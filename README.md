@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+# Street-Fighter-II -Gamusinos-Fighters-
 
-You can use the [editor on GitHub](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+A semi-replica of the original Street Fighter II
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Installation
 
-### Markdown
+TODO: Describe the installation process
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Usage
 
-```markdown
-Syntax highlighted code block
+TODO: Write usage instructions
 
-# Header 1
-## Header 2
-### Header 3
+## Contributing
 
-- Bulleted
-- List
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
-1. Numbered
-2. List
+## History
 
-**Bold** and _Italic_ and `Code` text
+TODO: Write history
 
-[Link](url) and ![Image](src)
-```
+## Credits
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+TODO: Write credits
 
-### Jekyll Themes
+## License
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+TODO: Write license
