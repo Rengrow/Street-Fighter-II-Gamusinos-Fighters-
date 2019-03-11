@@ -1,0 +1,72 @@
+En la guia esta mezclo tanto HTML como Markdown y os resumo como hacerlo de la manera que da menos problemas
+
+Titulos:
+	Nivel 1: # Titulo 1
+	Nivel 2: ## Titulo 2
+	Nivel 3: ### Titulo 3
+	Nivel 4: #### Titulo 4
+	
+Corte en horizontal, se puede hacer de tres maneras al gusto del consumidor:
+	***
+	---
+	___
+
+Cuerpo de texto:
+	Parrafos de texto: <p>Textooooooooooooo</p>
+	Salto de linea: (<br/>) <p>Textooooooooooooo<br/>Mas textoooooooooooooooooo</p>
+	
+	Negrita: Texto en <strong>negrita</strong>
+	Cursiva: <em>Texto en cursiva</em>
+	Negrita y Cursiva: <strong><em>Texto en negrita y cursiva</em></strong>
+	
+	Cuadros de texto: (Añadir ">" al inicio de cada frase) (Si queremos añadir un cuadro texto al cuadro de texto, ponemos ">>")
+	> Dorothy followed her through many of the beautiful rooms in her castle.
+	>
+	>> The Witch bade her clean the pots and kettles and sweep the floor and keep the fire fed with wood.
+	
+	Listas Numericas:
+	<ol>
+	<li>Objeto 1</li>
+	<li>Objeto 2</li>
+	<li>Objeto 3</li>
+	<ol>
+		<li>Objeto 1 segundo nivel</li>
+		<li>Objeto 2 segundo nivel</li>
+		<li>Objeto 3 segundo nivel</li>
+		<li>Objeto 4 segundo nivel</li>
+	</ol>
+	<li>Objeto 4</li>
+	</ol>
+	
+	Listas no Numericas:
+	<ul>
+	<li>Objeto 1</li>
+	<li>Objeto 2</li>
+	<li>Objeto 3</li>
+	<ul>
+		<li>Objeto 1 segundo nivel</li>
+		<li>Objeto 2 segundo nivel</li>
+		<li>Objeto 3 segundo nivel</li>
+		<li>Objeto 4 segundo nivel</li>
+	</ul>
+	<li>Objeto 4</li>
+	</ul>
+	
+	Links:
+	Si queremos que el texto sea el propio link añadimos <Link> --> <https://en.wikipedia.org/wiki/Arcade_system_board#Capcom>
+	Si queremos un texto diferente del link --> [Github](https://github.com/Rengrow)
+	
+	Imagenes:
+	Resumen de la sintaxis:
+	![Este texto aparece si la imagen por cualquier cosa no funciona](/carpeta/contenedora/imagen.jpg "Texto que aparece si dejamos el ratón encima")
+	![Philadelphia's Magic Gardens. This place was so cool!](/assets/images/philly-magic-gardens.jpg "Philadelphia's Magic Gardens")
+	
+	Checklist:
+	- [x] Write the press release
+	- [ ] Update the website
+	- [ ] Contact the media
+	
+	Video:
+	
+	
+	Si hay algo que querais usar y no está en el resumen mirad aquí: https://www.markdownguide.org/basic-syntax/
