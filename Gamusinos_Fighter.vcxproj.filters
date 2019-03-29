@@ -57,6 +57,12 @@
     <ClInclude Include="ModuleSecondPlayer.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleEndBattle.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWelcomePage.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -93,6 +99,12 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSecondPlayer.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEndBattle.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWelcomePage.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

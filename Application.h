@@ -12,6 +12,9 @@ class ModuleRender;
 class ModuleSceneKen;
 class ModuleSceneHonda;
 class ModulePlayer;
+class ModuleSecondPlayer;
+class ModuleWelcomePage;
+class ModuleEndBattle;
 class ModuleFadeToBlack;
 class Module;
 
@@ -24,9 +27,12 @@ public:
 	ModuleRender* render;
 	ModuleInput* input;
 	ModuleTextures* textures;
+	ModuleWelcomePage* welcomePage;
+	ModuleEndBattle* endBattle;
 	ModuleSceneKen* scene_ken;
 	ModuleSceneHonda* scene_honda;
 	ModulePlayer* player;
+	ModuleSecondPlayer* player2;
 	ModuleFadeToBlack* fade;
 
 public:

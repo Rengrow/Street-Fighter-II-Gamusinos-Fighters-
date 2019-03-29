@@ -64,12 +64,12 @@ update_status ModuleFadeToBlack::Update()
 }
 
 // Fade to black. At mid point deactivate one module, then activate the other
-bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
+bool ModuleFadeToBlack::FadeToBlack(Module* mModule_off, Module* mModule_on, float time)
 {
 	bool ret = false;
 
-	module_off = module_off;
-	module_on = module_on;
+	module_off = mModule_off;
+	module_on = mModule_on;
 
 	if(current_step == fade_step::none)
 	{
