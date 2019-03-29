@@ -7,6 +7,7 @@
 #include "ModuleSceneKen.h"
 #include "ModuleSceneHonda.h"
 #include "ModuleEndBattle.h"
+#include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModuleSecondPlayer.h"
 #include "ModuleFadeToBlack.h"
@@ -23,7 +24,8 @@ Application::Application()
 	modules[7] = endBattle = new ModuleEndBattle();
 	modules[8] = player = new ModulePlayer();
 	modules[9] = player2 = new ModuleSecondPlayer();
-	modules[10] = fade = new ModuleFadeToBlack();
+	modules[10] = audio = new ModuleAudio();
+	modules[11] = fade = new ModuleFadeToBlack();
 }
 
 Application::~Application()
@@ -36,10 +38,11 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	// Player will be enabled on the first update of a new scene
 	player->Disable();
-	// Disable the map that you do not start with
+	player2->Disable();
 	scene_honda->Disable();
+	scene_ken->Disable();
+	endBattle->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

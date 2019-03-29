@@ -16,6 +16,7 @@ class ModuleSecondPlayer;
 class ModuleWelcomePage;
 class ModuleEndBattle;
 class ModuleFadeToBlack;
+class ModuleAudio;
 class Module;
 
 class Application
@@ -33,6 +34,7 @@ public:
 	ModuleSceneHonda* scene_honda;
 	ModulePlayer* player;
 	ModuleSecondPlayer* player2;
+	ModuleAudio* audio;
 	ModuleFadeToBlack* fade;
 
 public:

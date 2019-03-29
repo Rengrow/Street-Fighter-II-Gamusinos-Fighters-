@@ -70,7 +70,7 @@ update_status ModuleSceneHonda::Update()
 
 	// TODO 2: make so pressing SPACE the KEN stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-		App->fade->FadeToBlack(this, (Module*)App->scene_ken, 5);
+		App->fade->FadeToBlack(this, (Module*)App->endBattle, 5);
 
 	return UPDATE_CONTINUE;
 }
