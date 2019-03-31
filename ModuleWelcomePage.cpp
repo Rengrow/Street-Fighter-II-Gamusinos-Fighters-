@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 
 ModuleWelcomePage::ModuleWelcomePage()
@@ -23,6 +24,8 @@ bool ModuleWelcomePage::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/title_screen.png");
+	App->audio->LoadSong("assets/music/title.ogg");
+	App->audio->PlaySongDelay(0, -1, 10000);
 
 	return ret;
 }
@@ -33,6 +36,7 @@ bool ModuleWelcomePage::CleanUp()
 	LOG("Unloading End battle screen");
 
 	App->textures->Unload(graphics);
+	App->audio->Unload(App->audio->songs[0]);
 
 	return true;
 }

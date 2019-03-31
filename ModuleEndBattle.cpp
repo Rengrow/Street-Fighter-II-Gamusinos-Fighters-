@@ -4,7 +4,9 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
+
 
 ModuleEndBattle::ModuleEndBattle()
 {
@@ -23,6 +25,8 @@ bool ModuleEndBattle::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
+	App->audio->LoadSong("assets/music/stage_end.ogg");
+	App->audio->PlaySongDelay(0, -1, 10000);
 
 	return ret;
 }
@@ -33,6 +37,8 @@ bool ModuleEndBattle::CleanUp()
 	LOG("Unloading End battle screen");
 
 	App->textures->Unload(graphics);
+
+	App->audio->Unload(App->audio->songs[0]);
 
 	return true;
 }
