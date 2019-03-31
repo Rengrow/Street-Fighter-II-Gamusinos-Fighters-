@@ -40,7 +40,8 @@ bool ModuleSceneHonda::Start()
 	bool ret = true;
 	graphics = App->textures->Load("honda_stage2.png");
 	App->audio->LoadSong("assets/music/japan_h_1.ogg");
-	App->audio->PlaySong(0);
+	//App->audio->PlaySong(0);
+	App->audio->PlaySongDelay(0, -1, 10000);
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();

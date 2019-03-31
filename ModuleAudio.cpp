@@ -120,6 +120,15 @@ bool const ModuleAudio::PlaySong(const int position) {
 	return true;
 }
 
+bool const ModuleAudio::PlaySongDelay(const int position, int loops, int ms) {
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+	if (Mix_FadeInMusic(songs[position], loops, ms) == -1) {
+	LOG("Mix_FadeInMusic: %s\n", Mix_GetError());
+	return false;
+	}
+	return true;
+}
+
 bool const ModuleAudio::PlayChunk(const int position) {
 	if (Mix_PlayChannel(-1, chunks[position], 0) == -1) {
 		LOG("Mix_PlayChannel: %s\n", Mix_GetError());
@@ -143,7 +152,11 @@ bool ModuleAudio::Unload(Mix_Music * song)
 				break;
 			}
 		}
+
+		Mix_FadeOutMusic(3000);
 		Mix_FreeMusic(song);
+
+
 	}
 	return ret;
 }

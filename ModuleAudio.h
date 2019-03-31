@@ -25,6 +25,7 @@ public:
 	bool Unload(Mix_Chunk * chunk);
 
 	bool const PlaySong(const int song);
+	bool const PlaySongDelay(const int song, int loops, int ms);
 	bool const PlayChunk(const int chunk);
 
 public:
