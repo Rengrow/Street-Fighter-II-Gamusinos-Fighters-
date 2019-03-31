@@ -123,8 +123,8 @@ bool const ModuleAudio::PlaySong(const int position) {
 bool const ModuleAudio::PlaySongDelay(const int position, int loops, int ms) {
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
 	if (Mix_FadeInMusic(songs[position], loops, ms) == -1) {
-	LOG("Mix_FadeInMusic: %s\n", Mix_GetError());
-	return false;
+		LOG("Mix_FadeInMusic: %s\n", Mix_GetError());
+		return false;
 	}
 	return true;
 }
@@ -141,22 +141,22 @@ bool ModuleAudio::Unload(Mix_Music * song)
 {
 	bool ret = false;
 
+	Mix_FreeMusic(song);
+
 	if (song != nullptr)
 	{
-		for (int i = 0; i < MAX_SONGS; ++i)
+		for (int i = 0; i < MAX_SONGS && !ret; ++i)
 		{
 			if (songs[i] == song)
 			{
 				songs[i] = nullptr;
 				ret = true;
-				break;
 			}
 		}
 
 		Mix_FadeOutMusic(3000);
-		Mix_FreeMusic(song);
-
 	}
+
 	return ret;
 }
 bool ModuleAudio::Unload(Mix_Chunk * chunk)
@@ -165,13 +165,12 @@ bool ModuleAudio::Unload(Mix_Chunk * chunk)
 
 	if (chunk != nullptr)
 	{
-		for (int i = 0; i < MAX_CHUNKS; ++i)
+		for (int i = 0; i < MAX_CHUNKS && !ret; ++i)
 		{
 			if (chunks[i] == chunk)
 			{
 				chunks[i] = nullptr;
 				ret = true;
-				break;
 			}
 		}
 		Mix_FreeChunk(chunk);
