@@ -26,7 +26,7 @@ bool ModuleEndBattle::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
 	App->audio->LoadSong("assets/music/stage_end.ogg");
-	App->audio->PlaySongDelay(0, -1, 10000);
+	App->audio->PlaySongDelay(0, 0, 10000);
 
 	return ret;
 }
