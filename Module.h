@@ -9,18 +9,18 @@ private:
 public:
 	virtual ~Module() {}
 
-	virtual bool Init()					{ return true; }
-	virtual bool Start()					{ return true; }
-	virtual update_status PreUpdate()		{ return update_status::UPDATE_CONTINUE; }
-	virtual update_status Update()		{ return update_status::UPDATE_CONTINUE; }
-	virtual update_status PostUpdate() 	{ return update_status::UPDATE_CONTINUE; }
-	virtual bool CleanUp()				{ return true; }
-		
-	bool IsEnabled() const				{ return enabled; }
+	virtual bool Init() { return true; }
+	virtual bool Start() { return true; }
+	virtual update_status PreUpdate() { return update_status::UPDATE_CONTINUE; }
+	virtual update_status Update() { return update_status::UPDATE_CONTINUE; }
+	virtual update_status PostUpdate() { return update_status::UPDATE_CONTINUE; }
+	virtual bool CleanUp() { return true; }
+
+	bool IsEnabled() const { return enabled; }
 
 	void Enable()
 	{
-		if(enabled == false)
+		if (enabled == false)
 		{
 			enabled = true;
 			Start();
@@ -29,7 +29,6 @@ public:
 
 	void Disable()
 	{
-		// TODO 0: Call CleanUp() for disabling a module
 		enabled = false;
 		CleanUp();
 	}

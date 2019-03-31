@@ -7,7 +7,6 @@
 
 ModuleAudio::ModuleAudio() : Module()
 {
-	// TODO 5: Initialize all texture pointers to nullptr
 	for (int i = 0; i < MAX_SONGS; i++)
 	{
 		songs[i] = nullptr;
@@ -52,7 +51,6 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing textures and Image library");
 
-	// TODO 6: Free all songs and chunks
 	for (int i = MAX_SONGS - 1; i >= 0; i--) {
 		if (songs[i] != nullptr)
 			Mix_FreeMusic(songs[i]);

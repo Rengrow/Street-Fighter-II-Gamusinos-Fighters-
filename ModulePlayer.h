@@ -16,6 +16,7 @@ public:
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 public:
 
@@ -23,8 +24,14 @@ public:
 	Animation idle;
 	Animation forward;
 	Animation backward;
+	Animation lp, lk;
+	Animation neutralJump;
 	iPoint position;
-
+	bool atacar = false;
+	bool jump = false;
+	int framesAtaque = 0;
+	int framesJump = 0;
+	int mov; //lp, mp, hp, lk, mk, hk
 };
 
 #endif

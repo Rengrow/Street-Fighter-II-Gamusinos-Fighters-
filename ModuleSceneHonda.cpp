@@ -46,11 +46,12 @@ bool ModuleSceneHonda::Start()
 	return ret;
 }
 
-// Load assets
+// Unload assets
 bool ModuleSceneHonda::CleanUp()
 {
-	// TODO 5: Remove all memory leaks
 	LOG("Unloading honda stage");
+
+	App->player->Disable();
 
 	App->textures->Unload(graphics);
 
@@ -68,7 +69,6 @@ update_status ModuleSceneHonda::Update()
 	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
 	App->render->Blit(graphics, 0, -16, &roof, 0.75f);
 
-	// TODO 2: make so pressing SPACE the KEN stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 		App->fade->FadeToBlack(this, (Module*)App->endBattle, 5);
 

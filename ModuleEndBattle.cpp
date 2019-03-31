@@ -8,10 +8,10 @@
 
 ModuleEndBattle::ModuleEndBattle()
 {
-	background.x = 72;
-	background.y = 208;
-	background.w = 768;
-	background.h = 176;
+	background.x = 0;
+	background.y = 0;
+	background.w = 308;
+	background.h = 220;
 }
 
 ModuleEndBattle::~ModuleEndBattle()
@@ -41,7 +41,7 @@ bool ModuleEndBattle::CleanUp()
 update_status ModuleEndBattle::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 0, 160, &background);
+	App->render->Blit(graphics, 40, 5, &background);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 5);
