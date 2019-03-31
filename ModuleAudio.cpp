@@ -156,7 +156,6 @@ bool ModuleAudio::Unload(Mix_Music * song)
 		Mix_FadeOutMusic(3000);
 		Mix_FreeMusic(song);
 
-
 	}
 	return ret;
 }
