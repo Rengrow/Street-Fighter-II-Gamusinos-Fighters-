@@ -20,6 +20,10 @@ public:
 
 	Mix_Chunk * const LoadChunk(const char* path);
 	Mix_Music * const LoadSong(const char* path);
+
+	bool Unload(Mix_Music * song);
+	bool Unload(Mix_Chunk * chunk);
+
 	bool const PlaySong(const int song);
 	bool const PlayChunk(const int chunk);
 

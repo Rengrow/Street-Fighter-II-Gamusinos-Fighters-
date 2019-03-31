@@ -1,7 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleAudio.h"
-
 #include "SDL/include/SDL.h"
 #pragma comment(lib, "SDL_Mixer/libx86/SDL2_mixer.lib")
 
@@ -127,4 +126,43 @@ bool const ModuleAudio::PlayChunk(const int position) {
 		return false;
 	}
 	return true;
+}
+
+bool ModuleAudio::Unload(Mix_Music * song)
+{
+	bool ret = false;
+
+	if (song != nullptr)
+	{
+		for (int i = 0; i < MAX_SONGS; ++i)
+		{
+			if (songs[i] == song)
+			{
+				songs[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+		Mix_FreeMusic(song);
+	}
+	return ret;
+}
+bool ModuleAudio::Unload(Mix_Chunk * chunk)
+{
+	bool ret = false;
+
+	if (chunk != nullptr)
+	{
+		for (int i = 0; i < MAX_CHUNKS; ++i)
+		{
+			if (chunks[i] == chunk)
+			{
+				chunks[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+		Mix_FreeChunk(chunk);
+	}
+	return ret;
 }

@@ -5,7 +5,7 @@ class Module
 {
 private:
 	bool enabled = true;
-
+	
 public:
 	virtual ~Module() {}
 

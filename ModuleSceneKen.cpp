@@ -6,6 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleAudio.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -55,7 +56,8 @@ bool ModuleSceneKen::Start()
 	LOG("Loading ken scene");
 
 	graphics = App->textures->Load("ken_stage.png");
-
+	App->audio->LoadSong("assets/music/usa_k_1.ogg");
+	App->audio->PlaySong(0);
 	App->player->Enable();
 
 	return true;
@@ -70,6 +72,7 @@ bool ModuleSceneKen::CleanUp()
 
 	App->textures->Unload(graphics);
 
+	App->audio->Unload(App->audio->songs[0]);
 	return true;
 }
 

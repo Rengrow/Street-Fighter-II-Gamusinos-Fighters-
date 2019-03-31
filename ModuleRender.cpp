@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -35,6 +36,9 @@ bool ModuleRender::Init()
 		LOG("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+
+	App->audio->LoadSong("assets/music/usa_k_1.ogg");
+	App->audio->LoadSong("assets/music/japan_h_1.ogg");
 
 	return ret;
 }

@@ -6,7 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-
+#include "ModuleAudio.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleSceneHonda::ModuleSceneHonda()
@@ -39,6 +39,8 @@ bool ModuleSceneHonda::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("honda_stage2.png");
+	App->audio->LoadSong("assets/music/japan_h_1.ogg");
+	App->audio->PlaySong(0);
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
@@ -55,6 +57,7 @@ bool ModuleSceneHonda::CleanUp()
 
 	App->textures->Unload(graphics);
 
+	App->audio->Unload(App->audio->songs[0]);
 	return true;
 }
 
