@@ -37,9 +37,6 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
-	App->audio->LoadSong("assets/music/usa_k_1.ogg");
-	App->audio->LoadSong("assets/music/japan_h_1.ogg");
-
 	return ret;
 }
 

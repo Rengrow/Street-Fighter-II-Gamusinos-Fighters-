@@ -37,7 +37,6 @@ ModulePlayer::ModulePlayer()
 
 
 	// lp
-
 	lp.PushBack({ 1, 3, 53, 94 });
 	lp.PushBack({ 59, 101, 63, 93 });
 	lp.PushBack({ 124, 101, 91, 93 });
@@ -47,7 +46,6 @@ ModulePlayer::ModulePlayer()
 	lp.speed = 0.1f;
 
 	// lk
-
 	lk.PushBack({ 1, 3, 53, 94 });
 	lk.PushBack({ 400, 102, 63, 93 });
 	lk.PushBack({ 467, 100, 115, 93 });
@@ -117,9 +115,11 @@ update_status ModulePlayer::Update()
 		jump = true;
 	}
 	//Light punch Ryu
-	if (atacar == true && framesAtaque == 0 && mov == 1) { framesAtaque = 1; }
+	if (atacar == true && framesAtaque == 0 && mov == 1)
+		framesAtaque = 1;
 
-	if (atacar == true && mov == 1) { current_animation = &lp; }
+	if (atacar == true && mov == 1)
+		current_animation = &lp;
 
 	if (framesAtaque > 60 && mov == 1) {
 		atacar = false;
@@ -128,9 +128,11 @@ update_status ModulePlayer::Update()
 	}
 
 	//Light kick Ryu
-	if (atacar == true && framesAtaque == 0 && mov == 4) { framesAtaque = 1; }
+	if (atacar == true && framesAtaque == 0 && mov == 4)
+		framesAtaque = 1;
 
-	if (atacar == true && mov == 4) { current_animation = &lk; }
+	if (atacar == true && mov == 4)
+		current_animation = &lk;
 
 	if (framesAtaque > 50 && mov == 4) {
 		atacar = false;
@@ -140,27 +142,27 @@ update_status ModulePlayer::Update()
 
 
 	//Neutral jump Ryu
-	if (jump == true && framesJump == 0) { framesJump = 1; }
+	if (jump == true && framesJump == 0)
+		framesJump = 1;
 	if (jump == true)
-	{
 		current_animation = &neutralJump;
-	}
 
 	if (framesJump > 0 && framesJump < 31)
-	{
 		position.y -= speed;
-	}
-	if (framesJump > 30 && framesJump < 61)
-	{
+
+	if (framesJump > 30 && framesJump < 61)	
 		position.y += speed;
-	}
+	
 	if (framesJump > 200) {
 		jump = false;
 		framesJump = 0;
 	}
 
-	if (framesAtaque > 0) { framesAtaque++; }
-	if (framesJump > 0) { framesJump++; }
+	if (framesAtaque > 0)
+		framesAtaque++;
+	if (framesJump > 0)
+		framesJump++;
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 

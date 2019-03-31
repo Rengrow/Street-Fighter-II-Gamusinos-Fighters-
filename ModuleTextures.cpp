@@ -70,13 +70,12 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 		else
 		{
 			bool room = false;
-			for (int i = 0; i < MAX_TEXTURES; ++i)
+			for (int i = 0; i < MAX_TEXTURES && !room; ++i)
 			{
 				if (textures[i] == nullptr)
 				{
 					textures[i] = texture;
 					room = true;
-					break;
 				}
 			}
 			if (room == false)
@@ -95,13 +94,12 @@ bool ModuleTextures::Unload(SDL_Texture * texture)
 
 	if (texture != nullptr)
 	{
-		for (int i = 0; i < MAX_TEXTURES; ++i)
+		for (int i = 0; i < MAX_TEXTURES && !ret; ++i)
 		{
 			if (textures[i] == texture)
 			{
 				textures[i] = nullptr;
 				ret = true;
-				break;
 			}
 		}
 		SDL_DestroyTexture(texture);
