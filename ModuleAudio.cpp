@@ -111,55 +111,66 @@ Mix_Music* const ModuleAudio::LoadSong(const char* path)
 		return songs[position];
 }
 
-bool const ModuleAudio::PlaySong(const int position) {
+bool const ModuleAudio::PlaySong(Mix_Music* music) {
 	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
-	if (Mix_PlayMusic(songs[position], -1) == -1) {
+	if (Mix_PlayMusic(music, -1) == -1) {
 		LOG("Mix_PlayMusic: %s\n", Mix_GetError());
 		return false;
 	}
 	return true;
 }
 
-bool const ModuleAudio::PlayChunk(const int position) {
-	if (Mix_PlayChannel(-1, chunks[position], 0) == -1) {
+bool const ModuleAudio::PlaySongDelay(Mix_Music * song, int loops, int ms) {
+	Mix_VolumeMusic(MIX_MAX_VOLUME / 2);
+	if (Mix_FadeInMusic(song, loops, ms) == -1) {
+		LOG("Mix_FadeInMusic: %s\n", Mix_GetError());
+		return false;
+	}
+	return true;
+}
+
+bool const ModuleAudio::PlayChunk(Mix_Chunk* chunk) {
+	if (Mix_PlayChannel(-1, chunk, 0) == -1) {
 		LOG("Mix_PlayChannel: %s\n", Mix_GetError());
 		return false;
 	}
 	return true;
 }
 
-bool ModuleAudio::Unload(Mix_Music * song)
+bool ModuleAudio::UnloadSong(Mix_Music * song)
 {
 	bool ret = false;
 
 	if (song != nullptr)
 	{
-		for (int i = 0; i < MAX_SONGS; ++i)
+		Mix_FreeMusic(song);
+		for (int i = 0; i < MAX_SONGS && !ret; ++i)
 		{
 			if (songs[i] == song)
 			{
 				songs[i] = nullptr;
 				ret = true;
-				break;
 			}
 		}
-		Mix_FreeMusic(song);
+
+		Mix_FadeOutMusic(3000);
+
 	}
+
 	return ret;
 }
-bool ModuleAudio::Unload(Mix_Chunk * chunk)
+bool ModuleAudio::UnloadChunk(Mix_Chunk * chunk)
 {
 	bool ret = false;
 
 	if (chunk != nullptr)
 	{
-		for (int i = 0; i < MAX_CHUNKS; ++i)
+		for (int i = 0; i < MAX_CHUNKS && !ret; ++i)
 		{
 			if (chunks[i] == chunk)
 			{
 				chunks[i] = nullptr;
 				ret = true;
-				break;
 			}
 		}
 		Mix_FreeChunk(chunk);

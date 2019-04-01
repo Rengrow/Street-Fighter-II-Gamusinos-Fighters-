@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "SDL_Mixer/include/SDL_mixer.h" //Arreglar
 
 struct SDL_Texture;
 
@@ -19,6 +20,7 @@ public:
 
 public:
 	SDL_Texture* graphics = nullptr;
+	Mix_Music *music = nullptr;
 	SDL_Rect background;
 };
 

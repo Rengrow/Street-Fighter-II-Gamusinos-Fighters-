@@ -4,7 +4,9 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
+
 
 ModuleEndBattle::ModuleEndBattle()
 {
@@ -23,6 +25,8 @@ bool ModuleEndBattle::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
+	music = App->audio->LoadSong("assets/music/stage_end.ogg");
+	App->audio->PlaySongDelay(music, 0, 10000);
 
 	return ret;
 }
@@ -34,6 +38,10 @@ bool ModuleEndBattle::CleanUp()
 
 	App->textures->Unload(graphics);
 
+	App->audio->UnloadSong(music);
+
+	music = nullptr;
+
 	return true;
 }
 
@@ -43,8 +51,10 @@ update_status ModuleEndBattle::Update()
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 40, 5, &background);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 5);
+	}
 
 	return UPDATE_CONTINUE;
 }

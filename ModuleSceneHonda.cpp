@@ -39,11 +39,10 @@ bool ModuleSceneHonda::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("honda_stage2.png");
-	App->audio->LoadSong("assets/music/japan_h_1.ogg");
-	App->audio->PlaySong(0);
+	music = App->audio->LoadSong("assets/music/japan_h_1.ogg");
 
-	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
+	App->audio->PlaySongDelay(music, -1, 2000);
 
 	return ret;
 }
@@ -57,7 +56,10 @@ bool ModuleSceneHonda::CleanUp()
 
 	App->textures->Unload(graphics);
 
-	App->audio->Unload(App->audio->songs[0]);
+	App->audio->UnloadSong(music);
+
+	music = nullptr;
+
 	return true;
 }
 
@@ -72,8 +74,10 @@ update_status ModuleSceneHonda::Update()
 	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
 	App->render->Blit(graphics, 0, -16, &roof, 0.75f);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->endBattle, 5);
+	}
 
 	return UPDATE_CONTINUE;
 }
