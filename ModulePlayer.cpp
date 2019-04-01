@@ -15,7 +15,7 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({ 408, 3, 60, 95 });
 	idle.PushBack({ 468, 3, 58, 95 });
 	idle.PushBack({ 526, 3, 55, 95 });
-	idle.speed = 0.2f;
+	idle.speed = 0.1f;
 
 	// walk forward animation (arcade sprite sheet)
 	forward.PushBack({ 1, 3, 53, 94 });
@@ -61,7 +61,10 @@ ModulePlayer::ModulePlayer()
 	neutralJump.PushBack({ 303, 540, 54, 77 });
 	neutralJump.PushBack({ 358, 547, 48, 70 });
 	neutralJump.PushBack({ 407, 528, 48, 89 });
-	neutralJump.speed = 0.1f;
+	neutralJump.PushBack({ 407, 528, 48, 89 });
+	neutralJump.PushBack({ 407, 528, 48, 89 });
+	neutralJump.PushBack({ 195, 512, 55, 105 });
+	neutralJump.speed = 0.081f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -140,21 +143,26 @@ update_status ModulePlayer::Update()
 
 
 	//Neutral jump Ryu
-	if (jump == true && framesJump == 0) { framesJump = 1; }
+	if (jump == true && framesJump == 0) { 
+		framesJump = 1; 
+	}
+
 	if (jump == true)
 	{
 		current_animation = &neutralJump;
 	}
 
-	if (framesJump > 0 && framesJump < 31)
+	if (framesJump > 0 && framesJump < 50)
 	{
-		position.y -= speed;
+		position.y -= speed+1;
 	}
-	if (framesJump > 30 && framesJump < 61)
+
+	if (framesJump > 49 && framesJump < 99)
 	{
-		position.y += speed;
+		position.y += speed+1;
 	}
-	if (framesJump > 200) {
+
+	if (framesJump > 98) {
 		jump = false;
 		framesJump = 0;
 	}
