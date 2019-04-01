@@ -23,8 +23,8 @@ private:
 		fade_from_black
 	} current_step = fade_step::none;
 
-	Module* module_off = nullptr;
-	Module* module_on = nullptr;
+	Module* to_enable = nullptr;
+	Module* to_disable = nullptr;
 	Uint32 start_time = 0;
 	Uint32 total_time = 0;
 	SDL_Rect screen;

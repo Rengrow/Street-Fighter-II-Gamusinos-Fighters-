@@ -21,12 +21,12 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
 	modules[5] = fade = new ModuleFadeToBlack();
-	modules[6] = particles = new ModuleParticles();
-	modules[7] = scene_honda = new ModuleSceneHonda();
-	modules[8] = scene_ken = new ModuleSceneKen();
-	modules[9] = player = new ModulePlayer();	
-	modules[10] = welcomePage = new ModuleWelcomePage();
-	modules[11] = endBattle = new ModuleEndBattle();
+	//modules[6] = particles = new ModuleParticles();
+	modules[6] = scene_honda = new ModuleSceneHonda();
+	modules[7] = scene_ken = new ModuleSceneKen();
+	modules[8] = player = new ModulePlayer();	
+	modules[9] = welcomePage = new ModuleWelcomePage();
+	modules[10] = endBattle = new ModuleEndBattle();
 	
 	//modules[12] = player2 = new ModuleSecondPlayer();
 }

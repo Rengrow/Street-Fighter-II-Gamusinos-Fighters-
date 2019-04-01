@@ -94,29 +94,32 @@ update_status ModulePlayer::Update()
 
 	int speed = 1;
 
-	if ((App->input->keyboard[SDL_SCANCODE_D] == 1) && (atacar == false) && (jump == false))
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
 	{
 		current_animation = &forward;
 		position.x += speed;
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_A] == 1) && (atacar == false) && (jump == false))
+
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
 	{
 		current_animation = &backward;
 		position.x -= speed;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_U] == 1) && (atacar == false) && (jump == false)) {
+	if ((App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN) && (atacar == false) && (jump == false)) {
 		atacar = true;
 		mov = 1;
 	}
-	if ((App->input->keyboard[SDL_SCANCODE_J] == 1) && (atacar == false) && (jump == false)) {
+
+	if ((App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) && (atacar == false) && (jump == false)) {
 		atacar = true;
 		mov = 4;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_W] == 1) && (atacar == false) && (jump == false)) {
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN) && (atacar == false) && (jump == false)) {
 		jump = true;
 	}
+
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)
 		framesAtaque = 1;
