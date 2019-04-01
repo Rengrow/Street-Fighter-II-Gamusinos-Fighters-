@@ -24,9 +24,9 @@ public:
 	bool UnloadSong(Mix_Music * song);
 	bool UnloadChunk(Mix_Chunk * chunk);
 
-	bool const PlaySong(const int song);
-	bool const PlaySongDelay(const int song, int loops, int ms);
-	bool const PlayChunk(const int chunk);
+	bool const PlaySong(Mix_Music * song);
+	bool const PlaySongDelay(Mix_Music * song, int loops, int ms);
+	bool const PlayChunk(Mix_Chunk* chunk);
 
 public:
 	Mix_Music * songs[MAX_SONGS];

@@ -25,7 +25,7 @@ bool ModuleWelcomePage::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/title_screen.png");
 	music = App->audio->LoadSong("assets/music/title.ogg");
-	App->audio->PlaySongDelay(0, -1, 10000);
+	App->audio->PlaySongDelay(music, -1, 10000);
 
 	return ret;
 }
@@ -49,8 +49,10 @@ update_status ModuleWelcomePage::Update()
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 45, 30, &background);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->scene_ken, 5);
+	}
 
 	return UPDATE_CONTINUE;
 }
