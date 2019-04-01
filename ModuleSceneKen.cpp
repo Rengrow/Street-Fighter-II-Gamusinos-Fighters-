@@ -74,6 +74,8 @@ bool ModuleSceneKen::CleanUp()
 	App->textures->Unload(graphics);
 
 	App->audio->UnloadSong(music);
+
+	music = nullptr;
 	
 	return true;
 }

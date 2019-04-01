@@ -40,6 +40,8 @@ bool ModuleEndBattle::CleanUp()
 
 	App->audio->UnloadSong(music);
 
+	music = nullptr;
+
 	return true;
 }
 
