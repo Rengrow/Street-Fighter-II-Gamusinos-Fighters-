@@ -56,7 +56,7 @@ bool ModuleSceneKen::Start()
 	LOG("Loading ken scene");
 
 	graphics = App->textures->Load("ken_stage.png");
-	App->audio->LoadSong("assets/music/usa_k_1.ogg");
+	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 	//App->audio->PlaySong(0);
 	App->audio->PlaySongDelay(0,-1,10000);
 	App->player->Enable();
@@ -73,7 +73,7 @@ bool ModuleSceneKen::CleanUp()
 
 	App->textures->Unload(graphics);
 
-	App->audio->Unload(App->audio->songs[0]);
+	App->audio->UnloadSong(music);
 	
 	return true;
 }

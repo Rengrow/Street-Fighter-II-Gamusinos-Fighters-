@@ -39,7 +39,7 @@ bool ModuleSceneHonda::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("honda_stage2.png");
-	App->audio->LoadSong("assets/music/japan_h_1.ogg");
+	music = App->audio->LoadSong("assets/music/japan_h_1.ogg");
 	//App->audio->PlaySong(0);
 	App->audio->PlaySongDelay(0, -1, 10000);
 
@@ -58,7 +58,7 @@ bool ModuleSceneHonda::CleanUp()
 
 	App->textures->Unload(graphics);
 
-	App->audio->Unload(App->audio->songs[0]);
+	App->audio->UnloadSong(music);
 	return true;
 }
 

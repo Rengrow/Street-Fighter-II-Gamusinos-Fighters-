@@ -19,13 +19,14 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_honda = new ModuleSceneHonda();
-	modules[5] = scene_ken = new ModuleSceneKen();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = welcomePage = new ModuleWelcomePage();
-	modules[9] = endBattle = new ModuleEndBattle();
-	modules[10] = audio = new ModuleAudio();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = scene_honda = new ModuleSceneHonda();
+	modules[6] = scene_ken = new ModuleSceneKen();
+	modules[7] = player = new ModulePlayer();
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = welcomePage = new ModuleWelcomePage();
+	modules[10] = endBattle = new ModuleEndBattle();
+	
 	//modules[11] = player2 = new ModuleSecondPlayer();
 }
 

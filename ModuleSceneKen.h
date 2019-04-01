@@ -4,8 +4,10 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "SDL_Mixer/include/SDL_mixer.h" //Arreglar
 
 struct SDL_Texture;
+struct _Mix_Music;
 
 class ModuleSceneKen : public Module
 {
@@ -20,6 +22,7 @@ public:
 public:
 	
 	SDL_Texture* graphics = nullptr;
+	Mix_Music *music = nullptr;
 	SDL_Rect ground;
 	SDL_Rect foreground;
 	SDL_Rect background;

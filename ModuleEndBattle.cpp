@@ -25,7 +25,7 @@ bool ModuleEndBattle::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
-	App->audio->LoadSong("assets/music/stage_end.ogg");
+	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(0, 0, 10000);
 
 	return ret;
@@ -38,7 +38,7 @@ bool ModuleEndBattle::CleanUp()
 
 	App->textures->Unload(graphics);
 
-	App->audio->Unload(App->audio->songs[0]);
+	App->audio->UnloadSong(music);
 
 	return true;
 }

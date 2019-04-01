@@ -137,14 +137,13 @@ bool const ModuleAudio::PlayChunk(const int position) {
 	return true;
 }
 
-bool ModuleAudio::Unload(Mix_Music * song)
+bool ModuleAudio::UnloadSong(Mix_Music * song)
 {
 	bool ret = false;
 
-	Mix_FreeMusic(song);
-
 	if (song != nullptr)
-	{
+	{		
+		Mix_FreeMusic(song);
 		for (int i = 0; i < MAX_SONGS && !ret; ++i)
 		{
 			if (songs[i] == song)
@@ -155,11 +154,12 @@ bool ModuleAudio::Unload(Mix_Music * song)
 		}
 
 		Mix_FadeOutMusic(3000);
+		
 	}
 
 	return ret;
 }
-bool ModuleAudio::Unload(Mix_Chunk * chunk)
+bool ModuleAudio::UnloadChunk(Mix_Chunk * chunk)
 {
 	bool ret = false;
 
