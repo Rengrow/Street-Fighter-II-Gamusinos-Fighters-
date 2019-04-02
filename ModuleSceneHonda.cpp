@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleSecondPlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
@@ -42,6 +43,7 @@ bool ModuleSceneHonda::Start()
 	music = App->audio->LoadSong("assets/music/japan_h_1.ogg");
 
 	App->player->Enable();
+	App->player2->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	return ret;
@@ -53,6 +55,7 @@ bool ModuleSceneHonda::CleanUp()
 	LOG("Unloading honda stage");
 
 	App->player->Disable();
+	App->player2->Disable();
 
 	App->textures->Unload(graphics);
 
@@ -67,12 +70,12 @@ bool ModuleSceneHonda::CleanUp()
 update_status ModuleSceneHonda::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 0, 160, &ground);
+	App->render->Blit(graphics, 0, 160, &ground, false);
 	App->render->Blit(graphics, 50, -15, &background, 0.75f); // back of the room
 	
-	App->render->Blit(graphics, 280, 125, &foreground);
-	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
-	App->render->Blit(graphics, 0, -16, &roof, 0.75f);
+	App->render->Blit(graphics, 280, 125, &foreground, false);
+	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame()), false); // water animation
+	App->render->Blit(graphics, 0, -16, &roof, false, 0.75f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

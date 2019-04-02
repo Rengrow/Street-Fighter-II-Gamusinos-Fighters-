@@ -25,10 +25,11 @@ Application::Application()
 	modules[5] = scene_honda = new ModuleSceneHonda();
 	modules[6] = scene_ken = new ModuleSceneKen();
 	modules[7] = player = new ModulePlayer();	
-	modules[8] = welcomePage = new ModuleWelcomePage();
-	modules[9] = endBattle = new ModuleEndBattle();
-	modules[10] = fade = new ModuleFadeToBlack();
-	//modules[12] = player2 = new ModuleSecondPlayer();
+	modules[8] = player2 = new ModuleSecondPlayer();
+	modules[9] = welcomePage = new ModuleWelcomePage();
+	modules[10] = endBattle = new ModuleEndBattle();
+	modules[11] = fade = new ModuleFadeToBlack();
+	
 }
 
 Application::~Application()
@@ -42,10 +43,11 @@ bool Application::Init()
 	bool ret = true;
 
 	player->Disable();
+	player2->Disable();
 	scene_honda->Disable();
 	scene_ken->Disable();
 	endBattle->Disable();
-	//player2->Disable();
+	
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

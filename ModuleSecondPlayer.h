@@ -19,10 +19,10 @@ public:
 
 public:
 
-	SDL_Texture* graphics = nullptr;
-	Animation idle;
-	Animation forward;
-	Animation backward;
+	SDL_Texture* graphics2 = nullptr;
+	Animation idle2;
+	Animation forward2;
+	Animation backward2;
 	iPoint position;
 
 };

@@ -33,7 +33,7 @@ ModulePlayer::ModulePlayer()
 	backward.PushBack({ 872, 3, 56, 93 });
 	backward.PushBack({ 930, 3, 57, 93 });
 	backward.PushBack({ 0, 102, 57, 92 });
-	backward.speed = 0.2f;
+	backward.speed = 0.1f;
 
 
 	// lp
@@ -176,7 +176,7 @@ update_status ModulePlayer::Update()
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	App->render->Blit(graphics, position.x, position.y - r.h, &r, false);
 
 	return UPDATE_CONTINUE;
 }

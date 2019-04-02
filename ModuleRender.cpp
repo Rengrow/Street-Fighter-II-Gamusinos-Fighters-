@@ -52,16 +52,16 @@ update_status ModuleRender::Update()
 {
 	int speed = 3;
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 		camera.y += speed;
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		camera.y -= speed;
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		camera.x += speed;
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		camera.x -= speed;
 
 	return update_status::UPDATE_CONTINUE;
@@ -88,7 +88,7 @@ bool ModuleRender::CleanUp()
 }
 
 // Blit to screen
-bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, bool flip, float speed)
 {
 	bool ret = true;
 	SDL_Rect rect;
@@ -108,7 +108,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
 
-	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, (flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE)) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

@@ -4,6 +4,7 @@
 #include "ModuleRender.h"
 #include "ModuleSceneKen.h"
 #include "ModulePlayer.h"
+#include "ModuleSecondPlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
@@ -59,6 +60,7 @@ bool ModuleSceneKen::Start()
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 	
 	App->player->Enable();
+	App->player2->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 
@@ -71,6 +73,7 @@ bool ModuleSceneKen::CleanUp()
 	LOG("Unloading ken scene");
 
 	App->player->Disable();
+	App->player2->Disable();
 
 	App->textures->Unload(graphics);
 
@@ -96,13 +99,13 @@ update_status ModuleSceneKen::Update()
 		foreground_pos += 0.02f;
 
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
-	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
+	App->render->Blit(graphics, 0, 0, &background, false, 0.75f); // sea and sky
+	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), false, 0.75f); // flag animation
 
-	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
-	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
+	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, false, 0.92f);
+	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), false, 0.92f); // girl animation
 
-	App->render->Blit(graphics, 0, 170, &ground);
+	App->render->Blit(graphics, 0, 170, &ground, false);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

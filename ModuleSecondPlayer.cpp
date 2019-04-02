@@ -13,21 +13,20 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({7, 14, 60, 90});
-	idle.PushBack({95, 15, 60, 89});
-	idle.PushBack({184, 14, 60, 90});
-	idle.PushBack({276, 11, 60, 93});
-	idle.PushBack({366, 12, 60, 92});
-	idle.speed = 0.2f;
+	idle2.PushBack({ 348, 3, 61, 95 });
+	idle2.PushBack({ 408, 3, 60, 95 });
+	idle2.PushBack({ 468, 3, 58, 95 });
+	idle2.PushBack({ 526, 3, 55, 95 });
+	idle2.speed = 0.1f;
 
 	// walk forward animation (arcade sprite sheet)
-	//forward.frames.PushBack({9, 136, 53, 83});
-	forward.PushBack({78, 131, 60, 88});
-	forward.PushBack({162, 128, 64, 92});
-	forward.PushBack({259, 128, 63, 90});
-	forward.PushBack({352, 128, 54, 91});
-	forward.PushBack({432, 131, 50, 89});
-	forward.speed = 0.1f;
+	forward2.PushBack({ 1, 3, 53, 94 });
+	forward2.PushBack({ 53, 3, 62, 95 });
+	forward2.PushBack({ 115, 3, 63, 95 });
+	forward2.PushBack({ 179, 3, 64, 94 });
+	forward2.PushBack({ 243, 3, 54, 95 });
+	forward2.PushBack({ 298, 3, 49, 94 });
+	forward2.speed = 0.1f;
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()
@@ -38,27 +37,27 @@ bool ModuleSecondPlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphics = App->textures->Load("ryu.png"); // arcade version
+	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 	return ret;
 }
 
 // Update: draw background
 update_status ModuleSecondPlayer::Update()
 {
-	Animation* current_animation = &idle;
+	Animation* current_animation = &idle2;
 
 	int speed = 1;
 
-	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
+	if(App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_REPEAT)
 	{
-		current_animation = &forward;
+		current_animation = &forward2;
 		position.x += speed;
 	}
 
 	// Draw everything --------------------------------------
-	SDL_Rect r = current_animation->GetCurrentFrame();
+	SDL_Rect r2 = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	App->render->Blit(graphics2, position.x, position.y - r2.h, &r2, true);
 	
 	return UPDATE_CONTINUE;
 }
