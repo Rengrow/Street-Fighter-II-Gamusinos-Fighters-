@@ -56,10 +56,11 @@ bool ModuleSceneKen::Start()
 	LOG("Loading ken scene");
 
 	graphics = App->textures->Load("ken_stage.png");
-	App->audio->LoadSong("assets/music/usa_k_1.ogg");
-	//App->audio->PlaySong(0);
-	App->audio->PlaySongDelay(0,-1,10000);
+	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
+	
 	App->player->Enable();
+	App->audio->PlaySongDelay(music, -1, 2000);
+
 
 	return true;
 }
@@ -73,7 +74,9 @@ bool ModuleSceneKen::CleanUp()
 
 	App->textures->Unload(graphics);
 
-	App->audio->Unload(App->audio->songs[0]);
+	App->audio->UnloadSong(music);
+
+	music = nullptr;
 	
 	return true;
 }
@@ -101,8 +104,10 @@ update_status ModuleSceneKen::Update()
 
 	App->render->Blit(graphics, 0, 170, &ground);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->scene_honda, 5);
+	}
 
 	return UPDATE_CONTINUE;
 }

@@ -37,8 +37,8 @@ update_status ModuleFadeToBlack::Update()
 		{
 			if(now >= total_time)
 			{
-				module_off->Disable();
-				module_on->Enable();
+				to_disable->Disable();
+				to_enable->Enable();
 				// ---
 				total_time += total_time;
 				start_time = SDL_GetTicks();
@@ -63,18 +63,18 @@ update_status ModuleFadeToBlack::Update()
 }
 
 // Fade to black. At mid point deactivate one module, then activate the other
-bool ModuleFadeToBlack::FadeToBlack(Module* mModule_off, Module* mModule_on, float time)
+bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
 {
 	bool ret = false;
 
-	module_off = mModule_off;
-	module_on = mModule_on;
 
 	if(current_step == fade_step::none)
 	{
 		current_step = fade_step::fade_to_black;
 		start_time = SDL_GetTicks();
 		total_time = (Uint32)(time * 0.5f * 1000.0f);
+		to_disable = module_off;
+		to_enable = module_on;
 		ret = true;
 	}
 

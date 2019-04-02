@@ -7,10 +7,10 @@
 #include "ModuleSceneHonda.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
-
 #include "ModuleWelcomePage.h"
 #include "ModuleEndBattle.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 #include "ModuleSecondPlayer.h"
 
 Application::Application()
@@ -19,14 +19,16 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_honda = new ModuleSceneHonda();
-	modules[5] = scene_ken = new ModuleSceneKen();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = welcomePage = new ModuleWelcomePage();
-	modules[9] = endBattle = new ModuleEndBattle();
-	modules[10] = audio = new ModuleAudio();
-	//modules[11] = player2 = new ModuleSecondPlayer();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = fade = new ModuleFadeToBlack();
+	//modules[6] = particles = new ModuleParticles();
+	modules[6] = scene_honda = new ModuleSceneHonda();
+	modules[7] = scene_ken = new ModuleSceneKen();
+	modules[8] = player = new ModulePlayer();	
+	modules[9] = welcomePage = new ModuleWelcomePage();
+	modules[10] = endBattle = new ModuleEndBattle();
+	
+	//modules[12] = player2 = new ModuleSecondPlayer();
 }
 
 Application::~Application()

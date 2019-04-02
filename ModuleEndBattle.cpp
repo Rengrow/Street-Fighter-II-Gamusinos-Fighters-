@@ -25,8 +25,8 @@ bool ModuleEndBattle::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
-	App->audio->LoadSong("assets/music/stage_end.ogg");
-	App->audio->PlaySongDelay(0, 0, 10000);
+	music = App->audio->LoadSong("assets/music/stage_end.ogg");
+	App->audio->PlaySongDelay(music, 0, 10000);
 
 	return ret;
 }
@@ -38,7 +38,9 @@ bool ModuleEndBattle::CleanUp()
 
 	App->textures->Unload(graphics);
 
-	App->audio->Unload(App->audio->songs[0]);
+	App->audio->UnloadSong(music);
+
+	music = nullptr;
 
 	return true;
 }
@@ -49,8 +51,10 @@ update_status ModuleEndBattle::Update()
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 40, 5, &background);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 5);
+	}
 
 	return UPDATE_CONTINUE;
 }
