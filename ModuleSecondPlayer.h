@@ -23,8 +23,14 @@ public:
 	Animation idle2;
 	Animation forward2;
 	Animation backward2;
+	Animation lp2, lk2;
+	Animation neutralJump2;
 	iPoint position;
-
+	bool atacar = false;
+	bool jump = false;
+	int framesAtaque = 0;
+	int framesJump = 0;
+	int mov; //lp, mp, hp, lk, mk, hk
 };
 
 #endif
