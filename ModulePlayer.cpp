@@ -4,6 +4,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 ModulePlayer::ModulePlayer()
 {
@@ -63,6 +65,14 @@ ModulePlayer::ModulePlayer()
 	neutralJump.PushBack({ 407, 528, 48, 89 });
 	neutralJump.PushBack({ 195, 512, 55, 105 });
 	neutralJump.speed = 0.081f;
+
+	//Hadoken
+	hdk.PushBack({462, 751, 74, 90});
+	hdk.PushBack({537, 757, 85, 84});
+	hdk.PushBack({623, 758, 90, 83});
+	hdk.PushBack({714, 764, 106, 77});
+	hdk.PushBack({714, 764, 106, 77});
+	hdk.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -120,6 +130,12 @@ update_status ModulePlayer::Update()
 		jump = true;
 	}
 
+	if ((App->input->keyboard[SDL_SCANCODE_Q]==KEY_STATE::KEY_DOWN) && (atacar == false) && (jump == false))
+	{
+		atacar = true;
+		mov = 7;
+	}
+
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)
 		framesAtaque = 1;
@@ -168,6 +184,25 @@ update_status ModulePlayer::Update()
 		framesJump = 0;
 	}
 
+	
+
+	//Hadoken
+	if (atacar == true && framesAtaque == 0 && mov == 7)
+		framesAtaque = 1;
+
+	if (atacar == true && mov == 7)
+		current_animation = &hdk;
+
+	if (atacar == true && mov == 7 && framesAtaque ==30)
+		App->particles->AddParticle(App->particles->hdk, position.x+25, position.y - 70, App->audio->hdk, 200);
+	
+	if (framesAtaque > 50 && mov == 7) {
+		atacar = false;
+		framesAtaque = 0;
+		mov = 0;
+	}
+
+	//Contadores
 	if (framesAtaque > 0)
 		framesAtaque++;
 	if (framesJump > 0)

@@ -21,24 +21,14 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("rtype/particles.png");
+	graphics = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 
-	// Explosion particle
-	explosion.anim.PushBack({ 274, 296, 33, 30 });
-	explosion.anim.PushBack({ 313, 296, 33, 30 });
-	explosion.anim.PushBack({ 346, 296, 33, 30 });
-	explosion.anim.PushBack({ 382, 296, 33, 30 });
-	explosion.anim.PushBack({ 419, 296, 33, 30 });
-	explosion.anim.PushBack({ 457, 296, 33, 30 });
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
-
-	// TODO 2: Create the template for a new particle "laser"
-	laser.anim.PushBack({ 230,101, 19,15 });
-	laser.anim.PushBack({ 248,105, 18,9 });
-	laser.anim.loop = false;
-	laser.speed = { 5, 0 };
-	laser.life = -1;
+	//Hadoken
+	hdk.anim.PushBack({ 277,30, 43, 32});
+	hdk.anim.PushBack({ 321, 35, 39, 21});
+	hdk.anim.loop = true;
+	hdk.speed = { 3, 0 };
+	hdk.life = -1;
 
 	return true;
 }

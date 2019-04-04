@@ -26,6 +26,7 @@ public:
 	Animation backward;
 	Animation lp, lk;
 	Animation neutralJump;
+	Animation hdk;
 	iPoint position;
 	bool atacar = false;
 	bool jump = false;
