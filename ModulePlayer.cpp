@@ -129,6 +129,12 @@ update_status ModulePlayer::Update()
 		mov = 7;
 	}
 
+	//GOD MODE
+
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {
+
+	}
+
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)
 		framesAtaque = 1;

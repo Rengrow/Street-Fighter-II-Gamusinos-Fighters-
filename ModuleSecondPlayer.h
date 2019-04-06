@@ -26,6 +26,7 @@ public:
 	Animation lp2, lk2;
 	Animation neutralJump2;
 	iPoint position;
+	Animation hdk;
 	bool atacar = false;
 	bool jump = false;
 	int framesAtaque = 0;

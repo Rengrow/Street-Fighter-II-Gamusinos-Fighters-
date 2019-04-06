@@ -4,6 +4,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleSecondPlayer.h"
+#include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -58,6 +60,13 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	neutralJump2.PushBack({ 407, 528, 48, 89 }, 0.081f);
 	neutralJump2.PushBack({ 407, 528, 48, 89 }, 0.081f);
 	neutralJump2.PushBack({ 195, 512, 55, 105 }, 0.081f);
+
+	//Hadoken
+	hdk.PushBack({ 462, 751, 74, 90 }, 0.1f);
+	hdk.PushBack({ 537, 757, 85, 84 }, 0.1f);
+	hdk.PushBack({ 623, 758, 90, 83 }, 0.1f);
+	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
+	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()
@@ -103,6 +112,11 @@ update_status ModuleSecondPlayer::Update()
 
 	if ((App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_DOWN) && (atacar == false) && (jump == false)) {
 		jump = true;
+	}
+	if ((App->input->keyboard[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN) && (atacar == false) && (jump == false))
+	{
+		atacar = true;
+		mov = 7;
 	}
 
 	//Light punch Ryu
@@ -153,6 +167,24 @@ update_status ModuleSecondPlayer::Update()
 		framesJump = 0;
 	}
 
+
+	//Hadoken
+	if (atacar == true && framesAtaque == 0 && mov == 7)
+		framesAtaque = 1;
+
+	if (atacar == true && mov == 7)
+		current_animation = &hdk;
+
+	if (atacar == true && mov == 7 && framesAtaque == 30)
+		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, App->audio->hdk, 200);
+
+	if (framesAtaque > 50 && mov == 7) {
+		atacar = false;
+		framesAtaque = 0;
+		mov = 0;
+	}
+
+	//Contadores
 	if (framesAtaque > 0)
 		framesAtaque++;
 	if (framesJump > 0)
