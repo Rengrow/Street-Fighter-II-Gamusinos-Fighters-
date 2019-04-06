@@ -1,26 +1,32 @@
 #ifndef __MODULE_H__
 #define __MODULE_H__
 
+#include "Globals.h"
+
+struct Collider;
+
 class Module
 {
 private:
 	bool enabled = true;
-	
+
 public:
 	virtual ~Module() {}
 
-	virtual bool Init() { return true; }
-	virtual bool Start() { return true; }
-	virtual update_status PreUpdate() { return update_status::UPDATE_CONTINUE; }
-	virtual update_status Update() { return update_status::UPDATE_CONTINUE; }
-	virtual update_status PostUpdate() { return update_status::UPDATE_CONTINUE; }
-	virtual bool CleanUp() { return true; }
-
-	bool IsEnabled() const { return enabled; }
+	// Game execution phases ---
+	virtual bool Init()					{ return true; }
+	virtual bool Start()					{ return true; }
+	virtual update_status PreUpdate()		{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status Update()		{ return update_status::UPDATE_CONTINUE; }
+	virtual update_status PostUpdate() 	{ return update_status::UPDATE_CONTINUE; }
+	virtual bool CleanUp()				{ return true; }
+	
+	// Module activation ---
+	bool IsEnabled() const				{ return enabled; }
 
 	void Enable()
 	{
-		if (enabled == false)
+		if(enabled == false)
 		{
 			enabled = true;
 			Start();
@@ -29,9 +35,15 @@ public:
 
 	void Disable()
 	{
-		enabled = false;
-		CleanUp();
+		if(enabled == true)
+		{
+			enabled = false;
+			CleanUp();
+		}
 	}
+
+	// Callbacks ---
+	virtual void OnCollision(Collider*, Collider*) {}
 };
 
 #endif // __MODULE_H__
