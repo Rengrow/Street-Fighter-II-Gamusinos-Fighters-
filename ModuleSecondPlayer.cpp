@@ -13,57 +13,51 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle2.PushBack({ 348, 3, 61, 95 });
-	idle2.PushBack({ 408, 3, 60, 95 });
-	idle2.PushBack({ 468, 3, 58, 95 });
-	idle2.PushBack({ 526, 3, 55, 95 });
-	idle2.speed = 0.1f;
+	idle2.PushBack({ 348, 3, 61, 95 }, 0.1f);
+	idle2.PushBack({ 408, 3, 60, 95 }, 0.1f);
+	idle2.PushBack({ 468, 3, 58, 95 }, 0.1f);
+	idle2.PushBack({ 526, 3, 55, 95 }, 0.1f);
 
 	// walk forward animation (arcade sprite sheet)
-	forward2.PushBack({ 1, 3, 53, 94 });
-	forward2.PushBack({ 53, 3, 62, 95 });
-	forward2.PushBack({ 115, 3, 63, 95 });
-	forward2.PushBack({ 179, 3, 64, 94 });
-	forward2.PushBack({ 243, 3, 54, 95 });
-	forward2.PushBack({ 298, 3, 49, 94 });
-	forward2.speed = 0.1f;
+	forward2.PushBack({ 1, 3, 53, 94 }, 0.1f);
+	forward2.PushBack({ 53, 3, 62, 95 }, 0.1f);
+	forward2.PushBack({ 115, 3, 63, 95 }, 0.1f);
+	forward2.PushBack({ 179, 3, 64, 94 }, 0.1f);
+	forward2.PushBack({ 243, 3, 54, 95 }, 0.1f);
+	forward2.PushBack({ 298, 3, 49, 94 }, 0.1f);
 
 	// walk backward animation (arcade sprite sheet)
-	backward2.PushBack({ 694, 3, 56, 93 });
-	backward2.PushBack({ 752, 3, 60, 93 });
-	backward2.PushBack({ 813, 3, 58, 93 });
-	backward2.PushBack({ 872, 3, 56, 93 });
-	backward2.PushBack({ 930, 3, 57, 93 });
-	backward2.PushBack({ 0, 102, 57, 92 });
-	backward2.speed = 0.1f;
+	backward2.PushBack({ 694, 3, 56, 93 }, 0.1f);
+	backward2.PushBack({ 752, 3, 60, 93 }, 0.1f);
+	backward2.PushBack({ 813, 3, 58, 93 }, 0.1f);
+	backward2.PushBack({ 872, 3, 56, 93 }, 0.1f);
+	backward2.PushBack({ 930, 3, 57, 93 }, 0.1f);
+	backward2.PushBack({ 0, 102, 57, 92 }, 0.1f);
 
 	// lp
-	lp2.PushBack({ 1, 3, 53, 94 });
-	lp2.PushBack({ 59, 101, 63, 93 });
-	lp2.PushBack({ 124, 101, 91, 93 });
-	lp2.PushBack({ 217, 101, 73, 93 });
-	lp2.PushBack({ 59, 101, 63, 93 });
-	lp2.PushBack({ 1, 3, 53, 94 });
-	lp2.speed = 0.1f;
+	lp2.PushBack({ 1, 3, 53, 94 }, 0.1f);
+	lp2.PushBack({ 59, 101, 63, 93 }, 0.1f);
+	lp2.PushBack({ 124, 101, 91, 93 }, 0.1f);
+	lp2.PushBack({ 217, 101, 73, 93 }, 0.1f);
+	lp2.PushBack({ 59, 101, 63, 93 }, 0.1f);
+	lp2.PushBack({ 1, 3, 53, 94 }, 0.1f);
 
 	// lk
-	lk2.PushBack({ 1, 3, 53, 94 });
-	lk2.PushBack({ 400, 102, 63, 93 });
-	lk2.PushBack({ 467, 100, 115, 93 });
-	lk2.PushBack({ 400, 102, 63, 93 });
-	lk2.PushBack({ 1, 3, 53, 94 });
-	lk2.speed = 0.1f;
+	lk2.PushBack({ 1, 3, 53, 94 }, 0.1f);
+	lk2.PushBack({ 400, 102, 63, 93 }, 0.1f);
+	lk2.PushBack({ 467, 100, 115, 93 }, 0.1f);
+	lk2.PushBack({ 400, 102, 63, 93 }, 0.1f);
+	lk2.PushBack({ 1, 3, 53, 94 }, 0.1f);
 
 	// Neutral jump
-	neutralJump2.PushBack({ 195, 512, 55, 105 });
-	neutralJump2.PushBack({ 252, 528, 50, 89 });
-	neutralJump2.PushBack({ 303, 540, 54, 77 });
-	neutralJump2.PushBack({ 358, 547, 48, 70 });
-	neutralJump2.PushBack({ 407, 528, 48, 89 });
-	neutralJump2.PushBack({ 407, 528, 48, 89 });
-	neutralJump2.PushBack({ 407, 528, 48, 89 });
-	neutralJump2.PushBack({ 195, 512, 55, 105 });
-	neutralJump2.speed = 0.081f;
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 0.081f);
+	neutralJump2.PushBack({ 252, 528, 50, 89 }, 0.081f);
+	neutralJump2.PushBack({ 303, 540, 54, 77 }, 0.081f);
+	neutralJump2.PushBack({ 358, 547, 48, 70 }, 0.081f);
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 0.081f);
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 0.081f);
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 0.081f);
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 0.081f);
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()

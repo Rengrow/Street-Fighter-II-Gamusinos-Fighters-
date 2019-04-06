@@ -8,6 +8,8 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
+#include "ModuleCollision.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleSceneHonda::ModuleSceneHonda()
@@ -25,10 +27,9 @@ ModuleSceneHonda::ModuleSceneHonda()
 	background = {120, 128, 671, 199};
 
 	// flag animation
-	water.PushBack({8, 447, 283, 9});
-	water.PushBack({296, 447, 283, 12});
-	water.PushBack({588, 447, 283, 18});
-	water.speed = 0.02f;
+	water.PushBack({8, 447, 283, 9}, 0.02f);
+	water.PushBack({296, 447, 283, 12}, 0.02f);
+	water.PushBack({588, 447, 283, 18}, 0.02f);
 }
 
 ModuleSceneHonda::~ModuleSceneHonda()
@@ -44,6 +45,8 @@ bool ModuleSceneHonda::Start()
 
 	App->player->Enable();
 	App->player2->Enable();
+	App->particles->Enable();
+	App->collisions->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	return ret;

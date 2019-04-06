@@ -8,6 +8,8 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
+#include "ModuleCollision.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -32,16 +34,14 @@ ModuleSceneKen::ModuleSceneKen()
 	background.h = 176;
 
 	// flag animation
-	flag.PushBack({ 848, 208, 40, 40 });
-	flag.PushBack({ 848, 256, 40, 40 });
-	flag.PushBack({ 848, 304, 40, 40 });
-	flag.speed = 0.08f;
+	flag.PushBack({ 848, 208, 40, 40 }, 0.08f);
+	flag.PushBack({ 848, 256, 40, 40 }, 0.08f);
+	flag.PushBack({ 848, 304, 40, 40 }, 0.08f);
 
 	// Girl Animation
-	girl.PushBack({ 624, 16, 32, 56 });
-	girl.PushBack({ 624, 80, 32, 56 });
-	girl.PushBack({ 624, 144, 32, 56 });
-	girl.speed = 0.05f;
+	girl.PushBack({ 624, 16, 32, 56 }, 0.05f);
+	girl.PushBack({ 624, 80, 32, 56 }, 0.05f);
+	girl.PushBack({ 624, 144, 32, 56 }, 0.05f);
 
 	// for moving the foreground
 	foreground_pos = 0;
@@ -61,6 +61,8 @@ bool ModuleSceneKen::Start()
 	
 	App->player->Enable();
 	App->player2->Enable();
+	App->particles->Enable();
+	App->collisions->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 

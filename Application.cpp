@@ -12,6 +12,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleSecondPlayer.h"
+#include "ModuleCollision.h"
 
 Application::Application()
 {
@@ -28,6 +29,7 @@ Application::Application()
 	modules[10] = welcomePage = new ModuleWelcomePage();
 	modules[11] = endBattle = new ModuleEndBattle();
 	modules[12] = fade = new ModuleFadeToBlack();
+	modules[13] = collisions = new ModuleCollision();
 	
 }
 
@@ -43,6 +45,8 @@ bool Application::Init()
 
 	player->Disable();
 	player2->Disable();
+	particles->Disable();
+	collisions->Disable();
 	scene_honda->Disable();
 	scene_ken->Disable();
 	endBattle->Disable();
