@@ -7,7 +7,7 @@
 class Frame
 {
 public:
-	float speed = 0.15f;
+	float speed;
 	SDL_Rect frame;
 
 private:
