@@ -6,12 +6,13 @@
 #include "ModuleSecondPlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleSecondPlayer::ModuleSecondPlayer()
 {
-	position.x = 100;
+	position.x = 250;
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
@@ -78,6 +79,8 @@ bool ModuleSecondPlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
+	collider = App->collisions->AddCollider(idle2.GetCurrentFrame(), COLLIDER_PLAYER, this);
+
 	return ret;
 }
 
@@ -118,6 +121,9 @@ update_status ModuleSecondPlayer::Update()
 		atacar = true;
 		mov = 7;
 	}
+
+
+	collider->SetPos(position.x, position.y - 95);
 
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)
@@ -176,7 +182,7 @@ update_status ModuleSecondPlayer::Update()
 		current_animation = &hdk;
 
 	if (atacar == true && mov == 7 && framesAtaque == 30)
-		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, App->audio->hdk, 200);
+		App->particles->AddParticle(App->particles->hdk, position.x - 25, position.y - 70, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 
 	if (framesAtaque > 50 && mov == 7) {
 		atacar = false;
@@ -193,7 +199,8 @@ update_status ModuleSecondPlayer::Update()
 	// Draw everything --------------------------------------
 	SDL_Rect r2 = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics2, position.x, position.y - r2.h, &r2, true);
+	App->render->Blit(graphics2, position.x, position.y - r2.h, &r2, flip);
 	
 	return UPDATE_CONTINUE;
 }
+

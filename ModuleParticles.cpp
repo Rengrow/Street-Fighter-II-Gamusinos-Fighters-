@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -29,7 +30,6 @@ bool ModuleParticles::Start()
 	hdk.anim.loop = true;
 	hdk.speed = { 3, 0 };
 	hdk.life = -1;
-
 	return true;
 }
 
@@ -75,20 +75,31 @@ update_status ModuleParticles::Update()
 				p->fx_played = true;
 			}
 		}
+		p->collider->SetPos(p->position);
 	}
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Mix_Chunk* sfx, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
-	Particle* p = new Particle(particle);
-	p->born = SDL_GetTicks() + delay;
-	p->position.x = x;
-	p->position.y = y;
-	p->sfx = sfx;
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks() + delay;
+			p->position.x = x;
+			p->position.y = y;
+			p->sfx = sfx;
+			
 
-	active[last_particle++] = p;
+			if (collider_type != COLLIDER_NONE)
+				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+			active[i] = p;
+			break;
+		}
+	}
 }
 
 // -------------------------------------------------------------

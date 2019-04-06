@@ -19,6 +19,7 @@ public:
 
 public:
 
+	Collider* collider = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	Animation idle2;
 	Animation forward2;
@@ -29,6 +30,7 @@ public:
 	Animation hdk;
 	bool atacar = false;
 	bool jump = false;
+	bool flip = true;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk

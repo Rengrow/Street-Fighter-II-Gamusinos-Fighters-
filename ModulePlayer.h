@@ -19,7 +19,7 @@ public:
 	bool CleanUp();
 
 public:
-
+	Collider* collider = nullptr;
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation forward;

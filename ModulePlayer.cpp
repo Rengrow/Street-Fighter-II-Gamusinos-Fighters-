@@ -6,6 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
+#include "ModuleCollision.h"
 
 ModulePlayer::ModulePlayer()
 {
@@ -77,6 +78,9 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
+	
+		collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
+	
 	return ret;
 }
 
@@ -128,6 +132,9 @@ update_status ModulePlayer::Update()
 		atacar = true;
 		mov = 7;
 	}
+
+	collider->SetPos(position.x, position.y-95);
+
 
 	//GOD MODE
 
@@ -193,7 +200,7 @@ update_status ModulePlayer::Update()
 		current_animation = &hdk;
 
 	if (atacar == true && mov == 7 && framesAtaque == 30)
-		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, App->audio->hdk, 200);
+		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 
 	if (framesAtaque > 50 && mov == 7) {
 		atacar = false;
