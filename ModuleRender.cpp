@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneKen.h"
+#include "ModuleCollision.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -38,6 +39,19 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	limit1Box.x = 0;
+	limit1Box.y = 0;
+	limit1Box.w = 3;
+	limit1Box.h = SCREEN_HEIGHT;
+
+	limit2Box.x = SCREEN_WIDTH - 3;
+	limit2Box.y = 0;
+	limit2Box.w = 3;
+	limit2Box.h = SCREEN_HEIGHT;
+
+	limit1 = App->collisions->AddCollider(limit1Box, COLLIDER_WALL);
+	limit2 = App->collisions->AddCollider(limit2Box, COLLIDER_WALL);
+
 	return ret;
 }
 
@@ -53,25 +67,35 @@ update_status ModuleRender::Update()
 {
 	int speed = 3;
 
-//	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
-	//	camera.y += speed;
+	//	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+		//	camera.y += speed;
 
-//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
-	//	camera.y -= speed;
+	//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+		//	camera.y -= speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
-			camera.x += speed;
-			App->scene_ken->wall.x = camera.x;
-			App->scene_ken->wall2.x = camera.x+camera.w;
+ 			camera.x += speed;
+
+			limit1Box.x += speed;
+			limit2Box.x += speed;
+
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 394) {
 			camera.x -= speed;
-			App->scene_ken->wall.x = camera.x;
-			App->scene_ken->wall2.x = camera.x+camera.w;
+
+			limit1Box.x -= speed;
+			limit2Box.x -= speed;
 		}
+
+	if (limit1 != nullptr) {
+		limit1->SetPos(limit1Box.x, limit1Box.y);
+	}
+	if (limit2 != nullptr) {
+		limit2->SetPos(limit2Box.x, limit2Box.y);
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
