@@ -27,7 +27,10 @@ public:
 	SDL_Rect roof;
 	SDL_Rect foreground;
 	SDL_Rect background;
+	SDL_Rect wall, wall2;
 	Animation water;
+	Collider *collider = nullptr;
+	Collider *collider2 = nullptr;
 };
 
 #endif // __MODULESCENEHONDA_H__

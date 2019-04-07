@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleSceneKen.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -52,17 +53,25 @@ update_status ModuleRender::Update()
 {
 	int speed = 3;
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
-		camera.y += speed;
+//	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+	//	camera.y += speed;
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
-		camera.y -= speed;
+//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+	//	camera.y -= speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
-		camera.x += speed;
+		if (camera.x != 0) {
+			camera.x += speed;
+			App->scene_ken->wall.x = camera.x;
+			App->scene_ken->wall2.x = camera.x+camera.w;
+		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-		camera.x -= speed;
+		if (camera.x != 394) {
+			camera.x -= speed;
+			App->scene_ken->wall.x = camera.x;
+			App->scene_ken->wall2.x = camera.x+camera.w;
+		}
 
 	return update_status::UPDATE_CONTINUE;
 }

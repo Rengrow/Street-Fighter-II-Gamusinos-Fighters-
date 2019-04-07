@@ -14,6 +14,20 @@
 
 ModuleSceneHonda::ModuleSceneHonda()
 {
+	//wall (for collisions)
+
+	wall.x = 0;
+	wall.y = 0;
+	wall.w = 3;
+	wall.h = 224;
+
+	//wall2 (for colliders)
+
+	wall2.x = 0;
+	wall2.y = 384;
+	wall2.w = 3;
+	wall2.h = 234;
+
 	// ground
 	ground = {8, 376, 848, 64};
 
@@ -42,6 +56,8 @@ bool ModuleSceneHonda::Start()
 	bool ret = true;
 	graphics = App->textures->Load("honda_stage2.png");
 	music = App->audio->LoadSong("assets/music/japan_h_1.ogg");
+	collider = App->collisions->AddCollider(wall, COLLIDER_WALL, this);
+	collider2 = App->collisions->AddCollider(wall2, COLLIDER_WALL, this);
 
 	App->player->Enable();
 	App->player2->Enable();
@@ -72,6 +88,12 @@ bool ModuleSceneHonda::CleanUp()
 // Update: draw background
 update_status ModuleSceneHonda::Update()
 {
+	if (collider != nullptr) {
+		collider->SetPos(0, 0);
+	}
+	if (collider2 != nullptr) {
+		collider2->SetPos(381, 0);
+	}
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 160, &ground, false);
 	App->render->Blit(graphics, 50, -15, &background, 0.75f); // back of the room

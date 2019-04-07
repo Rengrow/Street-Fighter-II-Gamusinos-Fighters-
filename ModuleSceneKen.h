@@ -26,8 +26,12 @@ public:
 	SDL_Rect ground;
 	SDL_Rect foreground;
 	SDL_Rect background;
+	SDL_Rect wall;
+	SDL_Rect wall2;
 	Animation flag;
 	Animation girl;
+	Collider *collider = nullptr;
+	Collider *collider2 = nullptr;	
 
 	float foreground_pos;
 	bool forward;

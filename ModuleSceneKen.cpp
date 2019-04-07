@@ -15,6 +15,20 @@
 
 ModuleSceneKen::ModuleSceneKen()
 {
+	//wall (for colliders)
+
+	wall.x = 0;
+	wall.y = 0;
+	wall.w = 3;
+	wall.h = 224;
+
+	//wall2 (for colliders)
+
+	wall2.x = 381;
+	wall2.y = 0;
+	wall2.w = 3;
+	wall2.h = 234;
+
 	// ground
 	ground.x = 8;
 	ground.y = 391;
@@ -58,6 +72,8 @@ bool ModuleSceneKen::Start()
 
 	graphics = App->textures->Load("ken_stage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
+	collider = App->collisions->AddCollider(wall, COLLIDER_WALL, this);
+	collider2 = App->collisions->AddCollider(wall2, COLLIDER_WALL, this);
 	
 	App->player->Enable();
 	App->player2->Enable();
@@ -89,6 +105,12 @@ bool ModuleSceneKen::CleanUp()
 // Update: draw background
 update_status ModuleSceneKen::Update()
 {
+	if (collider != nullptr) {
+		collider->SetPos(wall.x, wall.y);
+	}
+	if (collider2 != nullptr) {
+		collider2->SetPos(wall2.x, wall2.y);
+	}
 	// Calculate boat Y position -----------------------------
 	if (foreground_pos < -6.0f)
 		forward = false;

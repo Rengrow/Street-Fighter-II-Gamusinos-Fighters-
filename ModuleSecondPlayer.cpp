@@ -110,12 +110,12 @@ update_status ModuleSecondPlayer::Update()
 
 	int speed = 1;
 
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (position.x > App->render->camera.x)){
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false)){
 		current_animation = &forward2;
 		position.x -= speed;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (position.x + 60 < App->render->camera.x + App->render->camera.w)) {	
+	if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false)) {	
 		current_animation = &backward2;
 		position.x += speed;
 	}
@@ -140,7 +140,9 @@ update_status ModuleSecondPlayer::Update()
 	}
 
 
-	collider->SetPos(position.x, position.y - 95);
+	if (collider != nullptr) {
+		collider->SetPos(position.x, position.y - 95);
+	}
 
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)
@@ -241,5 +243,14 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 		mov = 8;
 		atacar = true;
 		App->audio->PlayChunk(App->audio->hdk_hit);
+	}
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
+	{
+		if (position.x == 2) {
+			position.x = 3;
+		}
+		if (position.x - 322 == 0) {
+		position.x = 321;
+		}
 	}
 }
