@@ -263,11 +263,11 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 	{
 		mov = 8;
 		atacar = true;
-	//	App->audio->PlayChunk(hdk_hit);
+		App->audio->PlayChunk(App->audio->hdk_hit);
 	}
 
 }

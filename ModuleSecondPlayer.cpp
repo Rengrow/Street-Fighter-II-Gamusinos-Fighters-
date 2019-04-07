@@ -240,7 +240,6 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	{
 		mov = 8;
 		atacar = true;
-	//	App->audio->PlayChunk(hdk_hit);
+		App->audio->PlayChunk(App->audio->hdk_hit);
 	}
-
 }
