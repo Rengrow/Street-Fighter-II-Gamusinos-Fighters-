@@ -133,21 +133,11 @@ update_status ModulePlayer::Update()
 		mov = 7;
 	}
 
-	collider->SetPos(position.x, position.y-95);
-
-
-	//GOD MODE
-
-	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {	
-		
-		if (App->collisions->IsEnabled() == true) {
-		App->collisions->Disable();
-		}
-	
-		else {
-			App->collisions->Enable();
-		}
+	if (collider != nullptr){
+		collider->SetPos(position.x, position.y - 95);
 	}
+	
+
 
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)
@@ -214,6 +204,25 @@ update_status ModulePlayer::Update()
 		framesAtaque = 0;
 		mov = 0;
 	}
+
+	//GOD MODE
+
+
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {
+
+		if (godmode == false) {
+			godmode = true;
+			collider->to_delete = true;
+			collider = nullptr;
+		}
+
+		else {
+			godmode = false;
+
+			collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
+		}
+	}
+
 
 	//Contadores
 	if (framesAtaque > 0)

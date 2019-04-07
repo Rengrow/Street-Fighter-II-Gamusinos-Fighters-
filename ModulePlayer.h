@@ -30,6 +30,7 @@ public:
 	iPoint position;
 	bool atacar = false;
 	bool jump = false;
+	bool godmode = false;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
