@@ -1,6 +1,6 @@
 # Street-Fighter-II -Gamusinos-Fighters-
 
-A pseudo-replica of the original Street Fighter II
+A semi-replica of the original Street Fighter II
 
 ## Installation
 
@@ -8,6 +8,8 @@ TODO: Describe the installation process
 
 ## Usage
 
+Player 1 Controls: movement W, A, S, D. Punch, kick: u, j
+Player 2 Controls: movement F, C, V, B. Punch, kick: 1, 2
 TODO: Write usage instructions
 
 ## Contributing

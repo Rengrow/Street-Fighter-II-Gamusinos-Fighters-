@@ -4,9 +4,12 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleSecondPlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
+#include "ModuleCollision.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleSceneHonda::ModuleSceneHonda()
@@ -24,10 +27,9 @@ ModuleSceneHonda::ModuleSceneHonda()
 	background = {120, 128, 671, 199};
 
 	// flag animation
-	water.PushBack({8, 447, 283, 9});
-	water.PushBack({296, 447, 283, 12});
-	water.PushBack({588, 447, 283, 18});
-	water.speed = 0.02f;
+	water.PushBack({8, 447, 283, 9}, 0.02f);
+	water.PushBack({296, 447, 283, 12}, 0.02f);
+	water.PushBack({588, 447, 283, 18}, 0.02f);
 }
 
 ModuleSceneHonda::~ModuleSceneHonda()
@@ -42,6 +44,9 @@ bool ModuleSceneHonda::Start()
 	music = App->audio->LoadSong("assets/music/japan_h_1.ogg");
 
 	App->player->Enable();
+	App->player2->Enable();
+	App->particles->Enable();
+	App->collisions->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	return ret;
@@ -53,6 +58,7 @@ bool ModuleSceneHonda::CleanUp()
 	LOG("Unloading honda stage");
 
 	App->player->Disable();
+	App->player2->Disable();
 
 	App->textures->Unload(graphics);
 
@@ -67,12 +73,12 @@ bool ModuleSceneHonda::CleanUp()
 update_status ModuleSceneHonda::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 0, 160, &ground);
+	App->render->Blit(graphics, 0, 160, &ground, false);
 	App->render->Blit(graphics, 50, -15, &background, 0.75f); // back of the room
 	
-	App->render->Blit(graphics, 280, 125, &foreground);
-	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
-	App->render->Blit(graphics, 0, -16, &roof, 0.75f);
+	App->render->Blit(graphics, 280, 125, &foreground, false);
+	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame()), false); // water animation
+	App->render->Blit(graphics, 0, -16, &roof, false, 0.75f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

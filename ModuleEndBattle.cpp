@@ -49,7 +49,7 @@ bool ModuleEndBattle::CleanUp()
 update_status ModuleEndBattle::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 40, 5, &background);
+	App->render->Blit(graphics, 40, 5, &background, false);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

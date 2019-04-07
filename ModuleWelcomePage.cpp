@@ -47,11 +47,11 @@ bool ModuleWelcomePage::CleanUp()
 update_status ModuleWelcomePage::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 45, 30, &background);
+	App->render->Blit(graphics, 45, 30, &background, false);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(App->modules[9], App->modules[7], 5);
+		App->fade->FadeToBlack(this, (Module*)App->scene_ken, 5);
 	}
 
 	return UPDATE_CONTINUE;

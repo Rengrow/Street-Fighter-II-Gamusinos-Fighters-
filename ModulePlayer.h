@@ -19,13 +19,14 @@ public:
 	bool CleanUp();
 
 public:
-
+	Collider* collider = nullptr;
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation forward;
 	Animation backward;
 	Animation lp, lk;
 	Animation neutralJump;
+	Animation hdk;
 	iPoint position;
 	bool atacar = false;
 	bool jump = false;

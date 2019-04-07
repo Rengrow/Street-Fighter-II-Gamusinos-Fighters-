@@ -19,12 +19,21 @@ public:
 
 public:
 
-	SDL_Texture* graphics = nullptr;
-	Animation idle;
-	Animation forward;
-	Animation backward;
+	Collider* collider = nullptr;
+	SDL_Texture* graphics2 = nullptr;
+	Animation idle2;
+	Animation forward2;
+	Animation backward2;
+	Animation lp2, lk2;
+	Animation neutralJump2;
 	iPoint position;
-
+	Animation hdk;
+	bool atacar = false;
+	bool jump = false;
+	bool flip = true;
+	int framesAtaque = 0;
+	int framesJump = 0;
+	int mov; //lp, mp, hp, lk, mk, hk
 };
 
 #endif

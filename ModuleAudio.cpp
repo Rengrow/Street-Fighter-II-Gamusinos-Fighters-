@@ -42,6 +42,8 @@ bool ModuleAudio::Init()
 			ret = false;
 		}
 
+	hdk = LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
+
 	return ret;
 }
 
