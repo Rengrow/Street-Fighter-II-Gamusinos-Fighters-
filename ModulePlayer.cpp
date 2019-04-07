@@ -105,13 +105,13 @@ update_status ModulePlayer::Update()
 
 	int speed = 1;
 
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (position.x + 60 < App->render->camera.x + App->render->camera.w))
 	{
 		current_animation = &forward;
 		position.x += speed;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (position.x > App->render->camera.x))
 	{
 		current_animation = &backward;
 		position.x -= speed;
