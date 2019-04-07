@@ -69,10 +69,10 @@ ModulePlayer::ModulePlayer()
 	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
 
 	// Standing reel
-	streel.PushBack({ 143, 857, 67, 92 }, 0.081f);
-	streel.PushBack({ 213, 857, 69, 91 }, 0.081f);
-	streel.PushBack({ 285, 857, 80, 91 }, 0.081f);
-	streel.PushBack({ 367, 857, 66, 91 }, 0.081f);
+	streel.PushBack({ 143, 857, 67, 92 }, 0.078f);
+	streel.PushBack({ 213, 857, 69, 91 }, 0.078f);
+	streel.PushBack({ 285, 857, 80, 91 }, 0.078f);
+	streel.PushBack({ 367, 857, 66, 91 }, 0.078f);
 }
 
 ModulePlayer::~ModulePlayer()
