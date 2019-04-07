@@ -32,6 +32,7 @@ public:
 	Mix_Music * songs[MAX_SONGS];
 	Mix_Chunk * chunks[MAX_CHUNKS];
 	Mix_Chunk * hdk;
+	Mix_Chunk * hdk_hit;
 };
 
 #endif // __ModuleAudio_H__

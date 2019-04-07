@@ -68,6 +68,12 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	hdk.PushBack({ 623, 758, 90, 83 }, 0.1f);
 	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
 	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
+
+	// Standing reel
+	streel.PushBack({ 143, 857, 67, 92 }, 0.081f);
+	streel.PushBack({ 213, 857, 69, 91 }, 0.081f);
+	streel.PushBack({ 285, 857, 80, 91 }, 0.081f);
+	streel.PushBack({ 367, 857, 66, 91 }, 0.081f);
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()
@@ -79,7 +85,7 @@ bool ModuleSecondPlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
-	collider = App->collisions->AddCollider(idle2.GetCurrentFrame(), COLLIDER_PLAYER, this);
+	collider = App->collisions->AddCollider(idle2.GetCurrentFrame(), COLLIDER_PLAYER2, this);
 
 	return ret;
 }
@@ -201,6 +207,20 @@ update_status ModuleSecondPlayer::Update()
 		mov = 0;
 	}
 
+	//Standing reel
+	if (atacar == true && framesAtaque == 0 && mov == 8) {
+		framesAtaque = 1;
+	}
+
+	if (atacar == true && mov == 8)
+		current_animation = &streel;
+
+	if (framesAtaque > 50 && mov == 8) {
+		atacar = false;
+		framesAtaque = 0;
+		mov = 0;
+	}
+
 	//Contadores
 	if (framesAtaque > 0)
 		framesAtaque++;
@@ -215,3 +235,12 @@ update_status ModuleSecondPlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
+	{
+		mov = 8;
+		atacar = true;
+	//	App->audio->PlayChunk(hdk_hit);
+	}
+
+}

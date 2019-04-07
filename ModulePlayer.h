@@ -27,7 +27,9 @@ public:
 	Animation lp, lk;
 	Animation neutralJump;
 	Animation hdk;
+	Animation streel;
 	iPoint position;
+	void OnCollision(Collider* c1, Collider* c2);
 	bool atacar = false;
 	bool jump = false;
 	bool godmode = false;

@@ -29,6 +29,8 @@ public:
 	Animation neutralJump2;
 	iPoint position;
 	Animation hdk;
+	Animation streel;
+	void OnCollision(Collider* c1, Collider* c2);
 	bool atacar = false;
 	bool jump = false;
 	bool flip = true;
