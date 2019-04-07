@@ -34,6 +34,7 @@ public:
 	bool atacar = false;
 	bool jump = false;
 	bool flip = true;
+	bool avanzar = true;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk

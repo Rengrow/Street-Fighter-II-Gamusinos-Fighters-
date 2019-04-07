@@ -111,13 +111,13 @@ update_status ModulePlayer::Update()
 
 	int speed = 1;
 
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (position.x + 60 < App->render->camera.x + App->render->camera.w))
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (avanzar == true))
 	{
 		current_animation = &forward;
 		position.x += speed;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (position.x > App->render->camera.x))
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
 	{
 		current_animation = &backward;
 		position.x -= speed;
@@ -253,7 +253,7 @@ update_status ModulePlayer::Update()
 		framesAtaque++;
 	if (framesJump > 0)
 		framesJump++;
-
+	avanzar = true;
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -263,6 +263,7 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
+	
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 	{
 		mov = 8;
@@ -270,4 +271,10 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		App->audio->PlayChunk(App->audio->hdk_hit);
 	}
 
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
+	{
+		avanzar = false;
+	}
+	
+	
 }
