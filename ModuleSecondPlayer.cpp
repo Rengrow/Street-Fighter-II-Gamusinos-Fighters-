@@ -84,6 +84,19 @@ bool ModuleSecondPlayer::Start()
 	return ret;
 }
 
+bool ModuleSecondPlayer::CleanUp()
+{
+	LOG("Unloading player 2");
+
+	App->textures->Unload(graphics2);
+	if (collider != nullptr) {
+		collider->to_delete = true;
+		collider = nullptr;
+	}
+
+	return true;
+}
+
 // Update: draw background
 update_status ModuleSecondPlayer::Update()
 {

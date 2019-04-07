@@ -91,6 +91,10 @@ bool ModulePlayer::CleanUp()
 
 	App->textures->Unload(graphics);
 
+	if (collider != nullptr) {
+		collider->to_delete = true;
+		collider = nullptr;
+	}
 	return true;
 }
 
