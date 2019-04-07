@@ -69,10 +69,10 @@ ModulePlayer::ModulePlayer()
 	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
 
 	// Standing reel
-	streel.PushBack({ 143, 857, 67, 92 }, 0.081f);
-	streel.PushBack({ 213, 857, 69, 91 }, 0.081f);
-	streel.PushBack({ 285, 857, 80, 91 }, 0.081f);
-	streel.PushBack({ 367, 857, 66, 91 }, 0.081f);
+	streel.PushBack({ 143, 857, 67, 92 }, 0.078f);
+	streel.PushBack({ 213, 857, 69, 91 }, 0.078f);
+	streel.PushBack({ 285, 857, 80, 91 }, 0.078f);
+	streel.PushBack({ 367, 857, 66, 91 }, 0.078f);
 }
 
 ModulePlayer::~ModulePlayer()
@@ -111,7 +111,7 @@ update_status ModulePlayer::Update()
 
 	int speed = 1;
 
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (avanzar == true))
 	{
 		current_animation = &forward;
 		position.x += speed;
@@ -252,7 +252,7 @@ update_status ModulePlayer::Update()
 		framesAtaque++;
 	if (framesJump > 0)
 		framesJump++;
-
+	avanzar = true;
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -262,12 +262,20 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
+	
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 	{
 		mov = 8;
 		atacar = true;
 		App->audio->PlayChunk(App->audio->hdk_hit);
 	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
+	{
+		avanzar = false;
+	}
+	
+	
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
 	{
 		if (position.x == 2) {
