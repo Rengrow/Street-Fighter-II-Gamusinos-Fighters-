@@ -42,9 +42,6 @@
     <ClInclude Include="ModuleRender.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneHonda.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleSceneKen.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -75,6 +72,9 @@
     <ClInclude Include="Frame.h">
       <Filter>Container</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneSagat.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -96,9 +96,6 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleRender.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneHonda.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneKen.cpp">
@@ -126,6 +123,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCollision.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneSagat.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
