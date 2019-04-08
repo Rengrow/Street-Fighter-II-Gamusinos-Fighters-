@@ -15,34 +15,40 @@
 
 ModuleSceneKen::ModuleSceneKen()
 {
+	
 	// ground
-	ground.x = 8;
-	ground.y = 391;
-	ground.w = 896;
-	ground.h = 72;
+	ground.x = 0;
+	ground.y = 878;
+	ground.w = 914;
+	ground.h = 58;
 
-	// foreground
-	foreground.x = 8;
-	foreground.y = 24;
-	foreground.w = 521;
-	foreground.h = 181;
-
-	// Background / sky
-	background.x = 72;
-	background.y = 208;
-	background.w = 768;
-	background.h = 176;
-
+	ground2.x = 0;
+	ground2.y = 878;
+	ground2.w = 951;
+	ground2.h = 8;
+	// big ship
+	foreground.x = 0;
+	foreground.y = 187;
+	foreground.w = 523;
+	foreground.h = 184;
+	
+	//sky
+	background.x = 0;
+	background.y = 0;
+	background.w = 572;
+	background.h = 179;
+	
 	// flag animation
-	flag.PushBack({ 848, 208, 40, 40 }, 0.08f);
-	flag.PushBack({ 848, 256, 40, 40 }, 0.08f);
-	flag.PushBack({ 848, 304, 40, 40 }, 0.08f);
+	flag.PushBack({ 578, 6, 38, 27 }, 0.08f);
+	flag.PushBack({ 578, 36, 38, 27 }, 0.08f);
+	flag.PushBack({ 578, 66, 38, 27 }, 0.08f);
 
 	// Girl Animation
-	girl.PushBack({ 624, 16, 32, 56 }, 0.05f);
-	girl.PushBack({ 624, 80, 32, 56 }, 0.05f);
-	girl.PushBack({ 624, 144, 32, 56 }, 0.05f);
-
+	girl.PushBack({ 714, 6, 32, 48 }, 0.05f);
+	girl.PushBack({ 714, 60, 32, 47 }, 0.05f);
+	girl.PushBack({ 714, 6, 32, 48 }, 0.05f);
+	girl.PushBack({ 714, 115, 32, 47 }, 0.05f);
+	
 	// for moving the foreground
 	foreground_pos = 0;
 	forward = true;
@@ -56,7 +62,7 @@ bool ModuleSceneKen::Start()
 {
 	LOG("Loading ken scene");
 
-	graphics = App->textures->Load("ken_stage.png");
+	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 	
 	App->player->Enable();
@@ -117,10 +123,10 @@ update_status ModuleSceneKen::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, false, 0.75f); // sea and sky
-	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), false, 0.75f); // flag animation
+	App->render->Blit(graphics, 469, 18, &(flag.GetCurrentFrame()), false, 0.75f); // flag animation
 
 	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, false, 0.92f);
-	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), false, 0.92f); // girl animation
+	App->render->Blit(graphics, 187, 112 + (int)foreground_pos, &(girl.GetCurrentFrame()), false, 0.92f); // girl animation
 
 	App->render->Blit(graphics, 0, 170, &ground, false);
 
