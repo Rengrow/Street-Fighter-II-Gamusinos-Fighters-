@@ -75,20 +75,20 @@ update_status ModuleRender::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
- 			camera.x += speed;
+			camera.x += speed;
 
-			limit1Box.x += speed;
-			limit2Box.x += speed;
-
+			limit1Box.x -= speed;
+			limit2Box.x -= speed;
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != -1011) {
 			camera.x -= speed;
 
-			limit1Box.x -= speed;
-			limit2Box.x -= speed;
+			limit1Box.x += speed;
+			limit2Box.x += speed;
 		}
+	
 
 	if (limit1 != nullptr) {
 		limit1->SetPos(limit1Box.x, limit1Box.y);
