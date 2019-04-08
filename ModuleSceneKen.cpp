@@ -15,24 +15,25 @@
 
 ModuleSceneKen::ModuleSceneKen()
 {
+	/*
 	// ground
 	ground.x = 8;
 	ground.y = 391;
 	ground.w = 896;
 	ground.h = 72;
 
-	// foreground
+	// big ship
 	foreground.x = 8;
 	foreground.y = 24;
 	foreground.w = 521;
 	foreground.h = 181;
-
-	// Background / sky
-	background.x = 72;
-	background.y = 208;
-	background.w = 768;
+	*/
+	//sky
+	background.x = 0;
+	background.y = 0;
+	background.w = 572;
 	background.h = 176;
-
+	/*
 	// flag animation
 	flag.PushBack({ 848, 208, 40, 40 }, 0.08f);
 	flag.PushBack({ 848, 256, 40, 40 }, 0.08f);
@@ -42,7 +43,7 @@ ModuleSceneKen::ModuleSceneKen()
 	girl.PushBack({ 624, 16, 32, 56 }, 0.05f);
 	girl.PushBack({ 624, 80, 32, 56 }, 0.05f);
 	girl.PushBack({ 624, 144, 32, 56 }, 0.05f);
-
+	*/
 	// for moving the foreground
 	foreground_pos = 0;
 	forward = true;
@@ -56,7 +57,7 @@ bool ModuleSceneKen::Start()
 {
 	LOG("Loading ken scene");
 
-	graphics = App->textures->Load("ken_stage.png");
+	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 	
 	App->player->Enable();
