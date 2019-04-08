@@ -45,9 +45,14 @@ ModuleSceneKen::ModuleSceneKen()
 
 	// Girl Animation
 	girl.PushBack({ 714, 6, 32, 48 }, 0.05f);
-	girl.PushBack({ 714, 60, 32, 47 }, 0.05f);
+	girl.PushBack({ 714, 61, 32, 48 }, 0.05f);
 	girl.PushBack({ 714, 6, 32, 48 }, 0.05f);
-	girl.PushBack({ 714, 115, 32, 47 }, 0.05f);
+	girl.PushBack({ 714, 116, 32, 48 }, 0.05f);
+	
+	// Purple guy animation
+		prGuy.PushBack({ 621, 6, 41, 33 }, 0.05f);
+	prGuy.PushBack({ 621, 46, 41, 33 }, 0.05f);
+	prGuy.PushBack({ 621, 86, 41, 33 }, 0.05f);
 	
 	// for moving the foreground
 	foreground_pos = 0;
@@ -127,6 +132,7 @@ update_status ModuleSceneKen::Update()
 
 	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, false, 0.92f);
 	App->render->Blit(graphics, 187, 112 + (int)foreground_pos, &(girl.GetCurrentFrame()), false, 0.92f); // girl animation
+	App->render->Blit(graphics, 125, 23 + (int)foreground_pos, &(prGuy.GetCurrentFrame()), false, 0.92f); //purple guy animation
 
 	App->render->Blit(graphics, 0, 170, &ground, false);
 

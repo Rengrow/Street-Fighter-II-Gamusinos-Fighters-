@@ -31,6 +31,7 @@ public:
 	SDL_Rect wall2;
 	Animation flag;
 	Animation girl;
+	Animation prGuy;
 	Collider *collider = nullptr;
 	Collider *collider2 = nullptr;
 	
