@@ -24,10 +24,10 @@ public:
 	SDL_Texture* graphics = nullptr;
 	Mix_Music *music = nullptr;
 	SDL_Rect ground;
-	SDL_Rect roof;
+	SDL_Rect rocks;
 	SDL_Rect foreground;
 	SDL_Rect background;
-	Animation water;
+	Animation palmtree;
 };
 
 #endif // __MODULESCENESAGAT_H__

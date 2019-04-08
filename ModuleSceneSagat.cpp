@@ -15,21 +15,23 @@
 ModuleSceneSagat::ModuleSceneSagat()
 {
 	// ground
-	ground = {8, 376, 848, 64};
+	ground.x = 0;
+	ground.y = 973;
+	ground.w = 1024;
+	ground.h = 49;
 
-	// roof
-	roof = {91, 7, 765, 49};
+	// rocks
+	rocks = {983, 159, 25, 25};
 
 	// foreground
-	foreground = {164, 66, 336, 51};
+	foreground = { 0, 655, 692, 195 };
 
-	// Background / sky
-	background = {760, 1443, 508, 145};
+	// Background
+	background = {0, 432, 633, 195};
 
 	// flag animation
-	water.PushBack({8, 447, 283, 9}, 0.02f);
-	water.PushBack({296, 447, 283, 12}, 0.02f);
-	water.PushBack({588, 447, 283, 18}, 0.02f);
+	palmtree.PushBack({699, 212, 325, 317}, 0.02f);
+	palmtree.PushBack({696, 550, 328, 317}, 0.02f);
 }
 
 ModuleSceneSagat::~ModuleSceneSagat()
@@ -40,7 +42,7 @@ bool ModuleSceneSagat::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("/assets/images/sprites/stages/stages_sagat.png");
+	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/thailand_s_1.ogg");
 
 	App->player->Enable();
@@ -74,12 +76,13 @@ bool ModuleSceneSagat::CleanUp()
 update_status ModuleSceneSagat::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 0, 160, &ground, false);
-	App->render->Blit(graphics, 50, -15, &background, 0.75f); // back of the room
+	App->render->Blit(graphics, 0, 0, &background, false, 0.5f);
+	App->render->Blit(graphics, 0, -19, &foreground, false, 0.75f); // back of the room
 	
-	App->render->Blit(graphics, 280, 125, &foreground, false);
-	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame()), false); // water animation
-	App->render->Blit(graphics, 0, -16, &roof, false, 0.75f);
+	App->render->Blit(graphics, -243, 175, &ground, false, 0.75f);
+	App->render->Blit(graphics, 174, 199, &rocks, false, 0.75f);
+	App->render->Blit(graphics, 489, 168, &rocks, false, 0.75f);
+	App->render->Blit(graphics, 364, 0, &(palmtree.GetCurrentFrame()), 0.75); // palmtree animation
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
