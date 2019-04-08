@@ -1,5 +1,5 @@
-#ifndef __MODULESCENEHONDA_H__
-#define __MODULESCENEHONDA_H__
+#ifndef __MODULESCENESAGAT_H__
+#define __MODULESCENESAGAT_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -9,11 +9,11 @@
 struct SDL_Texture;
 struct _Mix_Music;
 
-class ModuleSceneHonda : public Module
+class ModuleSceneSagat : public Module
 {
 public:
-	ModuleSceneHonda();
-	~ModuleSceneHonda();
+	ModuleSceneSagat();
+	~ModuleSceneSagat();
 
 	bool Start();
 	update_status Update();
@@ -30,4 +30,4 @@ public:
 	Animation water;
 };
 
-#endif // __MODULESCENEHONDA_H__
+#endif // __MODULESCENESAGAT_H__

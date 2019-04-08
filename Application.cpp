@@ -4,7 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleSceneKen.h"
-#include "ModuleSceneHonda.h"
+#include "ModuleSceneSagat.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleWelcomePage.h"
@@ -21,7 +21,7 @@ Application::Application()
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
-	modules[5] = scene_honda = new ModuleSceneHonda();
+	modules[5] = scene_Sagat = new ModuleSceneSagat();
 	modules[6] = scene_ken = new ModuleSceneKen();
 	modules[7] = player = new ModulePlayer();	
 	modules[8] = player2 = new ModuleSecondPlayer();
@@ -47,7 +47,7 @@ bool Application::Init()
 	player2->Disable();
 	particles->Disable();
 	collisions->Disable();
-	scene_honda->Disable();
+	scene_Sagat->Disable();
 	scene_ken->Disable();
 	endBattle->Disable();
 	

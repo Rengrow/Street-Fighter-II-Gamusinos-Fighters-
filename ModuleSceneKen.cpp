@@ -111,7 +111,7 @@ update_status ModuleSceneKen::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->scene_honda, 5);
+		App->fade->FadeToBlack(this, (Module*)App->scene_Sagat, 5);
 	}
 
 	return UPDATE_CONTINUE;

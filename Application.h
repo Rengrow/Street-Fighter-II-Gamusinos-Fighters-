@@ -11,7 +11,7 @@ class ModuleTextures;
 class ModuleParticles;
 class ModuleRender;
 class ModuleSceneKen;
-class ModuleSceneHonda;
+class ModuleSceneSagat;
 class ModulePlayer;
 class ModuleFadeToBlack;
 class ModuleWelcomePage;
@@ -33,7 +33,7 @@ public:
 	ModuleParticles* particles;
 	ModuleAudio* audio;
 	ModuleSceneKen* scene_ken;
-	ModuleSceneHonda* scene_honda;
+	ModuleSceneSagat* scene_Sagat;
 	ModulePlayer* player;
 	ModuleFadeToBlack* fade;
 	ModuleWelcomePage* welcomePage;
