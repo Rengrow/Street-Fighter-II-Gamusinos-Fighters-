@@ -2,6 +2,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
+#include "ModulePlayer.h"
 
 ModuleCollision::ModuleCollision()
 {
@@ -160,10 +161,16 @@ void ModuleCollision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
 		case COLLIDER_PLAYER_HIT: // magenta
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
-			break;
+			if ((App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN) && (App->player->atacar == false) && (App->player->jump == false))
+			{
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				break;
+			}
 		case COLLIDER_PLAYER2_HIT: // black
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
+			if ((App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) && (App->player->atacar == false) && (App->player->jump == false))
+			{
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
+			}
 			break;
 		}
 	}

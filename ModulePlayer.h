@@ -20,6 +20,7 @@ public:
 
 public:
 	Collider* collider = nullptr;
+	Collider* punch_collider = nullptr;
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation forward;

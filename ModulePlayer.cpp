@@ -86,6 +86,7 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 	
 	collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
+	punch_collider = App->collisions->AddCollider(lp.GetCurrentFrame(), COLLIDER_PLAYER_HIT, this);
 	
 	Animation* current_animation;
 	
