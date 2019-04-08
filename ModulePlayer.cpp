@@ -208,7 +208,7 @@ update_status ModulePlayer::Update()
 		current_animation = &hdk;
 
 	if (atacar == true && mov == 7 && framesAtaque == 30)
-		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
+		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 
 	if (framesAtaque > 50 && mov == 7) {
 		atacar = false;

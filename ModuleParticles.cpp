@@ -68,7 +68,12 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), false);
+			if (p->player_shooting == 0) {
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), false);
+			}
+			else if (p->player_shooting == 1) {
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), true, false);
+			}
 			if (p->fx_played == false)
 			{
 				App->audio->PlayChunk(p->sfx);
@@ -81,7 +86,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int player,  COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -92,7 +97,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 			p->position.x = x;
 			p->position.y = y;
 			p->sfx = sfx;
-			
+			p->player_shooting = player;
 
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);

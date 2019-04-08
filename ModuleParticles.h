@@ -23,6 +23,7 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
+	int player_shooting;
 	Mix_Chunk* sfx = nullptr;
 	bool fx_played = false;
 
@@ -41,7 +42,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Mix_Chunk* sfx = nullptr, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, int player, COLLIDER_TYPE collider_type = COLLIDER_NONE, Mix_Chunk* sfx = nullptr, Uint32 delay = 0);
 	void OnCollision(Collider* c1, Collider* c2);
 
 private:
