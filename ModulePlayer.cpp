@@ -87,6 +87,8 @@ bool ModulePlayer::Start()
 	
 	collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
 	
+	Animation* current_animation;
+	
 	return ret;
 }
 
@@ -117,7 +119,7 @@ update_status ModulePlayer::Update()
 		position.x += speed;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false))
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (retroceder == true))
 	{
 		current_animation = &backward;
 		position.x -= speed;
@@ -206,7 +208,7 @@ update_status ModulePlayer::Update()
 		current_animation = &hdk;
 
 	if (atacar == true && mov == 7 && framesAtaque == 30)
-		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
+		App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 
 	if (framesAtaque > 50 && mov == 7) {
 		atacar = false;
@@ -253,6 +255,8 @@ update_status ModulePlayer::Update()
 	if (framesJump > 0)
 		framesJump++;
 	avanzar = true;
+	retroceder = true;
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -278,11 +282,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
 	{
-		if (position.x == 2) {
-			position.x = 3;
+		if (abs(position.x-App->render->limit1Box.x) < 10){
+		
+		 retroceder = false;
 		}
-		if (position.x-322 == 0) {
-			position.x = 321;
+		if (abs(position.x - App->render->limit2Box.x) < 10){
+
+		 avanzar = false;
 		}
 	}
 }

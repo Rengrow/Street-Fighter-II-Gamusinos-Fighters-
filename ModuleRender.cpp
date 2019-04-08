@@ -13,6 +13,7 @@ ModuleRender::ModuleRender() : Module()
 	camera.x = camera.y = 0;
 	camera.w = SCREEN_WIDTH;
 	camera.h = SCREEN_HEIGHT;
+	
 }
 
 // Destructor
@@ -39,19 +40,6 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
-	limit1Box.x = 0;
-	limit1Box.y = 0;
-	limit1Box.w = 3;
-	limit1Box.h = SCREEN_HEIGHT;
-
-	limit2Box.x = SCREEN_WIDTH - 3;
-	limit2Box.y = 0;
-	limit2Box.w = 3;
-	limit2Box.h = SCREEN_HEIGHT;
-
-	limit1 = App->collisions->AddCollider(limit1Box, COLLIDER_WALL);
-	limit2 = App->collisions->AddCollider(limit2Box, COLLIDER_WALL);
-
 	return ret;
 }
 
@@ -65,6 +53,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
+	
 	int speed = 3;
 
 	//	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
@@ -72,18 +61,19 @@ update_status ModuleRender::Update()
 
 	//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		//	camera.y -= speed;
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
-			camera.x += speed;
+			camera.x += speed*2;
 
 			limit1Box.x -= speed;
 			limit2Box.x -= speed;
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-		if (camera.x != -1011) {
-			camera.x -= speed;
+		if (camera.x != scenelimit) {
+			camera.x -= speed*2;
 
 			limit1Box.x += speed;
 			limit2Box.x += speed;

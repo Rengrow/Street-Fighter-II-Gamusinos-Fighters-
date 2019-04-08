@@ -115,7 +115,7 @@ update_status ModuleSecondPlayer::Update()
 		position.x -= speed;
 	}
 
-	if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false)) {	
+	if ((App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (retroceder == true)) {
 		current_animation = &backward2;
 		position.x += speed;
 	}
@@ -201,7 +201,7 @@ update_status ModuleSecondPlayer::Update()
 		current_animation = &hdk;
 
 	if (atacar == true && mov == 7 && framesAtaque == 30)
-		App->particles->AddParticle(App->particles->hdk, position.x - 25, position.y - 70, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
+		App->particles->AddParticle(App->particles->hdk, position.x - 25, position.y - 70, 1, COLLIDER_PLAYER2_SHOT, App->audio->hdk, 200);
 
 	if (framesAtaque > 50 && mov == 7) {
 		atacar = false;
@@ -230,6 +230,7 @@ update_status ModuleSecondPlayer::Update()
 		framesJump++;
 
 	avanzar = true;
+	retroceder = true;
 
 	// Draw everything --------------------------------------
 	SDL_Rect r2 = current_animation->GetCurrentFrame();
@@ -253,11 +254,13 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
 	{
-		if (position.x == 2) {
-			position.x = 3;
+		if (abs(position.x+60 - App->render->limit2Box.x) < 10) {
+
+			retroceder = false;
 		}
-		if (position.x - 322 == 0) {
-		position.x = 321;
+		if (abs(position.x+60 - App->render->limit1Box.x) < 10) {
+
+			avanzar = false;
 		}
 	}
 }

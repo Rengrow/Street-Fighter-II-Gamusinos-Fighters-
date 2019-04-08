@@ -1,6 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneHonda.h"
+#include "ModuleSceneSagat.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
@@ -12,7 +12,7 @@
 #include "ModuleCollision.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
-ModuleSceneHonda::ModuleSceneHonda()
+ModuleSceneSagat::ModuleSceneSagat()
 {
 	// ground
 	ground = {8, 376, 848, 64};
@@ -24,7 +24,7 @@ ModuleSceneHonda::ModuleSceneHonda()
 	foreground = {164, 66, 336, 51};
 
 	// Background / sky
-	background = {120, 128, 671, 199};
+	background = {760, 1443, 508, 145};
 
 	// flag animation
 	water.PushBack({8, 447, 283, 9}, 0.02f);
@@ -32,16 +32,16 @@ ModuleSceneHonda::ModuleSceneHonda()
 	water.PushBack({588, 447, 283, 18}, 0.02f);
 }
 
-ModuleSceneHonda::~ModuleSceneHonda()
+ModuleSceneSagat::~ModuleSceneSagat()
 {}
 
 // Load assets
-bool ModuleSceneHonda::Start()
+bool ModuleSceneSagat::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("honda_stage2.png");
-	music = App->audio->LoadSong("assets/music/japan_h_1.ogg");
+	graphics = App->textures->Load("/assets/images/sprites/stages/stages_sagat.png");
+	music = App->audio->LoadSong("assets/music/thailand_s_1.ogg");
 
 	App->player->Enable();
 	App->player2->Enable();
@@ -53,24 +53,25 @@ bool ModuleSceneHonda::Start()
 }
 
 // Unload assets
-bool ModuleSceneHonda::CleanUp()
+bool ModuleSceneSagat::CleanUp()
 {
-	LOG("Unloading honda stage");
+	LOG("Unloading Sagat stage");
 
 	App->player->Disable();
 	App->player2->Disable();
+	App->particles->Disable();
+	App->collisions->Disable();
 
 	App->textures->Unload(graphics);
-
+	graphics = nullptr;
 	App->audio->UnloadSong(music);
-
 	music = nullptr;
 
 	return true;
 }
 
 // Update: draw background
-update_status ModuleSceneHonda::Update()
+update_status ModuleSceneSagat::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 160, &ground, false);

@@ -25,9 +25,12 @@ public:
 	
 public:
 	SDL_Renderer* renderer = nullptr;
-	SDL_Rect camera, limit1Box, limit2Box;
+	SDL_Rect camera;
+	SDL_Rect limit1Box;
+	SDL_Rect limit2Box;
 	Collider *limit1 = nullptr;
 	Collider *limit2 = nullptr;
+	int scenelimit;
 };
 
 #endif //__ModuleRenderer_H__
