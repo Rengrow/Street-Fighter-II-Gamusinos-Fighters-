@@ -13,6 +13,7 @@ ModuleRender::ModuleRender() : Module()
 	camera.x = camera.y = 0;
 	camera.w = SCREEN_WIDTH;
 	camera.h = SCREEN_HEIGHT;
+	
 }
 
 // Destructor
@@ -52,6 +53,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
+	
 	int speed = 3;
 
 	//	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
@@ -59,18 +61,19 @@ update_status ModuleRender::Update()
 
 	//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		//	camera.y -= speed;
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
-			camera.x += speed;
+			camera.x += speed*2;
 
 			limit1Box.x -= speed;
 			limit2Box.x -= speed;
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-		if (camera.x != -1011) {
-			camera.x -= speed;
+		if (camera.x != scenelimit) {
+			camera.x -= speed*2;
 
 			limit1Box.x += speed;
 			limit2Box.x += speed;

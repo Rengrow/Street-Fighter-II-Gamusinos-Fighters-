@@ -30,6 +30,7 @@ public:
 	SDL_Rect limit2Box;
 	Collider *limit1 = nullptr;
 	Collider *limit2 = nullptr;
+	int scenelimit;
 };
 
 #endif //__ModuleRenderer_H__
