@@ -24,6 +24,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	Mix_Music *music = nullptr;
 	SDL_Rect ground;
+	SDL_Rect ground2;
 	SDL_Rect foreground;
 	SDL_Rect background;
 	SDL_Rect wall;
