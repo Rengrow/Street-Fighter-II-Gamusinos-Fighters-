@@ -39,19 +39,6 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
-	limit1Box.x = 0;
-	limit1Box.y = 0;
-	limit1Box.w = 3;
-	limit1Box.h = SCREEN_HEIGHT;
-
-	limit2Box.x = SCREEN_WIDTH - 3;
-	limit2Box.y = 0;
-	limit2Box.w = 3;
-	limit2Box.h = SCREEN_HEIGHT;
-
-	limit1 = App->collisions->AddCollider(limit1Box, COLLIDER_WALL);
-	limit2 = App->collisions->AddCollider(limit2Box, COLLIDER_WALL);
-
 	return ret;
 }
 

@@ -31,7 +31,8 @@ public:
 	Animation flag;
 	Animation girl;
 	Collider *collider = nullptr;
-	Collider *collider2 = nullptr;	
+	Collider *collider2 = nullptr;
+	
 
 	float foreground_pos;
 	bool forward;

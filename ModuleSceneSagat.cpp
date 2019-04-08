@@ -59,11 +59,12 @@ bool ModuleSceneSagat::CleanUp()
 
 	App->player->Disable();
 	App->player2->Disable();
+	App->particles->Disable();
+	App->collisions->Disable();
 
 	App->textures->Unload(graphics);
-
+	graphics = nullptr;
 	App->audio->UnloadSong(music);
-
 	music = nullptr;
 
 	return true;

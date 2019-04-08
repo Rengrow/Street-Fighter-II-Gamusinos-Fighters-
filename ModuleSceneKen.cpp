@@ -65,6 +65,18 @@ bool ModuleSceneKen::Start()
 	App->collisions->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
+	App->render->limit1Box.x = 0;
+	App->render->limit1Box.y = 0;
+	App->render->limit1Box.w = 3;
+	App->render->limit1Box.h = SCREEN_HEIGHT;
+
+	App->render->limit2Box.x = SCREEN_WIDTH - 3;
+	App->render->limit2Box.y = 0;
+	App->render->limit2Box.w = 3;
+	App->render->limit2Box.h = SCREEN_HEIGHT;
+
+	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
+	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
 
 	return true;
 }
@@ -76,11 +88,13 @@ bool ModuleSceneKen::CleanUp()
 
 	App->player->Disable();
 	App->player2->Disable();
+	App->particles->Disable();
+	App->collisions->Disable();
 
 	App->textures->Unload(graphics);
+	graphics = nullptr;
 
 	App->audio->UnloadSong(music);
-
 	music = nullptr;
 	
 	return true;
