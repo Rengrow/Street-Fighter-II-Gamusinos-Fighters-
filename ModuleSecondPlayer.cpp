@@ -254,13 +254,20 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
 	{
-		if (abs(position.x+60 - App->render->limit2Box.x) < 10) {
+		// the condition checks at which side of the screen the player is, and makes it impossible to move further away from the center
 
-			retroceder = false;
-		}
-		if (abs(position.x+60 - App->render->limit1Box.x) < 10) {
+		// when characters automatically face each other, such condition doesnt make sense, since moving out of scene is only possible by walking backwards (walking forwards will collide with player)
+
+		//probably a bool "player at wall" will be necessary in the future, in order to provent characters from exiting camera if beign pushed back because an enemy attack.
+		//when the movement is triggered, it should check the bool state. If true, should not move in x axis. bool becomes true in this collision, resets in "Contadores"
+
+		if (position.x - App->render->camera.w / 2 < 0) {
 
 			avanzar = false;
+		}
+		if (position.x - App->render->camera.w / 2 > 0) {
+
+			retroceder = false;
 		}
 	}
 }
