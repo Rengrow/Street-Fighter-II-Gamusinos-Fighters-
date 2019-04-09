@@ -32,6 +32,9 @@ public:
 	Animation flag;
 	Animation girl;
 	Animation prGuy;
+	Animation baldGuy;
+	Animation greyHat;
+	Animation brownHat;
 	Collider *collider = nullptr;
 	Collider *collider2 = nullptr;
 	
