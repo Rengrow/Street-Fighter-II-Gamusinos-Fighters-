@@ -64,9 +64,9 @@ ModuleSceneKen::ModuleSceneKen()
 	brownHat.PushBack({ 577, 172, 31, 11 }, 0.08f);
 	
 	//Bald guy
-	prGuy.PushBack({ 667, 75, 41, 62 }, 0.05f);
-	prGuy.PushBack({ 621, 126, 41, 62 }, 0.05f);
-	prGuy.PushBack({ 667, 6, 41, 62 }, 0.05f);
+	baldGuy.PushBack({ 667, 75, 41, 63 }, 0.05f);
+	baldGuy.PushBack({ 621, 126, 41, 63 }, 0.05f);
+	baldGuy.PushBack({ 667, 6, 41, 63 }, 0.05f);
 
 	// for moving the foreground
 	foreground_pos = 0;
@@ -148,7 +148,8 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 187, 112 + (int)foreground_pos, &(girl.GetCurrentFrame()), false, 0.92f); // girl animation
 	App->render->Blit(graphics, 125, 23 + (int)foreground_pos, &(prGuy.GetCurrentFrame()), false, 0.92f); //purple guy animation
 	App->render->Blit(graphics, 161, 118 + (int)foreground_pos, &(greyHat.GetCurrentFrame()), false, 0.92f); //grey hat
-	App->render->Blit(graphics, 92, 45 + (int)foreground_pos, &(brownHat.GetCurrentFrame()), false, 0.92f); //brown hat
+	App->render->Blit(graphics, 91, 45 + (int)foreground_pos, &(brownHat.GetCurrentFrame()), false, 0.92f); //brown hat
+	App->render->Blit(graphics, 117, 100 + (int)foreground_pos, &(baldGuy.GetCurrentFrame()), false, 0.92f); //brown hat
 
 	App->render->Blit(graphics, 0, 170, &ground, false);
 
