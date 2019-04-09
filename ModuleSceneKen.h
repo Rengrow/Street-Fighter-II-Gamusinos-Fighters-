@@ -29,12 +29,17 @@ public:
 	SDL_Rect background;
 	SDL_Rect wall;
 	SDL_Rect wall2;
+	SDL_Rect box;
+	SDL_Rect little;
+	SDL_Rect big;
 	Animation flag;
 	Animation girl;
 	Animation prGuy;
 	Animation baldGuy;
+	Animation blueGuy;
 	Animation greyHat;
 	Animation brownHat;
+	Animation blueGuy2;
 	Collider *collider = nullptr;
 	Collider *collider2 = nullptr;
 	

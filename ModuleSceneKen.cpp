@@ -37,7 +37,25 @@ ModuleSceneKen::ModuleSceneKen()
 	background.y = 0;
 	background.w = 572;
 	background.h = 179;
+
+	//box
+	box.x = 854;
+	box.y = 6;
+	box.w = 155;
+	box.h = 99;
 	
+	//Little thing of metal
+	little.x = 577;
+	little.y = 96;
+	little.w = 22;
+	little.h = 17;
+
+	//Big thing of metal
+	big.x = 577;
+	big.y = 116;
+	big.w = 32;
+	big.h = 25;
+
 	// flag animation
 	flag.PushBack({ 578, 6, 38, 27 }, 0.08f);
 	flag.PushBack({ 578, 36, 38, 27 }, 0.08f);
@@ -67,6 +85,17 @@ ModuleSceneKen::ModuleSceneKen()
 	baldGuy.PushBack({ 667, 75, 41, 63 }, 0.05f);
 	baldGuy.PushBack({ 621, 126, 41, 63 }, 0.05f);
 	baldGuy.PushBack({ 667, 6, 41, 63 }, 0.05f);
+	baldGuy.PushBack({ 621, 126, 41, 63 }, 0.05f);
+
+	//Blue Guy
+	blueGuy.PushBack({ 752, 80, 47, 54 }, 0.05f);
+	blueGuy.PushBack({ 752, 136, 47, 54 }, 0.05f);
+	blueGuy.PushBack({ 802, 6, 47, 54 }, 0.05f);
+	blueGuy.PushBack({ 752, 136, 47, 54 }, 0.05f);
+	
+	//Blue guy 2
+	blueGuy2.PushBack({ 752, 6, 33, 30 }, 0.05f);
+	blueGuy2.PushBack({ 752, 43, 33, 30 }, 0.05f);
 
 	// for moving the foreground
 	foreground_pos = 0;
@@ -149,9 +178,18 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 125, 23 + (int)foreground_pos, &(prGuy.GetCurrentFrame()), false, 0.92f); //purple guy animation
 	App->render->Blit(graphics, 161, 118 + (int)foreground_pos, &(greyHat.GetCurrentFrame()), false, 0.92f); //grey hat
 	App->render->Blit(graphics, 91, 45 + (int)foreground_pos, &(brownHat.GetCurrentFrame()), false, 0.92f); //brown hat
-	App->render->Blit(graphics, 117, 100 + (int)foreground_pos, &(baldGuy.GetCurrentFrame()), false, 0.92f); //brown hat
+	App->render->Blit(graphics, 117, 100 + (int)foreground_pos, &(baldGuy.GetCurrentFrame()), false, 0.92f); //bald guy
+	App->render->Blit(graphics, 286, 100 + (int)foreground_pos, &(blueGuy.GetCurrentFrame()), false, 0.92f); //blue guy
+	App->render->Blit(graphics, 220, 129 + (int)foreground_pos, &(blueGuy2.GetCurrentFrame()), false, 0.92f); //blue guy 2
 
 	App->render->Blit(graphics, 0, 170, &ground, false);
+	App->render->Blit(graphics, 520, 120, &box, false); //box
+
+	App->render->Blit(graphics, 180, 160, &little, false);
+	App->render->Blit(graphics, 390, 160, &little, false);
+
+	App->render->Blit(graphics, 177, 200, &big, false);
+	App->render->Blit(graphics, 387, 200, &big, false);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
