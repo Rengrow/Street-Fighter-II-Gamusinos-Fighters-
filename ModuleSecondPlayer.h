@@ -27,9 +27,9 @@ public:
 	Animation backward2;
 	Animation lp2, lk2;
 	Animation neutralJump2;
-	iPoint position;
-	Animation hdk;
-	Animation streel;
+	iPoint position2;
+	Animation hdk2;
+	Animation streel2;
 	p2Point <int> pivot2 = { 250, 220 };		// The pivot is found in the furthest toe from the enemy. The 250 equals to the x = 0 that the character has respect his spritesheet
 	void OnCollision(Collider* c1, Collider* c2);
 	bool atacar = false;
