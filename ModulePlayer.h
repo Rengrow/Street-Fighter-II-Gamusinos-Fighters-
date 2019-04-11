@@ -30,6 +30,7 @@ public:
 	Animation hdk;
 	Animation streel;
 	iPoint position;
+	p2Point <int> pivot = { 100, 220 };		// The pivot is found in the furthest toe from the enemy
 	void OnCollision(Collider* c1, Collider* c2);
 	bool atacar = false;
 	bool jump = false;

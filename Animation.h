@@ -3,6 +3,7 @@
 
 #include "SDL/include/SDL_rect.h"
 #include "Frame.h"
+
 #define MAX_FRAMES 25
 
 class Animation
