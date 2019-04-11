@@ -14,42 +14,42 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 348, 3, 61, 95 }, 0.1f);
-	idle.PushBack({ 408, 3, 60, 95 }, 0.1f);
-	idle.PushBack({ 468, 3, 58, 95 }, 0.1f);
-	idle.PushBack({ 526, 3, 55, 95 }, 0.1f);
+	idle.PushBack({ 348, 3, 61, 95 }, 4);
+	idle.PushBack({ 408, 3, 60, 95 }, 4);
+	idle.PushBack({ 468, 3, 58, 95 }, 4);
+	idle.PushBack({ 526, 3, 55, 95 }, 4);
 
 	// walk forward animation (arcade sprite sheet)
-	forward.PushBack({ 1, 3, 53, 94 }, 0.1f);
-	forward.PushBack({ 53, 3, 62, 95 }, 0.1f);
-	forward.PushBack({ 115, 3, 63, 95 }, 0.1f);
-	forward.PushBack({ 179, 3, 64, 94 }, 0.1f);
-	forward.PushBack({ 243, 3, 54, 95 }, 0.1f);
-	forward.PushBack({ 298, 3, 49, 94 }, 0.1f);
+	forward.PushBack({ 1, 3, 53, 94 }, 4);
+	forward.PushBack({ 53, 3, 62, 95 }, 4);
+	forward.PushBack({ 115, 3, 63, 95 }, 4);
+	forward.PushBack({ 179, 3, 64, 94 }, 4);
+	forward.PushBack({ 243, 3, 54, 95 }, 4);
+	forward.PushBack({ 298, 3, 49, 94 }, 4);
 
 	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 694, 3, 56, 93 }, 0.1f);
-	backward.PushBack({ 752, 3, 60, 93 }, 0.1f);
-	backward.PushBack({ 813, 3, 58, 93 }, 0.1f);
-	backward.PushBack({ 872, 3, 56, 93 }, 0.1f);
-	backward.PushBack({ 930, 3, 57, 93 }, 0.1f);
-	backward.PushBack({ 0, 102, 57, 92 }, 0.1f);
+	backward.PushBack({ 694, 3, 56, 93 }, 4);
+	backward.PushBack({ 752, 3, 60, 93 }, 4);
+	backward.PushBack({ 813, 3, 58, 93 }, 4);
+	backward.PushBack({ 872, 3, 56, 93 }, 4);
+	backward.PushBack({ 930, 3, 57, 93 }, 4);
+	backward.PushBack({ 0, 102, 57, 92 }, 4);
 
 
 	// lp
-	lp.PushBack({ 1, 3, 53, 94 }, 0.1f);
-	lp.PushBack({ 59, 101, 63, 93 }, 0.1f);
-	lp.PushBack({ 124, 101, 91, 93 }, 0.1f);
-	lp.PushBack({ 217, 101, 73, 93 }, 0.1f);
-	lp.PushBack({ 59, 101, 63, 93 }, 0.1f);
-	lp.PushBack({ 1, 3, 53, 94 }, 0.1f);
+	lp.PushBack({ 1, 3, 53, 94 }, 1);
+	lp.PushBack({ 59, 101, 63, 93 }, 2);
+	lp.PushBack({ 124, 101, 91, 93 }, 4);
+	lp.PushBack({ 217, 101, 73, 93 }, 1);
+	lp.PushBack({ 59, 101, 63, 93 }, 4);
+	lp.PushBack({ 1, 3, 53, 94 }, 4);
 
 	// lk
-	lk.PushBack({ 1, 3, 53, 94 }, 0.1f);
-	lk.PushBack({ 400, 102, 63, 93 }, 0.1f);
-	lk.PushBack({ 467, 100, 115, 93 }, 0.1f);
-	lk.PushBack({ 400, 102, 63, 93 }, 0.1f);
-	lk.PushBack({ 1, 3, 53, 94 }, 0.1f);
+	lk.PushBack({ 1, 3, 53, 94 }, 4);
+	lk.PushBack({ 400, 102, 63, 93 }, 4);
+	lk.PushBack({ 467, 100, 115, 93 }, 4);
+	lk.PushBack({ 400, 102, 63, 93 }, 4);
+	lk.PushBack({ 1, 3, 53, 94 }, 4);
 
 	// Neutral jump
 	neutralJump.PushBack({ 195, 512, 55, 105 }, 0.081f);
@@ -62,11 +62,11 @@ ModulePlayer::ModulePlayer()
 	neutralJump.PushBack({ 195, 512, 55, 105 }, 0.081f);
 
 	//Hadoken
-	hdk.PushBack({ 462, 751, 74, 90 }, 0.1f);
-	hdk.PushBack({ 537, 757, 85, 84 }, 0.1f);
-	hdk.PushBack({ 623, 758, 90, 83 }, 0.1f);
-	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
-	hdk.PushBack({ 714, 764, 106, 77 }, 0.1f);
+	hdk.PushBack({ 462, 751, 74, 90 }, 4);
+	hdk.PushBack({ 537, 757, 85, 84 }, 4);
+	hdk.PushBack({ 623, 758, 90, 83 }, 4);
+	hdk.PushBack({ 714, 764, 106, 77 }, 4);
+	hdk.PushBack({ 714, 764, 106, 77 }, 4);
 
 	// Standing reel
 	streel.PushBack({ 143, 857, 67, 92 }, 0.078f);
@@ -158,7 +158,7 @@ update_status ModulePlayer::Update()
 	if (atacar == true && mov == 1)
 		current_animation = &lp;
 
-	if (framesAtaque > 60 && mov == 1) {
+	if (framesAtaque > 11 && mov == 1) {
 		atacar = false;
 		framesAtaque = 0;
 		mov = 0;
