@@ -51,6 +51,10 @@ bool ModuleSceneSagat::Start()
 	App->collisions->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
+	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
+	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
+	App->render->scenelimit = -580;
+
 	return ret;
 }
 
