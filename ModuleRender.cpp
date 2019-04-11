@@ -72,7 +72,7 @@ update_status ModuleRender::Update()
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-		if (camera.x != scenelimit) {
+		if ((camera.x != scenelimit) && (camera.x > scenelimit)) {
 			camera.x -= speed*2;
 
 			limit1Box.x += speed;
