@@ -30,8 +30,8 @@ ModuleSceneSagat::ModuleSceneSagat()
 	background = {0, 432, 633, 195};
 
 	// flag animation
-	palmtree.PushBack({699, 212, 325, 317}, 0.02f);
-	palmtree.PushBack({696, 550, 328, 317}, 0.02f);
+	palmtree.PushBack({699, 212, 325, 317}, 24);
+	palmtree.PushBack({696, 550, 328, 317}, 24);
 }
 
 ModuleSceneSagat::~ModuleSceneSagat()
