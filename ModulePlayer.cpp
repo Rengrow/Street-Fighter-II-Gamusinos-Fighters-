@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 
+
 ModulePlayer::ModulePlayer()
 {
 	position.x = 100;
@@ -143,10 +144,10 @@ update_status ModulePlayer::Update()
 		mov = 7;
 	}
 
-	if (collider != nullptr){
+	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y - 95);
 	}
-	
+
 
 	//Light punch Ryu
 	if (atacar == true && framesAtaque == 0 && mov == 1)

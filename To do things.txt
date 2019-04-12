@@ -2,10 +2,10 @@ Pivots
 Collision boxes
 The palmtree's width varies in the spritesheet, when it shoudn't
 Quitar una de las carpets assets
-Palmtree on Sagat stage must be on the front
-The things in the Ken stage must be on the front
 Lower the Fade to Black time
 Reset the camera every time module welcome page or endbattle is shown
 Add Hadoken impacting sprite
 Arreglar animación forward, backwards, salto
+Reset camera when entering a new stage or phase
+Make the camera move when characters are moving in one direction
 

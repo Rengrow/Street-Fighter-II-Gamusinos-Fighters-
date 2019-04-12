@@ -188,12 +188,9 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
 
-	App->render->Blit(graphics, 177, 200, &big, false);
-	App->render->Blit(graphics, 387, 200, &big, false);
-
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->scene_Sagat, 5);
+		App->fade->FadeToBlack(this, (Module*)App->scene_Sagat, 2);
 	}
 
 	return UPDATE_CONTINUE;

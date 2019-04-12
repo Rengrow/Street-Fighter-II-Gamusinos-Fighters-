@@ -53,7 +53,7 @@ update_status ModuleEndBattle::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 5);
+		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 2);
 	}
 
 	return UPDATE_CONTINUE;
