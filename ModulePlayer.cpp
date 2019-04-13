@@ -15,62 +15,62 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 348, 3, 61, 95 }, 6);
-	idle.PushBack({ 408, 3, 60, 95 }, 6);
-	idle.PushBack({ 468, 3, 58, 95 }, 6);
-	idle.PushBack({ 526, 3, 55, 95 }, 6);
+	idle.PushBack({ 348, 3, 61, 95 }, 6, 0, {}, {}, {}, {});
+	idle.PushBack({ 408, 3, 60, 95 }, 6, 0, {}, {}, {}, {});
+	idle.PushBack({ 468, 3, 58, 95 }, 6, 0, {}, {}, {}, {});
+	idle.PushBack({ 526, 3, 55, 95 }, 6, 0, {}, {}, {}, {});
 
 	// walk forward animation (arcade sprite sheet)
-	forward.PushBack({ 1, 3, 53, 94 }, 6);
-	forward.PushBack({ 53, 3, 62, 95 }, 6);
-	forward.PushBack({ 115, 3, 63, 95 }, 6);
-	forward.PushBack({ 179, 3, 64, 94 }, 6);
-	forward.PushBack({ 243, 3, 54, 95 }, 6);
-	forward.PushBack({ 298, 3, 49, 94 }, 6);
+	forward.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
+	forward.PushBack({ 53, 3, 62, 95 }, 6, 0, {}, {}, {}, {});
+	forward.PushBack({ 115, 3, 63, 95 }, 6, 0, {}, {}, {}, {});
+	forward.PushBack({ 179, 3, 64, 94 }, 6, 0, {}, {}, {}, {});
+	forward.PushBack({ 243, 3, 54, 95 }, 6, 0, {}, {}, {}, {});
+	forward.PushBack({ 298, 3, 49, 94 }, 6, 0, {}, {}, {}, {});
 
 	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 694, 3, 56, 93 }, 6);
-	backward.PushBack({ 752, 3, 60, 93 }, 6);
-	backward.PushBack({ 813, 3, 58, 93 }, 6);
-	backward.PushBack({ 872, 3, 56, 93 }, 6);
-	backward.PushBack({ 930, 3, 57, 93 }, 6);
-	backward.PushBack({ 0, 102, 57, 92 }, 6);
+	backward.PushBack({ 694, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
+	backward.PushBack({ 752, 3, 60, 93 }, 6, 0, {}, {}, {}, {});
+	backward.PushBack({ 813, 3, 58, 93 }, 6, 0, {}, {}, {}, {});
+	backward.PushBack({ 872, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
+	backward.PushBack({ 930, 3, 57, 93 }, 6, 0, {}, {}, {}, {});
+	backward.PushBack({ 0, 102, 57, 92 }, 6, 0, {}, {}, {}, {});
 
 
 	// lp
-	lp.PushBack({ 59, 101, 63, 93 }, 4);
-	lp.PushBack({ 124, 101, 91, 93 }, 8);
-	lp.PushBack({ 59, 101, 63, 93 }, 8);
-	lp.PushBack({ 409, 3, 58, 93 }, 2);
+	lp.PushBack({ 59, 101, 63, 93 }, 4, 0, {}, {}, {}, {});
+	lp.PushBack({ 124, 101, 91, 93 }, 8, 0, {}, {}, {}, {});
+	lp.PushBack({ 59, 101, 63, 93 }, 8, 0, {}, {}, {}, {});
+	lp.PushBack({ 409, 3, 58, 93 }, 2, 0, {}, {}, {}, {});
 
 	// lk
-	lk.PushBack({ 1, 3, 53, 94 }, 6);
-	lk.PushBack({ 400, 102, 63, 93 }, 6);
-	lk.PushBack({ 467, 100, 115, 93 }, 16);
-	lk.PushBack({ 400, 102, 63, 93 }, 8);
-	lk.PushBack({ 1, 3, 53, 94 }, 4);
+	lk.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
+	lk.PushBack({ 400, 102, 63, 93 }, 6, 0, {}, {}, {}, {});
+	lk.PushBack({ 467, 100, 115, 93 }, 16, 0, {}, {}, {}, {});
+	lk.PushBack({ 400, 102, 63, 93 }, 8, 0, {}, {}, {}, {});
+	lk.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {}, {});
 
 	// Neutral jump
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 1);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump.PushBack({ 252, 528, 50, 89 }, 1);
-	neutralJump.PushBack({ 303, 540, 54, 77 }, 2);
-	neutralJump.PushBack({ 358, 547, 48, 70 }, 3);
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 2);
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 2);
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 1);
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 1);
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump.PushBack({ 252, 528, 50, 89 }, 1, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 303, 540, 54, 77 }, 2, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 358, 547, 48, 70 }, 3, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 1, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});
 
 	//Hadoken
-	hdk.PushBack({ 462, 751, 74, 90 }, 4);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk.PushBack({ 537, 757, 85, 84 }, 12);
-	hdk.PushBack({ 623, 758, 90, 83 }, 2);
-	hdk.PushBack({ 714, 764, 106, 77 }, 2);
+	hdk.PushBack({ 462, 751, 74, 90 }, 4, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {}, {});
+	hdk.PushBack({ 623, 758, 90, 83 }, 2, 0, {}, {}, {}, {});
+	hdk.PushBack({ 714, 764, 106, 77 }, 2, 0, {}, {}, {}, {});
 
 	// Standing reel
-	streel.PushBack({ 143, 857, 67, 92 }, 6);		// Ya que no hay colisiones, no se puede ver...
-	streel.PushBack({ 213, 857, 69, 91 }, 6);
-	streel.PushBack({ 285, 857, 80, 91 }, 6);
-	streel.PushBack({ 367, 857, 66, 91 }, 6);
+	streel.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
+	streel.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {}, {});
+	streel.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {}, {});
+	streel.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {}, {});
 }
 
 ModulePlayer::~ModulePlayer()
@@ -82,12 +82,12 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
-	
+
 	collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
 	punch_collider = App->collisions->AddCollider(lp.GetCurrentFrame(), COLLIDER_PLAYER_HIT, this);
-	
+
 	Animation* current_animation;
-	
+
 	return ret;
 }
 
@@ -265,7 +265,7 @@ update_status ModulePlayer::Update()
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
-	
+
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 	{
 		mov = 8;
@@ -277,8 +277,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	{
 		avanzar = false;
 	}
-	
-	
+
+
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
 	{
 		// the condition checks at which side of the screen the player is, and makes it impossible to move further away from the center
@@ -287,14 +287,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		//probably a bool "player at wall" will be necessary in the future, in order to provent characters from exiting camera if beign pushed back because an enemy attack.
 		//when the movement is triggered, it should check the bool state. If true, should not move in x axis. bool becomes true in this collision, resets in "Contadores"
-		
-		if (position.x-App->render->camera.w/2 < 0){
-		
-		 retroceder = false;
-		}
-		if (position.x - App->render->camera.w/2 > 0){
 
-		 avanzar = false;
+		if (position.x - App->render->camera.w / 2 < 0) {
+
+			retroceder = false;
+		}
+		if (position.x - App->render->camera.w / 2 > 0) {
+
+			avanzar = false;
 		}
 	}
 }
