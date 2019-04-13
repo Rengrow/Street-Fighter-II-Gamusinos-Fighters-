@@ -75,6 +75,9 @@
     <ClInclude Include="ModuleSceneSagat.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="p2Qeue.h">
+      <Filter>Container</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">

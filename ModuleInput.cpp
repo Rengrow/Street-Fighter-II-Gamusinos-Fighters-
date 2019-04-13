@@ -3,6 +3,7 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 
+
 ModuleInput::ModuleInput() : Module()
 {
 	for(uint i = 0; i < MAX_KEYS; ++i)
