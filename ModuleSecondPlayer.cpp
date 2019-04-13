@@ -16,62 +16,62 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	position2.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle2.PushBack({ 348, 3, 61, 95 }, 6);
-	idle2.PushBack({ 408, 3, 60, 95 }, 6);
-	idle2.PushBack({ 468, 3, 58, 95 }, 6);
-	idle2.PushBack({ 526, 3, 55, 95 }, 6);
+	idle2.PushBack({ 348, 3, 61, 95 }, 6, 0, {}, {}, {}, {});
+	idle2.PushBack({ 408, 3, 60, 95 }, 6, 0, {}, {}, {}, {});
+	idle2.PushBack({ 468, 3, 58, 95 }, 6, 0, {}, {}, {}, {});
+	idle2.PushBack({ 526, 3, 55, 95 }, 6, 0, {}, {}, {}, {});
 
 	// walk forward animation (arcade sprite sheet)
-	forward2.PushBack({ 1, 3, 53, 94 }, 6);
-	forward2.PushBack({ 53, 3, 62, 95 }, 6);
-	forward2.PushBack({ 115, 3, 63, 95 }, 6);
-	forward2.PushBack({ 179, 3, 64, 94 }, 6);
-	forward2.PushBack({ 243, 3, 54, 95 }, 6);
-	forward2.PushBack({ 298, 3, 49, 94 }, 6);
+	forward2.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
+	forward2.PushBack({ 53, 3, 62, 95 }, 6, 0, {}, {}, {}, {});
+	forward2.PushBack({ 115, 3, 63, 95 }, 6, 0, {}, {}, {}, {});
+	forward2.PushBack({ 179, 3, 64, 94 }, 6, 0, {}, {}, {}, {});
+	forward2.PushBack({ 243, 3, 54, 95 }, 6, 0, {}, {}, {}, {});
+	forward2.PushBack({ 298, 3, 49, 94 }, 6, 0, {}, {}, {}, {});
 
 	// walk backward animation (arcade sprite sheet)
-	backward2.PushBack({ 694, 3, 56, 93 }, 6);
-	backward2.PushBack({ 752, 3, 60, 93 }, 6);
-	backward2.PushBack({ 813, 3, 58, 93 }, 6);
-	backward2.PushBack({ 872, 3, 56, 93 }, 6);
-	backward2.PushBack({ 930, 3, 57, 93 }, 6);
-	backward2.PushBack({ 0, 102, 57, 92 }, 6);
+	backward2.PushBack({ 694, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
+	backward2.PushBack({ 752, 3, 60, 93 }, 6, 0, {}, {}, {}, {});
+	backward2.PushBack({ 813, 3, 58, 93 }, 6, 0, {}, {}, {}, {});
+	backward2.PushBack({ 872, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
+	backward2.PushBack({ 930, 3, 57, 93 }, 6, 0, {}, {}, {}, {});
+	backward2.PushBack({ 0, 102, 57, 92 }, 6, 0, {}, {}, {}, {});
 
 
 	// lp
-	lp2.PushBack({ 59, 101, 63, 93 }, 4);
-	lp2.PushBack({ 124, 101, 91, 93 }, 8);
-	lp2.PushBack({ 59, 101, 63, 93 }, 8);
-	lp2.PushBack({ 409, 3, 58, 93 }, 2);
+	lp2.PushBack({ 59, 101, 63, 93 }, 4, 0, {}, {}, {}, {});
+	lp2.PushBack({ 124, 101, 91, 93 }, 8, 0, {}, {}, {}, {});
+	lp2.PushBack({ 59, 101, 63, 93 }, 8, 0, {}, {}, {}, {});
+	lp2.PushBack({ 409, 3, 58, 93 }, 2, 0, {}, {}, {}, {});
 
 	// lk
-	lk2.PushBack({ 1, 3, 53, 94 }, 6);
-	lk2.PushBack({ 400, 102, 63, 93 }, 6);
-	lk2.PushBack({ 467, 100, 115, 93 }, 16);
-	lk2.PushBack({ 400, 102, 63, 93 }, 8);
-	lk2.PushBack({ 1, 3, 53, 94 }, 4);
+	lk2.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
+	lk2.PushBack({ 400, 102, 63, 93 }, 6, 0, {}, {}, {}, {});
+	lk2.PushBack({ 467, 100, 115, 93 }, 16, 0, {}, {}, {}, {});
+	lk2.PushBack({ 400, 102, 63, 93 }, 8, 0, {}, {}, {}, {});
+	lk2.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {}, {});
 
 	// Neutral jump
-	neutralJump2.PushBack({ 195, 512, 55, 105 }, 1);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump2.PushBack({ 252, 528, 50, 89 }, 1);
-	neutralJump2.PushBack({ 303, 540, 54, 77 }, 2);
-	neutralJump2.PushBack({ 358, 547, 48, 70 }, 3);
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 2);
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 2);
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 1);
-	neutralJump2.PushBack({ 195, 512, 55, 105 }, 1);
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump2.PushBack({ 252, 528, 50, 89 }, 1, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 303, 540, 54, 77 }, 2, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 358, 547, 48, 70 }, 3, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 1, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});
 
 	//Hadoken
-	hdk2.PushBack({ 462, 751, 74, 90 }, 4);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk2.PushBack({ 537, 757, 85, 84 }, 12);
-	hdk2.PushBack({ 623, 758, 90, 83 }, 2);
-	hdk2.PushBack({ 714, 764, 106, 77 }, 2);
+	hdk2.PushBack({ 462, 751, 74, 90 }, 4, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk2.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {}, {});
+	hdk2.PushBack({ 623, 758, 90, 83 }, 2, 0, {}, {}, {}, {});
+	hdk2.PushBack({ 714, 764, 106, 77 }, 2, 0, {}, {}, {}, {});
 
 	// Standing reel
-	streel2.PushBack({ 143, 857, 67, 92 }, 6);		// Ya que no hay colisiones, no se puede ver...
-	streel2.PushBack({ 213, 857, 69, 91 }, 6);
-	streel2.PushBack({ 285, 857, 80, 91 }, 6);
-	streel2.PushBack({ 367, 857, 66, 91 }, 6);
+	streel2.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
+	streel2.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {}, {});
+	streel2.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {}, {});
+	streel2.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {}, {});
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()
@@ -108,7 +108,7 @@ update_status ModuleSecondPlayer::Update()
 
 	int speed = 1;
 
-	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (avanzar == true)){
+	if ((App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT) && (atacar == false) && (jump == false) && (avanzar == true)) {
 		current_animation = &forward2;
 		position2.x -= speed;
 	}
@@ -234,7 +234,7 @@ update_status ModuleSecondPlayer::Update()
 	SDL_Rect r2 = current_animation->GetCurrentFrame();
 
 	App->render->Blit(graphics2, position2.x, position2.y - r2.h, &r2, flip);
-	
+
 	return UPDATE_CONTINUE;
 }
 

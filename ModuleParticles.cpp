@@ -25,8 +25,8 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 
 	//Hadoken
-	hdk.anim.PushBack({ 277,30, 43, 32});
-	hdk.anim.PushBack({ 321, 35, 39, 21});
+	hdk.anim.PushBack({ 277,30, 43, 32 }, 1, 0, {}, {}, {}, {});
+	hdk.anim.PushBack({ 321, 35, 39, 21 }, 1, 0, {}, {}, {}, {});
 	hdk.anim.loop = true;
 	hdk.speed = { 3, 0 };
 	hdk.life = -1;
@@ -86,7 +86,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int player,  COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int player, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
