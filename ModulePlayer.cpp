@@ -155,13 +155,13 @@ update_status ModulePlayer::Update()
 
 			case ST_JUMP_NEUTRAL:
 				current_animation = &neutralJump;
-				if (SDL_GetTicks() - App->player->hadoken_timer > 1001)
-				{
-					position.y -= speed;
-				}
-				if (SDL_GetTicks() - App->player->hadoken_timer < 1000)
+				if (SDL_GetTicks() - App->player->jump_timer > 1001)
 				{
 					position.y += speed;
+				}
+				if (SDL_GetTicks() - App->player->jump_timer < 1000)
+				{
+					position.y -= speed;
 				}
 
 				break;
@@ -228,7 +228,7 @@ update_status ModulePlayer::Update()
 
 			case ST_HADOKEN:
 				current_animation = &hdk;
-				if (SDL_GetTicks() - App->player->hadoken_timer == 1500)
+				if (SDL_GetTicks() - App->player->hadoken_timer == 550)
 				{
 					App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 				}

@@ -55,14 +55,12 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	lk2.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {}, {});
 
 	// Neutral jump
-	neutralJump2.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump2.PushBack({ 252, 528, 50, 89 }, 1, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 303, 540, 54, 77 }, 2, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 358, 547, 48, 70 }, 3, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 1, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump2.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});
 
 	//Hadoken
 	hdk2.PushBack({ 462, 751, 74, 90 }, 4, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
@@ -159,6 +157,14 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_JUMP_NEUTRAL2:
 			current_animation = &neutralJump2;
+			if (SDL_GetTicks() - App->player2->jump_timer2 > 1001)
+			{
+				position2.y += speed;
+			}
+			if (SDL_GetTicks() - App->player2->jump_timer2 < 1000)
+			{
+				position2.y -= speed;
+			}
 			break;
 
 		case ST_JUMP_FORWARD2:
@@ -223,7 +229,7 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_HADOKEN2:
 			current_animation = &hdk2;
-			if (SDL_GetTicks() - App->player2->hadoken_timer2 == 1500)
+			if (SDL_GetTicks() - App->player2->hadoken_timer2 == 350)
 			{
 				App->particles->AddParticle(App->particles->hdk, position2.x + 25, position2.y - 70, 0, COLLIDER_PLAYER2_SHOT, App->audio->hdk, 200);
 			}

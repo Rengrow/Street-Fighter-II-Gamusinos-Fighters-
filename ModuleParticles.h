@@ -7,7 +7,7 @@
 #include "p2Point.h"
 #include "ModuleCollision.h"
 
-#define MAX_ACTIVE_PARTICLES 100
+#define MAX_ACTIVE_PARTICLES 150
 
 struct SDL_Texture;
 struct Mix_Chunk;

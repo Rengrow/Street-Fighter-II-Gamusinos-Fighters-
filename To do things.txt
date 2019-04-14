@@ -11,3 +11,4 @@ Reset camera when entering a new stage or phase
 Make the camera move when characters are moving in one direction
 Disable input module until combat starts
 Make the player turn around when he and the enemy switch sides
+If stage change happens when character is jumping, it won't appear on the proper x tile
