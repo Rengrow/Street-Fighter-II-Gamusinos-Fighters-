@@ -5,6 +5,54 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "p2Qeue.h"
+
+enum ryu_states2
+{
+	ST_UNKNOWN2,
+
+	ST_IDLE2,
+	ST_WALK_FORWARD2,
+	ST_WALK_BACKWARD2,
+	ST_JUMP_NEUTRAL2,
+	ST_JUMP_FORWARD2,
+	ST_JUMP_BACKWARD2,
+	ST_CROUCH2,
+
+	L_PUNCH_STANDING2,
+	L_PUNCH_NEUTRAL_JUMP2,
+	L_PUNCH_FORWARD_JUMP2,
+	L_PUNCH_BACKWARD_JUMP2,
+	L_PUNCH_CROUCH2,
+
+	L_KIK_STANDING2,
+	L_KIK_NEUTRAL_JUMP2,
+	L_KIK_FORWARD_JUMP2,
+	L_KIK_BACKWARD_JUMP2,
+	L_KIK_CROUCH2,
+
+	ST_HADOKEN2
+};
+
+enum ryu_inputs2
+{
+	IN_LEFT_DOWN2,
+	IN_LEFT_UP2,
+	IN_RIGHT_DOWN2,
+	IN_RIGHT_UP2,
+	IN_LEFT_AND_RIGHT2,
+	IN_JUMP2,
+	IN_CROUCH_UP2,
+	IN_CROUCH_DOWN2,
+	IN_JUMP_AND_CROUCH2,
+	IN_L_PUNCH2,
+	IN_L_KIK2,
+	IN_HADOKEN2,
+	IN_JUMP_FINISH2,
+	IN_L_PUNCH_FINISH2,
+	IN_L_KIK_FINISH2,
+	IN_HADOKEN_FINISH2
+};
 
 struct SDL_Texture;
 
@@ -17,10 +65,13 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void internal_input2(p2Qeue<ryu_inputs2>& inputs);
+	bool external_input2(p2Qeue<ryu_inputs2>& inputs);
+	ryu_states2 process_fsm2(p2Qeue<ryu_inputs2>& inputs);
+
 
 public:
-
-	Collider* collider = nullptr;
+	Collider* collider2 = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	Animation idle2;
 	Animation forward2;
@@ -35,11 +86,14 @@ public:
 	bool atacar = false;
 	bool jump = false;
 	bool flip = true;
-	bool avanzar = true;
-	bool retroceder = true;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
+
+	Uint32 jump_timer2 = 0;
+	Uint32 l_punch_timer2 = 0;
+	Uint32 l_kik_timer2 = 0;
+	Uint32 hadoken_timer2 = 0;
 };
 
 #endif

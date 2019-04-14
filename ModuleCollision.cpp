@@ -172,17 +172,9 @@ void ModuleCollision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
 		case COLLIDER_PLAYER_HIT: // magenta
-			if ((App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN) && (App->player->atacar == false) && (App->player->jump == false))
-			{
-				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
-				break;
-			}
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 		case COLLIDER_PLAYER2_HIT: // black
-			if ((App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) && (App->player->atacar == false) && (App->player->jump == false))
-			{
-				App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
-			}
-			break;
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
 		}
 	}
 }

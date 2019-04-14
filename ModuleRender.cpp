@@ -6,6 +6,8 @@
 #include "ModuleAudio.h"
 #include "ModuleSceneKen.h"
 #include "ModuleCollision.h"
+#include "ModulePlayer.h"
+#include "ModuleSecondPlayer.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -62,6 +64,16 @@ update_status ModuleRender::Update()
 	//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		//	camera.y -= speed;
 	
+/*	if ((App->player->position.x-30 + camera.x > 0) && (App->player2->position2.x != (camera.x - camera.w))) {
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP || KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		{
+			if (camera.x != 0) {
+				camera.x += speed*2;
+				limit1Box.x -= speed;
+				limit2Box.x -= speed;
+			}
+		}
+	}*/
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {

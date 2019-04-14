@@ -59,9 +59,6 @@ enum ryu_inputs
 	IN_HADOKEN_FINISH
 };
 
-
-
-
 struct SDL_Texture;
 
 class ModulePlayer : public Module
@@ -79,7 +76,6 @@ public:
 
 public:
 	Collider* collider = nullptr;
-	Collider* punch_collider = nullptr;
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation forward;
@@ -94,8 +90,6 @@ public:
 	bool atacar = false;
 	bool jump = false;
 	bool godmode = false;
-	bool avanzar = true;
-	bool retroceder = true;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk

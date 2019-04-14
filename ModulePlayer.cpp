@@ -85,7 +85,6 @@ bool ModulePlayer::Start()
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
 	collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
-	punch_collider = App->collisions->AddCollider(lp.GetCurrentFrame(), COLLIDER_PLAYER_HIT, this);
 
 	Animation* current_animation;
 
@@ -114,7 +113,6 @@ update_status ModulePlayer::Update()
 	p2Qeue<ryu_inputs> inputs; 
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
-	
 
 		App->player->external_input(inputs);
 		App->player->internal_input(inputs);
@@ -130,12 +128,12 @@ update_status ModulePlayer::Update()
 
 			case ST_WALK_FORWARD:
 				current_animation = &forward;
-				position.x += speed;
+				position.x++;
 				break;
 
 			case ST_WALK_BACKWARD:
 				current_animation = &backward;
-				position.x -= speed;
+				position.x--;
 				break;
 
 			case ST_JUMP_NEUTRAL:
@@ -205,11 +203,10 @@ update_status ModulePlayer::Update()
 		}
 		current_state = state;
 	
-	//GOD MODE
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y - 95);
 	}
-
+	//GOD MODE
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {
 
 		if (godmode == false) {
@@ -243,26 +240,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 	{
-		avanzar = false;
+		if (App->render->camera.x != 0){
+		position.x--;
+		}
 	}
-
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
 	{
-		// the condition checks at which side of the screen the player is, and makes it impossible to move further away from the center
-
-		// when characters automatically face each other, such condition doesnt make sense, since moving out of scene is only possible by walking backwards (walking forwards will collide with player)
-
-		//probably a bool "player at wall" will be necessary in the future, in order to provent characters from exiting camera if beign pushed back because an enemy attack.
-		//when the movement is triggered, it should check the bool state. If true, should not move in x axis. bool becomes true in this collision, resets in "Contadores"
-
-		if (position.x - App->render->camera.w / 2 < 0) {
-
-			retroceder = false;
+		if (position.x == App->render->limit1Box.x) {
+			position.x++;
 		}
-		if (position.x - App->render->camera.w / 2 > 0) {
-
-			avanzar = false;
+		if (position.x == (App->render->limit1Box.x + App->render->camera.w)) {
+			position.x--;
 		}
 	}
 }
@@ -327,7 +316,7 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 	
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
-		 left = true;
+		left = true;
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
