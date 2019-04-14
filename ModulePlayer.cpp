@@ -72,8 +72,13 @@ ModulePlayer::ModulePlayer()
 	streel.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {}, {});
 
 	//Crouching
-	crouching.PushBack({ 0, 317, 57, 70 }, 15, 0, {}, {}, {}, {});
-	crouching.PushBack({ 57, 325, 62, 62 }, 100, 0, {}, {}, {}, {});
+	crouching.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
+	
+	//Standing
+	standing.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
+
+	//Crouch
+	crouch.PushBack({ 57, 325, 62, 62 }, 1, 0, {}, {}, {}, {});
 	
 	//Crouching l punch
 	clp.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {}, {});
@@ -171,8 +176,16 @@ update_status ModulePlayer::Update()
 				LOG("JUMPING BACKWARD ^^<<\n");
 				break;
 
-			case ST_CROUCH:
+			case ST_CROUCHING:
 				current_animation = &crouching;
+				break;
+
+			case ST_CROUCH:
+				current_animation = &crouch;
+				break;
+
+			case ST_STANDING:
+				current_animation = &standing;
 				break;
 
 			case L_PUNCH_CROUCH:
@@ -420,6 +433,24 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 			App->player->hadoken_timer = 0;
 		}
 	}
+
+	if (crouching_timer > 0)
+	{
+		if (SDL_GetTicks() - crouching_timer > CROUCHING_TIME)
+		{
+			inputs.Push(IN_CROUCHING_FINISH);
+			crouching_timer = 0;
+		}
+	}
+
+	if (standing_timer > 0)
+	{
+		if (SDL_GetTicks() - standing_timer > STANDING_TIME)
+		{
+			inputs.Push(IN_STANDING_FINISH);
+			standing_timer = 0;
+		}
+	}
 }
 
 ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
@@ -438,7 +469,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_RIGHT_DOWN: state = ST_WALK_FORWARD; break;
 			case IN_LEFT_DOWN: state = ST_WALK_BACKWARD; break;
 			case IN_JUMP: state = ST_JUMP_NEUTRAL; jump_timer = SDL_GetTicks();  break;
-			case IN_CROUCH_DOWN: state = ST_CROUCH; break;
+			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = SDL_GetTicks(); break;
 			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
 			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
 			case IN_HADOKEN: state = ST_HADOKEN; hadoken_timer = SDL_GetTicks(); break;
@@ -592,11 +623,31 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 
+		case ST_CROUCHING:
+		{
+			switch (last_input)
+			{
+			case IN_CROUCHING_FINISH: state = ST_CROUCH; break;
+
+			}
+		}
+		break;
+
+		case ST_STANDING:
+		{
+			switch (last_input)
+			{
+			case IN_STANDING_FINISH: state = ST_IDLE; break;
+
+			}
+		}
+		break;
+
 		case ST_CROUCH:
 		{
 			switch (last_input)
 			{
-			case IN_CROUCH_UP: state = ST_IDLE; break;
+			case IN_CROUCH_UP: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
 			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_punch_timer = SDL_GetTicks(); break;
 			case IN_L_KIK: state = L_KIK_CROUCH; l_kik_timer = SDL_GetTicks(); break;
 			}
@@ -608,7 +659,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_IDLE; break;
+			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -618,7 +669,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_IDLE; break;
+			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
