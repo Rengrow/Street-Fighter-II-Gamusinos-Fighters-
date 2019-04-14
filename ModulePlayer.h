@@ -8,8 +8,8 @@
 #include "p2Qeue.h"
 
 #define JUMP_TIME 2000
-#define L_PUNCH_TIME 1000
-#define L_KIK_TIME 1500
+#define L_PUNCH_TIME 353
+#define L_KIK_TIME 600
 #define HADOKEN_TIME 2000
 
 enum ryu_states
@@ -84,10 +84,11 @@ public:
 	Animation idle;
 	Animation forward;
 	Animation backward;
-	Animation lp, lk;
+	Animation lp, lk, clp, clk;
 	Animation neutralJump;
 	Animation hdk;
 	Animation streel;
+	Animation crouching;
 	iPoint position;
 	p2Point <int> pivot = { 100, 220 };		// The pivot is found in the furthest toe from the enemy
 	void OnCollision(Collider* c1, Collider* c2);

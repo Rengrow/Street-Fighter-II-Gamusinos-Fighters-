@@ -52,14 +52,12 @@ ModulePlayer::ModulePlayer()
 	lk.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {}, {});
 
 	// Neutral jump
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump.PushBack({ 252, 528, 50, 89 }, 1, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 303, 540, 54, 77 }, 2, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 358, 547, 48, 70 }, 3, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 2, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 1, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 1, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});
 
 	//Hadoken
 	hdk.PushBack({ 462, 751, 74, 90 }, 4, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
@@ -72,6 +70,20 @@ ModulePlayer::ModulePlayer()
 	streel.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {}, {});
 	streel.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {}, {});
 	streel.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {}, {});
+
+	//Crouching
+	crouching.PushBack({ 0, 317, 57, 70 }, 15, 0, {}, {}, {}, {});
+	crouching.PushBack({ 57, 325, 62, 62 }, 100, 0, {}, {}, {}, {});
+	
+	//Crouching l punch
+	clp.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {}, {});
+	clp.PushBack({ 296, 325, 96, 61 }, 8, 0, {}, {}, {}, {});
+	clp.PushBack({ 392, 324, 65, 61 }, 6, 0, {}, {}, {}, {});
+
+	//Crouching l kik
+	clk.PushBack({ 617, 322, 71, 65 }, 14, 0, {}, {}, {}, {});
+	clk.PushBack({ 688, 322, 113, 65 }, 14, 0, {}, {}, {}, {});
+	clk.PushBack({ 617, 322, 71, 65 }, 12, 0, {}, {}, {}, {});
 }
 
 ModulePlayer::~ModulePlayer()
@@ -140,6 +152,15 @@ update_status ModulePlayer::Update()
 
 			case ST_JUMP_NEUTRAL:
 				current_animation = &neutralJump;
+				if (SDL_GetTicks() - App->player->hadoken_timer > 1001)
+				{
+					position.y -= speed;
+				}
+				if (SDL_GetTicks() - App->player->hadoken_timer < 1000)
+				{
+					position.y += speed;
+				}
+
 				break;
 
 			case ST_JUMP_FORWARD:
@@ -151,11 +172,11 @@ update_status ModulePlayer::Update()
 				break;
 
 			case ST_CROUCH:
-				LOG("CROUCHING ****\n");
+				current_animation = &crouching;
 				break;
 
 			case L_PUNCH_CROUCH:
-				LOG("PUNCH CROUCHING **++\n");
+				current_animation = &clp;
 				break;
 
 			case L_PUNCH_STANDING:
@@ -175,7 +196,7 @@ update_status ModulePlayer::Update()
 				break;
 
 			case L_KIK_CROUCH:
-				LOG("KIK CROUCHING **++\n");
+				current_animation = &clk;
 				break;
 
 			case L_KIK_STANDING:
@@ -577,6 +598,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_CROUCH_UP: state = ST_IDLE; break;
 			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_punch_timer = SDL_GetTicks(); break;
+			case IN_L_KIK: state = L_KIK_CROUCH; l_kik_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
