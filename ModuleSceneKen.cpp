@@ -10,6 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleFonts.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -133,6 +134,8 @@ bool ModuleSceneKen::Start()
 	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
 	App->render->scenelimit = -500;
 
+	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
+
 	return true;
 }
 
@@ -145,6 +148,8 @@ bool ModuleSceneKen::CleanUp()
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
+
+	App->fonts->UnLoad(timer);
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;
@@ -187,6 +192,8 @@ update_status ModuleSceneKen::Update()
 
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
+
+	App->fonts->TimerBlit(timer, this);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

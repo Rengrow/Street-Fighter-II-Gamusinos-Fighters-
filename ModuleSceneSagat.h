@@ -28,6 +28,8 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation palmtree;
+	int timer;
+
 };
 
 #endif // __MODULESCENESAGAT_H__

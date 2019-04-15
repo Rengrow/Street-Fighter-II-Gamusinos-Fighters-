@@ -42,7 +42,7 @@ public:
 	Animation blueGuy2;
 	Collider *collider = nullptr;
 	Collider *collider2 = nullptr;
-	
+	int timer;
 
 	float foreground_pos;
 	bool forward;

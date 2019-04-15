@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleFonts.h"
+#include "SDL\include\SDL.h"
 
 #include<string.h>
 
@@ -50,8 +51,6 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	fonts[id].rows = rows; // rows: rows of characters in the texture
 	fonts[id].len = 0; // len: length of the table
 
-	// TODO 1: Finish storing font data
-
 	strcpy_s(fonts[id].table, characters);// table: array of chars to have the list of characters
 	fonts[id].row_chars = strlen(characters);// row_chars: amount of chars per row of the texture
 	fonts[id].char_w = width / fonts[id].row_chars;// char_w: width of each character
@@ -98,5 +97,49 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 			App->render->Blit(App->textures->Load("fonts/rtype_font.png"), x, y, &rect, false, 1);
 			x += font->char_w;
 		}
+	}
+}
+
+void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
+	if (font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].graphic == nullptr) {
+		LOG("Unable to render text with bmp font id %d", font_id);
+		return;
+	}
+	const Font* font = &fonts[font_id];
+	SDL_Rect rect;
+	int x = 150;
+	int y = 40;
+	int counter = 0;
+	timer_timer = SDL_GetTicks();
+//	if (SDL_GetTicks() % 1000 == 0) {
+		if (tiempo[1] == '0') {
+			if (tiempo[0] == '0') {
+//				end = 1;
+			}		//WIN CONDITION
+			else {
+				tiempo[1] = '9';
+				tiempo[0]--;
+			}
+		}
+		else { tiempo[1]--; }
+//	}
+	rect.w = font->char_w;
+	rect.h = font->char_h;
+
+	if (end == 0) {
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 11; j++) {
+				if (fonts[font_id].table[j] == tiempo[counter]) {
+					rect.x = 0 + (j * fonts->char_w);
+					rect.y = 0;
+					App->render->Blit(App->textures->Load("assets/images/ui/timer_list.png"), x, y, &rect, false, 1);
+					x += fonts->char_w;
+				}
+			}
+			counter = 1;
+		}
+	}
+	else if (end == 1) {	// WIN CONDITION
+
 	}
 }

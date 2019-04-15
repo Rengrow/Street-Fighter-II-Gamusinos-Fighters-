@@ -26,15 +26,21 @@ public:
 	// Load Font
 	int Load(const char* texture_path, const char* characters, uint rows = 1);
 	void UnLoad(int font_id);
+
+public:
 	uint width;
 	uint height;
+	Uint32 timer_timer;
+	char tiempo[2] = {'9', '9'};
+	int end = 0;
 
 	// Create a surface from text
 	void BlitText(int x, int y, int bmp_font_id, const char* text) const;
+	void TimerBlit(int font_id, Module *module_call);
 
 private:
 
-	Font	 fonts[MAX_FONTS];
+	Font fonts[MAX_FONTS];
 };
 
 
