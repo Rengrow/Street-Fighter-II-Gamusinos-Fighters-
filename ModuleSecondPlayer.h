@@ -33,6 +33,10 @@ enum ryu_states2
 	L_KIK_BACKWARD_JUMP2,
 	L_KIK_CROUCH2,
 
+	ST_HEAD_REEL2,
+	ST_GUT_REEL2,
+	ST_CROUCH_REEL2,
+
 	ST_HADOKEN2
 };
 
@@ -50,12 +54,18 @@ enum ryu_inputs2
 	IN_L_PUNCH2,
 	IN_L_KIK2,
 	IN_HADOKEN2,
+
+	IN_HEAD_REEL2,
+	IN_GUT_REEL2,
+	IN_CROUCH_REEL2,
+
 	IN_CROUCHING_FINISH2,
 	IN_STANDING_FINISH2,
 	IN_JUMP_FINISH2,
 	IN_L_PUNCH_FINISH2,
 	IN_L_KIK_FINISH2,
-	IN_HADOKEN_FINISH2
+	IN_HADOKEN_FINISH2,
+	IN_REEL_FINISH2
 };
 
 struct SDL_Texture;
@@ -82,12 +92,13 @@ public:
 	Animation backward2;
 	Animation lp2, lk2, clp2, clk2;
 	Animation neutralJump2;
-	iPoint position2;
 	Animation hdk2;
 	Animation streel2;
 	Animation crouching2, standing2, crouch2;
+
 	p2Point <int> pivot2 = { 250, 220 };		// The pivot is found in the furthest toe from the enemy. The 250 equals to the x = 0 that the character has respect his spritesheet
-	
+	iPoint position2;
+	p2Qeue<ryu_inputs2> inputs2;
 
 	bool flip = true;
 	int framesAtaque = 0;
@@ -100,6 +111,7 @@ public:
 	Uint32 hadoken_timer2 = 0;
 	Uint32 crouching_timer2 = 0;
 	Uint32 standing_timer2 = 0;
+	Uint32 reel_timer2 = 0;
 };
 
 #endif

@@ -129,13 +129,13 @@ update_status ModuleSecondPlayer::Update()
 {
 	int speed = 1;
 
-	p2Qeue<ryu_inputs2> inputs;
+	
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle2;
 
-	App->player2->external_input2(inputs);
-	App->player2->internal_input2(inputs);
-	ryu_states2 state = process_fsm2(inputs);
+	App->player2->external_input2(inputs2);
+	App->player2->internal_input2(inputs2);
+	ryu_states2 state = process_fsm2(inputs2);
 
 	if (state != current_state)
 	{
@@ -227,6 +227,16 @@ update_status ModuleSecondPlayer::Update()
 			LOG("KIK JUMP BACKWARD ^<<+\n");
 			break;
 
+		case ST_HEAD_REEL2:
+			current_animation = &streel2;
+			break;
+
+		case ST_GUT_REEL2:
+			break;
+
+		case ST_CROUCH_REEL2:
+			break;
+
 		case ST_HADOKEN2:
 			current_animation = &hdk2;
 			if (SDL_GetTicks() - App->player2->hadoken_timer2 == 350)
@@ -252,8 +262,8 @@ update_status ModuleSecondPlayer::Update()
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
 	{
-		
 		App->audio->PlayChunk(App->audio->hdk_hit);
+		inputs2.Push(IN_HEAD_REEL2);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
@@ -398,7 +408,7 @@ void ModuleSecondPlayer::internal_input2(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (SDL_GetTicks() - App->player2->l_kik_timer2 > L_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH2);
+			inputs2.Push(IN_L_KIK_FINISH2);
 			App->player2->l_kik_timer2 = 0;
 		}
 	}
@@ -407,7 +417,7 @@ void ModuleSecondPlayer::internal_input2(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (SDL_GetTicks() - App->player2->hadoken_timer2 > HADOKEN_TIME)
 		{
-			inputs.Push(IN_HADOKEN_FINISH2);
+			inputs2.Push(IN_HADOKEN_FINISH2);
 			App->player2->hadoken_timer2 = 0;
 		}
 	}
@@ -416,7 +426,7 @@ void ModuleSecondPlayer::internal_input2(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (SDL_GetTicks() - crouching_timer2 > CROUCHING_TIME)
 		{
-			inputs.Push(IN_CROUCHING_FINISH2);
+			inputs2.Push(IN_CROUCHING_FINISH2);
 			crouching_timer2 = 0;
 		}
 	}
@@ -425,8 +435,17 @@ void ModuleSecondPlayer::internal_input2(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (SDL_GetTicks() - standing_timer2 > STANDING_TIME)
 		{
-			inputs.Push(IN_STANDING_FINISH2);
+			inputs2.Push(IN_STANDING_FINISH2);
 			standing_timer2 = 0;
+		}
+	}
+
+	if (reel_timer2 > 0)
+	{
+		if (SDL_GetTicks() - reel_timer2 > REEL_TIME)
+		{
+			inputs2.Push(IN_REEL_FINISH2);
+			reel_timer2 = 0;
 		}
 	}
 }
@@ -451,6 +470,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_punch_timer2 = SDL_GetTicks();  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_kik_timer2 = SDL_GetTicks();  break;
 			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer2 = SDL_GetTicks(); break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -465,6 +486,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer2 = SDL_GetTicks(); break;
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_punch_timer2 = SDL_GetTicks();  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_kik_timer2 = SDL_GetTicks();  break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -479,6 +502,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer2 = SDL_GetTicks(); break;
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_punch_timer2 = SDL_GetTicks();  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_kik_timer2 = SDL_GetTicks();  break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -530,6 +555,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_HADOKEN_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -588,6 +615,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -597,6 +626,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -605,7 +636,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCHING_FINISH2: state = ST_CROUCH2; break;
-
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -615,7 +646,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH2: state = ST_IDLE2; break;
-
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -628,6 +659,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			case IN_CROUCH_UP2: state = ST_STANDING2; standing_timer2 = SDL_GetTicks(); break;
 			case IN_L_PUNCH2: state = L_PUNCH_CROUCH2; l_punch_timer2 = SDL_GetTicks(); break;
 			case IN_L_KIK2: state = L_KIK_CROUCH2; l_kik_timer2 = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -638,6 +670,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_L_PUNCH_FINISH2: state = ST_CROUCH2; break;
 			case IN_CROUCH_UP2 && IN_L_PUNCH_FINISH2: state = ST_STANDING2; standing_timer2 = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer2 = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -648,6 +681,34 @@ ryu_states2 ModuleSecondPlayer::process_fsm2(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_L_KIK_FINISH2: state = ST_CROUCH2; break;
 			case IN_CROUCH_UP2 && IN_L_KIK_FINISH2: state = ST_STANDING2; standing_timer2 = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer2 = SDL_GetTicks(); break;
+			}
+		}
+		break;
+
+		case ST_HEAD_REEL2:
+		{
+			switch (last_input)
+			{
+			case IN_REEL_FINISH2: state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case ST_GUT_REEL2:
+		{
+			switch (last_input)
+			{
+			case IN_REEL_FINISH2: state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case ST_CROUCH_REEL2:
+		{
+			switch (last_input)
+			{
+			case IN_REEL_FINISH2: state = ST_CROUCH2; break;
 			}
 		}
 		break;
