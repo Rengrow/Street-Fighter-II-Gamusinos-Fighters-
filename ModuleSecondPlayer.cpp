@@ -259,8 +259,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
 	{
 		if ((position2.x+60) != (App->render->camera.x+App->render->camera.w)) {
-			position2.x = (App->player->position.x + 60);
-			position2.x++;
+			position2.x = (App->player->position.x + 63);
 		}
 		else { App->player->position.x--; }
 	}
