@@ -13,6 +13,7 @@
 #include "ModuleParticles.h"
 #include "ModuleSecondPlayer.h"
 #include "ModuleCollision.h"
+#include "ModuleFonts.h"
 
 Application::Application()
 {
@@ -30,6 +31,7 @@ Application::Application()
 	modules[11] = endBattle = new ModuleEndBattle();
 	modules[12] = fade = new ModuleFadeToBlack();
 	modules[13] = collisions = new ModuleCollision();
+	modules[14] = fonts = new ModuleFonts();
 	
 }
 
@@ -49,9 +51,9 @@ bool Application::Init()
 	collisions->Disable();
 	scene_Sagat->Disable();
 	scene_ken->Disable();
+	fonts->Disable();
 	endBattle->Disable();
 	
-
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 
@@ -73,6 +75,8 @@ update_status Application::Update()
 
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
+
+	App->frames++;
 
 	return ret;
 }

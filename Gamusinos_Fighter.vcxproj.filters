@@ -78,6 +78,9 @@
     <ClInclude Include="p2Qeue.h">
       <Filter>Container</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFonts.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -129,6 +132,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneSagat.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFonts.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
