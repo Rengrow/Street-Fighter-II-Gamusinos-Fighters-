@@ -13,6 +13,7 @@
 #define HADOKEN_TIME 600
 #define CROUCHING_TIME 250
 #define STANDING_TIME 250
+#define REEL_TIME 700
 
 enum ryu_states
 {
@@ -40,6 +41,10 @@ enum ryu_states
 	L_KIK_BACKWARD_JUMP,
 	L_KIK_CROUCH,
 
+	ST_HEAD_REEL,
+	ST_GUT_REEL,
+	ST_CROUCH_REEL,
+
 	ST_HADOKEN
 };
 
@@ -57,12 +62,18 @@ enum ryu_inputs
 	IN_L_PUNCH,
 	IN_L_KIK,
 	IN_HADOKEN,
+
+	IN_HEAD_REEL,
+	IN_GUT_REEL,
+	IN_CROUCH_REEL,
+
 	IN_CROUCHING_FINISH,
 	IN_STANDING_FINISH,
 	IN_JUMP_FINISH,
 	IN_L_PUNCH_FINISH,
 	IN_L_KIK_FINISH,
-	IN_HADOKEN_FINISH
+	IN_HADOKEN_FINISH,
+	IN_REEL_FINISH
 };
 
 struct SDL_Texture;
@@ -79,6 +90,7 @@ public:
 	void internal_input(p2Qeue<ryu_inputs>& inputs);
 	bool external_input(p2Qeue<ryu_inputs>& inputs);
 	ryu_states process_fsm(p2Qeue<ryu_inputs>& inputs);
+	void OnCollision(Collider* c1, Collider* c2);
 
 public:
 	Collider* collider = nullptr;
@@ -91,9 +103,10 @@ public:
 	Animation hdk;
 	Animation streel;
 	Animation crouching, standing, crouch;
+
+	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 	p2Point <int> pivot = { 100, 220 };		// The pivot is found in the furthest toe from the enemy
-	void OnCollision(Collider* c1, Collider* c2);
 
 	bool godmode = false;
 	int framesAtaque = 0;
@@ -106,6 +119,7 @@ public:
 	Uint32 hadoken_timer = 0;
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;
+	Uint32 reel_timer = 0;
 };
 
 #endif

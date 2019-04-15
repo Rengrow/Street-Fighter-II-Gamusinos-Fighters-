@@ -10,6 +10,7 @@
 #include "p2Qeue.h"
 #include "SDL\include\SDL.h"
 
+
 ModulePlayer::ModulePlayer()
 {
 	position.x = 100;
@@ -127,10 +128,10 @@ update_status ModulePlayer::Update()
 {
 	int speed = 1;
 
-	p2Qeue<ryu_inputs> inputs; 
+	
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
-
+		
 		App->player->external_input(inputs);
 		App->player->internal_input(inputs);
 		ryu_states state = process_fsm(inputs);
@@ -226,6 +227,16 @@ update_status ModulePlayer::Update()
 				LOG("KIK JUMP BACKWARD ^<<+\n");
 				break;
 
+			case ST_HEAD_REEL:
+				current_animation = &streel;
+				break;
+
+			case ST_GUT_REEL:
+				break;
+
+			case ST_CROUCH_REEL:
+				break;
+
 			case ST_HADOKEN:
 				current_animation = &hdk;
 				if (SDL_GetTicks() - App->player->hadoken_timer == 550)
@@ -267,8 +278,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 	{
-		
 		App->audio->PlayChunk(App->audio->hdk_hit);
+		inputs.Push(IN_HEAD_REEL);
 	}
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
@@ -439,6 +450,15 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 			standing_timer = 0;
 		}
 	}
+
+	if (reel_timer > 0)
+	{
+		if (SDL_GetTicks() - reel_timer > REEL_TIME)
+		{
+			inputs.Push(IN_REEL_FINISH);
+			reel_timer = 0;
+		}
+	}
 }
 
 ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
@@ -461,6 +481,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
 			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
 			case IN_HADOKEN: state = ST_HADOKEN; hadoken_timer = SDL_GetTicks(); break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -475,6 +497,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = SDL_GetTicks(); break;
 			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
 			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -489,6 +513,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = SDL_GetTicks(); break;
 			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
 			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -540,6 +566,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_HADOKEN_FINISH: state = ST_IDLE; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -598,6 +626,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_IDLE; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -607,6 +637,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH: state = ST_IDLE; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -616,7 +648,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCHING_FINISH: state = ST_CROUCH; break;
-
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -626,7 +658,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH: state = ST_IDLE; break;
-
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -638,6 +670,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_CROUCH_UP: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
 			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_punch_timer = SDL_GetTicks(); break;
 			case IN_L_KIK: state = L_KIK_CROUCH; l_kik_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -648,6 +681,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_CROUCH; break;
 			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
 			}
 		}
 		break;
@@ -658,10 +692,40 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_L_KIK_FINISH: state = ST_CROUCH; break;
 			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
+			}
+		}
+		break;
+
+
+		case ST_HEAD_REEL:
+		{
+			switch (last_input)
+			{
+			case IN_REEL_FINISH: state = ST_IDLE; break;
+			}
+		}
+		break;
+
+		case ST_GUT_REEL:
+		{
+			switch (last_input)
+			{
+			case IN_REEL_FINISH: state = ST_IDLE; break;
+			}
+		}
+		break;
+
+		case ST_CROUCH_REEL:
+		{
+			switch (last_input)
+			{
+			case IN_REEL_FINISH: state = ST_CROUCH; break;
 			}
 		}
 		break;
 		}
+	
 	}
 
 	return state;
