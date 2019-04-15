@@ -24,7 +24,7 @@ class Module;
 class Application
 {
 public:
-
+	Uint32 frames = 0;
 	Module* modules[NUM_MODULES];
 	ModuleWindow* window;
 	ModuleRender* render;
