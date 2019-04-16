@@ -33,7 +33,11 @@ public:
 	Uint32 timer_timer = 0;
 	char tiempo[2] = {'9', '9'};
 	int end = 0;
+	int timerbuffx = 170;
+	int kox = 170;
+	int koy = 17;
 
+public:
 	// Create a surface from text
 	void BlitText(int x, int y, int bmp_font_id, const char* text) const;
 	void TimerBlit(int font_id, Module *module_call);

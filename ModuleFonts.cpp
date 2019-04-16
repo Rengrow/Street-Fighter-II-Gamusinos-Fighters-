@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleFonts.h"
+#include "ModuleInput.h"
 #include "SDL\include\SDL.h"
 
 #include<string.h>
@@ -20,6 +21,7 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 {
 	tiempo[0] = '9';
 	tiempo[1] = '9';
+	end = 0;
 	int id = -1;
 
 	if(texture_path == nullptr || characters == nullptr || rows == 0)
@@ -108,11 +110,46 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 		return;
 	}
 	const Font* font = &fonts[font_id];
-	SDL_Rect rect;
-	int x = 170;
-	int y = 30;
+/*
+
+	SDL_Rect a;
+	a.x = 435;
+	a.y = 36;
+	a.w = 57;
+	a.h = 50;
+	int x2 = 30;
+	int y2 = 20;
+	App->render->Blit(App->textures->Load("assets/images/ui/fight_hud.png"), x2, y2, &a, false, 1);
+
+ "a" is a test to see size of fonts in order to do proper spritesheets. Left it commented, don't delete*/
+
+	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
+		timerbuffx -= 3;
+	}
+	if (App->render->camera.x < App->render->camerabuffer) {
+		timerbuffx += 3;
+	}
+
+	SDL_Rect timerrect;
 	int counter = 0;
+	int timerx = timerbuffx;
+	int timery = 40;
+	SDL_Rect ko;
+	ko.x = 337;
+	ko.y = 0;
+	ko.w = 27;
+	ko.h = 23;
 	timer_timer++;
+
+	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
+		kox -= 3;
+	}
+	if (App->render->camera.x < App->render->camerabuffer) {
+		kox += 3;
+	}
+
+///// CODE START //////
+
 	if (timer_timer % 75 == 0) {
 		if (tiempo[1] == '0') {
 			if (tiempo[0] == '0') {
@@ -125,17 +162,17 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 		}
 		else { tiempo[1]--; }
 	}
-	rect.w = font->char_w;
-	rect.h = font->char_h;
+	timerrect.w = font->char_w;
+	timerrect.h = font->char_h;
 
-	if (end == 0) {
+	if (end == 0) {		// Blits timer & KO
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 11; j++) {
 				if (fonts[font_id].table[j] == tiempo[counter]) {
-					rect.x = 0 + (j * fonts->char_w);
-					rect.y = 0;
-					App->render->Blit(App->textures->Load("assets/images/ui/timer_list.png"), x, y, &rect, false, 1);
-					x += fonts->char_w;
+					timerrect.x = 0 + (j * fonts->char_w);
+					timerrect.y = 0;
+					App->render->Blit(App->textures->Load("assets/images/ui/timer_list.png"), timerx, timery, &timerrect, false, 1);
+					timerx += fonts->char_w;
 				}
 			}
 			counter = 1;
@@ -144,4 +181,5 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	else if (end == 1) {	// WIN CONDITION
 
 	}
+	App->render->Blit(App->textures->Load("assets/images/ui/Life_bar.png"), kox, koy, &ko, false, 1);
 }

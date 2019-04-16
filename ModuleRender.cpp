@@ -74,6 +74,7 @@ update_status ModuleRender::Update()
 			}
 		}
 	}*/
+	camerabuffer = camera.x;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {

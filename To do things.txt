@@ -13,3 +13,4 @@ Disable input module until combat starts
 Make the player turn around when he and the enemy switch sides
 If stage change happens when character is jumping, it won't appear on the proper x tile
 When time comes to the last seconds, it starts blinking with white shadows. Implement it (maybe?)
+Make the KO icon blink when a player has low health by adding or subtracting the statistics, blittting, and reverting them

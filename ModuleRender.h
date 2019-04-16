@@ -31,6 +31,7 @@ public:
 	Collider *limit1 = nullptr;
 	Collider *limit2 = nullptr;
 	int scenelimit;
+	int camerabuffer;
 };
 
 #endif //__ModuleRenderer_H__
