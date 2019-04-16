@@ -30,7 +30,7 @@ public:
 public:
 	uint width;
 	uint height;
-	Uint32 timer_timer;
+	Uint32 timer_timer = 0;
 	char tiempo[2] = {'9', '9'};
 	int end = 0;
 

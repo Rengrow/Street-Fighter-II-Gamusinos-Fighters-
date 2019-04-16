@@ -113,6 +113,7 @@ bool ModuleSceneKen::Start()
 
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
+	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 
 	App->player->Enable();
 	App->player2->Enable();
@@ -133,8 +134,6 @@ bool ModuleSceneKen::Start()
 	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
 	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
 	App->render->scenelimit = -500;
-
-	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 
 	return true;
 }
