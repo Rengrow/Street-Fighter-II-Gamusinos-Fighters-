@@ -7,8 +7,6 @@
 
 #include<string.h>
 
-// All fonts are scalated half the size of the original spritesheet
-
 // Constructor
 ModuleFonts::ModuleFonts() : Module()
 {}
@@ -111,8 +109,8 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	}
 	const Font* font = &fonts[font_id];
 	SDL_Rect rect;
-	int x = 150;
-	int y = 40;
+	int x = 170;
+	int y = 30;
 	int counter = 0;
 	timer_timer++;
 	if (timer_timer % 75 == 0) {
