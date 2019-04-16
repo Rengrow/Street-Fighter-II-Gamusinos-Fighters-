@@ -18,6 +18,8 @@ ModuleFonts::~ModuleFonts()
 // Load new texture from file path
 int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows)
 {
+	tiempo[0] = '9';
+	tiempo[1] = '9';
 	int id = -1;
 
 	if(texture_path == nullptr || characters == nullptr || rows == 0)

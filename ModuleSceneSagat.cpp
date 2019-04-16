@@ -33,6 +33,7 @@ ModuleSceneSagat::ModuleSceneSagat()
 	// flag animation
 	palmtree.PushBack({699, 212, 325, 317}, 24, 0, {}, {}, {}, {});
 	palmtree.PushBack({696, 550, 328, 317}, 24, 0, {}, {}, {}, {});
+
 }
 
 ModuleSceneSagat::~ModuleSceneSagat()
