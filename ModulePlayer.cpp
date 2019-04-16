@@ -61,10 +61,10 @@ ModulePlayer::ModulePlayer()
 	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});
 
 	//Hadoken
-	hdk.PushBack({ 462, 751, 74, 90 }, 4, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk.PushBack({ 462, 751, 74, 90 }, 8, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
 	hdk.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {}, {});
-	hdk.PushBack({ 623, 758, 90, 83 }, 2, 0, {}, {}, {}, {});
-	hdk.PushBack({ 714, 764, 106, 77 }, 2, 0, {}, {}, {}, {});
+	hdk.PushBack({ 623, 758, 90, 83 }, 8, 0, {}, {}, {}, {});
+	hdk.PushBack({ 714, 764, 106, 77 }, 40, 0, {}, {}, {}, {});
 
 	// Standing reel
 	streel.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
@@ -232,9 +232,9 @@ update_status ModulePlayer::Update()
 
 		case ST_HADOKEN:
 			current_animation = &hdk;
-			if (SDL_GetTicks() - App->player->hadoken_timer == 550)
+			if (App->frames - App->player->hadoken_timer == 42)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + 45, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 			}
 			break;
 		}
@@ -408,7 +408,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 {
 	if (App->player->jump_timer > 0)
 	{
-		if (SDL_GetTicks() - App->player->jump_timer > JUMP_TIME)
+		if (App->frames - App->player->jump_timer > JUMP_TIME)
 		{
 			inputs.Push(IN_JUMP_FINISH);
 			App->player->jump_timer = 0;
@@ -417,7 +417,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (App->player->l_punch_timer > 0)
 	{
-		if (SDL_GetTicks() - App->player->l_punch_timer > L_PUNCH_TIME)
+		if (App->frames - App->player->l_punch_timer > L_PUNCH_TIME)
 		{
 			inputs.Push(IN_L_PUNCH_FINISH);
 			App->player->l_punch_timer = 0;
@@ -426,7 +426,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (App->player->l_kik_timer > 0)
 	{
-		if (SDL_GetTicks() - App->player->l_kik_timer > L_KIK_TIME)
+		if (App->frames - App->player->l_kik_timer > L_KIK_TIME)
 		{
 			inputs.Push(IN_L_KIK_FINISH);
 			App->player->l_kik_timer = 0;
@@ -435,7 +435,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (App->player->hadoken_timer > 0)
 	{
-		if (SDL_GetTicks() - App->player->hadoken_timer > HADOKEN_TIME)
+		if (App->frames - App->player->hadoken_timer > HADOKEN_TIME)
 		{
 			inputs.Push(IN_HADOKEN_FINISH);
 			App->player->hadoken_timer = 0;
@@ -444,7 +444,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (crouching_timer > 0)
 	{
-		if (SDL_GetTicks() - crouching_timer > CROUCHING_TIME)
+		if (App->frames - crouching_timer > CROUCHING_TIME)
 		{
 			inputs.Push(IN_CROUCHING_FINISH);
 			crouching_timer = 0;
@@ -453,7 +453,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (standing_timer > 0)
 	{
-		if (SDL_GetTicks() - standing_timer > STANDING_TIME)
+		if (App->frames - standing_timer > STANDING_TIME)
 		{
 			inputs.Push(IN_STANDING_FINISH);
 			standing_timer = 0;
@@ -462,7 +462,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (reel_timer > 0)
 	{
-		if (SDL_GetTicks() - reel_timer > REEL_TIME)
+		if (App->frames - reel_timer > REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH);
 			reel_timer = 0;
@@ -485,13 +485,13 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_RIGHT_DOWN: state = ST_WALK_FORWARD; break;
 			case IN_LEFT_DOWN: state = ST_WALK_BACKWARD; break;
-			case IN_JUMP: state = ST_JUMP_NEUTRAL; jump_timer = SDL_GetTicks();  break;
-			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = SDL_GetTicks(); break;
-			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
-			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
-			case IN_HADOKEN: state = ST_HADOKEN; hadoken_timer = SDL_GetTicks(); break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_JUMP: state = ST_JUMP_NEUTRAL; jump_timer = App->frames;  break;
+			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = App->frames;  break;
+			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = App->frames;  break;
+			case IN_HADOKEN: state = ST_HADOKEN; hadoken_timer = App->frames; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -502,12 +502,12 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_RIGHT_UP: state = ST_IDLE; break;
 			case IN_LEFT_AND_RIGHT: state = ST_IDLE; break;
-			case IN_JUMP: state = ST_JUMP_FORWARD; jump_timer = SDL_GetTicks();  break;
-			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = SDL_GetTicks(); break;
-			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
-			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_JUMP: state = ST_JUMP_FORWARD; jump_timer = App->frames;  break;
+			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = App->frames;  break;
+			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = App->frames;  break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -518,12 +518,12 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_LEFT_UP: state = ST_IDLE; break;
 			case IN_LEFT_AND_RIGHT: state = ST_IDLE; break;
-			case IN_JUMP: state = ST_JUMP_BACKWARD; jump_timer = SDL_GetTicks();  break;
-			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = SDL_GetTicks(); break;
-			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = SDL_GetTicks();  break;
-			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = SDL_GetTicks();  break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_JUMP: state = ST_JUMP_BACKWARD; jump_timer = App->frames;  break;
+			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = App->frames;  break;
+			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = App->frames;  break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -533,8 +533,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH: state = L_PUNCH_NEUTRAL_JUMP; l_punch_timer = SDL_GetTicks(); break;
-			case IN_L_KIK: state = L_KIK_NEUTRAL_JUMP; l_kik_timer = SDL_GetTicks(); break;
+			case IN_L_PUNCH: state = L_PUNCH_NEUTRAL_JUMP; l_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_NEUTRAL_JUMP; l_kik_timer = App->frames; break;
 			}
 		}
 		break;
@@ -544,8 +544,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH: state = L_PUNCH_FORWARD_JUMP; l_punch_timer = SDL_GetTicks(); break;
-			case IN_L_KIK: state = L_KIK_FORWARD_JUMP; l_kik_timer = SDL_GetTicks(); break;
+			case IN_L_PUNCH: state = L_PUNCH_FORWARD_JUMP; l_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_FORWARD_JUMP; l_kik_timer = App->frames; break;
 			}
 		}
 		break;
@@ -555,8 +555,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH: state = L_PUNCH_BACKWARD_JUMP; l_punch_timer = SDL_GetTicks(); break;
-			case IN_L_KIK: state = L_KIK_BACKWARD_JUMP; l_kik_timer = SDL_GetTicks(); break;
+			case IN_L_PUNCH: state = L_PUNCH_BACKWARD_JUMP; l_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_BACKWARD_JUMP; l_kik_timer = App->frames; break;
 			}
 		}
 		break;
@@ -575,8 +575,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_HADOKEN_FINISH: state = ST_IDLE; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -635,8 +635,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_IDLE; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -646,8 +646,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH: state = ST_IDLE; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = SDL_GetTicks(); break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -657,7 +657,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCHING_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -667,7 +667,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH: state = ST_IDLE; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -676,10 +676,10 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_CROUCH_UP: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
-			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_punch_timer = SDL_GetTicks(); break;
-			case IN_L_KIK: state = L_KIK_CROUCH; l_kik_timer = SDL_GetTicks(); break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_UP: state = ST_STANDING; standing_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_CROUCH; l_kik_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -689,8 +689,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
@@ -700,8 +700,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = SDL_GetTicks(); break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
 			}
 		}
 		break;
