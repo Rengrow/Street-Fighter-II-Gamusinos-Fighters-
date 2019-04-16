@@ -32,7 +32,7 @@ public:
 		last_frame++;
 	}
 
-	SDL_Rect& GetCurrentFrame()
+	Frame& GetCurrentFrame()
 	{
 		if (frames_passed < frames[current_frame].maxFrames) {
 			frames_passed++;
@@ -48,7 +48,12 @@ public:
 			loops++;
 		}
 
-		return frames[current_frame].frame;
+		return frames[current_frame];
+	}
+
+	SDL_Rect& GetCurrentFrameBox()
+	{
+		return GetCurrentFrame().frame;
 	}
 
 	bool Finished() const

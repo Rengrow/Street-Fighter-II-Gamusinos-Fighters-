@@ -104,8 +104,6 @@ bool ModuleSecondPlayer::Start()
 	bool ret = true;
 	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
-	collider2 = App->collisions->AddCollider(idle2.GetCurrentFrame(), COLLIDER_PLAYER2, this);
-
 	Animation* current_animation;
 
 	return ret;
@@ -116,10 +114,7 @@ bool ModuleSecondPlayer::CleanUp()
 	LOG("Unloading player 2");
 
 	App->textures->Unload(graphics2);
-	if (collider2 != nullptr) {
-		collider2->to_delete = true;
-		collider2 = nullptr;
-	}
+	ClearColliders();
 
 	return true;
 }
@@ -129,7 +124,7 @@ update_status ModuleSecondPlayer::Update()
 {
 	int speed = 1;
 
-	
+
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle2;
 
@@ -248,15 +243,21 @@ update_status ModuleSecondPlayer::Update()
 	}
 	current_state = state;
 
-	if (collider2 != nullptr) {
-		collider2->SetPos(position2.x, position2.y - 95);
-	}
-	// Draw everything --------------------------------------
-	SDL_Rect r2 = current_animation->GetCurrentFrame();
+	// Draw everything --------------------------------------	
 
-	App->render->Blit(graphics2, position2.x, position2.y - r2.h, &r2, flip);
+	BlitCharacterAndAddColliders(current_animation);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSecondPlayer::ClearColliders() {
+	for (int i = 0; i < MAX_COLLIDERS_PER_FRAME; i++)
+	{
+		if (colliders2[i] != nullptr) {
+			colliders2[i]->to_delete = true;
+			colliders2[i] = nullptr;
+		}
+	}
 }
 
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
@@ -268,7 +269,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
 	{
-		if ((position2.x+60) != (App->render->camera.x+App->render->camera.w)) {
+		if ((position2.x + 60) != (App->render->camera.x + App->render->camera.w)) {
 			position2.x = (App->player->position.x + 63);
 		}
 		else { App->player->position.x--; }
@@ -279,10 +280,28 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 		if (position2.x == App->render->limit1Box.x) {
 			position2.x++;
 		}
-		if (position2.x + 60 == (App->render->limit1Box.x+App->render->camera.w)) {
+		if (position2.x + 60 == (App->render->limit1Box.x + App->render->camera.w)) {
 			position2.x--;
 		}
 	}
+}
+
+void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
+	Frame frame = current_animation->GetCurrentFrame();
+	SDL_Rect r;
+
+	int hitboxesQnt = frame.GetColliderQnt();
+
+	ClearColliders();
+
+	for (int i = 0; i < hitboxesQnt; i++)
+	{
+		r = frame.hitBoxeRects[i];
+		colliders2[i] = App->collisions->AddCollider({ position2.x + frame.position[i].x, position2.y + frame.position[i].y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+	}
+
+	r = frame.frame;
+	App->render->Blit(graphics2, position2.x, position2.y - r.h, &r, flip);
 }
 
 bool ModuleSecondPlayer::external_input2(p2Qeue<ryu_inputs2>& inputs)
@@ -314,7 +333,7 @@ bool ModuleSecondPlayer::external_input2(p2Qeue<ryu_inputs2>& inputs)
 	{
 		inputs.Push(IN_LEFT_UP2);
 		left = false;
-		
+
 	}
 	//Key down
 
@@ -345,7 +364,7 @@ bool ModuleSecondPlayer::external_input2(p2Qeue<ryu_inputs2>& inputs)
 
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT)
 	{
-		
+
 		left = true;
 	}
 
@@ -354,7 +373,7 @@ bool ModuleSecondPlayer::external_input2(p2Qeue<ryu_inputs2>& inputs)
 		right = true;
 	}
 
-	
+
 
 
 	if (left && right)

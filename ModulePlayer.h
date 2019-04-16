@@ -91,9 +91,11 @@ public:
 	bool external_input(p2Qeue<ryu_inputs>& inputs);
 	ryu_states process_fsm(p2Qeue<ryu_inputs>& inputs);
 	void OnCollision(Collider* c1, Collider* c2);
+	void BlitCharacterAndAddColliders(Animation* current_animation);
+	void ClearColliders();
 
 public:
-	Collider* collider = nullptr;
+	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation forward;

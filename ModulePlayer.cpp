@@ -74,13 +74,13 @@ ModulePlayer::ModulePlayer()
 
 	//Crouching
 	crouching.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
-	
+
 	//Standing
 	standing.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
 
 	//Crouch
 	crouch.PushBack({ 57, 325, 62, 62 }, 1, 0, {}, {}, {}, {});
-	
+
 	//Crouching l punch
 	clp.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {}, {});
 	clp.PushBack({ 296, 325, 96, 61 }, 8, 0, {}, {}, {}, {});
@@ -102,8 +102,6 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
-	collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
-
 	Animation* current_animation;
 
 	return ret;
@@ -115,11 +113,8 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player 1");
 
 	App->textures->Unload(graphics);
+	ClearColliders();
 
-	if (collider != nullptr) {
-		collider->to_delete = true;
-		collider = nullptr;
-	}
 	return true;
 }
 
@@ -127,151 +122,146 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	int speed = 1;
-
-	
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
-		
-		App->player->external_input(inputs);
-		App->player->internal_input(inputs);
-		ryu_states state = process_fsm(inputs);
 
-		if (state != current_state)
+	App->player->external_input(inputs);
+	App->player->internal_input(inputs);
+	ryu_states state = process_fsm(inputs);
+
+	if (state != current_state)
+	{
+		switch (state)
 		{
-			switch (state)
+		case ST_IDLE:
+			current_animation = &idle;
+			break;
+
+		case ST_WALK_FORWARD:
+			current_animation = &forward;
+			position.x++;
+			break;
+
+		case ST_WALK_BACKWARD:
+			current_animation = &backward;
+			position.x--;
+			break;
+
+		case ST_JUMP_NEUTRAL:
+			current_animation = &neutralJump;
+			if (SDL_GetTicks() - App->player->jump_timer > 1001)
 			{
-			case ST_IDLE:
-				current_animation = &idle;
-				break;
-
-			case ST_WALK_FORWARD:
-				current_animation = &forward;
-				position.x++;
-				break;
-
-			case ST_WALK_BACKWARD:
-				current_animation = &backward;
-				position.x--;
-				break;
-
-			case ST_JUMP_NEUTRAL:
-				current_animation = &neutralJump;
-				if (SDL_GetTicks() - App->player->jump_timer > 1001)
-				{
-					position.y += speed;
-				}
-				if (SDL_GetTicks() - App->player->jump_timer < 1000)
-				{
-					position.y -= speed;
-				}
-
-				break;
-
-			case ST_JUMP_FORWARD:
-				LOG("JUMPING FORWARD ^^>>\n");
-				break;
-
-			case ST_JUMP_BACKWARD:
-				LOG("JUMPING BACKWARD ^^<<\n");
-				break;
-
-			case ST_CROUCHING:
-				current_animation = &crouching;
-				break;
-
-			case ST_CROUCH:
-				current_animation = &crouch;
-				break;
-
-			case ST_STANDING:
-				current_animation = &standing;
-				break;
-
-			case L_PUNCH_CROUCH:
-				current_animation = &clp;
-				break;
-
-			case L_PUNCH_STANDING:
-				current_animation = &lp;
-				break;
-
-			case L_PUNCH_NEUTRAL_JUMP:
-				LOG("PUNCH JUMP NEUTRAL ^^++\n");
-				break;
-
-			case L_PUNCH_FORWARD_JUMP:
-				LOG("PUNCH JUMP FORWARD ^>>+\n");
-				break;
-
-			case L_PUNCH_BACKWARD_JUMP:
-				LOG("PUNCH JUMP BACKWARD ^<<+\n");
-				break;
-
-			case L_KIK_CROUCH:
-				current_animation = &clk;
-				break;
-
-			case L_KIK_STANDING:
-				current_animation = &lk;
-				break;
-
-			case L_KIK_NEUTRAL_JUMP:
-				LOG("KIK JUMP NEUTRAL ^^++\n");
-				break;
-
-			case L_KIK_FORWARD_JUMP:
-				LOG("KIK JUMP FORWARD ^>>+\n");
-				break;
-
-			case L_KIK_BACKWARD_JUMP:
-				LOG("KIK JUMP BACKWARD ^<<+\n");
-				break;
-
-			case ST_HEAD_REEL:
-				current_animation = &streel;
-				break;
-
-			case ST_GUT_REEL:
-				break;
-
-			case ST_CROUCH_REEL:
-				break;
-
-			case ST_HADOKEN:
-				current_animation = &hdk;
-				if (SDL_GetTicks() - App->player->hadoken_timer == 550)
-				{
-					App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
-				}
-				break;
+				position.y += speed;
 			}
+			if (SDL_GetTicks() - App->player->jump_timer < 1000)
+			{
+				position.y -= speed;
+			}
+
+			break;
+
+		case ST_JUMP_FORWARD:
+			LOG("JUMPING FORWARD ^^>>\n");
+			break;
+
+		case ST_JUMP_BACKWARD:
+			LOG("JUMPING BACKWARD ^^<<\n");
+			break;
+
+		case ST_CROUCHING:
+			current_animation = &crouching;
+			break;
+
+		case ST_CROUCH:
+			current_animation = &crouch;
+			break;
+
+		case ST_STANDING:
+			current_animation = &standing;
+			break;
+
+		case L_PUNCH_CROUCH:
+			current_animation = &clp;
+			break;
+
+		case L_PUNCH_STANDING:
+			current_animation = &lp;
+			break;
+
+		case L_PUNCH_NEUTRAL_JUMP:
+			LOG("PUNCH JUMP NEUTRAL ^^++\n");
+			break;
+
+		case L_PUNCH_FORWARD_JUMP:
+			LOG("PUNCH JUMP FORWARD ^>>+\n");
+			break;
+
+		case L_PUNCH_BACKWARD_JUMP:
+			LOG("PUNCH JUMP BACKWARD ^<<+\n");
+			break;
+
+		case L_KIK_CROUCH:
+			current_animation = &clk;
+			break;
+
+		case L_KIK_STANDING:
+			current_animation = &lk;
+			break;
+
+		case L_KIK_NEUTRAL_JUMP:
+			LOG("KIK JUMP NEUTRAL ^^++\n");
+			break;
+
+		case L_KIK_FORWARD_JUMP:
+			LOG("KIK JUMP FORWARD ^>>+\n");
+			break;
+
+		case L_KIK_BACKWARD_JUMP:
+			LOG("KIK JUMP BACKWARD ^<<+\n");
+			break;
+
+		case ST_HEAD_REEL:
+			current_animation = &streel;
+			break;
+
+		case ST_GUT_REEL:
+			break;
+
+		case ST_CROUCH_REEL:
+			break;
+
+		case ST_HADOKEN:
+			current_animation = &hdk;
+			if (SDL_GetTicks() - App->player->hadoken_timer == 550)
+			{
+				App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
+			}
+			break;
 		}
-		current_state = state;
-	
-	if (collider != nullptr) {
-		collider->SetPos(position.x, position.y - 95);
 	}
+	current_state = state;
+
 	//GOD MODE
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN) {
-
-		if (godmode == false) {
+		if (godmode == false)
 			godmode = true;
-			collider->to_delete = true;
-			collider = nullptr;
-		}
-
-		else {
+		else
 			godmode = false;
-
-			collider = App->collisions->AddCollider(idle.GetCurrentFrame(), COLLIDER_PLAYER, this);
-		}
 	}
 
-	SDL_Rect r = current_animation->GetCurrentFrame();
-
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, false);
+	BlitCharacterAndAddColliders(current_animation);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::ClearColliders() {
+	for (int i = 0; i < MAX_COLLIDERS_PER_FRAME; i++)
+	{
+		if (colliders[i] != nullptr) {
+			colliders[i]->to_delete = true;
+			colliders[i] = nullptr;
+		}
+	}
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
@@ -284,8 +274,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 	{
-		if (position.x != 0){
-		position.x--;
+		if (position.x != 0) {
+			position.x--;
 		}
 	}
 
@@ -300,13 +290,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 }
 
+void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
+	Frame frame = current_animation->GetCurrentFrame();
+	SDL_Rect r;
+
+	int hitboxesQnt = frame.GetColliderQnt();
+
+	ClearColliders();
+
+	if (!godmode)
+		for (int i = 0; i < hitboxesQnt; i++)
+		{
+			r = frame.hitBoxeRects[i];
+			colliders[i] = App->collisions->AddCollider({ position.x + frame.position[i].x, position.y + frame.position[i].y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+		}
+
+	r = frame.frame;
+	App->render->Blit(graphics, position.x, position.y - r.h, &r, false);
+}
+
 bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 {
 	static bool left = false;
 	static bool right = false;
 	static bool down = false;
 	static bool up = false;
-	
+
 	//Key UP
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
 	{
@@ -325,7 +334,7 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 		inputs.Push(IN_LEFT_UP);
 		left = false;
 	}
-				
+
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP)
 	{
 		inputs.Push(IN_RIGHT_UP);
@@ -342,12 +351,12 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 	{
 		inputs.Push(IN_L_KIK);
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
 	{
 		inputs.Push(IN_HADOKEN);
 	}
-		
+
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		up = true;
@@ -357,18 +366,18 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 	{
 		down = true;
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		left = true;
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		right = true;
 	}
-			
-			
+
+
 	if (left && right)
 		inputs.Push(IN_LEFT_AND_RIGHT);
 	{
@@ -725,7 +734,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 		}
-	
+
 	}
 
 	return state;

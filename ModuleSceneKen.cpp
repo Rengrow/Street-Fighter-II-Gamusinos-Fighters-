@@ -176,16 +176,16 @@ update_status ModuleSceneKen::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &background, false, 0.75f); // sea and sky
-	App->render->Blit(graphics, 469, 18, &(flag.GetCurrentFrame()), false, 0.75f); // flag animation
+	App->render->Blit(graphics, 469, 18, &(flag.GetCurrentFrameBox()), false, 0.75f); // flag animation
 
 	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, false, 0.92f);
-	App->render->Blit(graphics, 187, 112 + (int)foreground_pos, &(girl.GetCurrentFrame()), false, 0.92f); // girl animation
-	App->render->Blit(graphics, 125, 23 + (int)foreground_pos, &(prGuy.GetCurrentFrame()), false, 0.92f); //purple guy animation
-	App->render->Blit(graphics, 161, 118 + (int)foreground_pos, &(greyHat.GetCurrentFrame()), false, 0.92f); //grey hat
-	App->render->Blit(graphics, 91, 45 + (int)foreground_pos, &(brownHat.GetCurrentFrame()), false, 0.92f); //brown hat
-	App->render->Blit(graphics, 117, 100 + (int)foreground_pos, &(baldGuy.GetCurrentFrame()), false, 0.92f); //bald guy
-	App->render->Blit(graphics, 286, 100 + (int)foreground_pos, &(blueGuy.GetCurrentFrame()), false, 0.92f); //blue guy
-	App->render->Blit(graphics, 220, 129 + (int)foreground_pos, &(blueGuy2.GetCurrentFrame()), false, 0.92f); //blue guy 2
+	App->render->Blit(graphics, 187, 112 + (int)foreground_pos, &(girl.GetCurrentFrameBox()), false, 0.92f); // girl animation
+	App->render->Blit(graphics, 125, 23 + (int)foreground_pos, &(prGuy.GetCurrentFrameBox()), false, 0.92f); //purple guy animation
+	App->render->Blit(graphics, 161, 118 + (int)foreground_pos, &(greyHat.GetCurrentFrameBox()), false, 0.92f); //grey hat
+	App->render->Blit(graphics, 91, 45 + (int)foreground_pos, &(brownHat.GetCurrentFrameBox()), false, 0.92f); //brown hat
+	App->render->Blit(graphics, 117, 100 + (int)foreground_pos, &(baldGuy.GetCurrentFrameBox()), false, 0.92f); //bald guy
+	App->render->Blit(graphics, 286, 100 + (int)foreground_pos, &(blueGuy.GetCurrentFrameBox()), false, 0.92f); //blue guy
+	App->render->Blit(graphics, 220, 129 + (int)foreground_pos, &(blueGuy2.GetCurrentFrameBox()), false, 0.92f); //blue guy 2
 
 	App->render->Blit(graphics, 0, 170, &ground, false);
 	App->render->Blit(graphics, 520, 120, &box, false); //box

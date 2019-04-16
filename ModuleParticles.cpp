@@ -69,10 +69,10 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 			if (p->player_shooting == 0) {
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), false);
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), false);
 			}
 			else if (p->player_shooting == 1) {
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), true, false);
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), true, false);
 			}
 			if (p->fx_played == false)
 			{
@@ -100,7 +100,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int pl
 			p->player_shooting = player;
 
 			if (collider_type != COLLIDER_NONE)
-				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrameBox(), collider_type, this);
 			active[i] = p;
 			break;
 		}

@@ -32,5 +32,5 @@ typedef unsigned int uint;
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1
 #define AUDIO_CHANNELS 2
-
+#define MAX_COLLIDERS_PER_FRAME 10
 #endif // __GLOBALS_H__
