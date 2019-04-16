@@ -234,7 +234,7 @@ update_status ModulePlayer::Update()
 			current_animation = &hdk;
 			if (SDL_GetTicks() - App->player->hadoken_timer == 550)
 			{
-				App->particles->AddParticle(App->particles->hdk, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 			}
 			break;
 		}
@@ -306,7 +306,7 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 		}
 
 	r = frame.frame;
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, false);
+	App->render->Blit(graphics, position.x, position.y - r.h, &r, flip);
 }
 
 bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)

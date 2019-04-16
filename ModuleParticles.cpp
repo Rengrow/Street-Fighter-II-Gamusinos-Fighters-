@@ -28,7 +28,7 @@ bool ModuleParticles::Start()
 	hdk.anim.PushBack({ 277,30, 43, 32 }, 1, 0, {}, {}, {}, {});
 	hdk.anim.PushBack({ 321, 35, 39, 21 }, 1, 0, {}, {}, {}, {});
 	hdk.anim.loop = true;
-	hdk.speed = { 3, 0 };
+	
 	hdk.life = -1;
 	return true;
 }
@@ -69,10 +69,10 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 			if (p->player_shooting == 0) {
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), false);
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), p->flip);
 			}
 			else if (p->player_shooting == 1) {
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), true, false);
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), true, p->flip);
 			}
 			if (p->fx_played == false)
 			{
@@ -86,8 +86,13 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int player, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, int y, int player, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
+
+	hdk.speed = { 3, 0 };
+
+
+
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
@@ -98,6 +103,16 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, int pl
 			p->position.y = y;
 			p->sfx = sfx;
 			p->player_shooting = player;
+
+			if (flip == false) {
+				p->speed = { 3, 0 };
+				p->flip = false;
+			}
+
+			if (flip == true){
+				p->speed = { -3, 0 };
+				p->flip = true;
+			}
 
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrameBox(), collider_type, this);

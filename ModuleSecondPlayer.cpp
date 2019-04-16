@@ -236,7 +236,7 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &hdk2;
 			if (SDL_GetTicks() - App->player2->hadoken_timer2 == 350)
 			{
-				App->particles->AddParticle(App->particles->hdk, position2.x + 25, position2.y - 70, 0, COLLIDER_PLAYER2_SHOT, App->audio->hdk, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position2.x + 25, position2.y - 70, 0, COLLIDER_PLAYER2_SHOT, App->audio->hdk, 200);
 			}
 			break;
 		}
