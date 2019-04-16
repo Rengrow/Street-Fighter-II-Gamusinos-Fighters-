@@ -8,11 +8,11 @@
 #include "p2Qeue.h"
 
 #define JUMP_TIME 2000
-#define L_PUNCH_TIME 353
-#define L_KIK_TIME 600
-#define HADOKEN_TIME 600
-#define CROUCHING_TIME 250
-#define STANDING_TIME 250
+#define L_PUNCH_TIME 25
+#define L_KIK_TIME 44
+#define HADOKEN_TIME 71
+#define CROUCHING_TIME 10
+#define STANDING_TIME 10
 #define REEL_TIME 700
 
 enum ryu_states
