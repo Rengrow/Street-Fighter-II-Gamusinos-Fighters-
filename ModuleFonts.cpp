@@ -171,7 +171,7 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 				if (fonts[font_id].table[j] == tiempo[counter]) {
 					timerrect.x = 0 + (j * fonts->char_w);
 					timerrect.y = 0;
-					App->render->Blit(App->textures->Load("assets/images/ui/timer_list.png"), timerx, timery, &timerrect, false, 1);
+					App->render->Blit(font[font_id].graphic, timerx, timery, &timerrect, false, 1);
 					timerx += fonts->char_w;
 				}
 			}
@@ -181,5 +181,5 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	else if (end == 1) {	// WIN CONDITION
 
 	}
-	App->render->Blit(App->textures->Load("assets/images/ui/Life_bar.png"), kox, koy, &ko, false, 1);
+	App->render->Blit(font[font_id].graphic, kox, koy, &ko, false, 1);
 }

@@ -377,7 +377,6 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 		right = true;
 	}
 
-
 	if (left && right)
 		inputs.Push(IN_LEFT_AND_RIGHT);
 	{
