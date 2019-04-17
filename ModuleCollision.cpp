@@ -179,7 +179,7 @@ void ModuleCollision::DebugDraw()
 		}
 	}
 	App->render->DrawQuad({ App->player->position.x, App->player->position.y, 5, 5 }, 51, 0, 51, alpha);
-	App->render->DrawQuad({ App->player2->position2.x, App->player2->position2.y, 5, 5 }, 51, 0, 51, alpha);
+	App->render->DrawQuad({ App->player2->position.x, App->player2->position.y, 5, 5 }, 51, 0, 51, alpha);
 }
 
 // Called before quitting

@@ -79,28 +79,28 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	void internal_input2(p2Qeue<ryu_inputs2>& inputs);
-	bool external_input2(p2Qeue<ryu_inputs2>& inputs);
-	ryu_states2 process_fsm2(p2Qeue<ryu_inputs2>& inputs);
+	void internal_input(p2Qeue<ryu_inputs2>& inputs);
+	bool external_input(p2Qeue<ryu_inputs2>& inputs);
+	ryu_states2 process_fsm(p2Qeue<ryu_inputs2>& inputs);
 	void OnCollision(Collider* c1, Collider* c2);
 	void BlitCharacterAndAddColliders(Animation* current_animation);
 	void ClearColliders();
 
 public:
-	Collider* colliders2[MAX_COLLIDERS_PER_FRAME];
-	SDL_Texture* graphics2 = nullptr;
-	Animation idle2;
-	Animation forward2;
-	Animation backward2;
-	Animation lp2, lk2, clp2, clk2;
-	Animation neutralJump2;
-	Animation hdk2;
-	Animation streel2;
-	Animation crouching2, standing2, crouch2;
+	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
+	SDL_Texture* graphics = nullptr;
+	Animation idle;
+	Animation forward;
+	Animation backward;
+	Animation lp, lk, clp, clk;
+	Animation neutralJump;
+	Animation hdk;
+	Animation streel;
+	Animation crouching, standing, crouch;
 
-	p2Point <int> pivot2 = { 250, 220 };		// The pivot is found in the furthest toe from the enemy. The 250 equals to the x = 0 that the character has respect his spritesheet
-	iPoint position2;
-	p2Qeue<ryu_inputs2> inputs2;
+	p2Point <int> pivot = { 250, 220 };		// The pivot is found in the furthest toe from the enemy. The 250 equals to the x = 0 that the character has respect his spritesheet
+	iPoint position;
+	p2Qeue<ryu_inputs2> inputs;
 
 	bool flip = true;
 	int framesAtaque = 0;
@@ -109,13 +109,13 @@ public:
 	
 	int jumpHeight = 0;
 
-	Uint32 jump_timer2 = 0;
-	Uint32 l_punch_timer2 = 0;
-	Uint32 l_kik_timer2 = 0;
-	Uint32 hadoken_timer2 = 0;
-	Uint32 crouching_timer2 = 0;
-	Uint32 standing_timer2 = 0;
-	Uint32 reel_timer2 = 0;
+	Uint32 jump_timer = 0;
+	Uint32 l_punch_timer = 0;
+	Uint32 l_kik_timer = 0;
+	Uint32 hadoken_timer = 0;
+	Uint32 crouching_timer = 0;
+	Uint32 standing_timer = 0;
+	Uint32 reel_timer = 0;
 };
 
 #endif

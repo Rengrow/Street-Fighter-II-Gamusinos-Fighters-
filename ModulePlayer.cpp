@@ -161,8 +161,8 @@ update_status ModulePlayer::Update()
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
 
-	App->player->external_input(inputs);
-	App->player->internal_input(inputs);
+	external_input(inputs);
+	internal_input(inputs);
 	ryu_states state = process_fsm(inputs);
 
 	if (state != current_state)
@@ -185,11 +185,11 @@ update_status ModulePlayer::Update()
 
 		case ST_JUMP_NEUTRAL:
 			current_animation = &neutralJump;
-			if (App->frames - App->player->jump_timer > 27 && (App->frames - App->player->jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - App->player->jump_timer < 28 && (App->frames - App->player->jump_timer >= 0))
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
@@ -268,7 +268,7 @@ update_status ModulePlayer::Update()
 
 		case ST_HADOKEN:
 			current_animation = &hdk;
-			if (App->frames - App->player->hadoken_timer == 42)
+			if (App->frames - hadoken_timer == 42)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + 45, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 			}
@@ -441,39 +441,39 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 
 void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 {
-	if (App->player->jump_timer > 0)
+	if (jump_timer > 0)
 	{
-		if (App->frames - App->player->jump_timer > JUMP_TIME)
+		if (App->frames - jump_timer > JUMP_TIME)
 		{
 			inputs.Push(IN_JUMP_FINISH);
-			App->player->jump_timer = 0;
+			jump_timer = 0;
 		}
 	}
 
-	if (App->player->l_punch_timer > 0)
+	if (l_punch_timer > 0)
 	{
-		if (App->frames - App->player->l_punch_timer > L_PUNCH_TIME)
+		if (App->frames - l_punch_timer > L_PUNCH_TIME)
 		{
 			inputs.Push(IN_L_PUNCH_FINISH);
-			App->player->l_punch_timer = 0;
+			l_punch_timer = 0;
 		}
 	}
 
-	if (App->player->l_kik_timer > 0)
+	if (l_kik_timer > 0)
 	{
-		if (App->frames - App->player->l_kik_timer > L_KIK_TIME)
+		if (App->frames - l_kik_timer > L_KIK_TIME)
 		{
 			inputs.Push(IN_L_KIK_FINISH);
-			App->player->l_kik_timer = 0;
+			l_kik_timer = 0;
 		}
 	}
 
-	if (App->player->hadoken_timer > 0)
+	if (hadoken_timer > 0)
 	{
-		if (App->frames - App->player->hadoken_timer > HADOKEN_TIME)
+		if (App->frames - hadoken_timer > HADOKEN_TIME)
 		{
 			inputs.Push(IN_HADOKEN_FINISH);
-			App->player->hadoken_timer = 0;
+			hadoken_timer = 0;
 		}
 	}
 

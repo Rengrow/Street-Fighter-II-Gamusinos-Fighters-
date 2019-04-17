@@ -13,7 +13,7 @@
 #define HADOKEN_TIME 71
 #define CROUCHING_TIME 10
 #define STANDING_TIME 10
-#define REEL_TIME 700
+#define REEL_TIME 30
 
 enum ryu_states
 {
