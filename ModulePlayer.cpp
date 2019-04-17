@@ -57,7 +57,7 @@ ModulePlayer::ModulePlayer()
 	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {});
 	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {});
 	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {});
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {});
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 18, 0, {}, {}, {});
 	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {});
 
 	//Hadoken
@@ -186,13 +186,13 @@ update_status ModulePlayer::Update()
 
 		case ST_JUMP_NEUTRAL:
 			current_animation = &neutralJump;
-			if (SDL_GetTicks() - App->player->jump_timer > 1001)
+			if (App->frames - App->player->jump_timer > 27 && (App->frames - App->player->jump_timer <= JUMP_TIME))
 			{
-				position.y += speed;
+				position.y += speed + 1;
 			}
-			if (SDL_GetTicks() - App->player->jump_timer < 1000)
+			if (App->frames - App->player->jump_timer < 28 && (App->frames - App->player->jump_timer >= 0))
 			{
-				position.y -= speed;
+				position.y -= speed + 1;
 			}
 
 			break;

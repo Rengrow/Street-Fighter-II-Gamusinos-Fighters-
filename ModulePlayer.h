@@ -7,7 +7,7 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-#define JUMP_TIME 2000
+#define JUMP_TIME 55
 #define L_PUNCH_TIME 25
 #define L_KIK_TIME 44
 #define HADOKEN_TIME 71
