@@ -104,6 +104,8 @@ public:
 	Animation neutralJump;
 	Animation hdk;
 	Animation streel;
+	Animation stgreel;
+	Animation creel;
 	Animation crouching, standing, crouch;
 
 	p2Qeue<ryu_inputs> inputs;

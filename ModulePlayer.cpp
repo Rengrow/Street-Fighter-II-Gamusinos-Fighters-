@@ -66,11 +66,48 @@ ModulePlayer::ModulePlayer()
 	hdk.PushBack({ 623, 758, 90, 83 }, 8, 0, {}, {}, {});
 	hdk.PushBack({ 714, 764, 106, 77 }, 40, 0, {}, {}, {});
 
-	// Standing reel
-	streel.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
-	streel.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {});
-	streel.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {});
-	streel.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {});
+
+	// Standing reel - p2Point will be eliminated, since collider x,y is already dependant of pivot point
+	const int streelnColliders = 3;
+	SDL_Rect streelHitbox1[streelnColliders] = { { -42, 90, 20, 20}, { -46, 76, 40, 46}, { -33, 39, 40, 38} };
+	SDL_Rect streelHitbox2[streelnColliders] = { { -52, 89, 20, 20}, { -53, 73, 40, 46}, { -33, 39, 40, 38} };
+	SDL_Rect streelHitbox3[streelnColliders] = { { -57, 90, 20, 20}, { -53, 73, 40, 46}, { -33, 39, 40, 38} };
+	SDL_Rect streelHitbox4[streelnColliders] = { { -14, 92, 20, 20}, { -36, 77, 40, 46}, { -23, 41, 40, 38} };
+	COLLIDER_TYPE streelColliderType[streelnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* streelCallback[streelnColliders] = { {this}, {this}, {this} };
+
+	streel.PushBack({ 143, 857, 67, 92 }, 6, streelnColliders, streelHitbox1, streelColliderType, streelCallback);		// Ya que no hay colisiones, no se puede ver...
+	streel.PushBack({ 213, 857, 69, 91 }, 6, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
+	streel.PushBack({ 285, 857, 80, 91 }, 6, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
+	streel.PushBack({ 367, 857, 66, 91 }, 6, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
+
+	// Standing gut reel
+	const int stgreelnColliders = 3;
+	SDL_Rect stgreelHitbox1[stgreelnColliders] = { { -15, 86, 28, 18}, { -31, 70, 42, 42}, { -30, 35, 42, 35} };
+	SDL_Rect stgreelHitbox2[stgreelnColliders] = { { -17, 83, 28, 18}, { -33, 66, 42, 42}, { -34, 35, 42, 35} };
+	SDL_Rect stgreelHitbox3[stgreelnColliders] = { { -17, 84, 28, 18}, { -41, 61, 42, 42}, { -40, 35, 42, 35} };
+	SDL_Rect stgreelHitbox4[stgreelnColliders] = { { -28, 69, 28, 18}, { -41, 61, 42, 42}, { -30, 36, 42, 35} };
+	COLLIDER_TYPE stgreelColliderType[stgreelnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* stgreelCallback[stgreelnColliders] = { {this}, {this}, {this} };
+
+	stgreel.PushBack({ 366, 859, 68, 91 }, 6, stgreelnColliders, stgreelHitbox1, stgreelColliderType, stgreelCallback);		// Ya que no hay colisiones, no se puede ver...
+	stgreel.PushBack({ 435, 865, 54, 84 }, 6, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 494, 868, 65, 81 }, 6, stgreelnColliders, stgreelHitbox3, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 561, 866, 70, 83 }, 6, stgreelnColliders, stgreelHitbox4, stgreelColliderType, stgreelCallback);
+
+
+	// Crouching reel
+	const int creelnColliders = 3;
+	SDL_Rect creelHitbox1[creelnColliders] = { { 2, 63, 24, 18}, { -16, 48, 42, 42}, { -30, 35, 42, 22} };
+	SDL_Rect creelHitbox2[creelnColliders] = { { -42, 66, 28, 18}, { -38, 54, 40, 32}, { -16, 27, 44, 24} };
+	SDL_Rect creelHitbox3[creelnColliders] = { { -42, 66, 28, 18}, { -38, 54, 40, 32}, { -16, 27, 44, 24} };
+	COLLIDER_TYPE creelColliderType[creelnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* creelCallback[creelnColliders] = { {this}, {this}, {this} };
+	streel.PushBack({ 889, 884, 66, 66 }, 6, creelnColliders, { creelHitbox1 }, { creelColliderType }, { creelCallback });		// Ya que no hay colisiones, no se puede ver...
+	streel.PushBack({ 955, 884, 68, 66 }, 6, creelnColliders, { creelHitbox2 }, { creelColliderType }, { creelCallback });
+	streel.PushBack({ 0, 953, 66, 71 }, 6, creelnColliders, { creelHitbox3 }, { creelColliderType }, { creelCallback });
+
+
 
 	//Crouching
 	crouching.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {});
