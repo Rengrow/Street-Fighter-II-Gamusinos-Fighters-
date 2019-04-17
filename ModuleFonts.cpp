@@ -134,19 +134,7 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	int counter = 0;
 	int timerx = timerbuffx;
 	int timery = 40;
-	SDL_Rect ko;
-	ko.x = 337;
-	ko.y = 0;
-	ko.w = 27;
-	ko.h = 23;
 	timer_timer++;
-
-	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
-		kox -= 3;
-	}
-	if (App->render->camera.x < App->render->camerabuffer) {
-		kox += 3;
-	}
 
 	///// CODE START //////
 
@@ -181,5 +169,4 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	else if (end) {	// WIN CONDITION
 
 	}
-	App->render->Blit(font[font_id].graphic, kox, koy, &ko, false, 1);
 }
