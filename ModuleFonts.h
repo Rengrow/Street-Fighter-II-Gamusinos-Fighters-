@@ -32,7 +32,7 @@ public:
 	uint height;
 	Uint32 timer_timer = 0;
 	char tiempo[2] = {'9', '9'};
-	int end = 0;
+	bool end = false;
 	int timerbuffx = 170;
 	int kox = 170;
 	int koy = 17;

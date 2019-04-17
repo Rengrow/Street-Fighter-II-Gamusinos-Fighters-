@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
+#include "ModuleSecondPlayer.h"
 #include "ModuleSceneKen.h"
 #include "ModuleSceneSagat.h"
 #include "ModuleFadeToBlack.h"
@@ -177,6 +178,8 @@ void ModuleCollision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
 		}
 	}
+	App->render->DrawQuad({ App->player->position.x, App->player->position.y, 10, 10 }, 51, 0, 51, alpha);
+	App->render->DrawQuad({ App->player2->position2.x, App->player2->position2.y, 10, 10 }, 51, 0, 51, alpha);
 }
 
 // Called before quitting
