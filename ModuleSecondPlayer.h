@@ -106,6 +106,8 @@ public:
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
+	
+	int jumpHeight = 0;
 
 	Uint32 jump_timer2 = 0;
 	Uint32 l_punch_timer2 = 0;

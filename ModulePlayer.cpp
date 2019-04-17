@@ -187,11 +187,11 @@ update_status ModulePlayer::Update()
 			current_animation = &neutralJump;
 			if (App->frames - App->player->jump_timer > 27 && (App->frames - App->player->jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed;
+				jumpHeight += speed + 1;
 			}
 			if (App->frames - App->player->jump_timer < 28 && (App->frames - App->player->jump_timer >= 0))
 			{
-				jumpHeight -= speed;
+				jumpHeight -= speed + 1;
 			}
 
 			break;

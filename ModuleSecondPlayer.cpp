@@ -152,13 +152,14 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_JUMP_NEUTRAL2:
 			current_animation = &neutralJump2;
-			if (App->frames - App->player2->jump_timer2 > 1001)
+			
+			if (App->frames - App->player2->jump_timer2 > 27 && (App->frames - App->player2->jump_timer2 <= JUMP_TIME))
 			{
-				position2.y += speed;
+				jumpHeight += speed + 1;
 			}
-			if (App->frames - App->player2->jump_timer2 < 1000)
+			if (App->frames - App->player2->jump_timer2 < 28 && (App->frames - App->player2->jump_timer2 >= 0))
 			{
-				position2.y -= speed;
+				jumpHeight -= speed + 1;
 			}
 			break;
 
@@ -301,7 +302,7 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	}
 
 	r = frame.frame;
-	App->render->Blit(graphics2, position2.x, position2.y - r.h, &r, flip);
+	App->render->Blit(graphics2, position2.x, position2.y - r.h + jumpHeight, &r, flip);
 }
 
 bool ModuleSecondPlayer::external_input2(p2Qeue<ryu_inputs2>& inputs)
