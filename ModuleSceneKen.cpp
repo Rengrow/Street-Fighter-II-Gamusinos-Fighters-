@@ -58,45 +58,45 @@ ModuleSceneKen::ModuleSceneKen()
 	big.h = 25;
 
 	// flag animation
-	flag.PushBack({ 578, 6, 38, 27 }, 10, 0, {}, {}, {}, {});
-	flag.PushBack({ 578, 36, 38, 27 }, 10, 0, {}, {}, {}, {});
-	flag.PushBack({ 578, 66, 38, 27 }, 10, 0, {}, {}, {}, {});
+	flag.PushBack({ 578, 6, 38, 27 }, 10, 0, {}, {}, {});
+	flag.PushBack({ 578, 36, 38, 27 }, 10, 0, {}, {}, {});
+	flag.PushBack({ 578, 66, 38, 27 }, 10, 0, {}, {}, {});
 
 	// Girl Animation
-	girl.PushBack({ 714, 6, 32, 48 }, 10, 0, {}, {}, {}, {});
-	girl.PushBack({ 714, 61, 32, 48 }, 10, 0, {}, {}, {}, {});
-	girl.PushBack({ 714, 6, 32, 48 }, 10, 0, {}, {}, {}, {});
-	girl.PushBack({ 714, 116, 32, 48 }, 10, 0, {}, {}, {}, {});
+	girl.PushBack({ 714, 6, 32, 48 }, 10, 0, {}, {}, {});
+	girl.PushBack({ 714, 61, 32, 48 }, 10, 0, {}, {}, {});
+	girl.PushBack({ 714, 6, 32, 48 }, 10, 0, {}, {}, {});
+	girl.PushBack({ 714, 116, 32, 48 }, 10, 0, {}, {}, {});
 
 	// Purple guy animation
-	prGuy.PushBack({ 621, 6, 41, 33 }, 10, 0, {}, {}, {}, {});
-	prGuy.PushBack({ 621, 46, 41, 33 }, 10, 0, {}, {}, {}, {});
-	prGuy.PushBack({ 621, 86, 41, 33 }, 10, 0, {}, {}, {}, {});
+	prGuy.PushBack({ 621, 6, 41, 33 }, 10, 0, {}, {}, {});
+	prGuy.PushBack({ 621, 46, 41, 33 }, 10, 0, {}, {}, {});
+	prGuy.PushBack({ 621, 86, 41, 33 }, 10, 0, {}, {}, {});
 
 	//Hat animation
-	greyHat.PushBack({ 667, 144, 17, 13 }, 10, 0, {}, {}, {}, {});
-	greyHat.PushBack({ 667, 164, 15, 13 }, 10, 0, {}, {}, {}, {});
+	greyHat.PushBack({ 667, 144, 17, 13 }, 10, 0, {}, {}, {});
+	greyHat.PushBack({ 667, 164, 15, 13 }, 10, 0, {}, {}, {});
 
 	//Brown Hat
-	brownHat.PushBack({ 577, 144, 22, 11 }, 12, 0, {}, {}, {}, {});
-	brownHat.PushBack({ 577, 158, 25, 11 }, 12, 0, {}, {}, {}, {});
-	brownHat.PushBack({ 577, 172, 31, 11 }, 12, 0, {}, {}, {}, {});
+	brownHat.PushBack({ 577, 144, 22, 11 }, 12, 0, {}, {}, {});
+	brownHat.PushBack({ 577, 158, 25, 11 }, 12, 0, {}, {}, {});
+	brownHat.PushBack({ 577, 172, 31, 11 }, 12, 0, {}, {}, {});
 
 	//Bald guy
-	baldGuy.PushBack({ 667, 75, 41, 63 }, 10, 0, {}, {}, {}, {});
-	baldGuy.PushBack({ 621, 126, 41, 63 }, 10, 0, {}, {}, {}, {});
-	baldGuy.PushBack({ 667, 6, 41, 63 }, 10, 0, {}, {}, {}, {});
-	baldGuy.PushBack({ 621, 126, 41, 63 }, 10, 0, {}, {}, {}, {});
+	baldGuy.PushBack({ 667, 75, 41, 63 }, 10, 0, {}, {}, {});
+	baldGuy.PushBack({ 621, 126, 41, 63 }, 10, 0, {}, {}, {});
+	baldGuy.PushBack({ 667, 6, 41, 63 }, 10, 0, {}, {}, {});
+	baldGuy.PushBack({ 621, 126, 41, 63 }, 10, 0, {}, {}, {});
 
 	//Blue Guy
-	blueGuy.PushBack({ 752, 80, 47, 54 }, 10, 0, {}, {}, {}, {});
-	blueGuy.PushBack({ 752, 136, 47, 54 }, 10, 0, {}, {}, {}, {});
-	blueGuy.PushBack({ 802, 6, 47, 54 }, 10, 0, {}, {}, {}, {});
-	blueGuy.PushBack({ 752, 136, 47, 54 }, 10, 0, {}, {}, {}, {});
+	blueGuy.PushBack({ 752, 80, 47, 54 }, 10, 0, {}, {}, {});
+	blueGuy.PushBack({ 752, 136, 47, 54 }, 10, 0, {}, {}, {});
+	blueGuy.PushBack({ 802, 6, 47, 54 }, 10, 0, {}, {}, {});
+	blueGuy.PushBack({ 752, 136, 47, 54 }, 10, 0, {}, {}, {});
 
 	//Blue guy 2
-	blueGuy2.PushBack({ 752, 6, 33, 30 }, 10, 0, {}, {}, {}, {});
-	blueGuy2.PushBack({ 752, 43, 33, 30 }, 10, 0, {}, {}, {}, {});
+	blueGuy2.PushBack({ 752, 6, 33, 30 }, 10, 0, {}, {}, {});
+	blueGuy2.PushBack({ 752, 43, 33, 30 }, 10, 0, {}, {}, {});
 
 	// for moving the foreground
 	foreground_pos = 0;

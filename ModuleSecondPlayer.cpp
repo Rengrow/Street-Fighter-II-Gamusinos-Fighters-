@@ -19,79 +19,79 @@ ModuleSecondPlayer::ModuleSecondPlayer()
 	position2.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle2.PushBack({ 348, 3, 61, 95 }, 6, 0, {}, {}, {}, {});
-	idle2.PushBack({ 408, 3, 60, 95 }, 6, 0, {}, {}, {}, {});
-	idle2.PushBack({ 468, 3, 58, 95 }, 6, 0, {}, {}, {}, {});
-	idle2.PushBack({ 526, 3, 55, 95 }, 6, 0, {}, {}, {}, {});
+	idle2.PushBack({ 348, 3, 61, 95 }, 6, 0, {}, {}, {});
+	idle2.PushBack({ 408, 3, 60, 95 }, 6, 0, {}, {}, {});
+	idle2.PushBack({ 468, 3, 58, 95 }, 6, 0, {}, {}, {});
+	idle2.PushBack({ 526, 3, 55, 95 }, 6, 0, {}, {}, {});
 
 	// walk forward animation (arcade sprite sheet)
-	forward2.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
-	forward2.PushBack({ 53, 3, 62, 95 }, 6, 0, {}, {}, {}, {});
-	forward2.PushBack({ 115, 3, 63, 95 }, 6, 0, {}, {}, {}, {});
-	forward2.PushBack({ 179, 3, 64, 94 }, 6, 0, {}, {}, {}, {});
-	forward2.PushBack({ 243, 3, 54, 95 }, 6, 0, {}, {}, {}, {});
-	forward2.PushBack({ 298, 3, 49, 94 }, 6, 0, {}, {}, {}, {});
+	forward2.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {});
+	forward2.PushBack({ 53, 3, 62, 95 }, 6, 0, {}, {}, {});
+	forward2.PushBack({ 115, 3, 63, 95 }, 6, 0, {}, {}, {});
+	forward2.PushBack({ 179, 3, 64, 94 }, 6, 0, {}, {}, {});
+	forward2.PushBack({ 243, 3, 54, 95 }, 6, 0, {}, {}, {});
+	forward2.PushBack({ 298, 3, 49, 94 }, 6, 0, {}, {}, {});
 
 	// walk backward animation (arcade sprite sheet)
-	backward2.PushBack({ 694, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
-	backward2.PushBack({ 752, 3, 60, 93 }, 6, 0, {}, {}, {}, {});
-	backward2.PushBack({ 813, 3, 58, 93 }, 6, 0, {}, {}, {}, {});
-	backward2.PushBack({ 872, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
-	backward2.PushBack({ 930, 3, 57, 93 }, 6, 0, {}, {}, {}, {});
-	backward2.PushBack({ 0, 102, 57, 92 }, 6, 0, {}, {}, {}, {});
+	backward2.PushBack({ 694, 3, 56, 93 }, 6, 0, {}, {}, {});
+	backward2.PushBack({ 752, 3, 60, 93 }, 6, 0, {}, {}, {});
+	backward2.PushBack({ 813, 3, 58, 93 }, 6, 0, {}, {}, {});
+	backward2.PushBack({ 872, 3, 56, 93 }, 6, 0, {}, {}, {});
+	backward2.PushBack({ 930, 3, 57, 93 }, 6, 0, {}, {}, {});
+	backward2.PushBack({ 0, 102, 57, 92 }, 6, 0, {}, {}, {});
 
 
 	// lp
-	lp2.PushBack({ 59, 101, 63, 93 }, 4, 0, {}, {}, {}, {});
-	lp2.PushBack({ 124, 101, 91, 93 }, 8, 0, {}, {}, {}, {});
-	lp2.PushBack({ 59, 101, 63, 93 }, 8, 0, {}, {}, {}, {});
-	lp2.PushBack({ 409, 3, 58, 93 }, 2, 0, {}, {}, {}, {});
+	lp2.PushBack({ 59, 101, 63, 93 }, 4, 0, {}, {}, {});
+	lp2.PushBack({ 124, 101, 91, 93 }, 8, 0, {}, {}, {});
+	lp2.PushBack({ 59, 101, 63, 93 }, 8, 0, {}, {}, {});
+	lp2.PushBack({ 409, 3, 58, 93 }, 2, 0, {}, {}, {});
 
 	// lk
-	lk2.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
-	lk2.PushBack({ 400, 102, 63, 93 }, 6, 0, {}, {}, {}, {});
-	lk2.PushBack({ 467, 100, 115, 93 }, 16, 0, {}, {}, {}, {});
-	lk2.PushBack({ 400, 102, 63, 93 }, 8, 0, {}, {}, {}, {});
-	lk2.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {}, {});
+	lk2.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {});
+	lk2.PushBack({ 400, 102, 63, 93 }, 6, 0, {}, {}, {});
+	lk2.PushBack({ 467, 100, 115, 93 }, 16, 0, {}, {}, {});
+	lk2.PushBack({ 400, 102, 63, 93 }, 8, 0, {}, {}, {});
+	lk2.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {});
 
 	// Neutral jump
-	neutralJump2.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump2.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {}, {});
-	neutralJump2.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump2.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {});
+	neutralJump2.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {});
+	neutralJump2.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {});
+	neutralJump2.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {});
+	neutralJump2.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {});
 
 	//Hadoken
-	hdk2.PushBack({ 462, 751, 74, 90 }, 8, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk2.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {}, {});
-	hdk2.PushBack({ 623, 758, 90, 83 }, 8, 0, {}, {}, {}, {});
-	hdk2.PushBack({ 714, 764, 106, 77 }, 40, 0, {}, {}, {}, {});
+	hdk2.PushBack({ 462, 751, 74, 90 }, 8, 0, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk2.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {});
+	hdk2.PushBack({ 623, 758, 90, 83 }, 8, 0, {}, {}, {});
+	hdk2.PushBack({ 714, 764, 106, 77 }, 40, 0, {}, {}, {});
 
 	// Standing reel
-	streel2.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
-	streel2.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {}, {});
-	streel2.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {}, {});
-	streel2.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {}, {});
+	streel2.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
+	streel2.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {});
+	streel2.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {});
+	streel2.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {});
 
 	//Crouching
-	crouching2.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
+	crouching2.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {});
 
 	//Standing
-	standing2.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
+	standing2.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {});
 
 	//Crouch
-	crouch2.PushBack({ 57, 325, 62, 62 }, 1, 0, {}, {}, {}, {});
+	crouch2.PushBack({ 57, 325, 62, 62 }, 1, 0, {}, {}, {});
 
 	//Crouching l punch
-	clp2.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {}, {});
-	clp2.PushBack({ 296, 325, 96, 61 }, 8, 0, {}, {}, {}, {});
-	clp2.PushBack({ 392, 324, 65, 61 }, 6, 0, {}, {}, {}, {});
+	clp2.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {});
+	clp2.PushBack({ 296, 325, 96, 61 }, 8, 0, {}, {}, {});
+	clp2.PushBack({ 392, 324, 65, 61 }, 6, 0, {}, {}, {});
 
 	//Crouching l kik
-	clk2.PushBack({ 617, 322, 71, 65 }, 14, 0, {}, {}, {}, {});
-	clk2.PushBack({ 688, 322, 113, 65 }, 14, 0, {}, {}, {}, {});
-	clk2.PushBack({ 617, 322, 71, 65 }, 12, 0, {}, {}, {}, {});
+	clk2.PushBack({ 617, 322, 71, 65 }, 14, 0, {}, {}, {});
+	clk2.PushBack({ 688, 322, 113, 65 }, 14, 0, {}, {}, {});
+	clk2.PushBack({ 617, 322, 71, 65 }, 12, 0, {}, {}, {});
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()
@@ -297,7 +297,7 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	for (int i = 0; i < hitboxesQnt; i++)
 	{
 		r = frame.hitBoxeRects[i];
-		colliders2[i] = App->collisions->AddCollider({ position2.x + frame.position[i].x, position2.y + frame.position[i].y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+		colliders2[i] = App->collisions->AddCollider({ position2.x + r.x, position2.y + r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 	}
 
 	r = frame.frame;

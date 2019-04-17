@@ -19,14 +19,14 @@ private:
 	int loops = 0;
 
 public:
-	void PushBack(const SDL_Rect& rect, const int maxFrames, int nColliders, p2Point<int> position[], SDL_Rect hitbox[], COLLIDER_TYPE type[], Module* callback[])
+	void PushBack(const SDL_Rect& rect, const int maxFrames, int nColliders, SDL_Rect hitbox[], COLLIDER_TYPE type[], Module* callback[])
 	{
 		frames[last_frame].frame = rect;
 		frames[last_frame].maxFrames = maxFrames;
 
 		for (int i = 0; i < nColliders; i++)
 		{
-			frames[last_frame].AddColliderToFrame(position[i], hitbox[i], type[i], callback[i]);
+			frames[last_frame].AddColliderToFrame(hitbox[i], type[i], callback[i]);
 		}
 
 		last_frame++;

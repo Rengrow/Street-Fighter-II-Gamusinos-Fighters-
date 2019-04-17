@@ -25,8 +25,8 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 
 	//Hadoken
-	hdk.anim.PushBack({ 277,30, 43, 32 }, 1, 0, {}, {}, {}, {});
-	hdk.anim.PushBack({ 321, 35, 39, 21 }, 1, 0, {}, {}, {}, {});
+	hdk.anim.PushBack({ 277,30, 43, 32 }, 1, 0, {}, {}, {});
+	hdk.anim.PushBack({ 321, 35, 39, 21 }, 1, 0, {}, {}, {});
 	hdk.anim.loop = true;
 	
 	hdk.life = -1;

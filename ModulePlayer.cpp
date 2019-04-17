@@ -17,79 +17,79 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 348, 3, 61, 95 }, 6, 0, {}, {}, {}, {});
-	idle.PushBack({ 408, 3, 60, 95 }, 6, 0, {}, {}, {}, {});
-	idle.PushBack({ 468, 3, 58, 95 }, 6, 0, {}, {}, {}, {});
-	idle.PushBack({ 526, 3, 55, 95 }, 6, 0, {}, {}, {}, {});
+	idle.PushBack({ 348, 3, 61, 95 }, 6, 0, {}, {}, {});
+	idle.PushBack({ 408, 3, 60, 95 }, 6, 0, {}, {}, {});
+	idle.PushBack({ 468, 3, 58, 95 }, 6, 0, {}, {}, {});
+	idle.PushBack({ 526, 3, 55, 95 }, 6, 0, {}, {}, {});
 
 	// walk forward animation (arcade sprite sheet)
-	forward.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
-	forward.PushBack({ 53, 3, 62, 95 }, 6, 0, {}, {}, {}, {});
-	forward.PushBack({ 115, 3, 63, 95 }, 6, 0, {}, {}, {}, {});
-	forward.PushBack({ 179, 3, 64, 94 }, 6, 0, {}, {}, {}, {});
-	forward.PushBack({ 243, 3, 54, 95 }, 6, 0, {}, {}, {}, {});
-	forward.PushBack({ 298, 3, 49, 94 }, 6, 0, {}, {}, {}, {});
+	forward.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {});
+	forward.PushBack({ 53, 3, 62, 95 }, 6, 0, {}, {}, {});
+	forward.PushBack({ 115, 3, 63, 95 }, 6, 0, {}, {}, {});
+	forward.PushBack({ 179, 3, 64, 94 }, 6, 0, {}, {}, {});
+	forward.PushBack({ 243, 3, 54, 95 }, 6, 0, {}, {}, {});
+	forward.PushBack({ 298, 3, 49, 94 }, 6, 0, {}, {}, {});
 
 	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 694, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
-	backward.PushBack({ 752, 3, 60, 93 }, 6, 0, {}, {}, {}, {});
-	backward.PushBack({ 813, 3, 58, 93 }, 6, 0, {}, {}, {}, {});
-	backward.PushBack({ 872, 3, 56, 93 }, 6, 0, {}, {}, {}, {});
-	backward.PushBack({ 930, 3, 57, 93 }, 6, 0, {}, {}, {}, {});
-	backward.PushBack({ 0, 102, 57, 92 }, 6, 0, {}, {}, {}, {});
+	backward.PushBack({ 694, 3, 56, 93 }, 6, 0, {}, {}, {});
+	backward.PushBack({ 752, 3, 60, 93 }, 6, 0, {}, {}, {});
+	backward.PushBack({ 813, 3, 58, 93 }, 6, 0, {}, {}, {});
+	backward.PushBack({ 872, 3, 56, 93 }, 6, 0, {}, {}, {});
+	backward.PushBack({ 930, 3, 57, 93 }, 6, 0, {}, {}, {});
+	backward.PushBack({ 0, 102, 57, 92 }, 6, 0, {}, {}, {});
 
 
 	// lp
-	lp.PushBack({ 59, 101, 63, 93 }, 4, 0, {}, {}, {}, {});
-	lp.PushBack({ 124, 101, 91, 93 }, 8, 0, {}, {}, {}, {});
-	lp.PushBack({ 59, 101, 63, 93 }, 8, 0, {}, {}, {}, {});
-	lp.PushBack({ 409, 3, 58, 93 }, 2, 0, {}, {}, {}, {});
+	lp.PushBack({ 59, 101, 63, 93 }, 4, 0, {}, {}, {});
+	lp.PushBack({ 124, 101, 91, 93 }, 8, 0, {}, {}, {});
+	lp.PushBack({ 59, 101, 63, 93 }, 8, 0, {}, {}, {});
+	lp.PushBack({ 409, 3, 58, 93 }, 2, 0, {}, {}, {});
 
 	// lk
-	lk.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {}, {});
-	lk.PushBack({ 400, 102, 63, 93 }, 6, 0, {}, {}, {}, {});
-	lk.PushBack({ 467, 100, 115, 93 }, 16, 0, {}, {}, {}, {});
-	lk.PushBack({ 400, 102, 63, 93 }, 8, 0, {}, {}, {}, {});
-	lk.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {}, {});
+	lk.PushBack({ 1, 3, 53, 94 }, 6, 0, {}, {}, {});
+	lk.PushBack({ 400, 102, 63, 93 }, 6, 0, {}, {}, {});
+	lk.PushBack({ 467, 100, 115, 93 }, 16, 0, {}, {}, {});
+	lk.PushBack({ 400, 102, 63, 93 }, 8, 0, {}, {}, {});
+	lk.PushBack({ 1, 3, 53, 94 }, 4, 0, {}, {}, {});
 
 	// Neutral jump
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {}, {});
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {}, {});
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, 0, {}, {}, {});
+	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, 0, {}, {}, {});
+	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, 0, {}, {}, {});
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 20, 0, {}, {}, {});
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, 0, {}, {}, {});
 
 	//Hadoken
-	hdk.PushBack({ 462, 751, 74, 90 }, 8, 0, {}, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {}, {});
-	hdk.PushBack({ 623, 758, 90, 83 }, 8, 0, {}, {}, {}, {});
-	hdk.PushBack({ 714, 764, 106, 77 }, 40, 0, {}, {}, {}, {});
+	hdk.PushBack({ 462, 751, 74, 90 }, 8, 0, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk.PushBack({ 537, 757, 85, 84 }, 12, 0, {}, {}, {});
+	hdk.PushBack({ 623, 758, 90, 83 }, 8, 0, {}, {}, {});
+	hdk.PushBack({ 714, 764, 106, 77 }, 40, 0, {}, {}, {});
 
 	// Standing reel
-	streel.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
-	streel.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {}, {});
-	streel.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {}, {});
-	streel.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {}, {});
+	streel.PushBack({ 143, 857, 67, 92 }, 6, 0, {}, {}, {});		// Ya que no hay colisiones, no se puede ver...
+	streel.PushBack({ 213, 857, 69, 91 }, 6, 0, {}, {}, {});
+	streel.PushBack({ 285, 857, 80, 91 }, 6, 0, {}, {}, {});
+	streel.PushBack({ 367, 857, 66, 91 }, 6, 0, {}, {}, {});
 
 	//Crouching
-	crouching.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
+	crouching.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {});
 
 	//Standing
-	standing.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {}, {});
+	standing.PushBack({ 0, 317, 57, 70 }, 1, 0, {}, {}, {});
 
 	//Crouch
-	crouch.PushBack({ 57, 325, 62, 62 }, 1, 0, {}, {}, {}, {});
+	crouch.PushBack({ 57, 325, 62, 62 }, 1, 0, {}, {}, {});
 
 	//Crouching l punch
-	clp.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {}, {});
-	clp.PushBack({ 296, 325, 96, 61 }, 8, 0, {}, {}, {}, {});
-	clp.PushBack({ 392, 324, 65, 61 }, 6, 0, {}, {}, {}, {});
+	clp.PushBack({ 226, 325, 70, 61 }, 8, 0, {}, {}, {});
+	clp.PushBack({ 296, 325, 96, 61 }, 8, 0, {}, {}, {});
+	clp.PushBack({ 392, 324, 65, 61 }, 6, 0, {}, {}, {});
 
 	//Crouching l kik
-	clk.PushBack({ 617, 322, 71, 65 }, 14, 0, {}, {}, {}, {});
-	clk.PushBack({ 688, 322, 113, 65 }, 14, 0, {}, {}, {}, {});
-	clk.PushBack({ 617, 322, 71, 65 }, 12, 0, {}, {}, {}, {});
+	clk.PushBack({ 617, 322, 71, 65 }, 14, 0, {}, {}, {});
+	clk.PushBack({ 688, 322, 113, 65 }, 14, 0, {}, {}, {});
+	clk.PushBack({ 617, 322, 71, 65 }, 12, 0, {}, {}, {});
 }
 
 ModulePlayer::~ModulePlayer()
@@ -302,7 +302,7 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 		for (int i = 0; i < hitboxesQnt; i++)
 		{
 			r = frame.hitBoxeRects[i];
-			colliders[i] = App->collisions->AddCollider({ position.x + frame.position[i].x, position.y + frame.position[i].y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+			colliders[i] = App->collisions->AddCollider({ position.x + r.x, position.y + r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 		}
 
 	r = frame.frame;
