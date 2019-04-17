@@ -22,6 +22,7 @@ public:
 public:
 	
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* kotexture = nullptr;
 	Mix_Music *music = nullptr;
 	SDL_Rect ground;
 	SDL_Rect ground2;
@@ -43,6 +44,9 @@ public:
 	Collider *collider = nullptr;
 	Collider *collider2 = nullptr;
 	int timer;
+	int kox = 170;
+	int koy = 17;
+	int ko_image;
 
 	float foreground_pos;
 	bool forward;

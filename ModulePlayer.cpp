@@ -158,7 +158,6 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	int speed = 1;
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
 
@@ -188,11 +187,11 @@ update_status ModulePlayer::Update()
 			current_animation = &neutralJump;
 			if (App->frames - App->player->jump_timer > 27 && (App->frames - App->player->jump_timer <= JUMP_TIME))
 			{
-				position.y += speed + 1;
+				jumpHeight += speed;
 			}
 			if (App->frames - App->player->jump_timer < 28 && (App->frames - App->player->jump_timer >= 0))
 			{
-				position.y -= speed + 1;
+				jumpHeight -= speed;
 			}
 
 			break;
@@ -343,7 +342,7 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 		}
 
 	r = frame.frame;
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, flip);
+	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
 }
 
 bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)

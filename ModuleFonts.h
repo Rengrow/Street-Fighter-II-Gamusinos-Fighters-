@@ -34,8 +34,6 @@ public:
 	char tiempo[2] = {'9', '9'};
 	bool end = false;
 	int timerbuffx = 170;
-	int kox = 170;
-	int koy = 17;
 
 public:
 	// Create a surface from text
