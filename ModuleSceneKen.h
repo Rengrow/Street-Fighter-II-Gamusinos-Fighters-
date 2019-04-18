@@ -44,6 +44,7 @@ public:
 	Collider *collider = nullptr;
 	Collider *collider2 = nullptr;
 	int timer;
+	int letters;
 	int kox = 170;
 	int koy = 17;
 	int ko_image;

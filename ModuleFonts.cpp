@@ -98,7 +98,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 			if (fonts[font_id].table[j] == text[i]) {
 				rect.x = 0 + (j * font->char_w);
 				rect.y = 0;
-				App->render->Blit(App->textures->Load("fonts/rtype_font.png"), x, y, &rect, false, 1);
+				App->render->Blit(App->textures->Load("assets/images/ui/Letters.png"), x, y, &rect, false, 1);
 				x += font->char_w;
 			}
 	}
@@ -113,15 +113,15 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	/*
 
 		SDL_Rect a;
-		a.x = 435;
-		a.y = 36;
-		a.w = 57;
-		a.h = 50;
+		a.x = 94;
+		a.y = 190;
+		a.w = 200;
+		a.h = 200;
 		int x2 = 30;
 		int y2 = 20;
 		App->render->Blit(App->textures->Load("assets/images/ui/fight_hud.png"), x2, y2, &a, false, 1);
 
-	 "a" is a test to see size of fonts in order to do proper spritesheets. Left it commented, don't delete*/
+//	 "a" is a test to see size of fonts in order to do proper spritesheets. Left it commented, don't delete*/
 
 	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
 		timerbuffx -= 3;

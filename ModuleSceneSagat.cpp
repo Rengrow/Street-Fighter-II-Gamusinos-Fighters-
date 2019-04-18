@@ -46,6 +46,8 @@ bool ModuleSceneSagat::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/thailand_s_1.ogg");
+	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
+	letters = App->fonts->Load("assets/images/ui/Letters.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ,_|@#~€¬/()='", 1);
 	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	App->player->Enable();
@@ -57,8 +59,6 @@ bool ModuleSceneSagat::Start()
 	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
 	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
 	App->render->scenelimit = -800;
-
-	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 
 	return ret;
 }
@@ -74,6 +74,7 @@ bool ModuleSceneSagat::CleanUp()
 	App->collisions->Disable();
 
 	App->fonts->UnLoad(timer);
+	App->fonts->UnLoad(letters);
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;

@@ -30,8 +30,12 @@ public:
 	SDL_Rect limit2Box;
 	Collider *limit1 = nullptr;
 	Collider *limit2 = nullptr;
-	int scenelimit;
+	int scenelimit = -500;
 	int camerabuffer;
+	int distance;
+	int distance_initial_point;
+	int distance_last_point;
+	int widthbuffer = SCREEN_WIDTH;
 };
 
 #endif //__ModuleRenderer_H__

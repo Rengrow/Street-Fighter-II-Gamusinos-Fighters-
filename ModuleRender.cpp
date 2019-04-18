@@ -55,26 +55,34 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	
 	int speed = 3;
 
-	//	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
-		//	camera.y += speed;
-
-	//	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
-		//	camera.y -= speed;
-	
-/*	if ((App->player->position.x-30 + camera.x > 0) && (App->player2->position2.x != (camera.x - camera.w))) {
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP || KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-		{
-			if (camera.x != 0) {
-				camera.x += speed*2;
-				limit1Box.x -= speed;
-				limit2Box.x -= speed;
-			}
-		}
-	}*/
 	camerabuffer = camera.x;
+
+	if (App->player->position.x < App->player2->position.x) {
+		distance_initial_point = App->player->position.x;
+		distance_last_point = App->player2->position.x;
+	}
+	else { distance_initial_point = App->player2->position.x; distance_last_point = App->player->position.x; }
+	
+	distance = distance_last_point - distance_initial_point;
+	
+	if (distance_initial_point < (widthbuffer / 4) && distance < (widthbuffer / 2)) {
+		if (camera.x != 0) {
+			camera.x += speed * 2;
+			widthbuffer -= 3;
+			limit1Box.x -= speed;
+			limit2Box.x -= speed;
+		}
+	}
+	if (distance_last_point > (0.75 * widthbuffer) && distance < (widthbuffer / 2)) {
+		if ((camera.x != scenelimit) && (camera.x > scenelimit)) {
+			camera.x -= speed * 2;
+			widthbuffer += 3;
+			limit1Box.x += speed;
+			limit2Box.x += speed;
+		}
+	}
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
