@@ -56,8 +56,9 @@ update_status ModuleRender::PreUpdate()
 update_status ModuleRender::Update()
 {
 	int speed = 3;
-
+	
 	camerabuffer = camera.x;
+	
 
 	if (App->player->position.x < App->player2->position.x) {
 		distance_initial_point = App->player->position.x;
@@ -76,13 +77,15 @@ update_status ModuleRender::Update()
 		}
 	}
 	if (distance_last_point > (0.75 * widthbuffer) && distance < (widthbuffer / 2)) {
-		if ((camera.x != scenelimit) && (camera.x > scenelimit)) {
+		if ((camera.x -camera.w != scenelimit) && (camera.x - camera.w > scenelimit)) {
 			camera.x -= speed * 2;
 			widthbuffer += 3;
 			limit1Box.x += speed;
 			limit2Box.x += speed;
 		}
 	}
+
+
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
@@ -93,7 +96,7 @@ update_status ModuleRender::Update()
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-		if ((camera.x != scenelimit) && (camera.x > scenelimit)) {
+		if ((camera.x - camera.w != scenelimit) && (camera.x - camera.w > scenelimit)) {
 			camera.x -= speed*2;
 
 			limit1Box.x += speed;
