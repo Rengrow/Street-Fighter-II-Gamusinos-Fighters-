@@ -7,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
+#include "ModuleFonts.h"
 #include "p2Qeue.h"
 #include "SDL\include\SDL.h"
 
@@ -137,6 +138,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
+	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	Animation* current_animation;
 
@@ -148,6 +150,8 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player 1");
 
+	App->textures->Unload(kotexture);
+	kotexture = nullptr;
 	App->textures->Unload(graphics);
 	ClearColliders();
 
@@ -328,6 +332,29 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
+	SDL_Rect ko;
+	ko.x = 337;
+	ko.y = 0;
+	ko.w = 27;
+	ko.h = 23;
+	SDL_Rect redlifebar;
+	SDL_Rect lifebar;
+	redlifebar.x = 153;
+	lifebar.x = 0;
+	redlifebar.y = 0;
+	lifebar.y = 0;
+	redlifebar.w = 150;
+	lifebar.w = 150;
+	redlifebar.h = 17;
+	lifebar.h = 17;
+
+	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
+		kox -= 3;
+	}
+	if (App->render->camera.x < App->render->camerabuffer) {
+		kox += 3;
+	}
+
 
 	int hitboxesQnt = frame.GetColliderQnt();
 
@@ -340,7 +367,10 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 			colliders[i] = App->collisions->AddCollider({ position.x + r.x, position.y + r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 		}
 
-	r = frame.frame;
+	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
+	App->render->Blit(kotexture, kox - 148, koy + 3, &redlifebar, false, 1);
+	App->fonts->LifeBlit(0, kotexture, kox - 147, koy + 3, &lifebar, false, 1);
+	App->render->Blit(kotexture, kox, koy, &ko, false);
 	App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 

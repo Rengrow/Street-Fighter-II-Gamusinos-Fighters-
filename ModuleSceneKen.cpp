@@ -115,7 +115,6 @@ bool ModuleSceneKen::Start()
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 	letters = App->fonts->Load("assets/images/ui/Letters.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ,_|@#~€¬/()='", 1);
-	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	App->player->Enable();
 	App->player2->Enable();
@@ -155,8 +154,6 @@ bool ModuleSceneKen::CleanUp()
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;
-	App->textures->Unload(kotexture);
-	kotexture = nullptr;
 	App->audio->UnloadSong(music);
 	music = nullptr;
 
@@ -166,19 +163,6 @@ bool ModuleSceneKen::CleanUp()
 // Update: draw background
 update_status ModuleSceneKen::Update()
 {
-	SDL_Rect ko;
-	ko.x = 337;
-	ko.y = 0;
-	ko.w = 27;
-	ko.h = 23;
-
-	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
-		kox -= 3;
-	}
-	if (App->render->camera.x < App->render->camerabuffer) {
-		kox += 3;
-	}
-
 	// Calculate boat Y position -----------------------------
 	if (foreground_pos < -6.0f)
 		forward = false;
@@ -209,7 +193,6 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
 
-	App->render->Blit(kotexture, kox, koy, &ko, false);
 	App->fonts->TimerBlit(timer, this);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {

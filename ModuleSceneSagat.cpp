@@ -48,7 +48,6 @@ bool ModuleSceneSagat::Start()
 	music = App->audio->LoadSong("assets/music/thailand_s_1.ogg");
 	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 	letters = App->fonts->Load("assets/images/ui/Letters.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ,_|@#~€¬/()='", 1);
-	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	App->player->Enable();
 	App->player2->Enable();
@@ -78,8 +77,6 @@ bool ModuleSceneSagat::CleanUp()
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;
-	App->textures->Unload(kotexture);
-	kotexture = nullptr;
 	App->audio->UnloadSong(music);
 	music = nullptr;
 
@@ -89,19 +86,7 @@ bool ModuleSceneSagat::CleanUp()
 // Update: draw background
 update_status ModuleSceneSagat::Update()
 {
-	SDL_Rect ko;
-	ko.x = 337;
-	ko.y = 0;
-	ko.w = 27;
-	ko.h = 23;
-
-	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
-		kox -= 3;
-	}
-	if (App->render->camera.x < App->render->camerabuffer) {
-		kox += 3;
-	}
-
+	
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphics, 0, 0, &background, false, 0.5f);
 	App->render->Blit(graphics, 0, -19, &foreground, false, 0.75f); // back of the room
@@ -110,7 +95,6 @@ update_status ModuleSceneSagat::Update()
 	App->render->Blit(graphics, 174, 199, &rocks, false, 0.75f);
 	App->render->Blit(graphics, 489, 168, &rocks, false, 0.75f);
 
-	App->render->Blit(kotexture, kox, koy, &ko, false);
 	App->fonts->TimerBlit(timer, this);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
