@@ -124,7 +124,6 @@ update_status ModuleCollision::PreUpdate()
 // Called before render is available
 update_status ModuleCollision::Update()
 {
-
 	DebugDraw();
 
 	if (App->fade->to_enable == App->scene_Sagat) {
@@ -178,8 +177,8 @@ void ModuleCollision::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
 		}
 	}
-	App->render->DrawQuad({ App->player->position.x, App->player->position.y, 5, 5 }, 51, 0, 51, alpha);
-	App->render->DrawQuad({ App->player2->position.x, App->player2->position.y, 5, 5 }, 51, 0, 51, alpha);
+	App->render->DrawQuad({ App->player->position.x, App->player->position.y, 2, 2 }, 0, 0, 0, 100);
+	App->render->DrawQuad({ App->player2->position.x, App->player2->position.y, 2, 2 }, 0, 0, 0, 100);
 }
 
 // Called before quitting

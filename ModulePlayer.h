@@ -8,8 +8,8 @@
 #include "p2Qeue.h"
 
 #define JUMP_TIME 55
-#define L_PUNCH_TIME 25
-#define L_KIK_TIME 44
+#define L_PUNCH_TIME 12
+#define L_KIK_TIME 20
 #define HADOKEN_TIME 71
 #define CROUCHING_TIME 10
 #define STANDING_TIME 10
@@ -110,7 +110,6 @@ public:
 
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
-	p2Point <int> pivot = { 100, 220 };		// The pivot is found in the furthest toe from the enemy
 
 	bool godmode = false;
 	int framesAtaque = 0;

@@ -98,7 +98,6 @@ public:
 	Animation streel;
 	Animation crouching, standing, crouch;
 
-	p2Point <int> pivot = { 250, 220 };		// The pivot is found in the furthest toe from the enemy. The 250 equals to the x = 0 that the character has respect his spritesheet
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;
 
