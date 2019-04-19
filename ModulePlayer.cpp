@@ -17,27 +17,46 @@ ModulePlayer::ModulePlayer()
 	position.x = 100;
 	position.y = 215;
 
-	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,5 }, 0, {}, {}, {});
 
+	// idle animation (arcade sprite sheet)
+	const int idlenColliders = 3;
+	SDL_Rect idleHitbox[idlenColliders] = { { -7, 89, 24, 26}, { -26, 77, 40, 42}, { -33, 35, 40, 32} };
+	COLLIDER_TYPE idleColliderType[idlenColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* idleCallback[idlenColliders] = { {this}, {this}, {this} };
+
+	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+
+
+	
+	
 	// walk forward animation (arcade sprite sheet)
-	forward.PushBack({ 1, 3, 53, 94 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 53, 3, 62, 95 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 115, 3, 63, 95 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 179, 3, 64, 94 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 243, 3, 54, 95 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 298, 3, 49, 94 }, 6, { 35,5 }, 0, {}, {}, {});
+	const int forwardnColliders = 3;
+	SDL_Rect forwardHitbox[forwardnColliders] = { { -2, 89, 24, 16}, { -26, 75, 40, 42}, { -33, 35, 40, 32} };
+	COLLIDER_TYPE forwardColliderType[forwardnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* forwardCallback[forwardnColliders] = { {this}, {this}, {this} };
+
+	forward.PushBack({ 1, 3, 53, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 53, 3, 62, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 115, 3, 63, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 179, 3, 64, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 243, 3, 54, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 298, 3, 49, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
 
 	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 694, 3, 56, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 752, 3, 60, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 813, 3, 58, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 872, 3, 56, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 930, 3, 57, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 0, 102, 57, 92 }, 6, { 34,5 }, 0, {}, {}, {});
+	const int backwardnColliders = 3;
+	SDL_Rect backwardHitbox[backwardnColliders] = { { -19, 89, 24, 16}, { -26, 75, 40, 42}, { -33, 35, 40, 32} };
+	COLLIDER_TYPE backwardColliderType[backwardnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* backwardCallback[backwardnColliders] = { {this}, {this}, {this} };
+
+	backward.PushBack({ 694, 3, 56, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 752, 3, 60, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 813, 3, 58, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 872, 3, 56, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 930, 3, 57, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 0, 102, 57, 92 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
 
 	// lp
 	lp.PushBack({ 59, 101, 64, 95 }, 2, { 32,5 }, 0, {}, {}, {});
@@ -113,6 +132,7 @@ ModulePlayer::ModulePlayer()
 
 	//Standing
 	standing.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, 0, {}, {}, {});
+
 
 	//Crouch
 	crouch.PushBack({ 57, 325, 62, 62 }, 1, { 29,5 }, 0, {}, {}, {});
