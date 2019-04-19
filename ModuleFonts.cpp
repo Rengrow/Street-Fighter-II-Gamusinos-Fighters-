@@ -112,18 +112,6 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 		return;
 	}
 	const Font* font = &fonts[font_id];
-	/*
-
-		SDL_Rect a;
-		a.x = 94;
-		a.y = 190;
-		a.w = 200;
-		a.h = 200;
-		int x2 = 30;
-		int y2 = 20;
-		App->render->Blit(App->textures->Load("assets/images/ui/fight_hud.png"), x2, y2, &a, false, 1);
-
-//	 "a" is a test to see size of fonts in order to do proper spritesheets. Left it commented, don't delete*/
 
 	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
 		timerbuffx -= 3;
@@ -174,6 +162,13 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 }
 
 void ModuleFonts::LifeBlit(int module_call, SDL_Texture* texture, int x, int y, SDL_Rect* section, bool flip, float speed) {
-	
+	if (module_call == 1) {
+		section->w = 150 * life2 / 14400;
+	}
+	else if (module_call == 0) {
+		int buffer = section->w;
+		section->w = 150 * life / 14400;
+		x += buffer - section->w;
+	}
 	App->render->Blit(texture, x, y, section, flip);
 }

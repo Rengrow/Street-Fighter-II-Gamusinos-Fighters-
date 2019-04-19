@@ -291,10 +291,15 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
+	SDL_Rect redlifebar;
 	SDL_Rect lifebar;
-	lifebar.x = 153;
+	redlifebar.x = 153;
+	lifebar.x = 0;
+	redlifebar.y = 0;
 	lifebar.y = 0;
+	redlifebar.w = 150;
 	lifebar.w = 150;
+	redlifebar.h = 17;
 	lifebar.h = 17;
 
 	int hitboxesQnt = frame.GetColliderQnt();
@@ -309,7 +314,8 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 
 	r = frame.frame;
 	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
-	App->fonts->LifeBlit(0, App->player->kotexture, App->player->kox + 27, App->player->koy + 3, &lifebar, true, 1);
+	App->render->Blit(App->player->kotexture, App->player->kox + 27, App->player->koy + 3, &redlifebar, true, 1);
+	App->fonts->LifeBlit(1, App->player->kotexture, App->player->kox + 26, App->player->koy + 3, &lifebar, true, 1);
 
 }
 
