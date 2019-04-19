@@ -16,14 +16,61 @@ ModuleFonts::ModuleFonts() : Module()
 ModuleFonts::~ModuleFonts()
 {}
 
-// Load new texture from file path
-int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows)
-{
+
+bool ModuleFonts::Start() {
+	LOG("Loading user interphase");
+	bool ret = true;
+	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
+	ko.x = 337;
+	ko.y = 0;
+	ko.w = 27;
+	ko.h = 23;
+	redlifebar.x = 153;
+	lifebar.x = 0;
+	redlifebar.y = 0;
+	lifebar.y = 0;
+	redlifebar.w = 150;
+	lifebar.w = 150;
+	redlifebar.h = 17;
+	lifebar.h = 17;
 	tiempo[0] = '9';
 	tiempo[1] = '9';
 	life = 14400;
 	life2 = 14400;
 	end = 0;
+	contador = 0;
+
+	return ret;
+}
+
+update_status ModuleFonts::Update() {
+	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
+		kox -= 3;
+	}
+	if (App->render->camera.x < App->render->camerabuffer) {
+		kox += 3;
+	}
+	if (contador == 0) {
+		App->render->Blit(kotexture, kox - 148, koy + 3, &redlifebar, false, 1);
+		App->fonts->LifeBlit(0, kotexture, kox - 147, koy + 3, &lifebar, false, 1);
+		App->render->Blit(kotexture, kox + 27, koy + 3, &redlifebar, true, 1);
+		App->fonts->LifeBlit(1, kotexture, kox + 26, koy + 3, &lifebar, true, 1);
+		App->render->Blit(kotexture, kox, koy, &ko, false);
+	}
+	return UPDATE_CONTINUE;
+}
+
+bool ModuleFonts::CleanUp() {
+	LOG("Unloading UI");
+
+	App->textures->Unload(kotexture);
+	kotexture = nullptr;
+
+	return true;
+}
+// Load new texture from file path
+int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows)
+{
 	int id = -1;
 
 	if (texture_path == nullptr || characters == nullptr || rows == 0)

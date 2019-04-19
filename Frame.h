@@ -11,6 +11,7 @@ class Frame
 public:
 	int maxFrames;
 	SDL_Rect frame;
+	p2Point <int> pivotPosition;
 	SDL_Rect hitBoxeRects[MAX_COLLIDERS_PER_FRAME];
 	COLLIDER_TYPE types[MAX_COLLIDERS_PER_FRAME];
 	Module* callbacks[MAX_COLLIDERS_PER_FRAME];

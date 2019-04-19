@@ -29,10 +29,10 @@ Application::Application()
 	modules[9] = particles = new ModuleParticles();
 	modules[10] = welcomePage = new ModuleWelcomePage();
 	modules[11] = endBattle = new ModuleEndBattle();
-	modules[12] = fade = new ModuleFadeToBlack();
-	modules[13] = collisions = new ModuleCollision();
-	modules[14] = fonts = new ModuleFonts();
-	
+	modules[12] = collisions = new ModuleCollision();
+	modules[13] = fonts = new ModuleFonts();
+	modules[14] = fade = new ModuleFadeToBlack();
+
 }
 
 Application::~Application()

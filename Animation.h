@@ -19,10 +19,11 @@ private:
 	int loops = 0;
 
 public:
-	void PushBack(const SDL_Rect& rect, const int maxFrames, int nColliders, SDL_Rect hitbox[], COLLIDER_TYPE type[], Module* callback[])
+	void PushBack(const SDL_Rect& rect, const int maxFrames, p2Point <int> pivotPosition, int nColliders, SDL_Rect hitbox[], COLLIDER_TYPE type[], Module* callback[])
 	{
 		frames[last_frame].frame = rect;
 		frames[last_frame].maxFrames = maxFrames;
+		frames[last_frame].pivotPosition = pivotPosition;
 
 		for (int i = 0; i < nColliders; i++)
 		{

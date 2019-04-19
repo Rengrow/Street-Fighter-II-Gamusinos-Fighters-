@@ -24,10 +24,17 @@ public:
 	~ModuleFonts();
 
 	// Load Font
+	bool Start();
 	int Load(const char* texture_path, const char* characters, uint rows = 1);
+	bool CleanUp();
+	update_status Update();
 	void UnLoad(int font_id);
 
 public:
+	SDL_Texture* kotexture = nullptr;
+	SDL_Rect ko;
+	SDL_Rect redlifebar;
+	SDL_Rect lifebar;
 	uint width;
 	uint height;
 	Uint32 timer_timer = 0;
@@ -36,6 +43,9 @@ public:
 	int timerbuffx = 170;
 	int life;
 	int life2;
+	int kox = 170;
+	int koy = 17;
+	int contador;
 
 public:
 	// Create a surface from text
