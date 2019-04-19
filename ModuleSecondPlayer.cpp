@@ -306,11 +306,11 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	}
 
 	r = frame.frame;
-	App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
-	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
+	
 	App->render->Blit(App->player->kotexture, App->player->kox + 27, App->player->koy + 3, &redlifebar, true, 1);
 	App->fonts->LifeBlit(1, App->player->kotexture, App->player->kox + 26, App->player->koy + 3, &lifebar, true, 1);
 
+	App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 
 bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)

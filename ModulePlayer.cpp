@@ -355,7 +355,6 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 		kox += 3;
 	}
 
-
 	int hitboxesQnt = frame.GetColliderQnt();
 
 	ClearColliders();
@@ -367,7 +366,8 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 			colliders[i] = App->collisions->AddCollider({ position.x + r.x, position.y + r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 		}
 
-	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
+	r = frame.frame;
+
 	App->render->Blit(kotexture, kox - 148, koy + 3, &redlifebar, false, 1);
 	App->fonts->LifeBlit(0, kotexture, kox - 147, koy + 3, &lifebar, false, 1);
 	App->render->Blit(kotexture, kox, koy, &ko, false);
