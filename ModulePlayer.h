@@ -97,6 +97,7 @@ public:
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* kotexture = nullptr;
 	Animation idle;
 	Animation forward;
 	Animation backward;
@@ -118,6 +119,8 @@ public:
 	int jumpHeight = 0;
 	int speed = 1;
 	int mov; //lp, mp, hp, lk, mk, hk
+	int kox = 170;
+	int koy = 17;
 	bool flip = false;
 
 	Uint32 jump_timer = 0;

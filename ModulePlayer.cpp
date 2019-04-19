@@ -7,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
+#include "ModuleFonts.h"
 #include "p2Qeue.h"
 #include "SDL\include\SDL.h"
 
@@ -138,6 +139,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
+	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	Animation* current_animation;
 
@@ -149,6 +151,8 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player 1");
 
+	App->textures->Unload(kotexture);
+	kotexture = nullptr;
 	App->textures->Unload(graphics);
 	ClearColliders();
 
@@ -329,6 +333,24 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
+	SDL_Rect ko;
+	ko.x = 337;
+	ko.y = 0;
+	ko.w = 27;
+	ko.h = 23;
+	SDL_Rect lifebar;
+	lifebar.x = 153;
+	lifebar.y = 0;
+	lifebar.w = 150;
+	lifebar.h = 17;
+
+	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
+		kox -= 3;
+	}
+	if (App->render->camera.x < App->render->camerabuffer) {
+		kox += 3;
+	}
+
 
 	int hitboxesQnt = frame.GetColliderQnt();
 
@@ -343,6 +365,8 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 
 	r = frame.frame;
 	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
+	App->fonts->LifeBlit(0, kotexture, kox - 148, koy + 3, &lifebar, false, 1);
+	App->render->Blit(kotexture, kox, koy, &ko, false);
 }
 
 bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)

@@ -22,7 +22,6 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	SDL_Texture* kotexture = nullptr;
 	Mix_Music *music = nullptr;
 	SDL_Rect ground;
 	SDL_Rect rocks;
@@ -31,9 +30,6 @@ public:
 	Animation palmtree;
 	int timer;
 	int letters;
-	int kox = 170;
-	int koy = 17;
-	int ko_image;
 
 };
 

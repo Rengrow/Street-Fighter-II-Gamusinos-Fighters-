@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
+#include "ModuleFonts.h"
 #include "p2Qeue.h"
 #include "SDL\include\SDL.h"
 
@@ -290,6 +291,11 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
+	SDL_Rect lifebar;
+	lifebar.x = 153;
+	lifebar.y = 0;
+	lifebar.w = 150;
+	lifebar.h = 17;
 
 	int hitboxesQnt = frame.GetColliderQnt();
 
@@ -303,6 +309,8 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 
 	r = frame.frame;
 	App->render->Blit(graphics, position.x, position.y - r.h + jumpHeight, &r, flip);
+	App->fonts->LifeBlit(0, App->player->kotexture, App->player->kox + 27, App->player->koy + 3, &lifebar, true, 1);
+
 }
 
 bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)

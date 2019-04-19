@@ -21,6 +21,8 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 {
 	tiempo[0] = '9';
 	tiempo[1] = '9';
+	life = 14400;
+	life2 = 14400;
 	end = 0;
 	int id = -1;
 
@@ -87,7 +89,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 
 	const Font* font = &fonts[font_id];		// font_id equival al numero de files que ocupa, no el que té, i serveix per iterar per saber quina fila és
 	SDL_Rect rect;
-	uint len = strlen(text);
+	int len = strlen(text);
 
 	rect.w = font->char_w;
 	rect.h = font->char_h;
@@ -169,4 +171,9 @@ void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
 	else if (end) {	// WIN CONDITION
 
 	}
+}
+
+void ModuleFonts::LifeBlit(int module_call, SDL_Texture* texture, int x, int y, SDL_Rect* section, bool flip, float speed) {
+	
+	App->render->Blit(texture, x, y, section, flip);
 }
