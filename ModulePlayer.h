@@ -85,6 +85,7 @@ public:
 	~ModulePlayer();
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 	void internal_input(p2Qeue<ryu_inputs>& inputs);

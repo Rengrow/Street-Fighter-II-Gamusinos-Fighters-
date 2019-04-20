@@ -30,8 +30,6 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 
 
-	
-	
 	// walk forward animation (arcade sprite sheet)
 	const int forwardnColliders = 3;
 	SDL_Rect forwardHitbox[forwardnColliders] = { { -2, 89, 24, 16}, { -26, 75, 40, 42}, { -33, 35, 40, 32} };
@@ -141,7 +139,7 @@ ModulePlayer::ModulePlayer()
 	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, 0, {}, {}, {});
 	clp.PushBack({ 296, 325, 96, 61 }, 4, { 29,5 }, 0, {}, {}, {});
 	clp.PushBack({ 227, 326, 69, 61 }, 4, { 29,5 }, 0, {}, {}, {});
-	
+
 
 	//Crouching l kik
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, 0, {}, {}, {});
@@ -173,6 +171,12 @@ bool ModulePlayer::CleanUp()
 	ClearColliders();
 
 	return true;
+}
+
+update_status ModulePlayer::PreUpdate() {
+	ClearColliders();
+
+	return UPDATE_CONTINUE;
 }
 
 // Update: draw background
@@ -351,13 +355,11 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
 
-	ClearColliders();
-
 	if (!godmode)
 		for (int i = 0; i < hitboxesQnt; i++)
 		{
 			r = frame.hitBoxeRects[i];
-			colliders[i] = App->collisions->AddCollider({ position.x + r.x, position.y + r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+			colliders[i] = App->collisions->AddCollider({ position.x - frame.pivotPosition.x - r.x, position.y - r.h + frame.pivotPosition.y + jumpHeight - r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 		}
 
 	r = frame.frame;
