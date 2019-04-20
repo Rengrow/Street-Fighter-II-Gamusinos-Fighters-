@@ -55,52 +55,49 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	int speed = 3;
 	
-	camerabuffer = camera.x;
-	
-
-	if (App->player->position.x < App->player2->position.x) {
-		distance_initial_point = App->player->position.x;
-		distance_last_point = App->player2->position.x;
-	}
-	else { distance_initial_point = App->player2->position.x; distance_last_point = App->player->position.x; }
-	
-	distance = distance_last_point - distance_initial_point;
-	
-	if (distance_initial_point < (widthbuffer / 4) && distance < (widthbuffer / 2)) {
-		if (camera.x != 0) {
-			camera.x += speed * 2;
-			widthbuffer -= 3;
-			limit1Box.x -= speed;
-			limit2Box.x -= speed;
+		
+		
+		if (App->player->position.x > -camera.x/SCREEN_SIZE && App->player->position.x < -camera.x/SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
+			camera.x += cameraSpeed* 2;
+			limit1Box.x -= cameraSpeed;
+			limit2Box.x -= cameraSpeed;
 		}
-	}
-	if (distance_last_point > (0.75 * widthbuffer) && distance < (widthbuffer / 2)) {
-		if ((camera.x -camera.w != scenelimit) && (camera.x - camera.w > scenelimit)) {
-			camera.x -= speed * 2;
-			widthbuffer += 3;
-			limit1Box.x += speed;
-			limit2Box.x += speed;
+
+		if (App->player2->position.x > -camera.x / SCREEN_SIZE && App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
+			camera.x += cameraSpeed*2;
+			limit1Box.x -= cameraSpeed;
+			limit2Box.x -= cameraSpeed;
 		}
-	}
 
+		if (App->player->position.x < -camera.x / SCREEN_SIZE + camera.w && App->player->position.x > -camera.x / SCREEN_SIZE + camera.w * 3 / 4 && (camera.x / SCREEN_SIZE != scenelimit) && (camera.x / SCREEN_SIZE > scenelimit)) {
+			camera.x -= cameraSpeed*2;
+			limit1Box.x += cameraSpeed;
+			limit2Box.x += cameraSpeed;
+		}
 
+		if (App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w && App->player2->position.x > -camera.x / SCREEN_SIZE + camera.w * 3 / 4 && (camera.x / SCREEN_SIZE != scenelimit) && (camera.x / SCREEN_SIZE > scenelimit)) {
+			camera.x -= cameraSpeed * 2;
+			limit1Box.x += cameraSpeed;
+			limit2Box.x += cameraSpeed;
+		}
+		
+		camerabuffer = camera.x;
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 		if (camera.x != 0) {
-			camera.x += speed*2;
+			camera.x += cameraSpeed*2;
 
-			limit1Box.x -= speed;
-			limit2Box.x -= speed;
+			limit1Box.x -= cameraSpeed;
+			limit2Box.x -= cameraSpeed;
 		}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 		if ((camera.x - camera.w != scenelimit) && (camera.x - camera.w > scenelimit)) {
-			camera.x -= speed*2;
+			camera.x -= cameraSpeed*2;
 
-			limit1Box.x += speed;
-			limit2Box.x += speed;
+			limit1Box.x += cameraSpeed;
+			limit2Box.x += cameraSpeed;
 		}
 	
 

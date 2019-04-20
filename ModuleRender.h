@@ -30,6 +30,7 @@ public:
 	SDL_Rect limit2Box;
 	Collider *limit1 = nullptr;
 	Collider *limit2 = nullptr;
+	int cameraSpeed = 2;
 	int camerabuffer;
 	int scenelimit;
 	int distance;
