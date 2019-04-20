@@ -31,12 +31,7 @@ public:
 	Collider *limit1 = nullptr;
 	Collider *limit2 = nullptr;
 	int cameraSpeed = 2;
-	int camerabuffer;
 	int scenelimit;
-	int distance;
-	int distance_initial_point;
-	int distance_last_point;
-	int widthbuffer = SCREEN_WIDTH;
 };
 
 #endif //__ModuleRenderer_H__

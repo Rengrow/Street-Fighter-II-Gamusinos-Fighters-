@@ -3,10 +3,9 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleFonts.h"
-#include "ModuleInput.h"
-#include "SDL\include\SDL.h"
 
 #include<string.h>
+#include "SDL/include/SDL.h"
 
 // Constructor
 ModuleFonts::ModuleFonts() : Module()
@@ -17,61 +16,13 @@ ModuleFonts::~ModuleFonts()
 {}
 
 
-bool ModuleFonts::Start() {
-	LOG("Loading user interphase");
-	bool ret = true;
-	kotexture = App->textures->Load("assets/images/ui/Life_bar.png");
-	ko.x = 337;
-	ko.y = 0;
-	ko.w = 27;
-	ko.h = 23;
-	redlifebar.x = 153;
-	lifebar.x = 0;
-	redlifebar.y = 0;
-	lifebar.y = 0;
-	redlifebar.w = 150;
-	lifebar.w = 150;
-	redlifebar.h = 17;
-	lifebar.h = 17;
-	tiempo[0] = '9';
-	tiempo[1] = '9';
-	life = 14400;
-	life2 = 14400;
-	end = 0;
-	contador = 0;
-
-	return ret;
-}
-
-update_status ModuleFonts::Update() {
-	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
-		kox -= 3;
-	}
-	if (App->render->camera.x < App->render->camerabuffer) {
-		kox += 3;
-	}
-	if (contador == 0) {
-		App->render->Blit(kotexture, kox - 148, koy + 3, &redlifebar, false, 1);
-		App->fonts->LifeBlit(0, kotexture, kox - 147, koy + 3, &lifebar, false, 1);
-		App->render->Blit(kotexture, kox + 27, koy + 3, &redlifebar, true, 1);
-		App->fonts->LifeBlit(1, kotexture, kox + 26, koy + 3, &lifebar, true, 1);
-		App->render->Blit(kotexture, kox, koy, &ko, false);
-	}
-	return UPDATE_CONTINUE;
-}
-
-bool ModuleFonts::CleanUp() {
-	LOG("Unloading UI");
-
-	App->textures->Unload(kotexture);
-	kotexture = nullptr;
-
-	return true;
-}
 // Load new texture from file path
 int ModuleFonts::Load(const char* texture_path, const char* characters, uint rows)
 {
 	int id = -1;
+
+	int width;
+	int height;
 
 	if (texture_path == nullptr || characters == nullptr || rows == 0)
 	{
@@ -98,17 +49,16 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 		return id;
 	}
 
-	App->textures->GetSize(tex, width, height);
+	SDL_QueryTexture(tex, NULL, NULL, &width, &height);
 
 	fonts[id].graphic = tex; // graphic: pointer to the texture
 	fonts[id].rows = rows; // rows: rows of characters in the texture
-	fonts[id].len = 0; // len: length of the table
+	fonts[id].len = strlen(characters); // len: length of the table
 
-	strcpy_s(fonts[id].table, characters);// table: array of chars to have the list of characters
-	fonts[id].row_chars = strlen(characters);// row_chars: amount of chars per row of the texture
-	fonts[id].char_w = width / fonts[id].row_chars;// char_w: width of each character
-	fonts[id].char_h = height;// char_h: height of each character
-
+	strcpy_s(fonts[id].table, characters);
+	fonts[id].row_chars = fonts[id].len;
+	fonts[id].char_h = height / rows;
+	fonts[id].char_w = width / strlen(characters);
 
 	LOG("Successfully loaded BMP font from %s", texture_path);
 
@@ -125,97 +75,3 @@ void ModuleFonts::UnLoad(int font_id)
 	}
 }
 
-// Render text using a bitmap font
-void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
-{
-	if (text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].graphic == nullptr)
-	{
-		LOG("Unable to render text with bmp font id %d", font_id);
-		return;
-	}
-
-	const Font* font = &fonts[font_id];		// font_id equival al numero de files que ocupa, no el que té, i serveix per iterar per saber quina fila és
-	SDL_Rect rect;
-	int len = strlen(text);
-
-	rect.w = font->char_w;
-	rect.h = font->char_h;
-
-	for (int i = 0; i < len; ++i)
-	{
-		for (int j = 0; j < fonts->row_chars; j++)
-			if (fonts[font_id].table[j] == text[i]) {
-				rect.x = 0 + (j * font->char_w);
-				rect.y = 0;
-				App->render->Blit(App->textures->Load("assets/images/ui/Letters.png"), x, y, &rect, false, 1);
-				x += font->char_w;
-			}
-	}
-}
-
-void ModuleFonts::TimerBlit(int font_id, Module *module_call) {
-	if (font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].graphic == nullptr) {
-		LOG("Unable to render text with bmp font id %d", font_id);
-		return;
-	}
-	const Font* font = &fonts[font_id];
-
-	if (App->render->camera.x > App->render->camerabuffer) {		// Coordinates movement with camera
-		timerbuffx -= 3;
-	}
-	if (App->render->camera.x < App->render->camerabuffer) {
-		timerbuffx += 3;
-	}
-
-	SDL_Rect timerrect;
-	int counter = 0;
-	int timerx = timerbuffx;
-	int timery = 40;
-	timer_timer++;
-
-	///// CODE START //////
-
-	if (timer_timer % 75 == 0) {
-		if (tiempo[1] == '0') {
-			if (tiempo[0] == '0') {
-				end = true;
-			}		//WIN CONDITION
-			else {
-				tiempo[1] = '9';
-				tiempo[0]--;
-			}
-		}
-		else { tiempo[1]--; }
-	}
-	timerrect.w = font->char_w;
-	timerrect.h = font->char_h;
-
-	if (!end) {		// Blits timer & KO
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 11; j++) {
-				if (fonts[font_id].table[j] == tiempo[counter]) {
-					timerrect.x = 0 + (j * fonts->char_w);
-					timerrect.y = 0;
-					App->render->Blit(font[font_id].graphic, timerx, timery, &timerrect, false, 1);
-					timerx += fonts->char_w;
-				}
-			}
-			counter = 1;
-		}
-	}
-	else if (end) {	// WIN CONDITION
-
-	}
-}
-
-void ModuleFonts::LifeBlit(int module_call, SDL_Texture* texture, int x, int y, SDL_Rect* section, bool flip, float speed) {
-	if (module_call == 1) {
-		section->w = 150 * life2 / 14400;
-	}
-	else if (module_call == 0) {
-		int buffer = section->w;
-		section->w = 150 * life / 14400;
-		x += buffer - section->w;
-	}
-	App->render->Blit(texture, x, y, section, flip);
-}

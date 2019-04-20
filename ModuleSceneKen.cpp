@@ -10,7 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
-#include "ModuleFonts.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -113,14 +113,13 @@ bool ModuleSceneKen::Start()
 
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
-	timer = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
-	letters = App->fonts->Load("assets/images/ui/Letters.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ,_|@#~€¬/()='", 1);
+	
+	
 
 	App->player->Enable();
 	App->player2->Enable();
 	App->particles->Enable();
 	App->collisions->Enable();
-	App->fonts->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	App->render->limit1Box.x = 0;
@@ -145,14 +144,13 @@ bool ModuleSceneKen::CleanUp()
 {
 	LOG("Unloading ken scene");
 
-	App->fonts->UnLoad(timer);
-	App->fonts->UnLoad(letters);
+	
 
 	App->player->Disable();
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
-	App->fonts->Disable();
+	
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;
@@ -195,7 +193,7 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
 
-	App->fonts->TimerBlit(timer, this);
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

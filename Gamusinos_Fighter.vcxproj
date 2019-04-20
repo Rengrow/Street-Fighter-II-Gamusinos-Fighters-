@@ -157,6 +157,7 @@
     <ClInclude Include="ModuleSceneKen.h" />
     <ClInclude Include="ModuleSecondPlayer.h" />
     <ClInclude Include="ModuleTextures.h" />
+    <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="ModuleWelcomePage.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="ModuleSceneKen.cpp" />
     <ClCompile Include="ModuleSecondPlayer.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
+    <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWelcomePage.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
