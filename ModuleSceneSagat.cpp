@@ -10,6 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleUI.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -52,6 +53,7 @@ bool ModuleSceneSagat::Start()
 	App->player2->Enable();
 	App->particles->Enable();
 	App->collisions->Enable();
+	App->UI->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
@@ -70,6 +72,7 @@ bool ModuleSceneSagat::CleanUp()
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
+	App->UI->Disable();
 	
 
 	App->textures->Unload(graphics);

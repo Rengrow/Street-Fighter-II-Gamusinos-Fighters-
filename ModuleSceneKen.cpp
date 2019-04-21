@@ -10,6 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleUI.h"
 
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -120,6 +121,7 @@ bool ModuleSceneKen::Start()
 	App->player2->Enable();
 	App->particles->Enable();
 	App->collisions->Enable();
+	App->UI->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	App->render->limit1Box.x = 0;
@@ -150,7 +152,7 @@ bool ModuleSceneKen::CleanUp()
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
-	
+	App->UI->Disable();
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;

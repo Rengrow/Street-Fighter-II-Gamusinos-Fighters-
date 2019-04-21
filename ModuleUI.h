@@ -17,7 +17,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	void BlitText(int x, int y, int bmp_font_id, const char* text) const;
+	void TimerBlit(int font_id);
 
 public:
 	int numbers;
@@ -25,6 +25,13 @@ public:
 	SDL_Rect lifeBarP1;
 	SDL_Rect lifeBarP2;
 	SDL_Rect KO; 
+	SDL_Rect redKO;
+
+	bool end;
+	Uint32 timer = 0;
+
+	int timerx = 170;
+	char tiempo[2] = { '9', '9' };
 };
 
 #endif // __MODULEUI_H__
