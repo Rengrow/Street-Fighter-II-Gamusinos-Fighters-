@@ -67,7 +67,7 @@ update_status ModuleUI::Update()
 
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + lifeBarP1.w +23 , 15, &KO, false);
 
-	TimerBlit(numbers);
+	//TimerBlit(numbers);
 
 	return UPDATE_CONTINUE;
 }

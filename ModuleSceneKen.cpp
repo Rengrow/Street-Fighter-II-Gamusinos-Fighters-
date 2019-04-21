@@ -136,7 +136,7 @@ bool ModuleSceneKen::Start()
 
 	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
 	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
-	App->render->scenelimit = -885;
+	App->render->scenelimit = 620;
 
 	return true;
 }

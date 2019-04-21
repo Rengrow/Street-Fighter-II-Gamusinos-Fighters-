@@ -20,7 +20,7 @@ ModulePlayer::ModulePlayer()
 
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
-	SDL_Rect idleHitbox[idlenColliders] = { { -7, 89, 24, 26}, { -26, 77, 40, 42}, { -33, 35, 40, 32} };
+	SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	COLLIDER_TYPE idleColliderType[idlenColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* idleCallback[idlenColliders] = { {this}, {this}, {this} };
 
@@ -32,7 +32,7 @@ ModulePlayer::ModulePlayer()
 
 	// walk forward animation (arcade sprite sheet)
 	const int forwardnColliders = 3;
-	SDL_Rect forwardHitbox[forwardnColliders] = { { -2, 89, 24, 16}, { -26, 75, 40, 42}, { -33, 35, 40, 32} };
+	SDL_Rect forwardHitbox[forwardnColliders] = { { -28, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	COLLIDER_TYPE forwardColliderType[forwardnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* forwardCallback[forwardnColliders] = { {this}, {this}, {this} };
 
@@ -45,7 +45,7 @@ ModulePlayer::ModulePlayer()
 
 	// walk backward animation (arcade sprite sheet)
 	const int backwardnColliders = 3;
-	SDL_Rect backwardHitbox[backwardnColliders] = { { -19, 89, 24, 16}, { -26, 75, 40, 42}, { -33, 35, 40, 32} };
+	SDL_Rect backwardHitbox[backwardnColliders] = { { -18, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	COLLIDER_TYPE backwardColliderType[backwardnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* backwardCallback[backwardnColliders] = { {this}, {this}, {this} };
 
@@ -85,11 +85,12 @@ ModulePlayer::ModulePlayer()
 
 
 	// Standing reel
+	/*SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };*/
 	const int streelnColliders = 3;
-	SDL_Rect streelHitbox1[streelnColliders] = { { -42, 90, 20, 20}, { -46, 76, 40, 46}, { -33, 39, 40, 38} };
-	SDL_Rect streelHitbox2[streelnColliders] = { { -52, 89, 20, 20}, { -53, 73, 40, 46}, { -33, 39, 40, 38} };
-	SDL_Rect streelHitbox3[streelnColliders] = { { -57, 90, 20, 20}, { -53, 73, 40, 46}, { -33, 39, 40, 38} };
-	SDL_Rect streelHitbox4[streelnColliders] = { { -14, 92, 20, 20}, { -36, 77, 40, 46}, { -23, 41, 40, 38} };
+	SDL_Rect streelHitbox1[streelnColliders] = { { -30, 79, 24, 19}, { -34, 76, 40, 50}, { -33, 44, 40, 42} };
+	SDL_Rect streelHitbox2[streelnColliders] = { { -34, 79, 24, 19}, { -34, 76, 40, 50}, { -33, 44, 40, 42} };
+	SDL_Rect streelHitbox3[streelnColliders] = { { -38, 79, 24, 19}, { -34, 76, 40, 50}, { -33, 44, 40, 42} };
+	SDL_Rect streelHitbox4[streelnColliders] = { { 1, 79, 24, 19}, { -34, 76, 40, 50}, { -33, 44, 40, 42} };
 	COLLIDER_TYPE streelColliderType[streelnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* streelCallback[streelnColliders] = { {this}, {this}, {this} };
 
@@ -97,13 +98,13 @@ ModulePlayer::ModulePlayer()
 	streel.PushBack({ 213, 857, 69, 91 }, 6, { 53,5 }, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
 	streel.PushBack({ 285, 857, 80, 91 }, 6, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
 	streel.PushBack({ 367, 857, 66, 91 }, 6, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
-
+	
 	// Standing gut reel
 	const int stgreelnColliders = 3;
-	SDL_Rect stgreelHitbox1[stgreelnColliders] = { { -15, 86, 28, 18}, { -31, 70, 42, 42}, { -30, 35, 42, 35} };
-	SDL_Rect stgreelHitbox2[stgreelnColliders] = { { -17, 83, 28, 18}, { -33, 66, 42, 42}, { -34, 35, 42, 35} };
-	SDL_Rect stgreelHitbox3[stgreelnColliders] = { { -17, 84, 28, 18}, { -41, 61, 42, 42}, { -40, 35, 42, 35} };
-	SDL_Rect stgreelHitbox4[stgreelnColliders] = { { -28, 69, 28, 18}, { -41, 61, 42, 42}, { -30, 36, 42, 35} };
+	SDL_Rect stgreelHitbox1[stgreelnColliders] = { { -6, 75, 32, 17}, { -22, 61, 42, 46}, { -31, 40, 42, 38} };
+	SDL_Rect stgreelHitbox2[stgreelnColliders] = { { -8, 72, 32, 17}, { -24, 57, 40, 44}, { -35, 40, 42, 38} };
+	SDL_Rect stgreelHitbox3[stgreelnColliders] = { { -5, 76, 32, 17}, { -30, 56, 42, 52}, { -30, 44, 42, 42} };
+	SDL_Rect stgreelHitbox4[stgreelnColliders] = { { -18, 60, 32, 17}, { -22, 61, 42, 46}, { -37, 44, 42, 38} };
 	COLLIDER_TYPE stgreelColliderType[stgreelnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* stgreelCallback[stgreelnColliders] = { {this}, {this}, {this} };
 
@@ -115,9 +116,9 @@ ModulePlayer::ModulePlayer()
 
 	// Crouching reel
 	const int creelnColliders = 3;
-	SDL_Rect creelHitbox1[creelnColliders] = { { 2, 63, 24, 18}, { -16, 48, 42, 42}, { -30, 35, 42, 22} };
-	SDL_Rect creelHitbox2[creelnColliders] = { { -42, 66, 28, 18}, { -38, 54, 40, 32}, { -16, 27, 44, 24} };
-	SDL_Rect creelHitbox3[creelnColliders] = { { -42, 66, 28, 18}, { -38, 54, 40, 32}, { -16, 27, 44, 24} };
+	SDL_Rect creelHitbox1[creelnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	SDL_Rect creelHitbox2[creelnColliders] = { { 16, 42, 24, 16}, { 14, 42, 36, 21}, { -6, 0, 48, 27} };
+	SDL_Rect creelHitbox3[creelnColliders] = { { 16, 42, 24, 16}, { 14, 42, 36, 21}, { -6, 0, 48, 27} };
 	COLLIDER_TYPE creelColliderType[creelnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* creelCallback[creelnColliders] = { {this}, {this}, {this} };
 	creel.PushBack({ 889, 884, 66, 66 }, 6, { 31,5 }, creelnColliders, { creelHitbox1 }, { creelColliderType }, { creelCallback });		// Ya que no hay colisiones, no se puede ver...
@@ -126,14 +127,38 @@ ModulePlayer::ModulePlayer()
 
 
 	//Crouching
-	crouching.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, 0, {}, {}, {});
+	
+
+	const int crouchingnColliders = 3;
+	SDL_Rect crouchingHitbox[crouchingnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+
+	// BOXES NOT IN WIKI, USED CROUCH HITBOXES, WHICH I THINK IS EXACTLY WHAT HAPPENS, SINCE CHARACTERS ARE CONSIDERED CROUCHED SINCE FRAME 1
+
+	COLLIDER_TYPE crouchingColliderType[crouchingnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* crouchingCallback[crouchingnColliders] = { {this}, {this}, {this} };
+
+	crouching.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, crouchingnColliders, crouchingHitbox, crouchingColliderType, crouchingCallback);
+
 
 	//Standing
-	standing.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, 0, {}, {}, {});
+	const int standingnColliders = 3;
+	SDL_Rect standingHitbox[standingnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+
+	// BOXES NOT IN WIKI, USED CROUCH HITBOXES, WHICH I THINK IS EXACTLY WHAT HAPPENS, SINCE CHARACTERS ARE CONSIDERED NOT CROUCHED WHILE STANDING SINCE FRAME 1
+
+	COLLIDER_TYPE standingColliderType[standingnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* standingCallback[standingnColliders] = { {this}, {this}, {this} };
+
+	standing.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, standingnColliders, standingHitbox, standingColliderType, standingCallback);
 
 
 	//Crouch
-	crouch.PushBack({ 57, 325, 62, 62 }, 1, { 29,5 }, 0, {}, {}, {});
+	const int crouchnColliders = 3;
+	SDL_Rect crouchHitbox[crouchnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	COLLIDER_TYPE crouchColliderType[crouchnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* crouchCallback[crouchnColliders] = { {this}, {this}, {this} };
+
+	crouch.PushBack({ 57, 325, 62, 62 }, 1, { 29,5 }, crouchnColliders, crouchHitbox, crouchColliderType, crouchCallback);
 
 	//Crouching l punch
 	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, 0, {}, {}, {});
@@ -341,10 +366,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
 	{
-		if (position.x == App->render->limit1Box.x) {
+		// additional check to know which wall did we collide with
+		if (position.x - App->render->limit1Box.x < App->render->camera.w /4) {
 			position.x++;
 		}
-		if (position.x == (App->render->limit1Box.x + App->render->camera.w)) {
+		if (position.x - App->render->limit2Box.x < App->render->camera.w / 4) {
 			position.x--;
 		}
 	}
