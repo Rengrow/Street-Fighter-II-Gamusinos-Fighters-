@@ -40,7 +40,7 @@ bool ModuleUI::Start()
 	LOG("Loading UI assets");
 	bool ret = true;
 
-	numbers = App->fonts->Load("assets/images/ui/Letters.png", "abcdefghijklmnopqrstuvwxyz.;:|@#~€¬/()=ABCDEFGHIJKLMNOPQRSTUVWXYZ,_1234567890!", 1);
+	numbers = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890", 1);
 	lifeBars = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	return ret;
@@ -67,7 +67,9 @@ update_status ModuleUI::Update()
 
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + lifeBarP1.w +23 , 15, &KO, false);
 
-	TimerBlit(numbers);
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE, 80, numbers, "0");
+
+	//TimerBlit(numbers);
 
 	return UPDATE_CONTINUE;
 }
