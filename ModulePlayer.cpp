@@ -81,7 +81,6 @@ ModulePlayer::ModulePlayer()
 
 
 	// Standing reel
-	/*SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };*/
 	const int streelnColliders = 3;
 	SDL_Rect streelHitbox1[streelnColliders] = { { -30, 79, 24, 19}, { -34, 76, 40, 50}, { -33, 44, 40, 42} };
 	SDL_Rect streelHitbox2[streelnColliders] = { { -34, 79, 24, 19}, { -34, 76, 40, 50}, { -33, 44, 40, 42} };

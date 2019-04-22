@@ -21,6 +21,7 @@ public:
 
 public:
 	int numbers;
+	Uint32 timeOut;
 	SDL_Texture* lifeBars = nullptr;
 	SDL_Rect lifeBarP1;
 	SDL_Rect lifeBarP2;
@@ -28,10 +29,9 @@ public:
 	SDL_Rect redKO;
 
 	bool end;
-	Uint32 timer = 0;
 
 	int timerx = 170;
-	char tiempo[2] = { '9', '9' };
+	char tiempo[2];
 };
 
 #endif // __MODULEUI_H__
