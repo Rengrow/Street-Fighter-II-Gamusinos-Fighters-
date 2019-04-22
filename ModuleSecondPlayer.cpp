@@ -16,9 +16,6 @@
 
 ModuleSecondPlayer::ModuleSecondPlayer()
 {
-	position.x = 250;
-	position.y = 215;
-
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,5 }, 0, {}, {}, {});
 	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,5 }, 0, {}, {}, {});
@@ -99,6 +96,9 @@ bool ModuleSecondPlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
+	position.x = 250;
+	position.y = 215;
+
 	Animation* current_animation;
 
 	return ret;
@@ -136,12 +136,14 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_WALK_FORWARD2:
 			current_animation = &forward;
-			position.x--;
+			if (position.x - 32 > -App->render->camera.x / SCREEN_SIZE)
+				position.x--;
 			break;
 
 		case ST_WALK_BACKWARD2:
 			current_animation = &backward;
-			position.x++;
+			if (position.x + 30 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+				position.x++;
 			break;
 
 		case ST_JUMP_NEUTRAL2:
@@ -306,7 +308,7 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	}
 
 	r = frame.frame;
-	
+
 	App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 

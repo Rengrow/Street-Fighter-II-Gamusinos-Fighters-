@@ -14,20 +14,16 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 100;
-	position.y = 215;
-
-
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
 	SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	COLLIDER_TYPE idleColliderType[idlenColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* idleCallback[idlenColliders] = { {this}, {this}, {this} };
 
-	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
-	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
-	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
-	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,3 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 
 
 	// walk forward animation (arcade sprite sheet)
@@ -98,7 +94,7 @@ ModulePlayer::ModulePlayer()
 	streel.PushBack({ 213, 857, 69, 91 }, 6, { 53,5 }, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
 	streel.PushBack({ 285, 857, 80, 91 }, 6, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
 	streel.PushBack({ 367, 857, 66, 91 }, 6, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
-	
+
 	// Standing gut reel
 	const int stgreelnColliders = 3;
 	SDL_Rect stgreelHitbox1[stgreelnColliders] = { { -6, 75, 32, 17}, { -22, 61, 42, 46}, { -31, 40, 42, 38} };
@@ -127,8 +123,6 @@ ModulePlayer::ModulePlayer()
 
 
 	//Crouching
-	
-
 	const int crouchingnColliders = 3;
 	SDL_Rect crouchingHitbox[crouchingnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
 
@@ -182,6 +176,9 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
+	position.x = 100;
+	position.y = 215;
+
 	Animation* current_animation;
 
 	return ret;
@@ -224,12 +221,14 @@ update_status ModulePlayer::Update()
 
 		case ST_WALK_FORWARD:
 			current_animation = &forward;
-			position.x++;
+			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+				position.x++;
 			break;
 
 		case ST_WALK_BACKWARD:
 			current_animation = &backward;
-			position.x--;
+			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+				position.x--;
 			break;
 
 		case ST_JUMP_NEUTRAL:
@@ -360,17 +359,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 	{
 		if (position.x != 0) {
-			position.x--;
-		}
-	}
-
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_WALL)
-	{
-		// additional check to know which wall did we collide with
-		if (position.x - App->render->limit1Box.x < App->render->camera.w /4) {
-			position.x++;
-		}
-		if (position.x - App->render->limit2Box.x < App->render->camera.w / 4) {
 			position.x--;
 		}
 	}

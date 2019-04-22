@@ -114,8 +114,6 @@ bool ModuleSceneKen::Start()
 
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
-	
-	
 
 	App->player->Enable();
 	App->player2->Enable();
@@ -134,9 +132,10 @@ bool ModuleSceneKen::Start()
 	App->render->limit2Box.w = 3;
 	App->render->limit2Box.h = SCREEN_HEIGHT;
 
-	App->render->limit1 = App->collisions->AddCollider(App->render->limit1Box, COLLIDER_WALL);
-	App->render->limit2 = App->collisions->AddCollider(App->render->limit2Box, COLLIDER_WALL);
 	App->render->scenelimit = 620;
+
+
+	App->render->camera.x = App->render->camera.y = 0;
 
 	return true;
 }
@@ -146,7 +145,7 @@ bool ModuleSceneKen::CleanUp()
 {
 	LOG("Unloading ken scene");
 
-	
+
 
 	App->player->Disable();
 	App->player2->Disable();
@@ -195,7 +194,7 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
 
-	
+
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);

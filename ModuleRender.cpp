@@ -15,7 +15,7 @@ ModuleRender::ModuleRender() : Module()
 	camera.x = camera.y = 0;
 	camera.w = SCREEN_WIDTH;
 	camera.h = SCREEN_HEIGHT;
-	
+
 }
 
 // Destructor
@@ -55,60 +55,52 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	
-	// this exact coding causes the following problem: camera wont move risght if opposite player is at left corner (the same way around)
-		
-		if (App->player->position.x > -camera.x/SCREEN_SIZE && App->player->position.x < -camera.x/SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
-			camera.x += cameraSpeed* 2;
-			limit1Box.x -= cameraSpeed;
-			limit2Box.x -= cameraSpeed;
-		}
-		
-		
-		if (App->player2->position.x > -camera.x / SCREEN_SIZE && App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
-			camera.x += cameraSpeed*2;
-			limit1Box.x -= cameraSpeed;
-			limit2Box.x -= cameraSpeed;
-		}
-		
-		
-		if ((App->player->position.x < -camera.x / SCREEN_SIZE + camera.w) && (App->player->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4)) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
-			camera.x -= cameraSpeed*2;
-			limit1Box.x += cameraSpeed;
-			limit2Box.x += cameraSpeed;
-		}
-		
-		if (App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w && App->player2->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
-			camera.x -= cameraSpeed * 2;
-			limit1Box.x += cameraSpeed;
-			limit2Box.x += cameraSpeed;
-		}
-		
 
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
-			if (camera.x != 0) {
-				camera.x += cameraSpeed * 2;
+	// this exact coding causes the following problem: camera wont move right if opposite player is at left corner (the same way around)
 
-				limit1Box.x -= cameraSpeed;
-				limit2Box.x -= cameraSpeed;
-			}
-		}
-
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) {
-			if ((-camera.x + camera.w != scenelimit) && (-camera.x + camera.w < scenelimit)) {
-				camera.x -= cameraSpeed * 2;
-
-				limit1Box.x += cameraSpeed;
-				limit2Box.x += cameraSpeed;
-			}
-		}
-	
-
-	if (limit1 != nullptr) {
-		limit1->SetPos(limit1Box.x, limit1Box.y);
+	if (App->player->position.x > -camera.x / SCREEN_SIZE && App->player->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
+		camera.x += cameraSpeed * 2;
+		limit1Box.x -= cameraSpeed;
+		limit2Box.x -= cameraSpeed;
 	}
-	if (limit2 != nullptr) {
-		limit2->SetPos(limit2Box.x, limit2Box.y);
+
+
+	if (App->player2->position.x > -camera.x / SCREEN_SIZE && App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
+		camera.x += cameraSpeed * 2;
+		limit1Box.x -= cameraSpeed;
+		limit2Box.x -= cameraSpeed;
+	}
+
+
+	if ((App->player->position.x < -camera.x / SCREEN_SIZE + camera.w) && (App->player->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4)) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
+		camera.x -= cameraSpeed * 2;
+		limit1Box.x += cameraSpeed;
+		limit2Box.x += cameraSpeed;
+	}
+
+	if (App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w && App->player2->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
+		camera.x -= cameraSpeed * 2;
+		limit1Box.x += cameraSpeed;
+		limit2Box.x += cameraSpeed;
+	}
+
+
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
+		if (camera.x != 0) {
+			camera.x += cameraSpeed * 2;
+
+			limit1Box.x -= cameraSpeed;
+			limit2Box.x -= cameraSpeed;
+		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) {
+		if ((-camera.x + camera.w != scenelimit) && (-camera.x + camera.w < scenelimit)) {
+			camera.x -= cameraSpeed * 2;
+
+			limit1Box.x += cameraSpeed;
+			limit2Box.x += cameraSpeed;
+		}
 	}
 
 	return update_status::UPDATE_CONTINUE;
