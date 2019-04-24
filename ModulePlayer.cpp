@@ -14,6 +14,24 @@
 
 ModulePlayer::ModulePlayer()
 {
+	
+
+}
+
+ModulePlayer::~ModulePlayer()
+{}
+
+// Load assets
+bool ModulePlayer::Start()
+{
+	LOG("Loading player textures");
+	bool ret = true;
+	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
+
+	position.x = 100;
+	position.y = 215;
+
+	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
 	SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
@@ -60,11 +78,10 @@ ModulePlayer::ModulePlayer()
 	const int lpnColliders2 = 4;
 	SDL_Rect lpHitbox[lpnColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	SDL_Rect lpHitbox2[lpnColliders2] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32}, { -43, 75, 50, 18} };
-	COLLIDER_TYPE lpColliderType[lpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}};
+	COLLIDER_TYPE lpColliderType[lpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
-	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {this} };
-	//Last this should be a callback to Player 2, however, App->player 2 doesnt work
+	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
 	lp.PushBack({ 59, 101, 64, 95 }, 2, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 	lp.PushBack({ 124, 101, 92, 95 }, 4, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
 	lp.PushBack({ 59, 101, 64, 95 }, 4, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
@@ -81,8 +98,7 @@ ModulePlayer::ModulePlayer()
 	COLLIDER_TYPE lkColliderType[lknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
-	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {this} };
-	//Last this should be a callback to Player 2, however, App->player 2 doesnt work
+	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->player2} };
 	lk.PushBack({ 1, 3, 53, 94 }, 3, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 	lk.PushBack({ 400, 102, 63, 93 }, 3, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
 	lk.PushBack({ 467, 100, 115, 93 }, 8, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
@@ -188,8 +204,7 @@ ModulePlayer::ModulePlayer()
 	COLLIDER_TYPE clpColliderType[clpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE clpColliderType2[clpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*clpCallback[clpnColliders] = { {this}, {this}, {this} };
-	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {this} };
-	//Last this should be a callback to Player 2, however, App->player 2 doesnt work
+	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
 
 	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 	clp.PushBack({ 296, 325, 96, 61 }, 4, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
@@ -205,29 +220,14 @@ ModulePlayer::ModulePlayer()
 	COLLIDER_TYPE clkColliderType[clknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE clkColliderType2[clknColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*clkCallback[clknColliders] = { {this}, {this}, {this} };
-	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {this} };
-	//Last this should be a callback to Player 2, however, App->player 2 doesnt work											DANGER: RYU DOES DOUBLE KICK FOR SOME REASEON, DESPITE ONLY DOING INPUT ONCE. CHECK STATE MATRIX?
+	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+
+	//	DANGER: RYU DOES DOUBLE KICK FOR SOME REASEON, DESPITE ONLY DOING INPUT ONCE. CHECK STATE MATRIX?
+
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 688, 322, 113, 65 }, 4, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 617, 322, 71, 65 }, 4, { 29,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
 	clk.PushBack({ 617, 322, 71, 65 }, 1, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-
-}
-
-ModulePlayer::~ModulePlayer()
-{}
-
-// Load assets
-bool ModulePlayer::Start()
-{
-	LOG("Loading player textures");
-	bool ret = true;
-	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
-
-	position.x = 100;
-	position.y = 215;
-
-	Animation* current_animation;
 
 	return ret;
 }
