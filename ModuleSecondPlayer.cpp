@@ -16,74 +16,6 @@
 
 ModuleSecondPlayer::ModuleSecondPlayer()
 {
-	// idle animation (arcade sprite sheet)
-	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,5 }, 0, {}, {}, {});
-
-	// walk forward animation (arcade sprite sheet)
-	forward.PushBack({ 1, 3, 53, 94 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 53, 3, 62, 95 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 115, 3, 63, 95 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 179, 3, 64, 94 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 243, 3, 54, 95 }, 6, { 35,5 }, 0, {}, {}, {});
-	forward.PushBack({ 298, 3, 49, 94 }, 6, { 35,5 }, 0, {}, {}, {});
-
-	// walk backward animation (arcade sprite sheet)
-	backward.PushBack({ 694, 3, 56, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 752, 3, 60, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 813, 3, 58, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 872, 3, 56, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 930, 3, 57, 93 }, 6, { 34,5 }, 0, {}, {}, {});
-	backward.PushBack({ 0, 102, 57, 92 }, 6, { 34,5 }, 0, {}, {}, {});
-
-	// lp
-	lp.PushBack({ 59, 101, 64, 95 }, 2, { 32,5 }, 0, {}, {}, {});
-	lp.PushBack({ 124, 101, 92, 95 }, 4, { 32,5 }, 0, {}, {}, {});
-	lp.PushBack({ 59, 101, 64, 95 }, 4, { 32,5 }, 0, {}, {}, {});
-	lp.PushBack({ 409, 3, 58, 95 }, 1, { 33,5 }, 0, {}, {}, {});
-
-	// lk
-	lk.PushBack({ 1, 3, 53, 94 }, 3, { 29,5 }, 0, {}, {}, {});
-	lk.PushBack({ 400, 102, 63, 93 }, 3, { 46,5 }, 0, {}, {}, {});
-	lk.PushBack({ 467, 100, 115, 93 }, 8, { 68,5 }, 0, {}, {}, {});
-	lk.PushBack({ 400, 102, 63, 93 }, 4, { 46,5 }, 0, {}, {}, {});
-	lk.PushBack({ 1, 3, 53, 94 }, 1, { 29,5 }, 0, {}, {}, {});
-
-	// Neutral jump
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, { 29,5 }, 0, {}, {}, {});		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, { 29,5 }, 0, {}, {}, {});
-	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, { 29,5 }, 0, {}, {}, {});
-	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, { 29,5 }, 0, {}, {}, {});
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 18, { 29,5 }, 0, {}, {}, {});
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, { 29,5 }, 0, {}, {}, {});
-
-	//Hadoken
-	hdk.PushBack({ 462, 751, 74, 90 }, 8, { 29,5 }, 0, {}, {}, {});		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk.PushBack({ 537, 757, 85, 84 }, 12, { 29,5 }, 0, {}, {}, {});
-	hdk.PushBack({ 623, 758, 90, 83 }, 8, { 29,5 }, 0, {}, {}, {});
-	hdk.PushBack({ 714, 764, 106, 77 }, 40, { 29,5 }, 0, {}, {}, {});
-
-	//Crouching
-	crouching.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, 0, {}, {}, {});
-
-	//Standing
-	standing.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, 0, {}, {}, {});
-
-	//Crouch
-	crouch.PushBack({ 57, 325, 62, 62 }, 1, { 29,5 }, 0, {}, {}, {});
-
-	//Crouching l punch
-	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, 0, {}, {}, {});
-	clp.PushBack({ 296, 325, 96, 61 }, 4, { 29,5 }, 0, {}, {}, {});
-	clp.PushBack({ 227, 326, 69, 61 }, 4, { 29,5 }, 0, {}, {}, {});
-
-
-	//Crouching l kik
-	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, 0, {}, {}, {});
-	clk.PushBack({ 688, 322, 113, 65 }, 4, { 29,5 }, 0, {}, {}, {});
-	clk.PushBack({ 617, 322, 71, 65 }, 4, { 29,5 }, 0, {}, {}, {});
 }
 
 ModuleSecondPlayer::~ModuleSecondPlayer()
@@ -100,6 +32,204 @@ bool ModuleSecondPlayer::Start()
 	position.y = 215;
 
 	Animation* current_animation;
+	// idle animation (arcade sprite sheet)
+	const int idlenColliders = 3;
+	SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	COLLIDER_TYPE idleColliderType[idlenColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* idleCallback[idlenColliders] = { {this}, {this}, {this} };
+
+	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+
+
+	// walk forward animation (arcade sprite sheet)
+	const int forwardnColliders = 3;
+	SDL_Rect forwardHitbox[forwardnColliders] = { { -28, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	COLLIDER_TYPE forwardColliderType[forwardnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* forwardCallback[forwardnColliders] = { {this}, {this}, {this} };
+
+	forward.PushBack({ 1, 3, 53, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 53, 3, 62, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 115, 3, 63, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 179, 3, 64, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 243, 3, 54, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 298, 3, 49, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+
+
+	// walk backward animation (arcade sprite sheet)
+	const int backwardnColliders = 3;
+	SDL_Rect backwardHitbox[backwardnColliders] = { { -18, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	COLLIDER_TYPE backwardColliderType[backwardnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* backwardCallback[backwardnColliders] = { {this}, {this}, {this} };
+
+	backward.PushBack({ 694, 3, 56, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 752, 3, 60, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 813, 3, 58, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 872, 3, 56, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 930, 3, 57, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 0, 102, 57, 92 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+
+
+	// lp
+
+	const int lpnColliders = 3;
+	const int lpnColliders2 = 4;
+	SDL_Rect lpHitbox[lpnColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	SDL_Rect lpHitbox2[lpnColliders2] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32}, { -43, 75, 50, 18} };
+	COLLIDER_TYPE lpColliderType[lpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
+	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player} };
+	lp.PushBack({ 59, 101, 64, 95 }, 2, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 124, 101, 92, 95 }, 4, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
+	lp.PushBack({ 59, 101, 64, 95 }, 4, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 409, 3, 58, 95 }, 1, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+
+
+	// lk
+	const int lknColliders = 3;
+	const int lknColliders2 = 3;
+	const int lknColliders3 = 4;
+	SDL_Rect lkHitbox[lknColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	SDL_Rect lkHitbox2[lknColliders2] = { { -7, 75, 30, 20}, { 9, 36, 42, 52}, { 0, 22, 44, 50} };
+	SDL_Rect lkHitbox3[lknColliders3] = { { -5, 75, 29, 16}, { -13, 37, 40, 47}, { -38, 0, 40, 42}, { -50, 67, 67, 26} };
+	COLLIDER_TYPE lkColliderType[lknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
+	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->player} };
+	lk.PushBack({ 1, 3, 53, 94 }, 3, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 400, 102, 63, 93 }, 3, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
+	lk.PushBack({ 467, 100, 115, 93 }, 8, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
+	lk.PushBack({ 400, 102, 63, 93 }, 4, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
+	lk.PushBack({ 1, 3, 53, 94 }, 1, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+
+	// Neutral jump
+	const int neutraljumpnColliders = 3;
+	SDL_Rect neutraljumpHitbox[neutraljumpnColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	COLLIDER_TYPE neutraljumpColliderType[neutraljumpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* neutraljumpCallback[neutraljumpnColliders] = { {this}, {this}, {this} };
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
+	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
+	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
+	neutralJump.PushBack({ 407, 528, 48, 89 }, 18, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
+	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
+
+	//Hadoken
+	const int hdknColliders = 3;
+	SDL_Rect hdkHitbox[hdknColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47 }, { -6, 5, 40, 32 } };
+	SDL_Rect hdkHitbox2[hdknColliders] = { { -62, 58, 24, 20}, { -43, 23, 40, 42}, { -10, 5, 78, 28} };
+	COLLIDER_TYPE hdkColliderType[hdknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* hdkCallback[hdknColliders] = { {this}, {this}, {this} };
+	hdk.PushBack({ 462, 751, 74, 90 }, 8, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk.PushBack({ 537, 757, 85, 84 }, 12, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
+	hdk.PushBack({ 623, 758, 90, 83 }, 8, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
+	hdk.PushBack({ 714, 764, 106, 77 }, 40, { 29,5 }, hdknColliders, hdkHitbox2, hdkColliderType, hdkCallback);
+
+
+	// Standing reel
+	const int streelnColliders = 3;
+	SDL_Rect streelHitbox1[streelnColliders] = { { -11, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
+	SDL_Rect streelHitbox2[streelnColliders] = { { -6, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
+	SDL_Rect streelHitbox3[streelnColliders] = { { 0, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
+	SDL_Rect streelHitbox4[streelnColliders] = { { -31, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
+	COLLIDER_TYPE streelColliderType[streelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* streelCallback[streelnColliders] = { {this}, {this}, {this} };
+
+	streel.PushBack({ 143, 857, 67, 92 }, 6, { 48,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
+	streel.PushBack({ 213, 857, 69, 91 }, 6, { 53,5 }, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
+	streel.PushBack({ 285, 857, 80, 91 }, 6, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
+	streel.PushBack({ 367, 857, 66, 91 }, 6, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
+
+
+	// Standing gut reel
+	const int stgreelnColliders = 3;
+
+	SDL_Rect stgreelHitbox2[stgreelnColliders] = { { -25, 68, 24, 16}, { -3, 32, 40, 37}, { -3, 0, 45, 32} };
+	SDL_Rect stgreelHitbox3[stgreelnColliders] = { { -25, 64, 24, 16}, { 0, 32, 40, 42}, { -3, 0, 45, 32} };
+	SDL_Rect stgreelHitbox4[stgreelnColliders] = { { -28, 63, 26, 18}, { -3, 37, 40, 25}, { -8, 0, 45, 37} };
+	SDL_Rect stgreelHitbox5[stgreelnColliders] = { { -22, 47, 24, 16}, { -3, 32, 40, 32}, { -6, 0, 45, 32} };
+	COLLIDER_TYPE stgreelColliderType[stgreelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* stgreelCallback[stgreelnColliders] = { {this}, {this}, {this} };
+
+	stgreel.PushBack({ 435, 865, 54, 84 }, 6, { 37,5 }, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 494, 868, 65, 81 }, 6, { 44,5 }, stgreelnColliders, stgreelHitbox3, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 561, 866, 70, 83 }, 6, { 47,5 }, stgreelnColliders, stgreelHitbox4, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 683, 878, 74, 71 }, 6, { 47,5 }, stgreelnColliders, stgreelHitbox5, stgreelColliderType, stgreelCallback);
+
+
+	// Crouching reel
+	const int creelnColliders = 3;
+	SDL_Rect creelHitbox1[creelnColliders] = { { -27, 44, 24, 16}, { -6, 27, 53, 21}, { -6, 0, 53, 27} };
+	SDL_Rect creelHitbox2[creelnColliders] = { { 0, 47, 24, 16}, { -4, 27, 36, 21}, { -16, 0, 48, 32} };
+	SDL_Rect creelHitbox3[creelnColliders] = { { 0, 47, 24, 16}, { -4, 27, 36, 21}, { -16, 0, 48, 32} };
+	COLLIDER_TYPE creelColliderType[creelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* creelCallback[creelnColliders] = { {this}, {this}, {this} };
+	creel.PushBack({ 889, 884, 66, 66 }, 6, { 31,5 }, creelnColliders, { creelHitbox1 }, { creelColliderType }, { creelCallback });
+	creel.PushBack({ 955, 884, 68, 66 }, 6, { 42,5 }, creelnColliders, { creelHitbox2 }, { creelColliderType }, { creelCallback });
+	creel.PushBack({ 0, 953, 66, 71 }, 6, { 42,5 }, creelnColliders, { creelHitbox3 }, { creelColliderType }, { creelCallback });
+
+
+	//Crouching
+	const int crouchingnColliders = 3;
+	SDL_Rect crouchingHitbox[crouchingnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	COLLIDER_TYPE crouchingColliderType[crouchingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* crouchingCallback[crouchingnColliders] = { {this}, {this}, {this} };
+
+	crouching.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, crouchingnColliders, crouchingHitbox, crouchingColliderType, crouchingCallback);
+
+
+	//Standing
+	const int standingnColliders = 3;
+	SDL_Rect standingHitbox[standingnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	COLLIDER_TYPE standingColliderType[standingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* standingCallback[standingnColliders] = { {this}, {this}, {this} };
+
+	standing.PushBack({ 0, 317, 57, 70 }, 1, { 29,5 }, standingnColliders, standingHitbox, standingColliderType, standingCallback);
+
+
+	//Crouch
+	const int crouchnColliders = 3;
+	SDL_Rect crouchHitbox[crouchnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	COLLIDER_TYPE crouchColliderType[crouchnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* crouchCallback[crouchnColliders] = { {this}, {this}, {this} };
+
+	crouch.PushBack({ 57, 325, 62, 62 }, 1, { 29,5 }, crouchnColliders, crouchHitbox, crouchColliderType, crouchCallback);
+
+	//Crouching l punch
+	const int clpnColliders = 3;
+	const int clpnColliders2 = 4;
+	SDL_Rect clpHitbox[clpnColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	SDL_Rect clpHitbox2[clpnColliders2] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27}, {-38, 33, 57, 20} };
+	COLLIDER_TYPE clpColliderType[clpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE clpColliderType2[clpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module*clpCallback[clpnColliders] = { {this}, {this}, {this} };
+	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player} };
+
+	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 296, 325, 96, 61 }, 4, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 227, 326, 69, 61 }, 4, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
+	clp.PushBack({ 227, 326, 69, 61 }, 1, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+
+
+	//Crouching l kik
+	const int clknColliders = 3;
+	const int clknColliders2 = 4;
+	SDL_Rect clkHitbox[clknColliders] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27} };
+	SDL_Rect clkHitbox2[clknColliders2] = { { -28, 44, 24, 16}, { -6, 27, 40, 21}, { -6, 0, 48, 27}, {-49, 0, 65, 22} };
+	COLLIDER_TYPE clkColliderType[clknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE clkColliderType2[clknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module*clkCallback[clknColliders] = { {this}, {this}, {this} };
+	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->player} };
+
+	//	DANGER: RYU DOES DOUBLE KICK FOR SOME REASEON, DESPITE ONLY DOING INPUT ONCE. CHECK STATE MATRIX?
+
+	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 688, 322, 113, 65 }, 4, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 617, 322, 71, 65 }, 4, { 29,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
+	clk.PushBack({ 617, 322, 71, 65 }, 1, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 	return ret;
 }
@@ -264,7 +394,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 		inputs.Push(IN_HEAD_REEL2);
 	}
 
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER2)
 	{
 		if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
 			position.x = (App->player->position.x + 63);
@@ -286,17 +416,6 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
-	SDL_Rect redlifebar;
-	SDL_Rect lifebar;
-	redlifebar.x = 153;
-	lifebar.x = 0;
-	redlifebar.y = 0;
-	lifebar.y = 0;
-	redlifebar.w = 150;
-	lifebar.w = 150;
-	redlifebar.h = 17;
-	lifebar.h = 17;
-
 	int hitboxesQnt = frame.GetColliderQnt();
 
 	ClearColliders();
@@ -304,12 +423,18 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	for (int i = 0; i < hitboxesQnt; i++)
 	{
 		r = frame.hitBoxeRects[i];
-		colliders[i] = App->collisions->AddCollider({ position.x + r.x, position.y + r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+		if (flip)
+			colliders[i] = App->collisions->AddCollider({ position.x - (r.w - frame.pivotPosition.x) + r.x, position.y - r.h + frame.pivotPosition.y + jumpHeight - r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
+		else
+			colliders[i] = App->collisions->AddCollider({ position.x - frame.pivotPosition.x - r.x, position.y - r.h + frame.pivotPosition.y + jumpHeight - r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 	}
 
 	r = frame.frame;
 
-	App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+	if (flip)
+		App->render->Blit(graphics, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+	else
+		App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 
 bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)
