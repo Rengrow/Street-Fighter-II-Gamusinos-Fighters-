@@ -96,6 +96,8 @@ public:
 	Animation neutralJump;
 	Animation hdk;
 	Animation streel;
+	Animation stgreel;
+	Animation creel;
 	Animation crouching, standing, crouch;
 
 	iPoint position;
