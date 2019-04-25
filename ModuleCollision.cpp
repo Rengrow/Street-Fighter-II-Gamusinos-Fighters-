@@ -18,8 +18,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER2] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_SHOT] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER2_SHOT] = true;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER_HIT] = true;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER2_HIT] = true;
+	matrix[COLLIDER_WALL][COLLIDER_PLAYER_HIT] = false;
+	matrix[COLLIDER_WALL][COLLIDER_PLAYER2_HIT] = false;
 
 	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
@@ -43,30 +43,30 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER_SHOT] = false;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER2_SHOT] = true;
 	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER_HIT] = false;
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER2_HIT] = true;
+	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER2_HIT] = false;
 
 	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER2] = false;
 	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER_SHOT] = true;
 	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER2_SHOT] = false;
-	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER_HIT] = true;
+	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER_HIT] = false;
 	matrix[COLLIDER_PLAYER2_SHOT][COLLIDER_PLAYER2_HIT] = false;
 
-	matrix[COLLIDER_PLAYER_HIT][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER_HIT][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER2] = true;
 	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER_SHOT] = false;
-	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER2_SHOT] = true;
+	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER2_SHOT] = false;
 	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER_HIT] = false;
-	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER2_HIT] = true;
+	matrix[COLLIDER_PLAYER_HIT][COLLIDER_PLAYER2_HIT] = false;
 
-	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER2] = false;
-	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER_SHOT] = true;
+	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER_SHOT] = false;
 	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER2_SHOT] = false;
-	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER_HIT] = true;
+	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER_HIT] = false;
 	matrix[COLLIDER_PLAYER2_HIT][COLLIDER_PLAYER2_HIT] = false;
 }
 
@@ -125,14 +125,6 @@ update_status ModuleCollision::PreUpdate()
 update_status ModuleCollision::Update()
 {
 	DebugDraw();
-
-	if (App->fade->to_enable == App->scene_Sagat) {
-		App->render->Blit(App->scene_Sagat->graphics, 364, 0, &(App->scene_Sagat->palmtree.GetCurrentFrameBox()), 0.75); // palmtree animation
-	}
-	if (App->fade->to_enable == App->scene_ken) {
-		App->render->Blit(App->scene_ken->graphics, 177, 200, &App->scene_ken->big, false);
-		App->render->Blit(App->scene_ken->graphics, 387, 200, &App->scene_ken->big, false);
-	}
 
 	return UPDATE_CONTINUE;
 }

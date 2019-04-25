@@ -103,3 +103,9 @@ update_status ModuleSceneSagat::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+update_status ModuleSceneSagat::PostUpdate() {
+
+	App->render->Blit(App->scene_Sagat->graphics, 364, 0, &(App->scene_Sagat->palmtree.GetCurrentFrameBox()), 0.75); // palmtree animation
+	return UPDATE_CONTINUE;
+}

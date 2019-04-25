@@ -63,7 +63,7 @@ bool ModuleUI::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleUI::Update()
+update_status ModuleUI::PostUpdate()
 {
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarP1, true);
 

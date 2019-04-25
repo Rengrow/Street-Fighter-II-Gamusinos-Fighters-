@@ -11,7 +11,7 @@ public:
 	~ModuleFadeToBlack();
 
 	bool Start();
-	update_status Update();
+	update_status PostUpdate();
 	bool FadeToBlack(Module* module_off, Module* module_on, float time = 2.0f);
 	Module* to_enable = nullptr;
 	Module* to_disable = nullptr;

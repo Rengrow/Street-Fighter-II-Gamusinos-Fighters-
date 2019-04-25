@@ -24,9 +24,8 @@ struct Particle
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool flip;
-	int player_shooting;
 	Mix_Chunk* sfx = nullptr;
-	bool fx_played = false;
+	
 
 	Particle();
 	Particle(const Particle& p);
@@ -53,8 +52,6 @@ private:
 	uint last_particle = 0;
 
 public:
-
-	
 	Particle hdk;
 };
 

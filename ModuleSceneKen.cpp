@@ -188,18 +188,29 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 286, 100 + (int)foreground_pos, &(blueGuy.GetCurrentFrameBox()), false, 0.92f); //blue guy
 	App->render->Blit(graphics, 220, 129 + (int)foreground_pos, &(blueGuy2.GetCurrentFrameBox()), false, 0.92f); //blue guy 2
 
+	
+
 	App->render->Blit(graphics, 0, 170, &ground, false);
 	App->render->Blit(graphics, 520, 120, &box, false); //box
 
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
 
-
+	
+	
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->scene_Sagat, 2);
 	}
+
+	return UPDATE_CONTINUE;
+}
+
+update_status ModuleSceneKen::PostUpdate() {
+
+	App->render->Blit(graphics, 177, 200, &big, false);
+	App->render->Blit(graphics, 387, 200, &big, false);
 
 	return UPDATE_CONTINUE;
 }

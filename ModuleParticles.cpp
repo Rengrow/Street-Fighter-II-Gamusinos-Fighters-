@@ -68,17 +68,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			if (p->player_shooting == 0) {
 				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), p->flip);
-			}
-			else if (p->player_shooting == 1) {
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), true, p->flip);
-			}
-			if (p->fx_played == false)
-			{
-				App->audio->PlayChunk(p->sfx);
-				p->fx_played = true;
-			}
 		}
 		p->collider->SetPos(p->position);
 	}
@@ -91,8 +81,6 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 
 	hdk.speed = { 3, 0 };
 
-
-
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
@@ -102,7 +90,6 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 			p->position.x = x;
 			p->position.y = y;
 			p->sfx = sfx;
-			p->player_shooting = player;
 
 			if (flip == false) {
 				p->speed = { 3, 0 };
@@ -117,6 +104,9 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrameBox(), collider_type, this);
 			active[i] = p;
+
+			App->audio->PlayChunk(p->sfx);
+
 			break;
 		}
 	}

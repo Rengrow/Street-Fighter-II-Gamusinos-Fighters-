@@ -101,7 +101,8 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 			if (font->table[j] == text[i]) {
 				rect.x = j * font->char_w;
 				rect.y = 0;
-				App->render->Blit(font->graphic, x, y, &rect, 0, false);
+				App->render->Blit(font->graphic, x, y, &rect, false);
+				
 				x += font->char_w;
 				foundCharacter = true;
 			}

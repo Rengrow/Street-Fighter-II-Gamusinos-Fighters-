@@ -23,7 +23,7 @@ bool ModuleFadeToBlack::Start()
 }
 
 // Update: draw background
-update_status ModuleFadeToBlack::Update()
+update_status ModuleFadeToBlack::PostUpdate()
 {
 	if(current_step == fade_step::none)
 		return UPDATE_CONTINUE;
