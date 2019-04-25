@@ -86,14 +86,6 @@ update_status ModuleCollision::Update()
 {
 	DebugDraw();
 
-	if (App->fade->to_enable == App->scene_Sagat) {
-		App->render->Blit(App->scene_Sagat->graphics, 364, 0, &(App->scene_Sagat->palmtree.GetCurrentFrameBox()), 0.75); // palmtree animation
-	}
-	if (App->fade->to_enable == App->scene_ken) {
-		App->render->Blit(App->scene_ken->graphics, 177, 200, &App->scene_ken->big, false);
-		App->render->Blit(App->scene_ken->graphics, 387, 200, &App->scene_ken->big, false);
-	}
-
 	return UPDATE_CONTINUE;
 }
 
