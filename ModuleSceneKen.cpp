@@ -137,8 +137,9 @@ bool ModuleSceneKen::Start()
 
 	App->render->camera.x = App->render->camera.y = 0;
 
-	App->UI->StartFight();
-
+	//App->UI->StartFight();
+	App->player->freeze = false;
+	App->player2->freeze = false;
 	return true;
 }
 
