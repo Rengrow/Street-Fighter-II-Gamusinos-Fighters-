@@ -9,6 +9,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "p2Qeue.h"
+
 #include "SDL\include\SDL.h"
 
 
@@ -28,6 +29,9 @@ bool ModulePlayer::Start()
 
 	position.x = 100;
 	position.y = 215;
+
+	life = 100;
+	freeze = true;
 
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
@@ -254,7 +258,9 @@ update_status ModulePlayer::Update()
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
 
-	external_input(inputs);
+	if (!freeze)
+		external_input(inputs);
+
 	internal_input(inputs);
 	ryu_states state = process_fsm(inputs);
 

@@ -112,11 +112,13 @@ public:
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 
+	bool freeze;
 	bool godmode = false;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int jumpHeight = 0;
 	int speed = 1;
+	int life;
 	int mov; //lp, mp, hp, lk, mk, hk
 	bool flip = false;
 

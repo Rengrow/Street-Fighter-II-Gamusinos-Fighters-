@@ -104,12 +104,14 @@ public:
 	p2Qeue<ryu_inputs2> inputs;
 
 	bool flip = true;
+	bool freeze;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
 	
 	int jumpHeight = 0;
-
+	int speed = 1;
+	int life;
 	Uint32 jump_timer = 0;
 	Uint32 l_punch_timer = 0;
 	Uint32 l_kik_timer = 0;

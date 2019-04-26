@@ -31,6 +31,9 @@ bool ModuleSecondPlayer::Start()
 	position.x = 250;
 	position.y = 215;
 
+	life = 100;
+	freeze = true;
+
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
@@ -247,12 +250,12 @@ bool ModuleSecondPlayer::CleanUp()
 // Update: draw background
 update_status ModuleSecondPlayer::Update()
 {
-	int speed = 1;
-
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle;
 
-	external_input(inputs);
+	if (!freeze)
+		external_input(inputs);
+
 	internal_input(inputs);
 	ryu_states2 state = process_fsm(inputs);
 

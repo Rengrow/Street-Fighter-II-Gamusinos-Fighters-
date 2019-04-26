@@ -137,6 +137,8 @@ bool ModuleSceneKen::Start()
 
 	App->render->camera.x = App->render->camera.y = 0;
 
+	App->UI->StartFight();
+
 	return true;
 }
 

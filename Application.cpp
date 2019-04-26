@@ -15,6 +15,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
+#include "ModuleFight.h"
 
 Application::Application()
 {
@@ -23,17 +24,18 @@ Application::Application()
 	modules[2] = textures = new ModuleTextures();
 	modules[3] = fonts = new ModuleFonts();
 	modules[4] = audio = new ModuleAudio();
-	modules[5] = scene_Sagat = new ModuleSceneSagat();
-	modules[6] = scene_ken = new ModuleSceneKen();
-	modules[7] = player = new ModulePlayer();	
-	modules[8] = player2 = new ModuleSecondPlayer();
-	modules[9] = particles = new ModuleParticles();
-	modules[10] = welcomePage = new ModuleWelcomePage();
-	modules[11] = endBattle = new ModuleEndBattle();
-	modules[12] = collisions = new ModuleCollision();
-	modules[13] = UI = new ModuleUI();
-	modules[14] = fade = new ModuleFadeToBlack();
-	modules[15] = render = new ModuleRender();
+	modules[5] = fight = new ModuleFight();
+	modules[6] = scene_Sagat = new ModuleSceneSagat();
+	modules[7] = scene_ken = new ModuleSceneKen();
+	modules[8] = player = new ModulePlayer();	
+	modules[9] = player2 = new ModuleSecondPlayer();
+	modules[10] = particles = new ModuleParticles();
+	modules[11] = welcomePage = new ModuleWelcomePage();
+	modules[12] = endBattle = new ModuleEndBattle();
+	modules[13] = collisions = new ModuleCollision();
+	modules[14] = UI = new ModuleUI();
+	modules[15] = fade = new ModuleFadeToBlack();
+	modules[16] = render = new ModuleRender();
 
 }
 
