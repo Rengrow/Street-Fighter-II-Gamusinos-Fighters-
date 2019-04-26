@@ -13,12 +13,13 @@ public:
 	virtual ~ModuleFight();
 
 
-	bool Init();
+	bool Start();
 	bool CleanUp();
 	update_status Update();
+	void Win(int player);
 
 public:
-	
+	bool roundStarted;
 };
 
 #endif // __ModuleFight_H__

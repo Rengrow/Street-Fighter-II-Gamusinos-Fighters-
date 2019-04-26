@@ -20,6 +20,8 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	void StopMusic(int time);
+
 public:
 	
 	SDL_Texture* graphics = nullptr;

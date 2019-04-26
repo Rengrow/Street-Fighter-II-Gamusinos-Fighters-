@@ -8,7 +8,6 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
-#include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleUI.h"
 
@@ -115,11 +114,6 @@ bool ModuleSceneKen::Start()
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 
-	App->player->Enable();
-	App->player2->Enable();
-	App->particles->Enable();
-	App->collisions->Enable();
-	App->UI->Enable();
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	App->render->limit1Box.x = 0;
@@ -137,8 +131,6 @@ bool ModuleSceneKen::Start()
 
 	App->render->camera.x = App->render->camera.y = 0;
 
-	App->UI->StartFight();
-
 	return true;
 }
 
@@ -146,14 +138,6 @@ bool ModuleSceneKen::Start()
 bool ModuleSceneKen::CleanUp()
 {
 	LOG("Unloading ken scene");
-
-
-
-	App->player->Disable();
-	App->player2->Disable();
-	App->particles->Disable();
-	App->collisions->Disable();
-	App->UI->Disable();
 
 	App->textures->Unload(graphics);
 	graphics = nullptr;
@@ -190,21 +174,11 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 286, 100 + (int)foreground_pos, &(blueGuy.GetCurrentFrameBox()), false, 0.92f); //blue guy
 	App->render->Blit(graphics, 220, 129 + (int)foreground_pos, &(blueGuy2.GetCurrentFrameBox()), false, 0.92f); //blue guy 2
 
-	
-
 	App->render->Blit(graphics, 0, 170, &ground, false);
 	App->render->Blit(graphics, 520, 120, &box, false); //box
 
 	App->render->Blit(graphics, 180, 160, &little, false);
 	App->render->Blit(graphics, 390, 160, &little, false);
-
-	
-	
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->scene_Sagat, 2);
-	}
 
 	return UPDATE_CONTINUE;
 }
@@ -215,4 +189,8 @@ update_status ModuleSceneKen::PostUpdate() {
 	App->render->Blit(graphics, 387, 200, &big, false);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSceneKen::StopMusic(int time) {
+	Mix_FadeOutMusic(time);
 }

@@ -31,7 +31,7 @@ bool ModuleSecondPlayer::Start()
 	position.x = 250;
 	position.y = 215;
 
-	life = 100;
+	life = 1;
 	freeze = true;
 
 	Animation* current_animation;
@@ -394,6 +394,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
 	{
 		App->audio->PlayChunk(App->audio->hdk_hit);
+		life -= 20;
 		inputs.Push(IN_HEAD_REEL2);
 	}
 

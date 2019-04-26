@@ -406,6 +406,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 	{
 		App->audio->PlayChunk(App->audio->hdk_hit);
+		life -= 20;
 		inputs.Push(IN_HEAD_REEL);
 	}
 

@@ -18,18 +18,22 @@ public:
 	bool CleanUp();
 	void StartTimer();
 	void StartFight();
+	void StartEndFight(int player);
+	int GetTimer();
 
 private:
 	void TimerBlit(int font_id);
 	void LifeBarsBlit();
 	void KoBlit();
 	void StartFightBlit(int font_id);
+	void EndFight();
 
 public:
 	int numbers;
 	int typography1;
-	Uint32 timeOut;
-	Uint32 countdownFight;
+	Uint32 timeOutTimer;
+	Uint32 countdownStartFight;
+	Uint32 endFightTimer;
 	SDL_Texture* lifeBars = nullptr;
 	SDL_Rect lifeBarP1;
 	SDL_Rect lifeBarP2;
@@ -42,6 +46,8 @@ public:
 private:
 	bool timerStarted;
 	bool starFight;
+	bool endFightStarted;
+	int winnerPlayer = 0;
 };
 
 #endif // __MODULEUI_H__

@@ -7,6 +7,9 @@
 #include "ModulePlayer.h"
 #include "ModuleSecondPlayer.h"
 #include "ModuleFonts.h"
+#include "ModuleInput.h"
+#include "ModuleSceneKen.h"
+#include "ModuleFight.h"
 #include<string.h>
 
 #include "SDL/include/SDL.h"
@@ -72,8 +75,13 @@ update_status ModuleUI::PostUpdate()
 	LifeBarsBlit();
 	TimerBlit(numbers);
 	StartFightBlit(typography1);
+	EndFight();
 
 	return UPDATE_CONTINUE;
+}
+
+int ModuleUI::GetTimer() {
+	return (timeOutTimer - SDL_GetTicks()) / 1000;
 }
 
 void ModuleUI::TimerBlit(int font_id) {
@@ -85,9 +93,9 @@ void ModuleUI::TimerBlit(int font_id) {
 
 	const Font* font = &App->fonts->fonts[font_id];
 
-	int timeRemaining = (timeOut - SDL_GetTicks()) / 1000;
+	int timeRemaining = GetTimer();
 
-	if (timerStarted && timeRemaining > 0) {
+	if (timerStarted || timeRemaining > 0) {
 		tiempo[0] = (char)48 + (timeRemaining / 10);
 		tiempo[1] = (char)48 + (timeRemaining % 10);
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 24, 40, font_id, tiempo);
@@ -112,19 +120,20 @@ void ModuleUI::KoBlit() {
 }
 
 void ModuleUI::StartTimer() {
-	timeOut = SDL_GetTicks() + 99000; //99 Seconds
+	timeOutTimer = SDL_GetTicks() + 10000;
+	//99000; //99 Seconds
 	timerStarted = true;
 }
 
 void ModuleUI::StartFight() {
-	countdownFight = SDL_GetTicks() + 5000; //5 seconds
+	countdownStartFight = SDL_GetTicks() + 5000; //5 seconds
 	starFight = true;
 }
 
 void ModuleUI::StartFightBlit(int font_id) {
 	const Font* font = &App->fonts->fonts[font_id];
 
-	int timeRemaining = (countdownFight - SDL_GetTicks()) / 1000;
+	int timeRemaining = GetTimer();
 
 	if (starFight)
 		if (timeRemaining > 3) {
@@ -143,6 +152,34 @@ void ModuleUI::StartFightBlit(int font_id) {
 			starFight = false;
 			App->player->freeze = false;
 			App->player2->freeze = false;
+			App->fight->roundStarted = true;
 			StartTimer();
 		}
+}
+
+void ModuleUI::StartEndFight(int player) {
+	endFightTimer = SDL_GetTicks() + 5000; //5 Seconds
+	winnerPlayer = player;
+	endFightStarted = true;
+}
+
+void ModuleUI::EndFight() {
+
+	if (endFightStarted) {
+		int timeRemaining = (endFightTimer - SDL_GetTicks()) / 1000;
+		if (timeRemaining >= 0) {
+			if (winnerPlayer == 1) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w - 32, SCREEN_HEIGHT / 2 - 50, typography1, "player 1 win");
+				//player -> win
+			}
+			else if (winnerPlayer == 2) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w - 32, SCREEN_HEIGHT / 2 - 50, typography1, "player 2 win");
+				//player2 -> win
+			}
+		}
+		else {
+			App->scene_ken->StopMusic(2000);
+			App->fade->FadeToBlack(this, (Module*)App->scene_Sagat, 2);
+		}
+	}
 }

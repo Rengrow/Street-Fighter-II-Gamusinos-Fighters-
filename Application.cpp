@@ -53,6 +53,7 @@ bool Application::Init()
 	player2->Disable();
 	particles->Disable();
 	collisions->Disable();
+	fight->Disable();
 	scene_Sagat->Disable();
 	scene_ken->Disable();
 	endBattle->Disable();
