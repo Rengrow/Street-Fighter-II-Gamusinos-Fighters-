@@ -42,7 +42,8 @@ bool ModuleUI::Start()
 	LOG("Loading UI assets");
 	bool ret = true;
 
-	numbers = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890", 1);//30x30
+	typography1 = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890", 1);
+	numbers = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 	lifeBars = App->textures->Load("assets/images/ui/Life_bar.png");
 
 	timeOut = SDL_GetTicks() + 99000;
@@ -56,6 +57,7 @@ bool ModuleUI::CleanUp()
 
 	App->textures->Unload(lifeBars);
 	App->fonts->UnLoad(numbers);
+	App->fonts->UnLoad(typography1);
 
 	lifeBars = nullptr;
 
@@ -89,8 +91,8 @@ void ModuleUI::TimerBlit(int font_id) {
 	if (timeRemaining > 0) {
 		tiempo[0] = (char)48 + (timeRemaining / 10);
 		tiempo[1] = (char)48 + (timeRemaining % 10);
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 6, 47, font_id, tiempo);
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 24, 40, font_id, tiempo);
 	}
 	else
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 6, 47, font_id, "0");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 24, 40, font_id, "0");
 }
