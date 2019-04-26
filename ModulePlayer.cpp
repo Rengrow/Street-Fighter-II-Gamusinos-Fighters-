@@ -80,10 +80,10 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
 	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
-	lp.PushBack({ 59, 101, 64, 95 }, 2, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 124, 101, 92, 95 }, 4, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
-	lp.PushBack({ 59, 101, 64, 95 }, 4, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 409, 3, 58, 95 }, 1, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 59, 101, 64, 95 }, 5, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 124, 101, 92, 95 }, 10, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
+	lp.PushBack({ 59, 101, 64, 95 }, 8, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 409, 3, 58, 95 }, 2, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
 	// lk
@@ -97,11 +97,11 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
 	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->player2} };
-	lk.PushBack({ 1, 3, 53, 94 }, 3, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
-	lk.PushBack({ 400, 102, 63, 93 }, 3, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
-	lk.PushBack({ 467, 100, 115, 93 }, 8, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
-	lk.PushBack({ 400, 102, 63, 93 }, 4, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
-	lk.PushBack({ 1, 3, 53, 94 }, 1, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 1, 3, 53, 94 }, 7, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 400, 102, 63, 93 }, 7, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
+	lk.PushBack({ 467, 100, 115, 93 }, 20, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
+	lk.PushBack({ 400, 102, 63, 93 }, 10, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
+	lk.PushBack({ 1, 3, 53, 94 }, 2, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
 	// Neutral jump
 	const int neutraljumpnColliders = 3;
@@ -121,9 +121,9 @@ bool ModulePlayer::Start()
 	SDL_Rect hdkHitbox2[hdknColliders] = { { -62, 58, 24, 20}, { -43, 23, 40, 42}, { -10, 5, 78, 28} };
 	COLLIDER_TYPE hdkColliderType[hdknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* hdkCallback[hdknColliders] = { {this}, {this}, {this} };
-	hdk.PushBack({ 462, 751, 74, 90 }, 8, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk.PushBack({ 537, 757, 85, 84 }, 12, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
-	hdk.PushBack({ 623, 758, 90, 83 }, 8, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
+	hdk.PushBack({ 462, 751, 74, 90 }, 5, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk.PushBack({ 537, 757, 85, 84 }, 15, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
+	hdk.PushBack({ 623, 758, 90, 83 }, 3, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
 	hdk.PushBack({ 714, 764, 106, 77 }, 40, { 29,5 }, hdknColliders, hdkHitbox2, hdkColliderType, hdkCallback);
 
 
@@ -206,10 +206,10 @@ bool ModulePlayer::Start()
 	Module*clpCallback[clpnColliders] = { {this}, {this}, {this} };
 	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
 
+	clp.PushBack({ 227, 326, 69, 61 }, 5, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 296, 325, 96, 61 }, 10, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 227, 326, 69, 61 }, 10, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
 	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 296, 325, 96, 61 }, 4, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 227, 326, 69, 61 }, 4, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
-	clp.PushBack({ 227, 326, 69, 61 }, 1, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 
 
 	//Crouching l kik
@@ -222,12 +222,11 @@ bool ModulePlayer::Start()
 	Module*clkCallback[clknColliders] = { {this}, {this}, {this} };
 	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
 
-	//	DANGER: RYU DOES DOUBLE KICK FOR SOME REASEON, DESPITE ONLY DOING INPUT ONCE. CHECK STATE MATRIX?
 
+	clk.PushBack({ 617, 322, 71, 65 }, 5, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 688, 322, 113, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 617, 322, 71, 65 }, 10, { 29,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-	clk.PushBack({ 688, 322, 113, 65 }, 4, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-	clk.PushBack({ 617, 322, 71, 65 }, 4, { 29,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
-	clk.PushBack({ 617, 322, 71, 65 }, 1, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 	return ret;
 }

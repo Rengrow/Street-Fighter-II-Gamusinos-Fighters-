@@ -9,7 +9,7 @@
 class Animation
 {
 public:
-	bool loop = true;
+	bool loop = false;
 	Frame frames[MAX_FRAMES];
 
 private:

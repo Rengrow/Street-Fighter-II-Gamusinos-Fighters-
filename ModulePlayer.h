@@ -8,8 +8,8 @@
 #include "p2Qeue.h"
 
 #define JUMP_TIME 55
-#define L_PUNCH_TIME 12
-#define L_KIK_TIME 20
+#define L_PUNCH_TIME 28
+#define L_KIK_TIME 47
 #define HADOKEN_TIME 71
 #define CROUCHING_TIME 10
 #define STANDING_TIME 10
