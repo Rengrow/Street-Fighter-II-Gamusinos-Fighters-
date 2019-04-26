@@ -28,6 +28,9 @@ bool ModuleSecondPlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
+	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
+	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
+	
 	position.x = 250;
 	position.y = 215;
 
@@ -85,10 +88,10 @@ bool ModuleSecondPlayer::Start()
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
 	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player} };
-	lp.PushBack({ 59, 101, 64, 95 }, 2, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 124, 101, 92, 95 }, 4, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
-	lp.PushBack({ 59, 101, 64, 95 }, 4, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 409, 3, 58, 95 }, 1, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 59, 101, 64, 95 }, 5, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 124, 101, 92, 95 }, 10, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
+	lp.PushBack({ 59, 101, 64, 95 }, 8, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 409, 3, 58, 95 }, 2, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
 	// lk
@@ -102,11 +105,11 @@ bool ModuleSecondPlayer::Start()
 	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
 	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->player} };
-	lk.PushBack({ 1, 3, 53, 94 }, 3, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
-	lk.PushBack({ 400, 102, 63, 93 }, 3, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
-	lk.PushBack({ 467, 100, 115, 93 }, 8, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
-	lk.PushBack({ 400, 102, 63, 93 }, 4, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
-	lk.PushBack({ 1, 3, 53, 94 }, 1, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 1, 3, 53, 94 }, 7, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 400, 102, 63, 93 }, 7, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
+	lk.PushBack({ 467, 100, 115, 93 }, 20, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
+	lk.PushBack({ 400, 102, 63, 93 }, 10, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
+	lk.PushBack({ 1, 3, 53, 94 }, 2, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
 	// Neutral jump
 	const int neutraljumpnColliders = 3;
@@ -126,9 +129,9 @@ bool ModuleSecondPlayer::Start()
 	SDL_Rect hdkHitbox2[hdknColliders] = { { -62, 58, 24, 20}, { -43, 23, 40, 42}, { -10, 5, 78, 28} };
 	COLLIDER_TYPE hdkColliderType[hdknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* hdkCallback[hdknColliders] = { {this}, {this}, {this} };
-	hdk.PushBack({ 462, 751, 74, 90 }, 8, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk.PushBack({ 537, 757, 85, 84 }, 12, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
-	hdk.PushBack({ 623, 758, 90, 83 }, 8, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
+	hdk.PushBack({ 462, 751, 74, 90 }, 5, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	hdk.PushBack({ 537, 757, 85, 84 }, 15, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
+	hdk.PushBack({ 623, 758, 90, 83 }, 3, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
 	hdk.PushBack({ 714, 764, 106, 77 }, 40, { 29,5 }, hdknColliders, hdkHitbox2, hdkColliderType, hdkCallback);
 
 
@@ -211,10 +214,10 @@ bool ModuleSecondPlayer::Start()
 	Module*clpCallback[clpnColliders] = { {this}, {this}, {this} };
 	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player} };
 
+	clp.PushBack({ 227, 326, 69, 61 }, 5, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 296, 325, 96, 61 }, 10, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 227, 326, 69, 61 }, 10, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
 	clp.PushBack({ 227, 326, 69, 61 }, 2, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 296, 325, 96, 61 }, 4, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 227, 326, 69, 61 }, 4, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
-	clp.PushBack({ 227, 326, 69, 61 }, 1, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 
 
 	//Crouching l kik
@@ -229,9 +232,9 @@ bool ModuleSecondPlayer::Start()
 
 	//	DANGER: RYU DOES DOUBLE KICK FOR SOME REASEON, DESPITE ONLY DOING INPUT ONCE. CHECK STATE MATRIX?
 
-	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-	clk.PushBack({ 688, 322, 113, 65 }, 4, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-	clk.PushBack({ 617, 322, 71, 65 }, 4, { 29,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
+	clk.PushBack({ 617, 322, 71, 65 }, 5, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 688, 322, 113, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 617, 322, 71, 65 }, 10, { 29,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
 	clk.PushBack({ 617, 322, 71, 65 }, 1, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 	return ret;
@@ -364,10 +367,26 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_HADOKEN2:
 			current_animation = &hdk;
-			if (App->frames - hadoken_timer == 42)
+			if (App->frames - hadoken_timer == 38)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, App->audio->hdk, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
+			break;
+
+		case ST_FALLING2:
+			LOG("Falling\n");
+			break;
+
+		case ST_GETTING_UP2:
+			LOG("Getting up\n");
+			break;
+
+		case LOOSE2:
+			LOG("LOSING\n");
+			break;
+
+		case VICTORY2:
+			LOG("VICTORY\n");
 			break;
 		}
 	}
@@ -393,8 +412,14 @@ void ModuleSecondPlayer::ClearColliders() {
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
 	{
-		App->audio->PlayChunk(App->audio->hdk_hit);
 		life -= 20;
+		App->audio->PlayChunk(hdk_hit);
+		inputs.Push(IN_HEAD_REEL2);
+	}
+
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT)
+	{
+		App->audio->PlayChunk(hdk_hit);	//CAMBIAR
 		inputs.Push(IN_HEAD_REEL2);
 	}
 
@@ -550,21 +575,57 @@ void ModuleSecondPlayer::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 	}
 
-	if (l_punch_timer > 0)
+	if (l_standing_punch_timer > 0)
 	{
-		if (App->frames - l_punch_timer > L_PUNCH_TIME)
+		if (App->frames - l_standing_punch_timer > L_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_L_PUNCH_FINISH2);
-			l_punch_timer = 0;
+			l_standing_punch_timer = 0;
 		}
 	}
 
-	if (l_kik_timer > 0)
+	if (l_crouching_punch_timer > 0)
 	{
-		if (App->frames - l_kik_timer > L_KIK_TIME)
+		if (App->frames - l_crouching_punch_timer > L_CROUCHING_PUNCH_TIME)
+		{
+			inputs.Push(IN_L_PUNCH_FINISH2);
+			l_crouching_punch_timer = 0;
+		}
+	}
+
+	if (l_d_jumping_punch_timer > 0)
+	{
+		if (App->frames - l_d_jumping_punch_timer > L_D_JUMPING_PUNCH_TIME)
+		{
+			inputs.Push(IN_L_PUNCH_FINISH2);
+			l_d_jumping_punch_timer = 0;
+		}
+	}
+
+	if (l_standing_kik_timer > 0)
+	{
+		if (App->frames - l_standing_kik_timer > L_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_L_KIK_FINISH2);
-			l_kik_timer = 0;
+			l_standing_kik_timer = 0;
+		}
+	}
+
+	if (l_crouching_kik_timer > 0)
+	{
+		if (App->frames - l_crouching_kik_timer > L_CROUCHING_KIK_TIME)
+		{
+			inputs.Push(IN_L_KIK_FINISH2);
+			l_crouching_kik_timer = 0;
+		}
+	}
+
+	if (l_d_jumping_kik_timer > 0)
+	{
+		if (App->frames - l_d_jumping_kik_timer > L_D_JUMPING_KIK_TIME)
+		{
+			inputs.Push(IN_L_KIK_FINISH2);
+			l_d_jumping_kik_timer = 0;
 		}
 	}
 
@@ -595,12 +656,39 @@ void ModuleSecondPlayer::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 	}
 
-	if (reel_timer > 0)
+	if (head_reel_timer > 0)
 	{
-		if (App->frames - reel_timer > REEL_TIME)
+		if (App->frames - head_reel_timer > HEAD_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
-			reel_timer = 0;
+			head_reel_timer = 0;
+		}
+	}
+
+	if (gut_reel_timer > 0)
+	{
+		if (App->frames - gut_reel_timer > GUT_REEL_TIME)
+		{
+			inputs.Push(IN_REEL_FINISH2);
+			gut_reel_timer = 0;
+		}
+	}
+
+	if (crouch_reel_timer > 0)
+	{
+		if (App->frames - crouch_reel_timer > CROUCH_REEL_TIME)
+		{
+			inputs.Push(IN_REEL_FINISH2);
+			crouch_reel_timer = 0;
+		}
+	}
+
+	if (getting_up_timer > 0)
+	{
+		if (App->frames - getting_up_timer > GETTING_UP_TIME)
+		{
+			inputs.Push(IN_GETTING_UP_FINISH2);
+			getting_up_timer = 0;
 		}
 	}
 }
@@ -622,11 +710,14 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_DOWN2: state = ST_WALK_BACKWARD2; break;
 			case IN_JUMP2: state = ST_JUMP_NEUTRAL2; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
-			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_punch_timer = App->frames;  break;
-			case IN_L_KIK2: state = L_KIK_STANDING2; l_kik_timer = App->frames;  break;
+			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
+			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
 			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer = App->frames; break;
-			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -638,11 +729,14 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
 			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
 			case IN_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
-			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_punch_timer = App->frames;  break;
-			case IN_L_KIK2: state = L_KIK_STANDING2; l_kik_timer = App->frames;  break;
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer = App->frames; break;
-			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer = App->frames; break;
+			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
+			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -654,11 +748,14 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
 			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
 			case IN_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
-			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_punch_timer = App->frames;  break;
-			case IN_L_KIK2: state = L_KIK_STANDING2; l_kik_timer = App->frames;  break;
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer = App->frames; break;
-			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer = App->frames; break;
+			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
+			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -668,8 +765,11 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_PUNCH2: state = L_PUNCH_NEUTRAL_JUMP2; l_punch_timer = App->frames; break;
-			case IN_L_KIK2: state = L_KIK_NEUTRAL_JUMP2; l_kik_timer = App->frames; break;
+			case IN_L_PUNCH2: state = L_PUNCH_NEUTRAL_JUMP2; break;
+			case IN_L_KIK2: state = L_KIK_NEUTRAL_JUMP2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -679,8 +779,11 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_PUNCH2: state = L_PUNCH_FORWARD_JUMP2; l_punch_timer = App->frames; break;
-			case IN_L_KIK2: state = L_KIK_FORWARD_JUMP2; l_kik_timer = App->frames; break;
+			case IN_L_PUNCH2: state = L_PUNCH_FORWARD_JUMP2; l_d_jumping_punch_timer = App->frames; break;
+			case IN_L_KIK2: state = L_KIK_FORWARD_JUMP2; l_d_jumping_kik_timer = App->frames; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -690,8 +793,11 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_PUNCH2: state = L_PUNCH_BACKWARD_JUMP2; l_punch_timer = App->frames; break;
-			case IN_L_KIK2: state = L_KIK_BACKWARD_JUMP2; l_kik_timer = App->frames; break;
+			case IN_L_PUNCH2: state = L_PUNCH_BACKWARD_JUMP2; l_d_jumping_punch_timer = App->frames; break;
+			case IN_L_KIK2: state = L_KIK_BACKWARD_JUMP2; l_d_jumping_kik_timer = App->frames; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -701,17 +807,9 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			}
-		}
-		break;
+			case IN_FALLING2: state = ST_FALLING2; break;
 
-		case ST_HADOKEN2:
-		{
-			switch (last_input)
-			{
-			case IN_HADOKEN_FINISH2: state = ST_IDLE2; break;
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer = App->frames; break;
-			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -721,6 +819,22 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case ST_HADOKEN2:
+		{
+			switch (last_input)
+			{
+			case IN_HADOKEN_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -731,6 +845,9 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_L_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -741,6 +858,9 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_L_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -751,6 +871,9 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_L_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -761,6 +884,9 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_L_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -770,8 +896,10 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH2: state = ST_IDLE2; break;
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer = App->frames; break;
-			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -781,17 +909,21 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH2: state = ST_IDLE2; break;
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; reel_timer = App->frames; break;
-			case IN_GUT_REEL2: state = ST_GUT_REEL2; reel_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
+
 		case ST_CROUCHING2:
 		{
 			switch (last_input)
 			{
 			case IN_CROUCHING_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer = App->frames; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -801,20 +933,22 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH2: state = ST_IDLE2; break;
-			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer = App->frames; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
-
 
 		case ST_CROUCH2:
 		{
 			switch (last_input)
 			{
 			case IN_CROUCH_UP2: state = ST_STANDING2; standing_timer = App->frames; break;
-			case IN_L_PUNCH2: state = L_PUNCH_CROUCH2; l_punch_timer = App->frames; break;
-			case IN_L_KIK2: state = L_KIK_CROUCH2; l_kik_timer = App->frames; break;
-			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer = App->frames; break;
+			case IN_L_PUNCH2: state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames; break;
+			case IN_L_KIK2: state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -824,8 +958,9 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_L_PUNCH_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
-			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer = App->frames; break;
+			case IN_CROUCH_UP2 && IN_L_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = App->frames; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -836,7 +971,8 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_L_KIK_FINISH2: state = ST_CROUCH2; break;
 			case IN_CROUCH_UP2 && IN_L_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
-			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; reel_timer = App->frames; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -845,7 +981,10 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH2: state = ST_IDLE2; break;
+			case IN_REEL_FINISH2:state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -854,7 +993,10 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH2: state = ST_IDLE2; break;
+			case IN_REEL_FINISH2:state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -863,7 +1005,28 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH2: state = ST_CROUCH2; break;
+			case IN_REEL_FINISH2:state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_L_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case ST_FALLING2:
+		{
+			switch (last_input)
+			{
+			case IN_FALLING_FINISH2:state = ST_GETTING_UP2; break;
+			}
+		}
+		break;
+
+		case ST_GETTING_UP2:
+		{
+			switch (last_input)
+			{
+			case IN_GETTING_UP_FINISH2:state = ST_IDLE2; break;
 			}
 		}
 		break;

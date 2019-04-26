@@ -7,13 +7,26 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-#define JUMP_TIME 55
-#define L_PUNCH_TIME 28
-#define L_KIK_TIME 47
-#define HADOKEN_TIME 71
+#define L_STANDING_PUNCH_TIME 28
+#define L_CROUCHING_PUNCH_TIME 30
+#define L_D_JUMPING_PUNCH_TIME 30
+
+#define L_STANDING_KIK_TIME 50
+#define L_CROUCHING_KIK_TIME 30
+#define L_D_JUMPING_KIK_TIME 20
+
+#define HADOKEN_TIME 66
 #define CROUCHING_TIME 10
 #define STANDING_TIME 10
-#define REEL_TIME 30
+#define JUMP_TIME 55
+#define GETTING_UP_TIME 10
+
+#define HEAD_REEL_TIME 30
+#define CROUCH_REEL_TIME 20
+#define GUT_REEL_TIME 25
+
+
+struct Mix_Chunk;
 
 enum ryu_states
 {
@@ -25,8 +38,8 @@ enum ryu_states
 	ST_JUMP_NEUTRAL,
 	ST_JUMP_FORWARD,
 	ST_JUMP_BACKWARD,
-	ST_CROUCH,
 	ST_CROUCHING,
+	ST_CROUCH,
 	ST_STANDING,
 
 	L_PUNCH_STANDING,
@@ -44,8 +57,14 @@ enum ryu_states
 	ST_HEAD_REEL,
 	ST_GUT_REEL,
 	ST_CROUCH_REEL,
+	ST_FALLING,
 
-	ST_HADOKEN
+	ST_GETTING_UP,
+
+	ST_HADOKEN,
+
+	VICTORY,
+	LOOSE
 };
 
 enum ryu_inputs
@@ -66,6 +85,7 @@ enum ryu_inputs
 	IN_HEAD_REEL,
 	IN_GUT_REEL,
 	IN_CROUCH_REEL,
+	IN_FALLING,
 
 	IN_CROUCHING_FINISH,
 	IN_STANDING_FINISH,
@@ -73,7 +93,13 @@ enum ryu_inputs
 	IN_L_PUNCH_FINISH,
 	IN_L_KIK_FINISH,
 	IN_HADOKEN_FINISH,
-	IN_REEL_FINISH
+
+	IN_REEL_FINISH,
+	IN_FALLING_FINISH,
+	IN_GETTING_UP_FINISH,
+
+	IN_VICTORY,
+	IN_LOOSE
 };
 
 struct SDL_Texture;
@@ -109,6 +135,9 @@ public:
 	Animation creel;
 	Animation crouching, standing, crouch;
 
+	Mix_Chunk* hdk_voice = nullptr;
+	Mix_Chunk* hdk_hit = nullptr;
+
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 
@@ -122,13 +151,23 @@ public:
 	int mov; //lp, mp, hp, lk, mk, hk
 	bool flip = false;
 
-	Uint32 jump_timer = 0;
-	Uint32 l_punch_timer = 0;
-	Uint32 l_kik_timer = 0;
+	Uint32 l_standing_punch_timer = 0;
+	Uint32 l_crouching_punch_timer = 0;
+	Uint32 l_d_jumping_punch_timer = 0;
+
+	Uint32 l_standing_kik_timer = 0;
+	Uint32 l_crouching_kik_timer = 0;
+	Uint32 l_d_jumping_kik_timer = 0;
+
 	Uint32 hadoken_timer = 0;
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;
-	Uint32 reel_timer = 0;
+	Uint32 jump_timer = 0;
+	Uint32 getting_up_timer = 0;
+
+	Uint32 head_reel_timer = 0;
+	Uint32 crouch_reel_timer = 0;
+	Uint32 gut_reel_timer = 0;
 };
 
 #endif
