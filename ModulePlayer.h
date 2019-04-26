@@ -25,6 +25,9 @@
 #define CROUCH_REEL_TIME 20
 #define GUT_REEL_TIME 25
 
+
+struct Mix_Chunk;
+
 enum ryu_states
 {
 	ST_UNKNOWN,
@@ -131,6 +134,9 @@ public:
 	Animation stgreel;
 	Animation creel;
 	Animation crouching, standing, crouch;
+
+	Mix_Chunk* hdk_voice = nullptr;
+	Mix_Chunk* hdk_hit = nullptr;
 
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;

@@ -7,6 +7,8 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
+struct Mix_Chunk;
+
 enum ryu_states2
 {
 	ST_UNKNOWN2,
@@ -112,6 +114,8 @@ public:
 	Animation stgreel;
 	Animation creel;
 	Animation crouching, standing, crouch;
+	Mix_Chunk* hdk_voice = nullptr;
+	Mix_Chunk* hdk_hit = nullptr;
 
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;

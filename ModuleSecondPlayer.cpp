@@ -28,6 +28,9 @@ bool ModuleSecondPlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 
+	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
+	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
+	
 	position.x = 250;
 	position.y = 215;
 
@@ -366,7 +369,7 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &hdk;
 			if (App->frames - hadoken_timer == 38)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, App->audio->hdk, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
 			break;
 
@@ -409,13 +412,13 @@ void ModuleSecondPlayer::ClearColliders() {
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
 	{
-		App->audio->PlayChunk(App->audio->hdk_hit);
+		App->audio->PlayChunk(hdk_hit);
 		inputs.Push(IN_HEAD_REEL2);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT)
 	{
-		App->audio->PlayChunk(App->audio->hdk_hit);	//CAMBIAR
+		App->audio->PlayChunk(hdk_hit);	//CAMBIAR
 		inputs.Push(IN_HEAD_REEL2);
 	}
 

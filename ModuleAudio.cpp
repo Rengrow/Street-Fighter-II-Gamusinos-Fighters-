@@ -42,8 +42,7 @@ bool ModuleAudio::Init()
 			ret = false;
 		}
 
-	hdk = LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
-	hdk_hit = LoadChunk("assets/sfx/effects/fist_intro.wav");
+	
 
 	return ret;
 }
