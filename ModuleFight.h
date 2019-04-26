@@ -15,7 +15,7 @@ public:
 
 	bool Init();
 	bool CleanUp();
-	update_status Update();
+	//update_status Update();
 
 public:
 	

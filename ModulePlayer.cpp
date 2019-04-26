@@ -374,6 +374,23 @@ update_status ModulePlayer::Update()
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + 45, position.y - 70, 0, COLLIDER_PLAYER_SHOT, App->audio->hdk, 200);
 			}
 			break;
+
+		case ST_FALLING:
+			LOG("Falling\n");
+			break;
+
+		case ST_GETTING_UP:
+			LOG("Getting up\n");
+			break;
+
+		case LOOSE:
+			LOG("LOSING\n");
+			break;
+
+		case VICTORY:
+			LOG("VICTORY\n");
+			break;
+
 		}
 	}
 	current_state = state;
@@ -545,21 +562,57 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 		}
 	}
 
-	if (l_punch_timer > 0)
+	if (l_standing_punch_timer > 0)
 	{
-		if (App->frames - l_punch_timer > L_PUNCH_TIME)
+		if (App->frames - l_standing_punch_timer > L_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_L_PUNCH_FINISH);
-			l_punch_timer = 0;
+			l_standing_punch_timer = 0;
 		}
 	}
 
-	if (l_kik_timer > 0)
+	if (l_crouching_punch_timer > 0)
 	{
-		if (App->frames - l_kik_timer > L_KIK_TIME)
+		if (App->frames - l_crouching_punch_timer > L_CROUCHING_PUNCH_TIME)
+		{
+			inputs.Push(IN_L_PUNCH_FINISH);
+			l_crouching_punch_timer = 0;
+		}
+	}
+
+	if (l_d_jumping_punch_timer > 0)
+	{
+		if (App->frames - l_d_jumping_punch_timer > L_D_JUMPING_PUNCH_TIME)
+		{
+			inputs.Push(IN_L_PUNCH_FINISH);
+			l_d_jumping_punch_timer = 0;
+		}
+	}
+
+	if (l_standing_kik_timer > 0)
+	{
+		if (App->frames - l_standing_kik_timer > L_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_L_KIK_FINISH);
-			l_kik_timer = 0;
+			l_standing_kik_timer = 0;
+		}
+	}
+
+	if (l_crouching_kik_timer > 0)
+	{
+		if (App->frames - l_crouching_kik_timer > L_CROUCHING_KIK_TIME)
+		{
+			inputs.Push(IN_L_KIK_FINISH);
+			l_crouching_kik_timer = 0;
+		}
+	}
+
+	if (l_d_jumping_kik_timer > 0)
+	{
+		if (App->frames - l_d_jumping_kik_timer > L_D_JUMPING_KIK_TIME)
+		{
+			inputs.Push(IN_L_KIK_FINISH);
+			l_d_jumping_kik_timer = 0;
 		}
 	}
 
@@ -590,12 +643,39 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 		}
 	}
 
-	if (reel_timer > 0)
+	if (head_reel_timer > 0)
 	{
-		if (App->frames - reel_timer > REEL_TIME)
+		if (App->frames - head_reel_timer > HEAD_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH);
-			reel_timer = 0;
+			head_reel_timer = 0;
+		}
+	}
+
+	if (gut_reel_timer > 0)
+	{
+		if (App->frames - gut_reel_timer > GUT_REEL_TIME)
+		{
+			inputs.Push(IN_REEL_FINISH);
+			gut_reel_timer = 0;
+		}
+	}
+
+	if (crouch_reel_timer > 0)
+	{
+		if (App->frames - crouch_reel_timer > CROUCH_REEL_TIME)
+		{
+			inputs.Push(IN_REEL_FINISH);
+			crouch_reel_timer = 0;
+		}
+	}
+
+	if (getting_up_timer > 0)
+	{
+		if (App->frames - getting_up_timer > GETTING_UP_TIME)
+		{
+			inputs.Push(IN_GETTING_UP_FINISH);
+			getting_up_timer = 0;
 		}
 	}
 }
@@ -617,11 +697,14 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_LEFT_DOWN: state = ST_WALK_BACKWARD; break;
 			case IN_JUMP: state = ST_JUMP_NEUTRAL; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = App->frames; break;
-			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = App->frames;  break;
-			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = App->frames;  break;
+			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_standing_punch_timer = App->frames;  break;
+			case IN_L_KIK: state = L_KIK_STANDING; l_standing_kik_timer = App->frames;  break;
 			case IN_HADOKEN: state = ST_HADOKEN; hadoken_timer = App->frames; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -633,11 +716,14 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_RIGHT_UP: state = ST_IDLE; break;
 			case IN_LEFT_AND_RIGHT: state = ST_IDLE; break;
 			case IN_JUMP: state = ST_JUMP_FORWARD; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = App->frames; break;
-			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = App->frames;  break;
-			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = App->frames;  break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
+			case IN_CROUCH_DOWN: state = ST_CROUCH; break;
+			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_standing_punch_timer = App->frames;  break;
+			case IN_L_KIK: state = L_KIK_STANDING; l_standing_kik_timer = App->frames;  break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -649,11 +735,14 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_LEFT_UP: state = ST_IDLE; break;
 			case IN_LEFT_AND_RIGHT: state = ST_IDLE; break;
 			case IN_JUMP: state = ST_JUMP_BACKWARD; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN: state = ST_CROUCHING; crouching_timer = App->frames; break;
-			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_punch_timer = App->frames;  break;
-			case IN_L_KIK: state = L_KIK_STANDING; l_kik_timer = App->frames;  break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
+			case IN_CROUCH_DOWN: state = ST_CROUCH; break;
+			case IN_L_PUNCH: state = L_PUNCH_STANDING; l_standing_punch_timer = App->frames;  break;
+			case IN_L_KIK: state = L_KIK_STANDING; l_standing_kik_timer = App->frames;  break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -663,8 +752,11 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH: state = L_PUNCH_NEUTRAL_JUMP; l_punch_timer = App->frames; break;
-			case IN_L_KIK: state = L_KIK_NEUTRAL_JUMP; l_kik_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_NEUTRAL_JUMP; break;
+			case IN_L_KIK: state = L_KIK_NEUTRAL_JUMP; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -674,8 +766,11 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH: state = L_PUNCH_FORWARD_JUMP; l_punch_timer = App->frames; break;
-			case IN_L_KIK: state = L_KIK_FORWARD_JUMP; l_kik_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_FORWARD_JUMP; l_d_jumping_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_FORWARD_JUMP; l_d_jumping_kik_timer = App->frames; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -685,8 +780,11 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH: state = L_PUNCH_BACKWARD_JUMP; l_punch_timer = App->frames; break;
-			case IN_L_KIK: state = L_KIK_BACKWARD_JUMP; l_kik_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_BACKWARD_JUMP; l_d_jumping_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_BACKWARD_JUMP; l_d_jumping_kik_timer = App->frames; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -696,17 +794,9 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			}
-		}
-		break;
+			case IN_FALLING: state = ST_FALLING; break;
 
-		case ST_HADOKEN:
-		{
-			switch (last_input)
-			{
-			case IN_HADOKEN_FINISH: state = ST_IDLE; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -716,6 +806,22 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
+			}
+		}
+		break;
+
+		case ST_HADOKEN:
+		{
+			switch (last_input)
+			{
+			case IN_HADOKEN_FINISH: state = ST_IDLE; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -726,6 +832,9 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
 			case IN_L_PUNCH_FINISH: state = ST_JUMP_FORWARD; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -736,6 +845,9 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
 			case IN_L_KIK_FINISH: state = ST_JUMP_FORWARD; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -746,6 +858,9 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
 			case IN_L_PUNCH_FINISH: state = ST_JUMP_BACKWARD; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -756,6 +871,9 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
 			case IN_L_KIK_FINISH: state = ST_JUMP_BACKWARD; break;
+			case IN_FALLING: state = ST_FALLING; break;
+
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -765,8 +883,10 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_IDLE; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -776,8 +896,10 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_KIK_FINISH: state = ST_IDLE; break;
-			case IN_HEAD_REEL: state = ST_HEAD_REEL; reel_timer = App->frames; break;
-			case IN_GUT_REEL: state = ST_GUT_REEL; reel_timer = App->frames; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -787,7 +909,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCHING_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -797,7 +920,8 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH: state = ST_IDLE; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -807,9 +931,11 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCH_UP: state = ST_STANDING; standing_timer = App->frames; break;
-			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_punch_timer = App->frames; break;
-			case IN_L_KIK: state = L_KIK_CROUCH; l_kik_timer = App->frames; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
+			case IN_L_PUNCH: state = L_PUNCH_CROUCH; l_crouching_punch_timer = App->frames; break;
+			case IN_L_KIK: state = L_KIK_CROUCH; l_crouching_kik_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
+			case IN_VICTORY: state = VICTORY; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -819,8 +945,9 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_L_PUNCH_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
+			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING;  standing_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -831,17 +958,20 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_L_KIK_FINISH: state = ST_CROUCH; break;
 			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
-			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; reel_timer = App->frames; break;
+			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
-
 
 		case ST_HEAD_REEL:
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH: state = ST_IDLE; break;
+			case IN_REEL_FINISH:state = ST_IDLE; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -850,7 +980,10 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH: state = ST_IDLE; break;
+			case IN_REEL_FINISH:state = ST_IDLE; break;
+			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;
@@ -859,12 +992,32 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH: state = ST_CROUCH; break;
+			case IN_REEL_FINISH:state = ST_CROUCH; break;
+			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
+			case IN_HEAD_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
+			}
+		}
+		break;
+
+		case ST_FALLING:
+		{
+			switch (last_input)
+			{
+			case IN_FALLING_FINISH:state = ST_GETTING_UP; break;
+			}
+		}
+		break;
+
+		case ST_GETTING_UP:
+		{
+			switch (last_input)
+			{
+			case IN_GETTING_UP_FINISH:state = ST_IDLE; break;
 			}
 		}
 		break;
 		}
-
 	}
 
 	return state;
