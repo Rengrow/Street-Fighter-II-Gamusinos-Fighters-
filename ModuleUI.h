@@ -21,6 +21,7 @@ public:
 
 public:
 	int numbers;
+	int typography1;
 	Uint32 timeOut;
 	SDL_Texture* lifeBars = nullptr;
 	SDL_Rect lifeBarP1;
