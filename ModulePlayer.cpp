@@ -422,15 +422,15 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
 
-	if (!godmode)
-		for (int i = 0; i < hitboxesQnt; i++)
-		{
-			r = frame.hitBoxeRects[i];
+	for (int i = 0; i < hitboxesQnt; i++)
+	{
+		r = frame.hitBoxeRects[i];
+		if (!godmode || frame.types[i] != COLLIDER_PLAYER)
 			if (flip)
 				colliders[i] = App->collisions->AddCollider({ position.x - (r.w - frame.pivotPosition.x) + r.x, position.y - r.h + frame.pivotPosition.y + jumpHeight - r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
 			else
 				colliders[i] = App->collisions->AddCollider({ position.x - frame.pivotPosition.x - r.x, position.y - r.h + frame.pivotPosition.y + jumpHeight - r.y ,r.w, r.h }, frame.types[i], frame.callbacks[i]);
-		}
+	}
 
 	r = frame.frame;
 
