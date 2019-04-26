@@ -34,6 +34,7 @@ public:
 	Uint32 timeOutTimer;
 	Uint32 countdownStartFight;
 	Uint32 endFightTimer;
+	int stopedTimer;
 	SDL_Texture* lifeBars = nullptr;
 	SDL_Rect lifeBarP1;
 	SDL_Rect lifeBarP2;
@@ -42,11 +43,12 @@ public:
 	int timerx = 170;
 	char tiempo[2];
 	bool redKoEnabled;
+	bool endFightStarted;
+	bool stopedFight;
 
 private:
 	bool timerStarted;
-	bool starFight;
-	bool endFightStarted;
+	bool starFight;	
 	int winnerPlayer = 0;
 };
 
