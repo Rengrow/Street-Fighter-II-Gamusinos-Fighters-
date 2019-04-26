@@ -28,27 +28,27 @@ Version 0.2:
 
 Version 0.3:
 
-2nd player added!
+-2nd player added!
 
-Hadoken added!
+-Hadoken added!
 
 Version 0.4:
 
-God Mode added!
+-God Mode added!
 
-Stage limits added!
+-Stage limits added!
 
-Collisions added!
+-Collisions added!
 
 Version 0.4.1:
 
-State machine added!
+-State machine added!
 
-Timer and health bars added!
+-Timer and health bars added!
 
-Camera added!
+-Camera added!
 
-Instant win added!
+-Instant win added!
 
 ## Contributing
 
