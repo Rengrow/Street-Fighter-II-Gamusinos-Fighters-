@@ -18,15 +18,36 @@ To play in God Mode (to be invulnerable to any attack), press F5.
 
 Up to version 0.5:
 
--Basic elements such as backgrounds, player textures, audio and sound effects, inputs and particles (hadoken) added!
+Version 0.2:
+
+-Basic elements such as backgrounds, player textures, audio and sound effects and inputs added!
+
 -Fade between stages added!
--God Mode added!
+
 -Animations added!
+
+Version 0.3:
+
+-2nd player added!
+
+-Hadoken added!
+
+Version 0.4:
+
+-God Mode added!
+
 -Stage limits added!
--State machine added!
--Timer and health bars added!
--Camera added!
+
 -Collisions added!
+
+Version 0.4.1:
+
+-State machine added!
+
+-Timer and health bars added!
+
+-Camera added!
+
 -Instant win added!
 
 ## Contributing
@@ -42,9 +63,9 @@ The project can be found at: https://github.com/Rengrow/Street-Fighter-II-Gamusi
 ## Credits
 
 Credits go to the team members:
-JosÈ LuÌs Redondo Tello
-Adri· Serrano LÛpez
-Rafa LÛpez MartÌnez
+Jos√© Lu√≠s Redondo Tello
+Adri√° Serrano L√≥pez
+Rafa L√≥pez Mart√≠nez
 Ferran-Roger Basart i Bosch
 
 ## License
