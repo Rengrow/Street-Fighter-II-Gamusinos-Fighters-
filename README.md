@@ -20,11 +20,11 @@ Up to version 0.5:
 
 Version 0.2:
 
-Basic elements such as backgrounds, player textures, audio and sound effects and inputs added!
+-Basic elements such as backgrounds, player textures, audio and sound effects and inputs added!
 
-Fade between stages added!
+-Fade between stages added!
 
-Animations added!
+-Animations added!
 
 Version 0.3:
 
