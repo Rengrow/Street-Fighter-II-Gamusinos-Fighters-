@@ -1,5 +1,4 @@
 Instant win/lose condition
-Fix timer and add the proper number graphics
 Add life substracting function and blit
 Add stun
 Add falling to the ground when multiple hits recieved or low hit
