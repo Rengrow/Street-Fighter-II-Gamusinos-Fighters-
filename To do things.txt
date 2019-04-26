@@ -1,15 +1,12 @@
-Pivots
-Collision boxes
-UI implementation
-Instant win/lose
-The palmtree's width varies in the spritesheet, when it shoudn't
-Quitar una de las carpets assets
-Reset the camera every time module welcome page or endbattle is shown
-Add Hadoken impacting sprite
-Arreglar animación forward, backwards, salto
+Instant win/lose condition
+Fix timer and add the proper number graphics
+Add life substracting function and blit
+Add stun
+Add falling to the ground when multiple hits recieved or low hit
 Reset camera when entering a new stage or phase
-Make the camera move when characters are moving in one direction
-Disable input module until combat starts
+
+Reset position player
+Disable input module until combat starts (3, 2, 1, go)
 Make the player turn around when he and the enemy switch sides
 If stage change happens when character is jumping, it won't appear on the proper x tile
 When time comes to the last seconds, it starts blinking with white shadows. Implement it (maybe?)
