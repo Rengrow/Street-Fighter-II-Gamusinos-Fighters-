@@ -43,6 +43,8 @@ update_status ModuleFight::Update()
 		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life == App->player2->life))))
 			Win(1);
 
+	CheckFlipPlayers();
+
 	if (endFightStarted) {
 		if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
 			if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 1) {
@@ -107,5 +109,18 @@ void ModuleFight::Win(int player) {
 	endFightStarted = stopedFight = true;
 
 	App->UI->StartEndFight(player);
+}
+
+void ModuleFight::CheckFlipPlayers() {
+
+	if ((!App->player->flip && App->player2->flip) && App->player->position.x > App->player2->position.x) {
+		App->player->flip = !App->player->flip;
+		App->player2->flip = !App->player2->flip;
+	}
+
+	if ((App->player->flip && !App->player2->flip) && App->player->position.x < App->player2->position.x) {
+		App->player->flip = !App->player->flip;
+		App->player2->flip = !App->player2->flip;
+	}
 }
 
