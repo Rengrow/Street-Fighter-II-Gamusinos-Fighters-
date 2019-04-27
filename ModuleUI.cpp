@@ -26,14 +26,14 @@ ModuleUI::ModuleUI()
 	lifeBarP2.w = 150;
 	lifeBarP2.h = 15;
 
-	KO.x = 337;
-	KO.y = 0;
-	KO.w = 29;
-	KO.h = 24;
+	KO.x = 34;
+	KO.y = 37;
+	KO.w = 26;
+	KO.h = 22;
 
-	redKO.x = 304;
-	redKO.y = 0;
-	redKO.w = 29;
+	redKO.x = 1;
+	redKO.y = 36;
+	redKO.w = 27;
 	redKO.h = 24;
 
 	iconRoundWinned.x = 65;
@@ -183,7 +183,7 @@ void ModuleUI::LifeBarsBlit() {
 }
 
 void ModuleUI::KoBlit() {
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 23, 15, (redKoEnabled ? &redKO : &KO), false);
+	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 15, (redKoEnabled ? &redKO : &KO), false);
 }
 
 void ModuleUI::RoundsWinnedBlit() {
