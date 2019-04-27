@@ -721,7 +721,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 	{
-		life -= 20;
+		life -= 12;
 		App->audio->PlayChunk(hdk_hit);
 		inputs.Push(IN_HEAD_REEL);
 	}
