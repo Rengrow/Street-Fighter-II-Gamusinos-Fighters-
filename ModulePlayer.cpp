@@ -683,6 +683,7 @@ update_status ModulePlayer::Update()
 
 		case VICTORY:
 			current_animation = &win1;
+			texture = graphics2;
 			break;
 
 		}

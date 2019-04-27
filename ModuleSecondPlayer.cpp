@@ -451,6 +451,7 @@ update_status ModuleSecondPlayer::Update()
 {
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle;
+	SDL_Texture *texture = graphics;
 
 	if (!freeze)
 		external_input(inputs);
@@ -583,6 +584,7 @@ update_status ModuleSecondPlayer::Update()
 
 		case VICTORY2:
 			current_animation = &win1;
+			texture = graphics2;
 			break;
 		}
 	}
@@ -590,7 +592,7 @@ update_status ModuleSecondPlayer::Update()
 
 	// Draw everything --------------------------------------	
 
-	BlitCharacterAndAddColliders(current_animation);
+	BlitCharacterAndAddColliders(current_animation, texture);
 
 	return UPDATE_CONTINUE;
 }
@@ -639,7 +641,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 }
 
-void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
+void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
@@ -656,9 +658,9 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	r = frame.frame;
 
 	if (flip)
-		App->render->Blit(graphics, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 	else
-		App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+		App->render->Blit(texture, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 
 bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)

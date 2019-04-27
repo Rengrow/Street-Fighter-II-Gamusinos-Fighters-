@@ -99,7 +99,7 @@ public:
 	bool external_input(p2Qeue<ryu_inputs2>& inputs);
 	ryu_states2 process_fsm(p2Qeue<ryu_inputs2>& inputs);
 	void OnCollision(Collider* c1, Collider* c2);
-	void BlitCharacterAndAddColliders(Animation* current_animation);
+	void BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture);
 	void ClearColliders();
 
 public:
