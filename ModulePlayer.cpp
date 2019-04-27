@@ -395,10 +395,11 @@ bool ModulePlayer::Start()
 	SDL_Rect winHitbox1[winnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	COLLIDER_TYPE winColliderType[winnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* winCallback[winnColliders] = { {this}, {this}, {this} };
-	
+
 	win1.PushBack({ 155, 110, 60, 113 }, 5, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	win1.PushBack({ 216, 110, 59, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	win1.PushBack({ 277, 110, 56, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.loop = false;
 
 	// Win2
 
@@ -411,6 +412,10 @@ bool ModulePlayer::Start()
 	win2.PushBack({ 389, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 444, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 499, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.loop = false;
+
+
+	state = ST_IDLE;
 
 	return ret;
 }
@@ -428,7 +433,7 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	ClearColliders();
-	
+
 	airreel = Animation();
 	win1 = Animation();
 	win2 = Animation();
@@ -682,8 +687,10 @@ update_status ModulePlayer::Update()
 			break;
 
 		case VICTORY:
-			current_animation = &win1;
-			texture = graphics2;
+			if (App->frames % 2 == 0)
+				current_animation = &win1;
+			else
+				texture = graphics2;
 			break;
 
 		}

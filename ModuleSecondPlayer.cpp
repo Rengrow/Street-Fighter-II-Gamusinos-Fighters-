@@ -409,6 +409,8 @@ bool ModuleSecondPlayer::Start()
 	win2.PushBack({ 444, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 499, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 
+	state = ST_IDLE2;
+
 	return ret;
 }
 
@@ -679,7 +681,10 @@ update_status ModuleSecondPlayer::Update()
 			break;
 
 		case VICTORY2:
-			current_animation = &win1;
+			if (App->frames % 2 == 0)
+				current_animation = &win1;
+			else
+				texture = graphics2;
 			texture = graphics2;
 			break;
 		}
