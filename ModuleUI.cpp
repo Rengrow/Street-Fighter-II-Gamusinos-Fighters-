@@ -308,8 +308,8 @@ void ModuleUI::EndFight() {
 
 		if (timeRemaining > 0)
 			if (winnerPlayer == 1)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2, typography1, "player 1 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 1 win");
 			else if (winnerPlayer == 2)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2, typography1, "player 2 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 2 win");
 	}
 }
