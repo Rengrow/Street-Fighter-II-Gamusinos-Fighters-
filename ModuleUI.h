@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "Globals.h"
 
+#define LIFE_BAR_LENGHT 150
+
 struct SDL_Texture;
 
 class ModuleUI : public Module

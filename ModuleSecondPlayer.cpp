@@ -34,7 +34,7 @@ bool ModuleSecondPlayer::Start()
 	position.x = 250;
 	position.y = 215;
 
-	life = 1;
+	life = 100;
 	freeze = true;
 
 	Animation* current_animation;
@@ -230,7 +230,6 @@ bool ModuleSecondPlayer::Start()
 	Module*clkCallback[clknColliders] = { {this}, {this}, {this} };
 	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->player} };
 
-	//	DANGER: RYU DOES DOUBLE KICK FOR SOME REASEON, DESPITE ONLY DOING INPUT ONCE. CHECK STATE MATRIX?
 
 	clk.PushBack({ 617, 322, 71, 65 }, 5, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 688, 322, 113, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
@@ -410,6 +409,7 @@ void ModuleSecondPlayer::ClearColliders() {
 }
 
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
+
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
 	{
 		life -= 20;
@@ -423,7 +423,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 		inputs.Push(IN_HEAD_REEL2);
 	}
 
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER2)
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
 	{
 		if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
 			position.x = (App->player->position.x + 63);
