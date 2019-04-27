@@ -494,7 +494,7 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -514,7 +514,7 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -538,7 +538,7 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -581,7 +581,7 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -598,11 +598,11 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 1;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -621,11 +621,11 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 1;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -652,11 +652,11 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 1;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -673,11 +673,11 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 1;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -696,11 +696,11 @@ update_status ModulePlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 1;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 1;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
