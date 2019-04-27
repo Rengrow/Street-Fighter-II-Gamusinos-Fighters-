@@ -152,7 +152,7 @@ public:
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 
-
+	int victoryExecuted;
 	bool freeze;
 	bool godmode = false;
 	int framesAtaque = 0;

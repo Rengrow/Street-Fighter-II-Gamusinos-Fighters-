@@ -37,6 +37,7 @@ bool ModuleSecondPlayer::Start()
 
 	life = 100;
 	freeze = true;
+	victoryExecuted = 0;
 
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
@@ -433,7 +434,7 @@ bool ModuleSecondPlayer::CleanUp()
 	streel = Animation(); //standing reel
 	stgreel = Animation(); //standing gut reel
 	creel = Animation(); //crouching reel
-	crouching, standing, crouch = Animation();
+	crouching = standing = crouch = Animation();
 	return true;
 }
 
@@ -504,7 +505,7 @@ update_status ModuleSecondPlayer::Update()
 			{
 				jumpHeight -= speed + 1;
 			}
-			
+
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
 			LOG("JUMPING FORWARD ^^>>\n");
@@ -520,7 +521,7 @@ update_status ModuleSecondPlayer::Update()
 			{
 				jumpHeight -= speed + 1;
 			}
-			
+
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
 			LOG("JUMPING BACKWARD ^^<<\n");
@@ -578,7 +579,7 @@ update_status ModuleSecondPlayer::Update()
 
 		case L_PUNCH_BACKWARD_JUMP2:
 			current_animation = &jblp;
-			
+
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
@@ -590,7 +591,7 @@ update_status ModuleSecondPlayer::Update()
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			
+
 			break;
 
 		case L_KIK_CROUCH2:
@@ -611,7 +612,7 @@ update_status ModuleSecondPlayer::Update()
 			{
 				jumpHeight -= speed + 1;
 			}
-			
+
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
@@ -627,7 +628,7 @@ update_status ModuleSecondPlayer::Update()
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-			
+
 			break;
 
 		case L_KIK_BACKWARD_JUMP2:
@@ -681,13 +682,15 @@ update_status ModuleSecondPlayer::Update()
 			break;
 
 		case VICTORY2:
-			if (App->frames % 2 == 0) {
+			if (victoryExecuted == 1 || (victoryExecuted == 0 && App->frames % 2 == 0)) {
 				texture = graphics2;
 				current_animation = &win1;
+				victoryExecuted = 1;
 			}
 			else {
 				texture = graphics2;
 				current_animation = &win2;
+				victoryExecuted = 2;
 			}
 			break;
 		}

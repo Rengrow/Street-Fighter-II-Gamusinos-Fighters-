@@ -36,6 +36,7 @@ bool ModulePlayer::Start()
 
 	life = 100;
 	freeze = true;
+	victoryExecuted = 0;
 
 	Animation* current_animation;
 
@@ -356,9 +357,6 @@ bool ModulePlayer::Start()
 	clk.PushBack({ 617, 322, 71, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
-
-
-
 	// Win1
 
 	const int winnColliders = 3;
@@ -444,7 +442,7 @@ bool ModulePlayer::CleanUp()
 	streel = Animation(); //standing reel
 	stgreel = Animation(); //standing gut reel
 	creel = Animation(); //crouching reel
-	crouching, standing, crouch = Animation();
+	crouching = standing = crouch = Animation();
 
 	return true;
 }
@@ -685,13 +683,15 @@ update_status ModulePlayer::Update()
 			break;
 
 		case VICTORY:
-			if (App->frames % 2 == 0) {
+			if (victoryExecuted == 1 || (victoryExecuted == 0 && App->frames % 2 == 0)) {
 				texture = graphics2;
 				current_animation = &win1;
+				victoryExecuted = 1;
 			}
 			else {
 				texture = graphics2;
 				current_animation = &win2;
+				victoryExecuted = 2;
 			}
 			break;
 
