@@ -426,16 +426,15 @@ bool ModuleSecondPlayer::CleanUp()
 	stgreel = Animation(); //standing gut reel
 	creel = Animation(); //crouching reel
 	crouching = standing = crouch = Animation();
+	airreel = Animation();
+	win1 = Animation();
+	win2 = Animation();
+	getup = Animation();
 	return true;
 }
 
 update_status ModuleSecondPlayer::PreUpdate() {
 	ClearColliders();
-
-	airreel = Animation();
-	win1 = Animation();
-	win2 = Animation();
-	getup = Animation();
 
 	return UPDATE_CONTINUE;
 }
@@ -662,7 +661,6 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_GETTING_UP2:
 			current_animation = &getup;
-
 			break;
 
 		case LOOSE2:
@@ -1321,7 +1319,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_FALLING_FINISH2:state = ST_GETTING_UP2; break;
+			case IN_FALLING_FINISH2:state = ST_GETTING_UP2; getting_up_timer = App->frames; break;
 			}
 		}
 		break;
