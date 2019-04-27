@@ -62,7 +62,7 @@ public:
 		return loops > 0;
 	}
 
-	void Reset()
+	void ResetAnimation()
 	{
 		current_frame = 0;
 	}

@@ -9,6 +9,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
+#include "ModuleParticles.h"
 #include "ModuleUI.h"
 
 
@@ -114,6 +115,7 @@ bool ModuleSceneKen::Start()
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/usa_k_1.ogg");
 
+
 	App->audio->PlaySongDelay(music, -1, 2000);
 
 	App->render->limit1Box.x = 0;
@@ -128,8 +130,15 @@ bool ModuleSceneKen::Start()
 
 	App->render->scenelimit = 620;
 
-
 	App->render->camera.x = App->render->camera.y = 0;
+
+	App->player->Enable();
+	App->player2->Enable();
+	App->particles->Enable();
+	App->collisions->Enable();
+	App->UI->Enable();
+
+	App->UI->StartFight();
 
 	return true;
 }
@@ -139,6 +148,11 @@ bool ModuleSceneKen::CleanUp()
 {
 	LOG("Unloading ken scene");
 
+	App->player->Disable();
+	App->player2->Disable();
+	App->particles->Disable();
+	App->collisions->Disable();
+	App->UI->Disable();
 	App->textures->Unload(graphics);
 	graphics = nullptr;
 	App->audio->UnloadSong(music);

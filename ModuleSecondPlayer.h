@@ -92,6 +92,7 @@ public:
 	~ModuleSecondPlayer();
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 	void internal_input(p2Qeue<ryu_inputs2>& inputs);
@@ -109,11 +110,14 @@ public:
 	Animation forward;
 	Animation backward;
 	Animation lp, lk, clp, clk;
+	Animation jlp, jlk, jflp, jflk, jblp, jblk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	Animation neutralJump;
-	Animation hdk;
-	Animation streel;
-	Animation stgreel;
-	Animation creel;
+	Animation forwardJump;
+	Animation backwardJump;
+	Animation hdk; //hadouken
+	Animation streel; //standing reel
+	Animation stgreel; //standing gut reel
+	Animation creel; //crouching reel
 	Animation crouching, standing, crouch;
 	Animation win1, win2, airreel, getup;
 	// Animation sweep;
