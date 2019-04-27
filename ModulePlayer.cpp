@@ -391,6 +391,20 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(graphics);
 	ClearColliders();
 
+	 idle = Animation();
+	 forward = Animation();
+	 backward = Animation();
+	 lp, lk, clp, clk = Animation();
+	 jlp, jlk, jflp, jflk, jblp, jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	 neutralJump = Animation();
+	 forwardJump = Animation();
+	 backwardJump = Animation();
+	 hdk = Animation(); //hadouken
+	 streel = Animation(); //standing reel
+	 stgreel = Animation(); //standing gut reel
+	 creel = Animation(); //crouching reel
+	 crouching, standing, crouch = Animation();
+
 	return true;
 }
 
