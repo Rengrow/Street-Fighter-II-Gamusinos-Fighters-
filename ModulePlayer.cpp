@@ -401,6 +401,7 @@ update_status ModulePlayer::Update()
 {
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
+	SDL_Texture* texture = graphics;
 
 	if (!freeze)
 		external_input(inputs);
@@ -635,7 +636,7 @@ update_status ModulePlayer::Update()
 			godmode = false;
 	}
 
-	BlitCharacterAndAddColliders(current_animation);
+	BlitCharacterAndAddColliders(current_animation, texture);
 
 	return UPDATE_CONTINUE;
 }
@@ -667,7 +668,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 }
 
-void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
+void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture* texture) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
@@ -685,9 +686,9 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	r = frame.frame;
 
 	if (flip)
-		App->render->Blit(graphics, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 	else
-		App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+		App->render->Blit(texture, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 
 bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
