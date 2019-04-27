@@ -104,6 +104,7 @@ public:
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	Animation idle;
 	Animation forward;
 	Animation backward;
@@ -114,6 +115,8 @@ public:
 	Animation stgreel;
 	Animation creel;
 	Animation crouching, standing, crouch;
+	Animation win1, win2, airreel, getup;
+	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
 
