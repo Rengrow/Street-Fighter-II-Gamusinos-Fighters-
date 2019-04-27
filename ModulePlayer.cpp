@@ -26,7 +26,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
-
+	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png"); // arcade version
 
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
@@ -211,7 +211,7 @@ bool ModulePlayer::Start()
 
 	jlk.PushBack({ 252, 528, 49, 88 }, 3, { 29,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 	jlk.PushBack({ 948, 525, 75, 90 }, 100, { 29,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
-	
+
 
 	// Jumping backward lk
 	const int jblknColliders = 3;
@@ -356,6 +356,23 @@ bool ModulePlayer::Start()
 	clk.PushBack({ 617, 322, 71, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
+
+	
+
+	// Win1
+
+	const int winnColliders = 3;
+	SDL_Rect winHitbox1[winnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE winColliderType[winnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* winCallback[winnColliders] = { {this}, {this}, {this} };
+
+	win1.PushBack({ 155, 110, 60, 113 }, 5, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.PushBack({ 216, 110, 59, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.PushBack({ 277, 110, 56, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.loop = false;
+
+	// Win2
+
 	
 	//Falling
 	const int airreelnColliders = 3;
@@ -379,6 +396,20 @@ bool ModulePlayer::Start()
 	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 
 
+	const int win2nColliders = 3;
+	SDL_Rect win2Hitbox1[win2nColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE win2ColliderType[win2nColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* win2Callback[win2nColliders] = { {this}, {this}, {this} };
+
+	win2.PushBack({ 335, 127, 52, 96 }, 5, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.PushBack({ 389, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.PushBack({ 444, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.PushBack({ 499, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.loop = false;
+
+
+	state = ST_IDLE;
+
 	return ret;
 }
 
@@ -391,25 +422,29 @@ bool ModulePlayer::CleanUp()
 	hdk_voice = nullptr;
 	App->audio->UnloadChunk(hdk_hit);
 	hdk_hit = nullptr;
-	
+
 	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
 	ClearColliders();
 
-	 idle = Animation();
-	 forward = Animation();
-	 backward = Animation();
-	 lp, lk, clp, clk = Animation();
-	 jlp, jlk, jflp, jflk, jblp, jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
-	 neutralJump = Animation();
-	 forwardJump = Animation();
-	 backwardJump = Animation();
-	 hdk = Animation(); //hadouken
-	 streel = Animation(); //standing reel
-	 stgreel = Animation(); //standing gut reel
-	 creel = Animation(); //crouching reel
-	 crouching, standing, crouch = Animation();
-	 airreel = Animation();
-	 getup = Animation();
+	airreel = Animation();
+	win1 = Animation();
+	win2 = Animation();
+	getup = Animation();
+
+	idle = Animation();
+	forward = Animation();
+	backward = Animation();
+	lp = lk = clp = clk = Animation();
+	jlp = jlk = jflp = jflk = jblp = jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	neutralJump = Animation();
+	forwardJump = Animation();
+	backwardJump = Animation();
+	hdk = Animation(); //hadouken
+	streel = Animation(); //standing reel
+	stgreel = Animation(); //standing gut reel
+	creel = Animation(); //crouching reel
+	crouching, standing, crouch = Animation();
 
 	return true;
 }
@@ -425,6 +460,7 @@ update_status ModulePlayer::Update()
 {
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
+	SDL_Texture* texture = graphics;
 
 	if (!freeze)
 		external_input(inputs);
@@ -454,7 +490,7 @@ update_status ModulePlayer::Update()
 
 		case ST_JUMP_NEUTRAL:
 			current_animation = &neutralJump;
-			if (App->frames - jump_timer >  27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
@@ -632,12 +668,7 @@ update_status ModulePlayer::Update()
 			break;
 
 		case ST_FALLING:
-			jumpHeight += speed + 1;
-			current_animation = &airreel;
-			if (jumpHeight == 0)
-			{
-				inputs.Push(IN_FALLING_FINISH);
-			}
+			LOG("Falling\n");
 			break;
 
 		case ST_GETTING_UP:
@@ -645,11 +676,14 @@ update_status ModulePlayer::Update()
 			break;
 
 		case LOOSE:
-			LOG("LOSING\n");
+			current_animation = &airreel;
 			break;
 
 		case VICTORY:
-			LOG("VICTORY\n");
+			if (App->frames % 2 == 0)
+				current_animation = &win1;
+			else
+				texture = graphics2;
 			break;
 
 		}
@@ -664,7 +698,7 @@ update_status ModulePlayer::Update()
 			godmode = false;
 	}
 
-	BlitCharacterAndAddColliders(current_animation);
+	BlitCharacterAndAddColliders(current_animation, texture);
 
 	return UPDATE_CONTINUE;
 }
@@ -716,7 +750,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 }
 
-void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
+void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture* texture) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
@@ -734,9 +768,9 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation) {
 	r = frame.frame;
 
 	if (flip)
-		App->render->Blit(graphics, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 	else
-		App->render->Blit(graphics, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+		App->render->Blit(texture, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 
 bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)

@@ -40,6 +40,8 @@ update_status ModuleFight::Update()
 			Win(1);
 		else if ((!endFightStarted && (App->player->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 			Win(2);
+		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life == App->player2->life))))
+			Win(1);
 
 	if (endFightStarted) {
 		if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
@@ -89,11 +91,13 @@ void ModuleFight::Win(int player) {
 
 	if (player == 1) {
 		player1RoundWinned++;
-		//player -> win
+		App->player->inputs.Push(IN_VICTORY);
+		App->player2->inputs.Push(IN_LOOSE2);
 	}
 	else if (player == 2) {
 		player2RoundWinned++;
-		//player2 -> win
+		App->player->inputs.Push(IN_LOOSE);
+		App->player2->inputs.Push(IN_VICTORY2);
 	}
 
 	round++;

@@ -92,18 +92,20 @@ public:
 	~ModuleSecondPlayer();
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 	void internal_input(p2Qeue<ryu_inputs2>& inputs);
 	bool external_input(p2Qeue<ryu_inputs2>& inputs);
 	ryu_states2 process_fsm(p2Qeue<ryu_inputs2>& inputs);
 	void OnCollision(Collider* c1, Collider* c2);
-	void BlitCharacterAndAddColliders(Animation* current_animation);
+	void BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture);
 	void ClearColliders();
 
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	Animation idle;
 	Animation forward;
 	Animation backward;
@@ -118,6 +120,8 @@ public:
 	Animation creel; //crouching reel
 	Animation falling;
 	Animation crouching, standing, crouch;
+	Animation win1, win2, airreel, getup;
+	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
 

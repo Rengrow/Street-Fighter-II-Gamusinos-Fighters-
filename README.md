@@ -1,4 +1,4 @@
-# Street-Fighter-II -Gamusinos-Fighters-
+﻿# Street-Fighter-II -Gamusinos-Fighters-
 
 A semi-replica of the original Street Fighter II, a one-vs-one 2D fighting game playable throudh keyboard
 
@@ -13,6 +13,8 @@ Player 2 Controls: movement F (jump), C (backwards), V (crouch), B (forwards), 1
 In order to play, open the .exe and press space to navigate through each menu. The only playable ones are the ones
 with the port stage and the buda stage. In order to exit, press ESC.
 To play in God Mode (to be invulnerable to any attack), press F5.
+To get an instant win you have to press F10 while the timer is decreasing.
+To get an instant lose you have to press F11 while the timier is decreasing.
 
 ## History
 
