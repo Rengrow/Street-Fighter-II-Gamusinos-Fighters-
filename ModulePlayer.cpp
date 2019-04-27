@@ -357,7 +357,7 @@ bool ModulePlayer::Start()
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 
-	
+
 
 	// Win1
 
@@ -373,7 +373,7 @@ bool ModulePlayer::Start()
 
 	// Win2
 
-	
+
 	//Falling
 	const int airreelnColliders = 3;
 	SDL_Rect airreelHitbox1[airreelnColliders] = { { -11, 57, 24, 10}, { 0, 11, 73, 47}, { -31, -32, 40, 45} };
@@ -670,7 +670,7 @@ update_status ModulePlayer::Update()
 		case ST_FALLING:
 			current_animation = &airreel;
 			jumpHeight += speed;
-			if (jumpHeight==0)
+			if (jumpHeight == 0)
 			{
 				inputs.Push(IN_FALLING_FINISH);
 			}
@@ -685,10 +685,14 @@ update_status ModulePlayer::Update()
 			break;
 
 		case VICTORY:
-			if (App->frames % 2 == 0)
-				current_animation = &win1;
-			else
+			if (App->frames % 2 == 0) {
 				texture = graphics2;
+				current_animation = &win1;
+			}
+			else {
+				texture = graphics2;
+				current_animation = &win2;
+			}
 			break;
 
 		}
@@ -729,14 +733,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL || state != ST_JUMP_FORWARD || state != ST_JUMP_BACKWARD || state != L_PUNCH_NEUTRAL_JUMP || state != L_PUNCH_FORWARD_JUMP || state != L_PUNCH_BACKWARD_JUMP || state != L_KIK_NEUTRAL_JUMP || state != L_KIK_FORWARD_JUMP || state != L_KIK_BACKWARD_JUMP))
 	{
-		
+
 		inputs.Push(IN_HEAD_REEL);
 	}
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
 	{
 		life -= 20;
-		
+
 		inputs.Push(IN_FALLING);
 	}
 
