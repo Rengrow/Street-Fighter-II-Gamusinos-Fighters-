@@ -172,9 +172,6 @@ void ModuleUI::TimerBlit(int font_id) {
 }
 
 void ModuleUI::LifeBarsBlit() {
-
-	
-
 	lifeBarP1.w = App->player->life*1.5;
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarP1, true);
 
@@ -204,7 +201,7 @@ void ModuleUI::RoundsWinnedBlit() {
 }
 
 void ModuleUI::StartTimer() {
-	App->fight->timeOutTimer = SDL_GetTicks() + 99000;
+	App->fight->timeOutTimer = SDL_GetTicks() + 99000; //99 Secs
 	timerStarted = true;
 }
 
@@ -282,7 +279,6 @@ void ModuleUI::StartEndFight(int player) {
 void ModuleUI::EndFight() {
 	if (App->fight->endFightStarted) {
 		int timeRemaining = (App->fight->endFightTimer - SDL_GetTicks()) / 1000;
-
 
 		if (timeRemaining == 3 && !youFinalSound) {
 			App->audio->PlayChunk(you_snd);

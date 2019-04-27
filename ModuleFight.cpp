@@ -40,6 +40,8 @@ update_status ModuleFight::Update()
 			Win(1);
 		else if ((!endFightStarted && (App->player->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
 			Win(2);
+		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life == App->player2->life))))
+			Win(1);
 
 	if (endFightStarted) {
 		if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
