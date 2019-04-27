@@ -20,6 +20,7 @@ public:
 	void StartNewRound();
 	void EndFullFight();
 	int GetTimer();
+	void CheckFlipPlayers();
 	int round;
 
 public:

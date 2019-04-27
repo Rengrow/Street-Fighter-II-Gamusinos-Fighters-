@@ -37,6 +37,7 @@ bool ModuleSecondPlayer::Start()
 
 	life = 100;
 	freeze = true;
+	victoryExecuted = 0;
 
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
@@ -354,37 +355,6 @@ bool ModuleSecondPlayer::Start()
 	clk.PushBack({ 617, 322, 71, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
-	// Aerial reel
-
-	const int airreelnColliders = 3;
-	SDL_Rect airreelHitbox1[airreelnColliders] = { { -11, 57, 24, 10}, { 0, 11, 73, 47}, { -31, -32, 40, 45} };
-	SDL_Rect airreelHitbox2[airreelnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, -0, 105, 40} };
-	SDL_Rect airreelHitbox3[airreelnColliders] = { { -12, 84, 24, 16}, { 0, 40, 55, 47}, { 0, 0, 40, 40} };
-	COLLIDER_TYPE airreelColliderType[airreelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	Module* airreelCallback[airreelnColliders] = { {this}, {this}, {this} };
-
-	airreel.PushBack({ 815, 883, 73, 65 }, 5, { 29,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
-	airreel.PushBack({ 815, 470, 103, 41 }, 10, { 29,5 }, { airreelnColliders }, { airreelHitbox2 }, { airreelColliderType }, { airreelCallback });
-	airreel.PushBack({ 697, 410, 54, 102 }, 10, { 29,5 }, { airreelnColliders }, { airreelHitbox3 }, { airreelColliderType }, { airreelCallback });
-
-
-	// Sweep
-
-
-
-	// Getting up
-
-	const int getupnColliders = 3;
-	SDL_Rect getupHitbox1[getupnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
-	COLLIDER_TYPE getupColliderType[getupnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	Module* getupCallback[getupnColliders] = { {this}, {this}, {this} };
-
-	getup.PushBack({ 311, 993, 127, 31 }, 5, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 440, 990, 92, 34 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 534, 953, 56, 71 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 633, 909, 46, 115 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-
 
 	// Win1
 
@@ -396,6 +366,7 @@ bool ModuleSecondPlayer::Start()
 	win1.PushBack({ 155, 110, 60, 113 }, 5, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	win1.PushBack({ 216, 110, 59, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	win1.PushBack({ 277, 110, 56, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.loop = false;
 
 	// Win2
 
@@ -408,8 +379,31 @@ bool ModuleSecondPlayer::Start()
 	win2.PushBack({ 389, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 444, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 499, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.loop = false;
 
-	state = ST_IDLE2;
+	//Falling
+	const int airreelnColliders = 3;
+	SDL_Rect airreelHitbox1[airreelnColliders] = { { -11, 57, 24, 10}, { 0, 11, 73, 47}, { -31, -32, 40, 45} };
+	SDL_Rect airreelHitbox2[airreelnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, -0, 105, 40} };
+	SDL_Rect airreelHitbox3[airreelnColliders] = { { -12, 84, 24, 16}, { 0, 40, 55, 47}, { 0, 0, 40, 40} };
+	COLLIDER_TYPE airreelColliderType[airreelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* airreelCallback[airreelnColliders] = { {this}, {this}, {this} };
+
+	airreel.PushBack({ 815, 883, 73, 65 }, 5, { 29,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
+
+	//Get up
+	const int getupnColliders = 3;
+	SDL_Rect getupHitbox1[getupnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE getupColliderType[getupnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* getupCallback[getupnColliders] = { {this}, {this}, {this} };
+
+	getup.PushBack({ 311, 993, 127, 31 }, 5, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+	getup.PushBack({ 440, 990, 92, 34 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+	getup.PushBack({ 534, 953, 56, 71 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+	getup.PushBack({ 633, 909, 46, 115 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+
+	inputs.Push(IN_END2);
 
 	return ret;
 }
@@ -433,17 +427,16 @@ bool ModuleSecondPlayer::CleanUp()
 	streel = Animation(); //standing reel
 	stgreel = Animation(); //standing gut reel
 	creel = Animation(); //crouching reel
-	crouching, standing, crouch = Animation();
+	crouching = standing = crouch = Animation();
+	airreel = Animation();
+	win1 = Animation();
+	win2 = Animation();
+	getup = Animation();
 	return true;
 }
 
 update_status ModuleSecondPlayer::PreUpdate() {
 	ClearColliders();
-
-	airreel = Animation();
-	win1 = Animation();
-	win2 = Animation();
-	getup = Animation();
 
 	return UPDATE_CONTINUE;
 }
@@ -459,7 +452,7 @@ update_status ModuleSecondPlayer::Update()
 		external_input(inputs);
 
 	internal_input(inputs);
-	ryu_states2 state = process_fsm(inputs);
+	state = process_fsm(inputs);
 
 	if (state != current_state)
 	{
@@ -494,7 +487,7 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -514,7 +507,7 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -522,7 +515,6 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-			LOG("JUMPING FORWARD ^^>>\n");
 			break;
 
 		case ST_JUMP_BACKWARD2:
@@ -537,7 +529,7 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -545,7 +537,6 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			LOG("JUMPING BACKWARD ^^<<\n");
 			break;
 
 		case ST_CROUCHING2:
@@ -580,7 +571,7 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -597,11 +588,11 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -609,7 +600,6 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-			LOG("PUNCH JUMP FORWARD ^>>+\n");
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP2:
@@ -621,11 +611,11 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -633,7 +623,7 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			
+
 			break;
 
 		case L_KIK_CROUCH2:
@@ -652,11 +642,11 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -673,11 +663,11 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -685,7 +675,7 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-			
+
 			break;
 
 		case L_KIK_BACKWARD_JUMP2:
@@ -696,11 +686,11 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
 			{
@@ -708,8 +698,6 @@ update_status ModuleSecondPlayer::Update()
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			LOG("PUNCH JUMP BACKWARD ^<<+\n");
-			LOG("KIK JUMP BACKWARD ^<<+\n");
 			break;
 
 		case ST_HEAD_REEL2:
@@ -732,12 +720,15 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_FALLING2:
 			current_animation = &airreel;
-
+			jumpHeight += speed;
+			if (jumpHeight == 0)
+			{
+				inputs.Push(IN_FALLING_FINISH2);
+			}
 			break;
 
 		case ST_GETTING_UP2:
 			current_animation = &getup;
-
 			break;
 
 		case LOOSE2:
@@ -745,11 +736,16 @@ update_status ModuleSecondPlayer::Update()
 			break;
 
 		case VICTORY2:
-			if (App->frames % 2 == 0)
+			if (victoryExecuted == 1 || (victoryExecuted == 0 && App->frames % 2 == 0)) {
+				texture = graphics2;
 				current_animation = &win1;
-			else
+				victoryExecuted = 1;
+			}
+			else {
+				texture = graphics2;
 				current_animation = &win2;
-			texture = graphics2;
+				victoryExecuted = 2;
+			}
 			break;
 		}
 	}
@@ -774,18 +770,33 @@ void ModuleSecondPlayer::ClearColliders() {
 
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 	{
 		life -= 20;
 		App->audio->PlayChunk(hdk_hit);
 		inputs.Push(IN_HEAD_REEL2);
 	}
 
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT)
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 	{
 		App->audio->PlayChunk(hdk_hit);	//CAMBIAR
 		inputs.Push(IN_HEAD_REEL2);
 	}
+
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
+	{
+		life -= 20;
+
+		inputs.Push(IN_FALLING2);
+	}
+
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
+	{
+		life -= 20;
+		inputs.Push(IN_FALLING2);
+	}
+
+
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
 	{
@@ -1376,7 +1387,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_FALLING_FINISH2:state = ST_GETTING_UP2; break;
+			case IN_FALLING_FINISH2:state = ST_GETTING_UP2; getting_up_timer = App->frames; break;
 			}
 		}
 		break;
@@ -1386,6 +1397,24 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_GETTING_UP_FINISH2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case LOOSE2:
+		{
+			switch (last_input)
+			{
+			case IN_END2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case VICTORY2:
+		{
+			switch (last_input)
+			{
+			case IN_END2:state = ST_IDLE2; break;
 			}
 		}
 		break;

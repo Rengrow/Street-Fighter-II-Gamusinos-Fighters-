@@ -27,12 +27,12 @@ ModuleUI::ModuleUI()
 	lifeBarP2.h = 16;
 
 	lifeBarRedP1.x = 0;
-	lifeBarRedP1.y = 18;
+	lifeBarRedP1.y = 19;
 	lifeBarRedP1.w = 150;
 	lifeBarRedP1.h = 16;
 
 	lifeBarRedP2.x = 0;
-	lifeBarRedP2.y = 18;
+	lifeBarRedP2.y = 19;
 	lifeBarRedP2.w = 150;
 	lifeBarRedP2.h = 16;
 

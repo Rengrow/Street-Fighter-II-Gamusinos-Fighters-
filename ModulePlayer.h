@@ -100,7 +100,8 @@ enum ryu_inputs
 	IN_GETTING_UP_FINISH,
 
 	IN_VICTORY,
-	IN_LOOSE
+	IN_LOOSE,
+	IN_END
 };
 
 struct SDL_Texture;
@@ -151,7 +152,7 @@ public:
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 
-
+	int victoryExecuted;
 	bool freeze;
 	bool godmode = false;
 	int framesAtaque = 0;
