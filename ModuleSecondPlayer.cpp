@@ -477,11 +477,11 @@ update_status ModuleSecondPlayer::Update()
 
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 			break;
 
@@ -489,30 +489,30 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &forwardJump;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x--;
+				position.x =- 4;
 			break;
 
 		case ST_JUMP_BACKWARD2:
 			current_animation = &backwardJump;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x++;
+				position.x =+ 4;
 			break;
 
 		case ST_CROUCHING2:
@@ -539,11 +539,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jlp;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 			break;
 
@@ -551,15 +551,15 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jflp;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x--;
+				position.x =- 4;
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP2:
@@ -567,15 +567,15 @@ update_status ModuleSecondPlayer::Update()
 
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x++;
+				position.x =+ 4;
 
 			break;
 
@@ -591,11 +591,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jlk;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			break;
@@ -604,15 +604,15 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jflk;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x--;
+				position.x =- 4;
 
 			break;
 
@@ -621,15 +621,15 @@ update_status ModuleSecondPlayer::Update()
 
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 2;
+				jumpHeight += speed + 5;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 2;
+				jumpHeight -= speed + 5;
 			}
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x++;
+				position.x =+ 4;
 			break;
 
 		case ST_HEAD_REEL2:
