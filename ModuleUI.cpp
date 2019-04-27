@@ -158,30 +158,32 @@ void ModuleUI::TimerBlit(int font_id) {
 	if (App->fight->stopedFight) {
 		tiempo[0] = (char)48 + (stopedTimer / 10);
 		tiempo[1] = (char)48 + (stopedTimer % 10);
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 24, 40, font_id, tiempo);
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 40, font_id, tiempo);
 	}
 	else if (timerStarted && timeRemaining > 0) {
 		tiempo[0] = (char)48 + (timeRemaining / 10);
 		tiempo[1] = (char)48 + (timeRemaining % 10);
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 24, 40, font_id, tiempo);
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 40, font_id, tiempo);
 	}
 	else {
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 24, 40, font_id, "99");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 40, font_id, "99");
 		timerStarted = false;
 	}
 }
 
 void ModuleUI::LifeBarsBlit() {
 
-	lifeBarP1.w = 150 * (App->player->life / 100);
+	
+
+	lifeBarP1.w = App->player->life*1.5;
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarP1, true);
 
-	lifeBarP2.w = 150 * (App->player2->life / 100);
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + lifeBarP2.w + 51, 20, &lifeBarP2, false);
+	lifeBarP2.w = App->player2->life*1.5;
+	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarP2, false);
 }
 
 void ModuleUI::KoBlit() {
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + lifeBarP1.w + 23, 15, (redKoEnabled ? &redKO : &KO), false);
+	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 23, 15, (redKoEnabled ? &redKO : &KO), false);
 }
 
 void ModuleUI::RoundsWinnedBlit() {

@@ -66,6 +66,7 @@ update_status ModuleParticles::Update()
 			delete p;
 			active[i] = nullptr;
 		}
+
 		else if (SDL_GetTicks() >= p->born)
 		{
 				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), p->flip);
@@ -78,9 +79,6 @@ update_status ModuleParticles::Update()
 
 void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, int y, int player, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
-
-	hdk.speed = { 3, 0 };
-
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] == nullptr)
@@ -103,6 +101,7 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrameBox(), collider_type, this);
+
 			active[i] = p;
 
 			App->audio->PlayChunk(p->sfx);
@@ -122,7 +121,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			active[i]->collider->to_delete = true;
 
 			delete active[i];
-			active[i] = nullptr;
+			active[i] = nullptr; 
 			break;
 		}
 	}
