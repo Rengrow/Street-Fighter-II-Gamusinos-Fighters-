@@ -39,6 +39,8 @@ public:
 	SDL_Texture* lifeBars = nullptr;
 	SDL_Rect lifeBarP1;
 	SDL_Rect lifeBarP2;
+	SDL_Rect lifeBarRedP1;
+	SDL_Rect lifeBarRedP2;
 	SDL_Rect KO;
 	SDL_Rect redKO;
 	SDL_Rect iconRoundWinned;
