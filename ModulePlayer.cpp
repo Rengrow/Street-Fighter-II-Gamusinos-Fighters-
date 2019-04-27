@@ -601,9 +601,9 @@ update_status ModulePlayer::Update()
 
 		case ST_HADOKEN:
 			current_animation = &hdk;
-			if (App->frames - hadoken_timer == 38)
+			if (App->frames - hadoken_timer == 35)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x - 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + 70, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
 			}
 			break;
 
