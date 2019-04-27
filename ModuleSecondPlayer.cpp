@@ -256,6 +256,7 @@ bool ModuleSecondPlayer::Start()
 
 	// Standing reel
 	const int streelnColliders = 3;
+	
 	SDL_Rect streelHitbox1[streelnColliders] = { { -11, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
 	SDL_Rect streelHitbox2[streelnColliders] = { { -6, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
 	SDL_Rect streelHitbox3[streelnColliders] = { { 0, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
@@ -263,10 +264,20 @@ bool ModuleSecondPlayer::Start()
 	COLLIDER_TYPE streelColliderType[streelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* streelCallback[streelnColliders] = { {this}, {this}, {this} };
 
-	streel.PushBack({ 143, 857, 67, 92 }, 6, { 48,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
-	streel.PushBack({ 213, 857, 69, 91 }, 6, { 53,5 }, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
-	streel.PushBack({ 285, 857, 80, 91 }, 6, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
-	streel.PushBack({ 367, 857, 66, 91 }, 6, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
+
+	const int streelinIcionColliders = 0;
+	/*
+	SDL_Rect streelHitbox1[streelinIcionColliders] = {};
+	SDL_Rect streelHitbox2[streelinIcionColliders] = {};
+	SDL_Rect streelHitbox3[streelinIcionColliders] = {};
+	SDL_Rect streelHitbox4[streelinIcionColliders] = {};
+	COLLIDER_TYPE streelColliderType[streelinIcionColliders] = {};
+	Module* streelCallback[streelinIcionColliders] = {};*/
+
+	streel.PushBack({ 143, 857, 67, 92 }, 10, { 48,5 }, streelinIcionColliders, streelHitbox1, streelColliderType, streelCallback);
+	streel.PushBack({ 213, 857, 69, 91 }, 10, { 53,5 }, streelinIcionColliders, streelHitbox2, streelColliderType, streelCallback);
+	streel.PushBack({ 285, 857, 80, 91 }, 10, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
+	streel.PushBack({ 367, 857, 66, 91 }, 10, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
 
 
 	// Standing gut reel
@@ -772,13 +783,14 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 	{
-		life -= 20;
+		life -= 12;
 		App->audio->PlayChunk(hdk_hit);
 		inputs.Push(IN_HEAD_REEL2);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 	{
+		life -= 7;
 		App->audio->PlayChunk(hdk_hit);	//CAMBIAR
 		inputs.Push(IN_HEAD_REEL2);
 	}

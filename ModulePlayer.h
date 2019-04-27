@@ -21,7 +21,7 @@
 #define JUMP_TIME 55
 #define GETTING_UP_TIME 48
 
-#define HEAD_REEL_TIME 30
+#define HEAD_REEL_TIME 43
 #define CROUCH_REEL_TIME 20
 #define GUT_REEL_TIME 25
 
