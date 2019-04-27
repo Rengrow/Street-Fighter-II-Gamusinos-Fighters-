@@ -478,11 +478,11 @@ update_status ModuleSecondPlayer::Update()
 
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			break;
 
@@ -490,11 +490,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &forwardJump;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
@@ -505,11 +505,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &backwardJump;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
@@ -540,11 +540,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jlp;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 			break;
 
@@ -552,11 +552,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jflp;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
@@ -568,11 +568,11 @@ update_status ModuleSecondPlayer::Update()
 
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
@@ -592,11 +592,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jlk;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			break;
@@ -605,11 +605,11 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &jflk;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
@@ -622,11 +622,11 @@ update_status ModuleSecondPlayer::Update()
 
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
-				jumpHeight += speed + 1;
+				jumpHeight += speed + 2;
 			}
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
 			{
-				jumpHeight -= speed + 1;
+				jumpHeight -= speed + 2;
 			}
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
