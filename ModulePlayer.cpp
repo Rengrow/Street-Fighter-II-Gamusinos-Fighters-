@@ -408,7 +408,7 @@ bool ModulePlayer::Start()
 	win2.loop = false;
 
 
-	state = ST_IDLE;
+	inputs.Push(IN_END);
 
 	return ret;
 }
@@ -685,6 +685,7 @@ update_status ModulePlayer::Update()
 			break;
 
 		case VICTORY:
+			current_animation = &win1; 
 			if (App->frames % 2 == 0)
 				current_animation = &win1;
 			else
@@ -720,16 +721,16 @@ void ModulePlayer::ClearColliders() {
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL || state != ST_JUMP_FORWARD || state != ST_JUMP_BACKWARD || state != L_PUNCH_NEUTRAL_JUMP || state != L_PUNCH_FORWARD_JUMP || state != L_PUNCH_BACKWARD_JUMP || state != L_KIK_NEUTRAL_JUMP || state != L_KIK_FORWARD_JUMP || state != L_KIK_BACKWARD_JUMP))
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 	{
 		life -= 20;
 		App->audio->PlayChunk(hdk_hit);
 		inputs.Push(IN_HEAD_REEL);
 	}
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL || state != ST_JUMP_FORWARD || state != ST_JUMP_BACKWARD || state != L_PUNCH_NEUTRAL_JUMP || state != L_PUNCH_FORWARD_JUMP || state != L_PUNCH_BACKWARD_JUMP || state != L_KIK_NEUTRAL_JUMP || state != L_KIK_FORWARD_JUMP || state != L_KIK_BACKWARD_JUMP))
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 	{
-		
+		life -= 20;
 		inputs.Push(IN_HEAD_REEL);
 	}
 
@@ -742,7 +743,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
 	{
-
+		life -= 20;
 		inputs.Push(IN_FALLING);
 	}
 
@@ -1335,6 +1336,24 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_GETTING_UP_FINISH:state = ST_IDLE; break;
+			}
+		}
+		break;
+
+		case LOOSE:
+		{
+			switch (last_input)
+			{
+			case IN_END:state = ST_IDLE; break;
+			}
+		}
+		break;
+
+		case VICTORY:
+		{
+			switch (last_input)
+			{
+			case IN_END:state = ST_IDLE; break;
 			}
 		}
 		break;

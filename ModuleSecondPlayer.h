@@ -80,7 +80,8 @@ enum ryu_inputs2
 	IN_GETTING_UP_FINISH2,
 
 	IN_VICTORY2,
-	IN_LOOSE2
+	IN_LOOSE2,
+	IN_END2
 };
 
 struct SDL_Texture;

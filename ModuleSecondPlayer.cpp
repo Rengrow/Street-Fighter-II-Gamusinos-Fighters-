@@ -409,7 +409,7 @@ bool ModuleSecondPlayer::Start()
 	win2.PushBack({ 444, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 499, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 
-	state = ST_IDLE2;
+	inputs.Push(IN_END2);
 
 	return ret;
 }
@@ -459,7 +459,7 @@ update_status ModuleSecondPlayer::Update()
 		external_input(inputs);
 
 	internal_input(inputs);
-	ryu_states2 state = process_fsm(inputs);
+	state = process_fsm(inputs);
 
 	if (state != current_state)
 	{
@@ -1322,6 +1322,24 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_GETTING_UP_FINISH2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case LOOSE2:
+		{
+			switch (last_input)
+			{
+			case IN_END2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case VICTORY2:
+		{
+			switch (last_input)
+			{
+			case IN_END2:state = ST_IDLE2; break;
 			}
 		}
 		break;
