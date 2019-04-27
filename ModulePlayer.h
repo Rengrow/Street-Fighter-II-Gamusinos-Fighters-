@@ -19,7 +19,7 @@
 #define CROUCHING_TIME 10
 #define STANDING_TIME 10
 #define JUMP_TIME 55
-#define GETTING_UP_TIME 10
+#define GETTING_UP_TIME 48
 
 #define HEAD_REEL_TIME 30
 #define CROUCH_REEL_TIME 20
@@ -86,6 +86,7 @@ enum ryu_inputs
 	IN_GUT_REEL,
 	IN_CROUCH_REEL,
 	IN_FALLING,
+	IN_GETTING_UP,
 
 	IN_CROUCHING_FINISH,
 	IN_STANDING_FINISH,
@@ -136,11 +137,13 @@ public:
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
+	Animation airreel;
+	Animation getup;
 	Animation crouching, standing, crouch;
 
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
-
+	ryu_states state;
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 
