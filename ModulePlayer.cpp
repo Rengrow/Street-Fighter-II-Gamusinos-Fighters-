@@ -211,7 +211,7 @@ bool ModulePlayer::Start()
 
 	jlk.PushBack({ 252, 528, 49, 88 }, 3, { 29,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 	jlk.PushBack({ 948, 525, 75, 90 }, 100, { 29,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
-	
+
 
 	// Jumping backward lk
 	const int jblknColliders = 3;
@@ -369,23 +369,23 @@ bool ModulePlayer::CleanUp()
 	hdk_voice = nullptr;
 	App->audio->UnloadChunk(hdk_hit);
 	hdk_hit = nullptr;
-	
+
 	App->textures->Unload(graphics);
 	ClearColliders();
 
-	 idle = Animation();
-	 forward = Animation();
-	 backward = Animation();
-	 lp, lk, clp, clk = Animation();
-	 jlp, jlk, jflp, jflk, jblp, jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
-	 neutralJump = Animation();
-	 forwardJump = Animation();
-	 backwardJump = Animation();
-	 hdk = Animation(); //hadouken
-	 streel = Animation(); //standing reel
-	 stgreel = Animation(); //standing gut reel
-	 creel = Animation(); //crouching reel
-	 crouching, standing, crouch = Animation();
+	idle = Animation();
+	forward = Animation();
+	backward = Animation();
+	lp = lk = clp = clk = Animation();
+	jlp = jlk = jflp = jflk = jblp = jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	neutralJump = Animation();
+	forwardJump = Animation();
+	backwardJump = Animation();
+	hdk = Animation(); //hadouken
+	streel = Animation(); //standing reel
+	stgreel = Animation(); //standing gut reel
+	creel = Animation(); //crouching reel
+	crouching, standing, crouch = Animation();
 
 	return true;
 }
@@ -430,7 +430,7 @@ update_status ModulePlayer::Update()
 
 		case ST_JUMP_NEUTRAL:
 			current_animation = &neutralJump;
-			if (App->frames - jump_timer >  27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}

@@ -30,7 +30,7 @@ bool ModuleSecondPlayer::Start()
 
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
-	
+
 	position.x = 250;
 	position.y = 215;
 
@@ -363,13 +363,13 @@ bool ModuleSecondPlayer::CleanUp()
 {
 	LOG("Unloading player 2");
 
- 	App->textures->Unload(graphics);
+	App->textures->Unload(graphics);
 	ClearColliders();
 	idle = Animation();
 	forward = Animation();
 	backward = Animation();
 	lp, lk, clp, clk = Animation();
-	jlp, jlk, jflp, jflk, jblp, jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	jlp = jlk = jflp = jflk = jblp = jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	neutralJump = Animation();
 	forwardJump = Animation();
 	backwardJump = Animation();
