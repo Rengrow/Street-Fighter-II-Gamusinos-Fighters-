@@ -353,9 +353,6 @@ bool ModuleSecondPlayer::Start()
 	clk.PushBack({ 617, 322, 71, 65 }, 10, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
-
-
-
 	return ret;
 }
 
@@ -379,6 +376,12 @@ bool ModuleSecondPlayer::CleanUp()
 	creel = Animation(); //crouching reel
 	crouching, standing, crouch = Animation();
 	return true;
+}
+
+update_status ModuleSecondPlayer::PreUpdate() {
+	ClearColliders();
+
+	return UPDATE_CONTINUE;
 }
 
 // Update: draw background
@@ -578,8 +581,6 @@ void ModuleSecondPlayer::BlitCharacterAndAddColliders(Animation* current_animati
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
-
-	ClearColliders();
 
 	for (int i = 0; i < hitboxesQnt; i++)
 	{
