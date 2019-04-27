@@ -19,12 +19,22 @@ ModuleUI::ModuleUI()
 	lifeBarP1.x = 0;
 	lifeBarP1.y = 1;
 	lifeBarP1.w = 150;
-	lifeBarP1.h = 15;
+	lifeBarP1.h = 16;
 
 	lifeBarP2.x = 0;
 	lifeBarP2.y = 1;
 	lifeBarP2.w = 150;
-	lifeBarP2.h = 15;
+	lifeBarP2.h = 16;
+
+	lifeBarRedP1.x = 0;
+	lifeBarRedP1.y = 18;
+	lifeBarRedP1.w = 150;
+	lifeBarRedP1.h = 16;
+
+	lifeBarRedP2.x = 0;
+	lifeBarRedP2.y = 18;
+	lifeBarRedP2.w = 150;
+	lifeBarRedP2.h = 16;
 
 	KO.x = 34;
 	KO.y = 37;
@@ -172,8 +182,12 @@ void ModuleUI::TimerBlit(int font_id) {
 }
 
 void ModuleUI::LifeBarsBlit() {
-	lifeBarP1.w = App->player->life*1.5;
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarP1, true);
+
+	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarRedP1, false);
+	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarRedP2, true);
+
+	lifeBarP1.x = lifeBarRedP1.w - App->player->life*1.5;
+	App->render->Blit(lifeBars, (- App->render->camera.x / SCREEN_SIZE) + 24, 20, &lifeBarP1, true);
 
 	lifeBarP2.w = App->player2->life*1.5;
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarP2, false);

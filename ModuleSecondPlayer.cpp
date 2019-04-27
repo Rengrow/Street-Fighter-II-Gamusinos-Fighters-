@@ -681,11 +681,14 @@ update_status ModuleSecondPlayer::Update()
 			break;
 
 		case VICTORY2:
-			if (App->frames % 2 == 0)
-				current_animation = &win1;
-			else
+			if (App->frames % 2 == 0) {
 				texture = graphics2;
-			texture = graphics2;
+				current_animation = &win1;
+			}
+			else {
+				texture = graphics2;
+				current_animation = &win2;
+			}
 			break;
 		}
 	}

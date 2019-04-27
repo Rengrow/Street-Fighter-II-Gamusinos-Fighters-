@@ -10,8 +10,9 @@ Currently there is no installation required, just open the .exe provided in the 
 
 Player 1 Controls: movement W (jump), A (backwards), S (crouch), D (forwards), U (punch), J (kick), Q (hadoken)
 Player 2 Controls: movement F (jump), C (backwards), V (crouch), B (forwards), 1 (punch), 2 (kick), 3 (hadoken)
-In order to play, open the .exe and press space to navigate through each menu. The only playable ones are the ones
-with the port stage and the buda stage. In order to exit, press ESC.
+In order to play, open the .exe and press space to navigate through each menu until you get into a battle stage, the ones
+with backgrounds, from which you will only be able to escape after defeating the opponent or
+being defeated. In order to exit, press ESC.
 To play in God Mode (to be invulnerable to any attack), press F5.
 To get an instant win you have to press F10 while the timer is decreasing.
 To get an instant lose you have to press F11 while the timier is decreasing.
