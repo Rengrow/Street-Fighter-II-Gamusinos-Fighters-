@@ -133,10 +133,10 @@ bool ModuleSecondPlayer::Start()
 
 	forwardJump.PushBack({ 641, 403, 55, 112 }, 8, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
 	forwardJump.PushBack({ 697, 410, 54, 102 }, 6, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
-	forwardJump.PushBack({ 753, 435, 60, 77 }, 6, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
+	forwardJump.PushBack({ 753, 435, 60, 77 }, 3, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
 	forwardJump.PushBack({ 815, 469, 104, 43 }, 4, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
 	forwardJump.PushBack({ 920, 430, 51, 82 }, 4, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
-	forwardJump.PushBack({ 0, 573, 122, 43 }, 4, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
+	forwardJump.PushBack({ 0, 573, 122, 43 }, 7, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
 	forwardJump.PushBack({ 123, 530, 70, 86 }, 8, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
 	forwardJump.PushBack({ 195, 512, 55, 105 }, 8, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
 
@@ -149,11 +149,11 @@ bool ModuleSecondPlayer::Start()
 
 	backwardJump.PushBack({ 641, 403, 55, 112 }, 8, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
 	backwardJump.PushBack({ 195, 512, 55, 105 }, 8, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
-	backwardJump.PushBack({ 123, 530, 70, 86 }, 8, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
-	backwardJump.PushBack({ 0, 573, 122, 43 }, 4, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
+	backwardJump.PushBack({ 123, 530, 70, 86 }, 6, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
+	backwardJump.PushBack({ 0, 573, 122, 43 }, 2, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
 	backwardJump.PushBack({ 920, 430, 51, 82 }, 4, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
-	backwardJump.PushBack({ 815, 469, 104, 43 }, 4, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
-	backwardJump.PushBack({ 753, 435, 60, 77 }, 6, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
+	backwardJump.PushBack({ 815, 469, 104, 43 }, 6, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
+	backwardJump.PushBack({ 753, 435, 60, 77 }, 8, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
 	backwardJump.PushBack({ 697, 410, 54, 102 }, 6, { 29,5 }, backwardjumpnColliders, backwardjumpHitbox, backwardjumpColliderType, backwardjumpCallback);
 
 	// Jumping neutral lp
@@ -484,27 +484,42 @@ update_status ModuleSecondPlayer::Update()
 		case ST_JUMP_NEUTRAL2:
 			current_animation = &neutralJump;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
+			}
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
 			}
 			break;
 
 		case ST_JUMP_FORWARD2:
 			current_animation = &forwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-			
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
 			LOG("JUMPING FORWARD ^^>>\n");
@@ -512,15 +527,22 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_JUMP_BACKWARD2:
 			current_animation = &backwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-			
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
 			LOG("JUMPING BACKWARD ^^<<\n");
@@ -548,29 +570,43 @@ update_status ModuleSecondPlayer::Update()
 
 		case L_PUNCH_NEUTRAL_JUMP2:
 			current_animation = &jlp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			LOG("PUNCH JUMP NEUTRAL ^^++\n");
 			break;
 
 		case L_PUNCH_FORWARD_JUMP2:
 			current_animation = &jflp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
 			LOG("PUNCH JUMP FORWARD ^>>+\n");
@@ -579,15 +615,22 @@ update_status ModuleSecondPlayer::Update()
 		case L_PUNCH_BACKWARD_JUMP2:
 			current_animation = &jblp;
 			
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
 			
@@ -603,28 +646,43 @@ update_status ModuleSecondPlayer::Update()
 
 		case L_KIK_NEUTRAL_JUMP2:
 			current_animation = &jlk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
+			}
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
 			}
 			
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
 			current_animation = &jflk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
 			
@@ -632,16 +690,22 @@ update_status ModuleSecondPlayer::Update()
 
 		case L_KIK_BACKWARD_JUMP2:
 			current_animation = &jblk;
-
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (App->frames - jump_timer < 35 && App->frames - jump_timer > 28 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 1;
 			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 29 && App->frames - jump_timer > 22 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 1;
 			}
-
+			if (App->frames - jump_timer < 21 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
 			LOG("PUNCH JUMP BACKWARD ^<<+\n");
@@ -684,7 +748,7 @@ update_status ModuleSecondPlayer::Update()
 			if (App->frames % 2 == 0)
 				current_animation = &win1;
 			else
-				texture = graphics2;
+				current_animation = &win2;
 			texture = graphics2;
 			break;
 		}
