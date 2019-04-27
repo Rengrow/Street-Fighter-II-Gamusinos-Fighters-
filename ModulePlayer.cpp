@@ -357,8 +357,24 @@ bool ModulePlayer::Start()
 	clk.PushBack({ 617, 322, 71, 65 }, 2, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 
-	// Aerial reel
+	
 
+	// Win1
+
+	const int winnColliders = 3;
+	SDL_Rect winHitbox1[winnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE winColliderType[winnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* winCallback[winnColliders] = { {this}, {this}, {this} };
+
+	win1.PushBack({ 155, 110, 60, 113 }, 5, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.PushBack({ 216, 110, 59, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.PushBack({ 277, 110, 56, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	win1.loop = false;
+
+	// Win2
+
+	
+	//Falling
 	const int airreelnColliders = 3;
 	SDL_Rect airreelHitbox1[airreelnColliders] = { { -11, 57, 24, 10}, { 0, 11, 73, 47}, { -31, -32, 40, 45} };
 	SDL_Rect airreelHitbox2[airreelnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, -0, 105, 40} };
@@ -367,15 +383,6 @@ bool ModulePlayer::Start()
 	Module* airreelCallback[airreelnColliders] = { {this}, {this}, {this} };
 
 	airreel.PushBack({ 815, 883, 73, 65 }, 5, { 29,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
-	airreel.PushBack({ 815, 470, 103, 41 }, 10, { 29,5 }, { airreelnColliders }, { airreelHitbox2 }, { airreelColliderType }, { airreelCallback });
-	airreel.PushBack({ 697, 410, 54, 102 }, 10, { 29,5 }, { airreelnColliders }, { airreelHitbox3 }, { airreelColliderType }, { airreelCallback });
-
-
-	// Sweep
-
-
-
-	// Getting up
 
 	const int getupnColliders = 3;
 	SDL_Rect getupHitbox1[getupnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
@@ -389,19 +396,6 @@ bool ModulePlayer::Start()
 	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 
 
-	// Win1
-
-	const int winnColliders = 3;
-	SDL_Rect winHitbox1[winnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
-	COLLIDER_TYPE winColliderType[winnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	Module* winCallback[winnColliders] = { {this}, {this}, {this} };
-	
-	win1.PushBack({ 155, 110, 60, 113 }, 5, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	win1.PushBack({ 216, 110, 59, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	win1.PushBack({ 277, 110, 56, 113 }, 10, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-
-	// Win2
-
 	const int win2nColliders = 3;
 	SDL_Rect win2Hitbox1[win2nColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	COLLIDER_TYPE win2ColliderType[win2nColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
@@ -411,6 +405,10 @@ bool ModulePlayer::Start()
 	win2.PushBack({ 389, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 444, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.PushBack({ 499, 127, 53, 96 }, 10, { 29,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
+	win2.loop = false;
+
+
+	state = ST_IDLE;
 
 	return ret;
 }
@@ -428,7 +426,7 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	ClearColliders();
-	
+
 	airreel = Animation();
 	win1 = Animation();
 	win2 = Animation();
@@ -468,7 +466,7 @@ update_status ModulePlayer::Update()
 		external_input(inputs);
 
 	internal_input(inputs);
-	ryu_states state = process_fsm(inputs);
+	state = process_fsm(inputs);
 
 	if (state != current_state)
 	{
@@ -671,6 +669,11 @@ update_status ModulePlayer::Update()
 
 		case ST_FALLING:
 			current_animation = &airreel;
+			jumpHeight += speed;
+			if (jumpHeight==0)
+			{
+				inputs.Push(IN_FALLING_FINISH);
+			}
 			break;
 
 		case ST_GETTING_UP:
@@ -682,8 +685,10 @@ update_status ModulePlayer::Update()
 			break;
 
 		case VICTORY:
-			current_animation = &win1;
-			texture = graphics2;
+			if (App->frames % 2 == 0)
+				current_animation = &win1;
+			else
+				texture = graphics2;
 			break;
 
 		}
@@ -715,12 +720,32 @@ void ModulePlayer::ClearColliders() {
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL || state != ST_JUMP_FORWARD || state != ST_JUMP_BACKWARD || state != L_PUNCH_NEUTRAL_JUMP || state != L_PUNCH_FORWARD_JUMP || state != L_PUNCH_BACKWARD_JUMP || state != L_KIK_NEUTRAL_JUMP || state != L_KIK_FORWARD_JUMP || state != L_KIK_BACKWARD_JUMP))
 	{
 		life -= 20;
 		App->audio->PlayChunk(hdk_hit);
 		inputs.Push(IN_HEAD_REEL);
 	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL || state != ST_JUMP_FORWARD || state != ST_JUMP_BACKWARD || state != L_PUNCH_NEUTRAL_JUMP || state != L_PUNCH_FORWARD_JUMP || state != L_PUNCH_BACKWARD_JUMP || state != L_KIK_NEUTRAL_JUMP || state != L_KIK_FORWARD_JUMP || state != L_KIK_BACKWARD_JUMP))
+	{
+		
+		inputs.Push(IN_HEAD_REEL);
+	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+	{
+		life -= 20;
+		
+		inputs.Push(IN_FALLING);
+	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+	{
+
+		inputs.Push(IN_FALLING);
+	}
+
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 	{
@@ -1300,7 +1325,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_FALLING_FINISH:state = ST_GETTING_UP; break;
+			case IN_FALLING_FINISH:state = ST_GETTING_UP; getting_up_timer = App->frames;  break;
 			}
 		}
 		break;

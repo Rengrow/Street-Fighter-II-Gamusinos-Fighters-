@@ -118,6 +118,7 @@ public:
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
+	Animation falling;
 	Animation crouching, standing, crouch;
 	Animation win1, win2, airreel, getup;
 	// Animation sweep;
@@ -126,6 +127,7 @@ public:
 
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;
+	ryu_states2 state;
 
 	bool flip = true;
 	bool freeze;
