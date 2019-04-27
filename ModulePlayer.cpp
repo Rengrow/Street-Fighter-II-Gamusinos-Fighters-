@@ -668,7 +668,12 @@ update_status ModulePlayer::Update()
 			break;
 
 		case ST_FALLING:
-			LOG("Falling\n");
+			current_animation = &airreel;
+			jumpHeight += speed;
+			if (jumpHeight==0)
+			{
+				inputs.Push(IN_FALLING_FINISH);
+			}
 			break;
 
 		case ST_GETTING_UP:

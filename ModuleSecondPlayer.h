@@ -127,6 +127,7 @@ public:
 
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;
+	ryu_states2 state;
 
 	bool flip = true;
 	bool freeze;

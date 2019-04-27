@@ -105,6 +105,7 @@ enum ryu_inputs
 
 struct SDL_Texture;
 
+
 class ModulePlayer : public Module
 {
 public:
@@ -141,7 +142,7 @@ public:
 	Animation airreel;
 	Animation getup;
 	Animation crouching, standing, crouch;
-	Animation win1, win2, airreel, getup;
+	Animation win1, win2;
 	// Animation sweep;
 
 	Mix_Chunk* hdk_voice = nullptr;
@@ -149,6 +150,7 @@ public:
 	ryu_states state;
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
+
 
 	bool freeze;
 	bool godmode = false;

@@ -590,7 +590,7 @@ update_status ModuleSecondPlayer::Update()
 
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			LOG("PUNCH JUMP BACKWARD ^<<+\n");
+			
 			break;
 
 		case L_KIK_CROUCH2:
@@ -611,9 +611,7 @@ update_status ModuleSecondPlayer::Update()
 			{
 				jumpHeight -= speed + 1;
 			}
-
-			LOG("PUNCH JUMP NEUTRAL ^^++\n");
-			LOG("KIK JUMP NEUTRAL ^^++\n");
+			
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
@@ -629,7 +627,7 @@ update_status ModuleSecondPlayer::Update()
 
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-			LOG("KIK JUMP FORWARD ^>>+\n");
+			
 			break;
 
 		case L_KIK_BACKWARD_JUMP2:
@@ -670,10 +668,12 @@ update_status ModuleSecondPlayer::Update()
 
 		case ST_FALLING2:
 			current_animation = &airreel;
+
 			break;
 
 		case ST_GETTING_UP2:
 			current_animation = &getup;
+
 			break;
 
 		case LOOSE2:
