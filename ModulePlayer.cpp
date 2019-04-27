@@ -616,7 +616,6 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 1;
 			}
-			LOG("KIK JUMP NEUTRAL ^^++\n");
 			break;
 
 		case L_KIK_FORWARD_JUMP:
@@ -631,7 +630,7 @@ update_status ModulePlayer::Update()
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			//LOG("KIK JUMP FORWARD ^>>+\n");
+			
 			break;
 
 		case L_KIK_BACKWARD_JUMP:
@@ -646,7 +645,7 @@ update_status ModulePlayer::Update()
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-			//LOG("KIK JUMP BACKWARD ^<<+\n");
+		
 			break;
 
 		case ST_HEAD_REEL:

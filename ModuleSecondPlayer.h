@@ -119,9 +119,10 @@ public:
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
-	Animation falling;
+	Animation airreel;
+	Animation getup;
 	Animation crouching, standing, crouch;
-	Animation win1, win2, airreel, getup;
+	Animation win1, win2;
 	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
