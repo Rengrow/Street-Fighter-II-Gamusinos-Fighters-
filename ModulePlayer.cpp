@@ -244,6 +244,11 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player 1");
 
+	App->audio->UnloadChunk(hdk_voice);
+	hdk_voice = nullptr;
+	App->audio->UnloadChunk(hdk_hit);
+	hdk_hit = nullptr;
+	
 	App->textures->Unload(graphics);
 	ClearColliders();
 

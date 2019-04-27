@@ -34,7 +34,7 @@ bool ModuleSecondPlayer::Start()
 	position.x = 250;
 	position.y = 215;
 
-	life = 1;
+	life = 100;
 	freeze = true;
 
 	Animation* current_animation;
@@ -244,7 +244,7 @@ bool ModuleSecondPlayer::CleanUp()
 {
 	LOG("Unloading player 2");
 
-	App->textures->Unload(graphics);
+ 	App->textures->Unload(graphics);
 	ClearColliders();
 
 	return true;
@@ -534,9 +534,6 @@ bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)
 	{
 		right = true;
 	}
-
-
-
 
 	if (left && right)
 		inputs.Push(IN_LEFT_AND_RIGHT2);
