@@ -133,6 +133,7 @@ public:
 
 	bool flip = true;
 	bool freeze;
+	int victoryExecuted;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
