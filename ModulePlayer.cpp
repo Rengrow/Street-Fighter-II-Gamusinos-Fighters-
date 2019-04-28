@@ -408,7 +408,7 @@ bool ModulePlayer::Start()
 	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 
 	//ground
-	ground.PushBack({ 310, 992, 129, 32 }, 20, {29,5}, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	ground.PushBack({ 310, 992, 129, 32 }, 20, { 29,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
 	inputs.Push(IN_END);
@@ -921,7 +921,8 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 
 		if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
 		{
-			hdk.ResetAnimation();
+			if (state != ST_HADOKEN)
+				hdk.ResetAnimation();
 			inputs.Push(IN_HADOKEN);
 		}
 
