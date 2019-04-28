@@ -483,7 +483,7 @@ update_status ModulePlayer::Update()
 
 	if (flip == true)
 	{
-		hdk_spawn = -40;
+		hdk_spawn = -45;
 	}
 
 	external_input(inputs);
@@ -1431,6 +1431,7 @@ ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_FALLING_FINISH:state = ST_GETTING_UP; getting_up_timer = App->frames;  break;
+			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
 		break;

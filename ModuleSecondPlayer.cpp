@@ -471,7 +471,7 @@ update_status ModuleSecondPlayer::Update()
 
 	if (flip == true)
 	{
-		hdk_spawn = -40;
+		hdk_spawn = -45;
 	}
 
 	external_input(inputs);
@@ -1382,6 +1382,7 @@ ryu_states2 ModuleSecondPlayer::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_FALLING_FINISH2:state = ST_GETTING_UP2; getting_up_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
