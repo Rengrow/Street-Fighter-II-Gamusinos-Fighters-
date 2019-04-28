@@ -921,6 +921,7 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 
 		if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
 		{
+			hdk.ResetAnimation();
 			inputs.Push(IN_HADOKEN);
 		}
 
