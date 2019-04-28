@@ -91,10 +91,10 @@ Version 0.5.3:
 ## Credits
 
 Credits go to the team members:
-José Luís Redondo Tello
-Adriá Serrano López
-Rafa López Martínez
-Ferran-Roger Basart i Bosch
+	José Luís Redondo Tello
+	Adriá Serrano López
+	Rafa López Martínez
+	Ferran-Roger Basart i Bosch
 
 ## License
 
