@@ -37,7 +37,7 @@ bool ModuleSecondPlayer::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = 0;
+	victoryExecuted = invulnerabilityFrames = 0;
 
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
@@ -256,7 +256,7 @@ bool ModuleSecondPlayer::Start()
 
 	// Standing reel
 	const int streelnColliders = 3;
-	
+
 	SDL_Rect streelHitbox1[streelnColliders] = { { -11, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
 	SDL_Rect streelHitbox2[streelnColliders] = { { -6, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
 	SDL_Rect streelHitbox3[streelnColliders] = { { 0, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
@@ -525,7 +525,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x =- 4;
+				position.x = -4;
 			break;
 
 		case ST_JUMP_BACKWARD2:
@@ -547,7 +547,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x =+ 4;
+				position.x = +4;
 			break;
 
 		case ST_CROUCHING2:
@@ -602,12 +602,12 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 5;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x =- 4;
+				position.x = -4;
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP2:
 			current_animation = &jblp;
-			
+
 			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
@@ -625,7 +625,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 5;
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x =+ 4;
+				position.x = +4;
 
 			break;
 
@@ -655,7 +655,7 @@ update_status ModuleSecondPlayer::Update()
 			{
 				jumpHeight -= speed + 5;
 			}
-			
+
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
@@ -677,7 +677,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 5;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x =- 4;
+				position.x = -4;
 
 			break;
 
@@ -700,7 +700,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 5;
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x =+ 4;
+				position.x = +4;
 			break;
 
 		case ST_HEAD_REEL2:
@@ -772,51 +772,53 @@ void ModuleSecondPlayer::ClearColliders() {
 }
 
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
-
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
-	{
-		life -= 12;
-		App->audio->PlayChunk(hdk_hit);
-		inputs.Push(IN_HEAD_REEL2);
-	}
-
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
-	{
-		life -= 7;
-		App->audio->PlayChunk(hdk_hit);	//CAMBIAR
-		inputs.Push(IN_HEAD_REEL2);
-	}
-
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
-	{
-		life -= 20;
-
-		inputs.Push(IN_FALLING2);
-	}
-
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
-	{
-		life -= 20;
-		inputs.Push(IN_FALLING2);
-	}
-
-
-
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
-	{
-		if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
-			position.x = (App->player->position.x + 63);
+	if (invulnerabilityFrames < App->frames) {
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
+		{
+			life -= 12;
+			invulnerabilityFrames = 20 + App->frames;
+			App->audio->PlayChunk(hdk_hit);
+			inputs.Push(IN_HEAD_REEL2);
 		}
-		else { App->player->position.x--; }
-	}
 
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
-	{
-		if (position.x == App->render->limit1Box.x) {
-			position.x++;
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
+		{
+			life -= 7;
+			invulnerabilityFrames = 20 + App->frames;
+			App->audio->PlayChunk(hdk_hit);	//CAMBIAR
+			inputs.Push(IN_HEAD_REEL2);
 		}
-		if (position.x + 60 == (App->render->limit1Box.x + App->render->camera.w)) {
-			position.x--;
+
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
+		{
+			life -= 20;
+			invulnerabilityFrames = 20 + App->frames;
+			inputs.Push(IN_FALLING2);
+		}
+
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
+		{
+			life -= 20;
+			invulnerabilityFrames = 20 + App->frames;
+			inputs.Push(IN_FALLING2);
+		}
+
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
+		{
+			if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
+				position.x = (App->player->position.x + 63);
+			}
+			else { App->player->position.x--; }
+		}
+
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
+		{
+			if (position.x == App->render->limit1Box.x) {
+				position.x++;
+			}
+			if (position.x + 60 == (App->render->limit1Box.x + App->render->camera.w)) {
+				position.x--;
+			}
 		}
 	}
 }

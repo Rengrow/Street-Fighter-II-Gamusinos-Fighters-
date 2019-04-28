@@ -131,6 +131,7 @@ public:
 	p2Qeue<ryu_inputs2> inputs;
 	ryu_states2 state;
 
+	Uint32 invulnerabilityFrames;
 	bool flip = true;
 	bool freeze;
 	int victoryExecuted;

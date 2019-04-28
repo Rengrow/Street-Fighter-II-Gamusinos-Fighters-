@@ -162,6 +162,7 @@ public:
 	int life;
 	int mov; //lp, mp, hp, lk, mk, hk
 	bool flip = false;
+	Uint32 invulnerabilityFrames;
 
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_crouching_punch_timer = 0;
