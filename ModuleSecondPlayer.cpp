@@ -515,7 +515,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x = -4;
+				position.x -= 4;
 			break;
 
 		case ST_JUMP_BACKWARD2:
@@ -537,7 +537,7 @@ update_status ModuleSecondPlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
-				position.x = +4;
+				position.x += 4;
 			break;
 
 		case ST_CROUCHING2:
@@ -570,7 +570,6 @@ update_status ModuleSecondPlayer::Update()
 			{
 				jumpHeight -= speed + 5;
 			}
-			LOG("PUNCH JUMP NEUTRAL ^^++\n");
 			break;
 
 		case L_PUNCH_FORWARD_JUMP2:
@@ -807,6 +806,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
 		{
+			//AQUI
 			if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
 				position.x = (App->player->position.x + 63);
 			}

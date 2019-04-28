@@ -547,7 +547,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 5;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x = -4;
+				position.x -= 4;
 			//LOG("JUMPING BACKWARD ^^<<\n");
 			break;
 
