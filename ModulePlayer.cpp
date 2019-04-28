@@ -30,6 +30,10 @@ bool ModulePlayer::Start()
 
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
+	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
+	low_fist = App->audio->LoadChunk("assets/sfx/effects/low_fist.wav");
+	high_fist = App->audio->LoadChunk("assets/sfx/effects/high_fist.wav");
+	high_kick = App->audio->LoadChunk("assets/sfx/effects/high_kick.wav");
 
 	position.x = 100;
 	position.y = 215;
@@ -418,29 +422,37 @@ bool ModulePlayer::CleanUp()
 	hdk_voice = nullptr;
 	App->audio->UnloadChunk(hdk_hit);
 	hdk_hit = nullptr;
+	App->audio->UnloadChunk(low_kick);
+	low_kick = nullptr;
+	App->audio->UnloadChunk(low_fist);
+	low_fist = nullptr;
+	App->audio->UnloadChunk(high_fist);
+	high_fist = nullptr;
+	App->audio->UnloadChunk(high_kick);
+	high_kick = nullptr;
 
 	App->textures->Unload(graphics);
+	graphics = nullptr;
 	App->textures->Unload(graphics2);
 	ClearColliders();
 
-	airreel = Animation();
-	win1 = Animation();
-	win2 = Animation();
-	getup = Animation();
 
 	idle = Animation();
 	forward = Animation();
 	backward = Animation();
 	lp = lk = clp = clk = Animation();
-	jlp = jlk = jflp = jflk = jblp = jblk = Animation(); // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	jlp = jlk = jflp = jflk = jblp = jblk = Animation();
 	neutralJump = Animation();
 	forwardJump = Animation();
 	backwardJump = Animation();
-	hdk = Animation(); //hadouken
-	streel = Animation(); //standing reel
-	stgreel = Animation(); //standing gut reel
-	creel = Animation(); //crouching reel
+	hdk = Animation();
+	streel = Animation();
+	stgreel = Animation();
+	creel = Animation();
+	airreel = Animation();
+	getup = Animation();
 	crouching = standing = crouch = Animation();
+	win1 = win2 = Animation();
 
 	return true;
 }
@@ -747,7 +759,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			life -= 10;
 			invulnerabilityFrames = 20 + App->frames;
 
-			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH || state == L_KIK_CROUCH)
+			if (App->player2->state == L_KIK_STANDING2 || App->player->state == L_KIK_NEUTRAL_JUMP2 || App->player->state == L_KIK_FORWARD_JUMP2 || App->player->state == L_KIK_BACKWARD_JUMP2)
+				App->audio->PlayChunk(high_kick);
+			else if (App->player2->state == L_KIK_CROUCH2)
+				App->audio->PlayChunk(low_kick);
+			else if (App->player2->state == L_PUNCH_STANDING2 || App->player->state == L_PUNCH_NEUTRAL_JUMP2 || App->player->state == L_PUNCH_FORWARD_JUMP2 || App->player->state == L_PUNCH_BACKWARD_JUMP2)
+				App->audio->PlayChunk(high_fist);
+			else if (App->player2->state == L_PUNCH_CROUCH2)
+				App->audio->PlayChunk(low_fist);
+
+			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 				inputs.Push(IN_CROUCH_REEL);
 
 			else

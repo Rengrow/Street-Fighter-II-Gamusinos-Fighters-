@@ -128,6 +128,10 @@ public:
 	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
+	Mix_Chunk* low_kick = nullptr;
+	Mix_Chunk* low_fist = nullptr;
+	Mix_Chunk* high_fist = nullptr;
+	Mix_Chunk* high_kick = nullptr;
 
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;

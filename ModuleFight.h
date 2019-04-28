@@ -32,6 +32,7 @@ public:
 	Uint32 timeOutTimer;
 	Uint32 countdownStartFight;
 	Uint32 endFightTimer;
+	Uint32 autoWinLoseTimer;
 };
 
 #endif // __ModuleFight_H__

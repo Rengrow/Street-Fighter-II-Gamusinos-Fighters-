@@ -28,6 +28,7 @@ bool ModuleFight::Start()
 	roundStarted = stopedFight = endFightStarted = false;
 
 	player1RoundWinned = player2RoundWinned = 0;
+	autoWinLoseTimer = 0;
 	round = 1;
 
 	return true;
@@ -36,12 +37,18 @@ bool ModuleFight::Start()
 update_status ModuleFight::Update()
 {
 	if (roundStarted)
-		if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life > App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN)
+		if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life > App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			Win(1);
-		else if ((!endFightStarted && (App->player->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN)
+			autoWinLoseTimer = SDL_GetTicks() + 7000;
+		}
+		else if ((!endFightStarted && (App->player->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			Win(2);
-		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life == App->player2->life))))
+			autoWinLoseTimer = SDL_GetTicks() + 7000;
+		}
+		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life == App->player2->life)))) {
 			Win(1);
+			autoWinLoseTimer = SDL_GetTicks() + 7000;
+		}
 
 	CheckFlipPlayers();
 
