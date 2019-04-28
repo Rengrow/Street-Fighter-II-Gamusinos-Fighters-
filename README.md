@@ -91,10 +91,10 @@ Version 0.5.3:
 ## Credits
 
 Credits go to the team members:
-	José Luís Redondo Tello
-	Adriá Serrano López
-	Rafa López Martínez
-	Ferran-Roger Basart i Bosch
+	José Luís Redondo Tello: <https://github.com/jose-tello> <br>
+	Adriá Serrano López: <https://github.com/adriaserrano97> <br>
+	Rafa López Martínez: <https://github.com/Rengrow> <br>
+	Ferran-Roger Basart i Bosch: <https://github.com/ferba93> <br>
 
 ## License
 
