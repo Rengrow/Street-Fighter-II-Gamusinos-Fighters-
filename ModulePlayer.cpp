@@ -508,9 +508,9 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (IsntOnRightLimit())
-				position.x++;
+				position.x += 3;
 
-			
+
 			break;
 
 		case ST_JUMP_BACKWARD:
@@ -524,7 +524,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x--;
+				position.x -= 3;
 			//LOG("JUMPING BACKWARD ^^<<\n");
 			break;
 
@@ -572,7 +572,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (IsntOnRightLimit())
-				position.x++;
+				position.x += 3;
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP:
@@ -587,7 +587,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (IsntOnLeftLimit())
-				position.x--;
+				position.x -= 3;
 			break;
 
 		case L_KIK_CROUCH:
@@ -622,7 +622,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (IsntOnRightLimit())
-				position.x++;
+				position.x += 3;
 			break;
 
 		case L_KIK_BACKWARD_JUMP:
@@ -636,7 +636,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 3;
 			}
 			if (IsntOnLeftLimit())
-				position.x--;
+				position.x -= 3;
 			break;
 
 		case ST_HEAD_REEL:
