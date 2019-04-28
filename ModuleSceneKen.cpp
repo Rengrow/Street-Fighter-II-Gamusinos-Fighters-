@@ -138,6 +138,9 @@ bool ModuleSceneKen::Start()
 	App->collisions->Enable();
 	App->UI->Enable();
 
+	collider = App->collisions->AddCollider({ 0,0,1,SCREEN_HEIGHT }, COLLIDER_WALL);
+	collider2 = App->collisions->AddCollider({ 620,0,1,SCREEN_HEIGHT }, COLLIDER_WALL);
+
 	App->UI->StartFight();
 
 	return true;
@@ -148,15 +151,28 @@ bool ModuleSceneKen::CleanUp()
 {
 	LOG("Unloading ken scene");
 
+
+	App->textures->Unload(graphics);
+	graphics = nullptr;
+	App->audio->UnloadSong(music);
+	music = nullptr;
+
+	if (collider != nullptr) {
+		collider->to_delete = true;
+		collider = nullptr;
+	}
+
+	if (collider2 != nullptr) {
+		collider2->to_delete = true;
+		collider2 = nullptr;
+	}
+
 	App->player->Disable();
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
 	App->UI->Disable();
-	App->textures->Unload(graphics);
-	graphics = nullptr;
-	App->audio->UnloadSong(music);
-	music = nullptr;
+
 
 	return true;
 }
