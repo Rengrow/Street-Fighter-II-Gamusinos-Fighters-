@@ -839,24 +839,24 @@ bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (!freeze) {
 		//Key UP
-		if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_CROUCH_UP2);
 			down = false;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_UP)
 		{
 			up = false;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_RIGHT_UP2);
 			right = false;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_LEFT_UP2);
 			left = false;
@@ -864,40 +864,46 @@ bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 		//Key down
 
-		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_8] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_PUNCH2);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_KIK2);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
 		{
 			if (state != ST_HADOKEN2)
 				hdk.ResetAnimation();
 			inputs.Push(IN_HADOKEN2);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_REPEAT)
 		{
+			if (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2)
+			{
+				backwardJump.ResetAnimation();
+				forwardJump.ResetAnimation();
+				neutralJump.ResetAnimation();
+			}
 			up = true;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_REPEAT)
 		{
 			down = true;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT)
 		{
 
 			left = true;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT)
+		if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT)
 		{
 			right = true;
 		}
