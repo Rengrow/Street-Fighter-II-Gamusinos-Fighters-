@@ -463,6 +463,17 @@ update_status ModuleSecondPlayer::Update()
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle;
 	SDL_Texture *texture = graphics;
+	int hdk_spawn;
+
+	if (flip == false)
+	{
+		hdk_spawn = 25;
+	}
+
+	if (flip == true)
+	{
+		hdk_spawn = -40;
+	}
 
 	if (!freeze)
 		external_input(inputs);
@@ -668,13 +679,13 @@ update_status ModuleSecondPlayer::Update()
 			current_animation = &hdk;
 			if (App->frames - hadoken_timer == 35)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x - 25, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
 			break;
 
 		case ST_FALLING2:
 			current_animation = &airreel;
-			jumpHeight += speed;
+			jumpHeight += speed + 3;
 			if (jumpHeight == 0)
 			{
 				inputs.Push(IN_FALLING_FINISH2);

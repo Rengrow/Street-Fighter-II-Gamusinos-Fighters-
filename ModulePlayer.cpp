@@ -407,6 +407,9 @@ bool ModulePlayer::Start()
 	getup.PushBack({ 633, 909, 46, 115 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 
+	//ground
+	ground.PushBack({ 310, 992, 129, 32 }, 20, {29,5}, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
 
 	inputs.Push(IN_END);
 
@@ -453,6 +456,7 @@ bool ModulePlayer::CleanUp()
 	getup = Animation();
 	crouching = standing = crouch = Animation();
 	win1 = win2 = Animation();
+	ground = Animation();
 
 	return true;
 }
@@ -470,6 +474,17 @@ update_status ModulePlayer::Update()
 	Animation* current_animation = &idle;
 	SDL_Texture* texture = graphics;
 
+	int hdk_spawn;
+
+	if (flip == false)
+	{
+		hdk_spawn = 25;
+	}
+
+	if (flip == true)
+	{
+		hdk_spawn = -40;
+	}
 
 	external_input(inputs);
 
@@ -666,7 +681,7 @@ update_status ModulePlayer::Update()
 			current_animation = &hdk;
 			if (App->frames - hadoken_timer == 35)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
 			}
 			break;
 
@@ -684,7 +699,7 @@ update_status ModulePlayer::Update()
 			break;
 
 		case LOOSE:
-			current_animation = &airreel;
+			current_animation = &ground;
 			break;
 
 		case VICTORY:
