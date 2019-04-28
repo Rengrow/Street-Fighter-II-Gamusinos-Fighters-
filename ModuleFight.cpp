@@ -91,16 +91,10 @@ void ModuleFight::Win(int player) {
 	App->player->freeze = true;
 	App->player2->freeze = true;
 
-	if (player == 1) {
+	if (player == 1)
 		player1RoundWinned++;
-		App->player->inputs.Push(IN_VICTORY);
-		App->player2->inputs.Push(IN_LOOSE2);
-	}
-	else if (player == 2) {
+	else if (player == 2)
 		player2RoundWinned++;
-		App->player->inputs.Push(IN_LOOSE);
-		App->player2->inputs.Push(IN_VICTORY2);
-	}
 
 	round++;
 

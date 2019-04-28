@@ -7,7 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
-#include "ModuleFonts.h"
+#include "ModuleSecondPlayer.h"
 #include "p2Qeue.h"
 
 #include "SDL\include\SDL.h"
@@ -473,14 +473,14 @@ update_status ModulePlayer::Update()
 			break;
 
 		case ST_WALK_FORWARD:
-			current_animation = &forward;
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			current_animation = (!flip ? &forward : &backward);
+			if (IsntOnRightLimit())
 				position.x++;
 			break;
 
 		case ST_WALK_BACKWARD:
-			current_animation = &backward;
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			current_animation = (!flip ? &backward : &forward);
+			if (IsntOnLeftLimit())
 				position.x--;
 			break;
 
@@ -522,7 +522,7 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			if (IsntOnRightLimit())
 				position.x += 4;
 
 			//LOG("JUMPING FORWARD ^^>>\n");
@@ -546,9 +546,8 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 5;
 			}
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x -= 4;
-			//LOG("JUMPING BACKWARD ^^<<\n");
 			break;
 
 		case ST_CROUCHING:
@@ -589,7 +588,6 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			LOG("PUNCH JUMP NEUTRAL ^^++\n");
 			break;
 
 		case L_PUNCH_FORWARD_JUMP:
@@ -610,9 +608,8 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			if (IsntOnRightLimit())
 				position.x++;
-			//LOG("PUNCH JUMP FORWARD ^>>+\n");
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP:
@@ -633,9 +630,8 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x--;
-			//LOG("PUNCH JUMP BACKWARD ^<<+\n");
 			break;
 
 		case L_KIK_CROUCH:
@@ -664,7 +660,6 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			LOG("KIK JUMP NEUTRAL ^^++\n");
 			break;
 
 		case L_KIK_FORWARD_JUMP:
@@ -685,9 +680,8 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			if (IsntOnRightLimit())
 				position.x++;
-
 			break;
 
 		case L_KIK_BACKWARD_JUMP:
@@ -708,9 +702,8 @@ update_status ModulePlayer::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x--;
-
 			break;
 
 		case ST_HEAD_REEL:
@@ -789,6 +782,14 @@ void ModulePlayer::ClearColliders() {
 	}
 }
 
+bool ModulePlayer::IsntOnRightLimit() {
+	return position.x + 34 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
+}
+
+bool ModulePlayer::IsntOnLeftLimit() {
+	return position.x - 34 > -App->render->camera.x / SCREEN_SIZE;
+}
+
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
@@ -797,6 +798,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 20 + App->frames;
 
+			if (!flip)
+				position.x--;
+
 			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH || state == L_KIK_CROUCH)
 				inputs.Push(IN_CROUCH_REEL);
 
@@ -804,7 +808,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_HEAD_REEL);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
+			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
 			life -= 10;
 			invulnerabilityFrames = 20 + App->frames;
@@ -830,12 +835,39 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			inputs.Push(IN_FALLING);
 		}
 
-
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 		{
-			/*if (position.x != 0) {
+			if (state == ST_WALK_FORWARD && App->player2->state == ST_WALK_FORWARD2) {
 				position.x--;
-			}*/
+				App->player2->position.x++;
+			}
+			else if (state == ST_WALK_BACKWARD && App->player2->state == ST_WALK_BACKWARD2) {
+				position.x++;
+				App->player2->position.x--;
+			}
+			else {
+				if (state != ST_IDLE && state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP) {
+					if (App->player2->IsntOnLeftLimit() && position.x > App->player2->position.x)
+						App->player2->position.x--;
+					else if (!App->player2->IsntOnLeftLimit() && position.x > App->player2->position.x)
+						position.x++;
+					else if (App->player2->IsntOnRightLimit() && position.x < App->player2->position.x)
+						App->player2->position.x++;
+					else if (!App->player2->IsntOnRightLimit() && position.x < App->player2->position.x)
+						position.x--;
+
+				}
+				else if (App->player2->state != ST_IDLE2 && App->player2->state != ST_JUMP_NEUTRAL2 && App->player2->state != ST_JUMP_FORWARD2 && App->player2->state != ST_JUMP_BACKWARD2 && App->player2->state != L_PUNCH_NEUTRAL_JUMP2 && App->player2->state != L_PUNCH_FORWARD_JUMP2 && App->player2->state != L_PUNCH_BACKWARD_JUMP2 && App->player2->state != L_KIK_NEUTRAL_JUMP2 && App->player2->state != L_KIK_FORWARD_JUMP2 && App->player2->state != L_KIK_BACKWARD_JUMP2) {
+					if (IsntOnLeftLimit() && position.x < App->player2->position.x)
+						position.x--;
+					else if (App->player2->IsntOnLeftLimit() && position.x < App->player2->position.x)
+						App->player2->position.x++;
+					else if (IsntOnRightLimit() && position.x > App->player2->position.x)
+						position.x++;
+					else if (App->player2->IsntOnRightLimit() && position.x > App->player2->position.x)
+						App->player2->position.x--;
+				}
+			}
 		}
 	}
 }

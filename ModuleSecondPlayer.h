@@ -102,6 +102,8 @@ public:
 	void OnCollision(Collider* c1, Collider* c2);
 	void BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture);
 	void ClearColliders();
+	bool IsntOnLeftLimit();
+	bool IsntOnRightLimit();
 
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];

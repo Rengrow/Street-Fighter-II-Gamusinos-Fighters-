@@ -464,20 +464,19 @@ update_status ModuleSecondPlayer::Update()
 			break;
 
 		case ST_WALK_FORWARD2:
-			current_animation = &forward;
-			if (position.x - 32 > -App->render->camera.x / SCREEN_SIZE)
+			current_animation = (flip ? &forward : &backward);
+			if (IsntOnLeftLimit())
 				position.x--;
 			break;
 
 		case ST_WALK_BACKWARD2:
-			current_animation = &backward;
-			if (position.x + 30 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			current_animation = (flip ? &backward : &forward);
+			if (IsntOnRightLimit())
 				position.x++;
 			break;
 
 		case ST_JUMP_NEUTRAL2:
 			current_animation = &neutralJump;
-
 			if (App->frames - jump_timer > 34 && (App->frames - jump_timer <= JUMP_TIME))
 			{
 				jumpHeight += speed + 5;
@@ -761,6 +760,14 @@ void ModuleSecondPlayer::ClearColliders() {
 	}
 }
 
+bool ModuleSecondPlayer::IsntOnLeftLimit() {
+	return position.x - 34 > -App->render->camera.x / SCREEN_SIZE;
+}
+
+bool ModuleSecondPlayer::IsntOnRightLimit() {
+	return position.x + 34 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
+}
+
 void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
@@ -768,12 +775,12 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 			life -= 12;
 			invulnerabilityFrames = 20 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
-			
+
 			if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 				inputs.Push(IN_CROUCH_REEL2);
-			
+
 			else
-			inputs.Push(IN_HEAD_REEL2);
+				inputs.Push(IN_HEAD_REEL2);
 
 		}
 
@@ -803,27 +810,6 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 			invulnerabilityFrames = 20 + App->frames;
 			inputs.Push(IN_FALLING2);
 		}
-
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER)
-		{
-			//AQUI
-			if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
-				position.x = (App->player->position.x + 63);
-			}
-			else {
-				App->player->position.x--;
-			}
-		}
-
-		/*if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
-		{
-			if (position.x == App->render->limit1Box.x) {
-				position.x++;
-			}
-			if (position.x + 60 == (App->render->limit1Box.x + App->render->camera.w)) {
-				position.x--;
-			}
-		}*/
 	}
 }
 

@@ -187,7 +187,7 @@ void ModuleUI::LifeBarsBlit() {
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarRedP2, true);
 
 	lifeBarP1.x = lifeBarRedP1.w - App->player->life*1.5;
-	App->render->Blit(lifeBars, (- App->render->camera.x / SCREEN_SIZE) + 24, 20, &lifeBarP1, true);
+	App->render->Blit(lifeBars, (-App->render->camera.x / SCREEN_SIZE) + 24, 20, &lifeBarP1, true);
 
 	lifeBarP2.w = App->player2->life*1.5;
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarP2, false);
@@ -296,6 +296,16 @@ void ModuleUI::EndFight() {
 
 		if (timeRemaining == 3 && !youFinalSound) {
 			App->audio->PlayChunk(you_snd);
+
+			if (winnerPlayer == 1) {
+				App->player->inputs.Push(IN_VICTORY);
+				App->player2->inputs.Push(IN_LOOSE2);
+			}
+			else if (winnerPlayer == 2) {
+				App->player->inputs.Push(IN_LOOSE);
+				App->player2->inputs.Push(IN_VICTORY2);
+			}
+
 			youFinalSound = true;
 		}
 		else if (timeRemaining == 2 && !winLoseFinalSound) {
