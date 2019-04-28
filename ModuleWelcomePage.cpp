@@ -26,6 +26,7 @@ bool ModuleWelcomePage::Start()
 	graphics = App->textures->Load("assets/images/wiki/title_screen.png");
 	music = App->audio->LoadSong("assets/music/title.ogg");
 	App->audio->PlaySongDelay(music, -1, 10000);
+	App->render->camera.x = App->render->camera.y = 0;
 
 	return ret;
 }

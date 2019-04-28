@@ -36,7 +36,7 @@ bool ModulePlayer::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = 0;
+	victoryExecuted = invulnerabilityFrames = 0;
 
 	Animation* current_animation;
 
@@ -547,7 +547,7 @@ update_status ModulePlayer::Update()
 				jumpHeight -= speed + 5;
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
-				position.x =- 4;
+				position.x = -4;
 			//LOG("JUMPING BACKWARD ^^<<\n");
 			break;
 
@@ -687,7 +687,7 @@ update_status ModulePlayer::Update()
 			}
 			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
 				position.x++;
-			
+
 			break;
 
 		case L_KIK_BACKWARD_JUMP:
@@ -710,7 +710,7 @@ update_status ModulePlayer::Update()
 			}
 			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
 				position.x--;
-		
+
 			break;
 
 		case ST_HEAD_REEL:
@@ -790,38 +790,42 @@ void ModulePlayer::ClearColliders() {
 }
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
+	if (invulnerabilityFrames < App->frames) {
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
+		{
+			life -= 12;
+			App->audio->PlayChunk(hdk_hit);
+			inputs.Push(IN_HEAD_REEL);
+			invulnerabilityFrames = 20 + App->frames;
+		}
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
-	{
-		life -= 12;
-		App->audio->PlayChunk(hdk_hit);
-		inputs.Push(IN_HEAD_REEL);
-	}
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
+		{
+			life -= 10;
+			inputs.Push(IN_HEAD_REEL);
+			invulnerabilityFrames = 20 + App->frames;
+		}
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
-	{
-		life -= 10;
-		inputs.Push(IN_HEAD_REEL);
-	}
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+		{
+			life -= 20;
+			invulnerabilityFrames = 20 + App->frames;
+			inputs.Push(IN_FALLING);
+		}
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
-	{
-		life -= 20;
-
-		inputs.Push(IN_FALLING);
-	}
-
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
-	{
-		life -= 10;
-		inputs.Push(IN_FALLING);
-	}
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+		{
+			life -= 10;
+			invulnerabilityFrames = 20 + App->frames;
+			inputs.Push(IN_FALLING);
+		}
 
 
-	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
-	{
-		if (position.x != 0) {
-			position.x--;
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
+		{
+			if (position.x != 0) {
+				position.x--;
+			}
 		}
 	}
 }
