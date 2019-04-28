@@ -909,17 +909,17 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 		}
 		//Key down
 
-		if (App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_4] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_PUNCH);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_5] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_KIK);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_6] == KEY_STATE::KEY_DOWN)
 		{
 			if (state != ST_HADOKEN)
 				hdk.ResetAnimation();
@@ -928,6 +928,12 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 
 		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 		{
+			if (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD)
+			{
+				backwardJump.ResetAnimation();
+				forwardJump.ResetAnimation();
+				neutralJump.ResetAnimation();
+			}
 			up = true;
 		}
 
