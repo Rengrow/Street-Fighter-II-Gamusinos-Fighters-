@@ -470,8 +470,8 @@ update_status ModulePlayer::Update()
 	Animation* current_animation = &idle;
 	SDL_Texture* texture = graphics;
 
-	if (!freeze)
-		external_input(inputs);
+
+	external_input(inputs);
 
 	internal_input(inputs);
 	state = process_fsm(inputs);
@@ -856,88 +856,96 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 	static bool down = false;
 	static bool up = false;
 
-	//Key UP
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
-	{
-		inputs.Push(IN_CROUCH_UP);
-		down = false;
-
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)
-	{
-		up = false;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP)
-	{
-		inputs.Push(IN_LEFT_UP);
-		left = false;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP)
-	{
-		inputs.Push(IN_RIGHT_UP);
-		right = false;
-	}
-	//Key down
-
-	if (App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN)
-	{
-		inputs.Push(IN_L_PUNCH);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN)
-	{
-		inputs.Push(IN_L_KIK);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
-	{
-		inputs.Push(IN_HADOKEN);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-	{
-		up = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
-	{
-		down = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
-	{
-		left = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-	{
-		right = true;
-	}
-
-	if (left && right)
-		inputs.Push(IN_LEFT_AND_RIGHT);
-	{
-		if (left)
-			inputs.Push(IN_LEFT_DOWN);
-		if (right)
-			inputs.Push(IN_RIGHT_DOWN);
-	}
-
-	if (up && down)
-		inputs.Push(IN_JUMP_AND_CROUCH);
-	else
-	{
-		if (down)
-			inputs.Push(IN_CROUCH_DOWN);
-		else
+	if (!freeze) {
+		//Key UP
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_CROUCH_UP);
+			down = false;
+
 		}
-		if (up)
-			inputs.Push(IN_JUMP);
+
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)
+		{
+			up = false;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP)
+		{
+			inputs.Push(IN_LEFT_UP);
+			left = false;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP)
+		{
+			inputs.Push(IN_RIGHT_UP);
+			right = false;
+		}
+		//Key down
+
+		if (App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_L_PUNCH);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_L_KIK);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_HADOKEN);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+		{
+			up = true;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+		{
+			down = true;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		{
+			left = true;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		{
+			right = true;
+		}
+
+		if (left && right)
+			inputs.Push(IN_LEFT_AND_RIGHT);
+		{
+			if (left)
+				inputs.Push(IN_LEFT_DOWN);
+			if (right)
+				inputs.Push(IN_RIGHT_DOWN);
+		}
+
+		if (up && down)
+			inputs.Push(IN_JUMP_AND_CROUCH);
+		else
+		{
+			if (down)
+				inputs.Push(IN_CROUCH_DOWN);
+			else
+			{
+				inputs.Push(IN_CROUCH_UP);
+			}
+			if (up)
+				inputs.Push(IN_JUMP);
+		}
+	}
+	else {
+		left = false;
+		right = false;
+		down = false;
+		up = false;
 	}
 
 	return true;
