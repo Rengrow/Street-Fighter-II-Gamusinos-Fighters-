@@ -10,37 +10,37 @@ Currently there is no installation required, just open the .exe provided in the 
 
 ## Usage
 
-General Controls :
-	Space: In menus, go to the next screen
-	ESC: Close the game
+General Controls :<br>
+	Space: In menus, go to the next screen<br>
+	ESC: Close the game<br>
 	
-Debug Controls:
-	F1: Enable the collision boxes
-	F5: Enable God Mode for the player 1
-	F10: Instant win for player 1 in the fight
-	F11: Instant win for player 2 in the fight
+Debug Controls:<br>
+	F1: Show/Unshow the collision boxes<br>
+	F5: Enable God Mode for the player 1<br>
+	F10: Instant win for player 1 in the fight screen<br>
+	F11: Instant win for player 2 in the fight screen<br>
 
-Player 1 Controls: 
-    Movement:
-        W: Jump
-        A: Backwards
-        S: Crouch
-        D: Forwards
-    Attacks:
-        4: Punch
-        5: Kick
-        6: Hadoken
+Player 1 Controls: <br>
+    Movement:<br>
+        W: Jump<br>
+        A: Backwards<br>
+        S: Crouch<br>
+        D: Forwards<br>
+    Attacks:<br>
+        4: Punch<br>
+        5: Kick<br>
+        6: Hadoken<br>
 
-Player 2 Controls: 
-    Movement:
-        Y: Jump
-        G: Backwards
-        H: Crouch
-        J: Forwards
-    Attacks:
-        8: Punch
-        9: Kick
-        0: Hadoken
+Player 2 Controls:<br> 
+    Movement:<br>
+        Y: Jump<br>
+        G: Backwards<br>
+        H: Crouch<br>
+        J: Forwards<br>
+    Attacks:<br>
+        8: Punch<br>
+        9: Kick<br>
+        0: Hadoken<br>
 
 ## History
 
@@ -98,13 +98,13 @@ Ferran-Roger Basart i Bosch
 
 ## License
 
-SDL license:
-Simple DirectMedia Layer
-Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org>
-SDL_image:  An example image loading library for use with SDL
-Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
-SDL_mixer:  An audio mixer library based on the SDL library
-Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org>
+SDL license:<br>
+Simple DirectMedia Layer<br>
+Copyright (C) 1997-2016 Sam Lantinga <slouken@libsdl.org><br>
+SDL_image:  An example image loading library for use with SDL<br>
+Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org><br>
+SDL_mixer:  An audio mixer library based on the SDL library<br>
+Copyright (C) 1997-2013 Sam Lantinga <slouken@libsdl.org><br>
 
   
 This software is provided 'as-is', without any express or implied
