@@ -9,26 +9,26 @@ Currently there is no installation required, just open the .exe provided in the 
 ## Usage
 
 Player 1 Controls: 
-	Movement:
-		W (jump),
-		A (backwards),
-		S (crouch),
-		D (forwards)
-	Attacks:
-		U (punch),
-		J (kick),
-		Q (hadoken)
-		
+    Movement:
+        W (jump),
+        A (backwards),
+        S (crouch),
+        D (forwards)
+    Attacks:
+        4 (punch),
+        5 (kick),
+        6 (hadoken)
+
 Player 2 Controls: 
-	Movement:
-		F (jump),
-		C (backwards),
-		V (crouch),
-		B (forwards),
-	Attacks:
-		1 (punch),
-		2 (kick),
-		3 (hadoken)
+    Movement:
+        Y (jump),
+        G (backwards),
+        H (crouch),
+        J (forwards),
+    Attacks:
+        8 (punch),
+        9 (kick),
+        0 (hadoken)
 		
 In order to play, open the .exe and press space to navigate through each menu until you get into a battle stage, the ones
 with backgrounds, from which you will only be able to escape after defeating the opponent or
