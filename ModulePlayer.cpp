@@ -756,7 +756,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		{
 			life -= 12;
 			App->audio->PlayChunk(hdk_hit);
-			invulnerabilityFrames = 20 + App->frames;
+			invulnerabilityFrames = 25 + App->frames;
 
 			if (!flip)
 				position.x--;
@@ -772,7 +772,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
 			life -= 7;
-			invulnerabilityFrames = 20 + App->frames;
+			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player2->state == L_KIK_STANDING2 || App->player->state == L_KIK_NEUTRAL_JUMP2 || App->player->state == L_KIK_FORWARD_JUMP2 || App->player->state == L_KIK_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_kick);
@@ -794,14 +794,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		{
 			life -= 12;
 			App->audio->PlayChunk(hdk_hit);
-			invulnerabilityFrames = 20 + App->frames;
+			invulnerabilityFrames = 25 + App->frames;
 			inputs.Push(IN_FALLING);
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
 		{
 			life -= 7;
-			invulnerabilityFrames = 20 + App->frames;
+			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player2->state == L_KIK_STANDING2 || App->player2->state == L_KIK_NEUTRAL_JUMP2 || App->player2->state == L_KIK_FORWARD_JUMP2 || App->player2->state == L_KIK_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_kick);
