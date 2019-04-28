@@ -10,17 +10,17 @@ Currently there is no installation required, just open the .exe provided in the 
 
 ## Usage
 
-General Controls :<br>
+###General Controls :<br>
 	Space: In menus, go to the next screen<br>
 	ESC: Close the game<br>
 	
-Debug Controls:<br>
+###Debug Controls:<br>
 	F1: Show/Unshow the collision boxes<br>
 	F5: Enable God Mode for the player 1<br>
 	F10: Instant win for player 1 in the fight screen<br>
 	F11: Instant win for player 2 in the fight screen<br>
 
-Player 1 Controls: <br>
+###Player 1 Controls: <br>
     Movement:<br>
         W: Jump<br>
         A: Backwards<br>
@@ -31,7 +31,7 @@ Player 1 Controls: <br>
         5: Kick<br>
         6: Hadoken<br>
 
-Player 2 Controls:<br> 
+###Player 2 Controls:<br> 
     Movement:<br>
         Y: Jump<br>
         G: Backwards<br>
