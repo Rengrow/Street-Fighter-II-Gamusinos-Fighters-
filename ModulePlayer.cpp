@@ -672,7 +672,7 @@ update_status ModulePlayer::Update()
 
 		case ST_FALLING:
 			current_animation = &airreel;
-			jumpHeight += speed;
+			jumpHeight += speed + 3;
 			if (jumpHeight == 0)
 			{
 				inputs.Push(IN_FALLING_FINISH);
