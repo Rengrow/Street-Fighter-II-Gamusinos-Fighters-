@@ -823,9 +823,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 		{
-			if (position.x != 0) {
+			/*if (position.x != 0) {
 				position.x--;
-			}
+			}*/
 		}
 	}
 }

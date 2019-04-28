@@ -264,18 +264,8 @@ bool ModuleSecondPlayer::Start()
 	COLLIDER_TYPE streelColliderType[streelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* streelCallback[streelnColliders] = { {this}, {this}, {this} };
 
-
-	const int streelinIcionColliders = 0;
-	/*
-	SDL_Rect streelHitbox1[streelinIcionColliders] = {};
-	SDL_Rect streelHitbox2[streelinIcionColliders] = {};
-	SDL_Rect streelHitbox3[streelinIcionColliders] = {};
-	SDL_Rect streelHitbox4[streelinIcionColliders] = {};
-	COLLIDER_TYPE streelColliderType[streelinIcionColliders] = {};
-	Module* streelCallback[streelinIcionColliders] = {};*/
-
-	streel.PushBack({ 143, 857, 67, 92 }, 10, { 48,5 }, streelinIcionColliders, streelHitbox1, streelColliderType, streelCallback);
-	streel.PushBack({ 213, 857, 69, 91 }, 10, { 53,5 }, streelinIcionColliders, streelHitbox2, streelColliderType, streelCallback);
+	streel.PushBack({ 143, 857, 67, 92 }, 10, { 48,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
+	streel.PushBack({ 213, 857, 69, 91 }, 10, { 53,5 }, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
 	streel.PushBack({ 285, 857, 80, 91 }, 10, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
 	streel.PushBack({ 367, 857, 66, 91 }, 10, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
 
@@ -809,10 +799,12 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 			if ((position.x + 60) != (App->render->camera.x + App->render->camera.w)) {
 				position.x = (App->player->position.x + 63);
 			}
-			else { App->player->position.x--; }
+			else {
+				App->player->position.x--;
+			}
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
+		/*if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_WALL)
 		{
 			if (position.x == App->render->limit1Box.x) {
 				position.x++;
@@ -820,7 +812,7 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 			if (position.x + 60 == (App->render->limit1Box.x + App->render->camera.w)) {
 				position.x--;
 			}
-		}
+		}*/
 	}
 }
 
