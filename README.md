@@ -85,7 +85,10 @@ Version 0.5.2:
 
 Version 0.5.3:
 - Fixed animations when interrump
+- Changed Controls
 
+Version 0.5.4:
+- Fixed infinite loop for changed controls
 
 
 ## Credits
