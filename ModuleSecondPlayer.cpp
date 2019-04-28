@@ -373,7 +373,6 @@ bool ModuleSecondPlayer::Start()
 	win1.loop = false;
 
 	// Win2
-
 	const int win2nColliders = 3;
 	SDL_Rect win2Hitbox1[win2nColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	COLLIDER_TYPE win2ColliderType[win2nColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
@@ -464,8 +463,7 @@ update_status ModuleSecondPlayer::Update()
 	Animation* current_animation = &idle;
 	SDL_Texture *texture = graphics;
 
-	if (!freeze)
-		external_input(inputs);
+	external_input(inputs);
 
 	internal_input(inputs);
 	state = process_fsm(inputs);
@@ -753,9 +751,9 @@ void ModuleSecondPlayer::OnCollision(Collider* c1, Collider* c2) {
 
 			if (App->player->state == L_KIK_STANDING || App->player->state == L_KIK_NEUTRAL_JUMP || App->player->state == L_KIK_FORWARD_JUMP || App->player->state == L_KIK_BACKWARD_JUMP)
 				App->audio->PlayChunk(high_kick);
-			else if(App->player->state == L_KIK_CROUCH)
+			else if (App->player->state == L_KIK_CROUCH)
 				App->audio->PlayChunk(low_kick);
-			else if(App->player->state == L_PUNCH_STANDING || App->player->state == L_PUNCH_NEUTRAL_JUMP || App->player->state == L_PUNCH_FORWARD_JUMP || App->player->state == L_PUNCH_BACKWARD_JUMP)
+			else if (App->player->state == L_PUNCH_STANDING || App->player->state == L_PUNCH_NEUTRAL_JUMP || App->player->state == L_PUNCH_FORWARD_JUMP || App->player->state == L_PUNCH_BACKWARD_JUMP)
 				App->audio->PlayChunk(high_fist);
 			else if (App->player->state == L_PUNCH_CROUCH)
 				App->audio->PlayChunk(low_fist);
@@ -823,89 +821,97 @@ bool ModuleSecondPlayer::external_input(p2Qeue<ryu_inputs2>& inputs)
 	static bool down = false;
 	static bool up = false;
 
-	//Key UP
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_UP)
-	{
-		inputs.Push(IN_CROUCH_UP2);
-		down = false;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_UP)
-	{
-		up = false;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP)
-	{
-		inputs.Push(IN_RIGHT_UP2);
-		right = false;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_UP)
-	{
-		inputs.Push(IN_LEFT_UP2);
-		left = false;
-
-	}
-	//Key down
-
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
-	{
-		inputs.Push(IN_L_PUNCH2);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
-	{
-		inputs.Push(IN_L_KIK2);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
-	{
-		inputs.Push(IN_HADOKEN2);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_REPEAT)
-	{
-		up = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_REPEAT)
-	{
-		down = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT)
-	{
-
-		left = true;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT)
-	{
-		right = true;
-	}
-
-	if (left && right)
-		inputs.Push(IN_LEFT_AND_RIGHT2);
-	{
-		if (left)
-			inputs.Push(IN_LEFT_DOWN2);
-		if (right)
-			inputs.Push(IN_RIGHT_DOWN2);
-	}
-
-	if (up && down)
-		inputs.Push(IN_JUMP_AND_CROUCH2);
-	else
-	{
-		if (down)
-			inputs.Push(IN_CROUCH_DOWN2);
-		else
+	if (!freeze) {
+		//Key UP
+		if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_CROUCH_UP2);
+			down = false;
 		}
-		if (up)
-			inputs.Push(IN_JUMP2);
+
+		if (App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_UP)
+		{
+			up = false;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_UP)
+		{
+			inputs.Push(IN_RIGHT_UP2);
+			right = false;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_UP)
+		{
+			inputs.Push(IN_LEFT_UP2);
+			left = false;
+
+		}
+		//Key down
+
+		if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_L_PUNCH2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_L_KIK2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_HADOKEN2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_F] == KEY_STATE::KEY_REPEAT)
+		{
+			up = true;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_REPEAT)
+		{
+			down = true;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_REPEAT)
+		{
+
+			left = true;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_C] == KEY_STATE::KEY_REPEAT)
+		{
+			right = true;
+		}
+
+		if (left && right)
+			inputs.Push(IN_LEFT_AND_RIGHT2);
+		{
+			if (left)
+				inputs.Push(IN_LEFT_DOWN2);
+			if (right)
+				inputs.Push(IN_RIGHT_DOWN2);
+		}
+
+		if (up && down)
+			inputs.Push(IN_JUMP_AND_CROUCH2);
+		else
+		{
+			if (down)
+				inputs.Push(IN_CROUCH_DOWN2);
+			else
+			{
+				inputs.Push(IN_CROUCH_UP2);
+			}
+			if (up)
+				inputs.Push(IN_JUMP2);
+		}
+	}
+	else {
+		left = false;
+		right = false;
+		down = false;
+		up = false;
 	}
 
 	return true;

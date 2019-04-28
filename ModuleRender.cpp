@@ -84,8 +84,8 @@ update_status ModuleRender::Update()
 		limit2Box.x += cameraSpeed;
 	}
 
-
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
+	//CAMERA DEBUG
+	/*if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
 		if (camera.x != 0) {
 			camera.x += cameraSpeed * SCREEN_SIZE;
 			limit1Box.x -= cameraSpeed;
@@ -99,7 +99,7 @@ update_status ModuleRender::Update()
 			limit1Box.x += cameraSpeed;
 			limit2Box.x += cameraSpeed;
 		}
-	}
+	}*/
 
 	return update_status::UPDATE_CONTINUE;
 }

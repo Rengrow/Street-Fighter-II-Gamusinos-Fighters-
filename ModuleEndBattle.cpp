@@ -7,6 +7,9 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 
+#include "ModulePlayer.h"
+#include "ModuleSecondPlayer.h"
+
 
 ModuleEndBattle::ModuleEndBattle()
 {
@@ -27,6 +30,12 @@ bool ModuleEndBattle::Start()
 	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
+
+
+	App->player->position.x = 100;
+	App->player->position.y = 215;
+	App->player2->position.x = 250;
+	App->player2->position.y = 215;
 	App->render->camera.x = App->render->camera.y = 0;
 
 	return ret;
