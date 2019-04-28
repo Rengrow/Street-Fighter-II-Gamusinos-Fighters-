@@ -29,7 +29,7 @@ bool ModuleParticles::Start()
 	hdk.anim.PushBack({ 321, 35, 39, 21 }, 1, { 0,0 }, 0, {}, {}, {});
 	hdk.anim.loop = true;
 	
-	hdk.life = -2;
+	hdk.life = -1;
 	return true;
 }
 
