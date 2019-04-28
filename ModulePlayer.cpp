@@ -803,11 +803,11 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			life -= 7;
 			invulnerabilityFrames = 20 + App->frames;
 
-			if (App->player2->state == L_KIK_STANDING2 || App->player->state == L_KIK_NEUTRAL_JUMP2 || App->player->state == L_KIK_FORWARD_JUMP2 || App->player->state == L_KIK_BACKWARD_JUMP2)
+			if (App->player2->state == L_KIK_STANDING2 || App->player2->state == L_KIK_NEUTRAL_JUMP2 || App->player2->state == L_KIK_FORWARD_JUMP2 || App->player2->state == L_KIK_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_kick);
 			else if (App->player2->state == L_KIK_CROUCH2)
 				App->audio->PlayChunk(low_kick);
-			else if (App->player2->state == L_PUNCH_STANDING2 || App->player->state == L_PUNCH_NEUTRAL_JUMP2 || App->player->state == L_PUNCH_FORWARD_JUMP2 || App->player->state == L_PUNCH_BACKWARD_JUMP2)
+			else if (App->player2->state == L_PUNCH_STANDING2 || App->player2->state == L_PUNCH_NEUTRAL_JUMP2 || App->player2->state == L_PUNCH_FORWARD_JUMP2 || App->player2->state == L_PUNCH_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_fist);
 			else if (App->player2->state == L_PUNCH_CROUCH2)
 				App->audio->PlayChunk(low_fist);
