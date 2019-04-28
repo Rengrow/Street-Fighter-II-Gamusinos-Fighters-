@@ -90,7 +90,7 @@ Version 0.5.3:
 
 ## Credits
 
-Credits go to the team members:
+Credits go to the team members: <br>
 	José Luís Redondo Tello: <https://github.com/jose-tello> <br>
 	Adriá Serrano López: <https://github.com/adriaserrano97> <br>
 	Rafa López Martínez: <https://github.com/Rengrow> <br>
