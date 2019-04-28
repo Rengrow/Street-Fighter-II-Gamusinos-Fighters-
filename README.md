@@ -2,87 +2,91 @@
 
 A semi-replica of the original Street Fighter II, a one-vs-one 2D fighting game playable throudh keyboard
 
+### The project can be found at: https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-
+
 ## Installation
 
 Currently there is no installation required, just open the .exe provided in the download file
 
 ## Usage
 
+General Controls :
+	Space: In menus, go to the next screen
+	ESC: Close the game
+	
+Debug Controls:
+	F1: Enable the collision boxes
+	F5: Enable God Mode for the player 1
+	F10: Instant win for player 1 in the fight
+	F11: Instant win for player 2 in the fight
+
 Player 1 Controls: 
     Movement:
-        W (jump),
-        A (backwards),
-        S (crouch),
-        D (forwards)
+        W: Jump
+        A: Backwards
+        S: Crouch
+        D: Forwards
     Attacks:
-        4 (punch),
-        5 (kick),
-        6 (hadoken)
+        4: Punch
+        5: Kick
+        6: Hadoken
 
 Player 2 Controls: 
     Movement:
-        Y (jump),
-        G (backwards),
-        H (crouch),
-        J (forwards),
+        Y: Jump
+        G: Backwards
+        H: Crouch
+        J: Forwards
     Attacks:
-        8 (punch),
-        9 (kick),
-        0 (hadoken)
-		
-In order to play, open the .exe and press space to navigate through each menu until you get into a battle stage, the ones
-with backgrounds, from which you will only be able to escape after defeating the opponent or
-being defeated. In order to exit, press ESC.
-To enable the collision boxes, press F1.
-To play in God Mode (to be invulnerable to any attack), press F5.
-To get an instant win you have to press F10 while the timer is decreasing.
-To get an instant lose you have to press F11 while the timier is decreasing.
+        8: Punch
+        9: Kick
+        0: Hadoken
 
 ## History
 
 Up to version 0.5:
 
 Version 0.2:
-
--Basic elements such as backgrounds, player textures, audio and sound effects and inputs added!
-
--Fade between stages added!
-
--Animations added!
+- Basic elements such as backgrounds, player textures, audio and sound effects and inputs added!
+- Fade between stages added!
+- Animations added!
 
 Version 0.3:
-
--2nd player added!
-
--Hadoken added!
+- 2nd player added!
+- Hadoken added!
 
 Version 0.4:
-
--God Mode added!
-
--Stage limits added!
-
--Collisions added!
+- God Mode added!
+- Stage limits added!
+- Collisions added!
 
 Version 0.4.1:
+- State machine added!
+- Timer and health bars added!
+- Camera added!
 
--State machine added!
+Version 0.5:
+- UI in fight screen added!
+- UI music in fight screen added!
+- Rounds added!
+- Instant win added!
+- Win and lose pose added!
+- Hit sounds added!
 
--Timer and health bars added!
+Version 0.5.1:
+- Fixed bug crouch win
+- Fixed audios in jump player 2
 
--Camera added!
+Version 0.5.2:
+- Fixed different damage for both players
+- Fixed lose pose
+- Added Wall Colliders in stage limits
+- Extended invulnerability frames to 25
 
--Instant win added!
+Version 0.5.3:
+- Fixed animations when interrump
 
-## Contributing
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
-
-The project can be found at: https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-
 
 ## Credits
 
