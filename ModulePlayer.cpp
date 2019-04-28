@@ -391,6 +391,7 @@ bool ModulePlayer::Start()
 
 	airreel.PushBack({ 815, 883, 73, 65 }, 5, { 29,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
 
+	//getting up
 	const int getupnColliders = 3;
 	SDL_Rect getupHitbox1[getupnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	COLLIDER_TYPE getupColliderType[getupnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
@@ -401,6 +402,7 @@ bool ModulePlayer::Start()
 	getup.PushBack({ 534, 953, 56, 71 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 	getup.PushBack({ 633, 909, 46, 115 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
 	getup.PushBack({ 681, 956, 79, 68 }, 10, { 29,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+
 
 	inputs.Push(IN_END);
 
@@ -719,13 +721,14 @@ update_status ModulePlayer::Update()
 			break;
 
 		case ST_CROUCH_REEL:
+			current_animation = &creel;
 			break;
 
 		case ST_HADOKEN:
 			current_animation = &hdk;
 			if (App->frames - hadoken_timer == 35)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + 70, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + 25, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
 			}
 			break;
 
