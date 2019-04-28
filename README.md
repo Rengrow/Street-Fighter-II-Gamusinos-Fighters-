@@ -33,6 +33,7 @@ Player 2 Controls:
 In order to play, open the .exe and press space to navigate through each menu until you get into a battle stage, the ones
 with backgrounds, from which you will only be able to escape after defeating the opponent or
 being defeated. In order to exit, press ESC.
+To enable the collision boxes, press F1.
 To play in God Mode (to be invulnerable to any attack), press F5.
 To get an instant win you have to press F10 while the timer is decreasing.
 To get an instant lose you have to press F11 while the timier is decreasing.
