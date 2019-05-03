@@ -24,6 +24,7 @@ public:
 	int round;
 
 public:
+	Module * stage;
 	bool roundStarted;
 	bool endFightStarted;
 	bool stopedFight;

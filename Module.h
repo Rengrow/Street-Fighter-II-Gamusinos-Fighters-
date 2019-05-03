@@ -44,6 +44,7 @@ public:
 
 	// Callbacks ---
 	virtual void OnCollision(Collider*, Collider*) {}
+	virtual void StopMusic(int time) {}
 };
 
 #endif // __MODULE_H__

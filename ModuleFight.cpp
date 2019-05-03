@@ -5,6 +5,7 @@
 #include "ModuleSecondPlayer.h"
 #include "ModuleUI.h"
 #include "ModuleSceneKen.h"
+#include "ModuleSceneSagat.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include"ModuleFadeToBlack.h"
@@ -23,7 +24,9 @@ ModuleFight::~ModuleFight()
 
 bool ModuleFight::Start()
 {
-	App->scene_ken->Enable();
+	stage = App->scene_Sagat;
+
+	stage->Enable();
 
 	roundStarted = stopedFight = endFightStarted = false;
 
@@ -50,32 +53,33 @@ update_status ModuleFight::Update()
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
 
-	CheckFlipPlayers();
+		CheckFlipPlayers();
 
-	if (endFightStarted) {
-		if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
-			if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 1) {
-				StartNewRound();
-			}
-			else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 1) {
-				StartNewRound();
-			}
-			else if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 2) {
-				EndFullFight();
-			}
-			else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 2) {
-				EndFullFight();
+		if (endFightStarted) {
+			if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
+				if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 1) {
+					StartNewRound();
+				}
+				else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 1) {
+					StartNewRound();
+				}
+				else if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 2) {
+					EndFullFight();
+				}
+				else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 2) {
+					EndFullFight();
+				}
 			}
 		}
-	}
 
-	return UPDATE_CONTINUE;
+		return UPDATE_CONTINUE;
 }
 
 // Called before quitting
 bool ModuleFight::CleanUp()
 {
-	App->scene_ken->Disable();
+	if (stage != nullptr)
+		stage->Disable();
 	return true;
 }
 
@@ -85,12 +89,12 @@ int ModuleFight::GetTimer() {
 
 void ModuleFight::StartNewRound() {
 	endFightStarted = stopedFight = roundStarted = false;
-	App->scene_ken->StopMusic(2000);
-	App->fade->FadeToBlack((Module*)App->scene_ken, (Module*)App->scene_ken, 2);
+	stage->StopMusic(2000);
+	App->fade->FadeToBlack((Module*)stage, (Module*)stage, 2);
 }
 
 void ModuleFight::EndFullFight() {
-	App->scene_ken->StopMusic(2000);
+	stage->StopMusic(2000);
 	App->fade->FadeToBlack(this, (Module*)App->endBattle, 2);
 }
 

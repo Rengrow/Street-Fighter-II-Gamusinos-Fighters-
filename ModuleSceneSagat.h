@@ -19,6 +19,7 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+	void StopMusic(int time);
 
 public:
 
@@ -29,9 +30,8 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation palmtree;
-	int timer;
-	int letters;
-
+	Collider *collider = nullptr;
+	Collider *collider2 = nullptr;
 };
 
 #endif // __MODULESCENESAGAT_H__

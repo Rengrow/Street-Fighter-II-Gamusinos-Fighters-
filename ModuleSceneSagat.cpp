@@ -48,17 +48,32 @@ bool ModuleSceneSagat::Start()
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/thailand_s_1.ogg");
 
+	App->audio->PlaySongDelay(music, -1, 2000);
+
+	App->render->scenelimit = 790;
+
+	App->render->limit1Box.x = 0;
+	App->render->limit1Box.y = 0;
+	App->render->limit1Box.w = 3;
+	App->render->limit1Box.h = SCREEN_HEIGHT;
+
+	App->render->limit2Box.x = SCREEN_WIDTH - 3;
+	App->render->limit2Box.y = 0;
+	App->render->limit2Box.w = 3;
+	App->render->limit2Box.h = SCREEN_HEIGHT;
+
+	App->render->camera.x = App->render->camera.y = 0;
 
 	App->player->Enable();
 	App->player2->Enable();
 	App->particles->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
-	App->audio->PlaySongDelay(music, -1, 2000);
 
-	App->render->scenelimit = 790;
+	collider = App->collisions->AddCollider({ 0,0,1,SCREEN_HEIGHT }, COLLIDER_WALL);
+	collider2 = App->collisions->AddCollider({ 790,0,1,SCREEN_HEIGHT }, COLLIDER_WALL);
 
-	App->render->camera.x = App->render->camera.y = 0;
+	App->UI->StartFight();
 
 	return ret;
 }
@@ -68,17 +83,26 @@ bool ModuleSceneSagat::CleanUp()
 {
 	LOG("Unloading Sagat stage");
 
+	App->textures->Unload(graphics);
+	graphics = nullptr;
+	App->audio->UnloadSong(music);
+	music = nullptr;
+
+	if (collider != nullptr) {
+		collider->to_delete = true;
+		collider = nullptr;
+	}
+
+	if (collider2 != nullptr) {
+		collider2->to_delete = true;
+		collider2 = nullptr;
+	}
+
 	App->player->Disable();
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
 	App->UI->Disable();
-
-
-	App->textures->Unload(graphics);
-	graphics = nullptr;
-	App->audio->UnloadSong(music);
-	music = nullptr;
 
 	return true;
 }
@@ -108,4 +132,8 @@ update_status ModuleSceneSagat::PostUpdate() {
 
 	App->render->Blit(App->scene_Sagat->graphics, 364, 0, &(App->scene_Sagat->palmtree.GetCurrentFrameBox()), 0.75); // palmtree animation
 	return UPDATE_CONTINUE;
+}
+
+void ModuleSceneSagat::StopMusic(int time) {
+	Mix_FadeOutMusic(time);
 }
