@@ -7,8 +7,8 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 
-#include "ModulePlayer.h"
-#include "ModuleSecondPlayer.h"
+#include "ModuleRyu.h"
+#include "ModuleDhalsim.h"
 
 
 ModuleEndBattle::ModuleEndBattle()
@@ -32,10 +32,10 @@ bool ModuleEndBattle::Start()
 	App->audio->PlaySongDelay(music, 0, 10000);
 
 
-	App->player->position.x = 100;
-	App->player->position.y = 215;
-	App->player2->position.x = 250;
-	App->player2->position.y = 215;
+	App->ryu->position.x = 100;
+	App->ryu->position.y = 215;
+	App->dhalsim->position.x = 250;
+	App->dhalsim->position.y = 215;
 	App->render->camera.x = App->render->camera.y = 0;
 
 	return ret;

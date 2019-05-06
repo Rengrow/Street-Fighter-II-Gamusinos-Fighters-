@@ -3,27 +3,27 @@
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
+#include "ModuleRyu.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
-#include "ModuleSecondPlayer.h"
+#include "ModuleDhalsim.h"
 #include "p2Qeue.h"
 
 #include "SDL\include\SDL.h"
 
 
-ModulePlayer::ModulePlayer()
+ModuleRyu::ModuleRyu()
 {
 }
 
-ModulePlayer::~ModulePlayer()
+ModuleRyu::~ModuleRyu()
 {}
 
 // Load assets
-bool ModulePlayer::Start()
+bool ModuleRyu::Start()
 {
-	LOG("Loading player textures");
+	LOG("Loading ryu textures");
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
 	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png"); // arcade version
@@ -94,7 +94,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE lpColliderType[lpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
-	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 	lp.PushBack({ 59, 101, 64, 95 }, 5, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 	lp.PushBack({ 124, 101, 92, 95 }, 10, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
 	lp.PushBack({ 59, 101, 64, 95 }, 8, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
@@ -111,7 +111,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE lkColliderType[lknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
-	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 	lk.PushBack({ 1, 3, 53, 94 }, 7, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 	lk.PushBack({ 400, 102, 63, 93 }, 7, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
 	lk.PushBack({ 467, 100, 115, 93 }, 20, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
@@ -170,7 +170,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE jlpColliderType[jlpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE jlpColliderType2[jlpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*jlpCallback[jlpnColliders] = { {this}, {this}, {this} };
-	Module*jlpCallback2[jlpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*jlpCallback2[jlpnColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	jlp.PushBack({ 455, 547, 52, 69 }, 2, { 29,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
 	jlp.PushBack({ 508, 545, 82, 72 }, 100, { 29,5 }, { jlpnColliders2 }, { jlpHitbox2 }, { jlpColliderType2 }, { jlpCallback2 });
@@ -184,7 +184,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE jblpColliderType[jblpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE jblpColliderType2[jblpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*jblpCallback[jblpnColliders] = { {this}, {this}, {this} };
-	Module*jblpCallback2[jblpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*jblpCallback2[jblpnColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	jblp.PushBack({ 455, 547, 52, 69 }, 2, { 29,5 }, { jblpnColliders }, { jblpHitbox }, { jblpColliderType }, { jblpCallback });
 	jblp.PushBack({ 508, 545, 82, 72 }, 100, { 29,5 }, { jblpnColliders2 }, { jblpHitbox2 }, { jblpColliderType2 }, { jblpCallback2 });
@@ -197,7 +197,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE jflpColliderType[jflpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE jflpColliderType2[jflpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*jflpCallback[jflpnColliders] = { {this}, {this}, {this} };
-	Module*jflpCallback2[jflpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*jflpCallback2[jflpnColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	jflp.PushBack({ 455, 547, 52, 69 }, 2, { 29,5 }, { jflpnColliders }, { jflpHitbox }, { jflpColliderType }, { jflpCallback });
 	jflp.PushBack({ 508, 545, 82, 72 }, 100, { 29,5 }, { jflpnColliders2 }, { jflpHitbox2 }, { jflpColliderType2 }, { jflpCallback2 });
@@ -212,7 +212,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE jlkColliderType[jlknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE jlkColliderType2[jlknColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*jlkCallback[jlknColliders] = { {this}, {this}, {this} };
-	Module*jlkCallback2[jlknColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*jlkCallback2[jlknColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	jlk.PushBack({ 252, 528, 49, 88 }, 3, { 29,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 	jlk.PushBack({ 948, 525, 75, 90 }, 100, { 29,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
@@ -226,7 +226,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE jblkColliderType[jblknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE jblkColliderType2[jblknColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*jblkCallback[jblknColliders] = { {this}, {this}, {this} };
-	Module*jblkCallback2[jblknColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*jblkCallback2[jblknColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	jblk.PushBack({ 750, 540, 58, 77 }, 2, { 29,5 }, { jblknColliders }, { jblkHitbox }, { jblkColliderType }, { jblkCallback });
 	jblk.PushBack({ 810, 543, 55, 73 }, 3, { 29,5 }, { jblknColliders }, { jblkHitbox }, { jblkColliderType }, { jblkCallback });
@@ -241,7 +241,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE jflkColliderType[jflknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE jflkColliderType2[jflknColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*jflkCallback[jflknColliders] = { {this}, {this}, {this} };
-	Module*jflkCallback2[jflknColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*jflkCallback2[jflknColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	jflk.PushBack({ 750, 540, 58, 77 }, 2, { 29,5 }, { jflknColliders }, { jflkHitbox }, { jflkColliderType }, { jflkCallback });
 	jflk.PushBack({ 810, 543, 55, 73 }, 3, { 29,5 }, { jflknColliders }, { jflkHitbox }, { jflkColliderType }, { jflkCallback });
@@ -337,7 +337,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE clpColliderType[clpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE clpColliderType2[clpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*clpCallback[clpnColliders] = { {this}, {this}, {this} };
-	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 	clp.PushBack({ 227, 326, 69, 61 }, 5, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 	clp.PushBack({ 296, 325, 96, 61 }, 10, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
@@ -353,7 +353,7 @@ bool ModulePlayer::Start()
 	COLLIDER_TYPE clkColliderType[clknColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE clkColliderType2[clknColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
 	Module*clkCallback[clknColliders] = { {this}, {this}, {this} };
-	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->player2} };
+	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->dhalsim} };
 
 
 	clk.PushBack({ 617, 322, 71, 65 }, 5, { 29,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
@@ -417,9 +417,9 @@ bool ModulePlayer::Start()
 }
 
 // Unload assets
-bool ModulePlayer::CleanUp()
+bool ModuleRyu::CleanUp()
 {
-	LOG("Unloading player 1");
+	LOG("Unloading ryu 1");
 
 	App->audio->UnloadChunk(hdk_voice);
 	hdk_voice = nullptr;
@@ -461,14 +461,14 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
-update_status ModulePlayer::PreUpdate() {
+update_status ModuleRyu::PreUpdate() {
 	ClearColliders();
 
 	return UPDATE_CONTINUE;
 }
 
 // Update: draw background
-update_status ModulePlayer::Update()
+update_status ModuleRyu::Update()
 {
 	ryu_states current_state = ST_UNKNOWN;
 	Animation* current_animation = &idle;
@@ -732,7 +732,7 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::ClearColliders() {
+void ModuleRyu::ClearColliders() {
 	for (int i = 0; i < MAX_COLLIDERS_PER_FRAME; i++)
 	{
 		if (colliders[i] != nullptr) {
@@ -742,15 +742,15 @@ void ModulePlayer::ClearColliders() {
 	}
 }
 
-bool ModulePlayer::IsntOnRightLimit() {
+bool ModuleRyu::IsntOnRightLimit() {
 	return position.x + 34 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
 }
 
-bool ModulePlayer::IsntOnLeftLimit() {
+bool ModuleRyu::IsntOnLeftLimit() {
 	return position.x - 34 > -App->render->camera.x / SCREEN_SIZE;
 }
 
-void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
+void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
@@ -774,13 +774,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
 
-			if (App->player2->state == L_KIK_STANDING2 || App->player->state == L_KIK_NEUTRAL_JUMP2 || App->player->state == L_KIK_FORWARD_JUMP2 || App->player->state == L_KIK_BACKWARD_JUMP2)
+			if (App->dhalsim->state == L_KIK_STANDING2 || App->ryu->state == L_KIK_NEUTRAL_JUMP2 || App->ryu->state == L_KIK_FORWARD_JUMP2 || App->ryu->state == L_KIK_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_kick);
-			else if (App->player2->state == L_KIK_CROUCH2)
+			else if (App->dhalsim->state == L_KIK_CROUCH2)
 				App->audio->PlayChunk(low_kick);
-			else if (App->player2->state == L_PUNCH_STANDING2 || App->player->state == L_PUNCH_NEUTRAL_JUMP2 || App->player->state == L_PUNCH_FORWARD_JUMP2 || App->player->state == L_PUNCH_BACKWARD_JUMP2)
+			else if (App->dhalsim->state == L_PUNCH_STANDING2 || App->ryu->state == L_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == L_PUNCH_FORWARD_JUMP2 || App->ryu->state == L_PUNCH_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_fist);
-			else if (App->player2->state == L_PUNCH_CROUCH2)
+			else if (App->dhalsim->state == L_PUNCH_CROUCH2)
 				App->audio->PlayChunk(low_fist);
 
 			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
@@ -803,13 +803,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
 
-			if (App->player2->state == L_KIK_STANDING2 || App->player2->state == L_KIK_NEUTRAL_JUMP2 || App->player2->state == L_KIK_FORWARD_JUMP2 || App->player2->state == L_KIK_BACKWARD_JUMP2)
+			if (App->dhalsim->state == L_KIK_STANDING2 || App->dhalsim->state == L_KIK_NEUTRAL_JUMP2 || App->dhalsim->state == L_KIK_FORWARD_JUMP2 || App->dhalsim->state == L_KIK_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_kick);
-			else if (App->player2->state == L_KIK_CROUCH2)
+			else if (App->dhalsim->state == L_KIK_CROUCH2)
 				App->audio->PlayChunk(low_kick);
-			else if (App->player2->state == L_PUNCH_STANDING2 || App->player2->state == L_PUNCH_NEUTRAL_JUMP2 || App->player2->state == L_PUNCH_FORWARD_JUMP2 || App->player2->state == L_PUNCH_BACKWARD_JUMP2)
+			else if (App->dhalsim->state == L_PUNCH_STANDING2 || App->dhalsim->state == L_PUNCH_NEUTRAL_JUMP2 || App->dhalsim->state == L_PUNCH_FORWARD_JUMP2 || App->dhalsim->state == L_PUNCH_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_fist);
-			else if (App->player2->state == L_PUNCH_CROUCH2)
+			else if (App->dhalsim->state == L_PUNCH_CROUCH2)
 				App->audio->PlayChunk(low_fist);
 
 			inputs.Push(IN_FALLING);
@@ -817,42 +817,42 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 		{
-			if (state == ST_WALK_FORWARD && App->player2->state == ST_WALK_FORWARD2) {
+			if (state == ST_WALK_FORWARD && App->dhalsim->state == ST_WALK_FORWARD2) {
 				position.x--;
-				App->player2->position.x++;
+				App->dhalsim->position.x++;
 			}
-			else if (state == ST_WALK_BACKWARD && App->player2->state == ST_WALK_BACKWARD2) {
+			else if (state == ST_WALK_BACKWARD && App->dhalsim->state == ST_WALK_BACKWARD2) {
 				position.x++;
-				App->player2->position.x--;
+				App->dhalsim->position.x--;
 			}
 			else {
 				if (state != ST_IDLE && state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP) {
-					if (App->player2->IsntOnLeftLimit() && position.x > App->player2->position.x)
-						App->player2->position.x--;
-					else if (!App->player2->IsntOnLeftLimit() && position.x > App->player2->position.x)
+					if (App->dhalsim->IsntOnLeftLimit() && position.x > App->dhalsim->position.x)
+						App->dhalsim->position.x--;
+					else if (!App->dhalsim->IsntOnLeftLimit() && position.x > App->dhalsim->position.x)
 						position.x++;
-					else if (App->player2->IsntOnRightLimit() && position.x < App->player2->position.x)
-						App->player2->position.x++;
-					else if (!App->player2->IsntOnRightLimit() && position.x < App->player2->position.x)
+					else if (App->dhalsim->IsntOnRightLimit() && position.x < App->dhalsim->position.x)
+						App->dhalsim->position.x++;
+					else if (!App->dhalsim->IsntOnRightLimit() && position.x < App->dhalsim->position.x)
 						position.x--;
 
 				}
-				else if (App->player2->state != ST_IDLE2 && App->player2->state != ST_JUMP_NEUTRAL2 && App->player2->state != ST_JUMP_FORWARD2 && App->player2->state != ST_JUMP_BACKWARD2 && App->player2->state != L_PUNCH_NEUTRAL_JUMP2 && App->player2->state != L_PUNCH_FORWARD_JUMP2 && App->player2->state != L_PUNCH_BACKWARD_JUMP2 && App->player2->state != L_KIK_NEUTRAL_JUMP2 && App->player2->state != L_KIK_FORWARD_JUMP2 && App->player2->state != L_KIK_BACKWARD_JUMP2) {
-					if (IsntOnLeftLimit() && position.x < App->player2->position.x)
+				else if (App->dhalsim->state != ST_IDLE2 && App->dhalsim->state != ST_JUMP_NEUTRAL2 && App->dhalsim->state != ST_JUMP_FORWARD2 && App->dhalsim->state != ST_JUMP_BACKWARD2 && App->dhalsim->state != L_PUNCH_NEUTRAL_JUMP2 && App->dhalsim->state != L_PUNCH_FORWARD_JUMP2 && App->dhalsim->state != L_PUNCH_BACKWARD_JUMP2 && App->dhalsim->state != L_KIK_NEUTRAL_JUMP2 && App->dhalsim->state != L_KIK_FORWARD_JUMP2 && App->dhalsim->state != L_KIK_BACKWARD_JUMP2) {
+					if (IsntOnLeftLimit() && position.x < App->dhalsim->position.x)
 						position.x--;
-					else if (App->player2->IsntOnLeftLimit() && position.x < App->player2->position.x)
-						App->player2->position.x++;
-					else if (IsntOnRightLimit() && position.x > App->player2->position.x)
+					else if (App->dhalsim->IsntOnLeftLimit() && position.x < App->dhalsim->position.x)
+						App->dhalsim->position.x++;
+					else if (IsntOnRightLimit() && position.x > App->dhalsim->position.x)
 						position.x++;
-					else if (App->player2->IsntOnRightLimit() && position.x > App->player2->position.x)
-						App->player2->position.x--;
+					else if (App->dhalsim->IsntOnRightLimit() && position.x > App->dhalsim->position.x)
+						App->dhalsim->position.x--;
 				}
 			}
 		}
 	}
 }
 
-void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture* texture) {
+void ModuleRyu::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture* texture) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
 	int hitboxesQnt = frame.GetColliderQnt();
@@ -875,7 +875,7 @@ void ModulePlayer::BlitCharacterAndAddColliders(Animation* current_animation, SD
 		App->render->Blit(texture, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 }
 
-bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
+bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 {
 	static bool left = false;
 	static bool right = false;
@@ -985,7 +985,7 @@ bool ModulePlayer::external_input(p2Qeue<ryu_inputs>& inputs)
 	return true;
 }
 
-void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
+void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 {
 	if (jump_timer > 0)
 	{
@@ -1114,7 +1114,7 @@ void ModulePlayer::internal_input(p2Qeue<ryu_inputs>& inputs)
 	}
 }
 
-ryu_states ModulePlayer::process_fsm(p2Qeue<ryu_inputs>& inputs)
+ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 {
 	static ryu_states state = ST_IDLE;
 	ryu_inputs last_input;

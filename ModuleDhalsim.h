@@ -86,11 +86,11 @@ enum ryu_inputs2
 
 struct SDL_Texture;
 
-class ModuleSecondPlayer : public Module
+class ModuleDhalsim : public Module
 {
 public:
-	ModuleSecondPlayer();
-	~ModuleSecondPlayer();
+	ModuleDhalsim();
+	~ModuleDhalsim();
 
 	bool Start();
 	update_status PreUpdate();

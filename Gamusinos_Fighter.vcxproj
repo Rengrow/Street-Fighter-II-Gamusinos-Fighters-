@@ -152,11 +152,11 @@
     <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleParticles.h" />
-    <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="ModuleRyu.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleSceneSagat.h" />
     <ClInclude Include="ModuleSceneKen.h" />
-    <ClInclude Include="ModuleSecondPlayer.h" />
+    <ClInclude Include="ModuleDhalsim.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="ModuleWelcomePage.h" />
@@ -176,11 +176,11 @@
     <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
-    <ClCompile Include="ModulePlayer.cpp" />
+    <ClCompile Include="ModuleRyu.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneSagat.cpp" />
     <ClCompile Include="ModuleSceneKen.cpp" />
-    <ClCompile Include="ModuleSecondPlayer.cpp" />
+    <ClCompile Include="ModuleDhalsim.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWelcomePage.cpp" />

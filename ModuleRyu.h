@@ -108,11 +108,11 @@ enum ryu_inputs
 struct SDL_Texture;
 
 
-class ModulePlayer : public Module
+class ModuleRyu : public Module
 {
 public:
-	ModulePlayer();
-	~ModulePlayer();
+	ModuleRyu();
+	~ModuleRyu();
 
 	bool Start();
 	update_status PreUpdate();

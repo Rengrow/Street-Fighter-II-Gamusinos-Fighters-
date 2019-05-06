@@ -1,8 +1,8 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleFight.h"
-#include "ModulePlayer.h"
-#include "ModuleSecondPlayer.h"
+#include "ModuleRyu.h"
+#include "ModuleDhalsim.h"
 #include "ModuleUI.h"
 #include "ModuleSceneKen.h"
 #include "ModuleSceneSagat.h"
@@ -40,15 +40,15 @@ bool ModuleFight::Start()
 update_status ModuleFight::Update()
 {
 	if (roundStarted)
-		if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life > App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+		if ((!endFightStarted && (App->dhalsim->life <= 0 || (GetTimer() <= 0 && App->ryu->life > App->dhalsim->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			Win(1);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
-		else if ((!endFightStarted && (App->player->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+		else if ((!endFightStarted && (App->ryu->life <= 0 || (GetTimer() <= 0 && App->dhalsim->life > App->ryu->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			Win(2);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
-		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player->life == App->player2->life)))) {
+		else if ((!endFightStarted && (App->dhalsim->life <= 0 || (GetTimer() <= 0 && App->ryu->life == App->dhalsim->life)))) {
 			Win(1);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
@@ -98,13 +98,13 @@ void ModuleFight::EndFullFight() {
 	App->fade->FadeToBlack(this, (Module*)App->endBattle, 2);
 }
 
-void ModuleFight::Win(int player) {
-	App->player->freeze = true;
-	App->player2->freeze = true;
+void ModuleFight::Win(int ryu) {
+	App->ryu->freeze = true;
+	App->dhalsim->freeze = true;
 
-	if (player == 1)
+	if (ryu == 1)
 		player1RoundWinned++;
-	else if (player == 2)
+	else if (ryu == 2)
 		player2RoundWinned++;
 
 	round++;
@@ -113,19 +113,19 @@ void ModuleFight::Win(int player) {
 
 	endFightStarted = stopedFight = true;
 
-	App->UI->StartEndFight(player);
+	App->UI->StartEndFight(ryu);
 }
 
 void ModuleFight::CheckFlipPlayers() {
 
-	if ((!App->player->flip && App->player2->flip) && App->player->position.x > App->player2->position.x) {
-		App->player->flip = !App->player->flip;
-		App->player2->flip = !App->player2->flip;
+	if ((!App->ryu->flip && App->dhalsim->flip) && App->ryu->position.x > App->dhalsim->position.x) {
+		App->ryu->flip = !App->ryu->flip;
+		App->dhalsim->flip = !App->dhalsim->flip;
 	}
 
-	if ((App->player->flip && !App->player2->flip) && App->player->position.x < App->player2->position.x) {
-		App->player->flip = !App->player->flip;
-		App->player2->flip = !App->player2->flip;
+	if ((App->ryu->flip && !App->dhalsim->flip) && App->ryu->position.x < App->dhalsim->position.x) {
+		App->ryu->flip = !App->ryu->flip;
+		App->dhalsim->flip = !App->dhalsim->flip;
 	}
 }
 

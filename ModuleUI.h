@@ -21,7 +21,7 @@ public:
 	bool CleanUp();
 	void StartTimer();
 	void StartFight();
-	void StartEndFight(int player);
+	void StartEndFight(int ryu);
 
 private:
 	void TimerBlit(int font_id);

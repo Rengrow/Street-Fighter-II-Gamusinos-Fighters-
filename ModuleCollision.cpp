@@ -2,8 +2,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
-#include "ModulePlayer.h"
-#include "ModuleSecondPlayer.h"
+#include "ModuleRyu.h"
+#include "ModuleDhalsim.h"
 #include "ModuleSceneKen.h"
 #include "ModuleSceneSagat.h"
 #include "ModuleFadeToBlack.h"
@@ -192,8 +192,8 @@ void ModuleCollision::DebugDraw()
 			break;
 		}
 	}
-	App->render->DrawQuad({ App->player->position.x, App->player->position.y, 2, 2 }, 0, 0, 0, 100);
-	App->render->DrawQuad({ App->player2->position.x, App->player2->position.y, 2, 2 }, 0, 0, 0, 100);
+	App->render->DrawQuad({ App->ryu->position.x, App->ryu->position.y, 2, 2 }, 0, 0, 0, 100);
+	App->render->DrawQuad({ App->dhalsim->position.x, App->dhalsim->position.y, 2, 2 }, 0, 0, 0, 100);
 }
 
 // Called before quitting

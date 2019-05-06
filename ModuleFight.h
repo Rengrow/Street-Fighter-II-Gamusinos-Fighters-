@@ -16,7 +16,7 @@ public:
 	bool Start();
 	bool CleanUp();
 	update_status Update();
-	void Win(int player);
+	void Win(int ryu);
 	void StartNewRound();
 	void EndFullFight();
 	int GetTimer();

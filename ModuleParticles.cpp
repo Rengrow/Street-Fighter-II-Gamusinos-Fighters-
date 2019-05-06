@@ -77,7 +77,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, int y, int player, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, int y, int ryu, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{

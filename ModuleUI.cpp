@@ -3,8 +3,8 @@
 #include "ModuleUI.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
-#include "ModuleSecondPlayer.h"
+#include "ModuleRyu.h"
+#include "ModuleDhalsim.h"
 #include "ModuleFonts.h"
 #include "ModuleInput.h"
 #include "ModuleSceneKen.h"
@@ -186,10 +186,10 @@ void ModuleUI::LifeBarsBlit() {
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarRedP1, false);
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarRedP2, true);
 
-	lifeBarP1.x = lifeBarRedP1.w - App->player->life*1.5;
+	lifeBarP1.x = lifeBarRedP1.w - App->ryu->life*1.5;
 	App->render->Blit(lifeBars, (-App->render->camera.x / SCREEN_SIZE) + 24, 20, &lifeBarP1, true);
 
-	lifeBarP2.w = App->player2->life*1.5;
+	lifeBarP2.w = App->dhalsim->life*1.5;
 	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarP2, false);
 }
 
@@ -277,17 +277,17 @@ void ModuleUI::StartFightBlit() {
 		}
 		else {
 			starFight = false;
-			App->player->freeze = false;
-			App->player2->freeze = false;
+			App->ryu->freeze = false;
+			App->dhalsim->freeze = false;
 			App->fight->roundStarted = true;
 			StartTimer();
 		}
 	}
 }
 
-void ModuleUI::StartEndFight(int player) {
+void ModuleUI::StartEndFight(int ryu) {
 	stopedTimer = App->fight->GetTimer();
-	winnerPlayer = player;
+	winnerPlayer = ryu;
 }
 
 void ModuleUI::EndFight() {
@@ -298,12 +298,12 @@ void ModuleUI::EndFight() {
 			App->audio->PlayChunk(you_snd);
 
 			if (winnerPlayer == 1) {
-				App->player->inputs.Push(IN_VICTORY);
-				App->player2->inputs.Push(IN_LOOSE2);
+				App->ryu->inputs.Push(IN_VICTORY);
+				App->dhalsim->inputs.Push(IN_LOOSE2);
 			}
 			else if (winnerPlayer == 2) {
-				App->player->inputs.Push(IN_LOOSE);
-				App->player2->inputs.Push(IN_VICTORY2);
+				App->ryu->inputs.Push(IN_LOOSE);
+				App->dhalsim->inputs.Push(IN_VICTORY2);
 			}
 
 			youFinalSound = true;
@@ -318,8 +318,8 @@ void ModuleUI::EndFight() {
 
 		if (timeRemaining > 0)
 			if (winnerPlayer == 1)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 1 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "ryu 1 win");
 			else if (winnerPlayer == 2)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 2 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "ryu 2 win");
 	}
 }
