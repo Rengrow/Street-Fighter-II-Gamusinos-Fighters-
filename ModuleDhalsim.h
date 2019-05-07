@@ -109,6 +109,7 @@ public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
+	SDL_Texture* graphics3 = nullptr;
 	Animation idle;
 	Animation forward;
 	Animation backward;

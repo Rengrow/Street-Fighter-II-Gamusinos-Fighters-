@@ -26,8 +26,9 @@ bool ModuleDhalsim::Start()
 {
 	LOG("Loading ryu textures");
 	bool ret = true;
-	graphics = App->textures->Load("assets/images/sprites/characters/ryu1.png"); // arcade version
-	graphics2 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png"); // arcade version
+	graphics = App->textures->Load("assets/images/sprites/characters/dhalshim1.png"); // arcade version
+	graphics2 = App->textures->Load("assets/images/sprites/characters/dhalshim2.png"); // arcade version
+	graphics3 = App->textures->Load("assets/images/sprites/characters/dictator-dhalshim.png"); // arcade version
 
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
@@ -46,28 +47,28 @@ bool ModuleDhalsim::Start()
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
-	SDL_Rect idleHitbox[idlenColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	SDL_Rect idleHitbox[idlenColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50} };
 	COLLIDER_TYPE idleColliderType[idlenColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* idleCallback[idlenColliders] = { {this}, {this}, {this} };
 
-	idle.PushBack({ 348, 3, 61, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
-	idle.PushBack({ 408, 3, 60, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
-	idle.PushBack({ 468, 3, 58, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
-	idle.PushBack({ 526, 3, 55, 95 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 848, 438, 72, 99 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 922, 438, 67, 99 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 694, 448, 76, 89 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
+	idle.PushBack({ 772, 444, 74, 93 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 
 
 	// walk forward animation (arcade sprite sheet)
 	const int forwardnColliders = 3;
-	SDL_Rect forwardHitbox[forwardnColliders] = { { -28, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	SDL_Rect forwardHitbox[forwardnColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50} };
 	COLLIDER_TYPE forwardColliderType[forwardnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* forwardCallback[forwardnColliders] = { {this}, {this}, {this} };
 
-	forward.PushBack({ 1, 3, 53, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
-	forward.PushBack({ 53, 3, 62, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
-	forward.PushBack({ 115, 3, 63, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
-	forward.PushBack({ 179, 3, 64, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
-	forward.PushBack({ 243, 3, 54, 95 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
-	forward.PushBack({ 298, 3, 49, 94 }, 6, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 1, 546, 78, 97 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 81, 549, 86, 94 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 172, 544, 72, 99 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 246, 543, 68, 100 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 316, 544, 65, 99 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 383, 546, 68, 97 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
 
 
 	// walk backward animation (arcade sprite sheet)
@@ -434,6 +435,7 @@ bool ModuleDhalsim::CleanUp()
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
+	App->textures->Unload(graphics3);
 	ClearColliders();
 	idle = Animation();
 	forward = Animation();
@@ -489,10 +491,12 @@ update_status ModuleDhalsim::Update()
 		switch (state)
 		{
 		case ST_IDLE2:
+			texture = graphics3;
 			current_animation = &idle;
 			break;
 
 		case ST_WALK_FORWARD2:
+			texture = graphics3;
 			current_animation = (flip ? &forward : &backward);
 			if (IsntOnLeftLimit())
 				position.x--;

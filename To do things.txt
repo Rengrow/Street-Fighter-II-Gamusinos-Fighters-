@@ -1,14 +1,7 @@
-Instant win/lose condition
-Add life substracting function and blit
 Add stun
 Add falling to the ground when multiple hits recieved or low hit
 
-Make the player turn around when he and the enemy switch sides
-If stage change happens when character is jumping, it won't appear on the proper x tile
 When time comes to the last seconds, it starts blinking with white shadows. Implement it (maybe?) //Not for prototype
 Make the KO icon blink when a player has low health by adding or subtracting the statistics, blittting, and reverting them //Not for prototype
 
 
-
-
-Limpiar todas las animaciones y colliders en el clean de player y player2
