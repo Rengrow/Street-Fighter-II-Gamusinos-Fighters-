@@ -69,6 +69,10 @@ bool ModuleDhalsim::Start()
 	forward.PushBack({ 246, 543, 68, 100 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
 	forward.PushBack({ 316, 544, 65, 99 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
 	forward.PushBack({ 383, 546, 68, 97 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 453, 547, 73, 96 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 530, 546, 68, 97 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 600, 544, 65, 99 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
+	forward.PushBack({ 246, 543, 68, 100 }, 4, { 35,5 }, forwardnColliders, forwardHitbox, forwardColliderType, forwardCallback);
 
 
 	// walk backward animation (arcade sprite sheet)
@@ -128,15 +132,18 @@ bool ModuleDhalsim::Start()
 
 	// Neutral jump 50
 	const int neutraljumpnColliders = 3;
-	SDL_Rect neutraljumpHitbox[neutraljumpnColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	const int neutraljumpnColliders2 = 3;
+	SDL_Rect neutraljumpHitbox[neutraljumpnColliders] = { { -5, 81, 42, 36}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
+	SDL_Rect neutraljumpHitbox2[neutraljumpnColliders2] = { { 0, 0, 0, 0}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	COLLIDER_TYPE neutraljumpColliderType[neutraljumpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE neutraljumpColliderType2[neutraljumpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* neutraljumpCallback[neutraljumpnColliders] = { {this}, {this}, {this} };
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
-	neutralJump.PushBack({ 252, 528, 50, 89 }, 4, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
-	neutralJump.PushBack({ 303, 540, 54, 77 }, 8, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
-	neutralJump.PushBack({ 358, 547, 48, 70 }, 12, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
-	neutralJump.PushBack({ 407, 528, 48, 89 }, 18, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
-	neutralJump.PushBack({ 195, 512, 55, 105 }, 4, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);
+	Module* neutraljumpCallback2[neutraljumpnColliders2] = { {this}, {this}, {this} };
+	neutralJump.PushBack({ 1, 364, 57, 122 }, 28, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
+	neutralJump.PushBack({ 60, 398, 57, 88 }, 14, { 29,5 }, neutraljumpnColliders2, neutraljumpHitbox2, neutraljumpColliderType2, neutraljumpCallback2);
+	neutralJump.PushBack({ 119, 417, 58, 69 }, 14, { 29,5 }, neutraljumpnColliders2, neutraljumpHitbox2, neutraljumpColliderType2, neutraljumpCallback2);
+	neutralJump.PushBack({ 60, 398, 57, 88 }, 14, { 29,5 }, neutraljumpnColliders2, neutraljumpHitbox2, neutraljumpColliderType2, neutraljumpCallback2);
+	neutralJump.PushBack({ 1, 364, 57, 122 }, 28, { 29,5 }, neutraljumpnColliders, neutraljumpHitbox, neutraljumpColliderType, neutraljumpCallback);		// La velocidad es adecuada, pero las animaciones están mal / leen mal el tiempo
 
 
 	// forward jump 50
@@ -524,6 +531,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_JUMP_NEUTRAL2:
+			texture = graphics;
 			current_animation = &neutralJump;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
 			{
