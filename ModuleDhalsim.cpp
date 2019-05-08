@@ -77,46 +77,54 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE backwardColliderType[backwardnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* backwardCallback[backwardnColliders] = { {this}, {this}, {this} };
 
-	backward.PushBack({ 694, 3, 56, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
-	backward.PushBack({ 752, 3, 60, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
-	backward.PushBack({ 813, 3, 58, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
-	backward.PushBack({ 872, 3, 56, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
-	backward.PushBack({ 930, 3, 57, 93 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
-	backward.PushBack({ 0, 102, 57, 92 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	/*
+	Estas animaciones son las de defensa que hace antes de empezar a tirarse hacia atrás
+	falta
+	backward.PushBack({ 872, 708, 61, 94 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	falta
+	*/
+	backward.PushBack({ 737, 542, 71, 101 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 810, 545, 86, 98 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 898, 540, 64, 103 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 667, 539, 68, 104 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 1, 648, 65, 103 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 68, 650, 73, 101 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 143, 651, 83, 100 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 68, 650, 73, 101 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 1, 648, 65, 103 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
+	backward.PushBack({ 667, 539, 68, 104 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
 
 
 	// lp
 
 	const int lpnColliders = 3;
 	const int lpnColliders2 = 4;
-	SDL_Rect lpHitbox[lpnColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
-	SDL_Rect lpHitbox2[lpnColliders2] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32}, { -43, 75, 50, 18} };
+	SDL_Rect lpHitbox[lpnColliders] = { { 0, 0, 0, 0}, { -28, 37, 40, 47}, { -11, 5, 60, 32} };
+	SDL_Rect lpHitbox2[lpnColliders2] = { { 0, 0, 0, 0}, { -28, 37, 40, 47}, { -11, 5, 60, 32}, { -66, 55, 60, 15} };
 	COLLIDER_TYPE lpColliderType[lpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
 	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	lp.PushBack({ 59, 101, 64, 95 }, 5, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 124, 101, 92, 95 }, 10, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
-	lp.PushBack({ 59, 101, 64, 95 }, 8, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 409, 3, 58, 95 }, 2, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 437, 665, 90, 86 }, 5, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 529, 668, 83, 83 }, 10, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 614, 671, 135, 80 }, 8, { 32,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
+	lp.PushBack({ 529, 668, 83, 83 }, 10, { 32,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
 	// lk
 	const int lknColliders = 3;
-	const int lknColliders2 = 3;
 	const int lknColliders3 = 4;
-	SDL_Rect lkHitbox[lknColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
-	SDL_Rect lkHitbox2[lknColliders2] = { { -7, 75, 30, 20}, { 9, 36, 42, 52}, { 0, 22, 44, 50} };
-	SDL_Rect lkHitbox3[lknColliders3] = { { -5, 75, 29, 16}, { -13, 37, 40, 47}, { -38, 0, 40, 42}, { -50, 67, 67, 26} };
+	SDL_Rect lkHitbox[lknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
+	SDL_Rect lkHitbox3[lknColliders3] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
 	COLLIDER_TYPE lkColliderType[lknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
 	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	lk.PushBack({ 1, 3, 53, 94 }, 7, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
-	lk.PushBack({ 400, 102, 63, 93 }, 7, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
-	lk.PushBack({ 467, 100, 115, 93 }, 20, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
-	lk.PushBack({ 400, 102, 63, 93 }, 10, { 46,5 }, lknColliders2, lkHitbox2, lkColliderType, lkCallback);
-	lk.PushBack({ 1, 3, 53, 94 }, 2, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 770, 770, 58, 92 }, 7, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 842, 753, 118, 109 }, 7, { 46,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 0, 896, 165, 109 }, 20, { 68,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
+	lk.PushBack({ 842, 753, 118, 109 }, 7, { 46,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 770, 770, 58, 92 }, 7, { 29,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
 	// Neutral jump 50
 	const int neutraljumpnColliders = 3;
@@ -147,7 +155,7 @@ bool ModuleDhalsim::Start()
 	forwardJump.PushBack({ 195, 512, 55, 105 }, 8, { 29,5 }, forwardjumpnColliders, forwardjumpHitbox, forwardjumpColliderType, forwardjumpCallback);
 
 
-	// backward jump50
+	// backward jump 50
 	const int backwardjumpnColliders = 3;
 	SDL_Rect backwardjumpHitbox[backwardjumpnColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47}, { -6, 5, 40, 32} };
 	COLLIDER_TYPE backwardjumpColliderType[backwardjumpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
@@ -503,6 +511,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_WALK_BACKWARD2:
+			texture = graphics3;
 			current_animation = (flip ? &backward : &forward);
 			if (IsntOnRightLimit())
 				position.x++;
@@ -568,6 +577,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_PUNCH_STANDING2:
+			texture = graphics3;
 			current_animation = &lp;
 			break;
 
@@ -621,6 +631,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_KIK_STANDING2:
+			texture = graphics3;
 			current_animation = &lk;
 			break;
 
