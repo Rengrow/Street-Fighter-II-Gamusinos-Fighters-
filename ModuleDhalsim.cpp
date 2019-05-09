@@ -574,7 +574,7 @@ update_status ModuleDhalsim::Update()
 		case ST_JUMP_NEUTRAL2:
 			texture = graphics;
 			current_animation = &neutralJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -587,7 +587,7 @@ update_status ModuleDhalsim::Update()
 
 		case ST_JUMP_FORWARD2:
 			current_animation = &forwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -602,7 +602,7 @@ update_status ModuleDhalsim::Update()
 
 		case ST_JUMP_BACKWARD2:
 			current_animation = &backwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -631,14 +631,26 @@ update_status ModuleDhalsim::Update()
 			current_animation = &clp;
 			break;
 
+		case M_PUNCH_CROUCH2:
+			break;
+
+		case F_PUNCH_CROUCH2:
+			break;
+
 		case L_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &lp;
 			break;
 
+		case M_PUNCH_STANDING2:
+			break;
+
+		case F_PUNCH_STANDING2:
+			break;
+
 		case L_PUNCH_NEUTRAL_JUMP2:
 			current_animation = &jlp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -648,9 +660,15 @@ update_status ModuleDhalsim::Update()
 			}
 			break;
 
+		case M_PUNCH_NEUTRAL_JUMP2:
+			break;
+
+		case F_PUNCH_NEUTRAL_JUMP2:
+			break;
+
 		case L_PUNCH_FORWARD_JUMP2:
 			current_animation = &jflp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -663,11 +681,17 @@ update_status ModuleDhalsim::Update()
 				position.x -= 3;
 			break;
 
+		case M_PUNCH_FORWARD_JUMP2:
+			break;
+
+		case F_PUNCH_FORWARD_JUMP2:
+			break;
+
 		case L_PUNCH_BACKWARD_JUMP2:
 
 			current_animation = &jblp;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -681,8 +705,20 @@ update_status ModuleDhalsim::Update()
 
 			break;
 
+		case M_PUNCH_BACKWARD_JUMP2:
+			break;
+
+		case F_PUNCH_BACKWARD_JUMP2:
+			break;
+
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
+			break;
+
+		case M_KIK_CROUCH2:
+			break;
+
+		case F_KIK_CROUCH2:
 			break;
 
 		case L_KIK_STANDING2:
@@ -690,9 +726,15 @@ update_status ModuleDhalsim::Update()
 			current_animation = &lk;
 			break;
 
+		case M_KIK_STANDING2:
+			break;
+
+		case F_KIK_STANDING2:
+			break;
+
 		case L_KIK_NEUTRAL_JUMP2:
 			current_animation = &jlk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -703,9 +745,15 @@ update_status ModuleDhalsim::Update()
 
 			break;
 
+		case M_KIK_NEUTRAL_JUMP2:
+			break;
+
+		case F_KIK_NEUTRAL_JUMP2:
+			break;
+
 		case L_KIK_FORWARD_JUMP2:
 			current_animation = &jflk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -719,10 +767,16 @@ update_status ModuleDhalsim::Update()
 
 			break;
 
+		case M_KIK_FORWARD_JUMP2:
+			break;
+
+		case F_KIK_FORWARD_JUMP2:
+			break;
+
 		case L_KIK_BACKWARD_JUMP2:
 			current_animation = &jblk;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -736,6 +790,15 @@ update_status ModuleDhalsim::Update()
 
 			break;
 
+		case M_KIK_BACKWARD_JUMP2:
+			break;
+
+		case F_KIK_BACKWARD_JUMP2:
+			break;
+
+		case ST_DEFENDING:
+			LOG("Defending");
+			break;
 
 		case ST_HEAD_REEL2:
 			current_animation = &streel;
@@ -934,14 +997,34 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 		//Key down
 
-		if (App->input->keyboard[SDL_SCANCODE_8] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_PUNCH2);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_9] == KEY_STATE::KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_KIK2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_M_PUNCH2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_M_KIK2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_F_PUNCH2);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_F_KIK2);
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
@@ -1015,70 +1098,182 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 {
 	if (jump_timer > 0)
 	{
-		if (App->frames - jump_timer > JUMP_TIME)
+		if (App->frames - jump_timer > D_JUMP_TIME)
 		{
 			inputs.Push(IN_JUMP_FINISH2);
 			jump_timer = 0;
 		}
 	}
 
+	//light
 	if (l_standing_punch_timer > 0)
 	{
-		if (App->frames - l_standing_punch_timer > L_STANDING_PUNCH_TIME)
+		if (App->frames - l_standing_punch_timer > D_L_STANDING_PUNCH_TIME)
 		{
-			inputs.Push(IN_L_PUNCH_FINISH2);
+			inputs.Push(IN_PUNCH_FINISH2);
 			l_standing_punch_timer = 0;
 		}
 	}
 
 	if (l_crouching_punch_timer > 0)
 	{
-		if (App->frames - l_crouching_punch_timer > L_CROUCHING_PUNCH_TIME)
+		if (App->frames - l_crouching_punch_timer > D_L_CROUCHING_PUNCH_TIME)
 		{
-			inputs.Push(IN_L_PUNCH_FINISH2);
+			inputs.Push(IN_PUNCH_FINISH2);
 			l_crouching_punch_timer = 0;
 		}
 	}
 
 	if (l_d_jumping_punch_timer > 0)
 	{
-		if (App->frames - l_d_jumping_punch_timer > L_D_JUMPING_PUNCH_TIME)
+		if (App->frames - l_d_jumping_punch_timer > D_L_D_JUMPING_PUNCH_TIME)
 		{
-			inputs.Push(IN_L_PUNCH_FINISH2);
+			inputs.Push(IN_PUNCH_FINISH2);
 			l_d_jumping_punch_timer = 0;
 		}
 	}
 
 	if (l_standing_kik_timer > 0)
 	{
-		if (App->frames - l_standing_kik_timer > L_STANDING_KIK_TIME)
+		if (App->frames - l_standing_kik_timer > D_L_STANDING_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH2);
+			inputs.Push(IN_KIK_FINISH2);
 			l_standing_kik_timer = 0;
 		}
 	}
 
 	if (l_crouching_kik_timer > 0)
 	{
-		if (App->frames - l_crouching_kik_timer > L_CROUCHING_KIK_TIME)
+		if (App->frames - l_crouching_kik_timer > D_L_CROUCHING_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH2);
+			inputs.Push(IN_KIK_FINISH2);
 			l_crouching_kik_timer = 0;
 		}
 	}
 
 	if (l_d_jumping_kik_timer > 0)
 	{
-		if (App->frames - l_d_jumping_kik_timer > L_D_JUMPING_KIK_TIME)
+		if (App->frames - l_d_jumping_kik_timer > D_L_D_JUMPING_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH2);
+			inputs.Push(IN_KIK_FINISH2);
 			l_d_jumping_kik_timer = 0;
 		}
 	}
 
+	//medium
+	if (m_standing_punch_timer > 0)
+	{
+		if (SDL_GetTicks() - m_standing_punch_timer > D_M_STANDING_PUNCH_TIME)
+		{
+			inputs.Push(IN_PUNCH_FINISH2);
+			m_standing_punch_timer = 0;
+		}
+	}
+
+	if (m_crouching_punch_timer > 0)
+	{
+		if (SDL_GetTicks() - m_crouching_punch_timer > D_M_CROUCHING_PUNCH_TIME)
+		{
+			inputs.Push(IN_PUNCH_FINISH2);
+			m_crouching_punch_timer = 0;
+		}
+	}
+
+	if (m_d_jumping_punch_timer > 0)
+	{
+		if (SDL_GetTicks() - m_d_jumping_punch_timer > D_M_D_JUMPING_PUNCH_TIME)
+		{
+			inputs.Push(IN_PUNCH_FINISH2);
+			m_d_jumping_punch_timer = 0;
+		}
+	}
+
+	if (m_standing_kik_timer > 0)
+	{
+		if (SDL_GetTicks() - m_standing_kik_timer > D_M_STANDING_KIK_TIME)
+		{
+			inputs.Push(IN_KIK_FINISH2);
+			m_standing_kik_timer = 0;
+		}
+	}
+
+	if (m_crouching_kik_timer > 0)
+	{
+		if (SDL_GetTicks() - m_crouching_kik_timer > D_M_CROUCHING_KIK_TIME)
+		{
+			inputs.Push(IN_KIK_FINISH2);
+			m_crouching_kik_timer = 0;
+		}
+	}
+
+	if (m_d_jumping_kik_timer > 0)
+	{
+		if (SDL_GetTicks() - m_d_jumping_kik_timer > D_M_D_JUMPING_KIK_TIME)
+		{
+			inputs.Push(IN_KIK_FINISH2);
+			m_d_jumping_kik_timer = 0;
+		}
+	}
+
+	//fierce
+	if (f_standing_punch_timer > 0)
+	{
+		if (SDL_GetTicks() - f_standing_punch_timer > D_F_STANDING_PUNCH_TIME)
+		{
+			inputs.Push(IN_PUNCH_FINISH2);
+			f_standing_punch_timer = 0;
+		}
+	}
+
+	if (f_crouching_punch_timer > 0)
+	{
+		if (SDL_GetTicks() - f_crouching_punch_timer > D_F_CROUCHING_PUNCH_TIME)
+		{
+			inputs.Push(IN_PUNCH_FINISH2);
+			f_crouching_punch_timer = 0;
+		}
+	}
+
+	if (f_d_jumping_punch_timer > 0)
+	{
+		if (SDL_GetTicks() - f_d_jumping_punch_timer > D_F_D_JUMPING_PUNCH_TIME)
+		{
+			inputs.Push(IN_PUNCH_FINISH2);
+			f_d_jumping_punch_timer = 0;
+		}
+	}
+
+	if (f_standing_kik_timer > 0)
+	{
+		if (SDL_GetTicks() - f_standing_kik_timer > D_F_STANDING_KIK_TIME)
+		{
+			inputs.Push(IN_KIK_FINISH2);
+			f_standing_kik_timer = 0;
+		}
+	}
+
+	if (f_crouching_kik_timer > 0)
+	{
+		if (SDL_GetTicks() - f_crouching_kik_timer > D_F_CROUCHING_KIK_TIME)
+		{
+			inputs.Push(IN_KIK_FINISH2);
+			f_crouching_kik_timer = 0;
+		}
+	}
+
+	if (f_d_jumping_kik_timer > 0)
+	{
+		if (SDL_GetTicks() - f_d_jumping_kik_timer > D_F_D_JUMPING_KIK_TIME)
+		{
+			inputs.Push(IN_KIK_FINISH2);
+			f_d_jumping_kik_timer = 0;
+		}
+	}
+
+
 	if (hadoken_timer > 0)
 	{
-		if (App->frames - hadoken_timer > HADOKEN_TIME)
+		if (App->frames - hadoken_timer > D_HADOKEN_TIME)
 		{
 			inputs.Push(IN_HADOKEN_FINISH2);
 			hadoken_timer = 0;
@@ -1087,7 +1282,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (crouching_timer > 0)
 	{
-		if (App->frames - crouching_timer > CROUCHING_TIME)
+		if (App->frames - crouching_timer > D_CROUCHING_TIME)
 		{
 			inputs.Push(IN_CROUCHING_FINISH2);
 			crouching_timer = 0;
@@ -1096,7 +1291,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (standing_timer > 0)
 	{
-		if (App->frames - standing_timer > STANDING_TIME)
+		if (App->frames - standing_timer > D_STANDING_TIME)
 		{
 			inputs.Push(IN_STANDING_FINISH2);
 			standing_timer = 0;
@@ -1105,7 +1300,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (head_reel_timer > 0)
 	{
-		if (App->frames - head_reel_timer > HEAD_REEL_TIME)
+		if (App->frames - head_reel_timer > D_HEAD_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
 			head_reel_timer = 0;
@@ -1114,7 +1309,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (gut_reel_timer > 0)
 	{
-		if (App->frames - gut_reel_timer > GUT_REEL_TIME)
+		if (App->frames - gut_reel_timer > D_GUT_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
 			gut_reel_timer = 0;
@@ -1123,7 +1318,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (crouch_reel_timer > 0)
 	{
-		if (App->frames - crouch_reel_timer > CROUCH_REEL_TIME)
+		if (App->frames - crouch_reel_timer > D_CROUCH_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
 			crouch_reel_timer = 0;
@@ -1132,12 +1327,22 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (getting_up_timer > 0)
 	{
-		if (App->frames - getting_up_timer > GETTING_UP_TIME)
+		if (App->frames - getting_up_timer > D_GETTING_UP_TIME)
 		{
 			inputs.Push(IN_GETTING_UP_FINISH2);
 			getting_up_timer = 0;
 		}
 	}
+
+	if (defending_timer > 0)
+	{
+		if (SDL_GetTicks() - defending_timer > D_DEFENDING_TIME)
+		{
+			inputs.Push(IN_DEFENDING_FINISH2);
+			defending_timer = 0;
+		}
+	}
+
 }
 
 ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
@@ -1157,8 +1362,16 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_DOWN2: state = ST_WALK_BACKWARD2; break;
 			case IN_JUMP2: state = ST_JUMP_NEUTRAL2; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
+
+			case IN_M_PUNCH2: state = M_PUNCH_STANDING2; m_standing_punch_timer = SDL_GetTicks();  break;
+			case IN_M_KIK2: state = M_KIK_STANDING2; m_standing_kik_timer = SDL_GetTicks();  break;
+
+			case IN_F_PUNCH2: state = F_PUNCH_STANDING2; f_standing_punch_timer = SDL_GetTicks();  break;
+			case IN_F_KIK2: state = F_KIK_STANDING2; f_standing_kik_timer = SDL_GetTicks();  break;
+
 			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
@@ -1177,8 +1390,16 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
 			case IN_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
+
+			case IN_M_PUNCH2: state = M_PUNCH_STANDING2; m_standing_punch_timer = SDL_GetTicks();  break;
+			case IN_M_KIK2: state = M_KIK_STANDING2; m_standing_kik_timer = SDL_GetTicks();  break;
+
+			case IN_F_PUNCH2: state = F_PUNCH_STANDING2; f_standing_punch_timer = SDL_GetTicks();  break;
+			case IN_F_KIK2: state = F_KIK_STANDING2; f_standing_kik_timer = SDL_GetTicks();  break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 
@@ -1196,10 +1417,20 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
 			case IN_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
+
+			case IN_M_PUNCH2: state = M_PUNCH_STANDING2; m_standing_punch_timer = SDL_GetTicks();  break;
+			case IN_M_KIK2: state = M_KIK_STANDING2; m_standing_kik_timer = SDL_GetTicks();  break;
+
+			case IN_F_PUNCH2: state = F_PUNCH_STANDING2; f_standing_punch_timer = SDL_GetTicks();  break;
+			case IN_F_KIK2: state = F_KIK_STANDING2; f_standing_kik_timer = SDL_GetTicks();  break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_DEFENDING2: state = ST_DEFENDING2; defending_timer = App->frames; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1212,8 +1443,16 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_NEUTRAL_JUMP2; break;
 			case IN_L_KIK2: state = L_KIK_NEUTRAL_JUMP2; break;
+
+			case IN_M_PUNCH2: state = M_PUNCH_NEUTRAL_JUMP2; break;
+			case IN_M_KIK2: state = M_KIK_NEUTRAL_JUMP2; break;
+				
+			case IN_F_PUNCH2: state = F_PUNCH_NEUTRAL_JUMP2; break;
+			case IN_F_KIK2: state = F_KIK_NEUTRAL_JUMP2; break;
+
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1226,8 +1465,16 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_FORWARD_JUMP2; l_d_jumping_punch_timer = App->frames; break;
 			case IN_L_KIK2: state = L_KIK_FORWARD_JUMP2; l_d_jumping_kik_timer = App->frames; break;
+			
+			case IN_M_PUNCH2: state = M_PUNCH_FORWARD_JUMP2; m_d_jumping_punch_timer = SDL_GetTicks(); break;
+			case IN_M_KIK2: state = M_KIK_FORWARD_JUMP2; m_d_jumping_kik_timer = SDL_GetTicks(); break;
+
+			case IN_F_PUNCH2: state = F_PUNCH_FORWARD_JUMP2; f_d_jumping_punch_timer = SDL_GetTicks(); break;
+			case IN_F_KIK2: state = F_KIK_FORWARD_JUMP2; f_d_jumping_kik_timer = SDL_GetTicks(); break;
+
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1240,8 +1487,16 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_BACKWARD_JUMP2; l_d_jumping_punch_timer = App->frames; break;
 			case IN_L_KIK2: state = L_KIK_BACKWARD_JUMP2; l_d_jumping_kik_timer = App->frames; break;
+
+			case IN_M_PUNCH2: state = M_PUNCH_BACKWARD_JUMP2; m_d_jumping_punch_timer = SDL_GetTicks(); break;
+			case IN_M_KIK2: state = M_KIK_BACKWARD_JUMP2; m_d_jumping_kik_timer = SDL_GetTicks(); break;
+
+			case IN_F_PUNCH2: state = F_PUNCH_BACKWARD_JUMP2; f_d_jumping_punch_timer = SDL_GetTicks(); break;
+			case IN_F_KIK2: state = F_KIK_BACKWARD_JUMP2; f_d_jumping_kik_timer = SDL_GetTicks(); break;
+
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1261,7 +1516,56 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+		case M_PUNCH_NEUTRAL_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_PUNCH_NEUTRAL_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+
 		case L_KIK_NEUTRAL_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_KIK_NEUTRAL_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_KIK_NEUTRAL_JUMP2:
 		{
 			switch (last_input)
 			{
@@ -1291,7 +1595,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1304,7 +1608,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1312,12 +1616,66 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+
+		case M_PUNCH_FORWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_KIK_FORWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_PUNCH_FORWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_KIK_FORWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+
 		case L_PUNCH_BACKWARD_JUMP2:
 		{
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1330,7 +1688,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_L_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -1338,11 +1696,65 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+
+		case M_PUNCH_BACKWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_KIK_BACKWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_PUNCH_BACKWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_KIK_BACKWARD_JUMP2:
+		{
+			switch (last_input)
+			{
+			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
+			case IN_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+
 		case L_PUNCH_STANDING2:
 		{
 			switch (last_input)
 			{
-			case IN_L_PUNCH_FINISH2: state = ST_IDLE2; break;
+			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_VICTORY2: state = VICTORY2; break;
@@ -1355,9 +1767,61 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_KIK_FINISH2: state = ST_IDLE2; break;
+			case IN_KIK_FINISH2: state = ST_IDLE2; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_PUNCH_STANDING2:
+		{
+			switch (last_input)
+			{
+			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = SDL_GetTicks(); break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_KIK_STANDING2:
+		{
+			switch (last_input)
+			{
+			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = SDL_GetTicks(); break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_PUNCH_STANDING2:
+		{
+			switch (last_input)
+			{
+			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = SDL_GetTicks(); break;
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_KIK_STANDING2:
+		{
+			switch (last_input)
+			{
+			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = SDL_GetTicks(); break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = SDL_GetTicks(); break;
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1391,9 +1855,18 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCH_UP2: state = ST_STANDING2; standing_timer = App->frames; break;
+
 			case IN_L_PUNCH2: state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames; break;
 			case IN_L_KIK2: state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames; break;
+
+			case IN_M_PUNCH2: state = M_PUNCH_CROUCH2; m_crouching_punch_timer = SDL_GetTicks(); break;
+			case IN_M_KIK2: state = M_KIK_CROUCH2; m_crouching_kik_timer = SDL_GetTicks(); break;
+
+			case IN_F_PUNCH2: state = F_PUNCH_CROUCH2; f_crouching_punch_timer = SDL_GetTicks(); break;
+			case IN_F_KIK2: state = F_KIK_CROUCH2; f_crouching_kik_timer = SDL_GetTicks(); break;
+
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1404,8 +1877,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_PUNCH_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_L_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = App->frames; break;
+			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1416,9 +1889,57 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_KIK_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_L_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
+			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_PUNCH_CROUCH2:
+		{
+			switch (last_input)
+			{
+			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_KIK_CROUCH2:
+		{
+			switch (last_input)
+			{
+			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_PUNCH_CROUCH2:
+		{
+			switch (last_input)
+			{
+			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_KIK_CROUCH2:
+		{
+			switch (last_input)
+			{
+			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = SDL_GetTicks(); break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -1453,7 +1974,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2:state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_L_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
+			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break; 
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1475,6 +1996,16 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_GETTING_UP_FINISH2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case ST_DEFENDING2:
+		{
+			switch (last_input)
+			{
+			case IN_DEFENDING_FINISH2:state = ST_IDLE2; break;
+			case IN_GUT_REEL:state = ST_GUT_REEL2; break;
 			}
 		}
 		break;

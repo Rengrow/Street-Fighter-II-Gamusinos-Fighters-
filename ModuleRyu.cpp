@@ -513,7 +513,7 @@ update_status ModuleRyu::Update()
 
 		case ST_JUMP_NEUTRAL:
 			current_animation = &neutralJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -526,7 +526,7 @@ update_status ModuleRyu::Update()
 
 		case ST_JUMP_FORWARD:
 			current_animation = &forwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -542,7 +542,7 @@ update_status ModuleRyu::Update()
 
 		case ST_JUMP_BACKWARD:
 			current_animation = &backwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -577,7 +577,7 @@ update_status ModuleRyu::Update()
 
 		case L_PUNCH_NEUTRAL_JUMP:
 			current_animation = &jlp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -590,7 +590,7 @@ update_status ModuleRyu::Update()
 		case L_PUNCH_FORWARD_JUMP:
 			current_animation = &jflp;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -605,7 +605,7 @@ update_status ModuleRyu::Update()
 		case L_PUNCH_BACKWARD_JUMP:
 			current_animation = &jblp;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -627,7 +627,7 @@ update_status ModuleRyu::Update()
 
 		case L_KIK_NEUTRAL_JUMP:
 			current_animation = &jlk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -640,7 +640,7 @@ update_status ModuleRyu::Update()
 
 		case L_KIK_FORWARD_JUMP:
 			current_animation = &jflk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -654,7 +654,7 @@ update_status ModuleRyu::Update()
 
 		case L_KIK_BACKWARD_JUMP:
 			current_animation = &jblk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= JUMP_TIME))
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= R_JUMP_TIME))
 			{
 				jumpHeight += speed + 3;
 			}
@@ -989,7 +989,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 {
 	if (jump_timer > 0)
 	{
-		if (App->frames - jump_timer > JUMP_TIME)
+		if (App->frames - jump_timer > R_JUMP_TIME)
 		{
 			inputs.Push(IN_JUMP_FINISH);
 			jump_timer = 0;
@@ -998,61 +998,61 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (l_standing_punch_timer > 0)
 	{
-		if (App->frames - l_standing_punch_timer > L_STANDING_PUNCH_TIME)
+		if (App->frames - l_standing_punch_timer > R_L_STANDING_PUNCH_TIME)
 		{
-			inputs.Push(IN_L_PUNCH_FINISH);
+			inputs.Push(IN_PUNCH_FINISH);
 			l_standing_punch_timer = 0;
 		}
 	}
 
 	if (l_crouching_punch_timer > 0)
 	{
-		if (App->frames - l_crouching_punch_timer > L_CROUCHING_PUNCH_TIME)
+		if (App->frames - l_crouching_punch_timer > R_L_CROUCHING_PUNCH_TIME)
 		{
-			inputs.Push(IN_L_PUNCH_FINISH);
+			inputs.Push(IN_PUNCH_FINISH);
 			l_crouching_punch_timer = 0;
 		}
 	}
 
 	if (l_d_jumping_punch_timer > 0)
 	{
-		if (App->frames - l_d_jumping_punch_timer > L_D_JUMPING_PUNCH_TIME)
+		if (App->frames - l_d_jumping_punch_timer > R_L_D_JUMPING_PUNCH_TIME)
 		{
-			inputs.Push(IN_L_PUNCH_FINISH);
+			inputs.Push(IN_PUNCH_FINISH);
 			l_d_jumping_punch_timer = 0;
 		}
 	}
 
 	if (l_standing_kik_timer > 0)
 	{
-		if (App->frames - l_standing_kik_timer > L_STANDING_KIK_TIME)
+		if (App->frames - l_standing_kik_timer > R_L_STANDING_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH);
+			inputs.Push(IN_KIK_FINISH);
 			l_standing_kik_timer = 0;
 		}
 	}
 
 	if (l_crouching_kik_timer > 0)
 	{
-		if (App->frames - l_crouching_kik_timer > L_CROUCHING_KIK_TIME)
+		if (App->frames - l_crouching_kik_timer > R_L_CROUCHING_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH);
+			inputs.Push(IN_KIK_FINISH);
 			l_crouching_kik_timer = 0;
 		}
 	}
 
 	if (l_d_jumping_kik_timer > 0)
 	{
-		if (App->frames - l_d_jumping_kik_timer > L_D_JUMPING_KIK_TIME)
+		if (App->frames - l_d_jumping_kik_timer > R_L_D_JUMPING_KIK_TIME)
 		{
-			inputs.Push(IN_L_KIK_FINISH);
+			inputs.Push(IN_KIK_FINISH);
 			l_d_jumping_kik_timer = 0;
 		}
 	}
 
 	if (hadoken_timer > 0)
 	{
-		if (App->frames - hadoken_timer > HADOKEN_TIME)
+		if (App->frames - hadoken_timer > R_HADOKEN_TIME)
 		{
 			inputs.Push(IN_HADOKEN_FINISH);
 			hadoken_timer = 0;
@@ -1061,7 +1061,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (crouching_timer > 0)
 	{
-		if (App->frames - crouching_timer > CROUCHING_TIME)
+		if (App->frames - crouching_timer > R_CROUCHING_TIME)
 		{
 			inputs.Push(IN_CROUCHING_FINISH);
 			crouching_timer = 0;
@@ -1070,7 +1070,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (standing_timer > 0)
 	{
-		if (App->frames - standing_timer > STANDING_TIME)
+		if (App->frames - standing_timer > R_STANDING_TIME)
 		{
 			inputs.Push(IN_STANDING_FINISH);
 			standing_timer = 0;
@@ -1079,7 +1079,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (head_reel_timer > 0)
 	{
-		if (App->frames - head_reel_timer > HEAD_REEL_TIME)
+		if (App->frames - head_reel_timer > R_HEAD_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH);
 			head_reel_timer = 0;
@@ -1088,7 +1088,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (gut_reel_timer > 0)
 	{
-		if (App->frames - gut_reel_timer > GUT_REEL_TIME)
+		if (App->frames - gut_reel_timer > R_GUT_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH);
 			gut_reel_timer = 0;
@@ -1097,7 +1097,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (crouch_reel_timer > 0)
 	{
-		if (App->frames - crouch_reel_timer > CROUCH_REEL_TIME)
+		if (App->frames - crouch_reel_timer > R_CROUCH_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH);
 			crouch_reel_timer = 0;
@@ -1106,7 +1106,7 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (getting_up_timer > 0)
 	{
-		if (App->frames - getting_up_timer > GETTING_UP_TIME)
+		if (App->frames - getting_up_timer > R_GETTING_UP_TIME)
 		{
 			inputs.Push(IN_GETTING_UP_FINISH);
 			getting_up_timer = 0;
@@ -1265,7 +1265,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH_FINISH: state = ST_JUMP_FORWARD; break;
+			case IN_PUNCH_FINISH: state = ST_JUMP_FORWARD; break;
 			case IN_FALLING: state = ST_FALLING; break;
 
 			case IN_LOOSE: state = LOOSE; break;
@@ -1278,7 +1278,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_KIK_FINISH: state = ST_JUMP_FORWARD; break;
+			case IN_KIK_FINISH: state = ST_JUMP_FORWARD; break;
 			case IN_FALLING: state = ST_FALLING; break;
 
 			case IN_LOOSE: state = LOOSE; break;
@@ -1291,7 +1291,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_PUNCH_FINISH: state = ST_JUMP_BACKWARD; break;
+			case IN_PUNCH_FINISH: state = ST_JUMP_BACKWARD; break;
 			case IN_FALLING: state = ST_FALLING; break;
 
 			case IN_LOOSE: state = LOOSE; break;
@@ -1304,7 +1304,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH: state = ST_IDLE; break;
-			case IN_L_KIK_FINISH: state = ST_JUMP_BACKWARD; break;
+			case IN_KIK_FINISH: state = ST_JUMP_BACKWARD; break;
 			case IN_FALLING: state = ST_FALLING; break;
 
 			case IN_LOOSE: state = LOOSE; break;
@@ -1316,7 +1316,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_PUNCH_FINISH: state = ST_IDLE; break;
+			case IN_PUNCH_FINISH: state = ST_IDLE; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_VICTORY: state = VICTORY; break;
@@ -1329,7 +1329,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_KIK_FINISH: state = ST_IDLE; break;
+			case IN_KIK_FINISH: state = ST_IDLE; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_VICTORY: state = VICTORY; break;
@@ -1378,8 +1378,8 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_PUNCH_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_PUNCH_FINISH: state = ST_STANDING;  standing_timer = App->frames; break;
+			case IN_PUNCH_FINISH: state = ST_CROUCH; break;
+			case IN_CROUCH_UP && IN_PUNCH_FINISH: state = ST_STANDING;  standing_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
@@ -1390,8 +1390,8 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_L_KIK_FINISH: state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
+			case IN_KIK_FINISH: state = ST_CROUCH; break;
+			case IN_CROUCH_UP && IN_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
@@ -1427,7 +1427,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH:state = ST_CROUCH; break;
-			case IN_CROUCH_UP && IN_L_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
+			case IN_CROUCH_UP && IN_KIK_FINISH: state = ST_STANDING; standing_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}

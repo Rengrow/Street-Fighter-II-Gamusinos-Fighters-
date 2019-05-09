@@ -7,6 +7,41 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
+#define D_L_STANDING_PUNCH_TIME 1000
+#define D_L_CROUCHING_PUNCH_TIME 500
+#define D_L_D_JUMPING_PUNCH_TIME 1000
+
+#define D_L_STANDING_KIK_TIME 1500
+#define D_L_CROUCHING_KIK_TIME 600
+#define D_L_D_JUMPING_KIK_TIME 1000
+
+#define D_M_STANDING_PUNCH_TIME 1500
+#define D_M_CROUCHING_PUNCH_TIME 700
+#define D_M_D_JUMPING_PUNCH_TIME 1300
+
+#define D_M_STANDING_KIK_TIME 1800
+#define D_M_CROUCHING_KIK_TIME 800
+#define D_M_D_JUMPING_KIK_TIME 1350
+
+#define D_F_STANDING_PUNCH_TIME 1500
+#define D_F_CROUCHING_PUNCH_TIME 700
+#define D_F_D_JUMPING_PUNCH_TIME 1300
+
+#define D_F_STANDING_KIK_TIME 1800
+#define D_F_CROUCHING_KIK_TIME 800
+#define D_F_D_JUMPING_KIK_TIME 1350
+
+#define D_HADOKEN_TIME 4500
+#define D_CROUCHING_TIME 1000
+#define D_STANDING_TIME 1000
+#define D_JUMP_TIME 2000
+#define D_GETTING_UP_TIME 1000
+#define D_DEFENDING_TIME 1000
+
+#define D_HEAD_REEL_TIME 700
+#define D_CROUCH_REEL_TIME 700
+#define D_GUT_REEL_TIME 700
+
 struct Mix_Chunk;
 
 enum ryu_states2
@@ -22,6 +57,7 @@ enum ryu_states2
 	ST_CROUCHING2,
 	ST_CROUCH2,
 	ST_STANDING2,
+	ST_DEFENDING2,
 
 	L_PUNCH_STANDING2,
 	L_PUNCH_NEUTRAL_JUMP2,
@@ -34,6 +70,30 @@ enum ryu_states2
 	L_KIK_FORWARD_JUMP2,
 	L_KIK_BACKWARD_JUMP2,
 	L_KIK_CROUCH2,
+
+	M_PUNCH_STANDING2,
+	M_PUNCH_NEUTRAL_JUMP2,
+	M_PUNCH_FORWARD_JUMP2,
+	M_PUNCH_BACKWARD_JUMP2,
+	M_PUNCH_CROUCH2,
+
+	M_KIK_STANDING2,
+	M_KIK_NEUTRAL_JUMP2,
+	M_KIK_FORWARD_JUMP2,
+	M_KIK_BACKWARD_JUMP2,
+	M_KIK_CROUCH2,
+
+	F_PUNCH_STANDING2,
+	F_PUNCH_NEUTRAL_JUMP2,
+	F_PUNCH_FORWARD_JUMP2,
+	F_PUNCH_BACKWARD_JUMP2,
+	F_PUNCH_CROUCH2,
+
+	F_KIK_STANDING2,
+	F_KIK_NEUTRAL_JUMP2,
+	F_KIK_FORWARD_JUMP2,
+	F_KIK_BACKWARD_JUMP2,
+	F_KIK_CROUCH2,
 
 	ST_HEAD_REEL2,
 	ST_GUT_REEL2,
@@ -59,8 +119,14 @@ enum ryu_inputs2
 	IN_CROUCH_UP2,
 	IN_CROUCH_DOWN2,
 	IN_JUMP_AND_CROUCH2,
+	IN_DEFENDING2,
+
 	IN_L_PUNCH2,
 	IN_L_KIK2,
+	IN_M_PUNCH2,
+	IN_M_KIK2,
+	IN_F_PUNCH2,
+	IN_F_KIK2,
 	IN_HADOKEN2,
 
 	IN_HEAD_REEL2,
@@ -71,9 +137,10 @@ enum ryu_inputs2
 	IN_CROUCHING_FINISH2,
 	IN_STANDING_FINISH2,
 	IN_JUMP_FINISH2,
-	IN_L_PUNCH_FINISH2,
-	IN_L_KIK_FINISH2,
+	IN_PUNCH_FINISH2,
+	IN_KIK_FINISH2,
 	IN_HADOKEN_FINISH2,
+	IN_DEFENDING_FINISH2,
 
 	IN_REEL_FINISH2,
 	IN_FALLING_FINISH2,
@@ -151,6 +218,7 @@ public:
 	int speed = 1;
 	int life;
 	
+	//light
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_crouching_punch_timer = 0;
 	Uint32 l_d_jumping_punch_timer = 0;
@@ -159,11 +227,31 @@ public:
 	Uint32 l_crouching_kik_timer = 0;
 	Uint32 l_d_jumping_kik_timer = 0;
 
+	//medium
+	Uint32 m_standing_punch_timer = 0;
+	Uint32 m_crouching_punch_timer = 0;
+	Uint32 m_d_jumping_punch_timer = 0;
+
+	Uint32 m_standing_kik_timer = 0;
+	Uint32 m_crouching_kik_timer = 0;
+	Uint32 m_d_jumping_kik_timer = 0;
+
+	//fierce
+	Uint32 f_standing_punch_timer = 0;
+	Uint32 f_crouching_punch_timer = 0;
+	Uint32 f_d_jumping_punch_timer = 0;
+
+	Uint32 f_standing_kik_timer = 0;
+	Uint32 f_crouching_kik_timer = 0;
+	Uint32 f_d_jumping_kik_timer = 0;
+
+	//others
 	Uint32 hadoken_timer = 0;
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;
 	Uint32 jump_timer = 0;
 	Uint32 getting_up_timer = 0;
+	Uint32 defending_timer = 0;
 
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;

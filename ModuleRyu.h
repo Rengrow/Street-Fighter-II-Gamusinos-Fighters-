@@ -7,23 +7,39 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-#define L_STANDING_PUNCH_TIME 28
-#define L_CROUCHING_PUNCH_TIME 30
-#define L_D_JUMPING_PUNCH_TIME 30
+#define R_L_STANDING_PUNCH_TIME 28
+#define R_L_CROUCHING_PUNCH_TIME 30
+#define R_L_D_JUMPING_PUNCH_TIME 30
 
-#define L_STANDING_KIK_TIME 50
-#define L_CROUCHING_KIK_TIME 30
-#define L_D_JUMPING_KIK_TIME 20
+#define R_L_STANDING_KIK_TIME 50
+#define R_L_CROUCHING_KIK_TIME 30
+#define R_L_D_JUMPING_KIK_TIME 20
 
-#define HADOKEN_TIME 66
-#define CROUCHING_TIME 10
-#define STANDING_TIME 10
-#define JUMP_TIME 55
-#define GETTING_UP_TIME 48
+#define R_M_STANDING_PUNCH_TIME 60
+#define R_M_CROUCHING_PUNCH_TIME 36
+#define R_M_D_JUMPING_PUNCH_TIME 36
 
-#define HEAD_REEL_TIME 43
-#define CROUCH_REEL_TIME 20
-#define GUT_REEL_TIME 25
+#define R_M_STANDING_KIK_TIME 60
+#define R_M_CROUCHING_KIK_TIME 36
+#define R_M_D_JUMPING_KIK_TIME 36
+
+#define R_F_STANDING_PUNCH_TIME 70
+#define R_F_CROUCHING_PUNCH_TIME 40
+#define R_F_D_JUMPING_PUNCH_TIME 40
+
+#define R_F_STANDING_KIK_TIME 70
+#define R_F_CROUCHING_KIK_TIME 40
+#define R_F_D_JUMPING_KIK_TIME 40
+
+#define R_HADOKEN_TIME 66
+#define R_CROUCHING_TIME 10
+#define R_STANDING_TIME 10
+#define R_JUMP_TIME 55
+#define R_GETTING_UP_TIME 48
+
+#define R_HEAD_REEL_TIME 43
+#define R_CROUCH_REEL_TIME 20
+#define R_GUT_REEL_TIME 25
 
 
 
@@ -42,6 +58,7 @@ enum ryu_states
 	ST_CROUCHING,
 	ST_CROUCH,
 	ST_STANDING,
+	ST_DEFENDING,
 
 	L_PUNCH_STANDING,
 	L_PUNCH_NEUTRAL_JUMP,
@@ -54,6 +71,30 @@ enum ryu_states
 	L_KIK_FORWARD_JUMP,
 	L_KIK_BACKWARD_JUMP,
 	L_KIK_CROUCH,
+
+	M_PUNCH_STANDING,
+	M_PUNCH_NEUTRAL_JUMP,
+	M_PUNCH_FORWARD_JUMP,
+	M_PUNCH_BACKWARD_JUMP,
+	M_PUNCH_CROUCH,
+
+	M_KIK_STANDING,
+	M_KIK_NEUTRAL_JUMP,
+	M_KIK_FORWARD_JUMP,
+	M_KIK_BACKWARD_JUMP,
+	M_KIK_CROUCH,
+
+	F_PUNCH_STANDING,
+	F_PUNCH_NEUTRAL_JUMP,
+	F_PUNCH_FORWARD_JUMP,
+	F_PUNCH_BACKWARD_JUMP,
+	F_PUNCH_CROUCH,
+
+	F_KIK_STANDING,
+	F_KIK_NEUTRAL_JUMP,
+	F_KIK_FORWARD_JUMP,
+	F_KIK_BACKWARD_JUMP,
+	F_KIK_CROUCH,
 
 	ST_HEAD_REEL,
 	ST_GUT_REEL,
@@ -79,8 +120,14 @@ enum ryu_inputs
 	IN_CROUCH_UP,
 	IN_CROUCH_DOWN,
 	IN_JUMP_AND_CROUCH,
+	IN_DEFENDING,
+
 	IN_L_PUNCH,
 	IN_L_KIK,
+	IN_M_PUNCH,
+	IN_M_KIK,
+	IN_F_PUNCH,
+	IN_F_KIK,
 	IN_HADOKEN,
 
 	IN_HEAD_REEL,
@@ -92,8 +139,8 @@ enum ryu_inputs
 	IN_CROUCHING_FINISH,
 	IN_STANDING_FINISH,
 	IN_JUMP_FINISH,
-	IN_L_PUNCH_FINISH,
-	IN_L_KIK_FINISH,
+	IN_PUNCH_FINISH,
+	IN_KIK_FINISH,
 	IN_HADOKEN_FINISH,
 
 	IN_REEL_FINISH,
@@ -172,6 +219,7 @@ public:
 	bool flip = false;
 	Uint32 invulnerabilityFrames;
 
+	//light
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_crouching_punch_timer = 0;
 	Uint32 l_d_jumping_punch_timer = 0;
@@ -179,6 +227,24 @@ public:
 	Uint32 l_standing_kik_timer = 0;
 	Uint32 l_crouching_kik_timer = 0;
 	Uint32 l_d_jumping_kik_timer = 0;
+
+	//medium
+	Uint32 m_standing_punch_timer = 0;
+	Uint32 m_crouching_punch_timer = 0;
+	Uint32 m_d_jumping_punch_timer = 0;
+
+	Uint32 m_standing_kik_timer = 0;
+	Uint32 m_crouching_kik_timer = 0;
+	Uint32 m_d_jumping_kik_timer = 0;
+
+	//fierce
+	Uint32 f_standing_punch_timer = 0;
+	Uint32 f_crouching_punch_timer = 0;
+	Uint32 f_d_jumping_punch_timer = 0;
+
+	Uint32 f_standing_kik_timer = 0;
+	Uint32 f_crouching_kik_timer = 0;
+	Uint32 f_d_jumping_kik_timer = 0;
 
 	Uint32 hadoken_timer = 0;
 	Uint32 crouching_timer = 0;
