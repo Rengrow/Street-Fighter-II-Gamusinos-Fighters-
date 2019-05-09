@@ -119,12 +119,6 @@ update_status ModuleSceneSagat::Update()
 	App->render->Blit(graphics, 174, 199, &rocks, false, 0.75f);
 	App->render->Blit(graphics, 489, 168, &rocks, false, 0.75f);
 
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->endBattle, 2);
-	}
-
 	return UPDATE_CONTINUE;
 }
 
