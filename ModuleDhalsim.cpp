@@ -277,46 +277,36 @@ bool ModuleDhalsim::Start()
 	// Standing reel
 	const int streelnColliders = 3;
 
-	SDL_Rect streelHitbox1[streelnColliders] = { { -11, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
-	SDL_Rect streelHitbox2[streelnColliders] = { { -6, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
-	SDL_Rect streelHitbox3[streelnColliders] = { { 0, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
-	SDL_Rect streelHitbox4[streelnColliders] = { { -31, 68, 24, 16}, { -6, 26, 40, 47}, { -26, 0, 40, 45} };
+	SDL_Rect streelHitbox1[streelnColliders] = { { -11, 78, 24, 16}, { -6, 26, 40, 47}, { -6, 0, 40, 45} };
 	COLLIDER_TYPE streelColliderType[streelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* streelCallback[streelnColliders] = { {this}, {this}, {this} };
 
-	streel.PushBack({ 143, 857, 67, 92 }, 10, { 48,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
-	streel.PushBack({ 213, 857, 69, 91 }, 10, { 53,5 }, streelnColliders, streelHitbox2, streelColliderType, streelCallback);
-	streel.PushBack({ 285, 857, 80, 91 }, 10, { 57,5 }, streelnColliders, streelHitbox3, streelColliderType, streelCallback);
-	streel.PushBack({ 367, 857, 66, 91 }, 10, { 36,5 }, streelnColliders, streelHitbox4, streelColliderType, streelCallback);
+	streel.PushBack({ 70, 810, 72, 92 }, 10, { 48,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
+	streel.PushBack({ 144, 811, 69, 93 }, 10, { 53,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
+	streel.PushBack({ 215, 808, 72, 96 }, 10, { 57,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
+	streel.PushBack({ 289, 808, 86, 96 }, 10, { 36,5 }, streelnColliders, streelHitbox1, streelColliderType, streelCallback);
 
 
 	// Standing gut reel
 	const int stgreelnColliders = 3;
 
-	SDL_Rect stgreelHitbox2[stgreelnColliders] = { { -25, 68, 24, 16}, { -3, 32, 40, 37}, { -3, 0, 45, 32} };
-	SDL_Rect stgreelHitbox3[stgreelnColliders] = { { -25, 64, 24, 16}, { 0, 32, 40, 42}, { -3, 0, 45, 32} };
-	SDL_Rect stgreelHitbox4[stgreelnColliders] = { { -28, 63, 26, 18}, { -3, 37, 40, 25}, { -8, 0, 45, 37} };
-	SDL_Rect stgreelHitbox5[stgreelnColliders] = { { -22, 47, 24, 16}, { -3, 32, 40, 32}, { -6, 0, 45, 32} };
+	SDL_Rect stgreelHitbox2[stgreelnColliders] = { { -5, 78, 44, 11}, { -13, 37, 40, 37}, { -13, 0, 45, 37} };
 	COLLIDER_TYPE stgreelColliderType[stgreelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* stgreelCallback[stgreelnColliders] = { {this}, {this}, {this} };
 
-	stgreel.PushBack({ 435, 865, 54, 84 }, 6, { 37,5 }, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
-	stgreel.PushBack({ 494, 868, 65, 81 }, 6, { 44,5 }, stgreelnColliders, stgreelHitbox3, stgreelColliderType, stgreelCallback);
-	stgreel.PushBack({ 561, 866, 70, 83 }, 6, { 47,5 }, stgreelnColliders, stgreelHitbox4, stgreelColliderType, stgreelCallback);
-	stgreel.PushBack({ 683, 878, 74, 71 }, 6, { 47,5 }, stgreelnColliders, stgreelHitbox5, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 377, 813, 67, 91 }, 6, { 37,5 }, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 446, 816, 80, 88 }, 6, { 44,5 }, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 528, 818, 71, 86 }, 6, { 47,5 }, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
+	stgreel.PushBack({ 601, 825, 76, 79 }, 6, { 47,5 }, stgreelnColliders, stgreelHitbox2, stgreelColliderType, stgreelCallback);
 
 
 	// Crouching reel
 	const int creelnColliders = 3;
-	SDL_Rect creelHitbox1[creelnColliders] = { { -27, 44, 24, 16}, { -6, 27, 53, 21}, { -6, 0, 53, 27} };
-	SDL_Rect creelHitbox2[creelnColliders] = { { 0, 47, 24, 16}, { -4, 27, 36, 21}, { -16, 0, 48, 32} };
-	SDL_Rect creelHitbox3[creelnColliders] = { { 0, 47, 24, 16}, { -4, 27, 36, 21}, { -16, 0, 48, 32} };
+	SDL_Rect creelHitbox1[creelnColliders] = { { -7, 44, 44, 26}, { -6, 27, 53, 21}, { -6, 0, 53, 27} };
 	COLLIDER_TYPE creelColliderType[creelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* creelCallback[creelnColliders] = { {this}, {this}, {this} };
-	creel.PushBack({ 889, 884, 66, 66 }, 6, { 31,5 }, creelnColliders, { creelHitbox1 }, { creelColliderType }, { creelCallback });
-	creel.PushBack({ 955, 884, 68, 66 }, 6, { 42,5 }, creelnColliders, { creelHitbox2 }, { creelColliderType }, { creelCallback });
-	creel.PushBack({ 0, 953, 66, 71 }, 6, { 42,5 }, creelnColliders, { creelHitbox3 }, { creelColliderType }, { creelCallback });
-
+	creel.PushBack({ 679, 833, 57, 71 }, 6, { 31,5 }, creelnColliders, { creelHitbox1 }, { creelColliderType }, { creelCallback });
+	creel.PushBack({ 738, 835, 61, 69 }, 6, { 42,5 }, creelnColliders, { creelHitbox1 }, { creelColliderType }, { creelCallback });
 
 
 	//Standing
