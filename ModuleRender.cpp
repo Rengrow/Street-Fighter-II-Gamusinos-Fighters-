@@ -55,8 +55,8 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-
-	// this exact coding causes the following problem: camera wont move right if opposite ryu is at left corner (the same way around)
+	
+	// TO DO: this exact coding causes the following problem: camera wont move right if opposite ryu is at left corner (the same way around)
 
 	if (App->ryu->position.x > -camera.x / SCREEN_SIZE && App->ryu->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
 		camera.x += cameraSpeed * SCREEN_SIZE;
@@ -83,9 +83,9 @@ update_status ModuleRender::Update()
 		limit1Box.x += cameraSpeed;
 		limit2Box.x += cameraSpeed;
 	}
-
+	/*
 	//CAMERA DEBUG
-	/*if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
 		if (camera.x != 0) {
 			camera.x += cameraSpeed * SCREEN_SIZE;
 			limit1Box.x -= cameraSpeed;
@@ -100,14 +100,20 @@ update_status ModuleRender::Update()
 			limit2Box.x += cameraSpeed;
 		}
 	}*/
-
+	
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::PostUpdate()
 {
 	SDL_RenderPresent(renderer);
-	return update_status::UPDATE_CONTINUE;
+
+	if (SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT) == 0)
+	{
+		return update_status::UPDATE_CONTINUE;
+	}
+
+	return update_status::UPDATE_ERROR;
 }
 
 // Called before quitting
