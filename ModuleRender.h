@@ -28,7 +28,7 @@ public:
 	SDL_Rect camera;
 	SDL_Rect limit1Box;
 	SDL_Rect limit2Box;
-	int cameraSpeed = 2;
+	int cameraSpeed = 1;  //this used to be 2, but caused players to vibrate
 	int scenelimit;
 	
 };
