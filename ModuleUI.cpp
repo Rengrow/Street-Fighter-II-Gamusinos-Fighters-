@@ -13,6 +13,7 @@
 #include<string.h>
 
 #include "SDL/include/SDL.h"
+#include "SDL/include/SDL_gamecontroller.h"
 
 ModuleUI::ModuleUI()
 {
@@ -92,6 +93,7 @@ bool ModuleUI::Start()
 	bool ret = true;
 
 	typography1 = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890 ", 1);
+	typographyDebug = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 	numbers = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 	lifeBars = App->textures->Load("assets/images/ui/Life_bar_Rounds.png");
 
@@ -134,6 +136,7 @@ bool ModuleUI::CleanUp()
 
 	App->textures->Unload(lifeBars);
 	App->fonts->UnLoad(numbers);
+	App->fonts->UnLoad(typographyDebug);
 	App->fonts->UnLoad(typography1);
 
 	lifeBars = nullptr;
@@ -150,6 +153,12 @@ update_status ModuleUI::PostUpdate()
 	RoundsWinnedBlit();
 	StartFightBlit();
 	EndFight();
+
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN)
+		debugGamepads = !debugGamepads;
+
+	if (debugGamepads)
+		BlitGamePadDebug();
 
 	return UPDATE_CONTINUE;
 }
@@ -322,4 +331,13 @@ void ModuleUI::EndFight() {
 			else if (winnerPlayer == 2)
 				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "Player 2 win");
 	}
+}
+
+void ModuleUI::BlitGamePadDebug() {
+
+	bool pad1Pluged = App->input->gameController1States[SDL_CONTROLLER_BUTTON_A];
+
+
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "Player 1 win");
+
 }

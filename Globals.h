@@ -33,4 +33,5 @@ typedef unsigned int uint;
 #define REN_VSYNC 1
 #define AUDIO_CHANNELS 2
 #define MAX_COLLIDERS_PER_FRAME 10
+#define JOYSTICK_DEAD_ZONE 8000;
 #endif // __GLOBALS_H__

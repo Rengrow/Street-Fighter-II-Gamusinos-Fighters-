@@ -30,10 +30,12 @@ private:
 	void StartFightBlit();
 	void RoundsWinnedBlit();
 	void EndFight();
+	void BlitGamePadDebug();
 
 public:
 	int numbers;
 	int typography1;
+	int typographyDebug;
 	int stopedTimer;
 
 	SDL_Texture* lifeBars = nullptr;
@@ -64,6 +66,7 @@ public:
 	int timerx = 170;
 	char tiempo[2];
 	bool redKoEnabled;
+	bool debugGamepads = false;
 	int winnerPlayer = 0;
 
 private:
