@@ -208,6 +208,7 @@ public:
 
 	Uint32 invulnerabilityFrames;
 	bool flip = true;
+	bool altColor = false;
 	bool freeze;
 	int victoryExecuted;
 	int framesAtaque = 0;
