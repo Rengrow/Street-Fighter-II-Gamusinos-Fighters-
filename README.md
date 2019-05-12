@@ -38,8 +38,13 @@ Currently there is no installation required, just open the .exe provided in the 
         H: Crouch
         J: Forwards
     Attacks:
-        8: Punch
-        9: Kick
+	On the Pad
+        4: Light Punch
+        5: Medium Punch
+        6: Hard Punch
+        1: Light Kick
+        2: Medium Kick
+        3: Hard Kick
         0: Hadoken
 
 ## History
