@@ -81,12 +81,6 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE backwardColliderType[backwardnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* backwardCallback[backwardnColliders] = { {this}, {this}, {this} };
 
-	/*
-	Estas animaciones son las de defensa que hace antes de empezar a tirarse hacia atrás
-	falta
-	backward.PushBack({ 872, 708, 61, 94 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
-	falta
-	*/
 	backward.PushBack({ 737, 542, 71, 101 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
 	backward.PushBack({ 810, 545, 86, 98 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
 	backward.PushBack({ 898, 540, 64, 103 }, 6, { 34,5 }, backwardnColliders, backwardHitbox, backwardColliderType, backwardCallback);
