@@ -30,6 +30,14 @@ bool ModuleDhalsim::Start()
 	graphics2 = App->textures->Load("assets/images/sprites/characters/dhalshim2.png"); // arcade version
 	graphics3 = App->textures->Load("assets/images/sprites/characters/dictator-dhalshim.png"); // arcade version
 
+	if (altColor) {
+		SDL_SetTextureColorMod(graphics, 120, 120, 255);
+
+		SDL_SetTextureColorMod(graphics2, 120, 120, 255);
+
+		SDL_SetTextureColorMod(graphics3, 120, 120, 255);
+	}
+
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -345,7 +353,7 @@ bool ModuleDhalsim::Start()
 	Module* crouchCallback[crouchnColliders] = { {this}, {this}, {this} };
 
 	crouch.PushBack({ 331, 181, 61, 66 }, 1, { 29,5 }, crouchnColliders, crouchHitbox, crouchColliderType, crouchCallback);
-	
+
 
 	//Crouching l punch
 	const int clpnColliders = 3;
@@ -363,7 +371,7 @@ bool ModuleDhalsim::Start()
 	clp.PushBack({ 817, 211, 199, 34 }, 8, { 29,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
 	clp.PushBack({ 681, 211, 135, 34 }, 5, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 	clp.PushBack({ 596, 193, 83, 52 }, 5, { 29,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	
+
 
 
 	//Crouching l kik
@@ -1413,7 +1421,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_M_PUNCH2: state = M_PUNCH_NEUTRAL_JUMP2; break;
 			case IN_M_KIK2: state = M_KIK_NEUTRAL_JUMP2; break;
-				
+
 			case IN_F_PUNCH2: state = F_PUNCH_NEUTRAL_JUMP2; break;
 			case IN_F_KIK2: state = F_KIK_NEUTRAL_JUMP2; break;
 
@@ -1432,7 +1440,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_L_PUNCH2: state = L_PUNCH_FORWARD_JUMP2; l_d_jumping_punch_timer = App->frames; break;
 			case IN_L_KIK2: state = L_KIK_FORWARD_JUMP2; l_d_jumping_kik_timer = App->frames; break;
-			
+
 			case IN_M_PUNCH2: state = M_PUNCH_FORWARD_JUMP2; m_d_jumping_punch_timer = SDL_GetTicks(); break;
 			case IN_M_KIK2: state = M_KIK_FORWARD_JUMP2; m_d_jumping_kik_timer = SDL_GetTicks(); break;
 
@@ -1938,7 +1946,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2:state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break; 
+			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
