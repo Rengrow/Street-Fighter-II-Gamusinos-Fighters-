@@ -182,6 +182,7 @@ public:
 	Animation backward;
 	Animation lp, lk, clp, clk;
 	Animation jlp, jlk, jflp, jflk, jblp, jblk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	Animation mp, hp, mk, hk;
 	Animation neutralJump;
 	Animation forwardJump;
 	Animation backwardJump;

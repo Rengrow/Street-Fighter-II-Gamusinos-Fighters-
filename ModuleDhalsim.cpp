@@ -117,6 +117,41 @@ bool ModuleDhalsim::Start()
 	lp.PushBack({ 529, 668, 83, 83 }, 10, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
+
+	//mp
+	const int mpnColliders = 3;
+	const int mpnColliders2 = 3;
+	const int mpnColliders3 = 4;
+	const int mpnColliders4 = 4;
+	const int mpnColliders5 = 3;
+
+	SDL_Rect mpHitbox[mpnColliders] = { { -50, 75, 20, 16}, { -26, 37, 48, 42}, { -26, 0, 48, 37} };
+	SDL_Rect mpHitbox2[mpnColliders2] = { { -65, 59, 24, 20}, { -9, 0, 39, 50}, { -48, 0, 33, 50} };
+	SDL_Rect mpHitbox3[mpnColliders3] = { { -75, 32, 24, 20}, { -9, 0, 39, 47}, { -48, 0, 33, 47}, { -110, 32, 50, 20} };
+	SDL_Rect mpHitbox4[mpnColliders4] = { { -81, 30, 83, 13}, { -9, 0, 39, 47}, { -48, 0, 33, 47}, {-164, 28, 50, 15} };
+	SDL_Rect mpHitbox5[mpnColliders5] = { { -75, 32, 24, 20}, { -9, 0, 39, 47}, { -48, 0, 33, 47} };
+	COLLIDER_TYPE mpColliderType[mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE mpColliderType2[mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}};
+	COLLIDER_TYPE mpColliderType3[mpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE mpColliderType4[mpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2},{COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE mpColliderType5[mpnColliders5] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* mpCallback[mpnColliders] = { {this}, {this}, {this} };
+	Module* mpCallback2[mpnColliders2] = { {this}, {this}, {this} };
+	Module* mpCallback3[mpnColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	Module* mpCallback4[mpnColliders4] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	Module* mpCallback5[mpnColliders5] = { {this}, {this}, {this} };
+
+
+	mp.PushBack({ 751, 652, 74, 99 }, 3, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
+	mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
+	mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders3, mpHitbox3, mpColliderType3, mpCallback3);
+	mp.PushBack({ 152, 816, 214, 46 }, 6, { 33,5 }, mpnColliders4, mpHitbox4, mpColliderType4, mpCallback4);
+	mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders5, mpHitbox5, mpColliderType5, mpCallback5);
+	mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
+	mp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
+
+
+
 	// lk
 	const int lknColliders = 3;
 	const int lknColliders3 = 4;
@@ -474,7 +509,7 @@ bool ModuleDhalsim::CleanUp()
 	idle = Animation();
 	forward = Animation();
 	backward = Animation();
-	lp = lk = clp = clk = Animation();
+	lp = lk = clp = clk = mp = Animation();
 	jlp = jlk = jflp = jflk = jblp = jblk = Animation();
 	neutralJump = Animation();
 	forwardJump = Animation();
@@ -556,7 +591,6 @@ update_status ModuleDhalsim::Update()
 			}
 			break;
 
-
 		case ST_JUMP_FORWARD2:
 			current_animation = &forwardJump;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
@@ -615,6 +649,8 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_PUNCH_STANDING2:
+			texture = graphics3;
+			current_animation = &mp;
 			break;
 
 		case F_PUNCH_STANDING2:
@@ -968,6 +1004,15 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		}
 		//Key down
+		// Using B as debug tool
+		
+		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_M_PUNCH2);
+		}
+
+
+
 
 		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
 		{
