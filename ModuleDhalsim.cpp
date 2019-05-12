@@ -118,15 +118,6 @@ bool ModuleDhalsim::Start()
 
 
 
-
-
-
-
-
-
-
-
-
 	//mp
 	const int mpnColliders = 3;
 	const int mpnColliders2 = 3;
@@ -134,23 +125,11 @@ bool ModuleDhalsim::Start()
 	const int mpnColliders4 = 4;
 	const int mpnColliders5 = 3;
 
-
-
-
 	SDL_Rect mpHitbox[mpnColliders] = { { -50, 75, 20, 16}, { -26, 37, 48, 42}, { -26, 0, 48, 37} };
 	SDL_Rect mpHitbox2[mpnColliders2] = { { -65, 59, 24, 20}, { -9, 0, 39, 50}, { -48, 0, 33, 50} };
-
-
-
-
-	SDL_Rect mpHitbox3[mpnColliders3] = { { 0, 0, 0, 0}, { -28, 37, 40, 47}, { -11, 5, 60, 32}, { -66, 55, 60, 15} };
-
-
-
-
-
-	SDL_Rect mpHitbox4[mpnColliders4] = { { 0, 0, 0, 0}, { -28, 37, 40, 47}, { -11, 5, 60, 32},{ -66, 55, 60, 15} };
-	SDL_Rect mpHitbox5[mpnColliders5] = { { 0, 0, 0, 0}, { -28, 37, 40, 47}, { -11, 5, 60, 32} };
+	SDL_Rect mpHitbox3[mpnColliders3] = { { -75, 32, 24, 20}, { -9, 0, 39, 47}, { -48, 0, 33, 47}, { -110, 32, 50, 20} };
+	SDL_Rect mpHitbox4[mpnColliders4] = { { -81, 30, 83, 13}, { -9, 0, 39, 47}, { -48, 0, 33, 47}, {-164, 28, 50, 15} };
+	SDL_Rect mpHitbox5[mpnColliders5] = { { -75, 32, 24, 20}, { -9, 0, 39, 47}, { -48, 0, 33, 47} };
 	COLLIDER_TYPE mpColliderType[mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE mpColliderType2[mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}};
 	COLLIDER_TYPE mpColliderType3[mpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
@@ -163,31 +142,13 @@ bool ModuleDhalsim::Start()
 	Module* mpCallback5[mpnColliders5] = { {this}, {this}, {this} };
 
 
-	//mp.PushBack({ 751, 652, 74, 99 }, 3, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
-	//mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
+	mp.PushBack({ 751, 652, 74, 99 }, 3, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
+	mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
 	mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders3, mpHitbox3, mpColliderType3, mpCallback3);
-	//mp.PushBack({ 152, 816, 214, 46 }, 6, { 33,5 }, mpnColliders4, mpHitbox4, mpColliderType4, mpCallback4);
-	//mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders5, mpHitbox5, mpColliderType5, mpCallback5);
-	//mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
-	//mp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	mp.PushBack({ 152, 816, 214, 46 }, 6, { 33,5 }, mpnColliders4, mpHitbox4, mpColliderType4, mpCallback4);
+	mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders5, mpHitbox5, mpColliderType5, mpCallback5);
+	mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
+	mp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
 
 
 
