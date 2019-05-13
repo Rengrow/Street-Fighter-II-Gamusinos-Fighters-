@@ -154,11 +154,11 @@ update_status ModuleUI::PostUpdate()
 	StartFightBlit();
 	EndFight();
 
-	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN)
+	/*if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN)
 		debugGamepads = !debugGamepads;
 
 	if (debugGamepads)
-		BlitGamePadDebug();
+		BlitGamePadDebug();*/
 
 	return UPDATE_CONTINUE;
 }
@@ -335,9 +335,6 @@ void ModuleUI::EndFight() {
 
 void ModuleUI::BlitGamePadDebug() {
 
-	bool pad1Pluged = App->input->gameController1States[SDL_CONTROLLER_BUTTON_A];
-
-
-	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "funciona");
-
+	//bool pad1Pluged = App->input->gameController1States[SDL_CONTROLLER_BUTTON_A];
+	//App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "funciona");
 }

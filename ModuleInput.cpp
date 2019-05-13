@@ -86,6 +86,9 @@ update_status ModuleInput::PreUpdate()
 #pragma endregion
 
 #pragma region Gamepad
+
+	//Comprobar que ambos mandos están conectados y si no lo están conectarlos
+
 	SDL_GameControllerUpdate();
 
 	//Obtain the current button values of GamePad 1
