@@ -26,16 +26,17 @@ bool ModuleDhalsim::Start()
 {
 	LOG("Loading ryu textures");
 	bool ret = true;
-	graphics = App->textures->Load("assets/images/sprites/characters/dhalshim1.png"); // arcade version
-	graphics2 = App->textures->Load("assets/images/sprites/characters/dhalshim2.png"); // arcade version
-	graphics3 = App->textures->Load("assets/images/sprites/characters/dictator-dhalshim.png"); // arcade version
+	
 
-	if (altColor) {
-		SDL_SetTextureColorMod(graphics, 120, 120, 255);
-
-		SDL_SetTextureColorMod(graphics2, 120, 120, 255);
-
-		SDL_SetTextureColorMod(graphics3, 120, 120, 255);
+	if (!altColor) {
+		graphics = App->textures->Load("assets/images/sprites/characters/dhalshim1.png"); // arcade version
+		graphics2 = App->textures->Load("assets/images/sprites/characters/dhalshim2.png"); // arcade version
+		graphics3 = App->textures->Load("assets/images/sprites/characters/dictator-dhalshim.png"); // arcade version
+	}
+	else {
+		graphics = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim1.png"); // arcade version
+		graphics2 = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim2.png"); // arcade version
+		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
 	}
 
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
