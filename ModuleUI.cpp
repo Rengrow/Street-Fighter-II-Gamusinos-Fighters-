@@ -157,7 +157,7 @@ update_status ModuleUI::PostUpdate()
 	
 		
 		
-	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 		debugGamepads = !debugGamepads;
 	
 	
