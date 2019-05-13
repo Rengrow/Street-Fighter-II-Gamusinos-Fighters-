@@ -1004,7 +1004,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_F_PUNCH2);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN)
+		if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
 		{
 			inputs.Push(IN_F_KIK2);
 		}

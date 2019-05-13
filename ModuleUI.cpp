@@ -342,6 +342,22 @@ void ModuleUI::BlitGamePadDebug() {
 	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typographyDebug, "a");
 
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_REPEAT)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 10, typographyDebug, "x");
+
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_REPEAT)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 10, typographyDebug, "y");
+
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_REPEAT)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 30, typographyDebug, "b");
+
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_REPEAT)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 50, typographyDebug, "r1");
+
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 + 50, typographyDebug, "r2");
+	
+
 	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "up");
 	
