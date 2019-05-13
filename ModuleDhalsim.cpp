@@ -117,7 +117,6 @@ bool ModuleDhalsim::Start()
 	lp.PushBack({ 529, 668, 83, 83 }, 10, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
-
 	//mp
 	const int mpnColliders = 3;
 	const int mpnColliders2 = 3;
@@ -151,6 +150,35 @@ bool ModuleDhalsim::Start()
 	mp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
 
 
+	// hp
+
+	const int hpnColliders = 3;
+	const int hpnColliders2 = 3;
+	const int hpnColliders3 = 3;
+	const int hpnColliders4 = 3;
+	const int hpnColliders5 = 3;
+	SDL_Rect hpHitbox[hpnColliders] = { { -50, 75, 20, 16 },{ -26, 37, 48, 42 },{ -26, 0, 48, 37 } };
+	SDL_Rect hpHitbox2[hpnColliders2] = { { -65, 59, 24, 20 },{ -9, 0, 39, 50 },{ -48, 0, 33, 50 } };
+	SDL_Rect hpHitbox3[hpnColliders3] = { { -41, 15, 74, 30 },{ -9, 0, 69, 53 },{ -115, 15, 33, 30 } };
+	SDL_Rect hpHitbox4[hpnColliders4] = { { -78, 15, 85, 30 },{ -9, 0, 69, 53 },{ -163, 15, 83, 30 } };
+	SDL_Rect hpHitbox5[hpnColliders5] = { { -79, 15, 54, 30 }, { -9, 0, 69, 53 }, { 0, 0, 0, 0 } };
+	COLLIDER_TYPE hpColliderType[hpnColliders] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE hpColliderType2[hpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE hpColliderType3[hpnColliders3] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE hpColliderType4[hpnColliders4] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE hpColliderType5[hpnColliders5] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	Module* hpCallback[hpnColliders] = { { this },{ this },{ this } };
+	Module* hpCallback2[hpnColliders2] = { { this },{ this },{ this } };
+	Module* hpCallback3[hpnColliders3] = { { this },{ this },{ (Module*)App->ryu }};
+	Module* hpCallback4[hpnColliders4] = { { this },{ this },{ (Module*)App->ryu }};
+	Module* hpCallback5[hpnColliders5] = { { this },{ this }, { this } };
+	hp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
+	hp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
+	hp.PushBack({ 368, 816, 151, 46 }, 8, { 33,5 }, hpnColliders3, hpHitbox3, hpColliderType3, hpCallback3);
+	hp.PushBack({ 521, 816, 247, 46 }, 10, { 33,5 }, hpnColliders4, hpHitbox4, hpColliderType4, hpCallback4);
+	hp.PushBack({ 368, 816, 151, 46 }, 10, { 33,5 }, hpnColliders5, hpHitbox5, hpColliderType5, hpCallback5);
+	hp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
+	hp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
 
 	// lk
 	const int lknColliders = 3;
@@ -442,7 +470,7 @@ bool ModuleDhalsim::CleanUp()
 	idle = Animation();
 	forward = Animation();
 	backward = Animation();
-	lp = lk = clp = clk = mp = Animation();
+	lp = lk = clp = clk = mp = hp = Animation();
 	jlp = jlk = jflp = jflk = jblp = jblk = Animation();
 	neutralJump = Animation();
 	forwardJump = Animation();
@@ -587,6 +615,8 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case F_PUNCH_STANDING2:
+			texture = graphics3;
+			current_animation = &hp;
 			break;
 
 		case L_PUNCH_NEUTRAL_JUMP2:
