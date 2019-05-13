@@ -154,11 +154,15 @@ update_status ModuleUI::PostUpdate()
 	StartFightBlit();
 	EndFight();
 
-	/*if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN)
+	
+		
+		
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN)
 		debugGamepads = !debugGamepads;
-
+	
+	
 	if (debugGamepads)
-		BlitGamePadDebug();*/
+		BlitGamePadDebug();
 
 	return UPDATE_CONTINUE;
 }
@@ -335,6 +339,22 @@ void ModuleUI::EndFight() {
 
 void ModuleUI::BlitGamePadDebug() {
 
-	//bool pad1Pluged = App->input->gameController1States[SDL_CONTROLLER_BUTTON_A];
-	//App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "funciona");
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_REPEAT)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typographyDebug, "a");
+
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "up");
+	
+
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "down");
+	
+
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "left");
+	
+
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "right");
+	
 }

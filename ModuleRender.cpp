@@ -108,12 +108,12 @@ update_status ModuleRender::PostUpdate()
 {
 	SDL_RenderPresent(renderer);
 
-	if (SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT) == 0)
+	/*if (SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT) == 0)
 	{
 		return update_status::UPDATE_CONTINUE;
-	}
+	}*/
 
-	return update_status::UPDATE_ERROR;
+	return update_status::UPDATE_CONTINUE;
 }
 
 // Called before quitting

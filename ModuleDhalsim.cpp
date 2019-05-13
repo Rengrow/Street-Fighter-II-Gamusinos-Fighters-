@@ -578,8 +578,9 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w){
 				position.x += 3;
+		}
 			break;
 
 		case ST_CROUCHING2:
@@ -943,29 +944,30 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (!freeze) {
 		//Key UP
-		if (/*App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < JOYSTICK_DEAD_ZONE)
+		/*
+		if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_CROUCH_UP2);
 			down = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > -JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_UP)
 		{
 			up = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > -JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_RIGHT_UP2);
 			right = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_LEFT_UP2);
 			left = false;
 
-		}
+		}*/
 		//Key down
 		// Using B as debug tool
 		
@@ -979,7 +981,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
 		{
-			inputs.Push(IN_L_PUNCH2);
+ 			inputs.Push(IN_L_PUNCH2);
 		}
 
 		if ((App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
@@ -1024,10 +1026,18 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			}
 			up = true;
 		}
+		else
+		{
+			up = false;
+		}
 
 		if (/*App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 		{
 			down = true;
+		}
+		else {
+			inputs.Push(IN_CROUCH_UP2);
+			down = false;
 		}
 
 		if (/*App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
@@ -1035,11 +1045,23 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 			left = true;
 		}
+		else
+		{
+			inputs.Push(IN_LEFT_UP2);
+			left = false;
+		}
 
 		if (/*App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		{
 			right = true;
 		}
+		else
+		{
+			inputs.Push(IN_RIGHT_UP2);
+			right = false;
+		}
+
+
 
 		if (left && right)
 			inputs.Push(IN_LEFT_AND_RIGHT2);
@@ -1858,7 +1880,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1870,7 +1891,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1882,7 +1902,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = SDL_GetTicks(); break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1894,7 +1913,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = SDL_GetTicks(); break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1906,7 +1924,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_PUNCH_FINISH2: state = ST_STANDING2;  standing_timer = SDL_GetTicks(); break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1918,7 +1935,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = SDL_GetTicks(); break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = SDL_GetTicks(); break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -1954,7 +1970,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2:state = ST_CROUCH2; break;
-			case IN_CROUCH_UP2 && IN_KIK_FINISH2: state = ST_STANDING2; standing_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
