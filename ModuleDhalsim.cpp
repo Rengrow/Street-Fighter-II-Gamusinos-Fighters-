@@ -980,24 +980,24 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 	if (!freeze) {
 		//Key UP
-		if (/*App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < JOYSTICK_DEAD_ZONE && App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] >= 0)
+		if (/*App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < JOYSTICK_DEAD_ZONE)
 		{
 			inputs.Push(IN_CROUCH_UP2);
 			down = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > -JOYSTICK_DEAD_ZONE && App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] <= 0)
+		if (/*App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > -JOYSTICK_DEAD_ZONE)
 		{
 			up = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > -JOYSTICK_DEAD_ZONE && App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] <= 0)
+		if (/*App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > -JOYSTICK_DEAD_ZONE)
 		{
 			inputs.Push(IN_RIGHT_UP2);
 			right = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < JOYSTICK_DEAD_ZONE && App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] >= 0)
+		if (/*App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_UP*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < JOYSTICK_DEAD_ZONE)
 		{
 			inputs.Push(IN_LEFT_UP2);
 			left = false;
