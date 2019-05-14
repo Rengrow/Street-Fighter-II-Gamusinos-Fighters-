@@ -884,7 +884,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (!freeze) {
 		//Key UP
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
+		/*if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_CROUCH_UP);
 			down = false;
@@ -906,15 +906,15 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 		{
 			inputs.Push(IN_RIGHT_UP);
 			right = false;
-		}
+		}*/
 		//Key down
 
-		if (App->input->keyboard[SDL_SCANCODE_4] == KEY_STATE::KEY_DOWN)
+		if ((App->input->keyboard[SDL_SCANCODE_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
 		{
 			inputs.Push(IN_L_PUNCH);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_5] == KEY_STATE::KEY_DOWN)
+		if ((App->input->keyboard[SDL_SCANCODE_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
 		{
 			inputs.Push(IN_L_KIK);
 		}
@@ -926,7 +926,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_HADOKEN);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+		if (/*App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT*/App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 		{
 			if (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD)
 			{
@@ -936,20 +936,38 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			}
 			up = true;
 		}
+		else
+		{
+			up = false;
+		}
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+		if (/*App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT*/ App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 		{
 			down = true;
 		}
+		else {
+			inputs.Push(IN_CROUCH_UP);
+			down = false;
+		}
 
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+		if (/*App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT*/  App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 		{
 			left = true;
 		}
+		else
+		{
+			inputs.Push(IN_LEFT_UP);
+			left = false;
+		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+		if (/*App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		{
 			right = true;
+		}
+		else
+		{
+			inputs.Push(IN_RIGHT_UP);
+			right = false;
 		}
 
 		if (left && right)
