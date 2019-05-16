@@ -1378,8 +1378,14 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_RIGHT_DOWN2: state = ST_WALK_FORWARD2; break;
 			case IN_LEFT_DOWN2: state = ST_WALK_BACKWARD2; break;
+			
 			case IN_JUMP2: state = ST_JUMP_NEUTRAL2; jump_timer = App->frames;  break;
+			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames; break;
+			case IN_RIGHT_AND_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames; break;
+
 			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
+			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
+			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
@@ -1406,8 +1412,9 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
-			case IN_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+
+			case IN_RIGHT_AND_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
+			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
@@ -1433,8 +1440,9 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
-			case IN_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+
+			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
+			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
