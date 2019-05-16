@@ -1062,30 +1062,45 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			right = false;
 		}
 
-
-
-		if (left && right)
-			inputs.Push(IN_LEFT_AND_RIGHT2);
+		if (left)
 		{
-			if (left)
+			if (up)
+				inputs.Push(IN_LEFT_AND_JUMP2);
+
+			if (down)
+				inputs.Push(IN_LEFT_AND_CROUCH2);
+
+			else
 				inputs.Push(IN_LEFT_DOWN2);
-			if (right)
+		}
+
+		if (right)
+		{
+			if (up)
+				inputs.Push(IN_RIGHT_AND_JUMP2);
+
+			if (down)
+				inputs.Push(IN_RIGHT_AND_CROUCH2);
+
+			else
 				inputs.Push(IN_RIGHT_DOWN2);
 		}
 
-		if (up && down)
-			inputs.Push(IN_JUMP_AND_CROUCH2);
-		else
+		if (up && !right && !left)
 		{
-			if (down)
-				inputs.Push(IN_CROUCH_DOWN2);
-			else
-			{
-				inputs.Push(IN_CROUCH_UP2);
-			}
-			if (up)
-				inputs.Push(IN_JUMP2);
+			inputs.Push(IN_JUMP2);
 		}
+
+		if (down && !right && !left)
+		{
+			inputs.Push(IN_CROUCH_DOWN2);
+		}
+
+		if (!down && !up && !right && !left)
+		{
+			inputs.Push(IN_IDLE2);
+		}
+		
 	}
 	else {
 		left = false;
@@ -1390,7 +1405,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
-			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
+			case IN_IDLE2: state = ST_IDLE2; break;
 			case IN_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
 
@@ -1417,7 +1432,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
-			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
+			case IN_IDLE2: state = ST_IDLE2; break;
 			case IN_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
 			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
 
