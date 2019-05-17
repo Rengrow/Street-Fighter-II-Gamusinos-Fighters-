@@ -157,6 +157,7 @@
     <ClInclude Include="ModuleSceneSagat.h" />
     <ClInclude Include="ModuleSceneKen.h" />
     <ClInclude Include="ModuleDhalsim.h" />
+    <ClInclude Include="ModuleSlowdown.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleUI.h" />
     <ClInclude Include="ModuleWelcomePage.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="ModuleSceneSagat.cpp" />
     <ClCompile Include="ModuleSceneKen.cpp" />
     <ClCompile Include="ModuleDhalsim.cpp" />
+    <ClCompile Include="ModuleSlowdown.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
     <ClCompile Include="ModuleWelcomePage.cpp" />

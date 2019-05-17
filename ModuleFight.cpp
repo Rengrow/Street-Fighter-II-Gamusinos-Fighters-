@@ -10,6 +10,7 @@
 #include "ModuleCollision.h"
 #include"ModuleFadeToBlack.h"
 #include "ModuleInput.h"
+#include "ModuleSlowdown.h"
 #include "SDL/include/SDL.h"
 
 
@@ -101,6 +102,8 @@ void ModuleFight::EndFullFight() {
 void ModuleFight::Win(int ryu) {
 	App->ryu->freeze = true;
 	App->dhalsim->freeze = true;
+
+	App->slowdown->StartSlowdown(5000, 100);
 
 	if (ryu == 1)
 		player1RoundWinned++;
