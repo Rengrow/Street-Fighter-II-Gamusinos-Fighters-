@@ -47,7 +47,7 @@ public:
 	ModuleFonts* fonts;
 	ModuleUI* UI;
 	ModuleFight* fight;
-	ModuleSlowdown* slowDown;
+	ModuleSlowdown* slowdown;
 
 public:
 
