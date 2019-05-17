@@ -196,6 +196,29 @@ bool ModuleDhalsim::Start()
 	lk.PushBack({ 842, 753, 118, 109 }, 7, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 	lk.PushBack({ 770, 770, 58, 92 }, 7, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
+	// mk
+	const int mknColliders1 = 3;
+	const int mknColliders2 = 2;
+	const int mknColliders3 = 3;
+	const int mknColliders4 = 3;
+	SDL_Rect mkHitbox1[mknColliders1] = { { -15, 79, 44, 16 },{ -6, 37, 40, 47 },{ -6, 0, 40, 37 } };
+	SDL_Rect mkHitbox2[mknColliders2] = { { -10, 69, 104, 26 },{ -6, 0, 40, 84 } };
+	SDL_Rect mkHitbox3[mknColliders3] = { { -18, 57, 100, 37 },{ 0, 0, 40, 77 },{ -110, 84, 67, 26 } };
+	SDL_Rect mkHitbox4[mknColliders4] = { { -15, 79, 94, 16 },{ -6, 37, 40, 47 },{ -6, 0, 40, 37 } };
+	COLLIDER_TYPE mkColliderType1[mknColliders1] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE mkColliderType2[mknColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE mkColliderType3[mknColliders3] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE mkColliderType4[mknColliders4] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	Module* mkCallback1[mknColliders1] = { { this },{ this },{ this } };
+	Module* mkCallback2[mknColliders2] = { { this },{ this } };
+	Module* mkCallback3[mknColliders3] = { { this },{ this },{ (Module*)App->ryu } };
+	Module* mkCallback4[mknColliders4] = { { this },{ this }, {this} };
+	mk.PushBack({ 770, 770, 58, 92 }, 7, { 32,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
+	mk.PushBack({ 167, 910, 115, 96 }, 7, { 33,5 }, mknColliders2, mkHitbox2, mkColliderType2, mkCallback2);
+	mk.PushBack({ 284, 896, 177, 109 }, 20, { 33,5 }, mknColliders3, mkHitbox3, mkColliderType3, mkCallback3);
+	mk.PushBack({ 770, 770, 58, 92 }, 107, { 33,5 }, mknColliders4, mkHitbox4, mkColliderType4, mkCallback4);
+	mk.PushBack({ 770, 770, 58, 92 }, 7, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
+
 	// Neutral jump 50
 	const int neutraljumpnColliders = 3;
 	const int neutraljumpnColliders2 = 3;
@@ -700,9 +723,13 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_STANDING2:
+			texture = graphics3;
+			current_animation = &mk;
 			break;
 
 		case F_KIK_STANDING2:
+			texture = graphics3;
+			current_animation = &hk;
 			break;
 
 		case L_KIK_NEUTRAL_JUMP2:
