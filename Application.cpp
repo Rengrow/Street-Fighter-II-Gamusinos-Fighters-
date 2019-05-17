@@ -38,7 +38,6 @@ Application::Application()
 	modules[15] = fade = new ModuleFadeToBlack();
 	modules[16] = render = new ModuleRender();
 	modules[17] = slowdown = new ModuleSlowdown();
-
 }
 
 Application::~Application()
