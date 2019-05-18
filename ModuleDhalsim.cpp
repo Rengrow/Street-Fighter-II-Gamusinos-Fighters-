@@ -219,6 +219,63 @@ bool ModuleDhalsim::Start()
 	mk.PushBack({ 770, 770, 58, 92 }, 107, { 33,5 }, mknColliders4, mkHitbox4, mkColliderType4, mkCallback4);
 	mk.PushBack({ 770, 770, 58, 92 }, 7, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//hk
+	const int hknColliders = 3;
+	const int hknColliders2 = 4;
+	SDL_Rect hkHitbox[hknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
+	SDL_Rect hkHitbox2[hknColliders2] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
+	COLLIDER_TYPE hkColliderType[hknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE hkColliderType2[hknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* hkCallback[hknColliders] = { {this}, {this}, {this} };
+	Module* hkCallback2[hknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+
+
+	hk.PushBack({ 463, 909, 73, 96 }, 3, { 32,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 595, 901, 50, 104 }, 8, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 752, 903, 184, 102 }, 16, { 33,5 }, hknColliders2, hkHitbox2, hkColliderType2, hkCallback2);
+	hk.PushBack({ 647, 903, 103, 102 }, 26, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 595, 901, 50, 104 }, 16, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	// Neutral jump 50
 	const int neutraljumpnColliders = 3;
 	const int neutraljumpnColliders2 = 3;
@@ -494,7 +551,7 @@ bool ModuleDhalsim::CleanUp()
 	idle = Animation();
 	forward = Animation();
 	backward = Animation();
-	lp = lk = clp = clk = mp = hp = Animation();
+	lp = lk = clp = clk = mp = hp = mk = hk = Animation();
 	jlp = jlk = jflp = jflk = jblp = jblk = Animation();
 	neutralJump = Animation();
 	forwardJump = Animation();
@@ -1001,7 +1058,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
-			inputs.Push(IN_M_PUNCH2);
+			inputs.Push(IN_F_KIK2);
 		}
 
 
