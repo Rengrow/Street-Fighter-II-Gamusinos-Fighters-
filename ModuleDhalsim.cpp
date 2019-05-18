@@ -220,27 +220,11 @@ bool ModuleDhalsim::Start()
 	mk.PushBack({ 770, 770, 58, 92 }, 7, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	//hk
 	const int hknColliders = 3;
 	const int hknColliders2 = 4;
-	SDL_Rect hkHitbox[hknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
-	SDL_Rect hkHitbox2[hknColliders2] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
+	SDL_Rect hkHitbox[hknColliders] = { { -25, 76, 24, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
+	SDL_Rect hkHitbox2[hknColliders2] = { {-3, 75, 100, 27},{-23, 55, 100, 27}, { -6, 0, 40, 57}, { -117, 75, 67, 30} };
 	COLLIDER_TYPE hkColliderType[hknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE hkColliderType2[hknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* hkCallback[hknColliders] = { {this}, {this}, {this} };
@@ -251,29 +235,10 @@ bool ModuleDhalsim::Start()
 	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 	hk.PushBack({ 595, 901, 50, 104 }, 8, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 	hk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-	hk.PushBack({ 752, 903, 184, 102 }, 16, { 33,5 }, hknColliders2, hkHitbox2, hkColliderType2, hkCallback2);
+	hk.PushBack({ 752, 900, 184, 105 }, 16, { 33,5 }, hknColliders2, hkHitbox2, hkColliderType2, hkCallback2);
 	hk.PushBack({ 647, 903, 103, 102 }, 26, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 	hk.PushBack({ 595, 901, 50, 104 }, 16, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	// Neutral jump 50
@@ -356,6 +321,15 @@ bool ModuleDhalsim::Start()
 	jlk.PushBack({ 740, 404, 202, 82 }, 100, { 33,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
 	jlk.PushBack({ 605, 415, 133, 71 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 	jlk.PushBack({ 527, 396, 76, 90 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+
+	//jumping neutral mk
+
+	//jumping neutral hk
+
+	//jumping neutral mp
+
+	//jumping neutral hp
+
 
 
 	//Hadoken
