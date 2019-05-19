@@ -40,20 +40,6 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
-	//Load GameController
-	gameController1 = SDL_GameControllerOpen(0);
-	if (gameController1 == NULL)
-	{
-		LOG("Warning: Unable to open game controller 1! SDL Error: %s\n", SDL_GetError());
-	}
-
-	gameController2 = SDL_GameControllerOpen(1);
-	if (gameController2 == NULL)
-	{
-		LOG("Warning: Unable to open game controller 2! SDL Error: %s\n", SDL_GetError());
-	}
-
-
 	return ret;
 }
 
@@ -87,14 +73,25 @@ update_status ModuleInput::PreUpdate()
 
 #pragma region Gamepad
 
-	//Comprobar que ambos mandos están conectados y si no lo están conectarlos
+	//Load GameController
+	if (!SDL_GameControllerGetAttached(gameController1)) {
+		gameController1 = SDL_GameControllerOpen(0);
+		if (gameController1 == NULL)
+			LOG("Warning: Unable to open game controller 1! SDL Error: %s\n", SDL_GetError());
+	}
+
+	if (!SDL_GameControllerGetAttached(gameController2)) {
+		gameController2 = SDL_GameControllerOpen(1);
+		if (gameController2 == NULL)
+			LOG("Warning: Unable to open game controller 2! SDL Error: %s\n", SDL_GetError());
+	}
 
 	SDL_GameControllerUpdate();
 
 	//Obtain the current button values of GamePad 1
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i) {
 		if (SDL_GameControllerGetButton(gameController1, (SDL_GameControllerButton)i) == 1) {
-			if(gameController1States[i] == KEY_IDLE)
+			if (gameController1States[i] == KEY_IDLE)
 				gameController1States[i] = KEY_DOWN;
 			else
 				gameController1States[i] = KEY_REPEAT;
