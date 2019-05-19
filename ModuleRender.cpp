@@ -9,12 +9,16 @@
 #include "ModuleRyu.h"
 #include "ModuleDhalsim.h"
 #include "SDL/include/SDL.h"
+#include <cstdlib>
+#include <time.h>
 
 ModuleRender::ModuleRender() : Module()
 {
-	camera.x = camera.y = 0;
+	camera.x = camera.y = camera_offset.x = camera_offset.y = 0;
 	camera.w = SCREEN_WIDTH;
 	camera.h = SCREEN_HEIGHT;
+
+	srand(time(NULL));
 
 }
 
@@ -135,8 +139,8 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, b
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
-	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
+	rect.x = (int)((camera.x + camera_offset.x) * speed) + x * SCREEN_SIZE;
+	rect.y = (int)((camera.y + camera_offset.y) * speed) + y * SCREEN_SIZE;
 
 	if (section != NULL)
 	{
@@ -183,4 +187,22 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
+}
+
+void ModuleRender::StartCameraShake(int duration, float magnitude)
+{
+	shake_duration = duration;
+	shake_magnitude = magnitude;
+	shake_timer = 0;
+	shaking = true;
+}
+
+void ModuleRender::UpdateCameraShake()
+{
+	if ((shake_duration - shake_timer) > 0) {
+		camera_offset = { rand() % (int)shake_magnitude, rand() % (int)shake_magnitude };
+		shake_timer++;
+	}
+	else
+		shaking = false;
 }

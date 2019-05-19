@@ -16,6 +16,7 @@
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
 #include "ModuleFight.h"
+#include "ModuleSlowdown.h"
 
 Application::Application()
 {
@@ -36,7 +37,7 @@ Application::Application()
 	modules[14] = UI = new ModuleUI();
 	modules[15] = fade = new ModuleFadeToBlack();
 	modules[16] = render = new ModuleRender();
-
+	modules[17] = slowdown = new ModuleSlowdown();
 }
 
 Application::~Application()

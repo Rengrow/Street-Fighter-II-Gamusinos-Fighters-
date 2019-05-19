@@ -87,6 +87,9 @@
     <ClInclude Include="ModuleDhalsim.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSlowdown.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -147,6 +150,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleDhalsim.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSlowdown.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

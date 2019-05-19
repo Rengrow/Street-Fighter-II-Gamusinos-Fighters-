@@ -196,6 +196,51 @@ bool ModuleDhalsim::Start()
 	lk.PushBack({ 842, 753, 118, 109 }, 7, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 	lk.PushBack({ 770, 770, 58, 92 }, 7, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
+	// mk
+	const int mknColliders1 = 3;
+	const int mknColliders2 = 2;
+	const int mknColliders3 = 3;
+	const int mknColliders4 = 3;
+	SDL_Rect mkHitbox1[mknColliders1] = { { -15, 79, 44, 16 },{ -6, 37, 40, 47 },{ -6, 0, 40, 37 } };
+	SDL_Rect mkHitbox2[mknColliders2] = { { -10, 69, 104, 26 },{ -6, 0, 40, 84 } };
+	SDL_Rect mkHitbox3[mknColliders3] = { { -18, 57, 100, 37 },{ 0, 0, 40, 77 },{ -110, 84, 67, 26 } };
+	SDL_Rect mkHitbox4[mknColliders4] = { { -15, 79, 94, 16 },{ -6, 37, 40, 47 },{ -6, 0, 40, 37 } };
+	COLLIDER_TYPE mkColliderType1[mknColliders1] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE mkColliderType2[mknColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE mkColliderType3[mknColliders3] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE mkColliderType4[mknColliders4] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	Module* mkCallback1[mknColliders1] = { { this },{ this },{ this } };
+	Module* mkCallback2[mknColliders2] = { { this },{ this } };
+	Module* mkCallback3[mknColliders3] = { { this },{ this },{ (Module*)App->ryu } };
+	Module* mkCallback4[mknColliders4] = { { this },{ this }, {this} };
+	mk.PushBack({ 770, 770, 58, 92 }, 7, { 32,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
+	mk.PushBack({ 167, 910, 115, 96 }, 7, { 33,5 }, mknColliders2, mkHitbox2, mkColliderType2, mkCallback2);
+	mk.PushBack({ 284, 896, 177, 109 }, 20, { 33,5 }, mknColliders3, mkHitbox3, mkColliderType3, mkCallback3);
+	mk.PushBack({ 770, 770, 58, 92 }, 107, { 33,5 }, mknColliders4, mkHitbox4, mkColliderType4, mkCallback4);
+	mk.PushBack({ 770, 770, 58, 92 }, 7, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
+
+
+	//hk
+	const int hknColliders = 3;
+	const int hknColliders2 = 4;
+	SDL_Rect hkHitbox[hknColliders] = { { -25, 76, 24, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
+	SDL_Rect hkHitbox2[hknColliders2] = { {-3, 75, 100, 27},{-23, 55, 100, 27}, { -6, 0, 40, 57}, { -117, 75, 67, 30} };
+	COLLIDER_TYPE hkColliderType[hknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE hkColliderType2[hknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* hkCallback[hknColliders] = { {this}, {this}, {this} };
+	Module* hkCallback2[hknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+
+
+	hk.PushBack({ 463, 909, 73, 96 }, 3, { 32,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 595, 901, 50, 104 }, 8, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 752, 900, 184, 105 }, 16, { 33,5 }, hknColliders2, hkHitbox2, hkColliderType2, hkCallback2);
+	hk.PushBack({ 647, 903, 103, 102 }, 26, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 595, 901, 50, 104 }, 16, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+
+
 	// Neutral jump 50
 	const int neutraljumpnColliders = 3;
 	const int neutraljumpnColliders2 = 3;
@@ -276,6 +321,15 @@ bool ModuleDhalsim::Start()
 	jlk.PushBack({ 740, 404, 202, 82 }, 100, { 33,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
 	jlk.PushBack({ 605, 415, 133, 71 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 	jlk.PushBack({ 527, 396, 76, 90 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+
+	//jumping neutral mk
+
+	//jumping neutral hk
+
+	//jumping neutral mp
+
+	//jumping neutral hp
+
 
 
 	//Hadoken
@@ -471,7 +525,7 @@ bool ModuleDhalsim::CleanUp()
 	idle = Animation();
 	forward = Animation();
 	backward = Animation();
-	lp = lk = clp = clk = mp = hp = Animation();
+	lp = lk = clp = clk = mp = hp = mk = hk = Animation();
 	jlp = jlk = jflp = jflk = jblp = jblk = Animation();
 	neutralJump = Animation();
 	forwardJump = Animation();
@@ -700,9 +754,13 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_STANDING2:
+			texture = graphics3;
+			current_animation = &mk;
 			break;
 
 		case F_KIK_STANDING2:
+			texture = graphics3;
+			current_animation = &hk;
 			break;
 
 		case L_KIK_NEUTRAL_JUMP2:
@@ -974,7 +1032,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
-			inputs.Push(IN_M_PUNCH2);
+			inputs.Push(IN_F_KIK2);
 		}
 
 
@@ -1062,30 +1120,45 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			right = false;
 		}
 
-
-
-		if (left && right)
-			inputs.Push(IN_LEFT_AND_RIGHT2);
+		if (left)
 		{
-			if (left)
+			if (up)
+				inputs.Push(IN_LEFT_AND_JUMP2);
+
+			if (down)
+				inputs.Push(IN_LEFT_AND_CROUCH2);
+
+			else
 				inputs.Push(IN_LEFT_DOWN2);
-			if (right)
+		}
+
+		if (right)
+		{
+			if (up)
+				inputs.Push(IN_RIGHT_AND_JUMP2);
+
+			if (down)
+				inputs.Push(IN_RIGHT_AND_CROUCH2);
+
+			else
 				inputs.Push(IN_RIGHT_DOWN2);
 		}
 
-		if (up && down)
-			inputs.Push(IN_JUMP_AND_CROUCH2);
-		else
+		if (up && !right && !left)
 		{
-			if (down)
-				inputs.Push(IN_CROUCH_DOWN2);
-			else
-			{
-				inputs.Push(IN_CROUCH_UP2);
-			}
-			if (up)
-				inputs.Push(IN_JUMP2);
+			inputs.Push(IN_JUMP2);
 		}
+
+		if (down && !right && !left)
+		{
+			inputs.Push(IN_CROUCH_DOWN2);
+		}
+
+		if (!down && !up && !right && !left)
+		{
+			inputs.Push(IN_IDLE2);
+		}
+		
 	}
 	else {
 		left = false;
@@ -1363,8 +1436,14 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_RIGHT_DOWN2: state = ST_WALK_FORWARD2; break;
 			case IN_LEFT_DOWN2: state = ST_WALK_BACKWARD2; break;
+			
 			case IN_JUMP2: state = ST_JUMP_NEUTRAL2; jump_timer = App->frames;  break;
+			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames; break;
+			case IN_RIGHT_AND_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames; break;
+
 			case IN_CROUCH_DOWN2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
+			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
+			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
@@ -1390,9 +1469,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
-			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
-			case IN_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+			case IN_IDLE2: state = ST_IDLE2; break;
+
+			case IN_RIGHT_AND_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
+			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
@@ -1417,9 +1497,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
-			case IN_LEFT_AND_RIGHT2: state = ST_IDLE2; break;
-			case IN_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
-			case IN_CROUCH_DOWN2: state = ST_CROUCH2; break;
+			case IN_IDLE2: state = ST_IDLE2; break;
+
+			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
+			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;  break;
 			case IN_L_KIK2: state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;  break;
