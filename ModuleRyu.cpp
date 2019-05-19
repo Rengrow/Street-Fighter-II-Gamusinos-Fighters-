@@ -550,7 +550,7 @@ update_status ModuleRyu::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x -= 3;
 			//LOG("JUMPING BACKWARD ^^<<\n");
 			break;
@@ -743,11 +743,11 @@ void ModuleRyu::ClearColliders() {
 }
 
 bool ModuleRyu::IsntOnRightLimit() {
-	return position.x + 34 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
+	return position.x + 42 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
 }
 
 bool ModuleRyu::IsntOnLeftLimit() {
-	return position.x - 34 > -App->render->camera.x / SCREEN_SIZE;
+	return position.x - 42 > -App->render->camera.x / SCREEN_SIZE;
 }
 
 void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
@@ -835,7 +835,6 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 						App->dhalsim->position.x++;
 					else if (!App->dhalsim->IsntOnRightLimit() && position.x < App->dhalsim->position.x)
 						position.x--;
-
 				}
 				else if (App->dhalsim->state != ST_IDLE2 && App->dhalsim->state != ST_JUMP_NEUTRAL2 && App->dhalsim->state != ST_JUMP_FORWARD2 && App->dhalsim->state != ST_JUMP_BACKWARD2 && App->dhalsim->state != L_PUNCH_NEUTRAL_JUMP2 && App->dhalsim->state != L_PUNCH_FORWARD_JUMP2 && App->dhalsim->state != L_PUNCH_BACKWARD_JUMP2 && App->dhalsim->state != L_KIK_NEUTRAL_JUMP2 && App->dhalsim->state != L_KIK_FORWARD_JUMP2 && App->dhalsim->state != L_KIK_BACKWARD_JUMP2) {
 					if (IsntOnLeftLimit() && position.x < App->dhalsim->position.x)
@@ -845,6 +844,18 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 					else if (IsntOnRightLimit() && position.x > App->dhalsim->position.x)
 						position.x++;
 					else if (App->dhalsim->IsntOnRightLimit() && position.x > App->dhalsim->position.x)
+						App->dhalsim->position.x--;
+				}
+				else if (state == ST_IDLE && App->dhalsim->state == ST_IDLE2) {
+					if (IsntOnLeftLimit() && !flip)
+						position.x--;
+					else if (App->dhalsim->IsntOnLeftLimit() && !flip)
+						App->dhalsim->position.x++;
+					else if (IsntOnRightLimit() && flip)
+						position.x++;
+					else if (IsntOnRightLimit() && !flip)
+						App->dhalsim->position.x++;
+					else if (App->dhalsim->IsntOnRightLimit() && flip)
 						App->dhalsim->position.x--;
 				}
 			}
@@ -884,7 +895,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 
 	if (!freeze) {
 		//Key UP
-		/*if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
 		{
 			inputs.Push(IN_CROUCH_UP);
 			down = false;
@@ -906,7 +917,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 		{
 			inputs.Push(IN_RIGHT_UP);
 			right = false;
-		}*/
+		}
 		//Key down
 
 		if ((App->input->keyboard[SDL_SCANCODE_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
@@ -926,7 +937,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_HADOKEN);
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT*/App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 		{
 			if (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD)
 			{
@@ -941,7 +952,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			up = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT*/ App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 		{
 			down = true;
 		}
@@ -950,7 +961,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			down = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT*/  App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 		{
 			left = true;
 		}
@@ -960,7 +971,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			left = false;
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT*/ App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		{
 			right = true;
 		}

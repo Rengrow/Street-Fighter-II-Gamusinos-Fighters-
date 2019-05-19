@@ -618,7 +618,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x -= 3;
 			break;
 
@@ -633,7 +633,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w){
+			if (IsntOnRightLimit()){
 				position.x += 3;
 		}
 			break;
@@ -704,7 +704,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x -= 3;
 			break;
 
@@ -727,7 +727,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			if (IsntOnRightLimit())
 				position.x += 3;
 
 			break;
@@ -793,7 +793,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x - 34 > -App->render->camera.x / SCREEN_SIZE)
+			if (IsntOnLeftLimit())
 				position.x -= 3;
 
 			break;
@@ -816,7 +816,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight -= speed + 3;
 			}
 
-			if (position.x + 24 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w)
+			if (IsntOnRightLimit())
 				position.x += 3;
 
 			break;
@@ -901,11 +901,11 @@ void ModuleDhalsim::ClearColliders() {
 }
 
 bool ModuleDhalsim::IsntOnLeftLimit() {
-	return position.x - 34 > -App->render->camera.x / SCREEN_SIZE;
+	return position.x - 42 > -App->render->camera.x / SCREEN_SIZE;
 }
 
 bool ModuleDhalsim::IsntOnRightLimit() {
-	return position.x + 34 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
+	return position.x + 42 < -App->render->camera.x / SCREEN_SIZE + App->render->camera.w;
 }
 
 void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
