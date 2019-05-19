@@ -996,10 +996,7 @@ void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, S
 
 bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 {
-	static bool left = false;
-	static bool right = false;
-	static bool down = false;
-	static bool up = false;
+	bool crouch = false;
 
 	if (!freeze) {
 		//Key UP
@@ -1075,96 +1072,69 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_HADOKEN2);
 		}
 
-		if (/*App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_REPEAT*/App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
-		{
-			if (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2)
-			{
-				backwardJump.ResetAnimation();
-				forwardJump.ResetAnimation();
-				neutralJump.ResetAnimation();
-			}
-			up = true;
-		}
-		else
-		{
-			up = false;
-		}
+		
 
-		if (/*App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+		if (App->input->p1.left)
 		{
-			down = true;
-		}
-		else {
-			inputs.Push(IN_CROUCH_UP2);
-			down = false;
-		}
-
-		if (/*App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
-		{
-
-			left = true;
-		}
-		else
-		{
-			inputs.Push(IN_LEFT_UP2);
-			left = false;
-		}
-
-		if (/*App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_REPEAT*/ App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
-		{
-			right = true;
-		}
-		else
-		{
-			inputs.Push(IN_RIGHT_UP2);
-			right = false;
-		}
-
-		if (left)
-		{
-			if (up)
+			if (App->input->p1.up)
 				inputs.Push(IN_LEFT_AND_JUMP2);
 
-			if (down)
+			if (App->input->p1.down) {
 				inputs.Push(IN_LEFT_AND_CROUCH2);
+				crouch = true;
+			}
 
 			else
 				inputs.Push(IN_LEFT_DOWN2);
 		}
+		else
+			inputs.Push(IN_LEFT_UP2);
+		
 
-		if (right)
+		if (App->input->p1.right)
 		{
-			if (up)
+			if (App->input->p1.up)
 				inputs.Push(IN_RIGHT_AND_JUMP2);
 
-			if (down)
+			if (App->input->p1.down) {
 				inputs.Push(IN_RIGHT_AND_CROUCH2);
+				crouch = true;
+			}
 
 			else
 				inputs.Push(IN_RIGHT_DOWN2);
 		}
+		else
+			inputs.Push(IN_RIGHT_UP2);
+		
 
-		if (up && !right && !left)
+		if (App->input->p1.up && !App->input->p1.right && !App->input->p1.left)
 		{
 			inputs.Push(IN_JUMP2);
 		}
 
-		if (down && !right && !left)
+		if (App->input->p1.down && !App->input->p1.right && !App->input->p1.left)
 		{
 			inputs.Push(IN_CROUCH_DOWN2);
+			crouch = true;
+		}
+		
+		if (crouch == false)
+		{
+			inputs.Push(IN_CROUCH_UP2);
 		}
 
-		if (!down && !up && !right && !left)
+		if (!App->input->p1.down && !App->input->p1.up && !App->input->p1.right && !App->input->p1.left)
 		{
 			inputs.Push(IN_IDLE2);
 		}
 		
 	}
 	else {
-		left = false;
-		right = false;
-		down = false;
-		up = false;
+		App->input->p1.left = false;
+		App->input->p1.right = false;
+		App->input->p1.down = false;
+		App->input->p1.up = false;
 	}
 
 	return true;
@@ -1178,6 +1148,9 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_JUMP_FINISH2);
 			jump_timer = 0;
+			backwardJump.ResetAnimation();
+			forwardJump.ResetAnimation();
+			neutralJump.ResetAnimation();
 		}
 	}
 

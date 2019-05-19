@@ -109,8 +109,79 @@ update_status ModuleInput::PreUpdate()
 		gameController1AxisValues[i] = SDL_GameControllerGetAxis(gameController1, (SDL_GameControllerAxis)i);
 	}
 
+	//Obtaind the direction of Gamepad 1
+	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+	{
+		p1.up = true;
+	}
+	else
+		p1.up = false;
 
-	//Obtain the current button values of GamePad 1
+
+	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+	{
+		p1.down = true;
+	}
+	else
+		p1.down = false;
+
+
+	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	{
+		p1.left = true;
+	}
+	else
+		p1.left = false;
+
+	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	{
+		p1.right = true;
+	}
+	else
+		p1.right = false;
+
+
+	if (p1.left)
+	{
+		if (p1.up)
+			joystick1 = LEFT_AND_UP;
+
+		if (p1.down)
+			joystick1 = LEFT_AND_DOWN;
+
+		else
+			joystick1 = LEFT;
+	}
+
+	if (p1.right)
+	{
+		if (p1.up)
+			joystick1 = RIGHT_AND_UP;
+
+		if (p1.down)
+			joystick1 = RIGHT_AND_DOWN;
+
+		else
+			joystick1 = RIGHT;
+	}
+
+	if (p1.up && !p1.right && !p1.left)
+	{
+		joystick1 = UP;
+	}
+
+	if (p1.down && !p1.right && !p1.left)
+	{
+		joystick1 = DOWN;
+	}
+
+	if (!p1.down && !p1.up && !p1.right && !p1.left)
+	{
+		joystick1 = IDLE;
+	}
+
+
+	//Obtain the current button values of GamePad 2
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i) {
 		if (SDL_GameControllerGetButton(gameController2, (SDL_GameControllerButton)i) == 1) {
 			if (gameController2States[i] == KEY_IDLE)
