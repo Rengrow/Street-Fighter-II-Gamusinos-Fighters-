@@ -120,18 +120,22 @@ bool ModuleDhalsim::Start()
 
 	// close lp
 
-	const int close_lpnColliders = 3;
-	const int close_lpnColliders2 = 4;
-	SDL_Rect close_lpHitbox[close_lpnColliders] = { { 0, 0, 0, 0 },{ -28, 37, 40, 47 },{ -11, 5, 60, 32 } };
-	SDL_Rect close_lpHitbox2[close_lpnColliders2] = { { 0, 0, 0, 0 },{ -28, 37, 40, 47 },{ -11, 5, 60, 32 },{ -66, 55, 60, 15 } };
-	COLLIDER_TYPE close_lpColliderType[close_lpnColliders] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
-	COLLIDER_TYPE close_lpColliderType2[close_lpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
-	Module* close_lpCallback[close_lpnColliders] = { { this },{ this },{ this } };
-	Module* close_lpCallback2[close_lpnColliders2] = { { this },{ this },{ this },{ (Module*)App->ryu } };
+	const int close_lpnColliders = 2;
+	const int close_lpnColliders2 = 3;
+	const int close_lpnColliders3 = 3;
+	SDL_Rect close_lpHitbox[close_lpnColliders] = { { -34, 84, 24, 15 },{ -20, 0, 40, 84 } };
+	SDL_Rect close_lpHitbox2[close_lpnColliders2] = { { -34, 84, 24, 15 },{ -20, 0, 40, 84 },{ -41, 77, 44, 24 } };
+	SDL_Rect close_lpHitbox3[close_lpnColliders3] = { { -34, 84, 24, 15 },{ -20, 0, 40, 84 },{ -41, 77, 70, 12 } };
+	COLLIDER_TYPE close_lpColliderType[close_lpnColliders] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE close_lpColliderType2[close_lpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE close_lpColliderType3[close_lpnColliders3] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	Module* close_lpCallback[close_lpnColliders] = { { this },{ this }};
+	Module* close_lpCallback2[close_lpnColliders2] = { { this },{ this }, { (Module*)App->ryu } };
+	Module* close_lpCallback3[close_lpnColliders3] = { { this },{ this },{ (Module*)App->ryu } };
 	close_lp.PushBack({ 70, 24, 73, 110 }, 5, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
+	close_lp.PushBack({ 145, 24, 65, 110 }, 8, { 33,5 }, close_lpnColliders2, close_lpHitbox2, close_lpColliderType2, close_lpCallback2);
+	close_lp.PushBack({ 212, 57, 106, 77 }, 15, { 33,5 }, close_lpnColliders3, close_lpHitbox3, close_lpColliderType3, close_lpCallback3);
 	close_lp.PushBack({ 145, 24, 65, 110 }, 8, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
-	close_lp.PushBack({ 614, 671, 135, 80 }, 15, { 33,5 }, close_lpnColliders2, close_lpHitbox2, close_lpColliderType2, close_lpCallback2);
-	close_lp.PushBack({ 529, 668, 83, 83 }, 12, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
 
 	//mp
 	const int mpnColliders = 3;
@@ -166,6 +170,27 @@ bool ModuleDhalsim::Start()
 	mp.PushBack({ 751, 652, 74, 99 }, 2, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
 
 
+	// close mp
+	const int close_mpnColliders = 2;
+	const int close_mpnColliders2 = 3;
+	const int close_mpnColliders3 = 3;
+	SDL_Rect close_mpHitbox[close_mpnColliders] = { { -44, 74, 26, 15 },{ -9, 0, 63, 74 } };
+	SDL_Rect close_mpHitbox2[close_mpnColliders2] = { { -44, 74, 26, 15 },{ -9, 0, 63, 74 }, { -53, 37, 34, 30} };
+	SDL_Rect close_mpHitbox3[close_mpnColliders3] = { { -44, 74, 26, 15 },{ -9, 0, 63, 74 }, { -62, 43, 32, 30} };
+	COLLIDER_TYPE close_mpColliderType[close_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}};
+	COLLIDER_TYPE close_mpColliderType2[close_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE close_mpColliderType3[close_mpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* close_mpCallback[close_mpnColliders] = { {this}, {this} };
+	Module* close_mpCallback2[close_mpnColliders2] = { {this}, {this}, {this} };
+	Module* close_mpCallback3[close_mpnColliders3] = { {this}, {this}, {(Module*)App->ryu} };
+
+	close_mp.PushBack({ 320, 50, 80, 84 }, 8, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
+	close_mp.PushBack({ 402, 40, 80, 94 }, 10, { 33,5 }, close_mpnColliders2, close_mpHitbox2, close_mpColliderType2, close_mpCallback2);
+	close_mp.PushBack({ 484, 1, 80, 133 }, 10, { 33,5 }, close_mpnColliders3, close_mpHitbox3, close_mpColliderType3, close_mpCallback3);
+	close_mp.PushBack({ 402, 40, 80, 94 }, 15, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
+	close_mp.PushBack({ 320, 50, 80, 84 }, 10, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
+
+
 	// hp
 
 	const int hpnColliders = 3;
@@ -196,6 +221,31 @@ bool ModuleDhalsim::Start()
 	hp.PushBack({ 827, 674, 86, 77 }, 20, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
 	hp.PushBack({ 751, 652, 74, 99 }, 2, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
 
+
+	// close hp
+	const int close_hpnColliders = 3;
+	const int close_hpnColliders2 = 3;
+	const int close_hpnColliders3 = 3;
+	const int close_hpnColliders4 = 3;
+	SDL_Rect close_hpHitbox[close_hpnColliders] = { { 0, 0, 0, 0 },{ -30, 71, 24, 20 },{ -13, 1, 46, 76 } };
+	SDL_Rect close_hpHitbox2[close_hpnColliders2] = { { -59, 53, 22, 24 },{ -4, 1, 46, 77 },{ -39, 45, 58, 34 } };
+	SDL_Rect close_hpHitbox3[close_hpnColliders3] = { { -59, 53, 22, 24 },{ -4, 1, 46, 77 },{ -40, 42, 70, 34 } };
+	SDL_Rect close_hpHitbox4[close_hpnColliders4] = { { -59, 53, 22, 24 },{ -4, 1, 46, 77 },{ 0, 0, 0, 0 } };
+	COLLIDER_TYPE close_hpColliderType[close_hpnColliders] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	COLLIDER_TYPE close_hpColliderType2[close_hpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE close_hpColliderType3[close_hpnColliders3] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE close_hpColliderType4[close_hpnColliders4] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
+	Module* close_hpCallback[close_hpnColliders] = { { this },{ this },{ this } };
+	Module* close_hpCallback2[close_hpnColliders2] = { { this },{ this },{ this } };
+	Module* close_hpCallback3[close_hpnColliders3] = { { this },{ this },{ (Module*)App->ryu } };
+	Module* close_hpCallback4[close_hpnColliders4] = { { this },{ this },{ (Module*)App->ryu } };
+	close_hp.PushBack({ 124, 596, 72, 94 }, 8, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
+	close_hp.PushBack({ 566, 38, 53, 96 }, 10, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
+	close_hp.PushBack({ 621, 46, 80, 88 }, 10, { 33,5 }, close_hpnColliders2, close_hpHitbox2, close_hpColliderType2, close_hpCallback2);
+	close_hp.PushBack({ 703, 42, 84, 92 }, 15, { 33,5 }, close_hpnColliders3, close_hpHitbox3, close_hpColliderType3, close_hpCallback3);
+	close_hp.PushBack({ 621, 46, 80, 88 }, 25, { 33,5 }, close_hpnColliders4, close_hpHitbox4, close_hpColliderType4, close_hpCallback4);
+	close_hp.PushBack({ 566, 38, 53, 96 }, 20, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
+
 	// lk
 	const int lknColliders = 3;
 	const int lknColliders3 = 4;
@@ -211,6 +261,21 @@ bool ModuleDhalsim::Start()
 	lk.PushBack({ 842, 753, 118, 109 }, 10, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 	lk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
+	
+	// close_lk
+	const int close_lknColliders = 3;
+	const int close_lknColliders3 = 4;
+	SDL_Rect close_lkHitbox[close_lknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
+	SDL_Rect close_lkHitbox3[close_lknColliders3] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
+	COLLIDER_TYPE close_lkColliderType[close_lknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_lkColliderType3[close_lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* close_lkCallback[close_lknColliders] = { {this}, {this}, {this} };
+	Module* close_lkCallback3[close_lknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	close_lk.PushBack({ 770, 770, 58, 92 }, 5, { 32,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
+	close_lk.PushBack({ 789, 41, 123, 93 }, 8, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
+	close_lk.PushBack({ 0, 896, 165, 109 }, 20, { 33,5 }, close_lknColliders3, close_lkHitbox3, close_lkColliderType3, close_lkCallback3);
+	
+	
 	// mk
 	const int mknColliders1 = 3;
 	const int mknColliders2 = 2;
@@ -235,6 +300,20 @@ bool ModuleDhalsim::Start()
 	mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
 
 
+	// close_mk
+	const int close_mknColliders = 3;
+	const int close_mknColliders3 = 4;
+	SDL_Rect close_mkHitbox[close_mknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
+	SDL_Rect close_mkHitbox3[close_mknColliders3] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
+	COLLIDER_TYPE close_mkColliderType[close_mknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_mkColliderType3[close_mknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* close_mkCallback[close_mknColliders] = { {this}, {this}, {this} };
+	Module* close_mkCallback3[close_mknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	close_mk.PushBack({ 770, 770, 58, 92 }, 5, { 32,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
+	close_mk.PushBack({ 914, 32, 103, 102 }, 20, { 33,5 }, close_mknColliders3, close_mkHitbox3, close_mkColliderType3, close_mkCallback3);
+	close_mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
+
+
 	//hk
 	const int hknColliders = 3;
 	const int hknColliders2 = 4;
@@ -254,6 +333,26 @@ bool ModuleDhalsim::Start()
 	hk.PushBack({ 647, 903, 103, 102 }, 25, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 	hk.PushBack({ 595, 901, 50, 104 }, 20, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 	hk.PushBack({ 538, 899, 54, 106 }, 3, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+
+
+	// close_hk
+	const int close_hknColliders = 3;
+	const int close_hknColliders2 = 4;
+	SDL_Rect close_hkHitbox[close_hknColliders] = { { 0, 0, 0, 0}, { -9, 1, 46, 76}, { -26, 71, 24, 20} };
+	SDL_Rect close_hkHitbox2[close_hknColliders2] = { { 0, 0, 0, 0}, { -9, 1, 46, 76}, { -26, 71, 24, 20}, { -24, 39, 74, 40} };
+	COLLIDER_TYPE close_hkColliderType[close_hknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_hkColliderType2[close_hknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* close_hkCallback[close_hknColliders] = { {this}, {this}, {this} };
+	Module* close_hkCallback2[close_hknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+
+
+	close_hk.PushBack({ 209, 158, 63, 87 }, 2, { 32,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 0, 145, 67, 100 }, 5, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 70, 151, 55, 94 }, 8, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 131, 139, 76, 106 }, 10, { 33,5 }, close_hknColliders2, close_hkHitbox2, close_hkColliderType2, close_hkCallback2);
+	close_hk.PushBack({ 70, 151, 55, 94 }, 15, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 0, 145, 67, 100 }, 25, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 209, 158, 63, 87 }, 20, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
 
 
 	// Neutral jump 50
@@ -498,6 +597,20 @@ bool ModuleDhalsim::Start()
 	clp.PushBack({ 681, 211, 135, 34 }, 10, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 	clp.PushBack({ 596, 193, 83, 52 }, 12, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 
+	
+	//Crouching close_l punch
+	const int close_clpnColliders = 3;
+	const int close_clpnColliders2 = 4;
+	SDL_Rect close_clpHitbox[close_clpnColliders] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20} };
+	SDL_Rect close_clpHitbox2[close_clpnColliders2] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20}, {-54, 39, 66, 26} };
+	COLLIDER_TYPE close_clpColliderType[close_clpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_clpColliderType2[close_clpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module*close_clpCallback[close_clpnColliders] = { {this}, {this}, {this} };
+	Module*close_clpCallback2[close_clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	close_clp.PushBack({ 2, 299, 66, 62 }, 5, { 46,5 }, { close_clpnColliders }, { close_clpHitbox }, { close_clpColliderType }, { close_clpCallback });
+	close_clp.PushBack({ 70, 300, 119, 61 }, 8, { 33,5 }, { close_clpnColliders2 }, { close_clpHitbox2 }, { close_clpColliderType2 }, { close_clpCallback2 });
+	close_clp.PushBack({ 2, 299, 66, 62 }, 8, { 33,5 }, { close_clpnColliders }, { close_clpHitbox }, { close_clpColliderType }, { close_clpCallback });
+
 
 	//Crouching m punch
 	const int cmpnColliders = 3;
@@ -515,6 +628,20 @@ bool ModuleDhalsim::Start()
 	cmp.PushBack({ 817, 211, 199, 34 }, 15, { 33,5 }, { cmpnColliders2 }, { cmpHitbox2 }, { cmpColliderType2 }, { cmpCallback2 });
 	cmp.PushBack({ 681, 211, 135, 34 }, 10, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
 	cmp.PushBack({ 596, 193, 83, 52 }, 12, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
+
+
+	//Crouching close_m punch
+	const int close_cmpnColliders = 3;
+	const int close_cmpnColliders2 = 4;
+	SDL_Rect close_cmpHitbox[close_cmpnColliders] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20} };
+	SDL_Rect close_cmpHitbox2[close_cmpnColliders2] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20}, {-163, 5, 35, 25} };
+	COLLIDER_TYPE close_cmpColliderType[close_cmpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_cmpColliderType2[close_cmpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module*close_cmpCallback[close_cmpnColliders] = { {this}, {this}, {this} };
+	Module*close_cmpCallback2[close_cmpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	close_cmp.PushBack({ 2, 299, 66, 62 }, 5, { 46,5 }, { close_cmpnColliders }, { close_cmpHitbox }, { close_cmpColliderType }, { close_cmpCallback });
+	close_cmp.PushBack({ 70, 300, 119, 61 }, 8, { 33,5 }, { close_cmpnColliders2 }, { close_cmpHitbox2 }, { close_cmpColliderType2 }, { close_cmpCallback2 });
+	close_cmp.PushBack({ 2, 299, 66, 62 }, 8, { 33,5 }, { close_cmpnColliders }, { close_cmpHitbox }, { close_cmpColliderType }, { close_cmpCallback });
 
 
 	//Crouching h punch
@@ -552,6 +679,20 @@ bool ModuleDhalsim::Start()
 	clk.PushBack({ 190, 298, 65, 64 }, 12, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 
+	//Crouching close_l kick
+	const int close_clknColliders = 3;
+	const int close_clknColliders2 = 4;
+	SDL_Rect close_clkHitbox[close_clknColliders] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20} };
+	SDL_Rect close_clkHitbox2[close_clknColliders2] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20}, {-31, 3, 90, 26} };
+	COLLIDER_TYPE close_clkColliderType[close_clknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_clkColliderType2[close_clknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module*close_clkCallback[close_clknColliders] = { {this}, {this}, {this} };
+	Module*close_clkCallback2[close_clknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	close_clk.PushBack({ 408, 301, 66, 60 }, 5, { 46,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
+	close_clk.PushBack({ 476, 305, 117, 56 }, 8, { 33,5 }, { close_clknColliders2 }, { close_clkHitbox2 }, { close_clkColliderType2 }, { close_clkCallback2 });
+	close_clk.PushBack({ 408, 301, 66, 60 }, 8, { 33,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
+
+
 	//Crouching m kik
 	const int cmknColliders = 3;
 	const int cmknColliders2 = 4;
@@ -567,6 +708,20 @@ bool ModuleDhalsim::Start()
 	cmk.PushBack({ 190, 298, 65, 64 }, 10, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
 	cmk.PushBack({ 257, 318, 150, 43 }, 40, { 76,5 }, { cmknColliders2 }, { cmkHitbox2 }, { cmkColliderType2 }, { cmkCallback2 });
 	cmk.PushBack({ 190, 298, 65, 64 }, 12, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
+
+
+	//Crouching close_m kick
+	const int close_cmknColliders = 3;
+	const int close_cmknColliders2 = 4;
+	SDL_Rect close_cmkHitbox[close_cmknColliders] = { { 0, 0, 0, 0}, { -12, 1, 46, 51}, { -37, 47, 24, 20} };
+	SDL_Rect close_cmkHitbox2[close_cmknColliders2] = { { 0, 0, 0, 0}, { -12, 1, 46, 51}, { -37, 47, 24, 20}, {-37, 3, 90, 26} };
+	COLLIDER_TYPE close_cmkColliderType[close_cmknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE close_cmkColliderType2[close_cmknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module*close_cmkCallback[close_cmknColliders] = { {this}, {this}, {this} };
+	Module*close_cmkCallback2[close_cmknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	close_cmk.PushBack({ 191, 299, 64, 62 }, 5, { 46,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
+	close_cmk.PushBack({ 595, 299, 117, 62 }, 108, { 33,5 }, { close_cmknColliders2 }, { close_cmkHitbox2 }, { close_cmkColliderType2 }, { close_cmkCallback2 });
+	close_cmk.PushBack({ 191, 299, 64, 62 }, 8, { 33,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
 
 
 	//Crouching h kik
@@ -670,7 +825,7 @@ bool ModuleDhalsim::CleanUp()
 	forward = Animation();
 	backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
-	jlp = jlk = jmp = jmk = jhp = jhk = Animation();
+	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = Animation();
 	neutralJump = Animation();
 	forwardJump = Animation();
 	backwardJump = Animation();
@@ -1182,7 +1337,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
-			inputs.Push(IN_F_KIK2);
+			inputs.Push(IN_L_PUNCH2);
 		}
 
 

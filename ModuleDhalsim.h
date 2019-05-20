@@ -200,6 +200,7 @@ public:
 	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk;
 	Animation jlp, jlk, jmp, jfmp, jbmp, jmk, jfmk, jbmk, jhp, jfhp, jbhp, jhk, jfhk, jbhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	Animation mp, hp, mk, hk;
+	Animation close_mp, close_hp, close_mk, close_hk;
 	Animation neutralJump;
 	Animation forwardJump;
 	Animation backwardJump;
