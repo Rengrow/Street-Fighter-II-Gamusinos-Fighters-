@@ -7,32 +7,32 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-#define D_L_STANDING_PUNCH_TIME 28
-#define D_L_CROUCHING_PUNCH_TIME 30
-#define D_L_D_JUMPING_PUNCH_TIME 30
+#define D_L_STANDING_PUNCH_TIME 40
+#define D_L_CROUCHING_PUNCH_TIME 58
+#define D_L_D_JUMPING_PUNCH_TIME 300
 
-#define D_L_STANDING_KIK_TIME 50
-#define D_L_CROUCHING_KIK_TIME 30
-#define D_L_D_JUMPING_KIK_TIME 20
+#define D_L_STANDING_KIK_TIME 55
+#define D_L_CROUCHING_KIK_TIME 53
+#define D_L_D_JUMPING_KIK_TIME 200
 
-#define D_M_STANDING_PUNCH_TIME 1500
-#define D_M_CROUCHING_PUNCH_TIME 700
+#define D_M_STANDING_PUNCH_TIME 65
+#define D_M_CROUCHING_PUNCH_TIME 58
 #define D_M_D_JUMPING_PUNCH_TIME 1300
 
 #define D_H_STANDING_PUNCH_TIME 90
-#define D_H_CROUCHING_PUNCH_TIME 700
+#define D_H_CROUCHING_PUNCH_TIME 90
 #define D_H_D_JUMPING_PUNCH_TIME 1300
 
-#define D_M_STANDING_KIK_TIME 1800
-#define D_M_CROUCHING_KIK_TIME 800
+#define D_M_STANDING_KIK_TIME 55
+#define D_M_CROUCHING_KIK_TIME 70
 #define D_M_D_JUMPING_KIK_TIME 1350
 
-#define D_F_STANDING_PUNCH_TIME 1500
-#define D_F_CROUCHING_PUNCH_TIME 700
+#define D_F_STANDING_PUNCH_TIME 90
+#define D_F_CROUCHING_PUNCH_TIME 90
 #define D_F_D_JUMPING_PUNCH_TIME 1300
 
-#define D_F_STANDING_KIK_TIME 1600
-#define D_F_CROUCHING_KIK_TIME 800
+#define D_F_STANDING_KIK_TIME 88
+#define D_F_CROUCHING_KIK_TIME 115
 #define D_F_D_JUMPING_KIK_TIME 1350
 
 #define D_HADOKEN_TIME 66
@@ -196,8 +196,8 @@ public:
 	Animation idle;
 	Animation forward;
 	Animation backward;
-	Animation lp, lk, clp, clk;
-	Animation jlp, jlk, jflp, jflk, jblp, jblk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
+	Animation jlp, jlk, jmp, jfmp, jbmp, jmk, jfmk, jbmk, jhp, jfhp, jbhp, jhk, jfhk, jbhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	Animation mp, hp, mk, hk;
 	Animation neutralJump;
 	Animation forwardJump;
