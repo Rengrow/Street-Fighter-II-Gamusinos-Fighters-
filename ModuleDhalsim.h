@@ -7,46 +7,46 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-// All defines have an added +6 frames, unless said otherwise
+// All defines have an added +3 frames, unless said otherwise
 
 #define D_L_STANDING_PUNCH_TIME 43 //+3
 #define D_L_CROUCHING_PUNCH_TIME 60 //+5
-#define D_L_D_JUMPING_PUNCH_TIME 3006
+#define D_L_D_JUMPING_PUNCH_TIME 3003
 
 #define D_L_STANDING_KIK_TIME 59 //+4
 #define D_L_CROUCHING_KIK_TIME 56 //+3
-#define D_L_D_JUMPING_KIK_TIME 3006
+#define D_L_D_JUMPING_KIK_TIME 3003
 
 #define D_M_STANDING_PUNCH_TIME 68 //+5
 #define D_M_CROUCHING_PUNCH_TIME 63 //+5
-#define D_M_D_JUMPING_PUNCH_TIME 3006
+#define D_M_D_JUMPING_PUNCH_TIME 3003
 
 #define D_H_STANDING_PUNCH_TIME 93 //+3
 #define D_H_CROUCHING_PUNCH_TIME 96 //+6  
-#define D_H_D_JUMPING_PUNCH_TIME 3006
+#define D_H_D_JUMPING_PUNCH_TIME 3003
 
 #define D_M_STANDING_KIK_TIME 59 //+4
 #define D_M_CROUCHING_KIK_TIME 73 //+3
-#define D_M_D_JUMPING_KIK_TIME 3006
+#define D_M_D_JUMPING_KIK_TIME 3003
 
 #define D_F_STANDING_PUNCH_TIME 93 //+3
 #define D_F_CROUCHING_PUNCH_TIME 96 //+6
-#define D_F_D_JUMPING_PUNCH_TIME 3006
+#define D_F_D_JUMPING_PUNCH_TIME 3003
 
 #define D_F_STANDING_KIK_TIME 94 //+6
 #define D_F_CROUCHING_KIK_TIME 118 //+3
-#define D_F_D_JUMPING_KIK_TIME 3006
+#define D_F_D_JUMPING_KIK_TIME 3003
 
-#define D_HADOKEN_TIME 66
-#define D_CROUCHING_TIME 5
-#define D_STANDING_TIME 5
-#define D_JUMP_TIME 55
-#define D_GETTING_UP_TIME 45
-#define D_DEFENDING_TIME 20
+#define D_HADOKEN_TIME 66 //not altered, pendent of yoga fire
+#define D_CROUCHING_TIME 4 //used to be 5
+#define D_STANDING_TIME 4 //used to be 5
+#define D_JUMP_TIME 55 //ok
+#define D_GETTING_UP_TIME 45 //ok
+#define D_DEFENDING_TIME 20 //ok
 
-#define D_HEAD_REEL_TIME 32
-#define D_CROUCH_REEL_TIME 20
-#define D_GUT_REEL_TIME 25
+#define D_HEAD_REEL_TIME 35 //+3
+#define D_CROUCH_REEL_TIME 13 //+1
+#define D_GUT_REEL_TIME 27 //+3
 
 #define D_L_CLOSE_STANDING_KIK_TIME 46
 #define D_M_CLOSE_STANDING_KIK_TIME 46
@@ -55,7 +55,7 @@
 #define D_M_CLOSE_CROUCHING_KIK_TIME 35
 #define D_F_CLOSE_CROUCHING_KIK_TIME 6000 //Close crouch roundhouse does not exist
 
-// following defines made by Adria, not used in Matrix
+// following defines made by Adria, not used in State Matrix
 #define D_L_CLOSE_STANDING_PUNCH_TIME 23 //+2
 #define D_M_CLOSE_STANDING_PUNCH_TIME 21
 #define D_F_CLOSE_STANDING_PUNCH_TIME 94
@@ -80,6 +80,22 @@ enum ryu_states2
 	ST_STANDING2,
 	ST_DEFENDING2,
 
+	//testing adding states in order to debug animations of close attacks -Adrià
+	L_PUNCH_CLOSE2,
+	M_PUNCH_CLOSE2,
+	F_PUNCH_CLOSE2,
+
+	L_KIK_CLOSE2,
+	M_KIK_CLOSE2,
+	F_KIK_CLOSE2,
+
+	L_PUNCH_CROUCHCLOSE2,
+	M_PUNCH_CROUCHCLOSE2,
+	L_KIK_CROUCHCLOSE2,
+	M_KIK_CROUCHCLOSE2,
+	//end of test
+	
+	
 	L_PUNCH_STANDING2,
 	L_PUNCH_NEUTRAL_JUMP2,
 	L_PUNCH_FORWARD_JUMP2,

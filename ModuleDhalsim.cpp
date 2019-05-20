@@ -991,32 +991,28 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_PUNCH_NEUTRAL_JUMP2:
+		
 			current_animation = &jmp;
 			break;
 
 		case F_PUNCH_NEUTRAL_JUMP2:
+			
 			current_animation = &jhp;
 			break;
 
 		case L_PUNCH_FORWARD_JUMP2:
 			current_animation = &jlp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
-			{
-				jumpHeight -= speed + 3;
-			}
-
-			if (IsntOnLeftLimit())
-				position.x -= 3;
+		
 			break;
 
 		case M_PUNCH_FORWARD_JUMP2:
+			current_animation = &jfmp;
+			
 			break;
 
 		case F_PUNCH_FORWARD_JUMP2:
+			current_animation = &jfhp;
+			
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP2:
@@ -1038,9 +1034,13 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_PUNCH_BACKWARD_JUMP2:
+			current_animation = &jbmp;
+				
 			break;
 
 		case F_PUNCH_BACKWARD_JUMP2:
+			current_animation = &jbhp;
+			
 			break;
 
 		case L_KIK_CROUCH2:
@@ -1084,11 +1084,13 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_NEUTRAL_JUMP2:
+	
 			current_animation = &jmk;
 			break;
 
 		case F_KIK_NEUTRAL_JUMP2:
 			texture = graphics3;
+
 			current_animation = &jhk;
 			break;
 
@@ -1109,9 +1111,13 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_FORWARD_JUMP2:
+			current_animation = &jfmk;
+		
 			break;
 
 		case F_KIK_FORWARD_JUMP2:
+			current_animation = &jfhk;
+			
 			break;
 
 		case L_KIK_BACKWARD_JUMP2:
@@ -1132,9 +1138,13 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_BACKWARD_JUMP2:
+		
+				current_animation = &jbmk;
 			break;
 
 		case F_KIK_BACKWARD_JUMP2:
+		
+				current_animation = &jbhk;
 			break;
 
 		case ST_DEFENDING:
@@ -1146,6 +1156,8 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_GUT_REEL2:
+			texture = graphics;
+			current_animation = &stgreel;
 			break;
 
 		case ST_CROUCH_REEL2:
@@ -1189,6 +1201,42 @@ update_status ModuleDhalsim::Update()
 				victoryExecuted = 2;
 			}
 			break;
+
+
+		//trying adding cases in order to try out animations
+        
+		case L_PUNCH_CLOSE2:
+			current_animation = &close_lp;
+			break;
+		case M_PUNCH_CLOSE2:
+			current_animation = &close_mp;
+			break;
+		case F_PUNCH_CLOSE2:
+			current_animation = &close_hp;
+			break;
+		case L_KIK_CLOSE2:
+			current_animation = &close_lk;
+			break;
+		case M_KIK_CLOSE2:
+			current_animation = &close_mk;
+			break;
+		case F_KIK_CLOSE2:
+			current_animation = &close_hk;
+			break;
+		case L_PUNCH_CROUCHCLOSE2:
+			current_animation = &close_clp;
+			break;
+		case M_PUNCH_CROUCHCLOSE2:
+			current_animation = &close_cmp;
+			break;
+		case L_KIK_CROUCHCLOSE2:
+			current_animation = &close_clk;
+			break;
+		case M_KIK_CROUCHCLOSE2:
+			current_animation = &close_cmk;
+			break;
+
+		//end of test
 		}
 	}
 	current_state = state;
@@ -1339,7 +1387,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
-			inputs.Push(IN_L_PUNCH2);
+			inputs.Push(IN_GUT_REEL2);
 		}
 
 
