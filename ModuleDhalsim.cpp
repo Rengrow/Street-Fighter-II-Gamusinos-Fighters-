@@ -299,11 +299,11 @@ bool ModuleDhalsim::Start()
 	Module*jlpCallback[jlpnColliders] = { {this}, {this}, {this} };
 	Module*jlpCallback2[jlpnColliders2] = { {this}, {this}, {this}, {this}, {(Module*)App->ryu} };
 
-	jlp.PushBack({ 179, 398, 58, 88 }, 2, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
-	jlp.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
-	jlp.PushBack({ 352, 401, 173, 85 }, 100, { 33,5 }, { jlpnColliders2 }, { jlpHitbox2 }, { jlpColliderType2 }, { jlpCallback2 });
-	jlp.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
-	jlp.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 352, 401, 173, 85 }, 40, { 33,5 }, { jlpnColliders2 }, { jlpHitbox2 }, { jlpColliderType2 }, { jlpCallback2 });
+	jlp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 179, 398, 58, 88 }, 2932, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
 
 
 	// Jumping neutral / diagonal lk
@@ -316,11 +316,11 @@ bool ModuleDhalsim::Start()
 	Module*jlkCallback[jlknColliders] = { {this}, {this}, {this} };
 	Module*jlkCallback2[jlknColliders2] = { {this}, {this}, {this}, {this}, {(Module*)App->ryu} };
 
-	jlk.PushBack({ 527, 396, 76, 90 }, 2, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
-	jlk.PushBack({ 605, 415, 133, 71 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
-	jlk.PushBack({ 740, 404, 202, 82 }, 100, { 33,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
-	jlk.PushBack({ 605, 415, 133, 71 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
-	jlk.PushBack({ 527, 396, 76, 90 }, 100, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 527, 396, 76, 90 }, 10, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 605, 415, 133, 71 }, 15, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 740, 404, 202, 82 }, 45, { 33,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
+	jlk.PushBack({ 605, 415, 133, 71 }, 10, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 527, 396, 76, 90 }, 2920, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 
 
 	//jumping neutral / diagonal mp
@@ -333,11 +333,11 @@ bool ModuleDhalsim::Start()
 	Module*jmpCallback[jmpnColliders] = { { this },{ this },{ this } };
 	Module*jmpCallback2[jmpnColliders2] = { { this },{ this },{ this },{ this },{ (Module*)App->ryu } };
 
-	jmp.PushBack({ 179, 398, 58, 88 }, 2, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
-	jmp.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
-	jmp.PushBack({ 352, 401, 173, 85 }, 100, { 33,5 }, { jmpnColliders2 }, { jmpHitbox2 }, { jmpColliderType2 }, { jmpCallback2 });
-	jmp.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
-	jmp.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 352, 401, 173, 85 }, 25, { 33,5 }, { jmpnColliders2 }, { jmpHitbox2 }, { jmpColliderType2 }, { jmpCallback2 });
+	jmp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 179, 398, 58, 88 }, 2947, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
 
 	//jumping neutral / diagonal mk
 	const int jmknColliders = 3;
@@ -349,11 +349,11 @@ bool ModuleDhalsim::Start()
 	Module*jmkCallback[jmknColliders] = { { this },{ this },{ this } };
 	Module*jmkCallback2[jmknColliders2] = { { this },{ this },{ this },{ this },{ (Module*)App->ryu } };
 
-	jmk.PushBack({ 527, 396, 76, 90 }, 2, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
-	jmk.PushBack({ 605, 415, 133, 71 }, 100, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
-	jmk.PushBack({ 740, 404, 202, 82 }, 100, { 33,5 }, { jmknColliders2 }, { jmkHitbox2 }, { jmkColliderType2 }, { jmkCallback2 });
-	jmk.PushBack({ 605, 415, 133, 71 }, 100, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
-	jmk.PushBack({ 527, 396, 76, 90 }, 100, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 527, 396, 76, 90 }, 10, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 605, 415, 133, 71 }, 15, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 740, 404, 202, 82 }, 30, { 33,5 }, { jmknColliders2 }, { jmkHitbox2 }, { jmkColliderType2 }, { jmkCallback2 });
+	jmk.PushBack({ 605, 415, 133, 71 }, 10, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 527, 396, 76, 90 }, 2935, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
 
 
 	//jumping neutral / diagonal hp
@@ -366,11 +366,11 @@ bool ModuleDhalsim::Start()
 	Module*jhpCallback[jhpnColliders] = { { this },{ this },{ this } };
 	Module*jhpCallback2[jhpnColliders2] = { { this },{ this },{ this },{ this },{ (Module*)App->ryu } };
 
-	jhp.PushBack({ 179, 398, 58, 88 }, 2, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
-	jhp.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
-	jhp.PushBack({ 352, 401, 173, 85 }, 100, { 33,5 }, { jhpnColliders2 }, { jhpHitbox2 }, { jhpColliderType2 }, { jhpCallback2 });
-	jhp.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
-	jhp.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 352, 401, 173, 85 }, 10, { 33,5 }, { jhpnColliders2 }, { jhpHitbox2 }, { jhpColliderType2 }, { jhpCallback2 });
+	jhp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 179, 398, 58, 88 }, 2962, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
 
 	//jumping neutral / diagonal hk
 	const int jhknColliders = 3;
@@ -382,14 +382,14 @@ bool ModuleDhalsim::Start()
 	Module*jhkCallback[jhknColliders] = { { this },{ this },{ this } };
 	Module*jhkCallback2[jhknColliders2] = { { this },{ this }, { (Module*)App->ryu } };
 
-	jhk.PushBack({ 463, 909, 73, 96 }, 2, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 352, 401, 173, 85 }, 100, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 239, 410, 111, 76 }, 100, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
-	jhk.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 100, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 463, 909, 73, 96 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 594, 901, 51, 104 }, 8, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 752, 903, 184, 102 }, 15, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
+	jhk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 179, 398, 58, 88 }, 2941, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 
 
 	//Hadoken
@@ -912,9 +912,12 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_NEUTRAL_JUMP2:
+			current_animation = &jmk;
 			break;
 
 		case F_KIK_NEUTRAL_JUMP2:
+			texture = graphics3;
+			current_animation = &jhk;
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
