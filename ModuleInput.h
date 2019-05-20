@@ -61,6 +61,8 @@ public:
 
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
+	JOYSTICK_STATE joystick2;
+	directions p2;
 
 
 	SDL_GameController* gameController1 = NULL;
