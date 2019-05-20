@@ -7,7 +7,7 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-#define D_L_STANDING_PUNCH_TIME 40
+#define D_L_STANDING_PUNCH_TIME 43
 #define D_L_CROUCHING_PUNCH_TIME 58
 #define D_L_D_JUMPING_PUNCH_TIME 3000
 
@@ -42,7 +42,7 @@
 #define D_GETTING_UP_TIME 45
 #define D_DEFENDING_TIME 20
 
-#define D_HEAD_REEL_TIME 43
+#define D_HEAD_REEL_TIME 32
 #define D_CROUCH_REEL_TIME 20
 #define D_GUT_REEL_TIME 25
 
@@ -197,6 +197,7 @@ public:
 	Animation forward;
 	Animation backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
+	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk;
 	Animation jlp, jlk, jmp, jfmp, jbmp, jmk, jfmk, jbmk, jhp, jfhp, jbhp, jhk, jfhk, jbhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	Animation mp, hp, mk, hk;
 	Animation neutralJump;
