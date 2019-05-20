@@ -888,127 +888,145 @@ void ModuleRyu::BlitCharacterAndAddColliders(Animation* current_animation, SDL_T
 
 bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 {
-	static bool left = false;
-	static bool right = false;
-	static bool down = false;
-	static bool up = false;
+	bool crouch = false;
 
 	if (!freeze) {
 		//Key UP
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP)
+		/*
+		if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_UP)
 		{
-			inputs.Push(IN_CROUCH_UP);
-			down = false;
-
+		inputs.Push(IN_CROUCH_UP2);
+		down = false;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_UP)
 		{
-			up = false;
+		up = false;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_UP)
 		{
-			inputs.Push(IN_LEFT_UP);
-			left = false;
+		inputs.Push(IN_RIGHT_UP2);
+		right = false;
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_UP)
+		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_UP)
 		{
-			inputs.Push(IN_RIGHT_UP);
-			right = false;
-		}
+		inputs.Push(IN_LEFT_UP2);
+		left = false;
+
+		}*/
 		//Key down
+		// Using B as debug tool
 
-		if ((App->input->keyboard[SDL_SCANCODE_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
+		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+		{
+			inputs.Push(IN_F_KIK);
+		}
+
+
+
+
+		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
 		{
 			inputs.Push(IN_L_PUNCH);
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
+		if ((App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
 		{
 			inputs.Push(IN_L_KIK);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_6] == KEY_STATE::KEY_DOWN)
+		if ((App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN))
 		{
-			if (state != ST_HADOKEN)
+			inputs.Push(IN_M_PUNCH);
+		}
+
+		if ((App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
+		{
+			inputs.Push(IN_M_KIK);
+		}
+
+		if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
+		{
+			inputs.Push(IN_F_PUNCH);
+		}
+
+		if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
+		{
+			inputs.Push(IN_F_KIK);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
+		{
+			if (state != ST_HADOKEN2)
 				hdk.ResetAnimation();
 			inputs.Push(IN_HADOKEN);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+
+
+		if (App->input->p2.left)
 		{
-			if (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD)
-			{
-				backwardJump.ResetAnimation();
-				forwardJump.ResetAnimation();
-				neutralJump.ResetAnimation();
+			if (App->input->p2.up)
+				inputs.Push(IN_LEFT_AND_JUMP);
+
+			if (App->input->p2.down) {
+				inputs.Push(IN_LEFT_AND_CROUCH);
+				crouch = true;
 			}
-			up = true;
-		}
-		else
-		{
-			up = false;
-		}
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
-		{
-			down = true;
-		}
-		else {
-			inputs.Push(IN_CROUCH_UP);
-			down = false;
-		}
-
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
-		{
-			left = true;
-		}
-		else
-		{
-			inputs.Push(IN_LEFT_UP);
-			left = false;
-		}
-
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN || App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
-		{
-			right = true;
-		}
-		else
-		{
-			inputs.Push(IN_RIGHT_UP);
-			right = false;
-		}
-
-		if (left && right)
-			inputs.Push(IN_LEFT_AND_RIGHT);
-		{
-			if (left)
+			else
 				inputs.Push(IN_LEFT_DOWN);
-			if (right)
+		}
+		else
+			inputs.Push(IN_LEFT_UP);
+
+
+		if (App->input->p2.right)
+		{
+			if (App->input->p2.up)
+				inputs.Push(IN_RIGHT_AND_JUMP);
+
+			if (App->input->p2.down) {
+				inputs.Push(IN_RIGHT_AND_CROUCH);
+				crouch = true;
+			}
+
+			else
 				inputs.Push(IN_RIGHT_DOWN);
 		}
-
-		if (up && down)
-			inputs.Push(IN_JUMP_AND_CROUCH);
 		else
+			inputs.Push(IN_RIGHT_UP);
+
+
+		if (App->input->p2.up && !App->input->p2.right && !App->input->p2.left)
 		{
-			if (down)
-				inputs.Push(IN_CROUCH_DOWN);
-			else
-			{
-				inputs.Push(IN_CROUCH_UP);
-			}
-			if (up)
-				inputs.Push(IN_JUMP);
+			inputs.Push(IN_JUMP);
 		}
+
+		if (App->input->p2.down && !App->input->p2.right && !App->input->p2.left)
+		{
+			inputs.Push(IN_CROUCH_DOWN);
+			crouch = true;
+		}
+
+		if (crouch == false)
+		{
+			inputs.Push(IN_CROUCH_UP);
+		}
+
+		if (!App->input->p2.down && !App->input->p2.up && !App->input->p2.right && !App->input->p2.left)
+		{
+			inputs.Push(IN_IDLE);
+		}
+
 	}
 	else {
-		left = false;
-		right = false;
-		down = false;
-		up = false;
+		App->input->p2.left = false;
+		App->input->p2.right = false;
+		App->input->p2.down = false;
+		App->input->p2.up = false;
 	}
 
 	return true;

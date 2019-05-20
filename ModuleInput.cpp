@@ -202,6 +202,80 @@ update_status ModuleInput::PreUpdate()
 		gameController2AxisValues[i] = SDL_GameControllerGetAxis(gameController2, (SDL_GameControllerAxis)i);
 	}
 
+
+	//Obtaind the direction of Gamepad 2
+	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+	{
+		p2.up = true;
+	}
+	else
+		p2.up = false;
+
+
+	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+	{
+		p2.down = true;
+	}
+	else
+		p2.down = false;
+
+
+	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	{
+		p2.left = true;
+	}
+	else
+		p2.left = false;
+
+	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	{
+		p2.right = true;
+	}
+	else
+		p2.right = false;
+
+
+	if (p2.left)
+	{
+		if (p2.up)
+			joystick2 = LEFT_AND_UP;
+
+		if (p2.down)
+			joystick2 = LEFT_AND_DOWN;
+
+		else
+			joystick2 = LEFT;
+	}
+
+	if (p2.right)
+	{
+		if (p2.up)
+			joystick2 = RIGHT_AND_UP;
+
+		if (p2.down)
+			joystick2 = RIGHT_AND_DOWN;
+
+		else
+			joystick2 = RIGHT;
+	}
+
+	if (p2.up && !p2.right && !p2.left)
+	{
+		joystick2 = UP;
+	}
+
+	if (p2.down && !p2.right && !p2.left)
+	{
+		joystick2 = DOWN;
+	}
+
+	if (!p2.down && !p2.up && !p2.right && !p2.left)
+	{
+		joystick2 = IDLE;
+	}
+
+
+
 #pragma endregion
 
 	if (keyboard[SDL_SCANCODE_ESCAPE])
