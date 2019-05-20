@@ -167,7 +167,7 @@ bool ModuleDhalsim::Start()
 	mp.PushBack({ 152, 816, 214, 46 }, 15, { 33,5 }, mpnColliders4, mpHitbox4, mpColliderType4, mpCallback4);
 	mp.PushBack({ 0, 816, 150, 46 }, 10, { 33,5 }, mpnColliders5, mpHitbox5, mpColliderType5, mpCallback5);
 	mp.PushBack({ 827, 674, 86, 77 }, 10, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
-	mp.PushBack({ 751, 652, 74, 99 }, 2, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
+	//mp.PushBack({ 751, 652, 74, 99 }, 2, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
 
 
 	// close mp
@@ -962,8 +962,10 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_PUNCH_STANDING2:
+		
 			texture = graphics3;
 			current_animation = &lp;
+			
 			break;
 
 		case M_PUNCH_STANDING2:
@@ -1469,6 +1471,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
 			l_standing_punch_timer = 0;
+			lp.ResetAnimation();
 		}
 	}
 
@@ -1478,6 +1481,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
 			l_crouching_punch_timer = 0;
+			clp.ResetAnimation();
 		}
 	}
 
