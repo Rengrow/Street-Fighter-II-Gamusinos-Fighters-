@@ -271,10 +271,10 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_lkColliderType3[close_lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* close_lkCallback[close_lknColliders] = { {this}, {this}, {this} };
 	Module* close_lkCallback3[close_lknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_lk.PushBack({ 770, 770, 58, 92 }, 5, { 32,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
-	close_lk.PushBack({ 789, 41, 123, 93 }, 8, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
-	close_lk.PushBack({ 0, 896, 165, 109 }, 20, { 33,5 }, close_lknColliders3, close_lkHitbox3, close_lkColliderType3, close_lkCallback3);
-	
+	close_lk.PushBack({ 770, 770, 58, 92 }, 8, { 32,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
+	close_lk.PushBack({ 789, 41, 123, 93 }, 20, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
+	close_lk.PushBack({ 0, 896, 165, 109 }, 12, { 33,5 }, close_lknColliders3, close_lkHitbox3, close_lkColliderType3, close_lkCallback3);
+
 	
 	// mk
 	const int mknColliders1 = 3;
@@ -309,7 +309,7 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_mkColliderType3[close_mknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* close_mkCallback[close_mknColliders] = { {this}, {this}, {this} };
 	Module* close_mkCallback3[close_mknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_mk.PushBack({ 770, 770, 58, 92 }, 5, { 32,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
+	close_mk.PushBack({ 770, 770, 58, 92 }, 8, { 32,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
 	close_mk.PushBack({ 914, 32, 103, 102 }, 20, { 33,5 }, close_mknColliders3, close_mkHitbox3, close_mkColliderType3, close_mkCallback3);
 	close_mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
 
@@ -346,13 +346,13 @@ bool ModuleDhalsim::Start()
 	Module* close_hkCallback2[close_hknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
 
 
-	close_hk.PushBack({ 209, 158, 63, 87 }, 2, { 32,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 0, 145, 67, 100 }, 5, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 209, 158, 63, 87 }, 7, { 32,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 0, 145, 67, 100 }, 8, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 70, 151, 55, 94 }, 5, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 131, 139, 76, 106 }, 20, { 33,5 }, close_hknColliders2, close_hkHitbox2, close_hkColliderType2, close_hkCallback2);
 	close_hk.PushBack({ 70, 151, 55, 94 }, 8, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 131, 139, 76, 106 }, 10, { 33,5 }, close_hknColliders2, close_hkHitbox2, close_hkColliderType2, close_hkCallback2);
-	close_hk.PushBack({ 70, 151, 55, 94 }, 15, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 0, 145, 67, 100 }, 25, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 209, 158, 63, 87 }, 20, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 0, 145, 67, 100 }, 10, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 209, 158, 63, 87 }, 2, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
 
 
 	// Neutral jump 50
@@ -688,9 +688,9 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_clkColliderType2[close_clknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_clkCallback[close_clknColliders] = { {this}, {this}, {this} };
 	Module*close_clkCallback2[close_clknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_clk.PushBack({ 408, 301, 66, 60 }, 5, { 46,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
-	close_clk.PushBack({ 476, 305, 117, 56 }, 8, { 33,5 }, { close_clknColliders2 }, { close_clkHitbox2 }, { close_clkColliderType2 }, { close_clkCallback2 });
-	close_clk.PushBack({ 408, 301, 66, 60 }, 8, { 33,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
+	close_clk.PushBack({ 408, 301, 66, 60 }, 10, { 46,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
+	close_clk.PushBack({ 476, 305, 117, 56 }, 20, { 33,5 }, { close_clknColliders2 }, { close_clkHitbox2 }, { close_clkColliderType2 }, { close_clkCallback2 });
+	close_clk.PushBack({ 408, 301, 66, 60 }, 13, { 33,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
 
 
 	//Crouching m kik
@@ -719,9 +719,9 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_cmkColliderType2[close_cmknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_cmkCallback[close_cmknColliders] = { {this}, {this}, {this} };
 	Module*close_cmkCallback2[close_cmknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_cmk.PushBack({ 191, 299, 64, 62 }, 5, { 46,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
-	close_cmk.PushBack({ 595, 299, 117, 62 }, 108, { 33,5 }, { close_cmknColliders2 }, { close_cmkHitbox2 }, { close_cmkColliderType2 }, { close_cmkCallback2 });
-	close_cmk.PushBack({ 191, 299, 64, 62 }, 8, { 33,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
+	close_cmk.PushBack({ 191, 299, 64, 62 }, 2, { 46,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
+	close_cmk.PushBack({ 595, 299, 117, 62 }, 20, { 33,5 }, { close_cmknColliders2 }, { close_cmkHitbox2 }, { close_cmkColliderType2 }, { close_cmkCallback2 });
+	close_cmk.PushBack({ 191, 299, 64, 62 }, 13, { 33,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
 
 
 	//Crouching h kik
