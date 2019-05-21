@@ -9,7 +9,7 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-#define D_L_STANDING_PUNCH_TIME 44 //43 //+3
+//#define D_L_STANDING_PUNCH_TIME 43 //+3
 #define D_L_CROUCHING_PUNCH_TIME 60 //+5
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
@@ -66,6 +66,15 @@
 #define D_F_CLOSE_STANDING_KIK_TIME 66	//+6
 #define D_L_CLOSE_CROUCHING_KIK_TIME 45	//+2
 #define D_M_CLOSE_CROUCHING_KIK_TIME 37 //+2
+
+#define D_L_STANDING_PUNCH_TIME 23 //+2
+
+#define D_L_CLOSE_STANDING_KIK_TIME 46
+#define D_M_CLOSE_STANDING_KIK_TIME 46
+#define D_F_CLOSE_STANDING_KIK_TIME 66
+#define D_L_CLOSE_CROUCHING_KIK_TIME 43
+#define D_M_CLOSE_CROUCHING_KIK_TIME 35
+#define D_F_CLOSE_CROUCHING_KIK_TIME 6000 //Close crouch roundhouse does not exist
 
 // following defines made by Adria, not used in State Matrix
 #define D_L_CLOSE_STANDING_PUNCH_TIME 39 //+3
@@ -231,6 +240,7 @@ public:
 	void ClearColliders();
 	bool IsntOnLeftLimit();
 	bool IsntOnRightLimit();
+	void IsClose();
 
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
@@ -276,35 +286,48 @@ public:
 	int mov; //lp, mp, hp, lk, mk, hk
 	
 	int sprite_change_timer = 0;
+	bool close;
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
 	
 	//light
 	Uint32 l_standing_punch_timer = 0;
+	Uint32 l_close_standing_punch_timer = 0;
 	Uint32 l_crouching_punch_timer = 0;
+	Uint32 l_close_crouching_punch_timer = 0;
 	Uint32 l_d_jumping_punch_timer = 0;
 
 	Uint32 l_standing_kik_timer = 0;
+	Uint32 l_close_standing_kik_timer = 0;
 	Uint32 l_crouching_kik_timer = 0;
+	Uint32 l_close_crouching_kik_timer = 0;
 	Uint32 l_d_jumping_kik_timer = 0;
 
 	//medium
 	Uint32 m_standing_punch_timer = 0;
+	Uint32 m_close_standing_punch_timer = 0;
 	Uint32 m_crouching_punch_timer = 0;
+	Uint32 m_close_crouching_punch_timer = 0;
 	Uint32 m_d_jumping_punch_timer = 0;
 
 	Uint32 m_standing_kik_timer = 0;
+	Uint32 m_close_standing_kik_timer = 0;
 	Uint32 m_crouching_kik_timer = 0;
+	Uint32 m_close_crouching_kik_timer = 0;
 	Uint32 m_d_jumping_kik_timer = 0;
 
 	//fierce
 	Uint32 f_standing_punch_timer = 0;
+	Uint32 f_close_standing_punch_timer = 0;
 	Uint32 f_crouching_punch_timer = 0;
+	Uint32 f_close_crouching_punch_timer = 0;
 	Uint32 f_d_jumping_punch_timer = 0;
 
 	Uint32 f_standing_kik_timer = 0;
+	Uint32 f_close_standing_kik_timer = 0;
 	Uint32 f_crouching_kik_timer = 0;
+	Uint32 f_close_crouching_kik_timer = 0;
 	Uint32 f_d_jumping_kik_timer = 0;
 
 	//others
