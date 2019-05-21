@@ -9,7 +9,7 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-#define D_L_STANDING_PUNCH_TIME 43 //+3
+#define D_L_STANDING_PUNCH_TIME 44 //43 //+3
 #define D_L_CROUCHING_PUNCH_TIME 60 //+5
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
@@ -52,21 +52,20 @@
 #define D_MP_YOGA_FIRE 86	//+6
 #define D_HP_YOGA_FIRE 86	//+6
 
-#define D_LP_MP_YOGA_FLAME 110	//+20 ************* Does not loop, eventually the beggining of the animation starts to show at the end
-#define D_HP_YOGA_FLAME 113	//+23 ****************** Does not loop, Dhalsim makes a few frames of the begginning at the end. ADDITIONALLY: check animation? Dhalsim takes in air TWICE, should be once
-#define D_CYCLE_YOGA_FLAME 40	//+0 
-#define D_LP_MP_RECOVERY_YOGA_FLAME 54 // +6 *************** check animation, second flame seems to be misscut on the left, lacks a few pixels
-#define D_HP_RECOVERY_YOGA_FLAME 58	//+8 ***************** same as above
+#define D_LP_MP_YOGA_FLAME 107	//+17
+#define D_HP_YOGA_FLAME 112	//+22
+#define D_CYCLE_YOGA_FLAME 40	//+0
+#define D_LP_MP_RECOVERY_YOGA_FLAME 54 // +6
+#define D_HP_RECOVERY_YOGA_FLAME 58	//+8
 
 #define D_YOGA_DRILL 1000
 #define D_YOGA_MUMMY 1000
 
-#define D_L_CLOSE_STANDING_KIK_TIME 42	//+2 *********** CHECK ANIMATION: it's wrong: random pieces of spritesheet appear, checked on graphics 1,2,3
-#define D_M_CLOSE_STANDING_KIK_TIME 42	//+2 ********** CHECK ANIMATION: it's wrong: random pieces of spritesheet appear, checked on graphics 1,2,3
+#define D_L_CLOSE_STANDING_KIK_TIME 44	//+4
+#define D_M_CLOSE_STANDING_KIK_TIME 44	//+4
 #define D_F_CLOSE_STANDING_KIK_TIME 66	//+6
 #define D_L_CLOSE_CROUCHING_KIK_TIME 45	//+2
 #define D_M_CLOSE_CROUCHING_KIK_TIME 37 //+2
-#define D_F_CLOSE_CROUCHING_KIK_TIME 6000 //Close crouch roundhouse does not exist
 
 // following defines made by Adria, not used in State Matrix
 #define D_L_CLOSE_STANDING_PUNCH_TIME 39 //+3
@@ -74,7 +73,6 @@
 #define D_F_CLOSE_STANDING_PUNCH_TIME 93 //+5
 #define D_L_CLOSE_CROUCHING_PUNCH_TIME 23 //+2
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 23 //+2
-#define D_F_CLOSE_CROUCHING_PUNCH_TIME 6000 //Close crouch fierce does not exist
 
 struct Mix_Chunk;
 
@@ -241,7 +239,7 @@ public:
 	SDL_Texture* graphics3 = nullptr;
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
-	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk;
+	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk, close_firstframe_lk_mk;
 	Animation jlp, jlk, jmp, jfmp, jbmp, jmk, jfmk, jbmk, jhp, jfhp, jbhp, jhk, jfhk, jbhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	Animation mp, hp, mk, hk;
 	Animation close_mp, close_hp, close_mk, close_hk;
@@ -277,6 +275,7 @@ public:
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
 	
+	int sprite_change_timer = 0;
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;

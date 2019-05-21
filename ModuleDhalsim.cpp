@@ -261,19 +261,21 @@ bool ModuleDhalsim::Start()
 	lk.PushBack({ 842, 753, 118, 109 }, 10, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 	lk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
-	
+
+	// close_firstframe_lk_mk
+	const int close_firstframe_lk_mknColliders = 2;
+	SDL_Rect close_firstframe_lk_mkHitbox[close_firstframe_lk_mknColliders] = { { -38, 69, 22, 20}, { -11, 0, 50, 74} };
+	COLLIDER_TYPE close_firstframe_lk_mkColliderType[close_firstframe_lk_mknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* close_firstframe_lk_mkCallback[close_firstframe_lk_mknColliders] = { {this}, {this} };
+	close_firstframe_lk_mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, close_firstframe_lk_mknColliders, close_firstframe_lk_mkHitbox, close_firstframe_lk_mkColliderType, close_firstframe_lk_mkCallback);
+
+
 	// close_lk
 	const int close_lknColliders = 3;
-	const int close_lknColliders3 = 4;
-	SDL_Rect close_lkHitbox[close_lknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
-	SDL_Rect close_lkHitbox3[close_lknColliders3] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
-	COLLIDER_TYPE close_lkColliderType[close_lknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE close_lkColliderType3[close_lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	Module* close_lkCallback[close_lknColliders] = { {this}, {this}, {this} };
-	Module* close_lkCallback3[close_lknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_lk.PushBack({ 770, 770, 58, 92 }, 8, { 32,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
+	SDL_Rect close_lkHitbox[close_lknColliders] = { { -54, 69, 22, 20}, { -27, 0, 50, 74}, { -65, 71, 80, 28} };
+	COLLIDER_TYPE close_lkColliderType[close_lknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* close_lkCallback[close_lknColliders] = { {this}, {this}, {(Module*)App->ryu} };
 	close_lk.PushBack({ 789, 41, 123, 93 }, 20, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
-	close_lk.PushBack({ 0, 896, 165, 109 }, 12, { 33,5 }, close_lknColliders3, close_lkHitbox3, close_lkColliderType3, close_lkCallback3);
 
 	
 	// mk
@@ -302,16 +304,10 @@ bool ModuleDhalsim::Start()
 
 	// close_mk
 	const int close_mknColliders = 3;
-	const int close_mknColliders3 = 4;
-	SDL_Rect close_mkHitbox[close_mknColliders] = { { -15, 79, 44, 16}, { -6, 37, 40, 47}, { -6, 0, 40, 37} };
-	SDL_Rect close_mkHitbox3[close_mknColliders3] = { { 3, 84, 50, 27}, { -13, 57, 100, 27}, { -6, 0, 40, 57}, { -100, 77, 67, 26} };
-	COLLIDER_TYPE close_mkColliderType[close_mknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE close_mkColliderType3[close_mknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	Module* close_mkCallback[close_mknColliders] = { {this}, {this}, {this} };
-	Module* close_mkCallback3[close_mknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_mk.PushBack({ 770, 770, 58, 92 }, 8, { 32,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
-	close_mk.PushBack({ 914, 32, 103, 102 }, 20, { 33,5 }, close_mknColliders3, close_mkHitbox3, close_mkColliderType3, close_mkCallback3);
-	close_mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
+	SDL_Rect close_mkHitbox[close_mknColliders] = { { -13, 69, 22, 20}, { 14, 0, 50, 74}, { -20, 70, 84, 26} };
+	COLLIDER_TYPE close_mkColliderType[close_mknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* close_mkCallback[close_mknColliders] = { {this}, {this}, {(Module*)App->ryu} };
+	close_mk.PushBack({ 914, 32, 103, 102 }, 20, { 33,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
 
 
 	//hk
@@ -586,9 +582,9 @@ bool ModuleDhalsim::Start()
 	yoga_flame_lp_mp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox3, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
 	yoga_flame_lp_mp.PushBack({ 503, 602, 112, 88 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
 	yoga_flame_lp_mp.PushBack({ 420, 602, 81, 88 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 114, 92 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 144, 92 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
 	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 114, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 144, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
 	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
 	yoga_flame_lp_mp.PushBack({ 763, 598, 157, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
 	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
@@ -621,9 +617,9 @@ bool ModuleDhalsim::Start()
 	yoga_flame_hp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox3, yoga_flame_hpColliderType, yoga_flame_hpCallback);
 	yoga_flame_hp.PushBack({ 503, 602, 112, 88 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
 	yoga_flame_hp.PushBack({ 420, 602, 81, 88 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 617, 598, 114, 92 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 617, 598, 144, 92 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
 	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 617, 598, 114, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 144, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
 	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
 	yoga_flame_hp.PushBack({ 763, 598, 157, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
 	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
@@ -1026,7 +1022,7 @@ bool ModuleDhalsim::CleanUp()
 	forward = Animation();
 	backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
-	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = Animation();
+	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
 	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp_mp = yoga_flame_hp = yoga_flame_cycle = yoga_flame_recovery_lp_mp = yoga_flame_recovery_hp = Animation();
 	streel = Animation();
@@ -1170,15 +1166,9 @@ update_status ModuleDhalsim::Update()
 		
 			texture = graphics3;
 			current_animation = &lp;
-			
-			
-			//texture = graphics;
-			//current_animation = &close_cmk; //using lp to check animations
+
 
 			break;
-
-
-
 
 
 
@@ -1432,10 +1422,40 @@ update_status ModuleDhalsim::Update()
 			current_animation = &close_hp;
 			break;
 		case L_KIK_CLOSE2:
-			current_animation = &close_lk;
+			if (sprite_change_timer <= 8) {
+				texture = graphics3;
+				current_animation = &close_firstframe_lk_mk;
+				sprite_change_timer++;
+			}
+			else if (sprite_change_timer > 8 && sprite_change_timer <= 28) {
+				texture = graphics;
+				current_animation = &close_lk;
+				sprite_change_timer++;
+			}
+			else if (sprite_change_timer > 28 && sprite_change_timer <= D_L_CLOSE_STANDING_KIK_TIME) {
+				texture = graphics3;
+				current_animation = &close_firstframe_lk_mk;
+				if (sprite_change_timer == D_L_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
+				else { sprite_change_timer++; }
+			}
 			break;
 		case M_KIK_CLOSE2:
-			current_animation = &close_mk;
+			if (sprite_change_timer <= 8) {
+				texture = graphics3;
+				current_animation = &close_firstframe_lk_mk;
+				sprite_change_timer++;
+			}
+			else if (sprite_change_timer > 8 && sprite_change_timer <= 28) {
+				texture = graphics;
+				current_animation = &close_mk;
+				sprite_change_timer++;
+			}
+			else if (sprite_change_timer > 28 && sprite_change_timer <= D_M_CLOSE_STANDING_KIK_TIME) {
+				texture = graphics3;
+				current_animation = &close_firstframe_lk_mk;
+				if (sprite_change_timer == D_M_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
+				else { sprite_change_timer++; }
+			}
 			break;
 		case F_KIK_CLOSE2:
 			current_animation = &close_hk;
@@ -1604,7 +1624,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
-			inputs.Push(IN_GUT_REEL2);
+			inputs.Push(IN_L_PUNCH2);
 		}
 
 
