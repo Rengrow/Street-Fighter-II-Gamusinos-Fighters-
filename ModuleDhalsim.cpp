@@ -634,7 +634,7 @@ bool ModuleDhalsim::Start()
 	const int close_cmpnColliders = 3;
 	const int close_cmpnColliders2 = 4;
 	SDL_Rect close_cmpHitbox[close_cmpnColliders] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20} };
-	SDL_Rect close_cmpHitbox2[close_cmpnColliders2] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20}, {-163, 5, 35, 25} };
+	SDL_Rect close_cmpHitbox2[close_cmpnColliders2] = { { 0, 0, 0, 0}, { -6, 1, 46, 51}, { -31, 46, 24, 20}, {-63, 45, 55, 25} };
 	COLLIDER_TYPE close_cmpColliderType[close_cmpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE close_cmpColliderType2[close_cmpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_cmpCallback[close_cmpnColliders] = { {this}, {this}, {this} };
