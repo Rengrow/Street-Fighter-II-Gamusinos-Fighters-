@@ -961,12 +961,28 @@ update_status ModuleDhalsim::Update()
 			current_animation = &chp;
 			break;
 
+
+
+
+
+
+
 		case L_PUNCH_STANDING2:
 		
-			texture = graphics3;
-			current_animation = &lp;
+			//texture = graphics3;
+			//current_animation = &lp;
 			
+			current_animation = &close_cmp;
+
 			break;
+
+
+
+
+
+
+
+
 
 		case M_PUNCH_STANDING2:
 			texture = graphics3;

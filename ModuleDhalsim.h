@@ -9,7 +9,7 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-#define D_L_STANDING_PUNCH_TIME 43 //+3
+//#define D_L_STANDING_PUNCH_TIME 43 //+3
 #define D_L_CROUCHING_PUNCH_TIME 60 //+5
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
@@ -48,6 +48,9 @@
 #define D_CROUCH_REEL_TIME 13 //+1
 #define D_GUT_REEL_TIME 27 //+3
 
+
+#define D_L_STANDING_PUNCH_TIME 23 //+2
+
 #define D_L_CLOSE_STANDING_KIK_TIME 46
 #define D_M_CLOSE_STANDING_KIK_TIME 46
 #define D_F_CLOSE_STANDING_KIK_TIME 66
@@ -56,11 +59,11 @@
 #define D_F_CLOSE_CROUCHING_KIK_TIME 6000 //Close crouch roundhouse does not exist
 
 // following defines made by Adria, not used in State Matrix
-#define D_L_CLOSE_STANDING_PUNCH_TIME 23 //+2
-#define D_M_CLOSE_STANDING_PUNCH_TIME 21
-#define D_F_CLOSE_STANDING_PUNCH_TIME 94
-#define D_L_CLOSE_CROUCHING_PUNCH_TIME 43
-#define D_M_CLOSE_CROUCHING_PUNCH_TIME 35
+#define D_L_CLOSE_STANDING_PUNCH_TIME 39 //+3
+#define D_M_CLOSE_STANDING_PUNCH_TIME 57 //+4
+#define D_F_CLOSE_STANDING_PUNCH_TIME 93 //+5
+#define D_L_CLOSE_CROUCHING_PUNCH_TIME 23 //+2
+#define D_M_CLOSE_CROUCHING_PUNCH_TIME 23 //+2
 #define D_F_CLOSE_CROUCHING_PUNCH_TIME 6000 //Close crouch fierce does not exist
 
 struct Mix_Chunk;
