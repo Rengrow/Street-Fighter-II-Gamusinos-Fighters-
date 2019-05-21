@@ -923,7 +923,11 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 		{
 			inputs.Push(IN_F_KIK);
 		}
-
+		if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN) //trying pushback
+		
+		{
+			inputs.Push(IN_L_KIK);
+		}
 		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
 		{
 			inputs.Push(IN_L_PUNCH);
