@@ -243,7 +243,7 @@ public:
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
 	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk, close_firstframe_lk_mk;
-	Animation jlp, jlk, jmp, jfmp, jbmp, jmk, jfmk, jbmk, jhp, jfhp, jbhp, jhk, jfhk, jbhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
+	Animation jlp, jlk, jmp,  jmk, jhp,  jhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward. Nonexistent variations: jfmp, jbmp,jfmk, jbmk,jfhp, jbhp, jfhk, jbhk
 	Animation mp, hp, mk, hk;
 	Animation close_mp, close_hp, close_mk, close_hk;
 	Animation neutralJump, forwardJump, backwardJump;
