@@ -241,6 +241,7 @@ public:
 	void ClearColliders();
 	bool IsntOnLeftLimit();
 	bool IsntOnRightLimit();
+	void IsClose();
 
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
@@ -285,35 +286,48 @@ public:
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
 	
+	bool close;
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
 	
 	//light
 	Uint32 l_standing_punch_timer = 0;
+	Uint32 l_close_standing_punch_timer = 0;
 	Uint32 l_crouching_punch_timer = 0;
+	Uint32 l_close_crouching_punch_timer = 0;
 	Uint32 l_d_jumping_punch_timer = 0;
 
 	Uint32 l_standing_kik_timer = 0;
+	Uint32 l_close_standing_kik_timer = 0;
 	Uint32 l_crouching_kik_timer = 0;
+	Uint32 l_close_crouching_kik_timer = 0;
 	Uint32 l_d_jumping_kik_timer = 0;
 
 	//medium
 	Uint32 m_standing_punch_timer = 0;
+	Uint32 m_close_standing_punch_timer = 0;
 	Uint32 m_crouching_punch_timer = 0;
+	Uint32 m_close_crouching_punch_timer = 0;
 	Uint32 m_d_jumping_punch_timer = 0;
 
 	Uint32 m_standing_kik_timer = 0;
+	Uint32 m_close_standing_kik_timer = 0;
 	Uint32 m_crouching_kik_timer = 0;
+	Uint32 m_close_crouching_kik_timer = 0;
 	Uint32 m_d_jumping_kik_timer = 0;
 
 	//fierce
 	Uint32 f_standing_punch_timer = 0;
+	Uint32 f_close_standing_punch_timer = 0;
 	Uint32 f_crouching_punch_timer = 0;
+	Uint32 f_close_crouching_punch_timer = 0;
 	Uint32 f_d_jumping_punch_timer = 0;
 
 	Uint32 f_standing_kik_timer = 0;
+	Uint32 f_close_standing_kik_timer = 0;
 	Uint32 f_crouching_kik_timer = 0;
+	Uint32 f_close_crouching_kik_timer = 0;
 	Uint32 f_d_jumping_kik_timer = 0;
 
 	//others
