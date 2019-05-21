@@ -1503,10 +1503,7 @@ bool ModuleDhalsim::IsntOnRightLimit() {
 }
 
 void ModuleDhalsim::IsClose() {
-	if (App->ryu->position.x - this->position.x <=100 && App->ryu->position.x - this->position.x > 0)
-		close = true;
-
-	if (this->position.x - App->ryu->position.x <= 100 && this->position.x - App->ryu->position.x > 0)
+	if ((App->ryu->position.x - this->position.x <= 100 && App->ryu->position.x - this->position.x > 0) || (this->position.x - App->ryu->position.x <= 100 && this->position.x - App->ryu->position.x > 0))
 		close = true;
 
 	else
@@ -2770,11 +2767,25 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_CROUCH_UP2: state = ST_STANDING2; standing_timer = App->frames; break;
 
-			case IN_L_PUNCH2: state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames; break;
-			case IN_L_KIK2: state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames; break;
+			case IN_L_PUNCH2: {
+				if (!close) state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames; 
+				if (close) state = L_PUNCH_CROUCHCLOSE2; l_close_crouching_punch_timer = App->frames;
+			}break;
 
-			case IN_M_PUNCH2: state = M_PUNCH_CROUCH2; m_crouching_punch_timer = App->frames; break;
-			case IN_M_KIK2: state = M_KIK_CROUCH2; m_crouching_kik_timer = App->frames; break;
+			case IN_L_KIK2: {
+				if (!close) state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames; 
+				if (close) state = L_KIK_CROUCHCLOSE2; l_close_crouching_kik_timer = App->frames;
+			}break;
+
+			case IN_M_PUNCH2: {
+				if (!close) state = M_PUNCH_CROUCH2; m_crouching_punch_timer = App->frames; 
+				if (close) state = M_PUNCH_CROUCHCLOSE2; m_close_crouching_punch_timer = App->frames;
+			}break;
+
+			case IN_M_KIK2: {
+				if (!close) state = M_KIK_CROUCH2; m_crouching_kik_timer = App->frames; 
+				if (close) state = M_KIK_CROUCHCLOSE2; m_close_crouching_kik_timer = App->frames;
+			}break;
 
 			case IN_F_PUNCH2: state = F_PUNCH_CROUCH2; f_crouching_punch_timer = App->frames; break;
 			case IN_F_KIK2: state = F_KIK_CROUCH2; f_crouching_kik_timer = App->frames; break;
@@ -2798,7 +2809,29 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+		case L_PUNCH_CROUCHCLOSE2:
+		{
+			switch (last_input)
+			{
+			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
 		case L_KIK_CROUCH2:
+		{
+			switch (last_input)
+			{
+			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case L_KIK_CROUCHCLOSE2:
 		{
 			switch (last_input)
 			{
@@ -2820,7 +2853,29 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+		case M_PUNCH_CROUCHCLOSE2:
+		{
+			switch (last_input)
+			{
+			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
 		case M_KIK_CROUCH2:
+		{
+			switch (last_input)
+			{
+			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_KIK_CROUCHCLOSE2:
 		{
 			switch (last_input)
 			{
