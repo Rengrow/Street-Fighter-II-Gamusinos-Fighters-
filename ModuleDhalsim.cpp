@@ -426,11 +426,11 @@ bool ModuleDhalsim::Start()
 	Module*jlkCallback[jlknColliders] = { {this}, {this}, {this} };
 	Module*jlkCallback2[jlknColliders2] = { {this}, {this}, {this}, {this}, {(Module*)App->ryu} };
 
-	jlk.PushBack({ 527, 396, 76, 90 }, 10, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
-	jlk.PushBack({ 605, 415, 133, 71 }, 15, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
-	jlk.PushBack({ 740, 404, 202, 82 }, 45, { 33,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
-	jlk.PushBack({ 605, 415, 133, 71 }, 10, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
-	jlk.PushBack({ 527, 396, 76, 90 }, 2920, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 527, 396, 76, 90 }, 4, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 605, 415, 133, 71 }, 6, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 740, 404, 202, 82 }, 18, { 33,5 }, { jlknColliders2 }, { jlkHitbox2 }, { jlkColliderType2 }, { jlkCallback2 });
+	jlk.PushBack({ 605, 415, 133, 71 }, 4, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
+	jlk.PushBack({ 527, 396, 76, 90 }, 50, { 33,5 }, { jlknColliders }, { jlkHitbox }, { jlkColliderType }, { jlkCallback });
 
 
 	//jumping neutral / diagonal mp
@@ -1156,23 +1156,10 @@ update_status ModuleDhalsim::Update()
 			current_animation = &chp;
 			break;
 
-
-
-
-
-
-
 		case L_PUNCH_STANDING2:
-		
 			texture = graphics3;
 			current_animation = &lp;
-
 			break;
-
-
-
-
-
 
 		case M_PUNCH_STANDING2:
 			texture = graphics3;
@@ -1841,14 +1828,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 	}
 
-	if (l_d_jumping_kik_timer > 0)
-	{
-		if (App->frames - l_d_jumping_kik_timer > D_L_D_JUMPING_KIK_TIME)
-		{
-			inputs.Push(IN_KIK_FINISH2);
-			l_d_jumping_kik_timer = 0;
-		}
-	}
 
 	//medium
 	if (m_standing_punch_timer > 0)
@@ -1929,15 +1908,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_KIK_FINISH2);
 			m_close_crouching_kik_timer = 0;
-		}
-	}
-
-	if (m_d_jumping_kik_timer > 0)
-	{
-		if (App->frames - m_d_jumping_kik_timer > D_M_D_JUMPING_KIK_TIME)
-		{
-			inputs.Push(IN_KIK_FINISH2);
-			m_d_jumping_kik_timer = 0;
 		}
 	}
 
@@ -2022,16 +1992,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			f_close_crouching_kik_timer = 0;
 		}
 	}
-
-	if (f_d_jumping_kik_timer > 0)
-	{
-		if (App->frames - f_d_jumping_kik_timer > D_F_D_JUMPING_KIK_TIME)
-		{
-			inputs.Push(IN_KIK_FINISH2);
-			f_d_jumping_kik_timer = 0;
-		}
-	}
-
 
 	if (hadoken_timer > 0)
 	{
@@ -2428,7 +2388,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2441,7 +2400,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2455,7 +2413,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2468,7 +2425,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2481,7 +2437,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_PUNCH_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2494,7 +2449,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_KIK_FINISH2: state = ST_JUMP_FORWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2508,7 +2462,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2521,7 +2474,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2535,7 +2487,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2548,7 +2499,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2561,7 +2511,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_PUNCH_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -2574,7 +2523,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
-			case IN_KIK_FINISH2: state = ST_JUMP_BACKWARD2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
