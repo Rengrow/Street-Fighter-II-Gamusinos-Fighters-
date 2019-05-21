@@ -506,16 +506,217 @@ bool ModuleDhalsim::Start()
 	jhk.PushBack({ 179, 398, 58, 88 }, 2941, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 
 
-	//Hadoken
-	const int hdknColliders = 3;
-	SDL_Rect hdkHitbox[hdknColliders] = { { -25, 79, 24, 16}, { -6, 37, 40, 47 }, { -6, 5, 40, 32 } };
-	SDL_Rect hdkHitbox2[hdknColliders] = { { -62, 58, 24, 20}, { -43, 23, 40, 42}, { -10, 5, 78, 28} };
-	COLLIDER_TYPE hdkColliderType[hdknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	Module* hdkCallback[hdknColliders] = { {this}, {this}, {this} };
-	hdk.PushBack({ 462, 751, 74, 90 }, 5, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	hdk.PushBack({ 537, 757, 85, 84 }, 15, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
-	hdk.PushBack({ 623, 758, 90, 83 }, 3, { 29,5 }, hdknColliders, hdkHitbox, hdkColliderType, hdkCallback);
-	hdk.PushBack({ 714, 764, 106, 77 }, 40, { 29,5 }, hdknColliders, hdkHitbox2, hdkColliderType, hdkCallback);
+	//Lp yoga fire
+	const int yoga_fire_lpnColliders = 3;
+	SDL_Rect yoga_fire_lpHitbox[yoga_fire_lpnColliders] = { { 0, 0, 0, 0}, { -30, 71, 24, 20 }, { -13, 1, 46, 76 } };
+	SDL_Rect yoga_fire_lpHitbox2[yoga_fire_lpnColliders] = { { -2, 80, 26, 20}, { 3, 41, 50, 44}, { -30, 1, 46, 38} };
+	SDL_Rect yoga_fire_lpHitbox3[yoga_fire_lpnColliders] = { { 0, 0, 0, 0}, { -36, 78, 26, 20}, { -4, 1, 46, 76} };
+	SDL_Rect yoga_fire_lpHitbox4[yoga_fire_lpnColliders] = { { -60, 61, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_fire_lpHitbox5[yoga_fire_lpnColliders] = { { -72, 49, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_fire_lpHitbox6[yoga_fire_lpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
+	COLLIDER_TYPE yoga_fire_lpColliderType[yoga_fire_lpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* yoga_fire_lpCallback[yoga_fire_lpnColliders] = { {this}, {this}, {this} };
+	yoga_fire_lp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox, yoga_fire_lpColliderType, yoga_fire_lpCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	yoga_fire_lp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox2, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 272, 595, 86, 96 }, 18, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox6, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox3, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 8, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+
+
+	//Mp yoga fire
+	const int yoga_fire_mpnColliders = 3;
+	SDL_Rect yoga_fire_mpHitbox[yoga_fire_mpnColliders] = { { 0, 0, 0, 0}, { -30, 71, 24, 20 }, { -13, 1, 46, 76 } };
+	SDL_Rect yoga_fire_mpHitbox2[yoga_fire_mpnColliders] = { { -2, 80, 26, 20}, { 3, 41, 50, 44}, { -30, 1, 46, 38} };
+	SDL_Rect yoga_fire_mpHitbox3[yoga_fire_mpnColliders] = { { 0, 0, 0, 0}, { -36, 78, 26, 20}, { -4, 1, 46, 76} };
+	SDL_Rect yoga_fire_mpHitbox4[yoga_fire_mpnColliders] = { { -60, 61, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_fire_mpHitbox5[yoga_fire_mpnColliders] = { { -72, 49, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_fire_mpHitbox6[yoga_fire_mpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
+	COLLIDER_TYPE yoga_fire_mpColliderType[yoga_fire_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* yoga_fire_mpCallback[yoga_fire_mpnColliders] = { {this}, {this}, {this} };
+	yoga_fire_mp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox2, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 272, 595, 86, 96 }, 18, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox6, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox3, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 8, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox5, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+
+
+	//Hp yoga fire
+	const int yoga_fire_hpnColliders = 3;
+	SDL_Rect yoga_fire_hpHitbox[yoga_fire_hpnColliders] = { { 0, 0, 0, 0}, { -30, 71, 24, 20 }, { -13, 1, 46, 76 } };
+	SDL_Rect yoga_fire_hpHitbox2[yoga_fire_hpnColliders] = { { -2, 80, 26, 20}, { 3, 41, 50, 44}, { -30, 1, 46, 38} };
+	SDL_Rect yoga_fire_hpHitbox3[yoga_fire_hpnColliders] = { { 0, 0, 0, 0}, { -36, 78, 26, 20}, { -4, 1, 46, 76} };
+	SDL_Rect yoga_fire_hpHitbox4[yoga_fire_hpnColliders] = { { -60, 61, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_fire_hpHitbox5[yoga_fire_hpnColliders] = { { -72, 49, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_fire_hpHitbox6[yoga_fire_hpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
+	COLLIDER_TYPE yoga_fire_hpColliderType[yoga_fire_hpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* yoga_fire_hpCallback[yoga_fire_hpnColliders] = { {this}, {this}, {this} };
+	yoga_fire_hp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox2, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 272, 595, 86, 96 }, 18, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox6, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox3, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 420, 602, 81, 88 }, 8, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox4, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox5, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox4, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+
+
+	//Lp and Mp yoga flame
+	const int yoga_flame_lp_mpnColliders = 3;
+	const int yoga_flame_lp_mpnColliders2 = 4;
+	SDL_Rect yoga_flame_lp_mpHitbox[yoga_flame_lp_mpnColliders] = { { 0, 0, 0, 0}, { -30, 71, 24, 20 }, { -13, 1, 46, 76 } };
+	SDL_Rect yoga_flame_lp_mpHitbox2[yoga_flame_lp_mpnColliders] = { { -2, 80, 26, 20}, { 3, 41, 50, 44}, { -30, 1, 46, 38} };
+	SDL_Rect yoga_flame_lp_mpHitbox3[yoga_flame_lp_mpnColliders] = { { 0, 0, 0, 0}, { -36, 78, 26, 20}, { -4, 1, 46, 76} };
+	SDL_Rect yoga_flame_lp_mpHitbox4[yoga_flame_lp_mpnColliders] = { { -60, 61, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_flame_lp_mpHitbox5[yoga_flame_lp_mpnColliders] = { { -72, 49, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_flame_lp_mpHitbox6[yoga_flame_lp_mpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
+	SDL_Rect yoga_flame_lp_mpHitbox7[yoga_flame_lp_mpnColliders2] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -95, 37, 56, 32} };
+	SDL_Rect yoga_flame_lp_mpHitbox8[yoga_flame_lp_mpnColliders2] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
+	COLLIDER_TYPE yoga_flame_lp_mpColliderType[yoga_flame_lp_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE yoga_flame_lp_mpColliderType2[yoga_flame_lp_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* yoga_flame_lp_mpCallback[yoga_flame_lp_mpnColliders] = { {this}, {this}, {this} };
+	Module* yoga_flame_lp_mpCallback2[yoga_flame_lp_mpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	yoga_flame_lp_mp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox2, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox6, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox2, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 272, 595, 86, 96 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox6, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox3, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 503, 602, 112, 88 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 420, 602, 81, 88 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 114, 92 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 114, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 763, 598, 157, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+
+
+	//Hp yoga flame
+	const int yoga_flame_hpnColliders = 3;
+	const int yoga_flame_hpnColliders2 = 4;
+	SDL_Rect yoga_flame_hpHitbox[yoga_flame_hpnColliders] = { { 0, 0, 0, 0}, { -30, 71, 24, 20 }, { -13, 1, 46, 76 } };
+	SDL_Rect yoga_flame_hpHitbox2[yoga_flame_hpnColliders] = { { -2, 80, 26, 20}, { 3, 41, 50, 44}, { -30, 1, 46, 38} };
+	SDL_Rect yoga_flame_hpHitbox3[yoga_flame_hpnColliders] = { { 0, 0, 0, 0}, { -36, 78, 26, 20}, { -4, 1, 46, 76} };
+	SDL_Rect yoga_flame_hpHitbox4[yoga_flame_hpnColliders] = { { -60, 61, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_flame_hpHitbox5[yoga_flame_hpnColliders] = { { -72, 49, 26, 20}, { -15, 44, 46, 42}, { -4, 1, 46, 38} };
+	SDL_Rect yoga_flame_hpHitbox6[yoga_flame_hpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
+	SDL_Rect yoga_flame_hpHitbox7[yoga_flame_hpnColliders2] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -95, 37, 56, 32} };
+	SDL_Rect yoga_flame_hpHitbox8[yoga_flame_hpnColliders2] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
+	COLLIDER_TYPE yoga_flame_hpColliderType[yoga_flame_hpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE yoga_flame_hpColliderType2[yoga_flame_hpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* yoga_flame_hpCallback[yoga_flame_hpnColliders] = { {this}, {this}, {this} };
+	Module* yoga_flame_hpCallback2[yoga_flame_hpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	yoga_flame_hp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox2, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 272, 595, 86, 96 }, 10, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox6, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox2, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox6, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox3, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 503, 602, 112, 88 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 420, 602, 81, 88 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 617, 598, 114, 92 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 617, 598, 114, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 763, 598, 157, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+
+
+	//Yoga flame cycle
+	const int yoga_flame_cyclenColliders = 4;
+	SDL_Rect yoga_flame_cycleHitbox[yoga_flame_cyclenColliders] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
+	COLLIDER_TYPE yoga_flame_cycleColliderType[yoga_flame_cyclenColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* yoga_flame_cycleCallback[yoga_flame_cyclenColliders] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+
+
+	//Yoga flame recovery lp_mp
+	const int yoga_flame_recovery_lp_mpnColliders = 4;
+	const int yoga_flame_recovery_lp_mpnColliders2 = 3;
+	SDL_Rect yoga_flame_recovery_lp_mpHitbox[yoga_flame_recovery_lp_mpnColliders] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
+	SDL_Rect yoga_flame_recovery_lp_mpHitbox2[yoga_flame_recovery_lp_mpnColliders2] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
+	COLLIDER_TYPE yoga_flame_recovery_lp_mpColliderType[yoga_flame_recovery_lp_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE yoga_flame_recovery_lp_mpColliderType2[yoga_flame_recovery_lp_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* yoga_flame_recovery_lp_mpCallback[yoga_flame_recovery_lp_mpnColliders] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	Module* yoga_flame_recovery_lp_mpCallback2[yoga_flame_recovery_lp_mpnColliders2] = { {this}, {this}, {this} };
+	yoga_flame_recovery_lp_mp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders, yoga_flame_recovery_lp_mpHitbox, yoga_flame_recovery_lp_mpColliderType, yoga_flame_recovery_lp_mpCallback);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 10, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+
+
+	//Yoga flame recovery hp
+	const int yoga_flame_recovery_hpnColliders = 4;
+	const int yoga_flame_recovery_hpnColliders2 = 3;
+	SDL_Rect yoga_flame_recovery_hpHitbox[yoga_flame_recovery_hpnColliders] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
+	SDL_Rect yoga_flame_recovery_hpHitbox2[yoga_flame_recovery_hpnColliders2] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
+	COLLIDER_TYPE yoga_flame_recovery_hpColliderType[yoga_flame_recovery_hpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE yoga_flame_recovery_hpColliderType2[yoga_flame_recovery_hpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* yoga_flame_recovery_hpCallback[yoga_flame_recovery_hpnColliders] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	Module* yoga_flame_recovery_hpCallback2[yoga_flame_recovery_hpnColliders2] = { {this}, {this}, {this} };
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders, yoga_flame_recovery_hpHitbox, yoga_flame_recovery_hpColliderType, yoga_flame_recovery_hpCallback);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 10, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+
+
+	// Yoga drill
+	const int yoga_drillnColliders = 3;
+	const int yoga_drillnColliders3 = 4;
+	SDL_Rect yoga_drillHitbox[yoga_drillnColliders] = { { 0, 0, 0, 0}, { 2, 52, 20, 20}, { 17, 45, 50, 48} };
+	SDL_Rect yoga_drillHitbox3[yoga_drillnColliders3] = { { 0, 50, 24, 24}, { -19, 25, 58, 36}, { -44, 14, 54, 22}, { -58, -9, 64, 40} };
+	COLLIDER_TYPE yoga_drillColliderType[yoga_drillnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE yoga_drillColliderType3[yoga_drillnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* yoga_drillCallback[yoga_drillnColliders] = { {this}, {this}, {this} };
+	Module* yoga_drillCallback3[yoga_drillnColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	yoga_drill.PushBack({ 901, 271, 94, 90 }, 12, { 32,5 }, yoga_drillnColliders, yoga_drillHitbox, yoga_drillColliderType, yoga_drillCallback);
+	yoga_drill.PushBack({ 602, 522, 125, 67 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 729, 508, 120, 81 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 851, 514, 120, 75 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 0, 609, 122, 81 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+
+
+	// Yoga mummy
+	const int yoga_mummynColliders = 3;
+	const int yoga_mummynColliders3 = 4;
+	SDL_Rect yoga_mummyHitbox[yoga_mummynColliders] = { { 0, 0, 0, 0}, { -13, 33, 24, 20}, { -14, 48, 50, 48} };
+	SDL_Rect yoga_mummyHitbox3[yoga_mummynColliders3] = { { 0, 0, 0, 0}, { -23, -7, 112, 44}, { -127, 4, 24, 22}, { -93, -4, 58, 38} };
+	COLLIDER_TYPE yoga_mummyColliderType[yoga_mummynColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE yoga_mummyColliderType3[yoga_mummynColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	Module* yoga_mummyCallback[yoga_mummynColliders] = { {this}, {this}, {this} };
+	Module* yoga_mummyCallback3[yoga_mummynColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
+	yoga_mummy.PushBack({ 772, 272, 66, 89 }, 12, { 32,5 }, yoga_mummynColliders, yoga_mummyHitbox, yoga_drillColliderType, yoga_mummyCallback);
+	yoga_mummy.PushBack({ 1, 562, 149, 27 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 151, 548, 148, 41 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 301, 562, 149, 27 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 452, 548, 148, 41 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
 
 
 	// Standing reel
@@ -826,10 +1027,8 @@ bool ModuleDhalsim::CleanUp()
 	backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
 	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = Animation();
-	neutralJump = Animation();
-	forwardJump = Animation();
-	backwardJump = Animation();
-	hdk = Animation();
+	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
+	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp_mp = yoga_flame_hp = yoga_flame_cycle = yoga_flame_recovery_lp_mp = yoga_flame_recovery_hp = Animation();
 	streel = Animation();
 	stgreel = Animation();
 	creel = Animation();
@@ -1151,7 +1350,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_HADOKEN2:
-			current_animation = &hdk;
+			current_animation = &yoga_fire_lp;
 			if (App->frames - hadoken_timer == 35)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
@@ -1376,7 +1575,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
 		{
 			if (state != ST_HADOKEN2)
-				hdk.ResetAnimation();
+				yoga_fire_lp.ResetAnimation();
 			inputs.Push(IN_HADOKEN2);
 		}
 

@@ -46,12 +46,24 @@
 #define D_CROUCH_REEL_TIME 20
 #define D_GUT_REEL_TIME 25
 
-#define D_L_CLOSE_STANDING_KIK_TIME 40
-#define D_M_CLOSE_STANDING_KIK_TIME 40
-#define D_F_CLOSE_STANDING_KIK_TIME 60
-#define D_L_CLOSE_CROUCHING_KIK_TIME 43
-#define D_M_CLOSE_CROUCHING_KIK_TIME 35
-#define D_F_CLOSE_CROUCHING_KIK_TIME 6000
+#define D_LP_YOGA_FIRE 86
+#define D_MP_YOGA_FIRE 86
+#define D_HP_YOGA_FIRE 86
+
+#define D_LP_MP_YOGA_FLAME 110
+#define D_HP_YOGA_FLAME 113
+#define D_CYCLE_YOGA_FLAME 40
+#define D_LP_MP_RECOVERY_YOGA_FLAME 54
+#define D_HP_RECOVERY_YOGA_FLAME 58
+
+#define D_YOGA_DRILL 1000
+#define D_YOGA_MUMMY 1000
+
+#define D_L_CLOSE_STANDING_KIK_TIME 42
+#define D_M_CLOSE_STANDING_KIK_TIME 42
+#define D_F_CLOSE_STANDING_KIK_TIME 66
+#define D_L_CLOSE_CROUCHING_KIK_TIME 45
+#define D_M_CLOSE_CROUCHING_KIK_TIME 37
 
 struct Mix_Chunk;
 
@@ -200,18 +212,15 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
-	Animation idle;
-	Animation forward;
-	Animation backward;
+	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
 	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk;
 	Animation jlp, jlk, jmp, jfmp, jbmp, jmk, jfmk, jbmk, jhp, jfhp, jbhp, jhk, jfhk, jbhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
 	Animation mp, hp, mk, hk;
 	Animation close_mp, close_hp, close_mk, close_hk;
-	Animation neutralJump;
-	Animation forwardJump;
-	Animation backwardJump;
-	Animation hdk; //hadouken
+	Animation neutralJump, forwardJump, backwardJump;
+	Animation yoga_fire_lp, yoga_fire_mp, yoga_fire_hp, yoga_drill, yoga_mummy;
+	Animation yoga_flame_lp_mp, yoga_flame_hp, yoga_flame_cycle, yoga_flame_recovery_lp_mp, yoga_flame_recovery_hp;
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
