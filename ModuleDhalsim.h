@@ -9,7 +9,7 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-//#define D_L_STANDING_PUNCH_TIME 43 //+3
+#define D_L_STANDING_PUNCH_TIME 43 //+3
 #define D_L_CROUCHING_PUNCH_TIME 60 //+5
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
@@ -52,28 +52,20 @@
 #define D_MP_YOGA_FIRE 86	//+6
 #define D_HP_YOGA_FIRE 86	//+6
 
-#define D_LP_MP_YOGA_FLAME 110	//+20
-#define D_HP_YOGA_FLAME 113	//+23
-#define D_CYCLE_YOGA_FLAME 40	//+0
-#define D_LP_MP_RECOVERY_YOGA_FLAME 54 // +6
-#define D_HP_RECOVERY_YOGA_FLAME 58	//+8
+#define D_LP_MP_YOGA_FLAME 110	//+20 ************* Does not loop, eventually the beggining of the animation starts to show at the end
+#define D_HP_YOGA_FLAME 113	//+23 ****************** Does not loop, Dhalsim makes a few frames of the begginning at the end. ADDITIONALLY: check animation? Dhalsim takes in air TWICE, should be once
+#define D_CYCLE_YOGA_FLAME 40	//+0 
+#define D_LP_MP_RECOVERY_YOGA_FLAME 54 // +6 *************** check animation, second flame seems to be misscut on the left, lacks a few pixels
+#define D_HP_RECOVERY_YOGA_FLAME 58	//+8 ***************** same as above
 
 #define D_YOGA_DRILL 1000
 #define D_YOGA_MUMMY 1000
 
-#define D_L_CLOSE_STANDING_KIK_TIME 42	//+2
-#define D_M_CLOSE_STANDING_KIK_TIME 42	//+2
+#define D_L_CLOSE_STANDING_KIK_TIME 42	//+2 *********** CHECK ANIMATION: it's wrong: random pieces of spritesheet appear, checked on graphics 1,2,3
+#define D_M_CLOSE_STANDING_KIK_TIME 42	//+2 ********** CHECK ANIMATION: it's wrong: random pieces of spritesheet appear, checked on graphics 1,2,3
 #define D_F_CLOSE_STANDING_KIK_TIME 66	//+6
 #define D_L_CLOSE_CROUCHING_KIK_TIME 45	//+2
 #define D_M_CLOSE_CROUCHING_KIK_TIME 37 //+2
-
-#define D_L_STANDING_PUNCH_TIME 23 //+2
-
-#define D_L_CLOSE_STANDING_KIK_TIME 46
-#define D_M_CLOSE_STANDING_KIK_TIME 46
-#define D_F_CLOSE_STANDING_KIK_TIME 66
-#define D_L_CLOSE_CROUCHING_KIK_TIME 43
-#define D_M_CLOSE_CROUCHING_KIK_TIME 35
 #define D_F_CLOSE_CROUCHING_KIK_TIME 6000 //Close crouch roundhouse does not exist
 
 // following defines made by Adria, not used in State Matrix

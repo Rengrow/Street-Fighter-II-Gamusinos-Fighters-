@@ -1168,10 +1168,12 @@ update_status ModuleDhalsim::Update()
 
 		case L_PUNCH_STANDING2:
 		
-			//texture = graphics3;
-			//current_animation = &lp;
+			texture = graphics3;
+			current_animation = &lp;
 			
-			current_animation = &close_cmp;
+			
+			//texture = graphics;
+			//current_animation = &close_cmk; //using lp to check animations
 
 			break;
 
