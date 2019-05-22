@@ -1627,6 +1627,42 @@ void ModuleDhalsim::IsClose() {
 }
 
 void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
+	
+	//PUSHBACK
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
+	
+			if (IsntOnLeftLimit() && IsntOnRightLimit())
+			{
+				if (flip == true) {
+					position.x += 40;
+				}
+				else position.x -= 40;
+			}
+
+			else
+			{
+
+				if (flip == true) {
+					App->ryu->position.x -= 40;
+				}
+				else App->ryu->position.x += 40;
+			}
+		
+	
+	}
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
+
+		if (IsntOnLeftLimit() && IsntOnRightLimit())
+		{
+			if (flip == true) {
+				position.x += 40;
+			}
+			else position.x -= 40;
+		}
+	}
+
+	//PUSHBACK END
+	
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
