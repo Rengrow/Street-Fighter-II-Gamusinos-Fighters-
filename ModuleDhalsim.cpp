@@ -1059,36 +1059,7 @@ update_status ModuleDhalsim::Update()
 	{
 		hdk_spawn = -45;
 	}
-	//Pushback start
-	if (pushbacktimerhit != 0) {
-		--pushbacktimerhit;
-		if (IsntOnLeftLimit() && IsntOnRightLimit())
-		{
-			if (flip == true) {
-				position.x += 4;
-			}
-			else position.x -= 4;
-		}
 
-		else
-		{
-
-			if (flip == true) {
-				App->ryu->position.x -= 4;
-			}
-			else App->ryu->position.x += 4;
-		}
-
-	
-	if (IsntOnLeftLimit() && IsntOnRightLimit())
-	{
-		if (flip == true) {
-			position.x += 40;
-		}
-		else position.x -= 40;
-	}
-	}
-	//Pushback end
 
 	external_input(inputs);
 	internal_input(inputs);
@@ -1504,6 +1475,27 @@ update_status ModuleDhalsim::Update()
 
 		case ST_HEAD_REEL2:
 			current_animation = &streel;
+			
+			//Pushback start
+			if (pushbacktimerhit != 0) {
+				--pushbacktimerhit;
+				if (IsntOnLeftLimit() && IsntOnRightLimit())
+				{
+					if (flip == true) {
+						position.x += 1;
+					}
+					else position.x -= 1;
+				}
+
+				else
+				{
+					if (flip == true) {
+						App->ryu->position.x -= 1;
+					}
+					else App->ryu->position.x += 1;
+				}
+			}
+			//Pushback end
 			break;
 
 		case ST_GUT_REEL2:
@@ -1662,12 +1654,12 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 	
 	//PUSHBACK CHECK
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
-		pushbacktimerhit = 40;
+		pushbacktimerhit = 7;
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
 
-		pushbacktimerprojectile = 40;
+		pushbacktimerprojectile = 7;
 	}
 
 	//PUSHBACK CHECK END
