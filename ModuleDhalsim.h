@@ -276,6 +276,8 @@ public:
 	int victoryExecuted;
 	int pushbacktimerhit = 0;
 	int pushbacktimerprojectile = 0;
+	int pushbackspeed = 1;
+	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk

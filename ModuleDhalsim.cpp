@@ -1072,6 +1072,7 @@ update_status ModuleDhalsim::Update()
 		case ST_IDLE2:
 			texture = graphics3;
 			current_animation = &idle;
+			typeofattack = 0;
 			break;
 
 		case ST_WALK_FORWARD2:
@@ -1146,29 +1147,35 @@ update_status ModuleDhalsim::Update()
 
 		case L_PUNCH_CROUCH2:
 			current_animation = &clp;
+			typeofattack = 1;
 			break;
 
 		case M_PUNCH_CROUCH2:
 			current_animation = &cmp;
+			typeofattack = 2;
 			break;
 
 		case F_PUNCH_CROUCH2:
 			current_animation = &chp;
+			typeofattack = 3;
 			break;
 
 		case L_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &lp;
+			typeofattack = 1;
 			break;
 
 		case M_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &mp;
+			typeofattack = 2;
 			break;
 
 		case F_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &hp;
+			typeofattack = 3;
 			break;
 
 		case L_PUNCH_NEUTRAL_JUMP2:
@@ -1181,6 +1188,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 1;
 			break;
 
 		case M_PUNCH_NEUTRAL_JUMP2:
@@ -1193,6 +1201,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 2;
 			break;
 
 		case F_PUNCH_NEUTRAL_JUMP2:
@@ -1205,6 +1214,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 3;
 			break;
 
 		case L_PUNCH_FORWARD_JUMP2:
@@ -1220,6 +1230,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnLeftLimit())
 				position.x -= 3;
+			typeofattack = 1;
 		
 			break;
 
@@ -1236,7 +1247,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnLeftLimit())
 				position.x -= 3;
-			
+			typeofattack = 2;
 			break;
 
 		case F_PUNCH_FORWARD_JUMP2:
@@ -1252,6 +1263,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnLeftLimit())
 				position.x -= 3;
+			typeofattack = 3;
 			
 			break;
 
@@ -1270,7 +1282,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnRightLimit())
 				position.x += 3;
-
+			typeofattack = 1;
 			break;
 
 		case M_PUNCH_BACKWARD_JUMP2:
@@ -1287,7 +1299,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnRightLimit())
 				position.x += 3;
-				
+			typeofattack = 2;
 			break;
 
 		case F_PUNCH_BACKWARD_JUMP2:
@@ -1304,34 +1316,40 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnRightLimit())
 				position.x += 3;
-			
+			typeofattack = 3;
 			break;
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
+			typeofattack = 1;
 			break;
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
+			typeofattack = 2;
 			break;
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
+			typeofattack = 3;
 			break;
 
 		case L_KIK_STANDING2:
 			texture = graphics3;
 			current_animation = &lk;
+			typeofattack = 1;
 			break;
 
 		case M_KIK_STANDING2:
 			texture = graphics3;
 			current_animation = &mk;
+			typeofattack = 2;
 			break;
 
 		case F_KIK_STANDING2:
 			texture = graphics3;
 			current_animation = &hk;
+			typeofattack = 3;
 			break;
 
 		case L_KIK_NEUTRAL_JUMP2:
@@ -1344,7 +1362,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-
+			typeofattack = 1;
 			break;
 
 		case M_KIK_NEUTRAL_JUMP2:
@@ -1357,6 +1375,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 2;
 			break;
 
 		case F_KIK_NEUTRAL_JUMP2:
@@ -1370,6 +1389,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 3;
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
@@ -1385,7 +1405,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnLeftLimit())
 				position.x -= 3;
-
+			typeofattack = 1;
 			break;
 
 		case M_KIK_FORWARD_JUMP2:
@@ -1401,7 +1421,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnLeftLimit())
 				position.x -= 3;
-		
+			typeofattack = 2;
 			break;
 
 		case F_KIK_FORWARD_JUMP2:
@@ -1415,7 +1435,7 @@ update_status ModuleDhalsim::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
-
+			typeofattack = 3;
 			if (IsntOnLeftLimit())
 				position.x -= 3;
 			
@@ -1435,7 +1455,7 @@ update_status ModuleDhalsim::Update()
 
 			if (IsntOnRightLimit())
 				position.x += 3;
-
+			typeofattack = 1;
 			break;
 
 		case M_KIK_BACKWARD_JUMP2:
@@ -1451,6 +1471,7 @@ update_status ModuleDhalsim::Update()
 
 				if (IsntOnRightLimit())
 					position.x += 3;
+				typeofattack = 2;
 			break;
 
 		case F_KIK_BACKWARD_JUMP2:
@@ -1467,6 +1488,7 @@ update_status ModuleDhalsim::Update()
 
 				if (IsntOnRightLimit())
 					position.x += 3;
+				typeofattack = 3;
 			break;
 
 		case ST_DEFENDING:
@@ -1482,17 +1504,17 @@ update_status ModuleDhalsim::Update()
 				if (IsntOnLeftLimit() && IsntOnRightLimit())
 				{
 					if (flip == true) {
-						position.x += 1;
+						position.x += pushbackspeed;
 					}
-					else position.x -= 1;
+					else position.x -= pushbackspeed;
 				}
 
 				else
 				{
 					if (flip == true) {
-						App->ryu->position.x -= 1;
+						App->ryu->position.x -= pushbackspeed;
 					}
-					else App->ryu->position.x += 1;
+					else App->ryu->position.x += pushbackspeed;
 				}
 			}
 			//Pushback end
@@ -1513,6 +1535,7 @@ update_status ModuleDhalsim::Update()
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
+			typeofattack = 1;
 			break;
 
 		case ST_FALLING2:
@@ -1550,12 +1573,15 @@ update_status ModuleDhalsim::Update()
         
 		case L_PUNCH_CLOSE2:
 			current_animation = &close_lp;
+			typeofattack = 1;
 			break;
 		case M_PUNCH_CLOSE2:
 			current_animation = &close_mp;
+			typeofattack = 2;
 			break;
 		case F_PUNCH_CLOSE2:
 			current_animation = &close_hp;
+			typeofattack = 3;
 			break;
 		case L_KIK_CLOSE2:
 			if (sprite_change_timer <= 8) {
@@ -1574,6 +1600,7 @@ update_status ModuleDhalsim::Update()
 				if (sprite_change_timer == D_L_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
 				else { sprite_change_timer++; }
 			}
+			typeofattack = 1;
 			break;
 		case M_KIK_CLOSE2:
 			if (sprite_change_timer <= 8) {
@@ -1592,21 +1619,27 @@ update_status ModuleDhalsim::Update()
 				if (sprite_change_timer == D_M_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
 				else { sprite_change_timer++; }
 			}
+			typeofattack = 2;
 			break;
 		case F_KIK_CLOSE2:
 			current_animation = &close_hk;
+			typeofattack = 3;
 			break;
 		case L_PUNCH_CROUCHCLOSE2:
 			current_animation = &close_clp;
+			typeofattack = 1;
 			break;
 		case M_PUNCH_CROUCHCLOSE2:
 			current_animation = &close_cmp;
+			typeofattack = 2;
 			break;
 		case L_KIK_CROUCHCLOSE2:
 			current_animation = &close_clk;
+			typeofattack = 1;
 			break;
 		case M_KIK_CROUCHCLOSE2:
 			current_animation = &close_cmk;
+			typeofattack = 2;
 			break;
 
 		//end of test
@@ -1654,12 +1687,16 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 	
 	//PUSHBACK CHECK
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
-		pushbacktimerhit = 7;
+		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2;}
+		
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
-
-		pushbacktimerprojectile = 7;
+		if (App->ryu->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2;}
 	}
 
 	//PUSHBACK CHECK END

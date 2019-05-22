@@ -497,6 +497,7 @@ update_status ModuleRyu::Update()
 		{
 		case ST_IDLE:
 			current_animation = &idle;
+			typeofattack = 0;
 			break;
 
 		case ST_WALK_FORWARD:
@@ -569,10 +570,12 @@ update_status ModuleRyu::Update()
 
 		case L_PUNCH_CROUCH:
 			current_animation = &clp;
+			typeofattack = 1;
 			break;
 
 		case L_PUNCH_STANDING:
 			current_animation = &lp;
+			typeofattack = 1; 
 			break;
 
 		case L_PUNCH_NEUTRAL_JUMP:
@@ -585,6 +588,7 @@ update_status ModuleRyu::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 1;
 			break;
 
 		case L_PUNCH_FORWARD_JUMP:
@@ -600,6 +604,7 @@ update_status ModuleRyu::Update()
 			}
 			if (IsntOnRightLimit())
 				position.x += 3;
+			typeofattack = 1;
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP:
@@ -615,14 +620,17 @@ update_status ModuleRyu::Update()
 			}
 			if (IsntOnLeftLimit())
 				position.x -= 3;
+			typeofattack = 1;
 			break;
 
 		case L_KIK_CROUCH:
 			current_animation = &clk;
+			typeofattack = 1;
 			break;
 
 		case L_KIK_STANDING:
 			current_animation = &lk;
+			typeofattack = 1;
 			break;
 
 		case L_KIK_NEUTRAL_JUMP:
@@ -635,6 +643,7 @@ update_status ModuleRyu::Update()
 			{
 				jumpHeight -= speed + 3;
 			}
+			typeofattack = 1;
 			break;
 
 
@@ -650,6 +659,7 @@ update_status ModuleRyu::Update()
 			}
 			if (IsntOnRightLimit())
 				position.x += 3;
+			typeofattack = 1;
 			break;
 
 		case L_KIK_BACKWARD_JUMP:
@@ -664,6 +674,7 @@ update_status ModuleRyu::Update()
 			}
 			if (IsntOnLeftLimit())
 				position.x -= 3;
+			typeofattack = 1;
 			break;
 
 		case ST_HEAD_REEL:
@@ -683,6 +694,7 @@ update_status ModuleRyu::Update()
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER_SHOT, hdk_voice, 200);
 			}
+			typeofattack = 1;
 			break;
 
 		case ST_FALLING:
