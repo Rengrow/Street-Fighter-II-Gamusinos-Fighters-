@@ -1079,13 +1079,14 @@ update_status ModuleDhalsim::Update()
 			else App->ryu->position.x += 4;
 		}
 
-	}
+	
 	if (IsntOnLeftLimit() && IsntOnRightLimit())
 	{
 		if (flip == true) {
 			position.x += 40;
 		}
 		else position.x -= 40;
+	}
 	}
 	//Pushback end
 
