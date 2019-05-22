@@ -274,6 +274,8 @@ public:
 	bool altColor = true;
 	bool freeze;
 	int victoryExecuted;
+	int pushbacktimerhit = 0;
+	int pushbacktimerprojectile = 0;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
