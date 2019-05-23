@@ -141,45 +141,6 @@ update_status ModuleInput::PreUpdate()
 		p1.right = false;
 
 
-	if (p1.left)
-	{
-		if (p1.up)
-			joystick1 = LEFT_AND_UP;
-
-		if (p1.down)
-			joystick1 = LEFT_AND_DOWN;
-
-		else
-			joystick1 = LEFT;
-	}
-
-	if (p1.right)
-	{
-		if (p1.up)
-			joystick1 = RIGHT_AND_UP;
-
-		if (p1.down)
-			joystick1 = RIGHT_AND_DOWN;
-
-		else
-			joystick1 = RIGHT;
-	}
-
-	if (p1.up && !p1.right && !p1.left)
-	{
-		joystick1 = UP;
-	}
-
-	if (p1.down && !p1.right && !p1.left)
-	{
-		joystick1 = DOWN;
-	}
-
-	if (!p1.down && !p1.up && !p1.right && !p1.left)
-	{
-		joystick1 = IDLE;
-	}
-
 
 	//Obtain the current button values of GamePad 2
 	for (int i = 0; i < SDL_CONTROLLER_BUTTON_MAX; ++i) {
@@ -235,45 +196,6 @@ update_status ModuleInput::PreUpdate()
 		p2.right = false;
 
 
-	if (p2.left)
-	{
-		if (p2.up)
-			joystick2 = LEFT_AND_UP;
-
-		if (p2.down)
-			joystick2 = LEFT_AND_DOWN;
-
-		else
-			joystick2 = LEFT;
-	}
-
-	if (p2.right)
-	{
-		if (p2.up)
-			joystick2 = RIGHT_AND_UP;
-
-		if (p2.down)
-			joystick2 = RIGHT_AND_DOWN;
-
-		else
-			joystick2 = RIGHT;
-	}
-
-	if (p2.up && !p2.right && !p2.left)
-	{
-		joystick2 = UP;
-	}
-
-	if (p2.down && !p2.right && !p2.left)
-	{
-		joystick2 = DOWN;
-	}
-
-	if (!p2.down && !p2.up && !p2.right && !p2.left)
-	{
-		joystick2 = IDLE;
-	}
-
 
 
 #pragma endregion
@@ -297,4 +219,71 @@ bool ModuleInput::CleanUp()
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+
+bool CommandYogaFire::Check(uint frames_past) const {
+	int count = 0;
+	uint frame = 0;
+	for (uint i = 1u; i < frames_past; ++i) {
+		if (count > 0 && (i - frame) > MAX_COMMAND_FRAMES) {
+			return false;
+		}
+		const History* history = App->input->GetPrevious(i);
+		if (!history) {
+			break;
+		}
+		const gamecontroller* pad = &(history->pads[0]);
+		switch (count) {
+		case 0: { if (pad->LP) { ++count; frame = i; } } break;
+		case 1: { if (pad->RIGHT) { ++count; frame = i; } } break;
+		case 2: { if (pad->RIGHT_AND_DOWN) { ++count; frame = i; } } break;
+		case 3: { if (pad->DOWN) { return true; } } break;
+		}
+	}
+	return false;
+}
+
+
+bool CommandYogaFlame::Check(uint frames_past) const {
+	int count = 0;
+	uint frame = 0;
+	for (uint i = 1u; i < frames_past; ++i) {
+		if (count > 0 && (i - frame) > MAX_COMMAND_FRAMES) {
+			return false;
+		}
+		const History* history = App->input->GetPrevious(i);
+		if (!history) {
+			break;
+		}
+		const gamecontroller* pad = &(history->pads[0]);
+		switch (count) {
+		case 0: { if (pad->LP) { ++count; frame = i; } } break;
+		case 1: { if (pad->RIGHT) { ++count; frame = i; } } break;
+		case 2: { if (pad->RIGHT_AND_DOWN) { ++count; frame = i; } } break;
+		case 3: { if (pad->DOWN) { ++count; frame = i; } } break;
+		case 4: { if (pad->LEFT_AND_DOWN) { return true; } } break;
+		case 5: { if (pad->LEFT) { return true; } } break;
+		}
+	}
+	return false;
+}
+
+bool CommandPunch::Check(uint frames_past) const {
+	int count = 0;
+	uint frame = 0;
+	for (uint i = 1u; i < frames_past; ++i) {
+		if (count > 0 && (i - frame) > MAX_COMMAND_FRAMES) {
+			return false;
+		}
+		const History* history = App->input->GetPrevious(i);
+		if (!history) {
+			break;
+		}
+		const gamecontroller* pad = &(history->pads[0]);
+		switch (count) {
+		case 0: { if (pad->a) { ++count; frame = i; } } break;
+		}
+	}
+	return false;
 }

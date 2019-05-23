@@ -7,6 +7,8 @@
 #include "SDL\include\SDL_gamecontroller.h"
 
 #define MAX_KEYS 300
+#define MAX_HISTORY 180
+#define MAX_COMMAND_FRAMES 9
 
 enum KEY_STATE
 {
@@ -16,29 +18,55 @@ enum KEY_STATE
 	KEY_UP
 };
 
-enum JOYSTICK_STATE
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	IDLE,
-
-	LEFT_AND_DOWN,
-	LEFT_AND_UP,
-	RIGHT_AND_DOWN,
-	RIGHT_AND_UP
-
+enum class InputCommandTypes {
+	yogaflame,
+	yogafire,
+	punch,
+	max
 };
 
-struct directions
+struct Gamepad
 {
 	bool up = false;
 	bool down = false;
 	bool left = false;
 	bool right = false;
+
+	bool a = false;
+	bool b = false;
+	bool x = false;
+	bool y = false;
+	bool R1 = false;
+	bool R2 = false;
 };
 
+
+struct History {
+	uint frame = 0u;
+	
+	Uint8 buttons[MAX_KEYS];
+};
+
+struct InputCommand {
+	InputCommandTypes type = InputCommandTypes::max;
+	InputCommand(InputCommandTypes type) : type(type) {}
+	virtual bool Check(uint past_frame) const = 0;
+};
+
+struct CommandPunch : public InputCommand {
+	CommandPunch() : InputCommand(InputCommandTypes::punch) {}
+	bool Check(uint frames_past) const override;
+};
+
+struct CommandYogaFire : public InputCommand {
+	CommandYogaFire() : InputCommand(InputCommandTypes::yogafire) {}
+	bool Check(uint frames_past) const override;
+};
+
+struct CommandYogaFlame : public InputCommand {
+	CommandYogaFlame() : InputCommand(InputCommandTypes::yogaflame) {}
+	bool Check(uint frames_past) const override;
+};
 
 class ModuleInput : public Module
 {
@@ -56,13 +84,13 @@ public:
 
 	Uint8 gameController1States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController1AxisValues[SDL_CONTROLLER_AXIS_MAX];
-	JOYSTICK_STATE joystick1;
-	directions p1;
+	
+	Gamepad p1;
 
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
-	JOYSTICK_STATE joystick2;
-	directions p2;
+	
+	Gamepad p2;
 
 
 	SDL_GameController* gameController1 = NULL;
