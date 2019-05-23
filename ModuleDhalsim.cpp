@@ -1200,9 +1200,8 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_PUNCH_STANDING2:
-//			texture = graphics3;
-//			current_animation = &lp;
-			current_animation = &getup ;
+			texture = graphics3;
+			current_animation = &lp;
 			typeofattack = 1;
 			break;
 
