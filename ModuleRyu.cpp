@@ -979,12 +979,12 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 
 
 
-		if (App->input->p2.left)
+		if (App->input->pads[1].left)
 		{
-			if (App->input->p2.up)
+			if (App->input->pads[1].up)
 				inputs.Push(IN_LEFT_AND_JUMP);
 
-			if (App->input->p2.down) {
+			if (App->input->pads[1].down) {
 				inputs.Push(IN_LEFT_AND_CROUCH);
 				crouch = true;
 			}
@@ -996,12 +996,12 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_LEFT_UP);
 
 
-		if (App->input->p2.right)
+		if (App->input->pads[1].right)
 		{
-			if (App->input->p2.up)
+			if (App->input->pads[1].up)
 				inputs.Push(IN_RIGHT_AND_JUMP);
 
-			if (App->input->p2.down) {
+			if (App->input->pads[1].down) {
 				inputs.Push(IN_RIGHT_AND_CROUCH);
 				crouch = true;
 			}
@@ -1013,12 +1013,12 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_RIGHT_UP);
 
 
-		if (App->input->p2.up && !App->input->p2.right && !App->input->p2.left)
+		if (App->input->pads[1].up && !App->input->pads[1].right && !App->input->pads[1].left)
 		{
 			inputs.Push(IN_JUMP);
 		}
 
-		if (App->input->p2.down && !App->input->p2.right && !App->input->p2.left)
+		if (App->input->pads[1].down && !App->input->pads[1].right && !App->input->pads[1].left)
 		{
 			inputs.Push(IN_CROUCH_DOWN);
 			crouch = true;
@@ -1029,17 +1029,17 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_CROUCH_UP);
 		}
 
-		if (!App->input->p2.down && !App->input->p2.up && !App->input->p2.right && !App->input->p2.left)
+		if (!App->input->pads[1].down && !App->input->pads[1].up && !App->input->pads[1].right && !App->input->pads[1].left)
 		{
 			inputs.Push(IN_IDLE);
 		}
 
 	}
 	else {
-		App->input->p2.left = false;
-		App->input->p2.right = false;
-		App->input->p2.down = false;
-		App->input->p2.up = false;
+		App->input->pads[1].left = false;
+		App->input->pads[1].right = false;
+		App->input->pads[1].down = false;
+		App->input->pads[1].up = false;
 	}
 
 	return true;

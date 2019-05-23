@@ -1531,7 +1531,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_DEFENDING:
-			current_animation = &airreel;
+			current_animation = &defending;
 
 			//Pushback start
 			if (pushbacktimerhit != 0) {
@@ -1763,16 +1763,28 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
-			life -= 12;
+
+			
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
 
-			if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false))
+			{
+				inputs.Push(IN_DEFENDING2);
+				life -= 5;
+			}
+
+			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			{
 				inputs.Push(IN_CROUCH_REEL2);
+				life -= 12;
+			}
 
-			else
+			else 
+			{
 				inputs.Push(IN_HEAD_REEL2);
-
+				life -= 12;
+			}
 		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
@@ -1809,6 +1821,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
 		{
+
 			life -= 12;
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
@@ -1895,35 +1908,34 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_L_PUNCH2);
 		}
 
-
-
-
-		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
+		if (App->input->pads[0].x == true)
 		{
- 			inputs.Push(IN_L_PUNCH2);
+			
+			inputs.Push(IN_L_PUNCH2);
+			
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
+		if (App->input->pads[0].a == true)
 		{
 			inputs.Push(IN_L_KIK2);
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN))
+		if (App->input->pads[0].y == true)
 		{
 			inputs.Push(IN_M_PUNCH2);
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
+		if (App->input->pads[0].b == true)
 		{
 			inputs.Push(IN_M_KIK2);
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
+		if (App->input->pads[0].R1 == true)
 		{
 			inputs.Push(IN_F_PUNCH2);
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
+		if (App->input->pads[0].R2 == true)
 		{
 			inputs.Push(IN_F_KIK2);
 		}
@@ -1937,12 +1949,12 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		
 
-		if (App->input->p1.left)
+		if (App->input->pads[0].left)
 		{
-			if (App->input->p1.up)
+			if (App->input->pads[0].up)
 				inputs.Push(IN_LEFT_AND_JUMP2);
 
-			if (App->input->p1.down) {
+			if (App->input->pads[0].down) {
 				inputs.Push(IN_LEFT_AND_CROUCH2);
 				crouch = true;
 			}
@@ -1954,12 +1966,12 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_LEFT_UP2);
 		
 
-		if (App->input->p1.right)
+		if (App->input->pads[0].right)
 		{
-			if (App->input->p1.up)
+			if (App->input->pads[0].up)
 				inputs.Push(IN_RIGHT_AND_JUMP2);
 
-			if (App->input->p1.down) {
+			if (App->input->pads[0].down) {
 				inputs.Push(IN_RIGHT_AND_CROUCH2);
 				crouch = true;
 			}
@@ -1971,12 +1983,12 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_RIGHT_UP2);
 		
 
-		if (App->input->p1.up && !App->input->p1.right && !App->input->p1.left)
+		if (App->input->pads[0].up && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
 			inputs.Push(IN_JUMP2);
 		}
 
-		if (App->input->p1.down && !App->input->p1.right && !App->input->p1.left)
+		if (App->input->pads[0].down && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
 			inputs.Push(IN_CROUCH_DOWN2);
 			crouch = true;
@@ -1987,17 +1999,17 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_CROUCH_UP2);
 		}
 
-		if (!App->input->p1.down && !App->input->p1.up && !App->input->p1.right && !App->input->p1.left)
+		if (!App->input->pads[0].down && !App->input->pads[0].up && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
 			inputs.Push(IN_IDLE2);
 		}
 		
 	}
 	else {
-		App->input->p1.left = false;
-		App->input->p1.right = false;
-		App->input->p1.down = false;
-		App->input->p1.up = false;
+		App->input->pads[0].left = false;
+		App->input->pads[0].right = false;
+		App->input->pads[0].down = false;
+		App->input->pads[0].up = false;
 	}
 
 	return true;

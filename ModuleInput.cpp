@@ -112,34 +112,76 @@ update_status ModuleInput::PreUpdate()
 	//Obtaind the direction of Gamepad 1
 	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 	{
-		p1.up = true;
+		pads[0].up = true;
 	}
 	else
-		p1.up = false;
+		pads[0].up = false;
 
 
 	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 	{
-		p1.down = true;
+		pads[0].down = true;
 	}
 	else
-		p1.down = false;
+		pads[0].down = false;
 
 
 	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
-		p1.left = true;
+		pads[0].left = true;
 	}
 	else
-		p1.left = false;
+		pads[0].left = false;
 
 	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
-		p1.right = true;
+		pads[0].right = true;
 	}
 	else
-		p1.right = false;
+		pads[0].right = false;
 
+	if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
+	{
+		pads[0].x = true;
+	}
+	else
+		pads[0].x = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
+	{
+		pads[0].a = true;
+	}
+	else
+	pads[0].a = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN))
+	{
+		pads[0].y = true;
+	}
+	else
+		pads[0].y = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
+	{
+		pads[0].b = true;
+	}
+	else
+		pads[0].b = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
+	{
+		pads[0].R1 = true;
+	}
+	else
+		pads[0].R1 = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
+	{
+		pads[0].R2 = true;
+	}
+	else
+		pads[0].R2 = false;
+		
 
 
 	//Obtain the current button values of GamePad 2
@@ -167,36 +209,33 @@ update_status ModuleInput::PreUpdate()
 	//Obtaind the direction of Gamepad 2
 	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 	{
-		p2.up = true;
+		pads[1].up = true;
 	}
 	else
-		p2.up = false;
+		pads[1].up = false;
 
 
 	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 	{
-		p2.down = true;
+		pads[1].down = true;
 	}
 	else
-		p2.down = false;
+		pads[1].down = false;
 
 
 	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
-		p2.left = true;
+		pads[1].left = true;
 	}
 	else
-		p2.left = false;
+		pads[1].left = false;
 
 	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
-		p2.right = true;
+		pads[1].right = true;
 	}
 	else
-		p2.right = false;
-
-
-
+		pads[1].right = false;
 
 #pragma endregion
 
@@ -227,6 +266,11 @@ bool ModuleInput::CleanUp()
 	return true;
 }
 
+const History* ModuleInput::GetPrevious(int pointer) {
+
+	return (&history[pointer]);
+}
+
 
 bool CommandYogaFire::Check(uint frames_past) const {
 	int count = 0;
@@ -239,12 +283,12 @@ bool CommandYogaFire::Check(uint frames_past) const {
 		if (!history) {
 			break;
 		}
-		const gamecontroller* pad = &(history->pads[0]);
+		const Gamepad* pad = (history->pads[0]);
 		switch (count) {
-		case 0: { if (pad->LP) { ++count; frame = i; } } break;
-		case 1: { if (pad->RIGHT) { ++count; frame = i; } } break;
-		case 2: { if (pad->RIGHT_AND_DOWN) { ++count; frame = i; } } break;
-		case 3: { if (pad->DOWN) { return true; } } break;
+		case 0: { if (pad->a) { ++count; frame = i; } } break;
+		case 1: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
+		case 2: { if (pad->right && pad->down) { ++count; frame = i; } } break;
+		case 3: { if (pad->down) { return true; } } break;
 		}
 	}
 	return false;
@@ -262,14 +306,14 @@ bool CommandYogaFlame::Check(uint frames_past) const {
 		if (!history) {
 			break;
 		}
-		const gamecontroller* pad = &(history->pads[0]);
+		const Gamepad* pad = (history->pads[0]);
 		switch (count) {
-		case 0: { if (pad->LP) { ++count; frame = i; } } break;
-		case 1: { if (pad->RIGHT) { ++count; frame = i; } } break;
-		case 2: { if (pad->RIGHT_AND_DOWN) { ++count; frame = i; } } break;
-		case 3: { if (pad->DOWN) { ++count; frame = i; } } break;
-		case 4: { if (pad->LEFT_AND_DOWN) { return true; } } break;
-		case 5: { if (pad->LEFT) { return true; } } break;
+		case 0: { if (pad->a) { ++count; frame = i; } } break;
+		case 1: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
+		case 2: { if (pad->right && pad->down) { ++count; frame = i; } } break;
+		case 3: { if (pad->down) { ++count; frame = i; } } break;
+		case 4: { if (pad->left && pad->down) { return true; } } break;
+		case 5: { if (pad->left && !pad->down) { return true; } } break;
 		}
 	}
 	return false;
@@ -286,7 +330,7 @@ bool CommandPunch::Check(uint frames_past) const {
 		if (!history) {
 			break;
 		}
-		const gamecontroller* pad = &(history->pads[0]);
+		const Gamepad* pad = (history->pads[0]);
 		switch (count) {
 		case 0: { if (pad->a) { ++count; frame = i; } } break;
 		}

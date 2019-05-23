@@ -340,74 +340,74 @@ void ModuleUI::EndFight() {
 void ModuleUI::BlitGamePadDebug() {
 
 #pragma region Player 1
-	if (App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_A] == KEY_REPEAT)
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typographyDebug, "a");
 
-	if (App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN || App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_X] == KEY_REPEAT)
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 10, typographyDebug, "x");
 
-	if (App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_Y] == KEY_REPEAT)
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 10, typographyDebug, "y");
 
-	if (App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_B] == KEY_REPEAT)
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 30, typographyDebug, "b");
 
-	if (App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN || App->input->gameController[0]States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_REPEAT)
+	if (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN || App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 50, typographyDebug, "r1");
 
-	if (App->input->gameController[0]AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 + 50, typographyDebug, "r2");
 
 
-	if (App->input->gameController[0]AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "up");
 
 
-	if (App->input->gameController[0]AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "down");
 
 
-	if (App->input->gameController[0]AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "left");
 
 
-	if (App->input->gameController[0]AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "right");
 #pragma endregion
 
 #pragma region Player 2
-	if (App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_A] == KEY_REPEAT)
+	if (App->input->gameController2States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN || App->input->gameController2States[SDL_CONTROLLER_BUTTON_A] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 - 30, typographyDebug, "a");
 
-	if (App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN || App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_X] == KEY_REPEAT)
+	if (App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN || App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 - 10, typographyDebug, "x");
 
-	if (App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_Y] == KEY_REPEAT)
+	if (App->input->gameController2States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN || App->input->gameController2States[SDL_CONTROLLER_BUTTON_Y] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 10, typographyDebug, "y");
 
-	if (App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_B] == KEY_REPEAT)
+	if (App->input->gameController2States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN || App->input->gameController2States[SDL_CONTROLLER_BUTTON_B] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 30, typographyDebug, "b");
 
-	if (App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN || App->input->gameController[1]States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_REPEAT)
+	if (App->input->gameController2States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN || App->input->gameController2States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_REPEAT)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 50, typographyDebug, "r1");
 
-	if (App->input->gameController[1]AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 + 50, typographyDebug, "r2");
 
 
-	if (App->input->gameController[1]AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "up");
 
 
-	if (App->input->gameController[1]AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "down");
 
 
-	if (App->input->gameController[1]AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "left");
 
 
-	if (App->input->gameController[1]AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "right");
 #pragma endregion	
 }

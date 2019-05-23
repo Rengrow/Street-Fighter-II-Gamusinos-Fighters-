@@ -42,13 +42,6 @@ struct Gamepad
 	bool R2 = false;
 };
 
-
-struct History {
-	uint frame = 0u;
-	
-	Uint8 buttons[MAX_KEYS];
-};
-
 struct InputCommand {
 	InputCommandTypes type = InputCommandTypes::max;
 	InputCommand(InputCommandTypes type) : type(type) {}
@@ -73,7 +66,7 @@ struct History
 {
 	uint frame = 0u;
 	KEY_STATE keyboard[MAX_KEYS];
-	SDL_GameController* pads[MAX_GAME_CONTROLLERS];
+	Gamepad* pads[MAX_GAME_CONTROLLERS];
 };
 
 
@@ -87,6 +80,7 @@ public:
 	bool Init();
 	update_status PreUpdate();
 	bool CleanUp();
+	const History* GetPrevious(int);
 
 public:
 	History history[MAX_HISTORY];
@@ -102,9 +96,9 @@ public:
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
 
-
 	SDL_GameController* gameController1 = NULL;
 	SDL_GameController* gameController2 = NULL;
+
 };
 
 #endif // __ModuleInput_H__
