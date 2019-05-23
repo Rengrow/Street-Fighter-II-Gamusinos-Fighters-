@@ -278,6 +278,12 @@ update_status ModuleInput::PreUpdate()
 
 #pragma endregion
 
+	if (history_cursor >= MAX_HISTORY) history_cursor = 0;
+
+	memcpy(history[history_cursor].keyboard, keyboard, sizeof(KEY_STATE)*MAX_KEYS);
+	memcpy(history[history_cursor].pads, pads, sizeof(Gamepad)*MAX_GAME_CONTROLLERS);
+	history_cursor++;
+
 	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
 
