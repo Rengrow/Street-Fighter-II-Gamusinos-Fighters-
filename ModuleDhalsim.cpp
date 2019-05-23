@@ -1492,7 +1492,27 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_DEFENDING:
-			LOG("Defending");
+			current_animation = &airreel;
+
+			//Pushback start
+			if (pushbacktimerhit != 0) {
+				--pushbacktimerhit;
+				if (IsntOnLeftLimit() && IsntOnRightLimit())
+				{
+					if (flip == true) {
+						position.x += pushbackspeed;
+					}
+					else position.x -= pushbackspeed;
+				}
+
+				else
+				{
+					if (flip == true) {
+						App->ryu->position.x -= pushbackspeed;
+					}
+					else App->ryu->position.x += pushbackspeed;
+				}
+			}
 			break;
 
 		case ST_HEAD_REEL2:
@@ -1718,7 +1738,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
-			life -= 7;
+			
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP)
@@ -1730,11 +1750,22 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			else if (App->ryu->state == L_PUNCH_CROUCH)
 				App->audio->PlayChunk(low_fist);
 
-			if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			if ((state == ST_WALK_BACKWARD2 && flip == true)||(state == ST_WALK_FORWARD && flip == false))
+			{
+				inputs.Push(IN_DEFENDING2);
+			}
+
+			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			{
 				inputs.Push(IN_CROUCH_REEL2);
+				life -= 7;
+			}
 
 			else
+			{
 				inputs.Push(IN_HEAD_REEL2);
+				life -= 7;
+			}
 		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
@@ -2378,6 +2409,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 
+			case IN_DEFENDING2: state = ST_DEFENDING2; defending_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2424,8 +2457,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 				if (close) state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames;
 			}break;
 
-			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 
 			case IN_DEFENDING2: state = ST_DEFENDING2; defending_timer = App->frames; break;
 
