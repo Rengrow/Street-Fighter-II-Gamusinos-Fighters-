@@ -966,31 +966,75 @@ bool ModuleDhalsim::Start()
 	win2.PushBack({ 74, 241, 73, 74 }, 10, { 33,5 }, { win2nColliders }, { win2Hitbox1 }, { win2ColliderType }, { win2Callback });
 	win2.loop = false;
 
-	//Falling
+	// Air falling
 	const int airreelnColliders = 3;
-	SDL_Rect airreelHitbox1[airreelnColliders] = { { -11, 57, 24, 10}, { 0, 11, 73, 47}, { -31, -32, 40, 45} };
-	SDL_Rect airreelHitbox2[airreelnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, -0, 105, 40} };
-	SDL_Rect airreelHitbox3[airreelnColliders] = { { -12, 84, 24, 16}, { 0, 40, 55, 47}, { 0, 0, 40, 40} };
+	SDL_Rect airreelHitbox1[airreelnColliders] = { { 0, 0, 0, 0}, { 0, 11, 73, 37}, { -71, 5, 50, 45} };
 	COLLIDER_TYPE airreelColliderType[airreelnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* airreelCallback[airreelnColliders] = { {this}, {this}, {this} };
 
-	airreel.PushBack({ 815, 883, 73, 65 }, 5, { 33,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
+	airreel.PushBack({ 639, 750, 125, 52 }, 1000, { 33,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
+
+	
+	// Falling
+	const int fallnColliders = 3;
+	SDL_Rect fallHitbox1[fallnColliders] = { { 0, 0, 0, 0}, { -15, 11, 53, 70}, { -61, 5, 50, 35} };
+	SDL_Rect fallHitbox2[fallnColliders] = { { 0, 0, 0, 0}, { 0, 5, 93, 37}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE fallColliderType[fallnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE fallColliderType2[fallnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* fallCallback[fallnColliders] = { {this}, {this}, {this} };
+	Module* fallCallback2[fallnColliders] = { {this}, {this}, {this} };
+
+	fall.PushBack({ 801, 820, 94, 84 }, 30, { 33,5 }, { fallnColliders }, { fallHitbox1 }, { fallColliderType }, { airreelCallback });
+	fall.PushBack({ 897, 848, 97, 56 }, 10, { 33,5 }, { fallnColliders }, { fallHitbox2 }, { fallColliderType2 }, { fallCallback2 });
+	fall.PushBack({ 1, 978, 96, 48 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	fall.PushBack({ 99, 989, 96, 31 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
 
 	//Get up
-	const int getupnColliders = 3;
-	SDL_Rect getupHitbox1[getupnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
-	COLLIDER_TYPE getupColliderType[getupnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	Module* getupCallback[getupnColliders] = { {this}, {this}, {this} };
 
-	getup.PushBack({ 311, 993, 127, 31 }, 5, { 33,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 440, 990, 92, 34 }, 10, { 33,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 534, 953, 56, 71 }, 10, { 33,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 633, 909, 46, 115 }, 10, { 33,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
-	getup.PushBack({ 681, 956, 79, 68 }, 10, { 33,5 }, { getupnColliders }, { getupHitbox1 }, { getupColliderType }, { getupCallback });
+	getup.PushBack({ 197, 989, 131, 31 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 330, 974, 122, 46 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 455, 920, 83, 100 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	
+
+	// Defending
+	const int defendingnColliders = 3;
+	SDL_Rect defendingHitbox1[defendingnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { -10, 0, 30, 20} };
+	COLLIDER_TYPE defendingColliderType[defendingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* defendingCallback[defendingnColliders] = { {this}, {this}, {this} };
+
+	defending.PushBack({ 872, 708, 61, 94 }, 10, { 33,5 }, { defendingnColliders }, { defendingHitbox1 }, { defendingColliderType }, { defendingCallback });
 
 
-	//Ground
-	ground.PushBack({ 310, 992, 129, 32 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	// Crouch defending
+	const int cdefendingnColliders = 3;
+	SDL_Rect cdefendingHitbox1[cdefendingnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 30, 30, 40} };
+	COLLIDER_TYPE cdefendingColliderType[cdefendingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* cdefendingCallback[cdefendingnColliders] = { {this}, {this}, {this} };
+
+	cdefending.PushBack({ 935, 735, 60, 67 }, 5, { 33,5 }, { cdefendingnColliders }, { cdefendingHitbox1 }, { cdefendingColliderType }, { cdefendingCallback });
+	cdefending.PushBack({ 5, 838, 63, 66 }, 50, { 33,5 }, { cdefendingnColliders }, { cdefendingHitbox1 }, { cdefendingColliderType }, { cdefendingCallback });
+
+
+	// Grab
+	grab.PushBack({ 540, 932, 116, 88 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab.PushBack({ 658, 933, 80, 87 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab.PushBack({ 741, 927, 72, 93 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab.PushBack({ 815, 956, 134, 64 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
+	// Lose animation on ground
+	ground.PushBack({ 1, 978, 96, 48 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	ground.PushBack({ 99, 989, 96, 31 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
+	// Stun animation
+	const int stunnColliders = 3;
+	SDL_Rect stunHitbox[stunnColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50} };
+	COLLIDER_TYPE stunColliderType[stunnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* stunCallback[stunnColliders] = { {this}, {this}, {this} };
+
+	stun.PushBack({ 430, 709, 64, 93 }, 10, { 33,5 }, stunnColliders, stunHitbox, stunColliderType, stunCallback);
+	stun.PushBack({ 496, 713, 67, 89 }, 10, { 33,5 }, stunnColliders, stunHitbox, stunColliderType, stunCallback);
+	stun.PushBack({ 565, 717, 72, 85 }, 10, { 33,5 }, stunnColliders, stunHitbox, stunColliderType, stunCallback);
 
 	inputs.Push(IN_END2);
 
@@ -1018,19 +1062,14 @@ bool ModuleDhalsim::CleanUp()
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	ClearColliders();
-	idle = Animation();
-	forward = Animation();
-	backward = Animation();
+	idle = forward = backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
 	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
 	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp_mp = yoga_flame_hp = yoga_flame_cycle = yoga_flame_recovery_lp_mp = yoga_flame_recovery_hp = Animation();
-	streel = Animation();
-	stgreel = Animation();
-	creel = Animation();
-	airreel = Animation();
-	getup = Animation();
-	crouching = standing = crouch = Animation();
+	streel = stgreel = creel = Animation();
+	airreel = fall = getup = Animation();
+	crouching = standing = crouch = defending = cdefending = grab = stun = Animation();
 	win1 = win2 = Animation();
 	ground = Animation();
 	return true;
@@ -1161,8 +1200,9 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_PUNCH_STANDING2:
-			texture = graphics3;
-			current_animation = &lp;
+//			texture = graphics3;
+//			current_animation = &lp;
+			current_animation = &getup ;
 			typeofattack = 1;
 			break;
 

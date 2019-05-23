@@ -252,8 +252,8 @@ public:
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
-	Animation airreel;
-	Animation getup;
+	Animation airreel, fall;
+	Animation getup, cdefending, defending, grab, stun;
 	Animation crouching, standing, crouch;
 	Animation win1, win2;
 	Animation ground;
