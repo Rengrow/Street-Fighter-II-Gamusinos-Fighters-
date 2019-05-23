@@ -3,12 +3,14 @@
 
 #include "Module.h"
 #include "Globals.h"
+#include <string.h>
 #include "SDL\include\SDL_scancode.h"
 #include "SDL\include\SDL_gamecontroller.h"
 
 #define MAX_KEYS 300
 #define MAX_HISTORY 180
 #define MAX_COMMAND_FRAMES 9
+#define MAX_GAME_CONTROLLERS 2
 
 enum KEY_STATE
 {
@@ -67,6 +69,13 @@ struct CommandYogaFlame : public InputCommand {
 	CommandYogaFlame() : InputCommand(InputCommandTypes::yogaflame) {}
 	bool Check(uint frames_past) const override;
 };
+struct History
+{
+	uint frame = 0u;
+	KEY_STATE keyboard[MAX_KEYS];
+	SDL_GameController* pads[MAX_GAME_CONTROLLERS];
+};
+
 
 class ModuleInput : public Module
 {
@@ -80,17 +89,18 @@ public:
 	bool CleanUp();
 
 public:
+	History history[MAX_HISTORY];
 	KEY_STATE keyboard[MAX_KEYS];
+
+	int history_cursor = 0;
+
+	Gamepad pads[MAX_GAME_CONTROLLERS];
 
 	Uint8 gameController1States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController1AxisValues[SDL_CONTROLLER_AXIS_MAX];
-	
-	Gamepad p1;
 
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
-	
-	Gamepad p2;
 
 
 	SDL_GameController* gameController1 = NULL;
