@@ -17,6 +17,7 @@
 #include "ModuleUI.h"
 #include "ModuleFight.h"
 #include "ModuleSlowdown.h"
+#include "SDL\include\SDL.h"
 
 Application::Application()
 {
@@ -82,8 +83,6 @@ update_status Application::Update()
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 
-	App->frames++;
-
 	return ret;
 }
 
@@ -97,5 +96,6 @@ bool Application::CleanUp()
 	return ret;
 }
 
-
-// Just making a comment to test Github
+Uint32 Application::GetFrame() {
+	return (SDL_GetTicks() / 100) % 6;
+}

@@ -706,6 +706,11 @@ update_status ModuleRyu::Update()
 			}
 			break;
 
+		case GRABBED:
+			current_animation = &airreel;
+
+			break;
+
 		case ST_GETTING_UP:
 			current_animation = &getup;
 			break;
@@ -763,6 +768,7 @@ bool ModuleRyu::IsntOnLeftLimit() {
 }
 
 void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
+	
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
@@ -1172,6 +1178,16 @@ void ModuleRyu::internal_input(p2Qeue<ryu_inputs>& inputs)
 			getting_up_timer = 0;
 		}
 	}
+
+	if (grabbed_timer > 0)
+	{
+		if (App->frames - grabbed_timer > R_GRABBED_TIME)
+		{
+			inputs.Push(IN_GRABBED_FINISH);
+			grabbed_timer = 0;
+		}
+	}
+
 }
 
 ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
@@ -1196,6 +1212,7 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_HADOKEN: state = ST_HADOKEN; hadoken_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
+			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -1509,6 +1526,15 @@ ryu_states ModuleRyu::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_GETTING_UP_FINISH:state = ST_IDLE; break;
+			}
+		}
+		break;
+
+		case GRABBED:
+		{
+			switch (last_input)
+			{
+			case IN_GRABBED_FINISH:state = ST_IDLE; break;
 			}
 		}
 		break;

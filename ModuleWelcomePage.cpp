@@ -59,12 +59,9 @@ update_status ModuleWelcomePage::Update()
 	else
 		graphics = graphics2;
 
-	background.x = 384 * fila;
-	background.y = 224 * columna;
-
 	App->render->Blit(graphics, 0, 0, &background, false);
 
-	if (!segundaSheet || fila != 4 || columna != 8)
+	if (!segundaSheet || fila != 4 || columna != 8) {
 		if (fila != 4)
 			fila++;
 		else if (columna != 8) {
@@ -76,6 +73,9 @@ update_status ModuleWelcomePage::Update()
 			columna = 0;
 			segundaSheet = true;
 		}
+		background.x = 384 * fila;
+		background.y = 224 * columna;
+	}
 
 
 	if (timeLetters < App->frames) {
