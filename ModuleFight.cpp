@@ -103,7 +103,7 @@ void ModuleFight::Win(int ryu) {
 	App->ryu->freeze = true;
 	App->dhalsim->freeze = true;
 
-	App->slowdown->StartSlowdown(1000, 100);
+	//App->slowdown->StartSlowdown(1000, 100);
 
 	if (ryu == 1)
 		player1RoundWinned++;

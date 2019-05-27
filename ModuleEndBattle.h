@@ -19,7 +19,7 @@ public:
 	bool CleanUp();
 
 public:
-	SDL_Texture* graphics = nullptr;
+	SDL_Texture* portraits = nullptr;
 	Mix_Music *music = nullptr;
 	SDL_Rect background;
 };
