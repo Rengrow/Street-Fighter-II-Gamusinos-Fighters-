@@ -540,7 +540,6 @@ bool ModuleDhalsim::Start()
 	yoga_fire_mp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox5, yoga_fire_mpColliderType, yoga_fire_mpCallback);
 	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
 
-
 	//Hp yoga fire
 	const int yoga_fire_hpnColliders = 3;
 	SDL_Rect yoga_fire_hpHitbox[yoga_fire_hpnColliders] = { { 0, 0, 0, 0}, { -30, 71, 24, 20 }, { -13, 1, 46, 76 } };
@@ -1904,10 +1903,10 @@ void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, S
 	r2.y = 1;
 	r2.w = 69;
 	r2.h = 11;
-	if (jump_timer == 0)
-		App->render->Blit(shadow, position.x - (frame.pivotPosition.x), 210, &r2, flip);
+	if (position.y > 220)
+		App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
 	else
-		App->render->Blit(shadow, position.x - (frame.pivotPosition.x), 210, &r2, flip); r2.y = 13;
+		r2.y = 13; App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
 
 	if (flip)
 		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
