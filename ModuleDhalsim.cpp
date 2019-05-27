@@ -133,10 +133,10 @@ bool ModuleDhalsim::Start()
 	Module* close_lpCallback[close_lpnColliders] = { { this },{ this }};
 	Module* close_lpCallback2[close_lpnColliders2] = { { this },{ this }, { (Module*)App->ryu } };
 	Module* close_lpCallback3[close_lpnColliders3] = { { this },{ this },{ (Module*)App->ryu } };
-	close_lp.PushBack({ 70, 24, 73, 110 }, 5, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
-	close_lp.PushBack({ 145, 24, 65, 110 }, 8, { 33,5 }, close_lpnColliders2, close_lpHitbox2, close_lpColliderType2, close_lpCallback2);
-	close_lp.PushBack({ 212, 57, 106, 77 }, 15, { 33,5 }, close_lpnColliders3, close_lpHitbox3, close_lpColliderType3, close_lpCallback3);
-	close_lp.PushBack({ 145, 24, 65, 110 }, 8, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
+	close_lp.PushBack({ 70, 24, 73, 110 }, 2, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
+	close_lp.PushBack({ 145, 24, 65, 110 }, 3, { 33,5 }, close_lpnColliders2, close_lpHitbox2, close_lpColliderType2, close_lpCallback2);
+	close_lp.PushBack({ 212, 57, 106, 77 }, 6, { 33,5 }, close_lpnColliders3, close_lpHitbox3, close_lpColliderType3, close_lpCallback3);
+	close_lp.PushBack({ 145, 24, 65, 110 }, 5, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
 
 	//mp
 	const int mpnColliders = 3;
@@ -162,13 +162,13 @@ bool ModuleDhalsim::Start()
 	Module* mpCallback5[mpnColliders5] = { {this}, {this}, {this} };
 
 
-	mp.PushBack({ 751, 652, 74, 99 }, 8, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
-	mp.PushBack({ 827, 674, 86, 77 }, 10, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
-	mp.PushBack({ 0, 816, 150, 46 }, 10, { 33,5 }, mpnColliders3, mpHitbox3, mpColliderType3, mpCallback3);
-	mp.PushBack({ 152, 816, 214, 46 }, 15, { 33,5 }, mpnColliders4, mpHitbox4, mpColliderType4, mpCallback4);
-	mp.PushBack({ 0, 816, 150, 46 }, 10, { 33,5 }, mpnColliders5, mpHitbox5, mpColliderType5, mpCallback5);
-	mp.PushBack({ 827, 674, 86, 77 }, 10, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
-	//mp.PushBack({ 751, 652, 74, 99 }, 2, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
+	mp.PushBack({ 751, 652, 74, 99 }, 3, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
+	mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
+	mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders3, mpHitbox3, mpColliderType3, mpCallback3);
+	mp.PushBack({ 152, 816, 214, 46 }, 6, { 33,5 }, mpnColliders4, mpHitbox4, mpColliderType4, mpCallback4);
+	mp.PushBack({ 0, 816, 150, 46 }, 4, { 33,5 }, mpnColliders5, mpHitbox5, mpColliderType5, mpCallback5);
+	mp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, mpnColliders2, mpHitbox2, mpColliderType2, mpCallback2);
+	//mp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, mpnColliders, mpHitbox, mpColliderType, mpCallback);
 
 
 	// close mp
@@ -185,11 +185,11 @@ bool ModuleDhalsim::Start()
 	Module* close_mpCallback2[close_mpnColliders2] = { {this}, {this}, {this} };
 	Module* close_mpCallback3[close_mpnColliders3] = { {this}, {this}, {(Module*)App->ryu} };
 
-	close_mp.PushBack({ 320, 50, 80, 84 }, 8, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
-	close_mp.PushBack({ 402, 40, 80, 94 }, 10, { 33,5 }, close_mpnColliders2, close_mpHitbox2, close_mpColliderType2, close_mpCallback2);
-	close_mp.PushBack({ 484, 1, 80, 133 }, 10, { 33,5 }, close_mpnColliders3, close_mpHitbox3, close_mpColliderType3, close_mpCallback3);
-	close_mp.PushBack({ 402, 40, 80, 94 }, 15, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
-	close_mp.PushBack({ 320, 50, 80, 84 }, 10, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
+	close_mp.PushBack({ 320, 50, 80, 84 }, 2, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
+	close_mp.PushBack({ 402, 40, 80, 94 }, 3, { 33,5 }, close_mpnColliders2, close_mpHitbox2, close_mpColliderType2, close_mpCallback2);
+	close_mp.PushBack({ 484, 1, 80, 133 }, 6, { 33,5 }, close_mpnColliders3, close_mpHitbox3, close_mpColliderType3, close_mpCallback3);
+	close_mp.PushBack({ 402, 40, 80, 94 }, 4, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
+	close_mp.PushBack({ 320, 50, 80, 84 }, 1, { 33,5 }, close_mpnColliders, close_mpHitbox, close_mpColliderType, close_mpCallback);
 
 
 	// hp
@@ -214,13 +214,13 @@ bool ModuleDhalsim::Start()
 	Module* hpCallback3[hpnColliders3] = { { this },{ this },{ (Module*)App->ryu }};
 	Module* hpCallback4[hpnColliders4] = { { this },{ this },{ (Module*)App->ryu }};
 	Module* hpCallback5[hpnColliders5] = { { this },{ this }, { this } };
-	hp.PushBack({ 751, 652, 74, 99 }, 8, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
-	hp.PushBack({ 827, 674, 86, 77 }, 10, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
-	hp.PushBack({ 368, 816, 151, 46 }, 10, { 33,5 }, hpnColliders3, hpHitbox3, hpColliderType3, hpCallback3);
-	hp.PushBack({ 521, 816, 247, 46 }, 15, { 33,5 }, hpnColliders4, hpHitbox4, hpColliderType4, hpCallback4);
-	hp.PushBack({ 368, 816, 151, 46 }, 25, { 33,5 }, hpnColliders5, hpHitbox5, hpColliderType5, hpCallback5);
-	hp.PushBack({ 827, 674, 86, 77 }, 20, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
-	hp.PushBack({ 751, 652, 74, 99 }, 2, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
+	hp.PushBack({ 751, 652, 74, 99 }, 3, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
+	hp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
+	hp.PushBack({ 368, 816, 151, 46 }, 4, { 33,5 }, hpnColliders3, hpHitbox3, hpColliderType3, hpCallback3);
+	hp.PushBack({ 521, 816, 247, 46 }, 6, { 33,5 }, hpnColliders4, hpHitbox4, hpColliderType4, hpCallback4);
+	hp.PushBack({ 368, 816, 151, 46 }, 10, { 33,5 }, hpnColliders5, hpHitbox5, hpColliderType5, hpCallback5);
+	hp.PushBack({ 827, 674, 86, 77 }, 8, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
+	hp.PushBack({ 751, 652, 74, 99 }, 1, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
 
 
 	// close hp
@@ -240,12 +240,12 @@ bool ModuleDhalsim::Start()
 	Module* close_hpCallback2[close_hpnColliders2] = { { this },{ this },{ this } };
 	Module* close_hpCallback3[close_hpnColliders3] = { { this },{ this },{ (Module*)App->ryu } };
 	Module* close_hpCallback4[close_hpnColliders4] = { { this },{ this },{ (Module*)App->ryu } };
-	close_hp.PushBack({ 124, 596, 72, 94 }, 8, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
-	close_hp.PushBack({ 566, 38, 53, 96 }, 10, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
-	close_hp.PushBack({ 621, 46, 80, 88 }, 10, { 33,5 }, close_hpnColliders2, close_hpHitbox2, close_hpColliderType2, close_hpCallback2);
-	close_hp.PushBack({ 703, 42, 84, 92 }, 15, { 33,5 }, close_hpnColliders3, close_hpHitbox3, close_hpColliderType3, close_hpCallback3);
-	close_hp.PushBack({ 621, 46, 80, 88 }, 25, { 33,5 }, close_hpnColliders4, close_hpHitbox4, close_hpColliderType4, close_hpCallback4);
-	close_hp.PushBack({ 566, 38, 53, 96 }, 20, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
+	close_hp.PushBack({ 124, 596, 72, 94 }, 2, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
+	close_hp.PushBack({ 566, 38, 53, 96 }, 3, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
+	close_hp.PushBack({ 621, 46, 80, 88 }, 3, { 33,5 }, close_hpnColliders2, close_hpHitbox2, close_hpColliderType2, close_hpCallback2);
+	close_hp.PushBack({ 703, 42, 84, 92 }, 8, { 33,5 }, close_hpnColliders3, close_hpHitbox3, close_hpColliderType3, close_hpCallback3);
+	close_hp.PushBack({ 621, 46, 80, 88 }, 10, { 33,5 }, close_hpnColliders4, close_hpHitbox4, close_hpColliderType4, close_hpCallback4);
+	close_hp.PushBack({ 566, 38, 53, 96 }, 7, { 33,5 }, close_hpnColliders, close_hpHitbox, close_hpColliderType, close_hpCallback);
 
 	// lk
 	const int lknColliders = 3;
@@ -256,11 +256,11 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE lkColliderType3[lknColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lkCallback[lknColliders] = { {this}, {this}, {this} };
 	Module* lkCallback3[lknColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	lk.PushBack({ 770, 770, 58, 92 }, 5, { 32,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
-	lk.PushBack({ 842, 753, 118, 109 }, 8, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
-	lk.PushBack({ 0, 896, 165, 109 }, 20, { 33,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
-	lk.PushBack({ 842, 753, 118, 109 }, 10, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
-	lk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 770, 770, 58, 92 }, 2, { 32,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 842, 753, 118, 109 }, 3, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 0, 896, 165, 109 }, 8, { 33,5 }, lknColliders3, lkHitbox3, lkColliderType3, lkCallback3);
+	lk.PushBack({ 842, 753, 118, 109 }, 4, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
+	lk.PushBack({ 770, 770, 58, 92 }, 5, { 33,5 }, lknColliders, lkHitbox, lkColliderType, lkCallback);
 
 
 	// close_firstframe_lk_mk
@@ -268,7 +268,7 @@ bool ModuleDhalsim::Start()
 	SDL_Rect close_firstframe_lk_mkHitbox[close_firstframe_lk_mknColliders] = { { -38, 69, 22, 20}, { -11, 0, 50, 74} };
 	COLLIDER_TYPE close_firstframe_lk_mkColliderType[close_firstframe_lk_mknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* close_firstframe_lk_mkCallback[close_firstframe_lk_mknColliders] = { {this}, {this} };
-	close_firstframe_lk_mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, close_firstframe_lk_mknColliders, close_firstframe_lk_mkHitbox, close_firstframe_lk_mkColliderType, close_firstframe_lk_mkCallback);
+	close_firstframe_lk_mk.PushBack({ 770, 770, 58, 92 }, 3, { 33,5 }, close_firstframe_lk_mknColliders, close_firstframe_lk_mkHitbox, close_firstframe_lk_mkColliderType, close_firstframe_lk_mkCallback);
 
 
 	// close_lk
@@ -276,7 +276,7 @@ bool ModuleDhalsim::Start()
 	SDL_Rect close_lkHitbox[close_lknColliders] = { { -54, 69, 22, 20}, { -27, 0, 50, 74}, { -65, 71, 80, 28} };
 	COLLIDER_TYPE close_lkColliderType[close_lknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* close_lkCallback[close_lknColliders] = { {this}, {this}, {(Module*)App->ryu} };
-	close_lk.PushBack({ 789, 41, 123, 93 }, 20, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
+	close_lk.PushBack({ 789, 41, 123, 93 }, 8, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
 
 	
 	// mk
@@ -296,11 +296,11 @@ bool ModuleDhalsim::Start()
 	Module* mkCallback2[mknColliders2] = { { this },{ this } };
 	Module* mkCallback3[mknColliders3] = { { this },{ this },{ (Module*)App->ryu } };
 	Module* mkCallback4[mknColliders4] = { { this },{ this }, {this} };
-	mk.PushBack({ 770, 770, 58, 92 }, 5, { 32,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
-	mk.PushBack({ 167, 910, 115, 96 }, 8, { 33,5 }, mknColliders2, mkHitbox2, mkColliderType2, mkCallback2);
-	mk.PushBack({ 284, 896, 177, 109 }, 20, { 33,5 }, mknColliders3, mkHitbox3, mkColliderType3, mkCallback3);
-	mk.PushBack({ 770, 770, 58, 92 }, 10, { 33,5 }, mknColliders4, mkHitbox4, mkColliderType4, mkCallback4);
-	mk.PushBack({ 770, 770, 58, 92 }, 12, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
+	mk.PushBack({ 770, 770, 58, 92 }, 2, { 32,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
+	mk.PushBack({ 167, 910, 115, 96 }, 3, { 33,5 }, mknColliders2, mkHitbox2, mkColliderType2, mkCallback2);
+	mk.PushBack({ 284, 896, 177, 109 }, 8, { 33,5 }, mknColliders3, mkHitbox3, mkColliderType3, mkCallback3);
+	mk.PushBack({ 770, 770, 58, 92 }, 4, { 33,5 }, mknColliders4, mkHitbox4, mkColliderType4, mkCallback4);
+	mk.PushBack({ 770, 770, 58, 92 }, 5, { 33,5 }, mknColliders1, mkHitbox1, mkColliderType1, mkCallback1);
 
 
 	// close_mk
@@ -308,7 +308,7 @@ bool ModuleDhalsim::Start()
 	SDL_Rect close_mkHitbox[close_mknColliders] = { { -13, 69, 22, 20}, { 14, 0, 50, 74}, { -20, 70, 84, 26} };
 	COLLIDER_TYPE close_mkColliderType[close_mknColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* close_mkCallback[close_mknColliders] = { {this}, {this}, {(Module*)App->ryu} };
-	close_mk.PushBack({ 914, 32, 103, 102 }, 20, { 33,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
+	close_mk.PushBack({ 914, 32, 103, 102 }, 8, { 33,5 }, close_mknColliders, close_mkHitbox, close_mkColliderType, close_mkCallback);
 
 
 	//hk
@@ -322,14 +322,14 @@ bool ModuleDhalsim::Start()
 	Module* hkCallback2[hknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
 
 
-	hk.PushBack({ 463, 909, 73, 96 }, 2, { 32,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-	hk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-	hk.PushBack({ 595, 901, 50, 104 }, 8, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 463, 909, 73, 96 }, 1, { 32,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 538, 899, 54, 106 }, 2, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 595, 901, 50, 104 }, 3, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 752, 900, 184, 105 }, 6, { 33,5 }, hknColliders2, hkHitbox2, hkColliderType2, hkCallback2);
 	hk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-	hk.PushBack({ 752, 900, 184, 105 }, 15, { 33,5 }, hknColliders2, hkHitbox2, hkColliderType2, hkCallback2);
-	hk.PushBack({ 647, 903, 103, 102 }, 25, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-	hk.PushBack({ 595, 901, 50, 104 }, 20, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
-	hk.PushBack({ 538, 899, 54, 106 }, 3, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 595, 901, 50, 104 }, 8, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
+	hk.PushBack({ 538, 899, 54, 106 }, 1, { 33,5 }, hknColliders, hkHitbox, hkColliderType, hkCallback);
 
 
 	// close_hk
@@ -343,13 +343,13 @@ bool ModuleDhalsim::Start()
 	Module* close_hkCallback2[close_hknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
 
 
-	close_hk.PushBack({ 209, 158, 63, 87 }, 7, { 32,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 0, 145, 67, 100 }, 8, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 70, 151, 55, 94 }, 5, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 131, 139, 76, 106 }, 20, { 33,5 }, close_hknColliders2, close_hkHitbox2, close_hkColliderType2, close_hkCallback2);
-	close_hk.PushBack({ 70, 151, 55, 94 }, 8, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 0, 145, 67, 100 }, 10, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
-	close_hk.PushBack({ 209, 158, 63, 87 }, 2, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 209, 158, 63, 87 }, 3, { 32,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 0, 145, 67, 100 }, 3, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 70, 151, 55, 94 }, 2, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 131, 139, 76, 106 }, 8, { 33,5 }, close_hknColliders2, close_hkHitbox2, close_hkColliderType2, close_hkCallback2);
+	close_hk.PushBack({ 70, 151, 55, 94 }, 3, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 0, 145, 67, 100 }, 4, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
+	close_hk.PushBack({ 209, 158, 63, 87 }, 1, { 33,5 }, close_hknColliders, close_hkHitbox, close_hkColliderType, close_hkCallback);
 
 
 	// Neutral jump 50
@@ -410,11 +410,11 @@ bool ModuleDhalsim::Start()
 	Module*jlpCallback[jlpnColliders] = { {this}, {this}, {this} };
 	Module*jlpCallback2[jlpnColliders2] = { {this}, {this}, {this}, {this}, {(Module*)App->ryu} };
 
-	jlp.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
-	jlp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
-	jlp.PushBack({ 352, 401, 173, 85 }, 40, { 33,5 }, { jlpnColliders2 }, { jlpHitbox2 }, { jlpColliderType2 }, { jlpCallback2 });
-	jlp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
-	jlp.PushBack({ 179, 398, 58, 88 }, 2932, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 179, 398, 58, 88 }, 3, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 239, 410, 111, 76 }, 4, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 352, 401, 173, 85 }, 16, { 33,5 }, { jlpnColliders2 }, { jlpHitbox2 }, { jlpColliderType2 }, { jlpCallback2 });
+	jlp.PushBack({ 239, 410, 111, 76 }, 4, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
+	jlp.PushBack({ 179, 398, 58, 88 }, 2973, { 33,5 }, { jlpnColliders }, { jlpHitbox }, { jlpColliderType }, { jlpCallback });
 
 
 	// Jumping neutral / diagonal lk
@@ -444,11 +444,11 @@ bool ModuleDhalsim::Start()
 	Module*jmpCallback[jmpnColliders] = { { this },{ this },{ this } };
 	Module*jmpCallback2[jmpnColliders2] = { { this },{ this },{ this },{ this },{ (Module*)App->ryu } };
 
-	jmp.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
-	jmp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
-	jmp.PushBack({ 352, 401, 173, 85 }, 25, { 33,5 }, { jmpnColliders2 }, { jmpHitbox2 }, { jmpColliderType2 }, { jmpCallback2 });
-	jmp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
-	jmp.PushBack({ 179, 398, 58, 88 }, 2947, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 179, 398, 58, 88 }, 3, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 239, 410, 111, 76 }, 4, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 352, 401, 173, 85 }, 10, { 33,5 }, { jmpnColliders2 }, { jmpHitbox2 }, { jmpColliderType2 }, { jmpCallback2 });
+	jmp.PushBack({ 239, 410, 111, 76 }, 4, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
+	jmp.PushBack({ 179, 398, 58, 88 }, 2979, { 33,5 }, { jmpnColliders }, { jmpHitbox }, { jmpColliderType }, { jmpCallback });
 
 	//jumping neutral / diagonal mk
 	const int jmknColliders = 3;
@@ -460,11 +460,11 @@ bool ModuleDhalsim::Start()
 	Module*jmkCallback[jmknColliders] = { { this },{ this },{ this } };
 	Module*jmkCallback2[jmknColliders2] = { { this },{ this },{ this },{ this },{ (Module*)App->ryu } };
 
-	jmk.PushBack({ 527, 396, 76, 90 }, 10, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
-	jmk.PushBack({ 605, 415, 133, 71 }, 15, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
-	jmk.PushBack({ 740, 404, 202, 82 }, 30, { 33,5 }, { jmknColliders2 }, { jmkHitbox2 }, { jmkColliderType2 }, { jmkCallback2 });
-	jmk.PushBack({ 605, 415, 133, 71 }, 10, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
-	jmk.PushBack({ 527, 396, 76, 90 }, 2935, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 527, 396, 76, 90 }, 4, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 605, 415, 133, 71 }, 6, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 740, 404, 202, 82 }, 12, { 33,5 }, { jmknColliders2 }, { jmkHitbox2 }, { jmkColliderType2 }, { jmkCallback2 });
+	jmk.PushBack({ 605, 415, 133, 71 }, 4, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
+	jmk.PushBack({ 527, 396, 76, 90 }, 2974, { 33,5 }, { jmknColliders }, { jmkHitbox }, { jmkColliderType }, { jmkCallback });
 
 
 	//jumping neutral / diagonal hp
@@ -477,11 +477,11 @@ bool ModuleDhalsim::Start()
 	Module*jhpCallback[jhpnColliders] = { { this },{ this },{ this } };
 	Module*jhpCallback2[jhpnColliders2] = { { this },{ this },{ this },{ this },{ (Module*)App->ryu } };
 
-	jhp.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
-	jhp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
-	jhp.PushBack({ 352, 401, 173, 85 }, 10, { 33,5 }, { jhpnColliders2 }, { jhpHitbox2 }, { jhpColliderType2 }, { jhpCallback2 });
-	jhp.PushBack({ 239, 410, 111, 76 }, 10, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
-	jhp.PushBack({ 179, 398, 58, 88 }, 2962, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 179, 398, 58, 88 }, 3, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 239, 410, 111, 76 }, 4, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 352, 401, 173, 85 }, 4, { 33,5 }, { jhpnColliders2 }, { jhpHitbox2 }, { jhpColliderType2 }, { jhpCallback2 });
+	jhp.PushBack({ 239, 410, 111, 76 }, 4, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
+	jhp.PushBack({ 179, 398, 58, 88 }, 2985, { 33,5 }, { jhpnColliders }, { jhpHitbox }, { jhpColliderType }, { jhpCallback });
 
 	//jumping neutral / diagonal hk
 	const int jhknColliders = 3;
@@ -493,14 +493,14 @@ bool ModuleDhalsim::Start()
 	Module*jhkCallback[jhknColliders] = { { this },{ this },{ this } };
 	Module*jhkCallback2[jhknColliders2] = { { this },{ this }, { (Module*)App->ryu } };
 
-	jhk.PushBack({ 463, 909, 73, 96 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 538, 899, 54, 106 }, 5, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 594, 901, 51, 104 }, 8, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 752, 903, 184, 102 }, 15, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
-	jhk.PushBack({ 647, 903, 103, 102 }, 10, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 8, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 2941, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 463, 909, 73, 96 }, 1, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 538, 899, 54, 106 }, 2, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 594, 901, 51, 104 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 752, 903, 184, 102 }, 6, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
+	jhk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 179, 398, 58, 88 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 179, 398, 58, 88 }, 2977, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 
 
 	//Lp yoga fire
@@ -513,13 +513,13 @@ bool ModuleDhalsim::Start()
 	SDL_Rect yoga_fire_lpHitbox6[yoga_fire_lpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
 	COLLIDER_TYPE yoga_fire_lpColliderType[yoga_fire_lpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_fire_lpCallback[yoga_fire_lpnColliders] = { {this}, {this}, {this} };
-	yoga_fire_lp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox, yoga_fire_lpColliderType, yoga_fire_lpCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
-	yoga_fire_lp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox2, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 272, 595, 86, 96 }, 18, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox6, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox3, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 8, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 124, 596, 72, 94 }, 2, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox, yoga_fire_lpColliderType, yoga_fire_lpCallback);		// Falta un trozo de animación, cuya durada depende de si es light, medium or hard
+	yoga_fire_lp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox2, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox6, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox3, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 3, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 
 
 	//Mp yoga fire
@@ -532,13 +532,13 @@ bool ModuleDhalsim::Start()
 	SDL_Rect yoga_fire_mpHitbox6[yoga_fire_mpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
 	COLLIDER_TYPE yoga_fire_mpColliderType[yoga_fire_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_fire_mpCallback[yoga_fire_mpnColliders] = { {this}, {this}, {this} };
-	yoga_fire_mp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox, yoga_fire_mpColliderType, yoga_fire_mpCallback);
-	yoga_fire_mp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox2, yoga_fire_mpColliderType, yoga_fire_mpCallback);
-	yoga_fire_mp.PushBack({ 272, 595, 86, 96 }, 18, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox6, yoga_fire_mpColliderType, yoga_fire_mpCallback);
-	yoga_fire_mp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox3, yoga_fire_mpColliderType, yoga_fire_mpCallback);
-	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 8, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
-	yoga_fire_mp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox5, yoga_fire_mpColliderType, yoga_fire_mpCallback);
-	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 124, 596, 72, 94 }, 2, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox2, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox6, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox3, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 3, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox5, yoga_fire_mpColliderType, yoga_fire_mpCallback);
+	yoga_fire_mp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_mpnColliders, yoga_fire_mpHitbox4, yoga_fire_mpColliderType, yoga_fire_mpCallback);
 
 	//Hp yoga fire
 	const int yoga_fire_hpnColliders = 3;
@@ -550,13 +550,13 @@ bool ModuleDhalsim::Start()
 	SDL_Rect yoga_fire_hpHitbox6[yoga_fire_hpnColliders] = { { -18, 80, 36, 20}, { -13, 41, 50, 44}, { -46, 1, 46, 38} };
 	COLLIDER_TYPE yoga_fire_hpColliderType[yoga_fire_hpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_fire_hpCallback[yoga_fire_hpnColliders] = { {this}, {this}, {this} };
-	yoga_fire_hp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox, yoga_fire_hpColliderType, yoga_fire_hpCallback);
-	yoga_fire_hp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox2, yoga_fire_hpColliderType, yoga_fire_hpCallback);
-	yoga_fire_hp.PushBack({ 272, 595, 86, 96 }, 18, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox6, yoga_fire_hpColliderType, yoga_fire_hpCallback);
-	yoga_fire_hp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox3, yoga_fire_hpColliderType, yoga_fire_hpCallback);
-	yoga_fire_hp.PushBack({ 420, 602, 81, 88 }, 8, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox4, yoga_fire_hpColliderType, yoga_fire_hpCallback);
-	yoga_fire_hp.PushBack({ 617, 598, 94, 92 }, 15, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox5, yoga_fire_hpColliderType, yoga_fire_hpCallback);
-	yoga_fire_hp.PushBack({ 420, 602, 81, 88 }, 22, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox4, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 124, 596, 72, 94 }, 2, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox2, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox6, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox3, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 420, 602, 81, 88 }, 3, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox4, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox5, yoga_fire_hpColliderType, yoga_fire_hpCallback);
+	yoga_fire_hp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_hpnColliders, yoga_fire_hpHitbox4, yoga_fire_hpColliderType, yoga_fire_hpCallback);
 
 
 	//Lp and Mp yoga flame
@@ -574,24 +574,24 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE yoga_flame_lp_mpColliderType2[yoga_flame_lp_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* yoga_flame_lp_mpCallback[yoga_flame_lp_mpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_lp_mpCallback2[yoga_flame_lp_mpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	yoga_flame_lp_mp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox2, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox6, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox2, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 272, 595, 86, 96 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox6, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox3, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 503, 602, 112, 88 }, 5, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 420, 602, 81, 88 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 144, 92 }, 7, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 144, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 763, 598, 157, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
-	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 124, 596, 72, 94 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox2, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 272, 595, 86, 96 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox6, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox2, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 272, 595, 86, 96 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox6, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox3, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 503, 602, 112, 88 }, 2, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 420, 602, 81, 88 }, 1, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox4, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 144, 92 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_lp_mpnColliders, yoga_flame_lp_mpHitbox5, yoga_flame_lp_mpColliderType, yoga_flame_lp_mpCallback);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 144, 92 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 763, 598, 157, 92 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox7, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
+	yoga_flame_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_lp_mpnColliders2, yoga_flame_lp_mpHitbox8, yoga_flame_lp_mpColliderType2, yoga_flame_lp_mpCallback2);
 
 
 	//Hp yoga flame
@@ -609,24 +609,24 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE yoga_flame_hpColliderType2[yoga_flame_hpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* yoga_flame_hpCallback[yoga_flame_hpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_hpCallback2[yoga_flame_hpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	yoga_flame_hp.PushBack({ 124, 596, 72, 94 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox2, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 272, 595, 86, 96 }, 10, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox6, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 198, 595, 72, 96 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox2, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox6, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 360, 596, 58, 94 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox3, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 503, 602, 112, 88 }, 5, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 420, 602, 81, 88 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 617, 598, 144, 92 }, 7, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 124, 596, 72, 94 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox2, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 272, 595, 86, 96 }, 4, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox6, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 198, 595, 72, 96 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox2, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 272, 595, 86, 96 }, 4, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox6, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox3, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 503, 602, 112, 88 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 420, 602, 81, 88 }, 1, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox4, yoga_flame_hpColliderType, yoga_flame_hpCallback);
+	yoga_flame_hp.PushBack({ 617, 598, 144, 92 }, 3, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
 	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders, yoga_flame_hpHitbox5, yoga_flame_hpColliderType, yoga_flame_hpCallback);
-	yoga_flame_hp.PushBack({ 617, 598, 144, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 763, 598, 157, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
-	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 144, 92 }, 3, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 763, 598, 157, 92 }, 3, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox7, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
+	yoga_flame_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_hpnColliders2, yoga_flame_hpHitbox8, yoga_flame_hpColliderType2, yoga_flame_hpCallback2);
 
 
 	//Yoga flame cycle
@@ -634,14 +634,14 @@ bool ModuleDhalsim::Start()
 	SDL_Rect yoga_flame_cycleHitbox[yoga_flame_cyclenColliders] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	COLLIDER_TYPE yoga_flame_cycleColliderType[yoga_flame_cyclenColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* yoga_flame_cycleCallback[yoga_flame_cyclenColliders] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
-	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
+	yoga_flame_cycle.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_cyclenColliders, yoga_flame_cycleHitbox, yoga_flame_cycleColliderType, yoga_flame_cycleCallback);
 
 
 	//Yoga flame recovery lp_mp
@@ -653,14 +653,14 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE yoga_flame_recovery_lp_mpColliderType2[yoga_flame_recovery_lp_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_flame_recovery_lp_mpCallback[yoga_flame_recovery_lp_mpnColliders] = { {this}, {this}, {this}, {(Module*)App->ryu} };
 	Module* yoga_flame_recovery_lp_mpCallback2[yoga_flame_recovery_lp_mpnColliders2] = { {this}, {this}, {this} };
-	yoga_flame_recovery_lp_mp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders, yoga_flame_recovery_lp_mpHitbox, yoga_flame_recovery_lp_mpColliderType, yoga_flame_recovery_lp_mpCallback);
-	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
-	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
-	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
-	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
-	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
-	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
-	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 10, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_recovery_lp_mpnColliders, yoga_flame_recovery_lp_mpHitbox, yoga_flame_recovery_lp_mpColliderType, yoga_flame_recovery_lp_mpCallback);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 3, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 3, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 176, 710, 156, 92 }, 3, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
+	yoga_flame_recovery_lp_mp.PushBack({ 617, 598, 94, 92 }, 4, { 29,5 }, yoga_flame_recovery_lp_mpnColliders2, yoga_flame_recovery_lp_mpHitbox2, yoga_flame_recovery_lp_mpColliderType2, yoga_flame_recovery_lp_mpCallback2);
 
 
 	//Yoga flame recovery hp
@@ -672,15 +672,15 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE yoga_flame_recovery_hpColliderType2[yoga_flame_recovery_hpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_flame_recovery_hpCallback[yoga_flame_recovery_hpnColliders] = { {this}, {this}, {this}, {(Module*)App->ryu} };
 	Module* yoga_flame_recovery_hpCallback2[yoga_flame_recovery_hpnColliders2] = { {this}, {this}, {this} };
-	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 2, 710, 172, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders, yoga_flame_recovery_hpHitbox, yoga_flame_recovery_hpColliderType, yoga_flame_recovery_hpCallback);
-	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 2, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 8, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
-	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 10, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 2, 710, 172, 92 }, 3, { 29,5 }, yoga_flame_recovery_hpnColliders, yoga_flame_recovery_hpHitbox, yoga_flame_recovery_hpColliderType, yoga_flame_recovery_hpCallback);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 3, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 3, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 1, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 176, 710, 156, 92 }, 3, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
+	yoga_flame_recovery_hp.PushBack({ 617, 598, 94, 92 }, 4, { 29,5 }, yoga_flame_recovery_hpnColliders2, yoga_flame_recovery_hpHitbox2, yoga_flame_recovery_hpColliderType2, yoga_flame_recovery_hpCallback2);
 
 
 	// Yoga drill
@@ -787,12 +787,12 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE clpColliderType2[clpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*clpCallback[clpnColliders] = { {this}, {this}, {this} };
 	Module*clpCallback2[clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	clp.PushBack({ 511, 170, 83, 75 }, 5, { 46,5 }, { clpnColliders }, { clpHitbox1 }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 596, 193, 83, 52 }, 8, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 681, 211, 135, 34 }, 8, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 817, 211, 199, 34 }, 15, { 33,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
-	clp.PushBack({ 681, 211, 135, 34 }, 10, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
-	clp.PushBack({ 596, 193, 83, 52 }, 12, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 511, 170, 83, 75 }, 2, { 46,5 }, { clpnColliders }, { clpHitbox1 }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 596, 193, 83, 52 }, 3, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 681, 211, 135, 34 }, 3, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 817, 211, 199, 34 }, 6, { 33,5 }, { clpnColliders2 }, { clpHitbox2 }, { clpColliderType2 }, { clpCallback2 });
+	clp.PushBack({ 681, 211, 135, 34 }, 4, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
+	clp.PushBack({ 596, 193, 83, 52 }, 5, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 
 	
 	//Crouching close_l punch
@@ -804,9 +804,9 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_clpColliderType2[close_clpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_clpCallback[close_clpnColliders] = { {this}, {this}, {this} };
 	Module*close_clpCallback2[close_clpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_clp.PushBack({ 2, 299, 66, 62 }, 5, { 46,5 }, { close_clpnColliders }, { close_clpHitbox }, { close_clpColliderType }, { close_clpCallback });
-	close_clp.PushBack({ 70, 300, 119, 61 }, 8, { 33,5 }, { close_clpnColliders2 }, { close_clpHitbox2 }, { close_clpColliderType2 }, { close_clpCallback2 });
-	close_clp.PushBack({ 2, 299, 66, 62 }, 8, { 33,5 }, { close_clpnColliders }, { close_clpHitbox }, { close_clpColliderType }, { close_clpCallback });
+	close_clp.PushBack({ 2, 299, 66, 62 }, 2, { 46,5 }, { close_clpnColliders }, { close_clpHitbox }, { close_clpColliderType }, { close_clpCallback });
+	close_clp.PushBack({ 70, 300, 119, 61 }, 4, { 33,5 }, { close_clpnColliders2 }, { close_clpHitbox2 }, { close_clpColliderType2 }, { close_clpCallback2 });
+	close_clp.PushBack({ 2, 299, 66, 62 }, 5, { 33,5 }, { close_clpnColliders }, { close_clpHitbox }, { close_clpColliderType }, { close_clpCallback });
 
 
 	//Crouching m punch
@@ -819,12 +819,12 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE cmpColliderType2[cmpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
 	Module*cmpCallback[cmpnColliders] = { { this },{ this },{ this } };
 	Module*cmpCallback2[cmpnColliders2] = { { this },{ this },{ this },{ (Module*)App->ryu } };
-	cmp.PushBack({ 511, 170, 83, 75 }, 5, { 46,5 }, { cmpnColliders }, { cmpHitbox1 }, { cmpColliderType }, { cmpCallback });
-	cmp.PushBack({ 596, 193, 83, 52 }, 8, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
-	cmp.PushBack({ 681, 211, 135, 34 }, 8, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
-	cmp.PushBack({ 817, 211, 199, 34 }, 15, { 33,5 }, { cmpnColliders2 }, { cmpHitbox2 }, { cmpColliderType2 }, { cmpCallback2 });
-	cmp.PushBack({ 681, 211, 135, 34 }, 10, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
-	cmp.PushBack({ 596, 193, 83, 52 }, 12, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
+	cmp.PushBack({ 511, 170, 83, 75 }, 2, { 46,5 }, { cmpnColliders }, { cmpHitbox1 }, { cmpColliderType }, { cmpCallback });
+	cmp.PushBack({ 596, 193, 83, 52 }, 3, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
+	cmp.PushBack({ 681, 211, 135, 34 }, 3, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
+	cmp.PushBack({ 817, 211, 199, 34 }, 6, { 33,5 }, { cmpnColliders2 }, { cmpHitbox2 }, { cmpColliderType2 }, { cmpCallback2 });
+	cmp.PushBack({ 681, 211, 135, 34 }, 4, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
+	cmp.PushBack({ 596, 193, 83, 52 }, 5, { 33,5 }, { cmpnColliders }, { cmpHitbox }, { cmpColliderType }, { cmpCallback });
 
 
 	//Crouching close_m punch
@@ -836,9 +836,9 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_cmpColliderType2[close_cmpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_cmpCallback[close_cmpnColliders] = { {this}, {this}, {this} };
 	Module*close_cmpCallback2[close_cmpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_cmp.PushBack({ 2, 299, 66, 62 }, 5, { 46,5 }, { close_cmpnColliders }, { close_cmpHitbox }, { close_cmpColliderType }, { close_cmpCallback });
-	close_cmp.PushBack({ 70, 300, 119, 61 }, 8, { 33,5 }, { close_cmpnColliders2 }, { close_cmpHitbox2 }, { close_cmpColliderType2 }, { close_cmpCallback2 });
-	close_cmp.PushBack({ 2, 299, 66, 62 }, 8, { 33,5 }, { close_cmpnColliders }, { close_cmpHitbox }, { close_cmpColliderType }, { close_cmpCallback });
+	close_cmp.PushBack({ 2, 299, 66, 62 }, 3, { 46,5 }, { close_cmpnColliders }, { close_cmpHitbox }, { close_cmpColliderType }, { close_cmpCallback });
+	close_cmp.PushBack({ 70, 300, 119, 61 }, 5, { 33,5 }, { close_cmpnColliders2 }, { close_cmpHitbox2 }, { close_cmpColliderType2 }, { close_cmpCallback2 });
+	close_cmp.PushBack({ 2, 299, 66, 62 }, 7, { 33,5 }, { close_cmpnColliders }, { close_cmpHitbox }, { close_cmpColliderType }, { close_cmpCallback });
 
 
 	//Crouching h punch
@@ -851,12 +851,12 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE chpColliderType2[chpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
 	Module*chpCallback[chpnColliders] = { { this },{ this },{ this } };
 	Module*chpCallback2[chpnColliders2] = { { this },{ this },{ this },{ (Module*)App->ryu } };
-	chp.PushBack({ 511, 170, 83, 75 }, 8, { 46,5 }, { chpnColliders }, { chpHitbox1 }, { chpColliderType }, { chpCallback });
-	chp.PushBack({ 596, 193, 83, 52 }, 10, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
+	chp.PushBack({ 511, 170, 83, 75 }, 3, { 46,5 }, { chpnColliders }, { chpHitbox1 }, { chpColliderType }, { chpCallback });
+	chp.PushBack({ 596, 193, 83, 52 }, 4, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
+	chp.PushBack({ 681, 211, 135, 34 }, 4, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
+	chp.PushBack({ 817, 211, 199, 34 }, 6, { 33,5 }, { chpnColliders2 }, { chpHitbox2 }, { chpColliderType2 }, { chpCallback2 });
 	chp.PushBack({ 681, 211, 135, 34 }, 10, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
-	chp.PushBack({ 817, 211, 199, 34 }, 15, { 33,5 }, { chpnColliders2 }, { chpHitbox2 }, { chpColliderType2 }, { chpCallback2 });
-	chp.PushBack({ 681, 211, 135, 34 }, 25, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
-	chp.PushBack({ 596, 193, 83, 52 }, 22, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
+	chp.PushBack({ 596, 193, 83, 52 }, 9, { 33,5 }, { chpnColliders }, { chpHitbox }, { chpColliderType }, { chpCallback });
 
 
 	//Crouching l kik
@@ -870,10 +870,10 @@ bool ModuleDhalsim::Start()
 	Module*clkCallback2[clknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
 
 
-	clk.PushBack({ 331, 181, 61, 66 }, 3, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-	clk.PushBack({ 190, 298, 65, 64 }, 3, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
-	clk.PushBack({ 257, 318, 150, 43 }, 35, { 76,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
-	clk.PushBack({ 190, 298, 65, 64 }, 12, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 331, 181, 61, 66 }, 1, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 190, 298, 65, 64 }, 1, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
+	clk.PushBack({ 257, 318, 150, 43 }, 14, { 76,5 }, { clknColliders2 }, { clkHitbox2 }, { clkColliderType2 }, { clkCallback2 });
+	clk.PushBack({ 190, 298, 65, 64 }, 5, { 33,5 }, { clknColliders }, { clkHitbox }, { clkColliderType }, { clkCallback });
 
 
 	//Crouching close_l kick
@@ -885,9 +885,9 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_clkColliderType2[close_clknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_clkCallback[close_clknColliders] = { {this}, {this}, {this} };
 	Module*close_clkCallback2[close_clknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_clk.PushBack({ 408, 301, 66, 60 }, 10, { 46,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
-	close_clk.PushBack({ 476, 305, 117, 56 }, 20, { 33,5 }, { close_clknColliders2 }, { close_clkHitbox2 }, { close_clkColliderType2 }, { close_clkCallback2 });
-	close_clk.PushBack({ 408, 301, 66, 60 }, 13, { 33,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
+	close_clk.PushBack({ 408, 301, 66, 60 }, 4, { 46,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
+	close_clk.PushBack({ 476, 305, 117, 56 }, 8, { 33,5 }, { close_clknColliders2 }, { close_clkHitbox2 }, { close_clkColliderType2 }, { close_clkCallback2 });
+	close_clk.PushBack({ 408, 301, 66, 60 }, 5, { 33,5 }, { close_clknColliders }, { close_clkHitbox }, { close_clkColliderType }, { close_clkCallback });
 
 
 	//Crouching m kik
@@ -901,10 +901,10 @@ bool ModuleDhalsim::Start()
 	Module*cmkCallback2[cmknColliders2] = { { this },{ this },{ this },{ (Module*)App->ryu } };
 
 
-	cmk.PushBack({ 331, 181, 61, 66 }, 8, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
-	cmk.PushBack({ 190, 298, 65, 64 }, 10, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
-	cmk.PushBack({ 257, 318, 150, 43 }, 40, { 76,5 }, { cmknColliders2 }, { cmkHitbox2 }, { cmkColliderType2 }, { cmkCallback2 });
-	cmk.PushBack({ 190, 298, 65, 64 }, 12, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
+	cmk.PushBack({ 331, 181, 61, 66 }, 3, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
+	cmk.PushBack({ 190, 298, 65, 64 }, 4, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
+	cmk.PushBack({ 257, 318, 150, 43 }, 16, { 76,5 }, { cmknColliders2 }, { cmkHitbox2 }, { cmkColliderType2 }, { cmkCallback2 });
+	cmk.PushBack({ 190, 298, 65, 64 }, 5, { 33,5 }, { cmknColliders }, { cmkHitbox }, { cmkColliderType }, { cmkCallback });
 
 
 	//Crouching close_m kick
@@ -916,9 +916,9 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_cmkColliderType2[close_cmknColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module*close_cmkCallback[close_cmknColliders] = { {this}, {this}, {this} };
 	Module*close_cmkCallback2[close_cmknColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	close_cmk.PushBack({ 191, 299, 64, 62 }, 2, { 46,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
-	close_cmk.PushBack({ 595, 299, 117, 62 }, 20, { 33,5 }, { close_cmknColliders2 }, { close_cmkHitbox2 }, { close_cmkColliderType2 }, { close_cmkCallback2 });
-	close_cmk.PushBack({ 191, 299, 64, 62 }, 13, { 33,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
+	close_cmk.PushBack({ 191, 299, 64, 62 }, 1, { 46,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
+	close_cmk.PushBack({ 595, 299, 117, 62 }, 8, { 33,5 }, { close_cmknColliders2 }, { close_cmkHitbox2 }, { close_cmkColliderType2 }, { close_cmkCallback2 });
+	close_cmk.PushBack({ 191, 299, 64, 62 }, 5, { 33,5 }, { close_cmknColliders }, { close_cmkHitbox }, { close_cmkColliderType }, { close_cmkCallback });
 
 
 	//Crouching h kik
@@ -932,10 +932,10 @@ bool ModuleDhalsim::Start()
 	Module*chkCallback2[chknColliders2] = { { this },{ this },{ this },{ (Module*)App->ryu } };
 
 
-	chk.PushBack({ 331, 181, 61, 66 }, 8, { 33,5 }, { chknColliders }, { chkHitbox }, { chkColliderType }, { chkCallback });
-	chk.PushBack({ 190, 298, 65, 64 }, 10, { 33,5 }, { chknColliders }, { chkHitbox }, { chkColliderType }, { chkCallback });
-	chk.PushBack({ 257, 318, 150, 43 }, 45, { 76,5 }, { chknColliders2 }, { chkHitbox2 }, { chkColliderType2 }, { chkCallback2 });
-	chk.PushBack({ 190, 298, 65, 64 }, 52, { 33,5 }, { chknColliders }, { chkHitbox }, { chkColliderType }, { chkCallback });
+	chk.PushBack({ 331, 181, 61, 66 }, 3, { 33,5 }, { chknColliders }, { chkHitbox }, { chkColliderType }, { chkCallback });
+	chk.PushBack({ 190, 298, 65, 64 }, 4, { 33,5 }, { chknColliders }, { chkHitbox }, { chkColliderType }, { chkCallback });
+	chk.PushBack({ 257, 318, 150, 43 }, 18, { 76,5 }, { chknColliders2 }, { chkHitbox2 }, { chkColliderType2 }, { chkCallback2 });
+	chk.PushBack({ 190, 298, 65, 64 }, 21, { 33,5 }, { chknColliders }, { chkHitbox }, { chkColliderType }, { chkCallback });
 
 
 	// Win1
