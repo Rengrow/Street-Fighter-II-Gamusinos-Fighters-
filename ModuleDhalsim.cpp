@@ -1634,14 +1634,17 @@ update_status ModuleDhalsim::Update()
 			current_animation = &close_lp;
 			typeofattack = 1;
 			break;
+
 		case M_PUNCH_CLOSE2:
 			current_animation = &close_mp;
 			typeofattack = 2;
 			break;
+
 		case F_PUNCH_CLOSE2:
 			current_animation = &close_hp;
 			typeofattack = 3;
 			break;
+
 		case L_KIK_CLOSE2:
 			if (sprite_change_timer <= 8) {
 				texture = graphics3;
@@ -1661,6 +1664,7 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 1;
 			break;
+
 		case M_KIK_CLOSE2:
 			if (sprite_change_timer <= 8) {
 				texture = graphics3;
@@ -1680,25 +1684,38 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 2;
 			break;
+
 		case F_KIK_CLOSE2:
 			current_animation = &close_hk;
 			typeofattack = 3;
 			break;
+
 		case L_PUNCH_CROUCHCLOSE2:
 			current_animation = &close_clp;
 			typeofattack = 1;
 			break;
+
 		case M_PUNCH_CROUCHCLOSE2:
 			current_animation = &close_cmp;
 			typeofattack = 2;
 			break;
+
 		case L_KIK_CROUCHCLOSE2:
 			current_animation = &close_clk;
 			typeofattack = 1;
 			break;
+
 		case M_KIK_CROUCHCLOSE2:
 			current_animation = &close_cmk;
 			typeofattack = 2;
+			break;
+
+		case M_GRABBING2:
+			current_animation = &crouch;
+			break;
+
+		case M_GRAB2:
+			current_animation = &grab;
 			break;
 
 		//end of test
@@ -1738,9 +1755,6 @@ void ModuleDhalsim::IsClose() {
 	else
 		close = false;
 }
-
-
-
 
 void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 	
@@ -1843,6 +1857,11 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(low_fist);
 
 			inputs.Push(IN_FALLING2);
+		}
+
+		if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER_GRABBOX)
+		{
+			inputs.Push(IN_GRAB2);
 		}
 	}
 }
@@ -2026,6 +2045,34 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			backwardJump.ResetAnimation();
 			forwardJump.ResetAnimation();
 			neutralJump.ResetAnimation();
+		}
+	}
+
+	if (grabbing_timer > 0)
+	{
+		if (App->frames - grabbing_timer > D_GRABBING_TIME)
+		{
+			inputs.Push(IN_GRABBING_FINISH2);
+			grabbing_timer = 0;
+
+		}
+	}
+
+	if (m_grab_timer > 0)
+	{
+		if (App->frames - m_grab_timer > D_M_GRAB_TIME)
+		{
+			inputs.Push(IN_M_GRAB_FINISH2);
+			m_grab_timer = 0;
+		}
+	}
+
+	if (f_grab_timer > 0)
+	{
+		if (App->frames - f_grab_timer > D_F_GRAB_TIME)
+		{
+			inputs.Push(IN_M_GRAB_FINISH2);
+			f_grab_timer = 0;
 		}
 	}
 
@@ -2439,7 +2486,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_M_PUNCH2: {
 				if (!close) state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames;
-				if (close) state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames;
+				if (close) state = M_GRABBING2; grabbing_timer = App->frames;
 			}break;
 
 			case IN_M_KIK2: {
@@ -2490,7 +2537,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_M_PUNCH2: {
 				if (!close) state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames;
-				if (close) state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames;
+				if (close) state = M_GRABBING2; grabbing_timer = App->frames;
 			}break;
 
 			case IN_M_KIK2: {
@@ -3197,6 +3244,26 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			}
 		}
 		break;
+
+		case M_GRABBING2:
+		{
+			switch (last_input)
+			{
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GRAB2:state = M_GRAB2; grabbing_timer = App->frames; break;
+			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case M_GRAB2:
+		{
+			switch (last_input)
+			{
+			case IN_M_GRAB_FINISH2:state = ST_IDLE2; m_grab_timer = App->frames; break;
+			}
+		}
 
 		case ST_DEFENDING2:
 		{
