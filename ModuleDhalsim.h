@@ -37,6 +37,11 @@
 #define D_F_CROUCHING_KIK_TIME 118 //+3
 #define D_F_D_JUMPING_KIK_TIME 3003
 
+#define D_GRABBING_TIME 1
+
+#define D_M_GRAB_TIME 100
+#define D_F_GRAB_TIME 100
+
 #define D_HADOKEN_TIME 66 //not altered, pendent of yoga fire
 #define D_CROUCHING_TIME 4 //used to be 5
 #define D_STANDING_TIME 4 //used to be 5
@@ -92,6 +97,12 @@ enum ryu_states2
 	ST_CROUCH2,
 	ST_STANDING2,
 	ST_DEFENDING2,
+
+	M_GRABBING2,
+	F_GRABBING,
+
+	M_GRAB2,
+	F_GRAB2,
 
 	//testing adding states in order to debug animations of close attacks -Adrià
 	L_PUNCH_CLOSE2,
@@ -191,6 +202,11 @@ enum ryu_inputs2
 	IN_F_KIK2,
 	IN_HADOKEN2,
 
+	IN_GRAB2,
+	IN_GRABBING_FINISH2,
+	IN_M_GRAB_FINISH2,
+	IN_F_GRAB_FINISH2,
+
 	IN_HEAD_REEL2,
 	IN_GUT_REEL2,
 	IN_CROUCH_REEL2,
@@ -257,6 +273,7 @@ public:
 	Animation crouching, standing, crouch;
 	Animation win1, win2;
 	Animation ground;
+	Animation grabbing;
 	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
@@ -288,6 +305,8 @@ public:
 	int speed = 1;
 	int life;
 	
+	Uint32 grabbing_timer = 0;
+
 	//light
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_close_standing_punch_timer = 0;
@@ -314,6 +333,8 @@ public:
 	Uint32 m_close_crouching_kik_timer = 0;
 	Uint32 m_d_jumping_kik_timer = 0;
 
+	Uint32 m_grab_timer = 0;
+
 	//fierce
 	Uint32 f_standing_punch_timer = 0;
 	Uint32 f_close_standing_punch_timer = 0;
@@ -326,6 +347,8 @@ public:
 	Uint32 f_crouching_kik_timer = 0;
 	Uint32 f_close_crouching_kik_timer = 0;
 	Uint32 f_d_jumping_kik_timer = 0;
+
+	Uint32 f_grab_timer = 0;
 
 	//others
 	Uint32 hadoken_timer = 0;
