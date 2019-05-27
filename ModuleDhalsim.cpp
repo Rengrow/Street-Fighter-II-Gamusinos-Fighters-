@@ -1022,6 +1022,19 @@ bool ModuleDhalsim::Start()
 	grab.PushBack({ 741, 927, 72, 93 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab.PushBack({ 815, 956, 134, 64 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
+
+
+	// Grabbing
+	const int grabbingnColliders = 4;
+	SDL_Rect grabbingHitbox1[grabbingnColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50}, { -30, 50, 70, 27} };
+	COLLIDER_TYPE grabbingColliderType[grabbingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER_GRAB} };
+	Module* grabbingCallback[grabbingnColliders] = { {this}, {this}, {this}, { (Module*)App->ryu } };
+
+	grabbing.PushBack({ 694, 448, 76, 89 }, 1, { 33,5 }, { grabbingnColliders }, { grabbingHitbox1 }, { grabbingColliderType }, { grabbingCallback });
+
+
+
+
 	// Lose animation on ground
 	ground.PushBack({ 1, 978, 96, 48 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	ground.PushBack({ 99, 989, 96, 31 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });

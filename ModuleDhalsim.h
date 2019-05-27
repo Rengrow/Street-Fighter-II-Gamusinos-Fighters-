@@ -257,6 +257,7 @@ public:
 	Animation crouching, standing, crouch;
 	Animation win1, win2;
 	Animation ground;
+	Animation grabbing;
 	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
