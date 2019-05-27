@@ -9,7 +9,7 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-#define D_L_STANDING_PUNCH_TIME 43 //+3
+#define D_L_STANDING_PUNCH_TIME 16 //+3
 #define D_L_CROUCHING_PUNCH_TIME 60 //+5
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
@@ -37,7 +37,7 @@
 #define D_F_CROUCHING_KIK_TIME 118 //+3
 #define D_F_D_JUMPING_KIK_TIME 3003
 
-#define D_GRABBING_TIME 1
+#define D_GRABBING_TIME 2
 
 #define D_M_GRAB_TIME 100
 #define D_F_GRAB_TIME 100
@@ -99,7 +99,7 @@ enum ryu_states2
 	ST_DEFENDING2,
 
 	M_GRABBING2,
-	F_GRABBING,
+	F_GRABBING2,
 
 	M_GRAB2,
 	F_GRAB2,
@@ -256,6 +256,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
+	SDL_Texture* shadow = nullptr;
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
 	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk, close_firstframe_lk_mk;

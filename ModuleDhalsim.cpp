@@ -39,6 +39,7 @@ bool ModuleDhalsim::Start()
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
 	}
 
+	shadow = App->textures->Load("assets/images/sprites/sfx/Sombras.png");
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -112,10 +113,10 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
 	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	lp.PushBack({ 437, 665, 90, 86 }, 5, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 529, 668, 83, 83 }, 8, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 614, 671, 135, 80 }, 15, { 33,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
-	lp.PushBack({ 529, 668, 83, 83 }, 12, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 437, 665, 90, 86 }, 2, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 529, 668, 83, 83 }, 3, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 614, 671, 135, 80 }, 6, { 33,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
+	lp.PushBack({ 529, 668, 83, 83 }, 5, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
 	// close lp
@@ -1027,8 +1028,8 @@ bool ModuleDhalsim::Start()
 	// Grabbing
 	const int grabbingnColliders = 4;
 	SDL_Rect grabbingHitbox1[grabbingnColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50}, { -30, 50, 70, 27} };
-	COLLIDER_TYPE grabbingColliderType[grabbingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER_GRAB} };
-	Module* grabbingCallback[grabbingnColliders] = { {this}, {this}, {this}, { (Module*)App->ryu } };
+	COLLIDER_TYPE grabbingColliderType[grabbingnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_GRAB} };
+	Module* grabbingCallback[grabbingnColliders] = { {this}, {this}, {this}, {this} };
 
 	grabbing.PushBack({ 694, 448, 76, 89 }, 1, { 33,5 }, { grabbingnColliders }, { grabbingHitbox1 }, { grabbingColliderType }, { grabbingCallback });
 
@@ -1074,6 +1075,7 @@ bool ModuleDhalsim::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
+	App->textures->Unload(shadow);
 	ClearColliders();
 	idle = forward = backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
@@ -1724,7 +1726,8 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_GRABBING2:
-			current_animation = &crouch;
+			texture = graphics3;
+			current_animation = &grabbing;
 			break;
 
 		case M_GRAB2:
@@ -1787,6 +1790,12 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 	//PUSHBACK CHECK END
 	
+	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
+	{
+		inputs.Push(IN_GRAB2);
+		App->ryu->inputs.Push(IN_GRABBED);
+	}
+
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
@@ -1871,11 +1880,6 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 			inputs.Push(IN_FALLING2);
 		}
-
-		if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER_GRABBOX)
-		{
-			inputs.Push(IN_GRAB2);
-		}
 	}
 }
 
@@ -1883,6 +1887,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
+	SDL_Rect r2;
 	int hitboxesQnt = frame.GetColliderQnt();
 
 	for (int i = 0; i < hitboxesQnt; i++)
@@ -1895,11 +1900,20 @@ void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, S
 	}
 
 	r = frame.frame;
+	r2.x = 0;
+	r2.y = 1;
+	r2.w = 69;
+	r2.h = 11;
+	if (jump_timer == 0)
+		App->render->Blit(shadow, position.x - (frame.pivotPosition.x), 210, &r2, flip);
+	else
+		App->render->Blit(shadow, position.x - (frame.pivotPosition.x), 210, &r2, flip); r2.y = 13;
 
 	if (flip)
 		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 	else
 		App->render->Blit(texture, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+
 }
 
 bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
@@ -2509,7 +2523,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_F_PUNCH2: {
 				if (!close) state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames;
-				if (close) state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames;
+				if (close) state = F_GRABBING2; grabbing_timer = App->frames;
 			}break;
 
 			case IN_F_KIK2: {
@@ -2560,7 +2574,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_F_PUNCH2: {
 				if (!close) state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames;
-				if (close) state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames;
+				if (close) state = state = F_GRABBING2; grabbing_timer = App->frames;
 			}break;
 
 			case IN_F_KIK2: {
@@ -3264,7 +3278,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
-			case IN_GRAB2:state = M_GRAB2; grabbing_timer = App->frames; break;
+			case IN_GRAB2:state = M_GRAB2; m_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
 			}
 		}
@@ -3274,9 +3288,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_M_GRAB_FINISH2:state = ST_IDLE2; m_grab_timer = App->frames; break;
+			case IN_M_GRAB_FINISH2:state = ST_IDLE2; break;
 			}
 		}
+		break;
 
 		case ST_DEFENDING2:
 		{

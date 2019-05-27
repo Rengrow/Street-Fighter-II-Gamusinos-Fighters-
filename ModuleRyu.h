@@ -36,6 +36,7 @@
 #define R_STANDING_TIME 10
 #define R_JUMP_TIME 55
 #define R_GETTING_UP_TIME 48
+#define R_GRABBED_TIME 50
 
 #define R_HEAD_REEL_TIME 43
 #define R_CROUCH_REEL_TIME 20
@@ -84,6 +85,8 @@ enum ryu_states
 	M_KIK_BACKWARD_JUMP,
 	M_KIK_CROUCH,
 
+	GRABBED,
+
 	F_PUNCH_STANDING,
 	F_PUNCH_NEUTRAL_JUMP,
 	F_PUNCH_FORWARD_JUMP,
@@ -126,6 +129,9 @@ enum ryu_inputs
 	IN_LEFT_AND_CROUCH,
 	IN_RIGHT_AND_JUMP,
 	IN_RIGHT_AND_CROUCH,
+
+	IN_GRABBED,
+	IN_GRABBED_FINISH,
 
 	IN_L_PUNCH,
 	IN_L_KIK,
@@ -261,6 +267,7 @@ public:
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;
 	Uint32 gut_reel_timer = 0;
+	Uint32 grabbed_timer = 0;
 };
 
 #endif
