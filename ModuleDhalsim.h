@@ -37,7 +37,7 @@
 #define D_F_CROUCHING_KIK_TIME 118 //+3
 #define D_F_D_JUMPING_KIK_TIME 3003
 
-#define D_GRABBING_TIME 1
+#define D_GRABBING_TIME 2
 
 #define D_M_GRAB_TIME 100
 #define D_F_GRAB_TIME 100
@@ -99,7 +99,7 @@ enum ryu_states2
 	ST_DEFENDING2,
 
 	M_GRABBING2,
-	F_GRABBING,
+	F_GRABBING2,
 
 	M_GRAB2,
 	F_GRAB2,
