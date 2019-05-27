@@ -82,8 +82,6 @@ update_status Application::Update()
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 
-	App->frames++;
-
 	return ret;
 }
 

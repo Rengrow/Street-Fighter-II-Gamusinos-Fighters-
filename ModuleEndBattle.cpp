@@ -13,10 +13,10 @@
 
 ModuleEndBattle::ModuleEndBattle()
 {
-	background.x = 0;
-	background.y = 0;
-	background.w = 308;
-	background.h = 220;
+	background.x = 284;
+	background.y = 35;
+	background.w = 184;
+	background.h = 265;
 }
 
 ModuleEndBattle::~ModuleEndBattle()
@@ -27,10 +27,9 @@ bool ModuleEndBattle::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("assets/images/wiki/post_fight_screen.png");
+	portraits = App->textures->Load("assets/images/ui/portraits_2.png");
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
-
 
 	App->ryu->position.x = 100;
 	App->ryu->position.y = 215;
@@ -46,7 +45,7 @@ bool ModuleEndBattle::CleanUp()
 {
 	LOG("Unloading End battle screen");
 
-	App->textures->Unload(graphics);
+	App->textures->Unload(portraits);
 
 	App->audio->UnloadSong(music);
 
@@ -59,7 +58,7 @@ bool ModuleEndBattle::CleanUp()
 update_status ModuleEndBattle::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(graphics, 40, 5, &background, false);
+	App->render->Blit(portraits, 40, 5, &background, false);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
