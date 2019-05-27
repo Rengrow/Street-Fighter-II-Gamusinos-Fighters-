@@ -113,10 +113,10 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE lpColliderType2[lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* lpCallback[lpnColliders] = { {this}, {this}, {this} };
 	Module* lpCallback2[lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	lp.PushBack({ 437, 665, 90, 86 }, 5, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 529, 668, 83, 83 }, 8, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
-	lp.PushBack({ 614, 671, 135, 80 }, 15, { 33,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
-	lp.PushBack({ 529, 668, 83, 83 }, 12, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 437, 665, 90, 86 }, 2, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 529, 668, 83, 83 }, 3, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
+	lp.PushBack({ 614, 671, 135, 80 }, 6, { 33,5 }, lpnColliders2, lpHitbox2, lpColliderType2, lpCallback2);
+	lp.PushBack({ 529, 668, 83, 83 }, 5, { 33,5 }, lpnColliders, lpHitbox, lpColliderType, lpCallback);
 
 
 	// close lp
