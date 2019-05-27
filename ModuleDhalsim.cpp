@@ -39,6 +39,7 @@ bool ModuleDhalsim::Start()
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
 	}
 
+	shadow = App->textures->Load("assets/images/sprites/sfx/Sombras.png");
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -1074,6 +1075,7 @@ bool ModuleDhalsim::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
+	App->textures->Unload(shadow);
 	ClearColliders();
 	idle = forward = backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
@@ -1883,6 +1885,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture) {
 	Frame frame = current_animation->GetCurrentFrame();
 	SDL_Rect r;
+	SDL_Rect r2;
 	int hitboxesQnt = frame.GetColliderQnt();
 
 	for (int i = 0; i < hitboxesQnt; i++)
@@ -1895,11 +1898,20 @@ void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, S
 	}
 
 	r = frame.frame;
+	r2.x = 0;
+	r2.y = 1;
+	r2.w = 69;
+	r2.h = 11;
+	if (jump_timer == 0)
+		App->render->Blit(shadow, position.x - (frame.pivotPosition.x), 210, &r2, flip);
+	else
+		App->render->Blit(shadow, position.x - (frame.pivotPosition.x), 210, &r2, flip); r2.y = 13;
 
 	if (flip)
 		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
 	else
 		App->render->Blit(texture, position.x - frame.pivotPosition.x, position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
+
 }
 
 bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
