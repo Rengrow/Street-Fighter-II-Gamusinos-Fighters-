@@ -17,6 +17,7 @@
 #include "ModuleUI.h"
 #include "ModuleFight.h"
 #include "ModuleSlowdown.h"
+#include "SDL\include\SDL.h"
 
 Application::Application()
 {
@@ -95,5 +96,6 @@ bool Application::CleanUp()
 	return ret;
 }
 
-
-// Just making a comment to test Github
+Uint32 Application::GetFrame() {
+	return (SDL_GetTicks() / 100) % 6;
+}

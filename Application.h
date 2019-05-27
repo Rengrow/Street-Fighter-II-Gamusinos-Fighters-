@@ -57,6 +57,7 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+	Uint32 GetFrame();
 
 };
 
