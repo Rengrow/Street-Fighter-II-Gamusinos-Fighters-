@@ -14,7 +14,7 @@ public:
 
 private:
 	int frames_passed = 0;
-	int current_frame;
+	int current_frame = 0;
 	int last_frame = 0;
 	int loops = 0;
 
@@ -38,17 +38,16 @@ public:
 		if (frames_passed < frames[current_frame].maxFrames) {
 			frames_passed++;
 		}
-		else {
+		else if (current_frame < last_frame) {
 			frames_passed = 0;
 			current_frame++;
 		}
-
-		if (current_frame >= last_frame)
+		else if (loop && current_frame >= last_frame)
 		{
-			current_frame = (loop) ? 0.0f : last_frame - 1;
+			current_frame = 0;
+			frames_passed = 0;
 			loops++;
 		}
-
 		return frames[current_frame];
 	}
 
