@@ -230,6 +230,8 @@ public:
 	int mov; //lp, mp, hp, lk, mk, hk
 	bool flip = false;
 	Uint32 invulnerabilityFrames;
+	
+	
 
 	//light
 	Uint32 l_standing_punch_timer = 0;
