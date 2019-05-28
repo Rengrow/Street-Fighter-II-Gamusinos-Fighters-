@@ -80,8 +80,8 @@ void ModuleEndBattle::UpdateQuote() {
 update_status ModuleEndBattle::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(portraits, 40, 12, &portrait1, false);
-	App->render->Blit(portraits, SCREEN_WIDTH - portrait2.w - 40, 12, &portrait2, true);
+	App->render->Blit(portraits, 35, 10, &portrait1, false);
+	App->render->Blit(portraits, SCREEN_WIDTH - portrait2.w - 35, 10, &portrait2, true);
 
 	if (!quoteOption)
 		App->fonts->BlitText(10, SCREEN_HEIGHT / 2 + 70, typography, cstr);

@@ -31,6 +31,10 @@ bool ModuleWelcomePage::Start()
 	App->audio->PlaySongDelay(music, -1, 10000);
 	App->render->camera.x = App->render->camera.y = 0;
 
+	fila = 0;
+	columna = 0;
+	segundaSheet = lettersOn = false;
+
 	return ret;
 }
 
@@ -91,7 +95,7 @@ update_status ModuleWelcomePage::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->fight, 2);
+		App->fade->FadeToBlack(this, (Module*)App->vsScreen, 2);
 	}
 
 	return UPDATE_CONTINUE;
