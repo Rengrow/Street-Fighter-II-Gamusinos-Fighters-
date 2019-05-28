@@ -1023,6 +1023,13 @@ bool ModuleDhalsim::Start()
 	grab.PushBack({ 815, 956, 134, 64 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
+	// Grab2
+	grab2.PushBack({ 1, 321, 77, 116 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 79, 323, 71, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 151, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
 
 	// Grabbing
 	const int grabbingnColliders = 4;
@@ -1085,7 +1092,7 @@ bool ModuleDhalsim::CleanUp()
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp_mp = yoga_flame_hp = yoga_flame_cycle = yoga_flame_recovery_lp_mp = yoga_flame_recovery_hp = Animation();
 	streel = stgreel = creel = Animation();
 	airreel = fall = getup = Animation();
-	crouching = standing = crouch = defending = cdefending = grab = stun = Animation();
+	crouching = standing = crouch = defending = cdefending = grab = grab2= stun = Animation();
 	win1 = win2 = lose = Animation();
 	ground = Animation();
 	return true;
