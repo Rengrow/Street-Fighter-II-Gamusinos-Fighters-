@@ -93,6 +93,9 @@
     <ClInclude Include="ModuleVsScreen.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleChSelection.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -159,6 +162,9 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleVsScreen.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleChSelection.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
