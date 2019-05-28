@@ -1714,17 +1714,17 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_KIK_CLOSE2:
-			if (sprite_change_timer <= 8) {
+			if (sprite_change_timer <= 3) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 8 && sprite_change_timer <= 28) {
+			else if (sprite_change_timer > 3 && sprite_change_timer <= 11) {
 				texture = graphics;
 				current_animation = &close_lk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 28 && sprite_change_timer <= D_L_CLOSE_STANDING_KIK_TIME) {
+			else if (sprite_change_timer > 11 && sprite_change_timer <= D_L_CLOSE_STANDING_KIK_TIME) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				if (sprite_change_timer == D_L_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
@@ -1734,17 +1734,17 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_CLOSE2:
-			if (sprite_change_timer <= 8) {
+			if (sprite_change_timer <= 3) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 8 && sprite_change_timer <= 28) {
+			else if (sprite_change_timer > 3 && sprite_change_timer <= 11) {
 				texture = graphics;
 				current_animation = &close_mk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 28 && sprite_change_timer <= D_M_CLOSE_STANDING_KIK_TIME) {
+			else if (sprite_change_timer > 11 && sprite_change_timer <= D_M_CLOSE_STANDING_KIK_TIME) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				if (sprite_change_timer == D_M_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
