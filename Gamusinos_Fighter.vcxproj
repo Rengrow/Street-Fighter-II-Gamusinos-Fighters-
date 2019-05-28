@@ -160,6 +160,7 @@
     <ClInclude Include="ModuleSlowdown.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleUI.h" />
+    <ClInclude Include="ModuleVsScreen.h" />
     <ClInclude Include="ModuleWelcomePage.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="ModuleSlowdown.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUI.cpp" />
+    <ClCompile Include="ModuleVsScreen.cpp" />
     <ClCompile Include="ModuleWelcomePage.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
