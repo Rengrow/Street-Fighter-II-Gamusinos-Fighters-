@@ -1,5 +1,5 @@
-#ifndef __MODULEVSSCREEN_H__
-#define __MODULEVSSCREEN_H__
+#ifndef __MODULECHSELECTION_H__
+#define __MODULECHSELECTION_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -8,11 +8,11 @@
 
 struct SDL_Texture;
 
-class ModuleVsScreen : public Module
+class ModuleChSelection : public Module
 {
 public:
-	ModuleVsScreen();
-	~ModuleVsScreen();
+	ModuleChSelection();
+	~ModuleChSelection();
 
 	bool Start();
 	update_status Update();

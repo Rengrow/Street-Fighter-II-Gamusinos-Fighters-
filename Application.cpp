@@ -17,6 +17,7 @@
 #include "ModuleUI.h"
 #include "ModuleFight.h"
 #include "ModuleVsScreen.h"
+#include "ModuleChSelection.h"
 #include "ModuleSlowdown.h"
 #include "SDL\include\SDL.h"
 
@@ -37,10 +38,11 @@ Application::Application()
 	modules[12] = endBattle = new ModuleEndBattle();
 	modules[13] = collisions = new ModuleCollision();
 	modules[14] = UI = new ModuleUI();
-	modules[15] = fade = new ModuleFadeToBlack();
-	modules[16] = render = new ModuleRender();
-	modules[17] = vsScreen = new ModuleVsScreen();
-	modules[18] = slowdown = new ModuleSlowdown();
+	modules[15] = vsScreen = new ModuleVsScreen();
+	modules[16] = chSelectionScreen = new ModuleChSelection();
+	modules[17] = fade = new ModuleFadeToBlack();
+	modules[18] = render = new ModuleRender();	
+	modules[19] = slowdown = new ModuleSlowdown();
 }
 
 Application::~Application()
@@ -63,6 +65,7 @@ bool Application::Init()
 	endBattle->Disable();
 	UI->Disable();
 	vsScreen->Disable();
+	chSelectionScreen->Disable();
 	
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
