@@ -80,8 +80,6 @@ int main(int argc, char* argv[])
 
 		} break;
 		}
-
-		++App->frames;
 	}
 
 	delete App;
