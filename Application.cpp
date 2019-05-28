@@ -16,6 +16,7 @@
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
 #include "ModuleFight.h"
+#include "ModuleVsScreen.h"
 #include "ModuleSlowdown.h"
 #include "SDL\include\SDL.h"
 
@@ -38,7 +39,8 @@ Application::Application()
 	modules[14] = UI = new ModuleUI();
 	modules[15] = fade = new ModuleFadeToBlack();
 	modules[16] = render = new ModuleRender();
-	modules[17] = slowdown = new ModuleSlowdown();
+	modules[17] = vsScreen = new ModuleVsScreen();
+	modules[18] = slowdown = new ModuleSlowdown();
 }
 
 Application::~Application()
@@ -60,6 +62,7 @@ bool Application::Init()
 	scene_ken->Disable();
 	endBattle->Disable();
 	UI->Disable();
+	vsScreen->Disable();
 	
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
@@ -82,6 +85,8 @@ update_status Application::Update()
 
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
+
+	App->frames++;
 
 	return ret;
 }

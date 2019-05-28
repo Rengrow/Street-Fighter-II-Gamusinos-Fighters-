@@ -24,12 +24,12 @@ public:
 	Mix_Music *music = nullptr;
 	SDL_Rect background;
 
-	int fila = 0;
-	int columna = 0;
-	bool segundaSheet = false;
+	int fila;
+	int columna;
+	bool segundaSheet;
 	int typography;
 	Uint32 timeLetters;
-	bool lettersOn = false;
+	bool lettersOn;
 };
 
 #endif // __MODULEWELCOMEPAGE_H__

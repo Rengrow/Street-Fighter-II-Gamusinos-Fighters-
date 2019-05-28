@@ -26,10 +26,14 @@ bool ModuleWelcomePage::Start()
 	bool ret = true;
 	graphics1 = App->textures->Load("assets/images/ui/logo1.png");
 	graphics2 = App->textures->Load("assets/images/ui/logo2.png");
-	typography = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
+	typography = App->fonts->Load("assets/images/ui/font_2.png", "abcdefghijklmnopqrstuvwxyz_.?1234567890!", 1);
 	music = App->audio->LoadSong("assets/music/title.ogg");
 	App->audio->PlaySongDelay(music, -1, 10000);
 	App->render->camera.x = App->render->camera.y = 0;
+
+	fila = 0;
+	columna = 0;
+	segundaSheet = lettersOn = false;
 
 	return ret;
 }
@@ -85,11 +89,13 @@ update_status ModuleWelcomePage::Update()
 	}
 
 	if (lettersOn)
-		App->fonts->BlitText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 + 70, typography, "insert coin.");
+		//App->fonts->BlitText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 + 70, typography, "insert coin");    DEBUG FONT
+		App->fonts->BlitText(5, SCREEN_HEIGHT / 2 + 70, typography, "insert_coin.");
+
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->fight, 2);
+		App->fade->FadeToBlack(this, (Module*)App->vsScreen, 2);
 	}
 
 	return UPDATE_CONTINUE;
