@@ -9,7 +9,7 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-#define D_L_STANDING_PUNCH_TIME 16
+#define D_L_STANDING_PUNCH_TIME 180000000
 #define D_L_CROUCHING_PUNCH_TIME 23
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
