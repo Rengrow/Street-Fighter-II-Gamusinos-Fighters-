@@ -95,7 +95,7 @@ update_status ModuleWelcomePage::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		Mix_FadeOutMusic(2000);
-		App->fade->FadeToBlack(this, (Module*)App->vsScreen, 2);
+		App->fade->FadeToBlack(this, (Module*)App->chSelectionScreen, 1);
 	}
 
 	return UPDATE_CONTINUE;
