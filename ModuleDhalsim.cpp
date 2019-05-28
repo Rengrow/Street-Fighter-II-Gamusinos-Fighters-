@@ -39,7 +39,7 @@ bool ModuleDhalsim::Start()
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
 	}
 
-	shadow = App->textures->Load("assets/images/sprites/sfx/Sombras.png");
+	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -1921,14 +1921,14 @@ void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, S
 	}
 
 	r = frame.frame;
-	r2.x = 0;
-	r2.y = 1;
+	r2.x = 4;
+	r2.y = 355;
 	r2.w = 69;
 	r2.h = 11;
-	if (position.y > 220)
+	if (jump_timer == 0)
 		App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
 	else
-		r2.y = 13; App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
+		r2.y = 367; App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
 
 	if (flip)
 		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
