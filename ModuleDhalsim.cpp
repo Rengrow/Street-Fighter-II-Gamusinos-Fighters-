@@ -39,7 +39,7 @@ bool ModuleDhalsim::Start()
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
 	}
 
-	shadow = App->textures->Load("assets/images/sprites/sfx/Sombras.png");
+	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -1600,6 +1600,24 @@ update_status ModuleDhalsim::Update()
 
 		case ST_CROUCH_REEL2:
 			current_animation = &creel;
+			if (pushbacktimerhit != 0) {
+				--pushbacktimerhit;
+				if (IsntOnLeftLimit() && IsntOnRightLimit())
+				{
+					if (flip == true) {
+						position.x += pushbackspeed;
+					}
+					else position.x -= pushbackspeed;
+				}
+
+				else
+				{
+					if (flip == true) {
+						App->ryu->position.x -= pushbackspeed;
+					}
+					else App->ryu->position.x += pushbackspeed;
+				}
+			}
 			break;
 
 		case ST_HADOKEN2:
@@ -1731,6 +1749,10 @@ update_status ModuleDhalsim::Update()
 
 		case M_GRAB2:
 			current_animation = &grab;
+			break;
+
+		case GRABBED2:
+			current_animation = &airreel;
 			break;
 
 		//end of test
@@ -1899,14 +1921,14 @@ void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, S
 	}
 
 	r = frame.frame;
-	r2.x = 0;
-	r2.y = 1;
+	r2.x = 4;
+	r2.y = 355;
 	r2.w = 69;
 	r2.h = 11;
-	if (position.y > 220)
+	if (jump_timer == 0)
 		App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
 	else
-		r2.y = 13; App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
+		r2.y = 367; App->render->Blit(shadow, position.x - (idle.frames->pivotPosition.x), 210, &r2, flip);
 
 	if (flip)
 		App->render->Blit(texture, position.x - (r.w - frame.pivotPosition.x), position.y - r.h + frame.pivotPosition.y + jumpHeight, &r, flip);
@@ -2099,6 +2121,15 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_M_GRAB_FINISH2);
 			f_grab_timer = 0;
+		}
+	}
+
+	if (grabbed_timer > 0)
+	{
+		if (App->frames - grabbed_timer > D_GRABBED_TIME)
+		{
+			inputs.Push(IN_GRABBED_FINISH2);
+			grabbed_timer = 0;
 		}
 	}
 
@@ -2484,6 +2515,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2529,6 +2562,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 				if (!close) state = F_KIK_STANDING2; f_standing_kik_timer = App->frames;
 				if (close) state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames;
 			}break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
@@ -2580,6 +2615,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 				if (!close) state = F_KIK_STANDING2; f_standing_kik_timer = App->frames;
 				if (close) state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames;
 			}break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
@@ -2738,6 +2775,9 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HADOKEN_FINISH2: state = ST_IDLE2; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2897,8 +2937,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+			
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2910,8 +2953,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2923,8 +2969,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2936,8 +2985,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2949,8 +3001,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+			
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2962,8 +3017,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2975,8 +3033,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -2988,8 +3049,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3001,8 +3065,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3014,8 +3081,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3027,8 +3097,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3040,8 +3113,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_IDLE2; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3053,6 +3129,9 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCHING_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3064,6 +3143,9 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH2: state = ST_IDLE2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3099,6 +3181,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_F_PUNCH2: state = F_PUNCH_CROUCH2; f_crouching_punch_timer = App->frames; break;
 			case IN_F_KIK2: state = F_KIK_CROUCH2; f_crouching_kik_timer = App->frames; break;
 
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
@@ -3112,7 +3196,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3123,7 +3210,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3134,7 +3224,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3145,7 +3238,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3156,7 +3252,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3167,7 +3266,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3178,7 +3280,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3189,7 +3294,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3200,7 +3308,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_PUNCH_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3211,7 +3322,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_KIK_FINISH2: state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3222,8 +3336,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2:state = ST_IDLE2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3234,8 +3351,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2:state = ST_IDLE2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3246,7 +3366,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2:state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3275,8 +3398,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+
 			case IN_GRAB2:state = M_GRAB2; m_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
 			}
@@ -3292,10 +3417,20 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+		case GRABBED2:
+		{
+			switch (last_input)
+			{
+			case IN_GRABBED_FINISH2:state = ST_FALLING2; break;
+			}
+		}
+		break;
+
 		case ST_DEFENDING2:
 		{
 			switch (last_input)
 			{
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_DEFENDING_FINISH2:state = ST_IDLE2; break;
 			case IN_GUT_REEL:state = ST_GUT_REEL2; break;
 			}
