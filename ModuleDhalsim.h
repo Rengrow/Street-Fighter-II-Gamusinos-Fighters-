@@ -278,7 +278,7 @@ public:
 	Animation airreel, fall;
 	Animation getup, cdefending, defending, grab, stun;
 	Animation crouching, standing, crouch;
-	Animation win1, win2;
+	Animation win1, win2, lose;
 	Animation ground;
 	Animation grabbing;
 	// Animation sweep;

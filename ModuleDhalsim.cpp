@@ -1033,6 +1033,8 @@ bool ModuleDhalsim::Start()
 	grabbing.PushBack({ 694, 448, 76, 89 }, 1, { 33,5 }, { grabbingnColliders }, { grabbingHitbox1 }, { grabbingColliderType }, { grabbingCallback });
 
 
+	// Lose animation
+	lose.PushBack({ 99, 989, 96, 31 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
 	// Lose animation on ground
@@ -1084,7 +1086,7 @@ bool ModuleDhalsim::CleanUp()
 	streel = stgreel = creel = Animation();
 	airreel = fall = getup = Animation();
 	crouching = standing = crouch = defending = cdefending = grab = stun = Animation();
-	win1 = win2 = Animation();
+	win1 = win2 = lose = Animation();
 	ground = Animation();
 	return true;
 }
@@ -1669,7 +1671,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case LOOSE2:
-			current_animation = &ground;
+			current_animation = &lose;
 			break;
 
 		case VICTORY2:
