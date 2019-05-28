@@ -28,7 +28,7 @@ public:
 	int typography;
 	Uint32 timeLetters;
 	bool quoteOption;
-	std::string quote1 = "i will meditate and then destroy you";
+	std::string quote1 = "i will meditate and then destroy you!!";
 	std::string quote2 = "now you've realized the inner mysteries of yoga!";
 	std::string quoteTemp;
 	char *cstr;

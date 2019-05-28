@@ -68,7 +68,7 @@
 #define D_F_CLOSE_STANDING_KIK_TIME 24
 #define D_L_CLOSE_CROUCHING_KIK_TIME 17
 #define D_M_CLOSE_CROUCHING_KIK_TIME 14
-#define D_F_CLOSE_CROUCHING_KIK_TIME 37 //DOES NOT EXIST
+
 
 // following defines made by Adria, not used in State Matrix
 #define D_L_CLOSE_STANDING_PUNCH_TIME 16
@@ -76,7 +76,7 @@
 #define D_F_CLOSE_STANDING_PUNCH_TIME 33
 #define D_L_CLOSE_CROUCHING_PUNCH_TIME 11
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 15
-#define D_F_CLOSE_CROUCHING_PUNCH_TIME 23 //DOES NOT EXIST
+
 
 struct Mix_Chunk;
 
@@ -93,6 +93,9 @@ enum ryu_states2
 	ST_CROUCHING2,
 	ST_CROUCH2,
 	ST_STANDING2,
+
+	ST_CROUCH_DEFENDING2,
+	ST_CROUCH_DEFENDING_READY2,
 	ST_DEFENDING2,
 
 	M_GRABBING2,
@@ -192,6 +195,7 @@ enum ryu_inputs2
 	IN_IDLE2,
 
 	IN_DEFENDING2,
+	IN_CROUCH_DEFENDING2,
 
 	IN_L_PUNCH2,
 	IN_L_KIK2,
@@ -274,7 +278,7 @@ public:
 	Animation airreel, fall;
 	Animation getup, cdefending, defending, grab, stun;
 	Animation crouching, standing, crouch;
-	Animation win1, win2;
+	Animation win1, win2, lose;
 	Animation ground;
 	Animation grabbing;
 	// Animation sweep;
@@ -361,6 +365,7 @@ public:
 	Uint32 jump_timer = 0;
 	Uint32 getting_up_timer = 0;
 	Uint32 defending_timer = 0;
+	Uint32 crouch_defending_timer = 0;
 
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;
