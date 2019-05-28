@@ -34,7 +34,7 @@ bool ModuleEndBattle::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
-	typography = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
+	typography = App->fonts->Load("assets/images/ui/font_3.png", "abcdefghijklmnopqrstuvwxyz_.?1234567890!", 1);
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
 
@@ -55,7 +55,7 @@ bool ModuleEndBattle::CleanUp()
 	LOG("Unloading End battle screen");
 
 	App->textures->Unload(portraits);
-
+	App->fonts->UnLoad(typography);
 	App->audio->UnloadSong(music);
 
 	music = nullptr;
