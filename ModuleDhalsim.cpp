@@ -2134,8 +2134,14 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			backwardJump.ResetAnimation();
 			forwardJump.ResetAnimation();
 			neutralJump.ResetAnimation();
+			jlp.ResetAnimation();
+			jmp.ResetAnimation();
+			jhp.ResetAnimation();
+			jlk.ResetAnimation();
+			jmk.ResetAnimation();
 			jhk.ResetAnimation();
-
+			yoga_mummy.ResetAnimation();
+			yoga_drill.ResetAnimation();
 		}
 	}
 
