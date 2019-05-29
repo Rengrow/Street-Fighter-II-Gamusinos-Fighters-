@@ -1025,12 +1025,21 @@ bool ModuleDhalsim::Start()
 
 
 	// Grab2
-	grab2.PushBack({ 1, 321, 77, 116 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 79, 323, 71, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 151, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 1, 321, 77, 116 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 79, 323, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 151, 323, 70, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grabbing
 	const int grabbingnColliders = 4;
@@ -1548,9 +1557,9 @@ update_status ModuleDhalsim::Update()
 				{
 					jumpHeight -= speed + 3;
 				}
-//				if(jhk.GetCurrentFrame() == jhk.frames[8]){
-//					texture = graphics;
-//				}
+/*				if(jhk.GetCurrentFrame() == jhk.frames[8]){
+					texture = graphics;
+				}*/
 
 				if (IsntOnRightLimit())
 					position.x += 3;
@@ -2151,6 +2160,22 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			jhk.ResetAnimation();
 			yoga_mummy.ResetAnimation();
 			yoga_drill.ResetAnimation();
+			close_firstframe_lk_mk.ResetAnimation();
+			yoga_flame_lp_mp.ResetAnimation();
+			yoga_flame_hp.ResetAnimation();
+			yoga_flame_cycle.ResetAnimation();
+			yoga_flame_recovery_lp_mp.ResetAnimation();
+			yoga_flame_recovery_hp.ResetAnimation();
+			airreel.ResetAnimation();
+			fall.ResetAnimation();
+			getup.ResetAnimation();
+			grab.ResetAnimation();
+			grab2.ResetAnimation();
+			stun.ResetAnimation();
+			win1.ResetAnimation();
+			win2.ResetAnimation();
+			lose.ResetAnimation();
+			ground.ResetAnimation();
 		}
 	}
 
