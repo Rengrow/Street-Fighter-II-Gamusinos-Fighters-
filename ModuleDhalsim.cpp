@@ -494,14 +494,14 @@ bool ModuleDhalsim::Start()
 	Module*jhkCallback[jhknColliders] = { { this },{ this },{ this } };
 	Module*jhkCallback2[jhknColliders2] = { { this },{ this }, { (Module*)App->ryu } };
 
-	jhk.PushBack({ 463, 909, 73, 96 }, 1, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 538, 899, 54, 106 }, 2, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 594, 901, 51, 104 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 752, 903, 184, 102 }, 6, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
-	jhk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 594, 901, 51, 104 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 1, 364, 57, 122 }, 2977, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 1, 414, 73, 96 }, 1, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 76, 404, 54, 106 }, 2, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 132, 406, 51, 104 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 185, 408, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 293, 408, 184, 102 }, 6, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
+	jhk.PushBack({ 185, 408, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 132, 406, 51, 104 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 438, 110, 57, 122 }, 2977, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 
 
 	//Lp yoga fire
@@ -1025,21 +1025,21 @@ bool ModuleDhalsim::Start()
 
 
 	// Grab2
-	grab2.PushBack({ 1, 321, 77, 116 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 79, 323, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 151, 323, 70, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 150, 242, 77, 116 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 300, 244, 70, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grabbing
 	const int grabbingnColliders = 4;
@@ -1451,7 +1451,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case F_KIK_NEUTRAL_JUMP2:
-			texture = graphics3;
+			texture = graphics2;
 			current_animation = &jhk;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
@@ -1497,7 +1497,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case F_KIK_FORWARD_JUMP2:
-			texture = graphics3;
+			texture = graphics2;
 			current_animation = &jhk;
 			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 			{
@@ -1547,7 +1547,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case F_KIK_BACKWARD_JUMP2:
-				texture = graphics3;
+				texture = graphics2;
 				current_animation = &jhk;
 				if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
 				{
@@ -1557,10 +1557,6 @@ update_status ModuleDhalsim::Update()
 				{
 					jumpHeight -= speed + 3;
 				}
-				if(jhk.GetCurrentFrame() == jhk.frames[8]){
-					texture = graphics;
-				}
-
 				if (IsntOnRightLimit())
 					position.x += 3;
 				typeofattack = 3;

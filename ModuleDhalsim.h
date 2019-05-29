@@ -35,7 +35,7 @@
 
 #define D_GRABBING_TIME 2
 
-#define D_M_GRAB_TIME 135+58
+#define D_M_GRAB_TIME 135+15
 #define D_F_GRAB_TIME 40+3
 #define D_GRABBED_TIME 50
 
