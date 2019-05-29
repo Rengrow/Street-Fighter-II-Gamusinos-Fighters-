@@ -2585,7 +2585,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_M_PUNCH2: {
 				if (!close) { state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames; }
-				else if (close) { state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames; }
+				else if (close) { state = M_GRABBING2; grabbing_timer = App->frames; }
 			}break;
 
 			case IN_M_KIK2: {
@@ -2638,7 +2638,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_M_PUNCH2: {
 				if (!close) { state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames; }
-				else if (close) { state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames; }
+				else if (close) { state = M_GRABBING2; grabbing_timer = App->frames; }
 			}break;
 
 			case IN_M_KIK2: {

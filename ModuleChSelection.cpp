@@ -41,8 +41,6 @@ bool ModuleChSelection::Start()
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
 
 	App->render->camera.x = App->render->camera.y = 0;
-	isFading = false;
-	timeScreen = App->frames + 90;
 
 	return ret;
 }
