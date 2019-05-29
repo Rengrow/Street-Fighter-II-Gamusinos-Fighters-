@@ -1557,9 +1557,9 @@ update_status ModuleDhalsim::Update()
 				{
 					jumpHeight -= speed + 3;
 				}
-/*				if(jhk.GetCurrentFrame() == jhk.frames[8]){
+				if(jhk.GetCurrentFrame() == jhk.frames[8]){
 					texture = graphics;
-				}*/
+				}
 
 				if (IsntOnRightLimit())
 					position.x += 3;
@@ -2155,6 +2155,9 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			backwardJump.ResetAnimation();
 			forwardJump.ResetAnimation();
 			neutralJump.ResetAnimation();
+			jlp.ResetAnimation();
+			jmp.ResetAnimation();
+			jhp.ResetAnimation();
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
 			jhk.ResetAnimation();
@@ -2265,7 +2268,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_d_jumping_punch_timer > D_L_D_JUMPING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
-			jlp.ResetAnimation();
 			l_d_jumping_punch_timer = 0;
 		}
 	}
@@ -2357,7 +2359,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_d_jumping_punch_timer > D_M_D_JUMPING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
-			jmp.ResetAnimation();
 			m_d_jumping_punch_timer = 0;
 		}
 	}
@@ -2428,7 +2429,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_crouching_punch_timer > D_F_CROUCHING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
-			chp.ResetAnimation();
 			f_crouching_punch_timer = 0;
 		}
 	}
