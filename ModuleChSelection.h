@@ -4,7 +4,6 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
-#include "SDL_Mixer/include/SDL_mixer.h" //Arreglar
 
 struct SDL_Texture;
 
@@ -23,8 +22,6 @@ public:
 	SDL_Rect portrait1;
 	SDL_Rect portrait2;
 	SDL_Rect vs;
-	Uint32 timeScreen;
-	bool isFading;
 };
 
 #endif // __MODULEENDBATTLE_H__
