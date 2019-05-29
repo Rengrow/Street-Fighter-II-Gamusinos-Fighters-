@@ -500,8 +500,8 @@ bool ModuleDhalsim::Start()
 	jhk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 	jhk.PushBack({ 752, 903, 184, 102 }, 6, { 33,5 }, { jhknColliders2 }, { jhkHitbox2 }, { jhkColliderType2 }, { jhkCallback2 });
 	jhk.PushBack({ 647, 903, 103, 102 }, 4, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
-	jhk.PushBack({ 179, 398, 58, 88 }, 2977, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 594, 901, 51, 104 }, 3, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
+	jhk.PushBack({ 1, 364, 57, 122 }, 2977, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 
 
 	//Lp yoga fire
@@ -1548,6 +1548,9 @@ update_status ModuleDhalsim::Update()
 				{
 					jumpHeight -= speed + 3;
 				}
+//				if(jhk.GetCurrentFrame() == jhk.frames[8]){
+//					texture = graphics;
+//				}
 
 				if (IsntOnRightLimit())
 					position.x += 3;
@@ -2134,9 +2137,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			backwardJump.ResetAnimation();
 			forwardJump.ResetAnimation();
 			neutralJump.ResetAnimation();
-			jlp.ResetAnimation();
-			jmp.ResetAnimation();
-			jhp.ResetAnimation();
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
 			jhk.ResetAnimation();
@@ -2188,6 +2188,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_standing_punch_timer > D_L_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			lp.ResetAnimation();
 			l_standing_punch_timer = 0;
 		}
 	}
@@ -2197,6 +2198,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_close_standing_punch_timer > D_L_CLOSE_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			close_lp.ResetAnimation();
 			l_close_standing_punch_timer = 0;
 			
 		}
@@ -2207,6 +2209,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_crouching_punch_timer > D_L_CROUCHING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			clp.ResetAnimation();
 			l_crouching_punch_timer = 0;
 			
 		}
@@ -2217,6 +2220,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_close_crouching_punch_timer > D_L_CLOSE_CROUCHING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			close_clp.ResetAnimation();
 			l_close_crouching_punch_timer = 0;
 			
 		}
@@ -2227,6 +2231,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_d_jumping_punch_timer > D_L_D_JUMPING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			jlp.ResetAnimation();
 			l_d_jumping_punch_timer = 0;
 		}
 	}
@@ -2236,6 +2241,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_standing_kik_timer > D_L_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			lk.ResetAnimation();
 			l_standing_kik_timer = 0;
 		}
 	}
@@ -2245,6 +2251,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_close_standing_kik_timer > D_L_CLOSE_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			close_lk.ResetAnimation();
 			l_close_standing_kik_timer = 0;
 		}
 	}
@@ -2254,6 +2261,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_crouching_kik_timer > D_L_CROUCHING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			clk.ResetAnimation();
 			l_crouching_kik_timer = 0;
 		}
 	}
@@ -2263,6 +2271,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_close_crouching_kik_timer > D_L_CLOSE_CROUCHING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			close_clk.ResetAnimation();
 			l_close_crouching_kik_timer = 0;
 		}
 	}
@@ -2274,6 +2283,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_standing_punch_timer > D_M_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			mp.ResetAnimation();
 			m_standing_punch_timer = 0;
 		}
 	}
@@ -2283,6 +2293,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_close_standing_punch_timer > D_M_CLOSE_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			close_mp.ResetAnimation();
 			m_close_standing_punch_timer = 0;
 		}
 	}
@@ -2292,6 +2303,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_crouching_punch_timer > D_M_CROUCHING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			cmp.ResetAnimation();
 			m_crouching_punch_timer = 0;
 		}
 	}
@@ -2301,6 +2313,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_close_crouching_punch_timer > D_M_CLOSE_CROUCHING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			close_cmp.ResetAnimation();
 			m_close_crouching_punch_timer = 0;
 		}
 	}
@@ -2310,6 +2323,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_d_jumping_punch_timer > D_M_D_JUMPING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			jmp.ResetAnimation();
 			m_d_jumping_punch_timer = 0;
 		}
 	}
@@ -2319,6 +2333,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_standing_kik_timer > D_M_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			mk.ResetAnimation();
 			m_standing_kik_timer = 0;
 		}
 	}
@@ -2328,6 +2343,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_close_standing_kik_timer > D_M_CLOSE_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			close_mk.ResetAnimation();
 			m_close_standing_kik_timer = 0;
 		}
 	}
@@ -2337,6 +2353,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_crouching_kik_timer > D_M_CROUCHING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			cmk.ResetAnimation();
 			m_crouching_kik_timer = 0;
 		}
 	}
@@ -2346,6 +2363,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_close_crouching_kik_timer > D_M_CLOSE_CROUCHING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			close_cmk.ResetAnimation();
 			m_close_crouching_kik_timer = 0;
 		}
 	}
@@ -2356,6 +2374,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_standing_punch_timer > D_F_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			hp.ResetAnimation();
 			f_standing_punch_timer = 0;
 		}
 	}
@@ -2365,6 +2384,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_close_standing_punch_timer > D_F_CLOSE_STANDING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			close_hp.ResetAnimation();
 			f_close_standing_punch_timer = 0;
 		}
 	}
@@ -2374,6 +2394,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_crouching_punch_timer > D_F_CROUCHING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			chp.ResetAnimation();
 			f_crouching_punch_timer = 0;
 		}
 	}
@@ -2383,6 +2404,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_d_jumping_punch_timer > D_F_D_JUMPING_PUNCH_TIME)
 		{
 			inputs.Push(IN_PUNCH_FINISH2);
+			jhp.ResetAnimation();
 			f_d_jumping_punch_timer = 0;
 		}
 	}
@@ -2392,6 +2414,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_standing_kik_timer > D_F_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			hk.ResetAnimation();
 			f_standing_kik_timer = 0;
 		}
 	}
@@ -2401,6 +2424,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_close_standing_kik_timer > D_F_CLOSE_STANDING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			close_hk.ResetAnimation();
 			f_close_standing_kik_timer = 0;
 		}
 	}
@@ -2410,6 +2434,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_crouching_kik_timer > D_F_CROUCHING_KIK_TIME)
 		{
 			inputs.Push(IN_KIK_FINISH2);
+			chk.ResetAnimation();
 			f_crouching_kik_timer = 0;
 		}
 	}
@@ -2419,6 +2444,9 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - hadoken_timer > D_HADOKEN_TIME)
 		{
 			inputs.Push(IN_HADOKEN_FINISH2);
+			yoga_fire_lp.ResetAnimation();
+			yoga_fire_mp.ResetAnimation();
+			yoga_fire_hp.ResetAnimation();
 			hadoken_timer = 0;
 		}
 	}
@@ -2428,6 +2456,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - crouching_timer > D_CROUCHING_TIME)
 		{
 			inputs.Push(IN_CROUCHING_FINISH2);
+			crouching.ResetAnimation();
 			crouching_timer = 0;
 		}
 	}
@@ -2437,6 +2466,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - standing_timer > D_STANDING_TIME)
 		{
 			inputs.Push(IN_STANDING_FINISH2);
+			standing.ResetAnimation();
 			standing_timer = 0;
 		}
 	}
@@ -2446,6 +2476,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - head_reel_timer > D_HEAD_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
+			streel.ResetAnimation();
 			head_reel_timer = 0;
 		}
 	}
@@ -2455,6 +2486,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - gut_reel_timer > D_GUT_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
+			stgreel.ResetAnimation();
 			gut_reel_timer = 0;
 		}
 	}
@@ -2464,6 +2496,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - crouch_reel_timer > D_CROUCH_REEL_TIME)
 		{
 			inputs.Push(IN_REEL_FINISH2);
+			creel.ResetAnimation();
 			crouch_reel_timer = 0;
 		}
 	}
@@ -2473,6 +2506,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - getting_up_timer > D_GETTING_UP_TIME)
 		{
 			inputs.Push(IN_GETTING_UP_FINISH2);
+			getup.ResetAnimation();
 			getting_up_timer = 0;
 		}
 	}
@@ -2482,6 +2516,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - defending_timer > D_DEFENDING_TIME)
 		{
 			inputs.Push(IN_DEFENDING_FINISH2);
+			defending.ResetAnimation();
 			defending_timer = 0;
 		}
 	}
@@ -2491,6 +2526,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - crouch_defending_timer > D_DEFENDING_TIME)
 		{
 			inputs.Push(IN_DEFENDING_FINISH2);
+			cdefending.ResetAnimation();
 			crouch_defending_timer = 0;
 		}
 	}
