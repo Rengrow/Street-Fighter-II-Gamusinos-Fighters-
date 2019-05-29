@@ -1788,7 +1788,16 @@ update_status ModuleDhalsim::Update()
 			current_animation = &grabbing;
 			break;
 
+		case F_GRABBING2:
+			texture = graphics3;
+			current_animation = &grabbing;
+			break;
+
 		case M_GRAB2:
+			current_animation = &grab2;
+			break;
+
+		case F_GRAB2:
 			current_animation = &grab;
 			break;
 
@@ -2168,7 +2177,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (App->frames - f_grab_timer > D_F_GRAB_TIME)
 		{
-			inputs.Push(IN_M_GRAB_FINISH2);
+			inputs.Push(IN_F_GRAB_FINISH2);
 			f_grab_timer = 0;
 		}
 	}
@@ -2631,7 +2640,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_F_PUNCH2: {
 				if (!close) { state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames; }
-				else if (close) { state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames; }
+				else if (close) { state = F_GRABBING2; grabbing_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK2: {
@@ -2684,7 +2693,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_F_PUNCH2: {
 				if (!close) { state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames; }
-				else if (close) { state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames; }
+				else if (close) { state = F_GRABBING2; grabbing_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK2: {
@@ -3322,6 +3331,9 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 				else if (close) { state = M_KIK_CROUCHCLOSE2; m_close_crouching_kik_timer = App->frames; }
 			}break;
 
+			case IN_F_PUNCH2: state = F_PUNCH_CROUCH2; f_crouching_punch_timer = App->frames; break;
+			case IN_F_KIK2: state = F_KIK_CROUCH2; f_crouching_kik_timer = App->frames; break;
+
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_DEFENDING2: state = ST_CROUCH_DEFENDING2; crouch_defending_timer = App->frames; break;
 
@@ -3551,11 +3563,23 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 
 			case IN_GRAB2:state = M_GRAB2; m_grab_timer = App->frames; break;
+			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case F_GRABBING2:
+		{
+			switch (last_input)
+			{
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+
+			case IN_GRAB2:state = F_GRAB2; f_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
 			}
 		}
@@ -3566,6 +3590,15 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_M_GRAB_FINISH2:state = ST_IDLE2; break;
+			}
+		}
+		break;
+
+		case F_GRAB2:
+		{
+			switch (last_input)
+			{
+			case IN_F_GRAB_FINISH2:state = ST_IDLE2; break;
 			}
 		}
 		break;
