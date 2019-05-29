@@ -34,7 +34,8 @@ bool ModuleEndBattle::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
-	typography = App->fonts->Load("assets/images/ui/font_3.png", "abcdefghijklmnopqrstuvwxyz_.?1234567890!", 1);
+	typography = App->fonts->Load("assets/images/ui/font_3_small.png", "abcdefghijklmnopqrstuvwxyz.?1234567890! ", 1);
+	//typography = App->fonts->Load("assets/images/ui/font_4.png", "abcdefghijklmnopqrstuvwxyz.ºª1234567890_", 1);
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
 

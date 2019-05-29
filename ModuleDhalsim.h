@@ -9,28 +9,28 @@
 
 // All defines have an added +3 frames, unless said otherwise
 
-#define D_L_STANDING_PUNCH_TIME 16
-#define D_L_CROUCHING_PUNCH_TIME 23
+#define D_L_STANDING_PUNCH_TIME 16+3
+#define D_L_CROUCHING_PUNCH_TIME 23+5
 #define D_L_D_JUMPING_PUNCH_TIME 3003
 
-#define D_L_STANDING_KIK_TIME 22
-#define D_L_CROUCHING_KIK_TIME 21
+#define D_L_STANDING_KIK_TIME 22+4
+#define D_L_CROUCHING_KIK_TIME 21+3
 #define D_L_D_JUMPING_KIK_TIME 3003
 
-#define D_M_STANDING_PUNCH_TIME 26
-#define D_M_CROUCHING_PUNCH_TIME 23
+#define D_M_STANDING_PUNCH_TIME 26+4
+#define D_M_CROUCHING_PUNCH_TIME 23+5
 #define D_M_D_JUMPING_PUNCH_TIME 3003
 
-#define D_M_STANDING_KIK_TIME 22
-#define D_M_CROUCHING_KIK_TIME 28
+#define D_M_STANDING_KIK_TIME 22+4
+#define D_M_CROUCHING_KIK_TIME 28+3
 #define D_M_D_JUMPING_KIK_TIME 3003
 
-#define D_F_STANDING_PUNCH_TIME 36
-#define D_F_CROUCHING_PUNCH_TIME 33
+#define D_F_STANDING_PUNCH_TIME 36+6
+#define D_F_CROUCHING_PUNCH_TIME 33+8
 #define D_F_D_JUMPING_PUNCH_TIME 3003
 
-#define D_F_STANDING_KIK_TIME 35
-#define D_F_CROUCHING_KIK_TIME 46
+#define D_F_STANDING_KIK_TIME 35+7
+#define D_F_CROUCHING_KIK_TIME 46+3
 #define D_F_D_JUMPING_KIK_TIME 3003
 
 #define D_GRABBING_TIME 2
@@ -50,32 +50,32 @@
 #define D_CROUCH_REEL_TIME 13 //+1
 #define D_GUT_REEL_TIME 27 //+3
 
-#define D_LP_YOGA_FIRE 32
-#define D_MP_YOGA_FIRE 32
-#define D_HP_YOGA_FIRE 32
+#define D_LP_YOGA_FIRE 32+6
+#define D_MP_YOGA_FIRE 32+6
+#define D_HP_YOGA_FIRE 32+6
 
-#define D_LP_MP_YOGA_FLAME 37
-#define D_HP_YOGA_FLAME 39
-#define D_CYCLE_YOGA_FLAME 16
-#define D_LP_MP_RECOVERY_YOGA_FLAME 19
-#define D_HP_RECOVERY_YOGA_FLAME 20
+#define D_LP_MP_YOGA_FLAME 37+17
+#define D_HP_YOGA_FLAME 39+19
+#define D_CYCLE_YOGA_FLAME 16+3
+#define D_LP_MP_RECOVERY_YOGA_FLAME 19+7
+#define D_HP_RECOVERY_YOGA_FLAME 20+8
 
 #define D_YOGA_DRILL 1000
 #define D_YOGA_MUMMY 1000
 
-#define D_L_CLOSE_STANDING_KIK_TIME 16
-#define D_M_CLOSE_STANDING_KIK_TIME 16
-#define D_F_CLOSE_STANDING_KIK_TIME 24
-#define D_L_CLOSE_CROUCHING_KIK_TIME 17
-#define D_M_CLOSE_CROUCHING_KIK_TIME 14
+#define D_L_CLOSE_STANDING_KIK_TIME 16+3
+#define D_M_CLOSE_STANDING_KIK_TIME 16+3
+#define D_F_CLOSE_STANDING_KIK_TIME 24+3
+#define D_L_CLOSE_CROUCHING_KIK_TIME 17+2
+#define D_M_CLOSE_CROUCHING_KIK_TIME 14+2
 
 
 // following defines made by Adria, not used in State Matrix
-#define D_L_CLOSE_STANDING_PUNCH_TIME 16
-#define D_M_CLOSE_STANDING_PUNCH_TIME 16
-#define D_F_CLOSE_STANDING_PUNCH_TIME 33
-#define D_L_CLOSE_CROUCHING_PUNCH_TIME 11
-#define D_M_CLOSE_CROUCHING_PUNCH_TIME 15
+#define D_L_CLOSE_STANDING_PUNCH_TIME 16+3
+#define D_M_CLOSE_STANDING_PUNCH_TIME 16+3
+#define D_F_CLOSE_STANDING_PUNCH_TIME 33+5
+#define D_L_CLOSE_CROUCHING_PUNCH_TIME 11+2
+#define D_M_CLOSE_CROUCHING_PUNCH_TIME 15+2
 
 
 struct Mix_Chunk;
@@ -276,7 +276,7 @@ public:
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
 	Animation airreel, fall;
-	Animation getup, cdefending, defending, grab, stun;
+	Animation getup, cdefending, defending, grab, grab2, stun;
 	Animation crouching, standing, crouch;
 	Animation win1, win2, lose;
 	Animation ground;

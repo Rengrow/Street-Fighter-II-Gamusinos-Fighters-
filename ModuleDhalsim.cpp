@@ -10,6 +10,7 @@
 #include "ModuleRyu.h"
 #include "ModuleFonts.h"
 #include "p2Qeue.h"
+#include "ModuleSlowdown.h"
 #include "SDL\include\SDL.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -1023,6 +1024,13 @@ bool ModuleDhalsim::Start()
 	grab.PushBack({ 815, 956, 134, 64 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
+	// Grab2
+	grab2.PushBack({ 1, 321, 77, 116 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 79, 323, 71, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 151, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 222, 323, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 293, 323, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
 
 	// Grabbing
 	const int grabbingnColliders = 4;
@@ -1085,7 +1093,7 @@ bool ModuleDhalsim::CleanUp()
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp_mp = yoga_flame_hp = yoga_flame_cycle = yoga_flame_recovery_lp_mp = yoga_flame_recovery_hp = Animation();
 	streel = stgreel = creel = Animation();
 	airreel = fall = getup = Animation();
-	crouching = standing = crouch = defending = cdefending = grab = stun = Animation();
+	crouching = standing = crouch = defending = cdefending = grab = grab2= stun = Animation();
 	win1 = win2 = lose = Animation();
 	ground = Animation();
 	return true;
@@ -1706,17 +1714,17 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case L_KIK_CLOSE2:
-			if (sprite_change_timer <= 8) {
+			if (sprite_change_timer <= 3) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 8 && sprite_change_timer <= 28) {
+			else if (sprite_change_timer > 3 && sprite_change_timer <= 11) {
 				texture = graphics;
 				current_animation = &close_lk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 28 && sprite_change_timer <= D_L_CLOSE_STANDING_KIK_TIME) {
+			else if (sprite_change_timer > 11 && sprite_change_timer <= D_L_CLOSE_STANDING_KIK_TIME) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				if (sprite_change_timer == D_L_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
@@ -1726,17 +1734,17 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_CLOSE2:
-			if (sprite_change_timer <= 8) {
+			if (sprite_change_timer <= 3) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 8 && sprite_change_timer <= 28) {
+			else if (sprite_change_timer > 3 && sprite_change_timer <= 11) {
 				texture = graphics;
 				current_animation = &close_mk;
 				sprite_change_timer++;
 			}
-			else if (sprite_change_timer > 28 && sprite_change_timer <= D_M_CLOSE_STANDING_KIK_TIME) {
+			else if (sprite_change_timer > 11 && sprite_change_timer <= D_M_CLOSE_STANDING_KIK_TIME) {
 				texture = graphics3;
 				current_animation = &close_firstframe_lk_mk;
 				if (sprite_change_timer == D_M_CLOSE_STANDING_KIK_TIME) { sprite_change_timer = 0; }
@@ -2009,7 +2017,6 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if (App->input->pads[0].x == true)
 		{
-			
 			inputs.Push(IN_L_PUNCH2);
 			
 		}
@@ -2507,33 +2514,33 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: {
-				if (!close)	state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;
-				if (close)	state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames;
+				if (!close) { state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;}
+				else if (close) { state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames; }
 			} break;
 
 			case IN_L_KIK2: {
-				if (!close) state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;
-				if (close) state = L_KIK_CLOSE2; l_close_standing_kik_timer = App->frames;
+				if (!close) { state = L_KIK_STANDING2; l_standing_kik_timer = App->frames; }
+				else if (close) { state = L_KIK_CLOSE2; l_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_M_PUNCH2: {
-				if (!close) state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames;
-				if (close) state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames;
+				if (!close) { state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames; }
+				else if (close) { state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames; }
 			}break;
 
 			case IN_M_KIK2: {
-				if (!close) state = M_KIK_STANDING2; m_standing_kik_timer = App->frames;
-				if (close) state = M_KIK_CLOSE2; m_close_standing_kik_timer = App->frames;
+				if (!close) { state = M_KIK_STANDING2; m_standing_kik_timer = App->frames; }
+				else if (close) { state = M_KIK_CLOSE2; m_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_F_PUNCH2: {
-				if (!close) state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames;
-				if (close) state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames;
+				if (!close) { state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames; }
+				else if (close) { state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK2: {
-				if (!close) state = F_KIK_STANDING2; f_standing_kik_timer = App->frames;
-				if (close) state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames;
+				if (!close) { state = F_KIK_STANDING2; f_standing_kik_timer = App->frames; }
+				else if (close) { state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
@@ -2559,33 +2566,33 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: {
-				if (!close)	state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;
-				if (close)	state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames;
+				if (!close) { state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames; }
+				else if (close) { state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames; }
 			} break;
 
 			case IN_L_KIK2: {
-				if (!close) state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;
-				if (close) state = L_KIK_CLOSE2; l_close_standing_kik_timer = App->frames;
+				if (!close) { state = L_KIK_STANDING2; l_standing_kik_timer = App->frames; }
+				else if (close) { state = L_KIK_CLOSE2; l_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_M_PUNCH2: {
-				if (!close) state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames;
-				if (close) state = M_GRABBING2; grabbing_timer = App->frames;
+				if (!close) { state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames; }
+				else if (close) { state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames; }
 			}break;
 
 			case IN_M_KIK2: {
-				if (!close) state = M_KIK_STANDING2; m_standing_kik_timer = App->frames;
-				if (close) state = M_KIK_CLOSE2; m_close_standing_kik_timer = App->frames;
+				if (!close) { state = M_KIK_STANDING2; m_standing_kik_timer = App->frames; }
+				else if (close) { state = M_KIK_CLOSE2; m_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_F_PUNCH2: {
-				if (!close) state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames;
-				if (close) state = F_GRABBING2; grabbing_timer = App->frames;
+				if (!close) { state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames; }
+				else if (close) { state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK2: {
-				if (!close) state = F_KIK_STANDING2; f_standing_kik_timer = App->frames;
-				if (close) state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames;
+				if (!close) { state = F_KIK_STANDING2; f_standing_kik_timer = App->frames; }
+				else if (close) { state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
@@ -2612,33 +2619,33 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: {
-				if (!close)	state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;
-				if (close)	state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames;
+				if (!close) { state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames; }
+				else if (close) { state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames; }
 			} break;
 
 			case IN_L_KIK2: {
-				if (!close) state = L_KIK_STANDING2; l_standing_kik_timer = App->frames;
-				if (close) state = L_KIK_CLOSE2; l_close_standing_kik_timer = App->frames;
+				if (!close) { state = L_KIK_STANDING2; l_standing_kik_timer = App->frames; }
+				else if (close) { state = L_KIK_CLOSE2; l_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_M_PUNCH2: {
-				if (!close) state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames;
-				if (close) state = M_GRABBING2; grabbing_timer = App->frames;
+				if (!close) { state = M_PUNCH_STANDING2; m_standing_punch_timer = App->frames; }
+				else if (close) { state = M_PUNCH_CLOSE2; m_close_standing_punch_timer = App->frames; }
 			}break;
 
 			case IN_M_KIK2: {
-				if (!close) state = M_KIK_STANDING2; m_standing_kik_timer = App->frames;
-				if (close) state = M_KIK_CLOSE2; m_close_standing_kik_timer = App->frames;
+				if (!close) { state = M_KIK_STANDING2; m_standing_kik_timer = App->frames; }
+				else if (close) { state = M_KIK_CLOSE2; m_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_F_PUNCH2: {
-				if (!close) state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames;
-				if (close) state = state = F_GRABBING2; grabbing_timer = App->frames;
+				if (!close) { state = F_PUNCH_STANDING2; f_standing_punch_timer = App->frames; }
+				else if (close) { state = F_PUNCH_CLOSE2; f_close_standing_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK2: {
-				if (!close) state = F_KIK_STANDING2; f_standing_kik_timer = App->frames;
-				if (close) state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames;
+				if (!close) { state = F_KIK_STANDING2; f_standing_kik_timer = App->frames; }
+				else if (close) { state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames; }
 			}break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
@@ -3199,23 +3206,23 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			}break;
 
 			case IN_L_PUNCH2: {
-				if (!close) state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames;
-				if (close) state = L_PUNCH_CROUCHCLOSE2; l_close_crouching_punch_timer = App->frames;
+				if (!close) { state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames; }
+				else if (close) { state = L_PUNCH_CROUCHCLOSE2; l_close_crouching_punch_timer = App->frames; }
 			}break;
 
 			case IN_L_KIK2: {
-				if (!close) state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames;
-				if (close) state = L_KIK_CROUCHCLOSE2; l_close_crouching_kik_timer = App->frames;
+				if (!close) { state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames; }
+				else if (close) { state = L_KIK_CROUCHCLOSE2; l_close_crouching_kik_timer = App->frames; }
 			}break;
 
 			case IN_M_PUNCH2: {
-				if (!close) state = M_PUNCH_CROUCH2; m_crouching_punch_timer = App->frames;
-				if (close) state = M_PUNCH_CROUCHCLOSE2; m_close_crouching_punch_timer = App->frames;
+				if (!close) { state = M_PUNCH_CROUCH2; m_crouching_punch_timer = App->frames; }
+				else if (close) { state = M_PUNCH_CROUCHCLOSE2; m_close_crouching_punch_timer = App->frames; }
 			}break;
 
 			case IN_M_KIK2: {
-				if (!close) state = M_KIK_CROUCH2; m_crouching_kik_timer = App->frames;
-				if (close) state = M_KIK_CROUCHCLOSE2; m_close_crouching_kik_timer = App->frames;
+				if (!close) { state = M_KIK_CROUCH2; m_crouching_kik_timer = App->frames; }
+				else if (close) { state = M_KIK_CROUCHCLOSE2; m_close_crouching_kik_timer = App->frames; }
 			}break;
 
 			case IN_F_PUNCH2: state = F_PUNCH_CROUCH2; f_crouching_punch_timer = App->frames; break;
@@ -3249,6 +3256,26 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 					state = ST_CROUCH2;
 				else
 					state = ST_CROUCH_DEFENDING_READY2;
+			}break;
+
+			case IN_L_PUNCH2: {
+				if (!close) { state = L_PUNCH_CROUCH2; l_crouching_punch_timer = App->frames; }
+				else if (close) { state = L_PUNCH_CROUCHCLOSE2; l_close_crouching_punch_timer = App->frames; }
+			}break;
+
+			case IN_L_KIK2: {
+				if (!close) { state = L_KIK_CROUCH2; l_crouching_kik_timer = App->frames; }
+				else if (close) { state = L_KIK_CROUCHCLOSE2; l_close_crouching_kik_timer = App->frames; }
+			}break;
+
+			case IN_M_PUNCH2: {
+				if (!close) { state = M_PUNCH_CROUCH2; m_crouching_punch_timer = App->frames; }
+				else if (close) { state = M_PUNCH_CROUCHCLOSE2; m_close_crouching_punch_timer = App->frames; }
+			}break;
+
+			case IN_M_KIK2: {
+				if (!close) { state = M_KIK_CROUCH2; m_crouching_kik_timer = App->frames; }
+				else if (close) { state = M_KIK_CROUCHCLOSE2; m_close_crouching_kik_timer = App->frames; }
 			}break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
