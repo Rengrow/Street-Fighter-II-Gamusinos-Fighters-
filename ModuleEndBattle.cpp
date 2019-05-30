@@ -36,6 +36,7 @@ bool ModuleEndBattle::Start()
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
 	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
 	
+	
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
 
@@ -69,18 +70,26 @@ void ModuleEndBattle::UpdateQuote() {
 	std::string text;
 	std::string text2;
 
-	//if (quoteOption) {
+	if (quoteOption) {
 		text = quote1.substr(0, quoteLetters);
-		text2 = quote1sub.substr(0, quoteLetters-20);
-	//}
-	//else
-	//	text = quote2.substr(0, quoteLetters);
+		text2 = quote1sub.substr(0, quoteLetters);
+		
+		
+	}
+	else{
+		text = quote2.substr(0, quoteLetters);
+		text2 = quote2sub.substr(0, quoteLetters);
+		
 
+	
+	}
+	
 	cstr = new char[text.length() + 1];
 	strcpy_s(cstr, text.length() + 1, text.c_str());
-
 	cstr2 = new char[text2.length() + 1];
 	strcpy_s(cstr2, text2.length() + 1, text2.c_str());
+	
+	
 }
 
 // Update: draw background
@@ -92,10 +101,12 @@ update_status ModuleEndBattle::Update()
 
 	if (!quoteOption) {
 		App->fonts->BlitText(10, SCREEN_HEIGHT / 2 + 70, typography, cstr);
-		App->fonts->BlitText(10, SCREEN_HEIGHT / 2 + 80, typography, cstr2);
+		App->fonts->BlitText(10, SCREEN_HEIGHT / 2 + 85, typography, cstr2);
 	}
-	else
+	else {
 		App->fonts->BlitText(40, SCREEN_HEIGHT / 2 + 70, typography, cstr);
+		App->fonts->BlitText(40, SCREEN_HEIGHT / 2 + 85, typography, cstr2);
+	}
 
 	if (timeLetters < App->frames && (quoteOption) ? quoteLetters < 36 : quoteLetters < 48) {
 		quoteLetters++;
