@@ -25,6 +25,7 @@ public:
 	SDL_Rect vs;
 	Uint32 timeScreen;
 	bool isFading;
+	int typography;
 };
 
 #endif // __MODULEENDBATTLE_H__

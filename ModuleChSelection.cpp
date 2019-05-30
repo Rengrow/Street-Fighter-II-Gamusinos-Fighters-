@@ -141,8 +141,10 @@ bool ModuleChSelection::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("assets/images/ui/character_selection2.png");
+	graphics = App->textures->Load("assets/images/ui/character_selection.png");
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
+	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
+	typographyBig = App->fonts->Load("assets/images/ui/Font_Big.png", "ABCDEFGHIJKLMNOPQRSTUVW$XYZ0123456789.", 1);
 	music = App->audio->LoadSong("assets/music/player_select.ogg");
 	move = App->audio->LoadChunk("assets/sfx/effects/score_up.wav");
 	select = App->audio->LoadChunk("assets/sfx/effects/select_menu_option.wav");
@@ -156,7 +158,12 @@ bool ModuleChSelection::Start()
 	player2Position.y = SCREEN_HEIGHT / 2 + 62;
 
 	player1Portrait = dhalsimPortrait;
+	player1Name = new char[dhalsimName.length() + 1];
+	strcpy_s(player1Name, dhalsimName.length() + 1, dhalsimName.c_str());
+
 	player2Portrait = kenPortrait;
+	player2Name = new char[kenName.length() + 1];
+	strcpy_s(player2Name, kenName.length() + 1, kenName.c_str());
 
 	return ret;
 }
@@ -165,6 +172,9 @@ bool ModuleChSelection::Start()
 bool ModuleChSelection::CleanUp()
 {
 	LOG("Unloading Vs Screen");
+
+	App->fonts->UnLoad(typography);
+	App->fonts->UnLoad(typographyBig);
 
 	App->audio->UnloadChunk(move);
 	move = nullptr;
@@ -175,6 +185,7 @@ bool ModuleChSelection::CleanUp()
 	App->audio->UnloadSong(music);
 	music = nullptr;
 
+	App->textures->Unload(portraits);
 	App->textures->Unload(graphics);
 
 	return true;
@@ -196,18 +207,36 @@ update_status ModuleChSelection::Update()
 		if (player1Position.x != SCREEN_WIDTH / 2 - 60) {
 			player1Position.x -= 28;
 
-			if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait))
+			if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait)) {
 				player1Portrait = zangiefPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &zangiefPortrait))
+				player1Name = new char[zangiefName.length() + 1];
+				strcpy_s(player1Name, zangiefName.length() + 1, zangiefName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &zangiefPortrait)) {
 				player1Portrait = chunLiPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &chunLiPortrait))
+				player1Name = new char[chunLiName.length() + 1];
+				strcpy_s(player1Name, chunLiName.length() + 1, chunLiName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &chunLiPortrait)) {
 				player1Portrait = kenPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &guilePortrait))
+				player1Name = new char[kenName.length() + 1];
+				strcpy_s(player1Name, kenName.length() + 1, kenName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &guilePortrait)) {
 				player1Portrait = blankaPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &blankaPortrait))
+				player1Name = new char[blankaName.length() + 1];
+				strcpy_s(player1Name, blankaName.length() + 1, blankaName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &blankaPortrait)) {
 				player1Portrait = hondaPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &hondaPortrait))
+				player1Name = new char[hondaName.length() + 1];
+				strcpy_s(player1Name, hondaName.length() + 1, hondaName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &hondaPortrait)) {
 				player1Portrait = ryuPortrait;
+				player1Name = new char[ryuName.length() + 1];
+				strcpy_s(player1Name, ryuName.length() + 1, ryuName.c_str());
+			}
 		}
 	}
 
@@ -216,18 +245,36 @@ update_status ModuleChSelection::Update()
 		if (player1Position.x != SCREEN_WIDTH / 2 + 24) {
 			player1Position.x += 28;
 
-			if (SDL_RectEquals(&player1Portrait, &kenPortrait))
+			if (SDL_RectEquals(&player1Portrait, &kenPortrait)) {
 				player1Portrait = chunLiPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &chunLiPortrait))
+				player1Name = new char[chunLiName.length() + 1];
+				strcpy_s(player1Name, chunLiName.length() + 1, chunLiName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &chunLiPortrait)) {
 				player1Portrait = zangiefPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &zangiefPortrait))
+				player1Name = new char[zangiefName.length() + 1];
+				strcpy_s(player1Name, zangiefName.length() + 1, zangiefName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &zangiefPortrait)) {
 				player1Portrait = dhalsimPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &ryuPortrait))
+				player1Name = new char[dhalsimName.length() + 1];
+				strcpy_s(player1Name, dhalsimName.length() + 1, dhalsimName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &ryuPortrait)) {
 				player1Portrait = hondaPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &hondaPortrait))
+				player1Name = new char[hondaName.length() + 1];
+				strcpy_s(player1Name, hondaName.length() + 1, hondaName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &hondaPortrait)) {
 				player1Portrait = blankaPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &blankaPortrait))
+				player1Name = new char[blankaName.length() + 1];
+				strcpy_s(player1Name, blankaName.length() + 1, blankaName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &blankaPortrait)) {
 				player1Portrait = guilePortrait;
+				player1Name = new char[guileName.length() + 1];
+				strcpy_s(player1Name, guileName.length() + 1, guileName.c_str());
+			}
 		}
 	}
 
@@ -236,15 +283,26 @@ update_status ModuleChSelection::Update()
 		if (player1Position.y != SCREEN_HEIGHT / 2 + 25) {
 			player1Position.y -= 37;
 
-
-			if (SDL_RectEquals(&player1Portrait, &kenPortrait))
+			if (SDL_RectEquals(&player1Portrait, &kenPortrait)) {
 				player1Portrait = ryuPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &chunLiPortrait))
+				player1Name = new char[ryuName.length() + 1];
+				strcpy_s(player1Name, ryuName.length() + 1, ryuName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &chunLiPortrait)) {
 				player1Portrait = hondaPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &zangiefPortrait))
+				player1Name = new char[hondaName.length() + 1];
+				strcpy_s(player1Name, hondaName.length() + 1, hondaName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &zangiefPortrait)) {
 				player1Portrait = blankaPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait))
+				player1Name = new char[blankaName.length() + 1];
+				strcpy_s(player1Name, blankaName.length() + 1, blankaName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait)) {
 				player1Portrait = guilePortrait;
+				player1Name = new char[guileName.length() + 1];
+				strcpy_s(player1Name, guileName.length() + 1, guileName.c_str());
+			}
 		}
 	}
 
@@ -253,19 +311,30 @@ update_status ModuleChSelection::Update()
 		if (player1Position.y != SCREEN_HEIGHT / 2 + 62) {
 			player1Position.y += 37;
 
-			if (SDL_RectEquals(&player1Portrait, &ryuPortrait))
+			if (SDL_RectEquals(&player1Portrait, &ryuPortrait)) {
 				player1Portrait = kenPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &hondaPortrait))
+				player1Name = new char[kenName.length() + 1];
+				strcpy_s(player1Name, kenName.length() + 1, kenName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &hondaPortrait)) {
 				player1Portrait = chunLiPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &blankaPortrait))
+				player1Name = new char[chunLiName.length() + 1];
+				strcpy_s(player1Name, chunLiName.length() + 1, chunLiName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &blankaPortrait)) {
 				player1Portrait = zangiefPortrait;
-			else if (SDL_RectEquals(&player1Portrait, &guilePortrait))
+				player1Name = new char[zangiefName.length() + 1];
+				strcpy_s(player1Name, zangiefName.length() + 1, zangiefName.c_str());
+			}
+			else if (SDL_RectEquals(&player1Portrait, &guilePortrait)) {
 				player1Portrait = dhalsimPortrait;
+				player1Name = new char[dhalsimName.length() + 1];
+				strcpy_s(player1Name, dhalsimName.length() + 1, dhalsimName.c_str());
+			}
 
 		}
 	}
 	//
-
 
 	//Player 2
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1) {
@@ -273,18 +342,36 @@ update_status ModuleChSelection::Update()
 		if (player2Position.x != SCREEN_WIDTH / 2 - 60) {
 			player2Position.x -= 28;
 
-			if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait))
+			if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
 				player2Portrait = zangiefPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &zangiefPortrait))
+				player2Name = new char[zangiefName.length() + 1];
+				strcpy_s(player2Name, zangiefName.length() + 1, zangiefName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &zangiefPortrait)) {
 				player2Portrait = chunLiPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &chunLiPortrait))
+				player2Name = new char[chunLiName.length() + 1];
+				strcpy_s(player2Name, chunLiName.length() + 1, chunLiName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &chunLiPortrait)) {
 				player2Portrait = kenPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &guilePortrait))
+				player2Name = new char[kenName.length() + 1];
+				strcpy_s(player2Name, kenName.length() + 1, kenName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &guilePortrait)) {
 				player2Portrait = blankaPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &blankaPortrait))
+				player2Name = new char[blankaName.length() + 1];
+				strcpy_s(player2Name, blankaName.length() + 1, blankaName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &blankaPortrait)) {
 				player2Portrait = hondaPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &hondaPortrait))
+				player2Name = new char[hondaName.length() + 1];
+				strcpy_s(player2Name, hondaName.length() + 1, hondaName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &hondaPortrait)) {
 				player2Portrait = ryuPortrait;
+				player2Name = new char[ryuName.length() + 1];
+				strcpy_s(player2Name, ryuName.length() + 1, ryuName.c_str());
+			}
 		}
 	}
 
@@ -293,18 +380,36 @@ update_status ModuleChSelection::Update()
 		if (player2Position.x != SCREEN_WIDTH / 2 + 24) {
 			player2Position.x += 28;
 
-			if (SDL_RectEquals(&player2Portrait, &kenPortrait))
+			if (SDL_RectEquals(&player2Portrait, &kenPortrait)) {
 				player2Portrait = chunLiPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &chunLiPortrait))
+				player2Name = new char[chunLiName.length() + 1];
+				strcpy_s(player2Name, chunLiName.length() + 1, chunLiName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &chunLiPortrait)) {
 				player2Portrait = zangiefPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &zangiefPortrait))
+				player2Name = new char[zangiefName.length() + 1];
+				strcpy_s(player2Name, zangiefName.length() + 1, zangiefName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &zangiefPortrait)) {
 				player2Portrait = dhalsimPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &ryuPortrait))
+				player2Name = new char[dhalsimName.length() + 1];
+				strcpy_s(player2Name, dhalsimName.length() + 1, dhalsimName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &ryuPortrait)) {
 				player2Portrait = hondaPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &hondaPortrait))
+				player2Name = new char[hondaName.length() + 1];
+				strcpy_s(player2Name, hondaName.length() + 1, hondaName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &hondaPortrait)) {
 				player2Portrait = blankaPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &blankaPortrait))
+				player2Name = new char[blankaName.length() + 1];
+				strcpy_s(player2Name, blankaName.length() + 1, blankaName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &blankaPortrait)) {
 				player2Portrait = guilePortrait;
+				player2Name = new char[guileName.length() + 1];
+				strcpy_s(player2Name, guileName.length() + 1, guileName.c_str());
+			}
 		}
 	}
 
@@ -313,15 +418,26 @@ update_status ModuleChSelection::Update()
 		if (player2Position.y != SCREEN_HEIGHT / 2 + 25) {
 			player2Position.y -= 37;
 
-
-			if (SDL_RectEquals(&player2Portrait, &kenPortrait))
+			if (SDL_RectEquals(&player2Portrait, &kenPortrait)) {
 				player2Portrait = ryuPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &chunLiPortrait))
+				player2Name = new char[ryuName.length() + 1];
+				strcpy_s(player2Name, ryuName.length() + 1, ryuName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &chunLiPortrait)) {
 				player2Portrait = hondaPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &zangiefPortrait))
+				player2Name = new char[hondaName.length() + 1];
+				strcpy_s(player2Name, hondaName.length() + 1, hondaName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &zangiefPortrait)) {
 				player2Portrait = blankaPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait))
+				player2Name = new char[blankaName.length() + 1];
+				strcpy_s(player2Name, blankaName.length() + 1, blankaName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
 				player2Portrait = guilePortrait;
+				player2Name = new char[guileName.length() + 1];
+				strcpy_s(player2Name, guileName.length() + 1, guileName.c_str());
+			}
 		}
 	}
 
@@ -330,21 +446,33 @@ update_status ModuleChSelection::Update()
 		if (player2Position.y != SCREEN_HEIGHT / 2 + 62) {
 			player2Position.y += 37;
 
-			if (SDL_RectEquals(&player2Portrait, &ryuPortrait))
+			if (SDL_RectEquals(&player2Portrait, &ryuPortrait)) {
 				player2Portrait = kenPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &hondaPortrait))
+				player2Name = new char[kenName.length() + 1];
+				strcpy_s(player2Name, kenName.length() + 1, kenName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &hondaPortrait)) {
 				player2Portrait = chunLiPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &blankaPortrait))
+				player2Name = new char[chunLiName.length() + 1];
+				strcpy_s(player2Name, chunLiName.length() + 1, chunLiName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &blankaPortrait)) {
 				player2Portrait = zangiefPortrait;
-			else if (SDL_RectEquals(&player2Portrait, &guilePortrait))
+				player2Name = new char[zangiefName.length() + 1];
+				strcpy_s(player2Name, zangiefName.length() + 1, zangiefName.c_str());
+			}
+			else if (SDL_RectEquals(&player2Portrait, &guilePortrait)) {
 				player2Portrait = dhalsimPortrait;
+				player2Name = new char[dhalsimName.length() + 1];
+				strcpy_s(player2Name, dhalsimName.length() + 1, dhalsimName.c_str());
+			}
 
 		}
 	}
 	//
 
-
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 - map.w / 2, 18, &map, false);
+	App->fonts->BlitText(SCREEN_WIDTH / 4 + 20, 5, typography, "PLAYER SELECT");
+	App->render->Blit(graphics, SCREEN_WIDTH / 2 - map.w / 2, 25, &map, false);
 	App->render->Blit(graphics, 165, 80, &thailandFlag, false);
 
 	//Panel
@@ -364,11 +492,14 @@ update_status ModuleChSelection::Update()
 		App->render->Blit(graphics, player2Position.x, player2Position.y, &player2Cursor, false);
 
 
-	App->render->Blit(portraits, 0, SCREEN_HEIGHT / 2 - 20, &player1Portrait, false);
-	App->render->Blit(portraits, SCREEN_WIDTH - player2Portrait.w, SCREEN_HEIGHT / 2 - 20, &player2Portrait, true);
+	App->render->Blit(portraits, 0, SCREEN_HEIGHT - player1Portrait.h + 15, &player1Portrait, false);
+	App->render->Blit(portraits, SCREEN_WIDTH - player2Portrait.w, SCREEN_HEIGHT - player2Portrait.h + 15, &player2Portrait, true);
 
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 - 140, SCREEN_HEIGHT / 2 - 20, &player1Pointer, false);
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 + 140, SCREEN_HEIGHT / 2 - 20, &player2Pointer, false);
+	App->render->Blit(graphics, player1Portrait.w / 2, SCREEN_HEIGHT / 2 - 20, &player1Pointer, false);
+	App->render->Blit(graphics, SCREEN_WIDTH - player2Portrait.w / 2 - player2Pointer.w / 2, SCREEN_HEIGHT / 2 - 20, &player2Pointer, false);
+
+	App->fonts->BlitText(17 + player1Portrait.w / 2 - ((strlen(player1Name) * 17) / 2), SCREEN_HEIGHT / 2 - 5, typographyBig, player1Name);
+	App->fonts->BlitText(51 + SCREEN_WIDTH - player2Portrait.w - ((strlen(player2Name) * 17) / 2), SCREEN_HEIGHT / 2 - 5, typographyBig, player2Name);
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
