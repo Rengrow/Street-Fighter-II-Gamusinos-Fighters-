@@ -9,7 +9,7 @@
 
 #define MAX_KEYS 300
 #define MAX_HISTORY 180
-#define MAX_COMMAND_FRAMES 9
+#define MAX_COMMAND_FRAMES 300
 #define MAX_GAME_CONTROLLERS 2
 
 enum KEY_STATE
@@ -66,7 +66,7 @@ struct History
 {
 	uint frame = 0u;
 	KEY_STATE keyboard[MAX_KEYS];
-	Gamepad* pads[MAX_GAME_CONTROLLERS];
+	Gamepad pads[MAX_GAME_CONTROLLERS];
 };
 
 
@@ -95,6 +95,8 @@ public:
 
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
+
+	bool CheckYogaFire(uint, int, bool) const;
 
 	SDL_GameController* gameController1 = NULL;
 	SDL_GameController* gameController2 = NULL;

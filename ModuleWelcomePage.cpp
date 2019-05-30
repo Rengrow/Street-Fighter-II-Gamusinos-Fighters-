@@ -29,6 +29,7 @@ bool ModuleWelcomePage::Start()
 	//typography = App->fonts->Load("assets/images/ui/font_middle.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789¬!@ç~$%^&*()-_+=[]{}| :;¨'<>,./?", 1);
 	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
 	music = App->audio->LoadSong("assets/music/title.ogg");
+	start = App->audio->LoadChunk("assets/sfx/effects/coin.wav");
 	App->audio->PlaySongDelay(music, -1, 10000);
 	App->render->camera.x = App->render->camera.y = 0;
 
@@ -46,6 +47,10 @@ bool ModuleWelcomePage::CleanUp()
 
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics1);
+
+	App->audio->UnloadChunk(start);
+	start = nullptr;
+
 	App->audio->UnloadSong(music);
 
 	music = nullptr;
@@ -97,6 +102,7 @@ update_status ModuleWelcomePage::Update()
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		App->audio->PlayChunk(start);
 		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->chSelectionScreen, 1);
 	}

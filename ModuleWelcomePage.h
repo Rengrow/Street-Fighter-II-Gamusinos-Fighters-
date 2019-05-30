@@ -4,8 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
-#include "SDL_Mixer/include/SDL_mixer.h" //Arreglar
+#include "SDL_Mixer/include/SDL_mixer.h"
 
+struct Mix_Chunk;
 struct SDL_Texture;
 
 class ModuleWelcomePage : public Module
@@ -21,7 +22,8 @@ public:
 public:
 	SDL_Texture* graphics1 = nullptr;
 	SDL_Texture* graphics2 = nullptr;
-	Mix_Music *music = nullptr;
+	Mix_Music* music = nullptr;
+	Mix_Chunk* start = nullptr;
 	SDL_Rect background;
 
 	int fila;

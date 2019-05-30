@@ -271,7 +271,7 @@ const History* ModuleInput::GetPrevious(int pointer) {
 	return (&history[pointer]);
 }
 
-
+/*
 bool CommandYogaFire::Check(uint frames_past) const {
 	int count = 0;
 	uint frame = 0;
@@ -285,16 +285,50 @@ bool CommandYogaFire::Check(uint frames_past) const {
 		}
 		const Gamepad* pad = (history->pads[0]);
 		switch (count) {
-		case 0: { if (pad->a) { ++count; frame = i; } } break;
-		case 1: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
-		case 2: { if (pad->right && pad->down) { ++count; frame = i; } } break;
-		case 3: { if (pad->down) { return true; } } break;
+		case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
+		case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
+		case 2: { if (pad->down) { return true; } } break;
 		}
+	}
+	return false;
+}*/
+
+bool ModuleInput::CheckYogaFire(uint frames_past, int player, bool flip) const {
+	int count = 0;
+	uint frame = 0;
+	for (uint i = 1u; i < frames_past; ++i) {
+		if (count > 0 && (i - frame) > MAX_COMMAND_FRAMES) {
+			return false;
+		}
+		const History * history = App->input->GetPrevious(i);
+		if (!history) {
+			break;
+		}
+		const Gamepad * pad = &history->pads[player];
+
+		if (flip == true)
+		{
+			switch (count) {
+			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
+			case 2: { if (pad->down) { return true; } } break;
+			}
+		}
+
+		if (flip == false)
+		{
+			switch (count) {
+			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
+			case 2: { if (pad->down) { return true; } } break;
+			}
+		}
+		
 	}
 	return false;
 }
 
-
+/*
 bool CommandYogaFlame::Check(uint frames_past) const {
 	int count = 0;
 	uint frame = 0;
@@ -336,4 +370,4 @@ bool CommandPunch::Check(uint frames_past) const {
 		}
 	}
 	return false;
-}
+}*/
