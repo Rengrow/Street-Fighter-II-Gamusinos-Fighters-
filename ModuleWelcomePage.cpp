@@ -26,7 +26,8 @@ bool ModuleWelcomePage::Start()
 	bool ret = true;
 	graphics1 = App->textures->Load("assets/images/ui/logo1.png");
 	graphics2 = App->textures->Load("assets/images/ui/logo2.png");
-	typography = App->fonts->Load("assets/images/ui/font_2.png", "abcdefghijklmnopqrstuvwxyz_.?1234567890!", 1);
+	//typography = App->fonts->Load("assets/images/ui/font_middle.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789¬!@ç~$%^&*()-_+=[]{}| :;¨'<>,./?", 1);
+	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
 	music = App->audio->LoadSong("assets/music/title.ogg");
 	App->audio->PlaySongDelay(music, -1, 10000);
 	App->render->camera.x = App->render->camera.y = 0;
@@ -88,9 +89,11 @@ update_status ModuleWelcomePage::Update()
 		timeLetters = App->frames + 30;
 	}
 
+	App->fonts->BlitText(0, 0, typography, "Fanmade copy by: Gamusinos Fighters");
+	App->fonts->BlitText(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 90, typography, "@CAPCOM CO.. LTD.");
 	if (lettersOn)
-		//App->fonts->BlitText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 + 70, typography, "insert coin");    DEBUG FONT
-		App->fonts->BlitText(5, SCREEN_HEIGHT / 2 + 70, typography, "insert_coin.");
+		
+		App->fonts->BlitText(SCREEN_WIDTH/2 - 65, SCREEN_HEIGHT / 2 + 50, typography, "INSERT COIN.");
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
