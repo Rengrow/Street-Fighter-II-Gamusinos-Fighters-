@@ -1855,7 +1855,6 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2;}
 		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2;}
 		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2;}
-		
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
@@ -2045,6 +2044,12 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if (App->input->pads[0].y == true)
 		{
+			if (App->input->CheckYogaFire(200, 0, flip) == true)
+			{
+				inputs.Push(IN_HADOKEN2);
+			}
+
+			else
 			inputs.Push(IN_M_PUNCH2);
 		}
 
@@ -2636,6 +2641,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
 
+			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
+
 			case IN_RIGHT_AND_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
 			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
@@ -2688,6 +2695,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
+
+			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
 
 			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
 			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
