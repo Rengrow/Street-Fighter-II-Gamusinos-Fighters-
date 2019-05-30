@@ -1030,17 +1030,17 @@ bool ModuleDhalsim::Start()
 	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 300, 244, 70, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grabbing
 	const int grabbingnColliders = 4;
