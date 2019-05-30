@@ -1669,7 +1669,7 @@ update_status ModuleDhalsim::Update()
 
 		case ST_HADOKEN2:
 			current_animation = &yoga_fire_lp;
-			if (App->frames - hadoken_timer == 35)
+			if (App->frames - hadoken_timer == 13)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
@@ -1903,21 +1903,22 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			}
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
+		if (c1->type == COLLIDER_PLAYER2_HIT && c2->type == COLLIDER_PLAYER && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
 			
 			invulnerabilityFrames = 25 + App->frames;
+//			App->audio->PlayChunk(high_kick);
 
-			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP) {
+			if (App->dhalsim->state == L_KIK_STANDING || App->dhalsim->state == L_KIK_NEUTRAL_JUMP || App->dhalsim->state == L_KIK_FORWARD_JUMP || App->dhalsim->state == L_KIK_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_kick);
 			}
-			else if (App->ryu->state == L_KIK_CROUCH) {
+			else if (App->dhalsim->state == L_KIK_CROUCH) {
 				App->audio->PlayChunk(low_kick);
 			}
-			else if (App->ryu->state == L_PUNCH_STANDING || App->ryu->state == L_PUNCH_NEUTRAL_JUMP || App->ryu->state == L_PUNCH_FORWARD_JUMP || App->ryu->state == L_PUNCH_BACKWARD_JUMP) {
+			else if (App->dhalsim->state == L_PUNCH_STANDING || App->dhalsim->state == L_PUNCH_NEUTRAL_JUMP || App->dhalsim->state == L_PUNCH_FORWARD_JUMP || App->dhalsim->state == L_PUNCH_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_fist);
 			}
-			else if (App->ryu->state == L_PUNCH_CROUCH) {
+			else if (App->dhalsim->state == L_PUNCH_CROUCH) {
 				App->audio->PlayChunk(low_fist);
 			}
 
