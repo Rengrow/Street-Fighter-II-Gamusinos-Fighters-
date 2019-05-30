@@ -82,6 +82,9 @@ public:
 	bool CleanUp();
 	const History* GetPrevious(int);
 
+	bool CheckYogaFire(uint, int, bool) const;
+	bool CheckYogaFlame(uint, int, bool) const;
+
 public:
 	History history[MAX_HISTORY];
 	KEY_STATE keyboard[MAX_KEYS];
@@ -96,7 +99,7 @@ public:
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
 
-	bool CheckYogaFire(uint, int, bool) const;
+	
 
 	SDL_GameController* gameController1 = NULL;
 	SDL_GameController* gameController2 = NULL;

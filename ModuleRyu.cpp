@@ -978,8 +978,6 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 
 		if (App->input->keyboard[SDL_SCANCODE_5] == KEY_STATE::KEY_DOWN)
 		{
-			if (state != ST_HADOKEN2)
-				hdk.ResetAnimation();
 			inputs.Push(IN_HADOKEN);
 		}
 

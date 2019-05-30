@@ -1030,17 +1030,17 @@ bool ModuleDhalsim::Start()
 	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 300, 244, 70, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grabbing
 	const int grabbingnColliders = 4;
@@ -1667,13 +1667,45 @@ update_status ModuleDhalsim::Update()
 			}
 			break;
 
-		case ST_HADOKEN2:
+		case L_YFIRE2:
 			current_animation = &yoga_fire_lp;
 			if (App->frames - hadoken_timer == 13)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
 			typeofattack = 1;
+			break;
+
+		case M_YFIRE2:
+			current_animation = &yoga_fire_mp;
+			if (App->frames - hadoken_timer == 35)
+			{
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
+			}
+			typeofattack = 1;
+			break;
+
+		case F_YFIRE2:
+			current_animation = &yoga_fire_mp;
+			if (App->frames - hadoken_timer == 35)
+			{
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
+			}
+			typeofattack = 1;
+			break;
+
+		case L_YFLAME2:
+			current_animation = &yoga_flame_lp_mp;
+			typeofattack = 1;
+			break;
+
+		case M_YFLAME2:
+			current_animation = &yoga_flame_lp_mp;
+			typeofattack = 1;
+			break;
+
+		case F_YFLAME2:
+			current_animation = &yoga_flame_hp;
 			break;
 
 		case ST_FALLING2:
@@ -2048,7 +2080,18 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if (App->input->pads[0].x == true)
 		{
-			inputs.Push(IN_L_PUNCH2);
+			if (App->input->CheckYogaFlame(250, 0, flip) == true)
+			{
+				inputs.Push(IN_L_YFLAME2);
+			}
+
+			else if (App->input->CheckYogaFire(200, 0, flip) == true)
+			{
+				inputs.Push(IN_L_YFIRE2);
+			}
+
+			else
+				inputs.Push(IN_L_PUNCH2);
 			
 		}
 
@@ -2059,9 +2102,15 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if (App->input->pads[0].y == true)
 		{
-			if (App->input->CheckYogaFire(200, 0, flip) == true)
+
+			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
-				inputs.Push(IN_HADOKEN2);
+				inputs.Push(IN_M_YFLAME2);
+			}
+
+			else if (App->input->CheckYogaFire(200, 0, flip) == true)
+			{
+				inputs.Push(IN_M_YFIRE2);
 			}
 
 			else
@@ -2075,22 +2124,24 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if (App->input->pads[0].R1 == true)
 		{
-			inputs.Push(IN_F_PUNCH2);
+			if (App->input->CheckYogaFlame(250, 0, flip) == true)
+			{
+				inputs.Push(IN_F_YFLAME2);
+			}
+
+			else if (App->input->CheckYogaFire(200, 0, flip) == true)
+			{
+				inputs.Push(IN_F_YFIRE2);
+			}
+
+			else
+				inputs.Push(IN_F_PUNCH2);
 		}
 
 		if (App->input->pads[0].R2 == true)
 		{
 			inputs.Push(IN_F_KIK2);
 		}
-
-		if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
-		{
-			if (state != ST_HADOKEN2)
-				yoga_fire_lp.ResetAnimation();
-			inputs.Push(IN_HADOKEN2);
-		}
-
-		
 
 		if (App->input->pads[0].left)
 		{
@@ -2146,9 +2197,6 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_IDLE2);
 		}
-
-		
-		
 	}
 	else {
 		App->input->pads[0].left = false;
@@ -2493,11 +2541,38 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (App->frames - hadoken_timer > D_HADOKEN_TIME)
 		{
-			inputs.Push(IN_HADOKEN_FINISH2);
+			inputs.Push(IN_YFIRE_FINISH2);
 			yoga_fire_lp.ResetAnimation();
 			yoga_fire_mp.ResetAnimation();
 			yoga_fire_hp.ResetAnimation();
 			hadoken_timer = 0;
+		}
+	}
+
+	if (l_yflame_timer > 0)
+	{
+		if (App->frames - l_yflame_timer > D_LP_MP_YOGA_FLAME) // cambiar
+		{
+			inputs.Push(IN_YFLAME_FINISH2);
+			l_yflame_timer = 0;
+		}
+	}
+
+	if (m_yflame_timer > 0)
+	{
+		if (App->frames - m_yflame_timer > D_LP_MP_YOGA_FLAME) // cambiar
+		{
+			inputs.Push(IN_YFLAME_FINISH2);
+			m_yflame_timer = 0;
+		}
+	}
+
+	if (f_yflame_timer > 0)
+	{
+		if (App->frames - f_yflame_timer > D_HP_YOGA_FLAME)
+		{
+			inputs.Push(IN_YFLAME_FINISH2);
+			f_yflame_timer = 0;
 		}
 	}
 
@@ -2637,7 +2712,14 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 				else if (close) { state = F_KIK_CLOSE2; f_close_standing_kik_timer = App->frames; }
 			}break;
 
-			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
+			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
+
+			case IN_L_YFLAME2: state = L_YFLAME2; l_yflame_timer = App->frames; break;
+			case IN_M_YFLAME2: state = M_YFLAME2; m_yflame_timer = App->frames; break;
+			case IN_F_YFLAME2: state = F_YFLAME2; f_yflame_timer = App->frames; break;
+
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 
@@ -2656,7 +2738,13 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
 
-			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
+			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
+
+			case IN_L_YFLAME2: state = L_YFLAME2; l_yflame_timer = App->frames; break;
+			case IN_M_YFLAME2: state = M_YFLAME2; m_yflame_timer = App->frames; break;
+			case IN_F_YFLAME2: state = F_YFLAME2; f_yflame_timer = App->frames; break;
 
 			case IN_RIGHT_AND_JUMP2: state = ST_JUMP_FORWARD2; jump_timer = App->frames;  break;
 			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
@@ -2711,7 +2799,13 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
 
-			case IN_HADOKEN2: state = ST_HADOKEN2; hadoken_timer = App->frames; break;
+			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
+
+			case IN_L_YFLAME2: state = L_YFLAME2; l_yflame_timer = App->frames; break;
+			case IN_M_YFLAME2: state = M_YFLAME2; m_yflame_timer = App->frames; break;
+			case IN_F_YFLAME2: state = F_YFLAME2; f_yflame_timer = App->frames; break;
 
 			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames;  break;
 			case IN_LEFT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
@@ -2898,11 +2992,91 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
-		case ST_HADOKEN2:
+		case L_YFIRE2:
 		{
 			switch (last_input)
 			{
-			case IN_HADOKEN_FINISH2: state = ST_IDLE2; break;
+			case IN_YFIRE_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_YFIRE2:
+		{
+			switch (last_input)
+			{
+			case IN_YFIRE_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_YFIRE2:
+		{
+			switch (last_input)
+			{
+			case IN_YFIRE_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case L_YFLAME2:
+		{
+			switch (last_input)
+			{
+			case IN_YFLAME_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case M_YFLAME2:
+		{
+			switch (last_input)
+			{
+			case IN_YFLAME_FINISH2: state = ST_IDLE2; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case F_YFLAME2:
+		{
+			switch (last_input)
+			{
+			case IN_YFLAME_FINISH2: state = ST_IDLE2; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 
