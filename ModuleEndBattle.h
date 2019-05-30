@@ -28,11 +28,15 @@ public:
 	int typography;
 	Uint32 timeLetters;
 	bool quoteOption;
-	bool startWriting;
-	std::string quote1 = "I will meditate and then destroy you!!";
-	std::string quote2 = "Now you've realized the inner mysteries of yoga!";
+
+	std::string quote1 = "I will meditate and then"; //awesome line jump implemented here
+	std::string quote1sub = "destroy you!!";
+	std::string quote2 = "Now you've realized the ";
+	std::string quote2sub = "inner mysteries of yoga!";
+
 	std::string quoteTemp;
 	char *cstr;
+	char *cstr2;
 	int quoteLetters = 0;
 };
 
