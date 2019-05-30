@@ -24,9 +24,9 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 
-	//Hadoken
-	hdk.anim.PushBack({ 277,30, 43, 32 }, 1, { 0,0 }, 0, {}, {}, {});
-	hdk.anim.PushBack({ 321, 35, 39, 21 }, 1, { 0,0 }, 0, {}, {}, {});
+	//Hadoken  ATTENTION: THIS FIRES A YOGA FIRE (DHALSIM)
+	hdk.anim.PushBack({ 108, 304, 56, 37 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 170, 304, 54, 37 }, 2, { 0,0 }, 0, {}, {}, {});
 	hdk.anim.loop = true;
 	
 	hdk.life = -1;

@@ -31,7 +31,8 @@ ModuleSceneSagat::ModuleSceneSagat()
 	// Background
 	background = { 0, 432, 633, 195 };
 
-	// Here rests the module palmera :(
+	// J: Here rests the module palmera :( 
+	//A:  Gone, but not forgotten
 	palmtree.PushBack({ 699, 212, 325, 317 }, 24, { 0,0 }, 0, {}, {}, {});
 	palmtree.PushBack({ 696, 550, 328, 317 }, 24, { 0,0 }, 0, {}, {}, {});
 

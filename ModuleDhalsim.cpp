@@ -47,6 +47,7 @@ bool ModuleDhalsim::Start()
 	low_fist = App->audio->LoadChunk("assets/sfx/effects/low_fist.wav");
 	high_fist = App->audio->LoadChunk("assets/sfx/effects/high_fist.wav");
 	high_kick = App->audio->LoadChunk("assets/sfx/effects/high_kick.wav");
+	block = App->audio->LoadChunk("assets/sfx/effects/blocked_hadouken.wav");
 
 	position.x = 250;
 	position.y = 215;
@@ -519,8 +520,8 @@ bool ModuleDhalsim::Start()
 	yoga_fire_lp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox6, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 	yoga_fire_lp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox3, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 3, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	//yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	//yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 
 
 	//Mp yoga fire
@@ -1029,17 +1030,17 @@ bool ModuleDhalsim::Start()
 	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 300, 244, 70, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grab2.PushBack({ 371, 244, 70, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grab2.PushBack({ 442, 244, 59, 114 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grab2.PushBack({ 228, 244, 71, 114 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grabbing
 	const int grabbingnColliders = 4;
@@ -1089,6 +1090,8 @@ bool ModuleDhalsim::CleanUp()
 	high_fist = nullptr;
 	App->audio->UnloadChunk(high_kick);
 	high_kick = nullptr;
+	App->audio->UnloadChunk(block);
+	block = nullptr;
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
@@ -1666,7 +1669,7 @@ update_status ModuleDhalsim::Update()
 
 		case L_YFIRE2:
 			current_animation = &yoga_fire_lp;
-			if (App->frames - hadoken_timer == 35)
+			if (App->frames - hadoken_timer == 13)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
@@ -1831,6 +1834,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_GRAB2:
+			texture = graphics2;
 			current_animation = &grab2;
 			break;
 
@@ -1913,6 +1917,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false))
 			{
+				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
 				life -= 5;
 			}
@@ -1930,22 +1935,28 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			}
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
+		if (c1->type == COLLIDER_PLAYER2_HIT && c2->type == COLLIDER_PLAYER && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
 			
 			invulnerabilityFrames = 25 + App->frames;
+//			App->audio->PlayChunk(high_kick);
 
-			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP)
+			if (App->dhalsim->state == L_KIK_STANDING || App->dhalsim->state == L_KIK_NEUTRAL_JUMP || App->dhalsim->state == L_KIK_FORWARD_JUMP || App->dhalsim->state == L_KIK_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_kick);
-			else if (App->ryu->state == L_KIK_CROUCH)
+			}
+			else if (App->dhalsim->state == L_KIK_CROUCH) {
 				App->audio->PlayChunk(low_kick);
-			else if (App->ryu->state == L_PUNCH_STANDING || App->ryu->state == L_PUNCH_NEUTRAL_JUMP || App->ryu->state == L_PUNCH_FORWARD_JUMP || App->ryu->state == L_PUNCH_BACKWARD_JUMP)
+			}
+			else if (App->dhalsim->state == L_PUNCH_STANDING || App->dhalsim->state == L_PUNCH_NEUTRAL_JUMP || App->dhalsim->state == L_PUNCH_FORWARD_JUMP || App->dhalsim->state == L_PUNCH_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_fist);
-			else if (App->ryu->state == L_PUNCH_CROUCH)
+			}
+			else if (App->dhalsim->state == L_PUNCH_CROUCH) {
 				App->audio->PlayChunk(low_fist);
+			}
 
 			if ((state == ST_WALK_BACKWARD2 && flip == true)||(state == ST_WALK_FORWARD && flip == false)||(state == ST_CROUCH_DEFENDING_READY2))
 			{
+				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
 			}
 
@@ -1976,14 +1987,18 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
 
-			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP)
+			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_kick);
-			else if (App->ryu->state == L_KIK_CROUCH)
+			}
+			else if (App->ryu->state == L_KIK_CROUCH) {
 				App->audio->PlayChunk(low_kick);
-			else if (App->ryu->state == L_PUNCH_STANDING || App->ryu->state == L_PUNCH_NEUTRAL_JUMP || App->ryu->state == L_PUNCH_FORWARD_JUMP || App->ryu->state == L_PUNCH_BACKWARD_JUMP)
+			}
+			else if (App->ryu->state == L_PUNCH_STANDING || App->ryu->state == L_PUNCH_NEUTRAL_JUMP || App->ryu->state == L_PUNCH_FORWARD_JUMP || App->ryu->state == L_PUNCH_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_fist);
-			else if (App->ryu->state == L_PUNCH_CROUCH)
+			}
+			else if (App->ryu->state == L_PUNCH_CROUCH) {
 				App->audio->PlayChunk(low_fist);
+			}
 
 			inputs.Push(IN_FALLING2);
 		}

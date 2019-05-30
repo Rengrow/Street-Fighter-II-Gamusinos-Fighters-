@@ -39,14 +39,14 @@ bool ModuleVsScreen::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
-
+	typography = App->fonts->Load("assets/images/ui/Font_Big.png", "ABCDEFGHIJKLMNOPQRSTUVW$XYZ0123456789.", 1);
 	App->ryu->position.x = 100;
 	App->ryu->position.y = 215;
 	App->dhalsim->position.x = 250;
 	App->dhalsim->position.y = 215;
 	App->render->camera.x = App->render->camera.y = 0;
 	isFading = false;
-	timeScreen = App->frames + 90;
+	timeScreen = App->frames + 150;
 
 	return ret;
 }
@@ -56,6 +56,7 @@ bool ModuleVsScreen::CleanUp()
 {
 	LOG("Unloading Vs Screen");
 
+	App->fonts->UnLoad(typography);
 	App->textures->Unload(portraits);
 
 	return true;
@@ -67,7 +68,10 @@ update_status ModuleVsScreen::Update()
 	// Draw everything --------------------------------------	
 	App->render->Blit(portraits, 35, 10, &portrait1, false);
 	App->render->Blit(portraits, SCREEN_WIDTH - portrait1.w - 35, 10, &portrait1, true);
-	App->render->Blit(portraits, SCREEN_WIDTH / 2 - 80, 150, &vs, false);
+	App->render->Blit(portraits, SCREEN_WIDTH / 2 - 80, 160, &vs, false);
+
+	App->fonts->BlitText(25, SCREEN_HEIGHT / 2 + 40, typography, "DHALSIM");
+	App->fonts->BlitText(SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT / 2 + 40, typography, "DHALSIM");
 
 	if (timeScreen < App->frames && !isFading) {
 		App->fade->FadeToBlack(this, (Module*)App->fight, 2);
