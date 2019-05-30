@@ -1,5 +1,3 @@
-Add Shadow
-Add ALL the animations of Dhalsim
 Change Ryu for Dhalsim in player1
 Add Particles in OnCollision
 
