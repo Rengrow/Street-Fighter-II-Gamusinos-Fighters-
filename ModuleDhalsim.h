@@ -54,11 +54,9 @@
 #define D_MP_YOGA_FIRE 32+6
 #define D_HP_YOGA_FIRE 32+6
 
-#define D_LP_MP_YOGA_FLAME 37+17
-#define D_HP_YOGA_FLAME 39+19
-#define D_CYCLE_YOGA_FLAME 16+3
-#define D_LP_MP_RECOVERY_YOGA_FLAME 19+7
-#define D_HP_RECOVERY_YOGA_FLAME 20+8
+#define D_LP_YOGA_FLAME 72+33
+#define D_MP_YOGA_FLAME 89+41
+#define D_HP_YOGA_FLAME 109+50
 
 #define D_YOGA_DRILL 1000
 #define D_YOGA_MUMMY 1000
@@ -288,7 +286,7 @@ public:
 	Animation close_mp, close_hp, close_mk, close_hk;
 	Animation neutralJump, forwardJump, backwardJump;
 	Animation yoga_fire_lp, yoga_fire_mp, yoga_fire_hp, yoga_drill, yoga_mummy;
-	Animation yoga_flame_lp_mp, yoga_flame_hp, yoga_flame_cycle, yoga_flame_recovery_lp_mp, yoga_flame_recovery_hp;
+	Animation yoga_flame_lp, yoga_flame_mp, yoga_flame_hp;
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
