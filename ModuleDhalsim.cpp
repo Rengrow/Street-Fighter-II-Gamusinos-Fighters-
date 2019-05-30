@@ -520,8 +520,8 @@ bool ModuleDhalsim::Start()
 	yoga_fire_lp.PushBack({ 272, 595, 86, 96 }, 7, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox6, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 	yoga_fire_lp.PushBack({ 360, 596, 58, 94 }, 3, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox3, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 3, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
-	yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	//yoga_fire_lp.PushBack({ 617, 598, 94, 92 }, 6, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox5, yoga_fire_lpColliderType, yoga_fire_lpCallback);
+	//yoga_fire_lp.PushBack({ 420, 602, 81, 88 }, 9, { 29,5 }, yoga_fire_lpnColliders, yoga_fire_lpHitbox4, yoga_fire_lpColliderType, yoga_fire_lpCallback);
 
 
 	//Mp yoga fire
