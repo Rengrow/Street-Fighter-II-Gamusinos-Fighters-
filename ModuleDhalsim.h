@@ -35,8 +35,8 @@
 
 #define D_GRABBING_TIME 2
 
-#define D_M_GRAB_TIME 100
-#define D_F_GRAB_TIME 100
+#define D_M_GRAB_TIME 135+15
+#define D_F_GRAB_TIME 40+3
 #define D_GRABBED_TIME 50
 
 #define D_HADOKEN_TIME 66 //not altered, pendent of yoga fire

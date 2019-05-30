@@ -15,16 +15,6 @@ public:
 	SDL_Rect hitBoxeRects[MAX_COLLIDERS_PER_FRAME];
 	COLLIDER_TYPE types[MAX_COLLIDERS_PER_FRAME];
 	Module* callbacks[MAX_COLLIDERS_PER_FRAME];
-	bool operator==(const Frame& f2)
-	{
-		return maxFrames == maxFrames &&
-			frame.h == f2.frame.h &&
-			frame.w == f2.frame.w &&
-			frame.h == f2.frame.h &&
-			frame.x == f2.frame.x &&
-			frame.y == f2.frame.y &&
-			pivotPosition == f2.pivotPosition;
-	}
 
 private:
 	int last_collider = 0;
