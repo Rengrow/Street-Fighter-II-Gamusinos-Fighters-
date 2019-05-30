@@ -73,10 +73,10 @@ update_status ModuleVsScreen::Update()
 	App->fonts->BlitText(25, SCREEN_HEIGHT / 2 + 40, typography, "DHALSIM");
 	App->fonts->BlitText(SCREEN_WIDTH / 2 + 50, SCREEN_HEIGHT / 2 + 40, typography, "DHALSIM");
 
-	/*if (timeScreen < App->frames && !isFading) {
+	if (timeScreen < App->frames && !isFading) {
 		App->fade->FadeToBlack(this, (Module*)App->fight, 2);
 		isFading = true;
-	}*/
+	}
 
 
 	return UPDATE_CONTINUE;
