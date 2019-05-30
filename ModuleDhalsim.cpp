@@ -487,13 +487,13 @@ bool ModuleDhalsim::Start()
 
 	//jumping neutral / diagonal hk
 	const int jhknColliders = 3;
-	const int jhknColliders2 = 3;
-	SDL_Rect jhkHitbox[jhknColliders] = { { 0, 0, 0, 0 },{ 0, 27, 48, 51 },{ 0, 0, 48, 27 } };
-	SDL_Rect jhkHitbox2[jhknColliders2] = { { -103, 21, 34, 26 },{ -63, 41, 34, 26 }, { -138, 0, 35, 30 } };
+	const int jhknColliders2 = 4;
+	SDL_Rect jhkHitbox[jhknColliders] = { { 0, 0, 0, 0 },{ -29, 86, 24, 20 },{ -28, 44, 50, 46 } };
+	SDL_Rect jhkHitbox2[jhknColliders2] = { { -5, 43, 57, 29 },{ -47, 59, 64, 24 }, { -111, 72, 54, 24 }, { -111, 60, 72, 46} };
 	COLLIDER_TYPE jhkColliderType[jhknColliders] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
-	COLLIDER_TYPE jhkColliderType2[jhknColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
+	COLLIDER_TYPE jhkColliderType2[jhknColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{COLLIDER_PLAYER2},{ COLLIDER_PLAYER2_HIT } };
 	Module*jhkCallback[jhknColliders] = { { this },{ this },{ this } };
-	Module*jhkCallback2[jhknColliders2] = { { this },{ this }, { (Module*)App->ryu } };
+	Module*jhkCallback2[jhknColliders2] = { { this },{ this }, {this}, { (Module*)App->ryu } };
 
 	jhk.PushBack({ 1, 414, 73, 96 }, 1, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
 	jhk.PushBack({ 76, 404, 54, 106 }, 2, { 33,5 }, { jhknColliders }, { jhkHitbox }, { jhkColliderType }, { jhkCallback });
@@ -1678,7 +1678,7 @@ update_status ModuleDhalsim::Update()
 
 		case M_YFIRE2:
 			current_animation = &yoga_fire_mp;
-			if (App->frames - hadoken_timer == 35)
+			if (App->frames - hadoken_timer == 13)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
@@ -1687,7 +1687,7 @@ update_status ModuleDhalsim::Update()
 
 		case F_YFIRE2:
 			current_animation = &yoga_fire_mp;
-			if (App->frames - hadoken_timer == 35)
+			if (App->frames - hadoken_timer == 13)
 			{
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
