@@ -288,6 +288,7 @@ public:
 	Mix_Chunk* low_fist = nullptr;
 	Mix_Chunk* high_fist = nullptr;
 	Mix_Chunk* high_kick = nullptr;
+	Mix_Chunk* block = nullptr;
 
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;
