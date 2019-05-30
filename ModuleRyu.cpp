@@ -792,13 +792,13 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
 
-			if (App->dhalsim->state == L_KIK_STANDING2 || App->ryu->state == L_KIK_NEUTRAL_JUMP2 || App->ryu->state == L_KIK_FORWARD_JUMP2 || App->ryu->state == L_KIK_BACKWARD_JUMP2)
+			if (App->ryu->state == L_KIK_STANDING2 || App->ryu->state == L_KIK_NEUTRAL_JUMP2 || App->ryu->state == L_KIK_FORWARD_JUMP2 || App->ryu->state == L_KIK_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_kick);
-			else if (App->dhalsim->state == L_KIK_CROUCH2)
+			else if (App->ryu->state == L_KIK_CROUCH2)
 				App->audio->PlayChunk(low_kick);
-			else if (App->dhalsim->state == L_PUNCH_STANDING2 || App->ryu->state == L_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == L_PUNCH_FORWARD_JUMP2 || App->ryu->state == L_PUNCH_BACKWARD_JUMP2)
+			else if (App->ryu->state == L_PUNCH_STANDING2 || App->ryu->state == L_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == L_PUNCH_FORWARD_JUMP2 || App->ryu->state == L_PUNCH_BACKWARD_JUMP2)
 				App->audio->PlayChunk(high_fist);
-			else if (App->dhalsim->state == L_PUNCH_CROUCH2)
+			else if (App->ryu->state == L_PUNCH_CROUCH2)
 				App->audio->PlayChunk(low_fist);
 
 			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
