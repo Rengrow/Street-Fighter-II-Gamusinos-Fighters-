@@ -38,9 +38,8 @@ update_status ModuleFadeToBlack::PostUpdate()
 			if(now >= total_time)
 			{
 				to_disable->Disable();
-				to_enable->Enable();
-				// ---
 				App->frames = 0;
+				to_enable->Enable();
 				total_time += total_time;
 				start_time = SDL_GetTicks();
 				current_step = fade_step::fade_from_black;
