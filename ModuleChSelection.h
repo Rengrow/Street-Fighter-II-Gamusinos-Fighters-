@@ -20,8 +20,10 @@ public:
 public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect map;
-	SDL_Rect title;
 	SDL_Rect thailandFlag;
+
+	Uint32 timeSelector;
+	bool lettersOn;
 	
 	SDL_Rect player1Cursor;
 	iPoint player1Position;
