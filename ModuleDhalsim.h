@@ -165,7 +165,13 @@ enum ryu_states2
 
 	ST_GETTING_UP2,
 
-	ST_HADOKEN2,
+	L_YFIRE2,
+	M_YFIRE2,
+	F_YFIRE2,
+
+	L_YFLAME2,
+	M_YFLAME2,
+	F_YFLAME2,
 
 	VICTORY2,
 	LOOSE2
@@ -203,7 +209,6 @@ enum ryu_inputs2
 	IN_M_KIK2,
 	IN_F_PUNCH2,
 	IN_F_KIK2,
-	IN_HADOKEN2,
 
 	IN_GRAB2,
 	IN_GRABBING_FINISH2,
@@ -220,12 +225,24 @@ enum ryu_inputs2
 	IN_JUMP_FINISH2,
 	IN_PUNCH_FINISH2,
 	IN_KIK_FINISH2,
-	IN_HADOKEN_FINISH2,
 	IN_DEFENDING_FINISH2,
 
 	IN_REEL_FINISH2,
 	IN_FALLING_FINISH2,
 	IN_GETTING_UP_FINISH2,
+
+	IN_L_YFIRE2,
+	IN_M_YFIRE2,
+	IN_F_YFIRE2,
+
+	IN_L_YFLAME2,
+	IN_M_YFLAME2,
+	IN_F_YFLAME2,
+
+	IN_YFIRE_FINISH2,
+	
+	IN_YFLAME_FINISH2,
+
 	
 	IN_GRABBED2,
 	IN_GRABBED_FINISH2,
@@ -360,6 +377,10 @@ public:
 
 	//others
 	Uint32 hadoken_timer = 0;
+	Uint32 l_yflame_timer = 0;
+	Uint32 m_yflame_timer = 0;
+	Uint32 f_yflame_timer = 0;
+
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;
 	Uint32 jump_timer = 0;
