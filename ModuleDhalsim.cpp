@@ -785,11 +785,11 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE yoga_drillColliderType3[yoga_drillnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* yoga_drillCallback[yoga_drillnColliders] = { {this}, {this}, {this} };
 	Module* yoga_drillCallback3[yoga_drillnColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	yoga_drill.PushBack({ 901, 271, 94, 90 }, 12, { 32,5 }, yoga_drillnColliders, yoga_drillHitbox, yoga_drillColliderType, yoga_drillCallback);
-	yoga_drill.PushBack({ 602, 522, 125, 67 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
-	yoga_drill.PushBack({ 729, 508, 120, 81 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
-	yoga_drill.PushBack({ 851, 514, 120, 75 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
-	yoga_drill.PushBack({ 0, 609, 122, 81 }, 15, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 901, 271, 94, 90 }, 7, { 32,5 }, yoga_drillnColliders, yoga_drillHitbox, yoga_drillColliderType, yoga_drillCallback);
+	yoga_drill.PushBack({ 602, 522, 125, 67 }, 7, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 729, 508, 120, 81 }, 7, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 851, 514, 120, 75 }, 7, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
+	yoga_drill.PushBack({ 0, 609, 122, 81 }, 7, { 33,5 }, yoga_drillnColliders3, yoga_drillHitbox3, yoga_drillColliderType3, yoga_drillCallback3);
 
 
 	// Yoga mummy
@@ -801,11 +801,11 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE yoga_mummyColliderType3[yoga_mummynColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* yoga_mummyCallback[yoga_mummynColliders] = { {this}, {this}, {this} };
 	Module* yoga_mummyCallback3[yoga_mummynColliders3] = { {this}, {this}, {this}, {(Module*)App->ryu} };
-	yoga_mummy.PushBack({ 772, 272, 66, 89 }, 12, { 32,5 }, yoga_mummynColliders, yoga_mummyHitbox, yoga_drillColliderType, yoga_mummyCallback);
-	yoga_mummy.PushBack({ 1, 562, 149, 27 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
-	yoga_mummy.PushBack({ 151, 548, 148, 41 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
-	yoga_mummy.PushBack({ 301, 562, 149, 27 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
-	yoga_mummy.PushBack({ 452, 548, 148, 41 }, 15, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 772, 272, 66, 89 }, 7, { 32,5 }, yoga_mummynColliders, yoga_mummyHitbox, yoga_drillColliderType, yoga_mummyCallback);
+	yoga_mummy.PushBack({ 1, 562, 149, 27 }, 7, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 151, 548, 148, 41 }, 7, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 301, 562, 149, 27 }, 7, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
+	yoga_mummy.PushBack({ 452, 548, 148, 41 }, 7, { 33,5 }, yoga_mummynColliders3, yoga_mummyHitbox3, yoga_mummyColliderType3, yoga_mummyCallback3);
 
 
 	// Standing reel
@@ -1619,33 +1619,33 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
-			if (App->frames - l_crouching_kik_timer < 18 && App->frames - l_crouching_kik_timer > 2) {
+			if (App->frames - l_crouching_kik_timer < 14 && App->frames - l_crouching_kik_timer > 2) {
 				if (flip == true) {
-					position.x -= pushbackspeed * 3;
+					position.x -= speed * 3;
 				}
-				else position.x += pushbackspeed * 3;
+				else position.x += speed * 3;
 			}
 			typeofattack = 1;
 			break;
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
-			if (App->frames - m_crouching_kik_timer < 24 && App->frames - m_crouching_kik_timer > 7) {
+			if (App->frames - m_crouching_kik_timer < 19 && App->frames - m_crouching_kik_timer > 7) {
 				if (flip == true) {
-					position.x -= pushbackspeed * 4;
+					position.x -= speed * 4;
 				}
-				else position.x += pushbackspeed * 4;
+				else position.x += speed * 4;
 			}
 			typeofattack = 2;
 			break;
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
-			if (App->frames - f_crouching_kik_timer < 25 && App->frames - f_crouching_kik_timer > 7) {
+			if (App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) {
 				if (flip == true) {
-					position.x -= pushbackspeed * 5;
+					position.x -= speed * 5;
 				}
-				else position.x += pushbackspeed * 5;
+				else position.x += speed * 5;
 			}
 			typeofattack = 3;
 			break;
