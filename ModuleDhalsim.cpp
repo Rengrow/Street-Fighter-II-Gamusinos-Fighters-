@@ -1487,16 +1487,34 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
+			if (App->frames - l_crouching_kik_timer < 18) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 2;
+				}
+				else position.x += pushbackspeed * 2;
+			}
 			typeofattack = 1;
 			break;
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
+			if (App->frames - m_crouching_kik_timer < 24) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 2;
+				}
+				else position.x += pushbackspeed * 2;
+			}
 			typeofattack = 2;
 			break;
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
+			if (App->frames - f_crouching_kik_timer < 25) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 3;
+				}
+				else position.x += pushbackspeed * 3;
+			}
 			typeofattack = 3;
 			break;
 
@@ -2319,9 +2337,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			yoga_mummy.ResetAnimation();
 			yoga_drill.ResetAnimation();
 			close_firstframe_lk_mk.ResetAnimation();
-//			yoga_flame_lp.ResetAnimation();
-//			yoga_flame_mp.ResetAnimation();
-//			yoga_flame_hp.ResetAnimation();
 			airreel.ResetAnimation();
 			fall.ResetAnimation();
 			getup.ResetAnimation();
@@ -2643,6 +2658,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_yflame_timer > D_LP_YOGA_FLAME) // cambiar
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_lp.ResetAnimation();
 			l_yflame_timer = 0;
 		}
 	}
@@ -2652,6 +2668,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_yflame_timer > D_MP_YOGA_FLAME) // cambiar
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_mp.ResetAnimation();
 			m_yflame_timer = 0;
 		}
 	}
@@ -2661,6 +2678,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_yflame_timer > D_HP_YOGA_FLAME)
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_hp.ResetAnimation();
 			f_yflame_timer = 0;
 		}
 	}
