@@ -1619,16 +1619,34 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
+			if (App->frames - l_crouching_kik_timer < 18) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 2;
+				}
+				else position.x += pushbackspeed * 2;
+			}
 			typeofattack = 1;
 			break;
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
+			if (App->frames - m_crouching_kik_timer < 24) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 2;
+				}
+				else position.x += pushbackspeed * 2;
+			}
 			typeofattack = 2;
 			break;
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
+			if (App->frames - f_crouching_kik_timer < 25) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 3;
+				}
+				else position.x += pushbackspeed * 3;
+			}
 			typeofattack = 3;
 			break;
 
@@ -2086,16 +2104,33 @@ update_status ModuleDhalsim::Update()
 			current_animation = &lose;
 			break;
 
+
+			//HERE IS VICTORY
 		case VICTORY2:
 			if (victoryExecuted == 1 || (victoryExecuted == 0 && App->frames % 2 == 0)) {
 				texture = graphics2;
 				current_animation = &win1;
 				victoryExecuted = 1;
+
+
 			}
 			else {
+					
 				texture = graphics2;
 				current_animation = &win2;
 				victoryExecuted = 2;
+			
+				if (levitationtimer > 1) { 
+					position.y--; 
+					levitationtimer--; 
+				}
+				if (levitationtimer < -1) { 
+					position.y++; 
+					levitationtimer++; 
+				}
+				if ((levitationtimer == 1) || (levitationtimer == -1)) { 
+					levitationtimer *= -45; 
+				}
 			}
 			break;
 
@@ -2907,6 +2942,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_yflame_timer > D_LP_YOGA_FLAME) // cambiar
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_lp.ResetAnimation();
 			l_yflame_timer = 0;
 		}
 	}
@@ -2916,6 +2952,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_yflame_timer > D_MP_YOGA_FLAME) // cambiar
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_mp.ResetAnimation();
 			m_yflame_timer = 0;
 		}
 	}
@@ -2925,6 +2962,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_yflame_timer > D_HP_YOGA_FLAME)
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_hp.ResetAnimation();
 			f_yflame_timer = 0;
 		}
 	}

@@ -325,6 +325,7 @@ public:
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
+	int levitationtimer = -1;
 	
 	int sprite_change_timer = 0;
 	bool close;
@@ -332,9 +333,6 @@ public:
 	int speed = 1;
 	int life;
 	
-	Uint32 grabbing_timer = 0;
-	Uint32 grabbed_timer = 0;
-
 	//light
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_close_standing_punch_timer = 0;
@@ -379,6 +377,10 @@ public:
 	Uint32 f_grab_timer = 0;
 
 	//others
+
+	Uint32 grabbing_timer = 0;
+	Uint32 grabbed_timer = 0;
+
 	Uint32 hadoken_timer = 0;
 	Uint32 l_yflame_timer = 0;
 	Uint32 m_yflame_timer = 0;
