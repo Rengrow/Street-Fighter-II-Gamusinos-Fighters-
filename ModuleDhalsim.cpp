@@ -4277,7 +4277,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH2:state = ST_IDLE2; break;
+			case IN_REEL_FINISH2: {
+				if (dizzi) state = ST_DIZZI2;
+				else state = ST_IDLE2;
+			} break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
@@ -4292,7 +4295,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH2:state = ST_IDLE2; break;
+			case IN_REEL_FINISH2: {
+				if (dizzi) state = ST_DIZZI2;
+				else state = ST_IDLE2;
+			} break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
@@ -4307,7 +4313,10 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_REEL_FINISH2:state = ST_CROUCH2; break;
+			case IN_REEL_FINISH2: {
+				if (dizzi) state = ST_DIZZI2;
+				else state = ST_IDLE2;
+			} break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
@@ -4331,7 +4340,25 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_GETTING_UP_FINISH2:state = ST_IDLE2; break;
+			case IN_GETTING_UP_FINISH2: {
+				if (dizzi) state = ST_DIZZI2;
+				else state = ST_IDLE2;
+			} break;
+			}
+		}
+		break;
+
+		case ST_DIZZI2:
+		{
+			switch (last_input)
+			{
+			case IN_DIZZI_FINISH2:state = ST_IDLE2; getting_up_timer = App->frames; break;
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;

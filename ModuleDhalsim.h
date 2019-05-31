@@ -164,6 +164,7 @@ enum ryu_states2
 	ST_GUT_REEL2,
 	ST_CROUCH_REEL2,
 	ST_FALLING2,
+	ST_DIZZI2,
 
 	ST_GETTING_UP2,
 
@@ -235,6 +236,7 @@ enum ryu_inputs2
 	IN_REEL_FINISH2,
 	IN_FALLING_FINISH2,
 	IN_GETTING_UP_FINISH2,
+	IN_DIZZI_FINISH2,
 
 	IN_L_YFIRE2,
 	IN_M_YFIRE2,
@@ -248,7 +250,6 @@ enum ryu_inputs2
 	IN_YFLAME_FINISH2,
 	IN_YDRILL_FINISH2,
 	IN_YMUMMY_FINISH2,
-
 	
 	IN_GRABBED2,
 	IN_GRABBED_FINISH2,
@@ -334,6 +335,7 @@ public:
 	int dizzylvl = 0;
 	Uint32 lasttimedamaged = 0;
 	
+	bool dizzi;
 	
 	int sprite_change_timer = 0;
 	bool close;
