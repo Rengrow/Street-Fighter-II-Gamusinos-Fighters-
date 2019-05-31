@@ -1487,16 +1487,34 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
+			if (App->frames - l_crouching_kik_timer < 18) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 2;
+				}
+				else position.x += pushbackspeed * 2;
+			}
 			typeofattack = 1;
 			break;
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
+			if (App->frames - m_crouching_kik_timer < 24) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 2;
+				}
+				else position.x += pushbackspeed * 2;
+			}
 			typeofattack = 2;
 			break;
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
+			if (App->frames - f_crouching_kik_timer < 25) {
+				if (flip == true) {
+					position.x -= pushbackspeed * 3;
+				}
+				else position.x += pushbackspeed * 3;
+			}
 			typeofattack = 3;
 			break;
 
@@ -1805,6 +1823,39 @@ update_status ModuleDhalsim::Update()
 			if (jumpHeight == 0)
 			{
 				inputs.Push(IN_FALLING_FINISH2);
+			}
+			break;
+
+		case YDRILL2:
+			current_animation = &yoga_drill;
+			jumpHeight += speed + 2;
+			
+			if (!flip) position.x += speed + 2;
+			
+			if (flip)  position.x -= speed + 2;
+
+			if (jumpHeight >= 0)
+			{
+				position.y = 215;
+				yoga_drill.ResetAnimation();
+				inputs.Push(IN_YDRILL_FINISH2);
+			}
+			break;
+
+		case YMUMMY2:
+
+			current_animation = &yoga_mummy;
+			jumpHeight += speed + 2;
+
+			if (!flip) position.x += speed + 3;
+
+			if (flip)  position.x -= speed + 3;
+
+			if (jumpHeight >= 0)
+			{
+				position.y = 215;
+				yoga_mummy.ResetAnimation();
+				inputs.Push(IN_YMUMMY_FINISH2);
 			}
 			break;
 
@@ -2336,9 +2387,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			yoga_mummy.ResetAnimation();
 			yoga_drill.ResetAnimation();
 			close_firstframe_lk_mk.ResetAnimation();
-//			yoga_flame_lp.ResetAnimation();
-//			yoga_flame_mp.ResetAnimation();
-//			yoga_flame_hp.ResetAnimation();
 			airreel.ResetAnimation();
 			fall.ResetAnimation();
 			getup.ResetAnimation();
@@ -2660,6 +2708,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - l_yflame_timer > D_LP_YOGA_FLAME) // cambiar
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_lp.ResetAnimation();
 			l_yflame_timer = 0;
 		}
 	}
@@ -2669,6 +2718,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_yflame_timer > D_MP_YOGA_FLAME) // cambiar
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_mp.ResetAnimation();
 			m_yflame_timer = 0;
 		}
 	}
@@ -2678,6 +2728,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_yflame_timer > D_HP_YOGA_FLAME)
 		{
 			inputs.Push(IN_YFLAME_FINISH2);
+			yoga_flame_hp.ResetAnimation();
 			f_yflame_timer = 0;
 		}
 	}
@@ -2971,8 +3022,15 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_M_PUNCH2: state = M_PUNCH_NEUTRAL_JUMP2; break;
 			case IN_M_KIK2: state = M_KIK_NEUTRAL_JUMP2; break;
 
-			case IN_F_PUNCH2: state = F_PUNCH_NEUTRAL_JUMP2; break;
-			case IN_F_KIK2: state = F_KIK_NEUTRAL_JUMP2; break;
+			case IN_F_PUNCH2: {
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY2; }
+				else { state = F_PUNCH_NEUTRAL_JUMP2;  }
+			}break;
+
+			case IN_F_KIK2: {
+				if ((App->frames - jump_timer  )> 23 && (App->frames - jump_timer )< 37) { state = YDRILL2; }
+				else { state = F_KIK_NEUTRAL_JUMP2; }
+			}break;
 
 			case IN_FALLING2: state = ST_FALLING2; break;
 
@@ -2993,8 +3051,15 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_M_PUNCH2: state = M_PUNCH_FORWARD_JUMP2; m_d_jumping_punch_timer = App->frames; break;
 			case IN_M_KIK2: state = M_KIK_FORWARD_JUMP2; m_d_jumping_kik_timer = App->frames; break;
 
-			case IN_F_PUNCH2: state = F_PUNCH_FORWARD_JUMP2; f_d_jumping_punch_timer = App->frames; break;
-			case IN_F_KIK2: state = F_KIK_FORWARD_JUMP2; f_d_jumping_kik_timer = App->frames; break;
+			case IN_F_PUNCH2: {
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY2; }
+				else { state = F_PUNCH_FORWARD_JUMP2; f_d_jumping_punch_timer = App->frames; }
+			}break;
+
+			case IN_F_KIK2: {
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL2; }
+				else { state = F_KIK_FORWARD_JUMP2; f_d_jumping_kik_timer = App->frames; }
+			}break;
 
 			case IN_FALLING2: state = ST_FALLING2; break;
 
@@ -3015,8 +3080,15 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_M_PUNCH2: state = M_PUNCH_BACKWARD_JUMP2; m_d_jumping_punch_timer = App->frames; break;
 			case IN_M_KIK2: state = M_KIK_BACKWARD_JUMP2; m_d_jumping_kik_timer = App->frames; break;
 
-			case IN_F_PUNCH2: state = F_PUNCH_BACKWARD_JUMP2; f_d_jumping_punch_timer = App->frames; break;
-			case IN_F_KIK2: state = F_KIK_BACKWARD_JUMP2; f_d_jumping_kik_timer = App->frames; break;
+			case IN_F_PUNCH2: {
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY2; }
+				else { state = F_PUNCH_BACKWARD_JUMP2; f_d_jumping_punch_timer = App->frames; }
+			}break;
+
+			case IN_F_KIK2: { 
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL2; }
+				else { state = F_KIK_BACKWARD_JUMP2; f_d_jumping_kik_timer = App->frames; }
+			}break;
 
 			case IN_FALLING2: state = ST_FALLING2; break;
 
@@ -3189,6 +3261,30 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case YDRILL2:
+		{
+			switch (last_input)
+			{
+			case IN_YDRILL_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case YMUMMY2:
+		{
+			switch (last_input)
+			{
+			case IN_YMUMMY_FINISH2: state = ST_IDLE2; break;
+			case IN_FALLING2: state = ST_FALLING2; break;
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -3540,6 +3636,14 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_CROUCHING_FINISH2: state = ST_CROUCH2; break;
 
+			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
+
+			case IN_L_YFLAME2: state = L_YFLAME2; l_yflame_timer = App->frames; break;
+			case IN_M_YFLAME2: state = M_YFLAME2; m_yflame_timer = App->frames; break;
+			case IN_F_YFLAME2: state = F_YFLAME2; f_yflame_timer = App->frames; break;
+
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
@@ -3553,6 +3657,14 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_STANDING_FINISH2: state = ST_IDLE2; break;
+
+			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
+			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
+
+			case IN_L_YFLAME2: state = L_YFLAME2; l_yflame_timer = App->frames; break;
+			case IN_M_YFLAME2: state = M_YFLAME2; m_yflame_timer = App->frames; break;
+			case IN_F_YFLAME2: state = F_YFLAME2; f_yflame_timer = App->frames; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 

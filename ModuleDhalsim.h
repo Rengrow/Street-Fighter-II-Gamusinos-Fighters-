@@ -171,6 +171,9 @@ enum ryu_states2
 	M_YFLAME2,
 	F_YFLAME2,
 
+	YMUMMY2,
+	YDRILL2,
+
 	VICTORY2,
 	LOOSE2
 };
@@ -238,8 +241,9 @@ enum ryu_inputs2
 	IN_F_YFLAME2,
 
 	IN_YFIRE_FINISH2,
-	
 	IN_YFLAME_FINISH2,
+	IN_YDRILL_FINISH2,
+	IN_YMUMMY_FINISH2,
 
 	
 	IN_GRABBED2,
@@ -329,9 +333,6 @@ public:
 	int speed = 1;
 	int life;
 	
-	Uint32 grabbing_timer = 0;
-	Uint32 grabbed_timer = 0;
-
 	//light
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_close_standing_punch_timer = 0;
@@ -376,6 +377,10 @@ public:
 	Uint32 f_grab_timer = 0;
 
 	//others
+
+	Uint32 grabbing_timer = 0;
+	Uint32 grabbed_timer = 0;
+
 	Uint32 hadoken_timer = 0;
 	Uint32 l_yflame_timer = 0;
 	Uint32 m_yflame_timer = 0;
