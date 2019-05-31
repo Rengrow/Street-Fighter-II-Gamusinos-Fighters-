@@ -2098,19 +2098,18 @@ void ModuleDhalsim::IsClose() {
 }
 
 void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
-	
-	
+
 	//PUSHBACK CHECK
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
-		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
-		if (App->ryu->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
 	//PUSHBACK CHECK END
@@ -2126,14 +2125,14 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (lasttimedamagedaux - lasttimedamaged > 240) {
 			dizzylvl = 0;
 		}
-		if (App->ryu->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7-1);}
-		if (App->ryu->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 11-5);}
-		if (App->ryu->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 17-11);}
-		if (App->ryu->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 19-13);}
-		if (App->ryu->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 13-7);}
+		if (App->ryu->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7 - 1); }
+		if (App->ryu->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 11 - 5); }
+		if (App->ryu->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 17 - 11); }
+		if (App->ryu->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 19 - 13); }
+		if (App->ryu->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 13 - 7); }
 
 		int ponderatedmodifier = (SDL_GetTicks() % 100);
-		if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) {dizzylvl -= 3 ; }
+		if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
 		if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
 		if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
 		if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
@@ -2160,14 +2159,14 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		lasttimedamaged = lasttimedamagedaux;
 	}
 	/*
-	if (dizzylvl = 32) { 
-	inputs.Push(IN_DIZZY); 
+	if (dizzylvl = 32) {
+	inputs.Push(IN_DIZZY);
 	dizzylvl = 0;
 	}
 	*/
-	
+
 	//DIZZYCHECKEND
-	
+
 
 
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
@@ -2180,7 +2179,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
 
-			
+
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
 
@@ -2197,7 +2196,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 				life -= 12;
 			}
 
-			else 
+			else
 			{
 				inputs.Push(IN_HEAD_REEL2);
 				life -= 12;
@@ -2206,9 +2205,9 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
-			
+
 			invulnerabilityFrames = 25 + App->frames;
-//			App->audio->PlayChunk(high_kick);
+			//			App->audio->PlayChunk(high_kick);
 
 			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP) {
 				App->audio->PlayChunk(high_kick);
@@ -2223,7 +2222,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(low_fist);
 			}
 
-			if ((state == ST_WALK_BACKWARD2 && flip == true)||(state == ST_WALK_FORWARD && flip == false)||(state == ST_CROUCH_DEFENDING_READY2))
+			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false) || (state == ST_CROUCH_DEFENDING_READY2))
 			{
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
@@ -2273,6 +2272,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		}
 	}
 }
+
 
 
 void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture) {
