@@ -1816,16 +1816,33 @@ update_status ModuleDhalsim::Update()
 			current_animation = &lose;
 			break;
 
+
+			//HERE IS VICTORY
 		case VICTORY2:
 			if (victoryExecuted == 1 || (victoryExecuted == 0 && App->frames % 2 == 0)) {
 				texture = graphics2;
 				current_animation = &win1;
 				victoryExecuted = 1;
+
+
 			}
 			else {
+					
 				texture = graphics2;
 				current_animation = &win2;
 				victoryExecuted = 2;
+			
+				if (levitationtimer > 1) { 
+					position.y--; 
+					levitationtimer--; 
+				}
+				if (levitationtimer < -1) { 
+					position.y++; 
+					levitationtimer++; 
+				}
+				if ((levitationtimer == 1) || (levitationtimer == -1)) { 
+					levitationtimer *= -45; 
+				}
 			}
 			break;
 
