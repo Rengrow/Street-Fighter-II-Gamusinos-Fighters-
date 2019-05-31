@@ -20,13 +20,6 @@ enum KEY_STATE
 	KEY_UP
 };
 
-enum class InputCommandTypes {
-	yogaflame,
-	yogafire,
-	punch,
-	max
-};
-
 struct Gamepad
 {
 	bool up = false;
@@ -42,26 +35,6 @@ struct Gamepad
 	bool R2 = false;
 };
 
-struct InputCommand {
-	InputCommandTypes type = InputCommandTypes::max;
-	InputCommand(InputCommandTypes type) : type(type) {}
-	virtual bool Check(uint past_frame) const = 0;
-};
-
-struct CommandPunch : public InputCommand {
-	CommandPunch() : InputCommand(InputCommandTypes::punch) {}
-	bool Check(uint frames_past) const override;
-};
-
-struct CommandYogaFire : public InputCommand {
-	CommandYogaFire() : InputCommand(InputCommandTypes::yogafire) {}
-	bool Check(uint frames_past) const override;
-};
-
-struct CommandYogaFlame : public InputCommand {
-	CommandYogaFlame() : InputCommand(InputCommandTypes::yogaflame) {}
-	bool Check(uint frames_past) const override;
-};
 struct History
 {
 	uint frame = 0u;
