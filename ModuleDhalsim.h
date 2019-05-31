@@ -76,6 +76,10 @@
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 15+2
 
 
+
+
+
+
 struct Mix_Chunk;
 
 enum ryu_states2
@@ -322,10 +326,14 @@ public:
 	int pushbacktimerprojectile = 0;
 	int pushbackspeed = 1;
 	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
+	int dizzydamage = 0; // 1 =light, 2 = medium, 3 = hard, 4 = special, 5 = throw
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
 	int levitationtimer = -1;
+	int dizzylvl = 0;
+	Uint32 lasttimedamaged = 0;
+	
 	
 	int sprite_change_timer = 0;
 	bool close;
