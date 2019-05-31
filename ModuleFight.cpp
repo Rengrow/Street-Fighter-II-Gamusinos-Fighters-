@@ -92,6 +92,7 @@ void ModuleFight::StartNewRound() {
 	endFightStarted = stopedFight = roundStarted = false;
 	stage->StopMusic(2000);
 	App->fade->FadeToBlack((Module*)stage, (Module*)stage, 2);
+	App->dhalsim->levitationtimer = -1; //I'll explain, I promise. Ad
 }
 
 void ModuleFight::EndFullFight() {

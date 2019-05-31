@@ -1258,25 +1258,47 @@ update_status ModuleDhalsim::Update()
 		case ST_JUMP_NEUTRAL2:
 			texture = graphics;
 			current_animation = &neutralJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			break;
 
 		case ST_JUMP_FORWARD2:
 			current_animation = &forwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnLeftLimit())
@@ -1285,13 +1307,24 @@ update_status ModuleDhalsim::Update()
 
 		case ST_JUMP_BACKWARD2:
 			current_animation = &backwardJump;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnRightLimit()){
@@ -1346,52 +1379,96 @@ update_status ModuleDhalsim::Update()
 
 		case L_PUNCH_NEUTRAL_JUMP2:
 			current_animation = &jlp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 1;
 			break;
 
 		case M_PUNCH_NEUTRAL_JUMP2:
 			current_animation = &jmp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 2;
 			break;
 
 		case F_PUNCH_NEUTRAL_JUMP2:
 			current_animation = &jhp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 3;
 			break;
 
 		case L_PUNCH_FORWARD_JUMP2:
 			current_animation = &jlp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnLeftLimit())
@@ -1402,13 +1479,24 @@ update_status ModuleDhalsim::Update()
 
 		case M_PUNCH_FORWARD_JUMP2:
 			current_animation = &jmp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnLeftLimit())
@@ -1418,13 +1506,24 @@ update_status ModuleDhalsim::Update()
 
 		case F_PUNCH_FORWARD_JUMP2:
 			current_animation = &jhp;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnLeftLimit())
@@ -1437,13 +1536,24 @@ update_status ModuleDhalsim::Update()
 
 			current_animation = &jlp;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnRightLimit())
@@ -1454,13 +1564,24 @@ update_status ModuleDhalsim::Update()
 		case M_PUNCH_BACKWARD_JUMP2:
 			current_animation = &jmp;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnRightLimit())
@@ -1471,13 +1592,24 @@ update_status ModuleDhalsim::Update()
 		case F_PUNCH_BACKWARD_JUMP2:
 			current_animation = &jhp;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnRightLimit())
@@ -1538,26 +1670,48 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_NEUTRAL_JUMP2:
 			current_animation = &jlk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 1;
 			break;
 
 		case M_KIK_NEUTRAL_JUMP2:
 			current_animation = &jmk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 2;
 			break;
@@ -1565,26 +1719,48 @@ update_status ModuleDhalsim::Update()
 		case F_KIK_NEUTRAL_JUMP2:
 			texture = graphics2;
 			current_animation = &jhk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 3;
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
 			current_animation = &jlk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnLeftLimit())
@@ -1594,13 +1770,24 @@ update_status ModuleDhalsim::Update()
 
 		case M_KIK_FORWARD_JUMP2:
 			current_animation = &jmk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnLeftLimit())
@@ -1611,13 +1798,24 @@ update_status ModuleDhalsim::Update()
 		case F_KIK_FORWARD_JUMP2:
 			texture = graphics2;
 			current_animation = &jhk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 			typeofattack = 3;
 			if (IsntOnLeftLimit())
@@ -1628,13 +1826,24 @@ update_status ModuleDhalsim::Update()
 		case L_KIK_BACKWARD_JUMP2:
 			current_animation = &jlk;
 
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-			{
-				jumpHeight += speed + 3;
-			}
-			if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
+			}
+
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
+
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
+
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
 			}
 
 			if (IsntOnRightLimit())
@@ -1644,13 +1853,24 @@ update_status ModuleDhalsim::Update()
 
 		case M_KIK_BACKWARD_JUMP2:
 				current_animation = &jmk;
-				if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-				{
-					jumpHeight += speed + 3;
-				}
-				if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 				{
 					jumpHeight -= speed + 3;
+				}
+
+				if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+				{
+					jumpHeight -= speed;
+				}
+
+				if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+				{
+					jumpHeight += speed;
+				}
+
+				if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+				{
+					jumpHeight += speed + 3;
 				}
 
 				if (IsntOnRightLimit())
@@ -1661,13 +1881,24 @@ update_status ModuleDhalsim::Update()
 		case F_KIK_BACKWARD_JUMP2:
 				texture = graphics2;
 				current_animation = &jhk;
-				if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-				{
-					jumpHeight += speed + 3;
-				}
-				if (App->frames - jump_timer < 28 && (App->frames - jump_timer >= 0))
+				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 				{
 					jumpHeight -= speed + 3;
+				}
+
+				if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+				{
+					jumpHeight -= speed;
+				}
+
+				if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+				{
+					jumpHeight += speed;
+				}
+
+				if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+				{
+					jumpHeight += speed + 3;
 				}
 				if (IsntOnRightLimit())
 					position.x += 3;
@@ -1820,8 +2051,14 @@ update_status ModuleDhalsim::Update()
 		case ST_FALLING2:
 			current_animation = &airreel;
 			jumpHeight += speed + 3;
+
+			if (!flip) position.x += speed + 1;
+
+			if (flip)  position.x -= speed + 1;
+
 			if (jumpHeight == 0)
 			{
+				airreel.ResetAnimation();
 				inputs.Push(IN_FALLING_FINISH2);
 			}
 			break;
@@ -1867,16 +2104,33 @@ update_status ModuleDhalsim::Update()
 			current_animation = &lose;
 			break;
 
+
+			//HERE IS VICTORY
 		case VICTORY2:
 			if (victoryExecuted == 1 || (victoryExecuted == 0 && App->frames % 2 == 0)) {
 				texture = graphics2;
 				current_animation = &win1;
 				victoryExecuted = 1;
+
+
 			}
 			else {
+					
 				texture = graphics2;
 				current_animation = &win2;
 				victoryExecuted = 2;
+			
+				if (levitationtimer > 1) { 
+					position.y--; 
+					levitationtimer--; 
+				}
+				if (levitationtimer < -1) { 
+					position.y++; 
+					levitationtimer++; 
+				}
+				if ((levitationtimer == 1) || (levitationtimer == -1)) { 
+					levitationtimer *= -45; 
+				}
 			}
 			break;
 
@@ -2367,19 +2621,10 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
 			jhk.ResetAnimation();
-			yoga_mummy.ResetAnimation();
-			yoga_drill.ResetAnimation();
-			close_firstframe_lk_mk.ResetAnimation();
-			airreel.ResetAnimation();
-			fall.ResetAnimation();
-			getup.ResetAnimation();
-			grab.ResetAnimation();
-			grab2.ResetAnimation();
 			stun.ResetAnimation();
 			win1.ResetAnimation();
 			win2.ResetAnimation();
 			lose.ResetAnimation();
-			ground.ResetAnimation();
 		}
 	}
 
@@ -2398,6 +2643,8 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_grab_timer > D_M_GRAB_TIME)
 		{
 			inputs.Push(IN_M_GRAB_FINISH2);
+			grab.ResetAnimation();
+			grab2.ResetAnimation();
 			m_grab_timer = 0;
 		}
 	}
@@ -2407,6 +2654,8 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_grab_timer > D_F_GRAB_TIME)
 		{
 			inputs.Push(IN_F_GRAB_FINISH2);
+			grab.ResetAnimation();
+			grab2.ResetAnimation();
 			f_grab_timer = 0;
 		}
 	}
@@ -2489,6 +2738,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_KIK_FINISH2);
 			close_lk.ResetAnimation();
+			close_firstframe_lk_mk.ResetAnimation();
 			l_close_standing_kik_timer = 0;
 		}
 	}
@@ -2580,6 +2830,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_KIK_FINISH2);
 			close_mk.ResetAnimation();
+			close_firstframe_lk_mk.ResetAnimation();
 			m_close_standing_kik_timer = 0;
 		}
 	}
