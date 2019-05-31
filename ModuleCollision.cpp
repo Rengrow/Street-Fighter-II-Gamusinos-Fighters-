@@ -14,8 +14,8 @@ ModuleCollision::ModuleCollision()
 		colliders[i] = nullptr;
 
 	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER2] = true;
+	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = false;
+	matrix[COLLIDER_WALL][COLLIDER_PLAYER2] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_SHOT] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER2_SHOT] = true;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_HIT] = false;
@@ -25,7 +25,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_GRAB] = false;
 	matrix[COLLIDER_WALL][COLLIDER_PLAYER_GRABBOX] = false;
 
-	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER2] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SHOT] = false;
@@ -37,7 +37,7 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER2_GRAB] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER2_GRABBOX] = false;
 
-	matrix[COLLIDER_PLAYER2][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER2][COLLIDER_WALL] = false;
 	matrix[COLLIDER_PLAYER2][COLLIDER_PLAYER2] = false;
 	matrix[COLLIDER_PLAYER2][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER2][COLLIDER_PLAYER2_SHOT] = false;

@@ -2337,6 +2337,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
 		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
 		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
+//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 200);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
