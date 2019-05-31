@@ -2287,6 +2287,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2;}
 		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2;}
 		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2;}
+		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_NONE, 0, 0);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
@@ -2331,22 +2332,21 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			}
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
+			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			
+			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
-//			App->audio->PlayChunk(high_kick);
 
-			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP) {
+			if (App->ryu->state == L_KIK_STANDING2 || App->ryu->state == L_KIK_NEUTRAL_JUMP2 || App->ryu->state == L_KIK_FORWARD_JUMP2 || App->ryu->state == L_KIK_BACKWARD_JUMP2 || App->ryu->state == M_KIK_STANDING2 || App->ryu->state == M_KIK_NEUTRAL_JUMP2 || App->ryu->state == M_KIK_FORWARD_JUMP2 || App->ryu->state == M_KIK_BACKWARD_JUMP2
+				|| App->ryu->state == F_KIK_STANDING2 || App->ryu->state == F_KIK_NEUTRAL_JUMP2 || App->ryu->state == F_KIK_FORWARD_JUMP2 || App->ryu->state == F_KIK_BACKWARD_JUMP2 || App->ryu->state == L_KIK_CLOSE2 || App->ryu->state == M_KIK_CLOSE2 || App->ryu->state == F_KIK_CLOSE2)
 				App->audio->PlayChunk(high_kick);
-			}
-			else if (App->ryu->state == L_KIK_CROUCH) {
+			else if (App->ryu->state == L_KIK_CROUCH2 || App->ryu->state == M_KIK_CROUCH2 || App->ryu->state == F_KIK_CROUCH2 || App->ryu->state == L_KIK_CROUCHCLOSE2 || App->ryu->state == M_KIK_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_kick);
-			}
-			else if (App->ryu->state == L_PUNCH_STANDING || App->ryu->state == L_PUNCH_NEUTRAL_JUMP || App->ryu->state == L_PUNCH_FORWARD_JUMP || App->ryu->state == L_PUNCH_BACKWARD_JUMP) {
+			else if (App->ryu->state == L_PUNCH_STANDING2 || App->ryu->state == L_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == L_PUNCH_FORWARD_JUMP2 || App->ryu->state == L_PUNCH_BACKWARD_JUMP2 || App->ryu->state == M_PUNCH_STANDING2 || App->ryu->state == M_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == M_PUNCH_FORWARD_JUMP2 || App->ryu->state == M_PUNCH_BACKWARD_JUMP2
+				|| App->ryu->state == F_PUNCH_STANDING2 || App->ryu->state == F_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == F_PUNCH_FORWARD_JUMP2 || App->ryu->state == F_PUNCH_BACKWARD_JUMP2 || App->ryu->state == L_PUNCH_CLOSE2 || App->ryu->state == M_PUNCH_CLOSE2 || App->ryu->state == F_PUNCH_CLOSE2)
 				App->audio->PlayChunk(high_fist);
-			}
-			else if (App->ryu->state == L_PUNCH_CROUCH) {
+			else if (App->ryu->state == L_PUNCH_CROUCH2 || App->ryu->state == M_PUNCH_CROUCH2 || App->ryu->state == F_PUNCH_CROUCH2 || App->ryu->state == L_PUNCH_CROUCHCLOSE2 || App->ryu->state == M_PUNCH_CROUCHCLOSE2){
 				App->audio->PlayChunk(low_fist);
 			}
 
@@ -2378,23 +2378,21 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			inputs.Push(IN_FALLING2);
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
 		{
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
 
-			if (App->ryu->state == L_KIK_STANDING || App->ryu->state == L_KIK_NEUTRAL_JUMP || App->ryu->state == L_KIK_FORWARD_JUMP || App->ryu->state == L_KIK_BACKWARD_JUMP) {
+			if (App->ryu->state == L_KIK_STANDING2 || App->ryu->state == L_KIK_NEUTRAL_JUMP2 || App->ryu->state == L_KIK_FORWARD_JUMP2 || App->ryu->state == L_KIK_BACKWARD_JUMP2 || App->ryu->state == M_KIK_STANDING2 || App->ryu->state == M_KIK_NEUTRAL_JUMP2 || App->ryu->state == M_KIK_FORWARD_JUMP2 || App->ryu->state == M_KIK_BACKWARD_JUMP2
+				|| App->ryu->state == F_KIK_STANDING2 || App->ryu->state == F_KIK_NEUTRAL_JUMP2 || App->ryu->state == F_KIK_FORWARD_JUMP2 || App->ryu->state == F_KIK_BACKWARD_JUMP2 || App->ryu->state == L_KIK_CLOSE2 || App->ryu->state == M_KIK_CLOSE2 || App->ryu->state == F_KIK_CLOSE2)
 				App->audio->PlayChunk(high_kick);
-			}
-			else if (App->ryu->state == L_KIK_CROUCH) {
+			else if (App->ryu->state == L_KIK_CROUCH2 || App->ryu->state == M_KIK_CROUCH2 || App->ryu->state == F_KIK_CROUCH2 || App->ryu->state == L_KIK_CROUCHCLOSE2 || App->ryu->state == M_KIK_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_kick);
-			}
-			else if (App->ryu->state == L_PUNCH_STANDING || App->ryu->state == L_PUNCH_NEUTRAL_JUMP || App->ryu->state == L_PUNCH_FORWARD_JUMP || App->ryu->state == L_PUNCH_BACKWARD_JUMP) {
+			else if (App->ryu->state == L_PUNCH_STANDING2 || App->ryu->state == L_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == L_PUNCH_FORWARD_JUMP2 || App->ryu->state == L_PUNCH_BACKWARD_JUMP2 || App->ryu->state == M_PUNCH_STANDING2 || App->ryu->state == M_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == M_PUNCH_FORWARD_JUMP2 || App->ryu->state == M_PUNCH_BACKWARD_JUMP2
+				|| App->ryu->state == F_PUNCH_STANDING2 || App->ryu->state == F_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == F_PUNCH_FORWARD_JUMP2 || App->ryu->state == F_PUNCH_BACKWARD_JUMP2 || App->ryu->state == L_PUNCH_CLOSE2 || App->ryu->state == M_PUNCH_CLOSE2 || App->ryu->state == F_PUNCH_CLOSE2)
 				App->audio->PlayChunk(high_fist);
-			}
-			else if (App->ryu->state == L_PUNCH_CROUCH) {
+			else if (App->ryu->state == L_PUNCH_CROUCH2 || App->ryu->state == M_PUNCH_CROUCH2 || App->ryu->state == F_PUNCH_CROUCH2 || App->ryu->state == L_PUNCH_CROUCHCLOSE2 || App->ryu->state == M_PUNCH_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_fist);
-			}
 
 			inputs.Push(IN_FALLING2);
 		}

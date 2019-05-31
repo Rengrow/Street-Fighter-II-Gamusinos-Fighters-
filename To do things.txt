@@ -1,8 +1,8 @@
 Change Ryu for Dhalsim in player1
 Add Particles in OnCollision
 
-Add stun
-Add falling to the ground when multiple hits recieved or low hit
+Add Yoga Fire and Yoga Flame sound
+Add punctuation
 
 When time comes to the last seconds, it starts blinking with white shadows. Implement it (maybe?) //Not for prototype
 Make the KO icon blink when a player has low health by adding or subtracting the statistics, blittting, and reverting them //Not for prototype

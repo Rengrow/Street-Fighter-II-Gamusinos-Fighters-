@@ -769,6 +769,22 @@ bool ModuleRyu::IsntOnLeftLimit() {
 
 void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 	
+	//PUSHBACK CHECK
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
+		if (App->dhalsim->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
+		if (App->dhalsim->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
+		if (App->dhalsim->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
+//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_NONE, 0, 200);
+	}
+
+	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT) {
+		if (App->dhalsim->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2; }
+		if (App->dhalsim->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2; }
+		if (App->dhalsim->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
+	}
+
+	//PUSHBACK CHECK END
+
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{

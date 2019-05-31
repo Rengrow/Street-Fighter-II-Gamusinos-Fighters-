@@ -53,6 +53,7 @@ private:
 
 public:
 	Particle hdk;
+	Particle ground_dust;
 };
 
 #endif // __MODULEPARTICLES_H__

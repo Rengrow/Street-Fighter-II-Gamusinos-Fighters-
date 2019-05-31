@@ -228,6 +228,9 @@ public:
 	int life;
 	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
 	int mov; //lp, mp, hp, lk, mk, hk
+	int pushbacktimerhit = 0;
+	int pushbacktimerprojectile = 0;
+	int pushbackspeed = 1;
 	bool flip = false;
 	Uint32 invulnerabilityFrames;
 	

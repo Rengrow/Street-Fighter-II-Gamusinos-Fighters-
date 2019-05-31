@@ -31,6 +31,15 @@ bool ModuleParticles::Start()
 	hdk.anim.loop = true;
 	
 	hdk.life = -1;
+
+	ground_dust.anim.PushBack({ 295, 98, 21, 17 }, 2, { 0,0 }, 0, {}, {}, {});
+	ground_dust.anim.PushBack({ 321, 96, 23, 19 }, 2, { 0,0 }, 0, {}, {}, {});
+	ground_dust.anim.PushBack({ 347, 94, 25, 21 }, 2, { 0,0 }, 0, {}, {}, {});
+	ground_dust.anim.PushBack({ 375, 92, 27, 23 }, 2, { 0,0 }, 0, {}, {}, {});
+	ground_dust.anim.PushBack({ 405, 90, 30, 25 }, 2, { 0,0 }, 0, {}, {}, {});
+
+	ground_dust.life = -1;
+
 	return true;
 }
 
