@@ -1619,33 +1619,33 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
-			if (App->frames - l_crouching_kik_timer < 18) {
+			if (App->frames - l_crouching_kik_timer < 18 && App->frames - l_crouching_kik_timer > 2) {
 				if (flip == true) {
-					position.x -= pushbackspeed * 2;
+					position.x -= pushbackspeed * 3;
 				}
-				else position.x += pushbackspeed * 2;
+				else position.x += pushbackspeed * 3;
 			}
 			typeofattack = 1;
 			break;
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
-			if (App->frames - m_crouching_kik_timer < 24) {
+			if (App->frames - m_crouching_kik_timer < 24 && App->frames - m_crouching_kik_timer > 7) {
 				if (flip == true) {
-					position.x -= pushbackspeed * 2;
+					position.x -= pushbackspeed * 4;
 				}
-				else position.x += pushbackspeed * 2;
+				else position.x += pushbackspeed * 4;
 			}
 			typeofattack = 2;
 			break;
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
-			if (App->frames - f_crouching_kik_timer < 25) {
+			if (App->frames - f_crouching_kik_timer < 25 && App->frames - f_crouching_kik_timer > 7) {
 				if (flip == true) {
-					position.x -= pushbackspeed * 3;
+					position.x -= pushbackspeed * 5;
 				}
-				else position.x += pushbackspeed * 3;
+				else position.x += pushbackspeed * 5;
 			}
 			typeofattack = 3;
 			break;
