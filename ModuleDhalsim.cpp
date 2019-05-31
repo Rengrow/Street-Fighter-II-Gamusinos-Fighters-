@@ -1302,7 +1302,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			break;
 
 		case ST_JUMP_BACKWARD2:
@@ -1328,7 +1328,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit()){
-				position.x += 3;
+				position.x += 2;
 		}
 			break;
 
@@ -1472,7 +1472,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 1;
 		
 			break;
@@ -1500,7 +1500,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 2;
 			break;
 
@@ -1527,7 +1527,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 3;
 			
 			break;
@@ -1557,7 +1557,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 1;
 			break;
 
@@ -1585,7 +1585,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 2;
 			break;
 
@@ -1613,7 +1613,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 3;
 			break;
 
@@ -1764,7 +1764,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 1;
 			break;
 
@@ -1791,7 +1791,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 2;
 			break;
 
@@ -1819,7 +1819,7 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 3;
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			
 			break;
 
@@ -1847,7 +1847,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 1;
 			break;
 
@@ -1874,7 +1874,7 @@ update_status ModuleDhalsim::Update()
 				}
 
 				if (IsntOnRightLimit())
-					position.x += 3;
+					position.x += 2;
 				typeofattack = 2;
 			break;
 
@@ -1901,7 +1901,7 @@ update_status ModuleDhalsim::Update()
 					jumpHeight += speed + 3;
 				}
 				if (IsntOnRightLimit())
-					position.x += 3;
+					position.x += 2;
 				typeofattack = 3;
 			break;
 
