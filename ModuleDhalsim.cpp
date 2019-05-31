@@ -1239,6 +1239,7 @@ update_status ModuleDhalsim::Update()
 			texture = graphics3;
 			current_animation = &idle;
 			typeofattack = 0;
+			dizzydamage = 0;
 			break;
 
 		case ST_WALK_FORWARD2:
@@ -1302,7 +1303,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
 			break;
 
 		case ST_JUMP_BACKWARD2:
@@ -1328,7 +1329,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit()){
-				position.x += 2;
+				position.x += 3;
 		}
 			break;
 
@@ -1347,34 +1348,40 @@ update_status ModuleDhalsim::Update()
 		case L_PUNCH_CROUCH2:
 			current_animation = &clp;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_PUNCH_CROUCH2:
 			current_animation = &cmp;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_PUNCH_CROUCH2:
 			current_animation = &chp;
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &lp;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &mp;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_PUNCH_STANDING2:
 			texture = graphics3;
 			current_animation = &hp;
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_PUNCH_NEUTRAL_JUMP2:
@@ -1399,6 +1406,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight += speed + 3;
 			}
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_PUNCH_NEUTRAL_JUMP2:
@@ -1423,6 +1431,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight += speed + 3;
 			}
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_PUNCH_NEUTRAL_JUMP2:
@@ -1447,6 +1456,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight += speed + 3;
 			}
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_PUNCH_FORWARD_JUMP2:
@@ -1472,8 +1482,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
 			typeofattack = 1;
+			dizzydamage = 1;
 		
 			break;
 
@@ -1500,8 +1511,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_PUNCH_FORWARD_JUMP2:
@@ -1527,8 +1539,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
 			typeofattack = 3;
+			dizzydamage = 3;
 			
 			break;
 
@@ -1557,8 +1570,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 2;
+				position.x += 3;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_PUNCH_BACKWARD_JUMP2:
@@ -1585,8 +1599,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 2;
+				position.x += 3;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_PUNCH_BACKWARD_JUMP2:
@@ -1613,8 +1628,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 2;
+				position.x += 3;
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_KIK_CROUCH2:
@@ -1626,6 +1642,7 @@ update_status ModuleDhalsim::Update()
 				else position.x += speed * 3;
 			}
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_CROUCH2:
@@ -1637,6 +1654,7 @@ update_status ModuleDhalsim::Update()
 				else position.x += speed * 4;
 			}
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_KIK_CROUCH2:
@@ -1648,12 +1666,14 @@ update_status ModuleDhalsim::Update()
 				else position.x += speed * 5;
 			}
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_KIK_STANDING2:
 			texture = graphics3;
 			current_animation = &lk;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_STANDING2:
@@ -1666,6 +1686,7 @@ update_status ModuleDhalsim::Update()
 			texture = graphics3;
 			current_animation = &hk;
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_KIK_NEUTRAL_JUMP2:
@@ -1690,14 +1711,16 @@ update_status ModuleDhalsim::Update()
 				jumpHeight += speed + 3;
 			}
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_NEUTRAL_JUMP2:
 			current_animation = &jmk;
-			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
-			{
-				jumpHeight -= speed + 3;
-			}
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
+				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
+				{
+					jumpHeight -= speed + 3;
+				}
 
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
 			{
@@ -1714,15 +1737,17 @@ update_status ModuleDhalsim::Update()
 				jumpHeight += speed + 3;
 			}
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_KIK_NEUTRAL_JUMP2:
 			texture = graphics2;
 			current_animation = &jhk;
-			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
-			{
-				jumpHeight -= speed + 3;
-			}
+			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
+				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
+				{
+					jumpHeight -= speed + 3;
+				}
 
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
 			{
@@ -1739,6 +1764,7 @@ update_status ModuleDhalsim::Update()
 				jumpHeight += speed + 3;
 			}
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_KIK_FORWARD_JUMP2:
@@ -1764,8 +1790,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_FORWARD_JUMP2:
@@ -1791,8 +1818,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_KIK_FORWARD_JUMP2:
@@ -1819,7 +1847,8 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 3;
 			if (IsntOnLeftLimit())
-				position.x -= 2;
+				position.x -= 3;
+			dizzydamage = 3;
 			
 			break;
 
@@ -1847,8 +1876,9 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 2;
+				position.x += 3;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_BACKWARD_JUMP2:
@@ -1874,8 +1904,9 @@ update_status ModuleDhalsim::Update()
 				}
 
 				if (IsntOnRightLimit())
-					position.x += 2;
+					position.x += 3;
 				typeofattack = 2;
+				dizzydamage = 2;
 			break;
 
 		case F_KIK_BACKWARD_JUMP2:
@@ -1901,8 +1932,9 @@ update_status ModuleDhalsim::Update()
 					jumpHeight += speed + 3;
 				}
 				if (IsntOnRightLimit())
-					position.x += 2;
+					position.x += 3;
 				typeofattack = 3;
+				dizzydamage = 3;
 			break;
 
 		case ST_DEFENDING2:
@@ -2014,6 +2046,7 @@ update_status ModuleDhalsim::Update()
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
 			typeofattack = 1;
+			dizzydamage = 4;
 			break;
 
 		case M_YFIRE2:
@@ -2023,6 +2056,7 @@ update_status ModuleDhalsim::Update()
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
 			typeofattack = 1;
+			dizzydamage = 4;
 			break;
 
 		case F_YFIRE2:
@@ -2032,40 +2066,40 @@ update_status ModuleDhalsim::Update()
 				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
 			}
 			typeofattack = 1;
+			dizzydamage = 4;
 			break;
 
 		case L_YFLAME2:
 			current_animation = &yoga_flame_lp;
 			typeofattack = 1;
+			dizzydamage = 4;
 			break;
 
 		case M_YFLAME2:
 			current_animation = &yoga_flame_mp;
 			typeofattack = 1;
+			dizzydamage = 4;
 			break;
 
 		case F_YFLAME2:
 			current_animation = &yoga_flame_hp;
+			dizzydamage = 4;
 			break;
 
 		case ST_FALLING2:
 			current_animation = &airreel;
 			jumpHeight += speed + 3;
-
-			if (!flip) position.x += speed + 1;
-
-			if (flip)  position.x -= speed + 1;
-
 			if (jumpHeight == 0)
 			{
-				airreel.ResetAnimation();
 				inputs.Push(IN_FALLING_FINISH2);
 			}
 			break;
 
 		case YDRILL2:
 			current_animation = &yoga_drill;
+			typeofattack = 3;
 			jumpHeight += speed + 2;
+			dizzydamage = 4;
 			
 			if (!flip) position.x += speed + 2;
 			
@@ -2083,6 +2117,8 @@ update_status ModuleDhalsim::Update()
 
 			current_animation = &yoga_mummy;
 			jumpHeight += speed + 2;
+			typeofattack = 3;
+			dizzydamage = 4;
 
 			if (!flip) position.x += speed + 3;
 
@@ -2140,16 +2176,19 @@ update_status ModuleDhalsim::Update()
 		case L_PUNCH_CLOSE2:
 			current_animation = &close_lp;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_PUNCH_CLOSE2:
 			current_animation = &close_mp;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_PUNCH_CLOSE2:
 			current_animation = &close_hp;
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_KIK_CLOSE2:
@@ -2170,6 +2209,7 @@ update_status ModuleDhalsim::Update()
 				else { sprite_change_timer++; }
 			}
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_CLOSE2:
@@ -2190,6 +2230,7 @@ update_status ModuleDhalsim::Update()
 				else { sprite_change_timer++; }
 			}
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		
@@ -2197,45 +2238,54 @@ update_status ModuleDhalsim::Update()
 		case F_KIK_CLOSE2:
 			current_animation = &close_hk;
 			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case L_PUNCH_CROUCHCLOSE2:
 			current_animation = &close_clp;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_PUNCH_CROUCHCLOSE2:
 			current_animation = &close_cmp;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case L_KIK_CROUCHCLOSE2:
 			current_animation = &close_clk;
 			typeofattack = 1;
+			dizzydamage = 1;
 			break;
 
 		case M_KIK_CROUCHCLOSE2:
 			current_animation = &close_cmk;
 			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case M_GRABBING2:
 			texture = graphics3;
 			current_animation = &grabbing;
+			dizzydamage = 5;
 			break;
 
 		case F_GRABBING2:
 			texture = graphics3;
 			current_animation = &grabbing;
+			dizzydamage = 5;
 			break;
 
 		case M_GRAB2:
 			texture = graphics2;
 			current_animation = &grab2;
+			dizzydamage = 5;
 			break;
 
 		case F_GRAB2:
 			current_animation = &grab;
+			dizzydamage = 5;
 			break;
 
 		case GRABBED2:
@@ -2281,23 +2331,77 @@ void ModuleDhalsim::IsClose() {
 }
 
 void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
-	
+
 	//PUSHBACK CHECK
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
-		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2;}
-		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_NONE, 0, 0);
+		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
-		if (App->ryu->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2;}
-		if (App->ryu->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2;}
+		if (App->ryu->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2; }
+		if (App->ryu->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
 	//PUSHBACK CHECK END
-	
+
+
+
+	//DIZZY CHECK
+
+
+
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
+		Uint32 lasttimedamagedaux = App->GetFrame();
+		if (lasttimedamagedaux - lasttimedamaged > 240) {
+			dizzylvl = 0;
+		}
+		if (App->ryu->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7 - 1); }
+		if (App->ryu->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 11 - 5); }
+		if (App->ryu->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 17 - 11); }
+		if (App->ryu->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 19 - 13); }
+		if (App->ryu->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 13 - 7); }
+
+		int ponderatedmodifier = (SDL_GetTicks() % 100);
+		if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
+		if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
+		if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
+		if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
+		if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl += +1; }
+		if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl += +2; }
+		if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl += +3; }
+		lasttimedamaged = lasttimedamagedaux;
+	}
+
+	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
+		Uint32 lasttimedamagedaux = App->GetFrame();
+		if (lasttimedamagedaux - lasttimedamaged > 240) {
+			dizzylvl = 0;
+		}
+		dizzylvl += 13 + (SDL_GetTicks() % 19);
+		int ponderatedmodifier = (SDL_GetTicks() % 100);
+		if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
+		if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
+		if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
+		if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
+		if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl -= +1; }
+		if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl -= +2; }
+		if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl -= +3; }
+		lasttimedamaged = lasttimedamagedaux;
+	}
+	/*
+	if (dizzylvl = 32) {
+	inputs.Push(IN_DIZZY);
+	dizzylvl = 0;
+	}
+	*/
+
+	//DIZZYCHECKEND
+
+
+
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
 	{
 		inputs.Push(IN_GRAB2);
@@ -2308,7 +2412,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
 
-			
+
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
 
@@ -2325,7 +2429,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 				life -= 12;
 			}
 
-			else 
+			else
 			{
 				inputs.Push(IN_HEAD_REEL2);
 				life -= 12;
@@ -2350,7 +2454,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(low_fist);
 			}
 
-			if ((state == ST_WALK_BACKWARD2 && flip == true)||(state == ST_WALK_FORWARD && flip == false)||(state == ST_CROUCH_DEFENDING_READY2))
+			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false) || (state == ST_CROUCH_DEFENDING_READY2))
 			{
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
@@ -2398,6 +2502,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		}
 	}
 }
+
 
 
 void ModuleDhalsim::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture) {
@@ -2591,8 +2696,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_IDLE2);
 		}
-	}
-	else {
+	}else {
 		App->input->pads[0].left = false;
 		App->input->pads[0].right = false;
 		App->input->pads[0].down = false;
@@ -2619,10 +2723,19 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
 			jhk.ResetAnimation();
+			yoga_mummy.ResetAnimation();
+			yoga_drill.ResetAnimation();
+			close_firstframe_lk_mk.ResetAnimation();
+			airreel.ResetAnimation();
+			fall.ResetAnimation();
+			getup.ResetAnimation();
+			grab.ResetAnimation();
+			grab2.ResetAnimation();
 			stun.ResetAnimation();
 			win1.ResetAnimation();
 			win2.ResetAnimation();
 			lose.ResetAnimation();
+			ground.ResetAnimation();
 		}
 	}
 
@@ -2641,8 +2754,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_grab_timer > D_M_GRAB_TIME)
 		{
 			inputs.Push(IN_M_GRAB_FINISH2);
-			grab.ResetAnimation();
-			grab2.ResetAnimation();
 			m_grab_timer = 0;
 		}
 	}
@@ -2652,8 +2763,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_grab_timer > D_F_GRAB_TIME)
 		{
 			inputs.Push(IN_F_GRAB_FINISH2);
-			grab.ResetAnimation();
-			grab2.ResetAnimation();
 			f_grab_timer = 0;
 		}
 	}
@@ -2736,7 +2845,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_KIK_FINISH2);
 			close_lk.ResetAnimation();
-			close_firstframe_lk_mk.ResetAnimation();
 			l_close_standing_kik_timer = 0;
 		}
 	}
@@ -2828,7 +2936,6 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_KIK_FINISH2);
 			close_mk.ResetAnimation();
-			close_firstframe_lk_mk.ResetAnimation();
 			m_close_standing_kik_timer = 0;
 		}
 	}
