@@ -2292,6 +2292,10 @@ update_status ModuleDhalsim::Update()
 			current_animation = &airreel;
 			break;
 
+		case ST_DIZZI2:
+			current_animation = &stun;
+			break;
+
 		//end of test
 		}
 	}
@@ -2354,50 +2358,8 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 
 
 
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
-		Uint32 lasttimedamagedaux = App->GetFrame();
-		if (lasttimedamagedaux - lasttimedamaged > 240) {
-			dizzylvl = 0;
-		}
-		if (App->ryu->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7 - 1); }
-		if (App->ryu->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 11 - 5); }
-		if (App->ryu->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 17 - 11); }
-		if (App->ryu->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 19 - 13); }
-		if (App->ryu->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 13 - 7); }
-
-		int ponderatedmodifier = (SDL_GetTicks() % 100);
-		if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
-		if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
-		if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
-		if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
-		if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl += +1; }
-		if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl += +2; }
-		if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl += +3; }
-		lasttimedamaged = lasttimedamagedaux;
-	}
-
-	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
-		Uint32 lasttimedamagedaux = App->GetFrame();
-		if (lasttimedamagedaux - lasttimedamaged > 240) {
-			dizzylvl = 0;
-		}
-		dizzylvl += 13 + (SDL_GetTicks() % 19);
-		int ponderatedmodifier = (SDL_GetTicks() % 100);
-		if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
-		if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
-		if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
-		if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
-		if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl -= +1; }
-		if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl -= +2; }
-		if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl -= +3; }
-		lasttimedamaged = lasttimedamagedaux;
-	}
-	/*
-	if (dizzylvl = 32) {
-	inputs.Push(IN_DIZZY);
-	dizzylvl = 0;
-	}
-	*/
+	
+	
 
 	//DIZZYCHECKEND
 
@@ -2410,6 +2372,51 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (invulnerabilityFrames < App->frames) {
+
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
+			Uint32 lasttimedamagedaux = App->GetFrame();
+			if (lasttimedamagedaux - lasttimedamaged > 240) {
+				dizzylvl = 0;
+			}
+			if (App->ryu->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7 - 1); }
+			if (App->ryu->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 11 - 5); }
+			if (App->ryu->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 17 - 11); }
+			if (App->ryu->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 19 - 13); }
+			if (App->ryu->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 13 - 7); }
+
+			int ponderatedmodifier = (SDL_GetTicks() % 100);
+			if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
+			if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
+			if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
+			if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
+			if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl += +1; }
+			if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl += +2; }
+			if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl += +3; }
+			lasttimedamaged = lasttimedamagedaux;
+		}
+
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
+			Uint32 lasttimedamagedaux = App->GetFrame();
+			if (lasttimedamagedaux - lasttimedamaged > 240) {
+				dizzylvl = 0;
+			}
+			dizzylvl += 13 + (SDL_GetTicks() % 19);
+			int ponderatedmodifier = (SDL_GetTicks() % 100);
+			if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
+			if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
+			if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
+			if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
+			if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl -= +1; }
+			if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl -= +2; }
+			if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl -= +3; }
+			lasttimedamaged = lasttimedamagedaux;
+		}
+
+		if (dizzylvl >= 32) {
+			dizzi = true;
+			dizzylvl = 0;
+		}
+
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
 		{
 
@@ -3150,6 +3157,16 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_DEFENDING_FINISH2);
 			cdefending.ResetAnimation();
 			crouch_defending_timer = 0;
+		}
+	}
+
+	if (dizzi_timer > 0)
+	{
+		if (App->frames - dizzi_timer > D_DIZZI_TIME)
+		{
+			inputs.Push(IN_DIZZI_FINISH2);
+			stun.ResetAnimation();
+			dizzi_timer = 0;
 		}
 	}
 
@@ -4025,7 +4042,6 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 					state = ST_CROUCH_DEFENDING_READY2;
 				else
 					state = ST_CROUCH2;
-					
 			}break;
 
 			case IN_RIGHT_AND_CROUCH2: {
@@ -4278,7 +4294,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2: {
-				if (dizzi) state = ST_DIZZI2;
+				if (dizzi) { state = ST_DIZZI2; dizzi_timer = App->frames; }
 				else state = ST_IDLE2;
 			} break;
 
@@ -4296,7 +4312,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2: {
-				if (dizzi) state = ST_DIZZI2;
+				if (dizzi) { state = ST_DIZZI2; dizzi_timer = App->frames; }
 				else state = ST_IDLE2;
 			} break;
 
@@ -4314,7 +4330,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_REEL_FINISH2: {
-				if (dizzi) state = ST_DIZZI2;
+				if (dizzi) { state = ST_DIZZI2; dizzi_timer = App->frames; }
 				else state = ST_IDLE2;
 			} break;
 
@@ -4341,7 +4357,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_GETTING_UP_FINISH2: {
-				if (dizzi) state = ST_DIZZI2;
+				if (dizzi) { state = ST_DIZZI2; dizzi_timer = App->frames; }
 				else state = ST_IDLE2;
 			} break;
 			}

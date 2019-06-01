@@ -576,6 +576,7 @@ update_status ModuleRyu::Update()
 		case L_PUNCH_STANDING:
 			current_animation = &lp;
 			typeofattack = 1; 
+			dizzydamage = 5;
 			break;
 
 		case L_PUNCH_NEUTRAL_JUMP:
