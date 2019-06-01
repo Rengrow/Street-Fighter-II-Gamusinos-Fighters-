@@ -78,7 +78,7 @@
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 15+2
 
 
-
+#define D_TURNING_TIME 4
 
 
 
@@ -181,6 +181,9 @@ enum ryu_states2
 	YMUMMY2,
 	YDRILL2,
 
+	TURNING2,
+	CROUCH_TURNING2,
+
 	VICTORY2,
 	LOOSE2
 };
@@ -256,6 +259,9 @@ enum ryu_inputs2
 	IN_GRABBED2,
 	IN_GRABBED_FINISH2,
 
+	IN_TURNING2,
+	IN_TURNING_FINISH2,
+
 	IN_VICTORY2,
 	IN_LOOSE2,
 	IN_END2
@@ -321,6 +327,7 @@ public:
 	ryu_states2 state;
 
 	Uint32 invulnerabilityFrames;
+	bool turn = false;
 	bool flip = true;
 	bool altColor = true;
 	bool freeze;
@@ -406,6 +413,8 @@ public:
 	Uint32 getting_up_timer = 0;
 	Uint32 defending_timer = 0;
 	Uint32 crouch_defending_timer = 0;
+
+	Uint32 turning_timer = 0;
 
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;
