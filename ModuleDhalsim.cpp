@@ -3174,6 +3174,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			turning_timer = 0;
 
 			turn = false;
+
 			flip = !flip;
 		}
 	}
