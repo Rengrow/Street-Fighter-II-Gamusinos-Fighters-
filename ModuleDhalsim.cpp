@@ -2297,6 +2297,14 @@ update_status ModuleDhalsim::Update()
 			current_animation = &stun;
 			break;
 
+		case TURNING2:
+			current_animation = &airreel;
+			break;
+
+		case CROUCH_TURNING2:
+			current_animation = &airreel;
+			break;
+
 		//end of test
 		}
 	}
@@ -3157,13 +3165,17 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 	}
 
-	if (dizzi_timer > 0)
+	if (turning_timer > 0)
 	{
-		if (App->frames - dizzi_timer > D_DIZZI_TIME)
+		if (App->frames - turning_timer > D_TURNING_TIME)
 		{
-			inputs.Push(IN_DIZZI_FINISH2);
+			inputs.Push(IN_TURNING_FINISH2);
 			stun.ResetAnimation();
-			dizzi_timer = 0;
+			turning_timer = 0;
+
+			turn = false;
+
+			flip = !flip;
 		}
 	}
 }
