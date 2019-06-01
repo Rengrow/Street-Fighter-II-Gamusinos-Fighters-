@@ -20,31 +20,45 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+private:
+	void ReadPlayer1Inputs();
+	void ReadPlayer2Inputs();
+	void PrintMap();
+	void PrintPanel();
+	void PrintPortraits();
+	void PrintPlayerCursors();
+
 public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* portraits = nullptr;
 	int typography;
 	int typographyBig;
+	bool isFading;
 	SDL_Rect map;
 	SDL_Rect thailandFlag;
 
 	Mix_Music *music = nullptr;
 	Mix_Chunk* move = nullptr;
+	Mix_Chunk* invalidSelect = nullptr;
 	Mix_Chunk* select = nullptr;
 	Uint32 timeSelector;
 	bool lettersOn;
 	
 	SDL_Rect player1Pointer;
 	SDL_Rect player1Cursor;
+	SDL_Rect player1CursorLocked;
 	iPoint player1Position;
 	SDL_Rect player1Portrait;
 	char* player1Name;
+	bool player1Lock;
 
 	SDL_Rect player2Pointer;
 	SDL_Rect player2Cursor;
+	SDL_Rect player2CursorLocked;
 	iPoint player2Position;
 	SDL_Rect player2Portrait;
 	char* player2Name;
+	bool player2Lock;
 
 	SDL_Rect airplane;
 
