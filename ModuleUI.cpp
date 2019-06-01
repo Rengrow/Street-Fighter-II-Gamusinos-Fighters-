@@ -77,7 +77,7 @@ bool ModuleUI::Start()
 	LOG("Loading UI assets");
 	bool ret = true;
 
-	typography1 = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890 ", 1);
+	typography1 = App->fonts->Load("assets/images/ui/Font_name.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~·!@#$%^&*()-_+=[]{}|:;\"'<>,./? ", 1);
 	typographyDebug = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 	numbers = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
 	graphics = App->textures->Load("assets/images/ui/fight_ui.png");
@@ -91,8 +91,9 @@ bool ModuleUI::Start()
 	you_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_you.wav");
 	win_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_win.wav");
 	lose_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_lose.wav");
+	perfect_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_perfect.wav");
 
-	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = false;
+	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = false;
 
 	return ret;
 }
@@ -100,6 +101,8 @@ bool ModuleUI::Start()
 // Load assets
 bool ModuleUI::CleanUp()
 {
+	App->audio->UnloadChunk(perfect_snd);
+	perfect_snd = nullptr;
 	App->audio->UnloadChunk(round_snd);
 	round_snd = nullptr;
 	App->audio->UnloadChunk(one_snd);
@@ -302,11 +305,17 @@ void ModuleUI::EndFight() {
 			winLoseFinalSound = true;
 		}
 
+		else if (timeRemaining == 1 && !perfectSound) {
+			if (App->ryu->life == 100 || App->dhalsim->life == 100)
+				App->audio->PlayChunk(perfect_snd);
+			perfectSound = true;
+		}
+
 		if (timeRemaining > 0)
 			if (winnerPlayer == 1)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 1 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 1 WIN");
 			else if (winnerPlayer == 2)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 2 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 2 WIN");
 	}
 }
 

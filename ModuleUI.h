@@ -58,6 +58,7 @@ public:
 	Mix_Chunk* you_snd = nullptr;
 	Mix_Chunk* win_snd = nullptr;
 	Mix_Chunk* lose_snd = nullptr;
+	Mix_Chunk* perfect_snd = nullptr;
 
 	int timerx = 170;
 	char tiempo[2];
@@ -74,6 +75,7 @@ private:
 
 	bool youFinalSound;
 	bool winLoseFinalSound;
+	bool perfectSound;
 };
 
 #endif // __MODULEUI_H__
