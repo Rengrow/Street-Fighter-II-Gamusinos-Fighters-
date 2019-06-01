@@ -569,5 +569,5 @@ void ModuleChSelection::PrintPortraits() {
 	App->render->Blit(graphics, SCREEN_WIDTH - player2Portrait.w / 2 - player2Pointer.w / 2, SCREEN_HEIGHT / 2 - 20, &player2Pointer, false);
 
 	App->fonts->BlitText(17 + player1Portrait.w / 2 - ((strlen(player1Name) * 17) / 2), SCREEN_HEIGHT / 2 - 5, typographyBig, player1Name);
-	App->fonts->BlitText(51 + SCREEN_WIDTH - player2Portrait.w - ((strlen(player2Name) * 17) / 2), SCREEN_HEIGHT / 2 - 5, typographyBig, player2Name);
+	App->fonts->BlitText(45 + SCREEN_WIDTH - player2Portrait.w - ((strlen(player2Name) * 17) / 2), SCREEN_HEIGHT / 2 - 5, typographyBig, player2Name);
 }
