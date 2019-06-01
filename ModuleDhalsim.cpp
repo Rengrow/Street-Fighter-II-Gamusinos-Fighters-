@@ -1304,7 +1304,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			break;
 
 		case ST_JUMP_BACKWARD2:
@@ -1330,7 +1330,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit()){
-				position.x += 3;
+				position.x += 2;
 		}
 			break;
 
@@ -1483,7 +1483,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 1;
 			dizzydamage = 1;
 		
@@ -1512,7 +1512,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 2;
 			dizzydamage = 2;
 			break;
@@ -1540,7 +1540,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 3;
 			dizzydamage = 3;
 			
@@ -1571,7 +1571,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 1;
 			dizzydamage = 1;
 			break;
@@ -1600,7 +1600,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 2;
 			dizzydamage = 2;
 			break;
@@ -1629,7 +1629,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 3;
 			dizzydamage = 3;
 			break;
@@ -1717,11 +1717,11 @@ update_status ModuleDhalsim::Update()
 
 		case M_KIK_NEUTRAL_JUMP2:
 			current_animation = &jmk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
-				{
-					jumpHeight -= speed + 3;
-				}
+			
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
 			{
@@ -1744,11 +1744,11 @@ update_status ModuleDhalsim::Update()
 		case F_KIK_NEUTRAL_JUMP2:
 			texture = graphics2;
 			current_animation = &jhk;
-			if (App->frames - jump_timer > 27 && (App->frames - jump_timer <= D_JUMP_TIME))
-				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
-				{
-					jumpHeight -= speed + 3;
-				}
+			
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 
 			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
 			{
@@ -1791,7 +1791,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 1;
 			dizzydamage = 1;
 			break;
@@ -1819,7 +1819,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			typeofattack = 2;
 			dizzydamage = 2;
 			break;
@@ -1848,7 +1848,7 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 3;
 			if (IsntOnLeftLimit())
-				position.x -= 3;
+				position.x -= 2;
 			dizzydamage = 3;
 			
 			break;
@@ -1877,7 +1877,7 @@ update_status ModuleDhalsim::Update()
 			}
 
 			if (IsntOnRightLimit())
-				position.x += 3;
+				position.x += 2;
 			typeofattack = 1;
 			dizzydamage = 1;
 			break;
@@ -1905,7 +1905,7 @@ update_status ModuleDhalsim::Update()
 				}
 
 				if (IsntOnRightLimit())
-					position.x += 3;
+					position.x += 2;
 				typeofattack = 2;
 				dizzydamage = 2;
 			break;
@@ -1933,7 +1933,7 @@ update_status ModuleDhalsim::Update()
 					jumpHeight += speed + 3;
 				}
 				if (IsntOnRightLimit())
-					position.x += 3;
+					position.x += 2;
 				typeofattack = 3;
 				dizzydamage = 3;
 			break;
@@ -2328,7 +2328,7 @@ bool ModuleDhalsim::IsntOnRightLimit() {
 }
 
 void ModuleDhalsim::IsClose() {
-	if ((App->ryu->position.x - this->position.x <= 100 && App->ryu->position.x - this->position.x > 0) || (this->position.x - App->ryu->position.x <= 100 && this->position.x - App->ryu->position.x > 0))
+	if ((App->ryu->position.x - this->position.x <= 90 && App->ryu->position.x - this->position.x > 0) || (this->position.x - App->ryu->position.x <= 90 && this->position.x - App->ryu->position.x > 0))
 		close = true;
 
 	else
@@ -2350,20 +2350,6 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (App->ryu->typeofattack == 2) { pushbacktimerprojectile = 15; pushbackspeed = 2; }
 		if (App->ryu->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
-
-	//PUSHBACK CHECK END
-
-
-
-	//DIZZY CHECK
-
-
-
-	
-	
-
-	//DIZZYCHECKEND
-
 
 
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
@@ -3171,6 +3157,15 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 	}
 
+	if (dizzi_timer > 0)
+	{
+		if (App->frames - dizzi_timer > D_DIZZI_TIME)
+		{
+			inputs.Push(IN_DIZZI_FINISH2);
+			stun.ResetAnimation();
+			dizzi_timer = 0;
+		}
+	}
 }
 
 ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
@@ -3188,6 +3183,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_RIGHT_DOWN2: state = ST_WALK_FORWARD2; break;
 			case IN_LEFT_DOWN2: state = ST_WALK_BACKWARD2; break;
+
+			case IN_TURNING2: state = TURNING2; turning_timer = App->frames;  break;
 
 			case IN_JUMP2: state = ST_JUMP_NEUTRAL2; jump_timer = App->frames;  break;
 			case IN_LEFT_AND_JUMP2: state = ST_JUMP_BACKWARD2; jump_timer = App->frames; break;
@@ -3253,6 +3250,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
 
+			case IN_TURNING2: state = TURNING2; turning_timer = App->frames;  break;
+
 			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
@@ -3313,6 +3312,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_LEFT_UP2: state = ST_IDLE2; break;
 			case IN_IDLE2: state = ST_IDLE2; break;
+
+			case IN_TURNING2: state = TURNING2; turning_timer = App->frames;  break;
 
 			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
@@ -3994,6 +3995,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_CROUCHING_FINISH2: state = ST_CROUCH2; break;
 
+			case IN_TURNING2: state = CROUCH_TURNING2; turning_timer = App->frames;  break;
+
 			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
@@ -4016,6 +4019,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_STANDING_FINISH2: state = ST_IDLE2; break;
 
+			case IN_TURNING2: state = CROUCH_TURNING2; turning_timer = App->frames;  break;
+
 			case IN_L_YFIRE2: state = L_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_M_YFIRE2: state = M_YFIRE2; hadoken_timer = App->frames; break;
 			case IN_F_YFIRE2: state = F_YFIRE2; hadoken_timer = App->frames; break;
@@ -4037,6 +4042,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCH_UP2: state = ST_STANDING2; standing_timer = App->frames; break;
+
+			case IN_TURNING2: state = CROUCH_TURNING2; turning_timer = App->frames;  break;
 
 			case IN_LEFT_AND_CROUCH2: {
 				if (flip == true)
@@ -4090,6 +4097,8 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_CROUCH_UP2: state = ST_STANDING2; standing_timer = App->frames; break;
+
+			case IN_TURNING2: state = CROUCH_TURNING2; turning_timer = App->frames;  break;
 
 			case IN_LEFT_UP2: {
 				if (flip == true)
@@ -4440,6 +4449,37 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_DEFENDING_FINISH2:state = ST_IDLE2; break;
 			case IN_GUT_REEL:state = ST_GUT_REEL2; break;
+			}
+		}
+		break;
+
+		case TURNING2:
+		{
+			switch (last_input)
+			{
+			case IN_TURNING_FINISH2:state = ST_IDLE2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break;
+
+		case CROUCH_TURNING2:
+		{
+			switch (last_input)
+			{
+			case IN_TURNING_FINISH2:state = ST_CROUCH2; break;
+
+			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
+			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+
+			case IN_VICTORY2: state = VICTORY2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
