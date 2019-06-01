@@ -287,6 +287,7 @@ public:
 	void ClearColliders();
 	bool IsntOnLeftLimit();
 	bool IsntOnRightLimit();
+	bool colliding = false;
 	void IsClose();
 
 public:

@@ -1635,7 +1635,7 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
-			if (App->frames - l_crouching_kik_timer < 14 && App->frames - l_crouching_kik_timer > 2) {
+			if ((App->frames - l_crouching_kik_timer < 14 && App->frames - l_crouching_kik_timer > 2) && (colliding == false)) {
 				if (flip == true) {
 					position.x -= speed * 3;
 				}
@@ -1647,7 +1647,7 @@ update_status ModuleDhalsim::Update()
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
-			if (App->frames - m_crouching_kik_timer < 19 && App->frames - m_crouching_kik_timer > 7) {
+			if ((App->frames - m_crouching_kik_timer < 19 && App->frames - m_crouching_kik_timer > 7) && (colliding == false)) {
 				if (flip == true) {
 					position.x -= speed * 4;
 				}
@@ -1659,7 +1659,7 @@ update_status ModuleDhalsim::Update()
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
-			if (App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) {
+			if ((App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) && (colliding == false)) {
 				if (flip == true) {
 					position.x -= speed * 5;
 				}
@@ -2100,10 +2100,10 @@ update_status ModuleDhalsim::Update()
 			typeofattack = 3;
 			jumpHeight += speed + 2;
 			dizzydamage = 4;
-
-			if (!flip) position.x += speed + 2;
-
-			if (flip)  position.x -= speed + 2;
+			
+			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			
+			if ((flip) && (colliding == false))  position.x -= speed + 2;
 
 			if (jumpHeight >= 0)
 			{
@@ -2120,9 +2120,9 @@ update_status ModuleDhalsim::Update()
 			typeofattack = 3;
 			dizzydamage = 4;
 
-			if (!flip) position.x += speed + 3;
+			if ((!flip) && (colliding == false)) position.x += speed + 3;
 
-			if (flip)  position.x -= speed + 3;
+			if ((flip) && (colliding == false))  position.x -= speed + 3;
 
 			if (jumpHeight >= 0)
 			{
