@@ -78,7 +78,7 @@
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 15+2
 
 
-
+#define D_TURNING_TIME 4
 
 
 
