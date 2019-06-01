@@ -1159,6 +1159,7 @@ bool ModuleDhalsim::Start()
 	stun.PushBack({ 430, 709, 64, 93 }, 10, { 33,5 }, stunnColliders, stunHitbox, stunColliderType, stunCallback);
 	stun.PushBack({ 496, 713, 67, 89 }, 10, { 33,5 }, stunnColliders, stunHitbox, stunColliderType, stunCallback);
 	stun.PushBack({ 565, 717, 72, 85 }, 10, { 33,5 }, stunnColliders, stunHitbox, stunColliderType, stunCallback);
+	stun.loop = true;
 
 	inputs.Push(IN_END2);
 
