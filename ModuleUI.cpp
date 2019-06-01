@@ -179,28 +179,28 @@ void ModuleUI::TimerBlit(int font_id) {
 }
 
 void ModuleUI::LifeBarsBlit() {
-	App->render->Blit(graphics, 37, 12, &lifeBars, false);
+	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 37, 12, &lifeBars, false);
 	yelllowBar1.x = yelllowBar1.w - App->ryu->life*1.36;
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 - 154, 16, &yelllowBar1, true);
+	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 154, 16, &yelllowBar1, true);
 
 	yelllowBar2.w = App->dhalsim->life*1.36;
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 + 18, 16, &yelllowBar2, false);
+	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 18, 16, &yelllowBar2, false);
 }
 
 void ModuleUI::RoundsWinnedBlit() {
 
 	if (App->fight->player1RoundWinned == 1)
-		App->render->Blit(graphics, 0, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 0, 8, &iconRoundWinned, false);
 	else if (App->fight->player1RoundWinned == 2) {
-		App->render->Blit(graphics, 0, 8, &iconRoundWinned, false);
-		App->render->Blit(graphics, 18, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 0, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 18, 8, &iconRoundWinned, false);
 	}
 
 	if (App->fight->player2RoundWinned == 1)
-		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
 	else if (App->fight->player2RoundWinned == 2) {
-		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
-		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 19, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - iconRoundWinned.w - 19, 8, &iconRoundWinned, false);
 	}
 }
 
@@ -408,8 +408,8 @@ void ModuleUI::GetPuntuations() {
 
 void ModuleUI::BlitPuntuation() {
 	GetPuntuations();
-	App->fonts->BlitText(10, 2, typography1, "1P");
-	App->fonts->BlitText(60 - strlen(player1Puntuation) * 12, 2, typography1, player1Puntuation);
-	App->fonts->BlitText(120, 2, typography1, "2P");
-	App->fonts->BlitText(80, 2, typography1, player2Puntuation);
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, 2, typography1, "1P");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 60 - strlen(player1Puntuation) * 12, 2, typography1, player1Puntuation);
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 120, 2, typography1, "2P");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 80, 2, typography1, player2Puntuation);
 }
