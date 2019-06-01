@@ -5,7 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 
-#define LIFE_BAR_LENGHT 150
+#define LIFE_BAR_LENGHT 136
 
 struct SDL_Texture;
 struct Mix_Chunk;
@@ -26,7 +26,6 @@ public:
 private:
 	void TimerBlit(int font_id);
 	void LifeBarsBlit();
-	void KoBlit();
 	void StartFightBlit();
 	void RoundsWinnedBlit();
 	void EndFight();
@@ -38,13 +37,10 @@ public:
 	int typographyDebug;
 	int stopedTimer;
 
-	SDL_Texture* lifeBars = nullptr;
-	SDL_Rect lifeBarP1;
-	SDL_Rect lifeBarP2;
-	SDL_Rect lifeBarRedP1;
-	SDL_Rect lifeBarRedP2;
-	SDL_Rect KO;
-	SDL_Rect redKO;
+	SDL_Texture* graphics = nullptr;
+	SDL_Rect lifeBars;
+	SDL_Rect yelllowBar1;
+	SDL_Rect yelllowBar2;
 	SDL_Rect iconRoundWinned;
 	SDL_Rect roundRect;
 	SDL_Rect round1Rect;

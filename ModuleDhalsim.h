@@ -33,6 +33,8 @@
 #define D_F_CROUCHING_KIK_TIME 46+3
 #define D_F_D_JUMPING_KIK_TIME 3003
 
+#define D_DIZZI_TIME 120
+
 #define D_GRABBING_TIME 2
 
 #define D_M_GRAB_TIME 135+15
@@ -335,7 +337,7 @@ public:
 	int dizzylvl = 0;
 	Uint32 lasttimedamaged = 0;
 	
-	bool dizzi;
+	bool dizzi = false;
 	
 	int sprite_change_timer = 0;
 	bool close;
@@ -398,6 +400,7 @@ public:
 
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;
+	Uint32 dizzi_timer = 0;
 	Uint32 jump_timer = 0;
 	Uint32 getting_up_timer = 0;
 	Uint32 defending_timer = 0;
