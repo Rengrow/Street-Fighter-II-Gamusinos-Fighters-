@@ -17,39 +17,24 @@
 
 ModuleUI::ModuleUI()
 {
-	lifeBarP1.x = 0;
-	lifeBarP1.y = 1;
-	lifeBarP1.w = 150;
-	lifeBarP1.h = 16;
+	lifeBars.x = 0;
+	lifeBars.y = 0;
+	lifeBars.w = 310;
+	lifeBars.h = 18;
 
-	lifeBarP2.x = 0;
-	lifeBarP2.y = 1;
-	lifeBarP2.w = 150;
-	lifeBarP2.h = 16;
+	yelllowBar1.x = 0;
+	yelllowBar1.y = 18;
+	yelllowBar1.w = 136;
+	yelllowBar1.h = 10;
 
-	lifeBarRedP1.x = 0;
-	lifeBarRedP1.y = 19;
-	lifeBarRedP1.w = 150;
-	lifeBarRedP1.h = 16;
+	yelllowBar2.x = 0;
+	yelllowBar2.y = 18;
+	yelllowBar2.w = 136;
+	yelllowBar2.h = 10;
 
-	lifeBarRedP2.x = 0;
-	lifeBarRedP2.y = 19;
-	lifeBarRedP2.w = 150;
-	lifeBarRedP2.h = 16;
-
-	KO.x = 34;
-	KO.y = 37;
-	KO.w = 26;
-	KO.h = 22;
-
-	redKO.x = 1;
-	redKO.y = 36;
-	redKO.w = 27;
-	redKO.h = 24;
-
-	iconRoundWinned.x = 65;
-	iconRoundWinned.y = 36;
-	iconRoundWinned.w = 20;
+	iconRoundWinned.x = 61;
+	iconRoundWinned.y = 38;
+	iconRoundWinned.w = 18;
 	iconRoundWinned.h = 20;
 
 	roundRect.x = 2;
@@ -95,7 +80,7 @@ bool ModuleUI::Start()
 	typography1 = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890 ", 1);
 	typographyDebug = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 	numbers = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
-	lifeBars = App->textures->Load("assets/images/ui/Life_bar_Rounds.png");
+	graphics = App->textures->Load("assets/images/ui/fight_ui.png");
 
 	round_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_round.wav");
 	one_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_1.wav");
@@ -134,12 +119,12 @@ bool ModuleUI::CleanUp()
 	App->audio->UnloadChunk(lose_snd);
 	lose_snd = nullptr;
 
-	App->textures->Unload(lifeBars);
+	App->textures->Unload(graphics);
 	App->fonts->UnLoad(numbers);
 	App->fonts->UnLoad(typographyDebug);
 	App->fonts->UnLoad(typography1);
 
-	lifeBars = nullptr;
+	graphics = nullptr;
 
 	return true;
 }
@@ -147,20 +132,15 @@ bool ModuleUI::CleanUp()
 // Update: draw background
 update_status ModuleUI::PostUpdate()
 {
-	KoBlit();
 	LifeBarsBlit();
 	TimerBlit(numbers);
 	RoundsWinnedBlit();
 	StartFightBlit();
 	EndFight();
 
-	
-		
-		
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 		debugGamepads = !debugGamepads;
-	
-	
+
 	if (debugGamepads)
 		BlitGamePadDebug();
 
@@ -181,49 +161,42 @@ void ModuleUI::TimerBlit(int font_id) {
 	if (App->fight->stopedFight) {
 		tiempo[0] = (char)48 + (stopedTimer / 10);
 		tiempo[1] = (char)48 + (stopedTimer % 10);
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 40, font_id, tiempo);
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 42, 31, font_id, tiempo);
 	}
 	else if (timerStarted && timeRemaining > 0) {
 		tiempo[0] = (char)48 + (timeRemaining / 10);
 		tiempo[1] = (char)48 + (timeRemaining % 10);
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 40, font_id, tiempo);
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 42, 31, font_id, tiempo);
 	}
 	else {
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 40, font_id, "99");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 42, 31, font_id, "99");
 		timerStarted = false;
 	}
 }
 
 void ModuleUI::LifeBarsBlit() {
+	App->render->Blit(graphics, 37, 12, &lifeBars, false);
+	yelllowBar1.x = yelllowBar1.w - App->ryu->life*1.36;
+	App->render->Blit(graphics, SCREEN_WIDTH / 2 - 154, 16, &yelllowBar1, true);
 
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 24, 20, &lifeBarRedP1, false);
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarRedP2, true);
-
-	lifeBarP1.x = lifeBarRedP1.w - App->ryu->life*1.5;
-	App->render->Blit(lifeBars, (-App->render->camera.x / SCREEN_SIZE) + 24, 20, &lifeBarP1, true);
-
-	lifeBarP2.w = App->dhalsim->life*1.5;
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 51, 20, &lifeBarP2, false);
-}
-
-void ModuleUI::KoBlit() {
-	App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + LIFE_BAR_LENGHT + 24, 15, (redKoEnabled ? &redKO : &KO), false);
+	yelllowBar2.w = App->dhalsim->life*1.36;
+	App->render->Blit(graphics, SCREEN_WIDTH / 2 + 18, 16, &yelllowBar2, false);
 }
 
 void ModuleUI::RoundsWinnedBlit() {
 
 	if (App->fight->player1RoundWinned == 1)
-		App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 2, 20, &iconRoundWinned, false);
+		App->render->Blit(graphics, 0, 8, &iconRoundWinned, false);
 	else if (App->fight->player1RoundWinned == 2) {
-		App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 2, 20, &iconRoundWinned, false);
-		App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + 22, 20, &iconRoundWinned, false);
+		App->render->Blit(graphics, 0, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, 18, 8, &iconRoundWinned, false);
 	}
 
 	if (App->fight->player2RoundWinned == 1)
-		App->render->Blit(lifeBars, (-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH) - 20, 20, &iconRoundWinned, false);
+		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
 	else if (App->fight->player2RoundWinned == 2) {
-		App->render->Blit(lifeBars, (-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH) - 20, 20, &iconRoundWinned, false);
-		App->render->Blit(lifeBars, (-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH) - 40, 20, &iconRoundWinned, false);
+		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 19, 8, &iconRoundWinned, false);
 	}
 }
 
@@ -275,18 +248,18 @@ void ModuleUI::StartFightBlit() {
 		}
 
 		if (timeRemaining >= 2) {
-			App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - roundRect.h, &roundRect, false);
+			App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - roundRect.h, &roundRect, false);
 			if (App->fight->round == 1)
-				App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round1Rect.h, &round1Rect, false);
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round1Rect.h, &round1Rect, false);
 			else if (App->fight->round == 2)
-				App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round2Rect.h, &round2Rect, false);
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round2Rect.h, &round2Rect, false);
 			else if (App->fight->round == 3)
-				App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round3Rect.h, &round3Rect, false);
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round3Rect.h, &round3Rect, false);
 			else if (App->fight->round > 3)
-				App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45 - roundFRect.w, SCREEN_HEIGHT / 2 - roundFRect.h, &roundFRect, false);
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45 - roundFRect.w, SCREEN_HEIGHT / 2 - roundFRect.h, &roundFRect, false);
 		}
 		else if (timeRemaining >= 1) {
-			App->render->Blit(lifeBars, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - fightRect.h, &fightRect, false);
+			App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - fightRect.h, &fightRect, false);
 		}
 		else {
 			starFight = false;
