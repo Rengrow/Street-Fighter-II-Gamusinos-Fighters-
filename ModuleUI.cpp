@@ -10,7 +10,7 @@
 #include "ModuleSceneKen.h"
 #include "ModuleFight.h"
 #include "ModuleAudio.h"
-#include<string.h>
+#include <string>
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_gamecontroller.h"
@@ -77,9 +77,9 @@ bool ModuleUI::Start()
 	LOG("Loading UI assets");
 	bool ret = true;
 
-	typography1 = App->fonts->Load("assets/images/ui/Font_name.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~·!@#$%^&*()-_+=[]{}|:;\"'<>,./? ", 1);
+	typography1 = App->fonts->Load("assets/images/ui/Font_name.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~·!@#$%^&*()-+=[]{}|:;ç'<>,./? ", 1);
 	typographyDebug = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
-	numbers = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
+	numbers = App->fonts->Load("assets/images/ui/Font_count.png", "0123456789<> ", 1);
 	graphics = App->textures->Load("assets/images/ui/fight_ui.png");
 
 	round_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_round.wav");
@@ -136,6 +136,7 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::PostUpdate()
 {
 	LifeBarsBlit();
+	BlitPuntuation();
 	TimerBlit(numbers);
 	RoundsWinnedBlit();
 	StartFightBlit();
@@ -274,9 +275,9 @@ void ModuleUI::StartFightBlit() {
 	}
 }
 
-void ModuleUI::StartEndFight(int ryu) {
+void ModuleUI::StartEndFight(int player) {
 	stopedTimer = App->fight->GetTimer();
-	winnerPlayer = ryu;
+	winnerPlayer = player;
 }
 
 void ModuleUI::EndFight() {
@@ -392,4 +393,23 @@ void ModuleUI::BlitGamePadDebug() {
 	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "right");
 #pragma endregion	
+}
+
+void ModuleUI::GetPuntuations() {
+	std::string stPlayer1Puntuation = std::to_string(App->ryu->puntuation);
+	std::string stPlayer2Puntuation = std::to_string(App->dhalsim->puntuation);
+
+	player1Puntuation = new char[stPlayer1Puntuation.length() + 1];
+	strcpy_s(player1Puntuation, stPlayer1Puntuation.length() + 1, stPlayer1Puntuation.c_str());
+
+	player2Puntuation = new char[stPlayer2Puntuation.length() + 1];
+	strcpy_s(player2Puntuation, stPlayer2Puntuation.length() + 1, stPlayer2Puntuation.c_str());
+}
+
+void ModuleUI::BlitPuntuation() {
+	GetPuntuations();
+	App->fonts->BlitText(10, 2, typography1, "1P");
+	App->fonts->BlitText(60 - strlen(player1Puntuation) * 12, 2, typography1, player1Puntuation);
+	App->fonts->BlitText(120, 2, typography1, "2P");
+	App->fonts->BlitText(80, 2, typography1, player2Puntuation);
 }
