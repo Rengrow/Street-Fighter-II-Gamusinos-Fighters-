@@ -521,7 +521,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_KP_4] == 1) {
+		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == 1) || App->input->keyboard[SDL_SCANCODE_0] == 1) {
 			if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
 				App->audio->PlayChunk(select);
 				player2Lock = true;
