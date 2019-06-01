@@ -40,7 +40,7 @@ bool ModuleRyu::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = 0;
+	victoryExecuted = invulnerabilityFrames = puntuation = 0;
 
 	Animation* current_animation;
 
@@ -575,7 +575,7 @@ update_status ModuleRyu::Update()
 
 		case L_PUNCH_STANDING:
 			current_animation = &lp;
-			typeofattack = 1; 
+			typeofattack = 1;
 			dizzydamage = 5;
 			break;
 
@@ -770,12 +770,15 @@ bool ModuleRyu::IsntOnLeftLimit() {
 
 void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 	
+	if (c1->type != COLLIDER_PLAYER2_SHOT && c2->type != COLLIDER_PLAYER2_SHOT && c1->type != COLLIDER_PLAYER_SHOT && c2->type != COLLIDER_PLAYER_SHOT) { App->dhalsim->colliding = true; }
+	else { App->dhalsim->colliding = false; }
+	
 	//PUSHBACK CHECK
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
 		if (App->dhalsim->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
 		if (App->dhalsim->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
 		if (App->dhalsim->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
-//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 0);
+		//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 0);
 	}
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT) {
@@ -856,6 +859,8 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 		{
+			
+
 			if (state == ST_WALK_FORWARD && App->dhalsim->state == ST_WALK_FORWARD2) {
 				position.x--;
 				App->dhalsim->position.x++;
@@ -898,7 +903,7 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 						App->dhalsim->position.x--;
 				}
 			}
-		}
+		} 
 	}
 }
 
@@ -963,7 +968,7 @@ bool ModuleRyu::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_F_KIK);
 		}
 		if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN) //trying pushback
-		
+
 		{
 			inputs.Push(IN_L_KIK);
 		}

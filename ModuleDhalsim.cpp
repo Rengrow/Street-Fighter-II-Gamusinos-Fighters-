@@ -27,7 +27,6 @@ bool ModuleDhalsim::Start()
 {
 	LOG("Loading ryu textures");
 	bool ret = true;
-	
 
 	if (!altColor) {
 		graphics = App->textures->Load("assets/images/sprites/characters/dhalshim1.png"); // arcade version
@@ -57,7 +56,7 @@ bool ModuleDhalsim::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = 0;
+	victoryExecuted = invulnerabilityFrames = puntuation = 0;
 
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
@@ -135,7 +134,7 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE close_lpColliderType[close_lpnColliders] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
 	COLLIDER_TYPE close_lpColliderType2[close_lpnColliders2] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
 	COLLIDER_TYPE close_lpColliderType3[close_lpnColliders3] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2_HIT } };
-	Module* close_lpCallback[close_lpnColliders] = { { this },{ this }};
+	Module* close_lpCallback[close_lpnColliders] = { { this },{ this } };
 	Module* close_lpCallback2[close_lpnColliders2] = { { this },{ this }, { (Module*)App->ryu } };
 	Module* close_lpCallback3[close_lpnColliders3] = { { this },{ this },{ (Module*)App->ryu } };
 	close_lp.PushBack({ 70, 24, 73, 110 }, 2, { 33,5 }, close_lpnColliders, close_lpHitbox, close_lpColliderType, close_lpCallback);
@@ -156,7 +155,7 @@ bool ModuleDhalsim::Start()
 	SDL_Rect mpHitbox4[mpnColliders4] = { { -81, 30, 83, 13}, { -9, 0, 39, 47}, { -48, 0, 33, 47}, {-164, 28, 50, 15} };
 	SDL_Rect mpHitbox5[mpnColliders5] = { { -75, 32, 24, 20}, { -9, 0, 39, 47}, { -48, 0, 33, 47} };
 	COLLIDER_TYPE mpColliderType[mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE mpColliderType2[mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}};
+	COLLIDER_TYPE mpColliderType2[mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE mpColliderType3[mpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	COLLIDER_TYPE mpColliderType4[mpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2},{COLLIDER_PLAYER2_HIT} };
 	COLLIDER_TYPE mpColliderType5[mpnColliders5] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
@@ -183,7 +182,7 @@ bool ModuleDhalsim::Start()
 	SDL_Rect close_mpHitbox[close_mpnColliders] = { { -44, 74, 26, 15 },{ -9, 0, 63, 74 } };
 	SDL_Rect close_mpHitbox2[close_mpnColliders2] = { { -44, 74, 26, 15 },{ -9, 0, 63, 74 }, { -53, 37, 34, 30} };
 	SDL_Rect close_mpHitbox3[close_mpnColliders3] = { { -44, 74, 26, 15 },{ -9, 0, 63, 74 }, { -62, 43, 32, 30} };
-	COLLIDER_TYPE close_mpColliderType[close_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}};
+	COLLIDER_TYPE close_mpColliderType[close_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	COLLIDER_TYPE close_mpColliderType2[close_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	COLLIDER_TYPE close_mpColliderType3[close_mpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
 	Module* close_mpCallback[close_mpnColliders] = { {this}, {this} };
@@ -216,8 +215,8 @@ bool ModuleDhalsim::Start()
 	COLLIDER_TYPE hpColliderType5[hpnColliders5] = { { COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 },{ COLLIDER_PLAYER2 } };
 	Module* hpCallback[hpnColliders] = { { this },{ this },{ this } };
 	Module* hpCallback2[hpnColliders2] = { { this },{ this },{ this } };
-	Module* hpCallback3[hpnColliders3] = { { this },{ this },{ (Module*)App->ryu }};
-	Module* hpCallback4[hpnColliders4] = { { this },{ this },{ (Module*)App->ryu }};
+	Module* hpCallback3[hpnColliders3] = { { this },{ this },{ (Module*)App->ryu } };
+	Module* hpCallback4[hpnColliders4] = { { this },{ this },{ (Module*)App->ryu } };
 	Module* hpCallback5[hpnColliders5] = { { this },{ this }, { this } };
 	hp.PushBack({ 751, 652, 74, 99 }, 3, { 33,5 }, hpnColliders, hpHitbox, hpColliderType, hpCallback);
 	hp.PushBack({ 827, 674, 86, 77 }, 4, { 33,5 }, hpnColliders2, hpHitbox2, hpColliderType2, hpCallback2);
@@ -283,7 +282,7 @@ bool ModuleDhalsim::Start()
 	Module* close_lkCallback[close_lknColliders] = { {this}, {this}, {(Module*)App->ryu} };
 	close_lk.PushBack({ 789, 41, 123, 93 }, 8, { 33,5 }, close_lknColliders, close_lkHitbox, close_lkColliderType, close_lkCallback);
 
-	
+
 	// mk
 	const int mknColliders1 = 3;
 	const int mknColliders2 = 2;
@@ -890,7 +889,7 @@ bool ModuleDhalsim::Start()
 	clp.PushBack({ 681, 211, 135, 34 }, 4, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 	clp.PushBack({ 596, 193, 83, 52 }, 5, { 33,5 }, { clpnColliders }, { clpHitbox }, { clpColliderType }, { clpCallback });
 
-	
+
 	//Crouching close_l punch
 	const int close_clpnColliders = 3;
 	const int close_clpnColliders2 = 4;
@@ -1070,7 +1069,7 @@ bool ModuleDhalsim::Start()
 
 	airreel.PushBack({ 639, 750, 125, 52 }, 1000, { 33,5 }, { airreelnColliders }, { airreelHitbox1 }, { airreelColliderType }, { airreelCallback });
 
-	
+
 	// Falling
 	const int fallnColliders = 3;
 	SDL_Rect fallHitbox1[fallnColliders] = { { 0, 0, 0, 0}, { -15, 11, 53, 70}, { -61, 5, 50, 35} };
@@ -1091,7 +1090,7 @@ bool ModuleDhalsim::Start()
 	getup.PushBack({ 197, 989, 131, 31 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	getup.PushBack({ 330, 974, 122, 46 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	getup.PushBack({ 455, 920, 83, 100 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	
+
 
 	// Defending
 	const int defendingnColliders = 3;
@@ -1206,7 +1205,7 @@ bool ModuleDhalsim::CleanUp()
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp = yoga_flame_hp = yoga_flame_mp = Animation();
 	streel = stgreel = creel = Animation();
 	airreel = fall = getup = Animation();
-	crouching = standing = crouch = defending = cdefending = grab = grab2= stun = Animation();
+	crouching = standing = crouch = defending = cdefending = grab = grab2 = stun = Animation();
 	win1 = win2 = lose = Animation();
 	ground = Animation();
 	return true;
@@ -1503,7 +1502,7 @@ update_status ModuleDhalsim::Update()
 				position.x -= 2;
 			typeofattack = 1;
 			dizzydamage = 1;
-		
+
 			break;
 
 		case M_PUNCH_FORWARD_JUMP2:
@@ -1560,7 +1559,7 @@ update_status ModuleDhalsim::Update()
 				position.x -= 2;
 			typeofattack = 3;
 			dizzydamage = 3;
-			
+
 			break;
 
 		case L_PUNCH_BACKWARD_JUMP2:
@@ -1653,7 +1652,7 @@ update_status ModuleDhalsim::Update()
 
 		case L_KIK_CROUCH2:
 			current_animation = &clk;
-			if (App->frames - l_crouching_kik_timer < 14 && App->frames - l_crouching_kik_timer > 2) {
+			if ((App->frames - l_crouching_kik_timer < 14 && App->frames - l_crouching_kik_timer > 2) && (colliding == false)) {
 				if (flip == true) {
 					position.x -= speed * 3;
 				}
@@ -1665,7 +1664,7 @@ update_status ModuleDhalsim::Update()
 
 		case M_KIK_CROUCH2:
 			current_animation = &cmk;
-			if (App->frames - m_crouching_kik_timer < 19 && App->frames - m_crouching_kik_timer > 7) {
+			if ((App->frames - m_crouching_kik_timer < 19 && App->frames - m_crouching_kik_timer > 7) && (colliding == false)) {
 				if (flip == true) {
 					position.x -= speed * 4;
 				}
@@ -1677,7 +1676,7 @@ update_status ModuleDhalsim::Update()
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
-			if (App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) {
+			if ((App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) && (colliding == false)) {
 				if (flip == true) {
 					position.x -= speed * 5;
 				}
@@ -1867,7 +1866,7 @@ update_status ModuleDhalsim::Update()
 			if (IsntOnLeftLimit())
 				position.x -= 2;
 			dizzydamage = 3;
-			
+
 			break;
 
 		case L_KIK_BACKWARD_JUMP2:
@@ -1900,26 +1899,26 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case M_KIK_BACKWARD_JUMP2:
-				current_animation = &jmk;
-				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
-				{
-					jumpHeight -= speed + 3;
-				}
+			current_animation = &jmk;
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 
-				if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
-				{
-					jumpHeight -= speed;
-				}
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
 
-				if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
-				{
-					jumpHeight += speed;
-				}
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
 
-				if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
-				{
-					jumpHeight += speed + 3;
-				}
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
 
 				if (IsntOnRightLimit())
 					position.x += 2;
@@ -1928,22 +1927,22 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case F_KIK_BACKWARD_JUMP2:
-				texture = graphics2;
-				current_animation = &jhk;
-				if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
-				{
-					jumpHeight -= speed + 3;
-				}
+			texture = graphics2;
+			current_animation = &jhk;
+			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
+			{
+				jumpHeight -= speed + 3;
+			}
 
-				if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
-				{
-					jumpHeight -= speed;
-				}
+			if (App->frames - jump_timer < 28 && (App->frames - jump_timer > 23))
+			{
+				jumpHeight -= speed;
+			}
 
-				if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
-				{
-					jumpHeight += speed;
-				}
+			if (App->frames - jump_timer < 32 && (App->frames - jump_timer > 27))
+			{
+				jumpHeight += speed;
+			}
 
 				if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
 				{
@@ -2007,7 +2006,7 @@ update_status ModuleDhalsim::Update()
 
 		case ST_HEAD_REEL2:
 			current_animation = &streel;
-			
+
 			//Pushback start
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
@@ -2191,9 +2190,9 @@ update_status ModuleDhalsim::Update()
 			jumpHeight += speed + 2;
 			dizzydamage = 4;
 			
-			if (!flip) position.x += speed + 2;
+			if ((!flip) && (colliding == false)) position.x += speed + 2;
 			
-			if (flip)  position.x -= speed + 2;
+			if ((flip) && (colliding == false))  position.x -= speed + 2;
 
 			if (jumpHeight >= 0)
 			{
@@ -2210,9 +2209,9 @@ update_status ModuleDhalsim::Update()
 			typeofattack = 3;
 			dizzydamage = 4;
 
-			if (!flip) position.x += speed + 3;
+			if ((!flip) && (colliding == false)) position.x += speed + 3;
 
-			if (flip)  position.x -= speed + 3;
+			if ((flip) && (colliding == false))  position.x -= speed + 3;
 
 			if (jumpHeight >= 0)
 			{
@@ -2241,28 +2240,28 @@ update_status ModuleDhalsim::Update()
 
 			}
 			else {
-					
+
 				texture = graphics2;
 				current_animation = &win2;
 				victoryExecuted = 2;
-			
-				if (levitationtimer > 1) { 
-					position.y--; 
-					levitationtimer--; 
+
+				if (levitationtimer > 1) {
+					position.y--;
+					levitationtimer--;
 				}
-				if (levitationtimer < -1) { 
-					position.y++; 
-					levitationtimer++; 
+				if (levitationtimer < -1) {
+					position.y++;
+					levitationtimer++;
 				}
-				if ((levitationtimer == 1) || (levitationtimer == -1)) { 
-					levitationtimer *= -45; 
+				if ((levitationtimer == 1) || (levitationtimer == -1)) {
+					levitationtimer *= -45;
 				}
 			}
 			break;
 
 
-		//trying adding cases in order to try out animations
-        
+			//trying adding cases in order to try out animations
+
 		case L_PUNCH_CLOSE2:
 			current_animation = &close_lp;
 			typeofattack = 1;
@@ -2323,7 +2322,7 @@ update_status ModuleDhalsim::Update()
 			dizzydamage = 2;
 			break;
 
-		
+
 
 		case F_KIK_CLOSE2:
 			current_animation = &close_hk;
@@ -2439,7 +2438,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 		if (App->ryu->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
 		if (App->ryu->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
 		if (App->ryu->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
-//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 200);
+		//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 200);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
@@ -2542,7 +2541,7 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 			else if (App->ryu->state == L_PUNCH_STANDING2 || App->ryu->state == L_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == L_PUNCH_FORWARD_JUMP2 || App->ryu->state == L_PUNCH_BACKWARD_JUMP2 || App->ryu->state == M_PUNCH_STANDING2 || App->ryu->state == M_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == M_PUNCH_FORWARD_JUMP2 || App->ryu->state == M_PUNCH_BACKWARD_JUMP2
 				|| App->ryu->state == F_PUNCH_STANDING2 || App->ryu->state == F_PUNCH_NEUTRAL_JUMP2 || App->ryu->state == F_PUNCH_FORWARD_JUMP2 || App->ryu->state == F_PUNCH_BACKWARD_JUMP2 || App->ryu->state == L_PUNCH_CLOSE2 || App->ryu->state == M_PUNCH_CLOSE2 || App->ryu->state == F_PUNCH_CLOSE2)
 				App->audio->PlayChunk(high_fist);
-			else if (App->ryu->state == L_PUNCH_CROUCH2 || App->ryu->state == M_PUNCH_CROUCH2 || App->ryu->state == F_PUNCH_CROUCH2 || App->ryu->state == L_PUNCH_CROUCHCLOSE2 || App->ryu->state == M_PUNCH_CROUCHCLOSE2){
+			else if (App->ryu->state == L_PUNCH_CROUCH2 || App->ryu->state == M_PUNCH_CROUCH2 || App->ryu->state == F_PUNCH_CROUCH2 || App->ryu->state == L_PUNCH_CROUCHCLOSE2 || App->ryu->state == M_PUNCH_CROUCHCLOSE2) {
 				App->audio->PlayChunk(low_fist);
 			}
 
@@ -2662,8 +2661,8 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		//Key down
 		// Using B as debug tool
 
-		
-		
+
+
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_PUNCH2);
@@ -2683,7 +2682,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 			else
 				inputs.Push(IN_L_PUNCH2);
-			
+
 		}
 
 		if (App->input->pads[0].a == true)
@@ -2705,7 +2704,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			}
 
 			else
-			inputs.Push(IN_M_PUNCH2);
+				inputs.Push(IN_M_PUNCH2);
 		}
 
 		if (App->input->pads[0].b == true)
@@ -2749,7 +2748,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 		else
 			inputs.Push(IN_LEFT_UP2);
-		
+
 
 		if (App->input->pads[0].right)
 		{
@@ -2766,7 +2765,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 		else
 			inputs.Push(IN_RIGHT_UP2);
-		
+
 
 		if (App->input->pads[0].up && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
@@ -2778,7 +2777,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_CROUCH_DOWN2);
 			crouch = true;
 		}
-		
+
 		if (crouch == false)
 		{
 			inputs.Push(IN_CROUCH_UP2);
@@ -2788,7 +2787,8 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 		{
 			inputs.Push(IN_IDLE2);
 		}
-	}else {
+	}
+	else {
 		App->input->pads[0].left = false;
 		App->input->pads[0].right = false;
 		App->input->pads[0].down = false;
@@ -2886,7 +2886,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_PUNCH_FINISH2);
 			close_lp.ResetAnimation();
 			l_close_standing_punch_timer = 0;
-			
+
 		}
 	}
 
@@ -2897,7 +2897,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_PUNCH_FINISH2);
 			clp.ResetAnimation();
 			l_crouching_punch_timer = 0;
-			
+
 		}
 	}
 
@@ -2908,7 +2908,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_PUNCH_FINISH2);
 			close_clp.ResetAnimation();
 			l_close_crouching_punch_timer = 0;
-			
+
 		}
 	}
 
@@ -3296,7 +3296,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_RIGHT_AND_CROUCH2: state = ST_CROUCHING2; crouching_timer = App->frames; break;
 
 			case IN_L_PUNCH2: {
-				if (!close) { state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames;}
+				if (!close) { state = L_PUNCH_STANDING2; l_standing_punch_timer = App->frames; }
 				else if (close) { state = L_PUNCH_CLOSE2; l_close_standing_punch_timer = App->frames; }
 			} break;
 
@@ -3484,11 +3484,11 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_F_PUNCH2: {
 				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY2; }
-				else { state = F_PUNCH_NEUTRAL_JUMP2;  }
+				else { state = F_PUNCH_NEUTRAL_JUMP2; }
 			}break;
 
 			case IN_F_KIK2: {
-				if ((App->frames - jump_timer  )> 23 && (App->frames - jump_timer )< 37) { state = YDRILL2; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL2; }
 				else { state = F_KIK_NEUTRAL_JUMP2; }
 			}break;
 
@@ -3545,7 +3545,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 				else { state = F_PUNCH_BACKWARD_JUMP2; f_d_jumping_punch_timer = App->frames; }
 			}break;
 
-			case IN_F_KIK2: { 
+			case IN_F_KIK2: {
 				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL2; }
 				else { state = F_KIK_BACKWARD_JUMP2; f_d_jumping_kik_timer = App->frames; }
 			}break;
@@ -4310,7 +4310,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
-			
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4380,7 +4380,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
-			
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4447,7 +4447,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
-			
+
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}

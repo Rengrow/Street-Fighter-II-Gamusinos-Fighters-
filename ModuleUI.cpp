@@ -10,7 +10,7 @@
 #include "ModuleSceneKen.h"
 #include "ModuleFight.h"
 #include "ModuleAudio.h"
-#include<string.h>
+#include <string>
 
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_gamecontroller.h"
@@ -77,9 +77,9 @@ bool ModuleUI::Start()
 	LOG("Loading UI assets");
 	bool ret = true;
 
-	typography1 = App->fonts->Load("assets/images/ui/Font_1.png", "abcdefghijklmnopqrstuvwxyz.;:1234567890 ", 1);
+	typography1 = App->fonts->Load("assets/images/ui/Font_name.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~·!@#$%^&*()-+=[]{}|:;ç'<>,./? ", 1);
 	typographyDebug = App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
-	numbers = App->fonts->Load("assets/images/ui/timer_list.png", "0123456789", 1);
+	numbers = App->fonts->Load("assets/images/ui/Font_count.png", "0123456789<> ", 1);
 	graphics = App->textures->Load("assets/images/ui/fight_ui.png");
 
 	round_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_round.wav");
@@ -91,8 +91,9 @@ bool ModuleUI::Start()
 	you_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_you.wav");
 	win_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_win.wav");
 	lose_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_lose.wav");
+	perfect_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_perfect.wav");
 
-	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = false;
+	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = false;
 
 	return ret;
 }
@@ -100,6 +101,8 @@ bool ModuleUI::Start()
 // Load assets
 bool ModuleUI::CleanUp()
 {
+	App->audio->UnloadChunk(perfect_snd);
+	perfect_snd = nullptr;
 	App->audio->UnloadChunk(round_snd);
 	round_snd = nullptr;
 	App->audio->UnloadChunk(one_snd);
@@ -133,6 +136,7 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::PostUpdate()
 {
 	LifeBarsBlit();
+	BlitPuntuation();
 	TimerBlit(numbers);
 	RoundsWinnedBlit();
 	StartFightBlit();
@@ -175,28 +179,28 @@ void ModuleUI::TimerBlit(int font_id) {
 }
 
 void ModuleUI::LifeBarsBlit() {
-	App->render->Blit(graphics, 37, 12, &lifeBars, false);
+	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 37, 12, &lifeBars, false);
 	yelllowBar1.x = yelllowBar1.w - App->ryu->life*1.36;
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 - 154, 16, &yelllowBar1, true);
+	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 154, 16, &yelllowBar1, true);
 
 	yelllowBar2.w = App->dhalsim->life*1.36;
-	App->render->Blit(graphics, SCREEN_WIDTH / 2 + 18, 16, &yelllowBar2, false);
+	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 18, 16, &yelllowBar2, false);
 }
 
 void ModuleUI::RoundsWinnedBlit() {
 
 	if (App->fight->player1RoundWinned == 1)
-		App->render->Blit(graphics, 0, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 0, 8, &iconRoundWinned, false);
 	else if (App->fight->player1RoundWinned == 2) {
-		App->render->Blit(graphics, 0, 8, &iconRoundWinned, false);
-		App->render->Blit(graphics, 18, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 0, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 18, 8, &iconRoundWinned, false);
 	}
 
 	if (App->fight->player2RoundWinned == 1)
-		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
 	else if (App->fight->player2RoundWinned == 2) {
-		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
-		App->render->Blit(graphics, SCREEN_WIDTH - iconRoundWinned.w - 19, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - iconRoundWinned.w - 2, 8, &iconRoundWinned, false);
+		App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - iconRoundWinned.w - 19, 8, &iconRoundWinned, false);
 	}
 }
 
@@ -271,9 +275,9 @@ void ModuleUI::StartFightBlit() {
 	}
 }
 
-void ModuleUI::StartEndFight(int ryu) {
+void ModuleUI::StartEndFight(int player) {
 	stopedTimer = App->fight->GetTimer();
-	winnerPlayer = ryu;
+	winnerPlayer = player;
 }
 
 void ModuleUI::EndFight() {
@@ -302,11 +306,17 @@ void ModuleUI::EndFight() {
 			winLoseFinalSound = true;
 		}
 
+		else if (timeRemaining == 1 && !perfectSound) {
+			if (App->ryu->life == 100 || App->dhalsim->life == 100)
+				App->audio->PlayChunk(perfect_snd);
+			perfectSound = true;
+		}
+
 		if (timeRemaining > 0)
 			if (winnerPlayer == 1)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 1 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 1 WIN");
 			else if (winnerPlayer == 2)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "player 2 win");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 2 WIN");
 	}
 }
 
@@ -383,4 +393,23 @@ void ModuleUI::BlitGamePadDebug() {
 	if (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "right");
 #pragma endregion	
+}
+
+void ModuleUI::GetPuntuations() {
+	std::string stPlayer1Puntuation = std::to_string(App->ryu->puntuation);
+	std::string stPlayer2Puntuation = std::to_string(App->dhalsim->puntuation);
+
+	player1Puntuation = new char[stPlayer1Puntuation.length() + 1];
+	strcpy_s(player1Puntuation, stPlayer1Puntuation.length() + 1, stPlayer1Puntuation.c_str());
+
+	player2Puntuation = new char[stPlayer2Puntuation.length() + 1];
+	strcpy_s(player2Puntuation, stPlayer2Puntuation.length() + 1, stPlayer2Puntuation.c_str());
+}
+
+void ModuleUI::BlitPuntuation() {
+	GetPuntuations();
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, 2, typography1, "1P");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 60 - strlen(player1Puntuation) * 12, 2, typography1, player1Puntuation);
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 120, 2, typography1, "2P");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 80, 2, typography1, player2Puntuation);
 }

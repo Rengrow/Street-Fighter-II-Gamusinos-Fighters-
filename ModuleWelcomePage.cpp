@@ -96,8 +96,8 @@ update_status ModuleWelcomePage::Update()
 
 	App->fonts->BlitText(0, 0, typography, "Fanmade copy by: Gamusinos Fighters");
 	App->fonts->BlitText(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 90, typography, "@CAPCOM CO.. LTD.");
-	if (lettersOn)
-		
+
+	if (lettersOn)		
 		App->fonts->BlitText(SCREEN_WIDTH/2 - 65, SCREEN_HEIGHT / 2 + 50, typography, "INSERT COIN.");
 
 

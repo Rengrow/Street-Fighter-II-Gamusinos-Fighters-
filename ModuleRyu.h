@@ -226,6 +226,7 @@ public:
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
+	int puntuation;
 	int mov; //lp, mp, hp, lk, mk, hk
 	int pushbacktimerhit = 0;
 	int pushbacktimerprojectile = 0;

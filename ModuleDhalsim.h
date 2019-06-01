@@ -287,6 +287,7 @@ public:
 	void ClearColliders();
 	bool IsntOnLeftLimit();
 	bool IsntOnRightLimit();
+	bool colliding = false;
 	void IsClose();
 
 public:
@@ -359,6 +360,7 @@ public:
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
+	int puntuation;
 	
 	//light
 	Uint32 l_standing_punch_timer = 0;

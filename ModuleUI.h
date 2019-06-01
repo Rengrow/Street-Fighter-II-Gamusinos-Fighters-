@@ -30,6 +30,8 @@ private:
 	void RoundsWinnedBlit();
 	void EndFight();
 	void BlitGamePadDebug();
+	void GetPuntuations();
+	void BlitPuntuation();
 
 public:
 	int numbers;
@@ -58,6 +60,10 @@ public:
 	Mix_Chunk* you_snd = nullptr;
 	Mix_Chunk* win_snd = nullptr;
 	Mix_Chunk* lose_snd = nullptr;
+	Mix_Chunk* perfect_snd = nullptr;
+
+	char* player1Puntuation;
+	char* player2Puntuation;
 
 	int timerx = 170;
 	char tiempo[2];
@@ -74,6 +80,7 @@ private:
 
 	bool youFinalSound;
 	bool winLoseFinalSound;
+	bool perfectSound;
 };
 
 #endif // __MODULEUI_H__
