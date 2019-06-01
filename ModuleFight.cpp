@@ -124,7 +124,7 @@ void ModuleFight::CheckFlipPlayers() {
 
 	if ((!App->ryu->flip && App->dhalsim->flip) && App->ryu->position.x > App->dhalsim->position.x) {
 		App->ryu->flip = !App->ryu->flip;
-		App->dhalsim->flip = !App->dhalsim->flip;
+		App->dhalsim->turn = true;
 	}
 
 	if ((App->ryu->flip && !App->dhalsim->flip) && App->ryu->position.x < App->dhalsim->position.x) {
