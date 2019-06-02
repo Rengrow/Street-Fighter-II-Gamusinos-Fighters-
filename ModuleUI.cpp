@@ -338,12 +338,12 @@ void ModuleUI::EndFight() {
 			}
 
 			if (timeRemaining < 10) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 86, 75, typography1, "VITAL");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 82, 75, typography1, "VITAL");
 				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(vitalBonusPuntuation) * 16, 75, numbers, vitalBonusPuntuation);
 			}
 
 			if (timeRemaining < 9) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 86, 100, typography1, "BONUS");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 82, 100, typography1, "BONUS");
 				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(bonusPuntuation) * 16, 100, numbers, bonusPuntuation);
 			}
 		}

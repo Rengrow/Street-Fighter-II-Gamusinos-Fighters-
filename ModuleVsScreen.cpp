@@ -77,7 +77,8 @@ update_status ModuleVsScreen::Update()
 		App->fade->FadeToBlack(this, (Module*)App->fight, 2);
 		isFading = true;
 	}
-
+	else if (App->frames - timeScreen > 1000)
+		isFading = false;
 
 	return UPDATE_CONTINUE;
 }
