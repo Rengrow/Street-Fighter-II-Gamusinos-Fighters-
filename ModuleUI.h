@@ -21,7 +21,7 @@ public:
 	bool CleanUp();
 	void StartTimer();
 	void StartFight();
-	void StartEndFight(int ryu);
+	void StartEndFight(int player, bool timeOut);
 
 private:
 	void TimerBlit(int font_id);
@@ -61,6 +61,7 @@ public:
 	Mix_Chunk* win_snd = nullptr;
 	Mix_Chunk* lose_snd = nullptr;
 	Mix_Chunk* perfect_snd = nullptr;
+	Mix_Chunk* scoreUp_snd = nullptr;
 
 	char* player1Puntuation;
 	char* player2Puntuation;
