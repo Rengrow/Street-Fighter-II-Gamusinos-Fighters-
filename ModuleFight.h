@@ -28,6 +28,8 @@ public:
 	bool roundStarted;
 	bool endFightStarted;
 	bool stopedFight;
+	bool left = false;
+	bool right = true;
 	int player1RoundWinned;
 	int player2RoundWinned;
 	Uint32 timeOutTimer;
