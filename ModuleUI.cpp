@@ -135,6 +135,11 @@ bool ModuleUI::CleanUp()
 // Update: draw background
 update_status ModuleUI::PostUpdate()
 {
+	if (App->input->keyboard[SDL_SCANCODE_KP_PLUS] == KEY_STATE::KEY_DOWN) {
+		App->ryu->puntuation += 51;
+		App->dhalsim->puntuation += 51;
+	}
+
 	LifeBarsBlit();
 	BlitPuntuation();
 	TimerBlit(numbers);
@@ -184,7 +189,7 @@ void ModuleUI::LifeBarsBlit() {
 	yelllowBar2.w = App->dhalsim->life*1.36;
 	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 18, 21, &yelllowBar2, false);
 
-	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 39, 33, typography1, "DHALSIM");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 39, 33, typography1, "PACO PEPE");
 	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 122, 33, typography1, "DHALSIM");
 
 }
@@ -410,8 +415,8 @@ void ModuleUI::GetPuntuations() {
 
 void ModuleUI::BlitPuntuation() {
 	GetPuntuations();
-	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 14, 0, typography1, "1P");
-	//App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 120 - strlen(player1Puntuation) * 12, 0, typography1, player1Puntuation);
-	//App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 120, 0, typography1, "2P");
-	//App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 80, 0, typography1, player2Puntuation);
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, 0, typography1, "1P");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 120 - strlen(player1Puntuation) * 12, 0, typography1, player1Puntuation);
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 260, 0, typography1, "2P");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 380 - strlen(player2Puntuation) * 12, 0, typography1, player2Puntuation);
 }
