@@ -37,8 +37,9 @@ bool ModuleParticles::Start()
 	ground_dust.anim.PushBack({ 347, 94, 25, 21 }, 2, { 0,0 }, 0, {}, {}, {});
 	ground_dust.anim.PushBack({ 375, 92, 27, 23 }, 2, { 0,0 }, 0, {}, {}, {});
 	ground_dust.anim.PushBack({ 405, 90, 30, 25 }, 2, { 0,0 }, 0, {}, {}, {});
+	ground_dust.anim.loop = false;
 
-	ground_dust.life = 500;
+	ground_dust.life = -1;
 
 	return true;
 }
@@ -70,20 +71,20 @@ update_status ModuleParticles::Update()
 
 		if (p == nullptr)
 			continue;
-
+		if (p->Update() == false) {}
+		p->collider->SetPos(p->position);
 		if (SDL_GetTicks() >= p->born)
 		{
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), p->flip);
+			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), p->flip);
 		}
-		p->collider->SetPos(p->position);
-/*		if (p->Update() == false)
+		if (active[i] != nullptr && p->anim.loop == false)
 		{
-			delete p;
 			active[i]->collider->to_delete = true;
-			active[i] = nullptr;
-		}*/
-	}
 
+			delete active[i];
+			active[i] = nullptr;
+		}
+	}
 	return UPDATE_CONTINUE;
 }
 
@@ -156,16 +157,7 @@ Particle::Particle(const Particle& p) :
 bool Particle::Update()
 {
 	bool ret = true;
-
-	if (life > 0)
-	{
-		if ((SDL_GetTicks() - born) > life)
-			ret = false;
-	}
-	else
-		if (anim.Finished())
-			ret = false;
-
+	
 	position.x += speed.x;
 	position.y += speed.y;
 
