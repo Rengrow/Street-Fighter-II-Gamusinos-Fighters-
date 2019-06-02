@@ -1104,9 +1104,9 @@ bool ModuleDhalsim::Start()
 
 	//Get up
 
-	getup.PushBack({ 197, 989, 131, 31 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	getup.PushBack({ 330, 974, 122, 46 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	getup.PushBack({ 455, 920, 83, 100 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 197, 989, 131, 31 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 330, 974, 122, 46 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 455, 920, 83, 100 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
 	// Defending
