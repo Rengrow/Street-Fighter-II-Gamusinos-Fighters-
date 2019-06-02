@@ -1240,7 +1240,7 @@ update_status ModuleDhalsim::Update()
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle;
 	SDL_Texture *texture = graphics;
-	int hdk_spawn;
+	int hdk_spawn; 
 
 	if (flip == false)
 	{
@@ -1677,6 +1677,7 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 1;
 			dizzydamage = 1;
+			colliding = false;
 			break;
 
 		case M_KIK_CROUCH2:
@@ -1689,6 +1690,7 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 2;
 			dizzydamage = 2;
+			colliding = false;
 			break;
 
 		case F_KIK_CROUCH2:
@@ -1701,6 +1703,7 @@ update_status ModuleDhalsim::Update()
 			}
 			typeofattack = 3;
 			dizzydamage = 3;
+			colliding = false;
 			break;
 
 		case L_KIK_STANDING2:
@@ -2217,10 +2220,11 @@ update_status ModuleDhalsim::Update()
 				yoga_drill.ResetAnimation();
 				inputs.Push(IN_YDRILL_FINISH2);
 			}
+			colliding = false;
 			break;
 
 		case YMUMMY2:
-
+			
 			current_animation = &yoga_mummy;
 			jumpHeight += speed + 2;
 			typeofattack = 3;
@@ -2236,6 +2240,7 @@ update_status ModuleDhalsim::Update()
 				yoga_mummy.ResetAnimation();
 				inputs.Push(IN_YMUMMY_FINISH2);
 			}
+			colliding = false;
 			break;
 
 		case ST_GETTING_UP2:
@@ -2728,7 +2733,7 @@ bool ModuleDhalsim::external_input(p2Qeue<ryu_inputs2>& inputs)
 			else
 				inputs.Push(IN_M_PUNCH2);
 		}
-
+		
 		if (App->input->pads[0].b == true)
 		{
 			inputs.Push(IN_M_KIK2);
@@ -2973,6 +2978,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			clk.ResetAnimation();
 			l_crouching_kik_timer = 0;
 		}
+		
 	}
 
 	if (l_close_crouching_kik_timer > 0)
@@ -2983,6 +2989,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			close_clk.ResetAnimation();
 			l_close_crouching_kik_timer = 0;
 		}
+		
 	}
 
 
@@ -3064,6 +3071,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			cmk.ResetAnimation();
 			m_crouching_kik_timer = 0;
 		}
+		
 	}
 
 	if (m_close_crouching_kik_timer > 0)
@@ -3074,6 +3082,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			close_cmk.ResetAnimation();
 			m_close_crouching_kik_timer = 0;
 		}
+		
 	}
 
 	//fierce
@@ -3144,6 +3153,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			chk.ResetAnimation();
 			f_crouching_kik_timer = 0;
 		}
+		
 	}
 
 	if (hadoken_timer > 0)
