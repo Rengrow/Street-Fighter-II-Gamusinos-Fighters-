@@ -474,6 +474,7 @@ update_status ModuleRyu::Update()
 	SDL_Texture* texture = graphics;
 
 	int hdk_spawn;
+	
 
 	if (flip == false)
 	{
@@ -769,7 +770,8 @@ bool ModuleRyu::IsntOnLeftLimit() {
 
 void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 
-	if (c1->type != COLLIDER_PLAYER2_SHOT && c2->type != COLLIDER_PLAYER2_SHOT && c1->type != COLLIDER_PLAYER_SHOT && c2->type != COLLIDER_PLAYER_SHOT) { App->dhalsim->colliding = true; }
+	if (c1->type != COLLIDER_PLAYER2_SHOT && c2->type != COLLIDER_PLAYER2_SHOT && c1->type != COLLIDER_PLAYER_SHOT && c2->type != COLLIDER_PLAYER_SHOT) { 
+		App->dhalsim->colliding = true; }
 	else { App->dhalsim->colliding = false; }
 
 	//PUSHBACK CHECK
@@ -777,8 +779,12 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 		if (App->dhalsim->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
 		if (App->dhalsim->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
 		if (App->dhalsim->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
-		//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 0);
+/*		if (Particle == true){
+			App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 0);
+			Particle = false;
+		}*/
 	}
+//	else { Particle = true; }
 
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT) {
 		if (App->dhalsim->typeofattack == 1) { pushbacktimerprojectile = 20; pushbackspeed = 2; }
@@ -856,7 +862,7 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 			inputs.Push(IN_FALLING);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2) //Colliding players
 		{
 
 
@@ -902,7 +908,7 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 						App->dhalsim->position.x--;
 				}
 			}
-		}
+		} else App->dhalsim->colliding = false;
 	}
 }
 

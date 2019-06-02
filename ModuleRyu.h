@@ -221,6 +221,7 @@ public:
 	int victoryExecuted;
 	bool freeze;
 	bool godmode = false;
+	bool Particle;
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int jumpHeight = 0;
