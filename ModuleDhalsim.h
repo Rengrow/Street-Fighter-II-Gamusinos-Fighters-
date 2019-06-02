@@ -347,11 +347,11 @@ public:
 	int framesAtaque = 0;
 	int framesJump = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
-	int levitationtimer = -1;
-	int dizzylvl = 0;
-	Uint32 lasttimedamaged = 0;
-	Uint32 timeUpdated = 0;
-	Uint32 timeStoped = 0;
+	int levitationtimer;
+	int dizzylvl;
+	Uint32 lasttimedamaged;
+	Uint32 timeUpdated;
+	Uint32 timeStoped;
 	
 	bool dizzi = false;
 	

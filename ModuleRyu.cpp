@@ -40,8 +40,7 @@ bool ModuleRyu::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = 0;
-	puntuation = 0;
+	victoryExecuted = invulnerabilityFrames = puntuation = 0;
 	Animation* current_animation;
 
 
@@ -769,10 +768,10 @@ bool ModuleRyu::IsntOnLeftLimit() {
 }
 
 void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
-	
+
 	if (c1->type != COLLIDER_PLAYER2_SHOT && c2->type != COLLIDER_PLAYER2_SHOT && c1->type != COLLIDER_PLAYER_SHOT && c2->type != COLLIDER_PLAYER_SHOT) { App->dhalsim->colliding = true; }
 	else { App->dhalsim->colliding = false; }
-	
+
 	//PUSHBACK CHECK
 	if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
 		if (App->dhalsim->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
@@ -859,7 +858,7 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2)
 		{
-			
+
 
 			if (state == ST_WALK_FORWARD && App->dhalsim->state == ST_WALK_FORWARD2) {
 				position.x--;
@@ -903,7 +902,7 @@ void ModuleRyu::OnCollision(Collider* c1, Collider* c2) {
 						App->dhalsim->position.x--;
 				}
 			}
-		} 
+		}
 	}
 }
 
