@@ -1979,7 +1979,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_CROUCH_DEFENDING_READY2:
-			current_animation = &crouch;
+			current_animation = &ground;
 			break;
 
 		case ST_CROUCH_DEFENDING2:
@@ -2815,15 +2815,13 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
 			jhk.ResetAnimation();
-			yoga_mummy.ResetAnimation();
-			yoga_drill.ResetAnimation();
-			close_firstframe_lk_mk.ResetAnimation();
+			
+			
 			airreel.ResetAnimation();
 			fall.ResetAnimation();
-			getup.ResetAnimation();
-			grab.ResetAnimation();
-			grab2.ResetAnimation();
-			stun.ResetAnimation();
+			
+			
+			
 			win1.ResetAnimation();
 			win2.ResetAnimation();
 			lose.ResetAnimation();
@@ -2846,6 +2844,8 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_grab_timer > D_M_GRAB_TIME)
 		{
 			inputs.Push(IN_M_GRAB_FINISH2);
+			grab.ResetAnimation();
+			grab2.ResetAnimation();
 			m_grab_timer = 0;
 		}
 	}
@@ -2855,6 +2855,8 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_grab_timer > D_F_GRAB_TIME)
 		{
 			inputs.Push(IN_F_GRAB_FINISH2);
+			grab.ResetAnimation();
+			grab2.ResetAnimation();
 			f_grab_timer = 0;
 		}
 	}
