@@ -56,8 +56,8 @@ bool ModuleDhalsim::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = puntuation = 0;
-
+	victoryExecuted = invulnerabilityFrames = puntuation = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = 0;
+	levitationtimer = -1;
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
@@ -70,6 +70,15 @@ bool ModuleDhalsim::Start()
 	idle.PushBack({ 694, 448, 76, 89 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 	idle.PushBack({ 772, 444, 74, 93 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 
+	// Turn (change side animation)
+	const int turn_animnColliders = 3;
+	SDL_Rect turn_animHitbox[turn_animnColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50} };
+	COLLIDER_TYPE turn_animColliderType[turn_animnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* turn_animCallback[turn_animnColliders] = { {this}, {this}, {this} };
+
+	turn_anim.PushBack({ 374, 657, 61, 94 }, 2, { 33,5 }, turn_animnColliders, turn_animHitbox, turn_animColliderType, turn_animCallback);
+	turn_anim.PushBack({ 302, 657, 65, 94 }, 2, { 33,5 }, turn_animnColliders, turn_animHitbox, turn_animColliderType, turn_animCallback);
+	turn_anim.PushBack({ 228, 657, 72, 94 }, 2, { 33,5 }, turn_animnColliders, turn_animHitbox, turn_animColliderType, turn_animCallback);
 
 	// walk forward animation (arcade sprite sheet)
 	const int forwardnColliders = 3;
@@ -871,6 +880,14 @@ bool ModuleDhalsim::Start()
 
 	crouch.PushBack({ 331, 181, 61, 66 }, 1, { 33,5 }, crouchnColliders, crouchHitbox, crouchColliderType, crouchCallback);
 
+	//Crouch turn
+	const int cturn_animnColliders = 3;
+	SDL_Rect cturn_animHitbox[cturn_animnColliders] = { { -32, 47, 26, 22}, { -6, 27, 46, 27}, { -6, 0, 46, 27} };
+	COLLIDER_TYPE cturn_animColliderType[cturn_animnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* cturn_animCallback[cturn_animnColliders] = { {this}, {this}, {this} };
+
+	cturn_anim.PushBack({ 393, 175, 57, 70 }, 3, { 33,5 }, cturn_animnColliders, cturn_animHitbox, cturn_animColliderType, cturn_animCallback);
+	cturn_anim.PushBack({ 452, 175, 58, 70 }, 3, { 33,5 }, cturn_animnColliders, cturn_animHitbox, cturn_animColliderType, cturn_animCallback);
 
 	//Crouching l punch
 	const int clpnColliders = 3;
@@ -1071,25 +1088,25 @@ bool ModuleDhalsim::Start()
 
 
 	// Falling
-	const int fallnColliders = 3;
-	SDL_Rect fallHitbox1[fallnColliders] = { { 0, 0, 0, 0}, { -15, 11, 53, 70}, { -61, 5, 50, 35} };
-	SDL_Rect fallHitbox2[fallnColliders] = { { 0, 0, 0, 0}, { 0, 5, 93, 37}, { 0, 0, 0, 0} };
-	COLLIDER_TYPE fallColliderType[fallnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE fallColliderType2[fallnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	Module* fallCallback[fallnColliders] = { {this}, {this}, {this} };
-	Module* fallCallback2[fallnColliders] = { {this}, {this}, {this} };
+	const int sweepnColliders = 3;
+	SDL_Rect sweepHitbox1[sweepnColliders] = { { 0, 0, 0, 0}, { -15, 11, 53, 70}, { -61, 5, 50, 35} };
+	SDL_Rect sweepHitbox2[sweepnColliders] = { { 0, 0, 0, 0}, { 0, 5, 93, 37}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE sweepColliderType[sweepnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	COLLIDER_TYPE sweepColliderType2[sweepnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* sweepCallback[sweepnColliders] = { {this}, {this}, {this} };
+	Module* sweepCallback2[sweepnColliders] = { {this}, {this}, {this} };
 
-	fall.PushBack({ 801, 820, 94, 84 }, 30, { 33,5 }, { fallnColliders }, { fallHitbox1 }, { fallColliderType }, { airreelCallback });
-	fall.PushBack({ 897, 848, 97, 56 }, 10, { 33,5 }, { fallnColliders }, { fallHitbox2 }, { fallColliderType2 }, { fallCallback2 });
-	fall.PushBack({ 1, 978, 96, 48 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	fall.PushBack({ 99, 989, 96, 31 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	sweep.PushBack({ 801, 820, 94, 84 }, 30, { 33,5 }, { sweepnColliders }, { sweepHitbox1 }, { sweepColliderType }, { airreelCallback });
+	sweep.PushBack({ 897, 848, 97, 56 }, 10, { 33,5 }, { sweepnColliders }, { sweepHitbox2 }, { sweepColliderType2 }, { sweepCallback2 });
+	sweep.PushBack({ 1, 978, 96, 48 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	sweep.PushBack({ 99, 989, 96, 31 }, 20, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
 	//Get up
 
-	getup.PushBack({ 197, 989, 131, 31 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	getup.PushBack({ 330, 974, 122, 46 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	getup.PushBack({ 455, 920, 83, 100 }, 15, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 197, 989, 131, 31 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 330, 974, 122, 46 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	getup.PushBack({ 455, 920, 83, 100 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
 	// Defending
@@ -1203,8 +1220,8 @@ bool ModuleDhalsim::CleanUp()
 	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
 	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp = yoga_flame_hp = yoga_flame_mp = Animation();
-	streel = stgreel = creel = Animation();
-	airreel = fall = getup = Animation();
+	streel = stgreel = creel = turn_anim = cturn_anim = Animation();
+	airreel = sweep = getup = Animation();
 	crouching = standing = crouch = defending = cdefending = grab = grab2 = stun = Animation();
 	win1 = win2 = lose = Animation();
 	ground = Animation();
@@ -2820,7 +2837,7 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			
 			
 			airreel.ResetAnimation();
-			fall.ResetAnimation();
+			sweep.ResetAnimation();
 			
 			
 			

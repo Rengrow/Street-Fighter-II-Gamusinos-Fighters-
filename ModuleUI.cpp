@@ -92,6 +92,7 @@ bool ModuleUI::Start()
 	win_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_win.wav");
 	lose_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_lose.wav");
 	perfect_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_perfect.wav");
+	scoreUp_snd = App->audio->LoadChunk("assets/sfx/effects/score_up.wav");
 
 	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = false;
 
@@ -101,6 +102,8 @@ bool ModuleUI::Start()
 // Load assets
 bool ModuleUI::CleanUp()
 {
+	App->audio->UnloadChunk(scoreUp_snd);
+	scoreUp_snd = nullptr;
 	App->audio->UnloadChunk(perfect_snd);
 	perfect_snd = nullptr;
 	App->audio->UnloadChunk(round_snd);
@@ -189,7 +192,7 @@ void ModuleUI::LifeBarsBlit() {
 	yelllowBar2.w = App->dhalsim->life*1.36;
 	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 18, 21, &yelllowBar2, false);
 
-	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 39, 33, typography1, "PACO PEPE");
+	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 39, 33, typography1, "DHALSIM");
 	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 122, 33, typography1, "DHALSIM");
 
 }
@@ -282,7 +285,7 @@ void ModuleUI::StartFightBlit() {
 	}
 }
 
-void ModuleUI::StartEndFight(int player) {
+void ModuleUI::StartEndFight(int player, bool timeOut) {
 	stopedTimer = App->fight->GetTimer();
 	winnerPlayer = player;
 }
@@ -291,7 +294,7 @@ void ModuleUI::EndFight() {
 	if (App->fight->endFightStarted) {
 		int timeRemaining = (App->fight->endFightTimer - SDL_GetTicks()) / 1000;
 
-		if (timeRemaining == 3 && !youFinalSound) {
+		if (timeRemaining == 9 && !youFinalSound) {
 			App->audio->PlayChunk(you_snd);
 
 			if (winnerPlayer == 1) {
@@ -305,7 +308,7 @@ void ModuleUI::EndFight() {
 
 			youFinalSound = true;
 		}
-		else if (timeRemaining == 2 && !winLoseFinalSound) {
+		else if (timeRemaining == 8 && !winLoseFinalSound) {
 			if (winnerPlayer == 1)
 				App->audio->PlayChunk(win_snd);
 			else if (winnerPlayer == 2)
@@ -313,17 +316,32 @@ void ModuleUI::EndFight() {
 			winLoseFinalSound = true;
 		}
 
-		else if (timeRemaining == 1 && !perfectSound) {
+		else if (timeRemaining == 7 && !perfectSound) {
 			if (App->ryu->life == 100 || App->dhalsim->life == 100)
 				App->audio->PlayChunk(perfect_snd);
 			perfectSound = true;
 		}
 
-		if (timeRemaining > 0)
+		if (timeRemaining > 0 && timeRemaining >= 7 && App->frames % 2 == 0)
 			if (winnerPlayer == 1)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 1 WIN");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 1 WIN");
 			else if (winnerPlayer == 2)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 2 WIN");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 2 WIN");
+
+		if (timeRemaining < 7 && timeRemaining > 0) {
+			if (timeRemaining < 7) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 30, typography1, "TIME");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 30, typography1, "TIME");
+			}
+
+			if (timeRemaining < 6) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 60, SCREEN_HEIGHT / 2 - 18, typography1, "VITAL");
+			}
+
+			if (timeRemaining < 5) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 65, SCREEN_HEIGHT / 2 + 10, typography1, "BONUS");
+			}
+		}
 	}
 }
 

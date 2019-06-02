@@ -92,7 +92,6 @@ void ModuleFight::StartNewRound() {
 	endFightStarted = stopedFight = roundStarted = false;
 	stage->StopMusic(2000);
 	App->fade->FadeToBlack((Module*)stage, (Module*)stage, 2);
-	App->dhalsim->levitationtimer = -1; //I'll explain, I promise. Ad
 }
 
 void ModuleFight::EndFullFight() {
@@ -113,11 +112,11 @@ void ModuleFight::Win(int ryu) {
 
 	round++;
 
-	endFightTimer = SDL_GetTicks() + 5000; //5 Seconds
+	endFightTimer = SDL_GetTicks() + 10000; //10 Seconds
 
 	endFightStarted = stopedFight = true;
 
-	App->UI->StartEndFight(ryu);
+	App->UI->StartEndFight(ryu, GetTimer() <= 0);
 }
 
 void ModuleFight::CheckFlipPlayers() {
