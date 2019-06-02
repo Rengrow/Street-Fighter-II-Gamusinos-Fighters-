@@ -1999,7 +1999,7 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case ST_CROUCH_DEFENDING_READY2:
-			current_animation = &ground;
+			current_animation = &crouch;
 			break;
 
 		case ST_CROUCH_DEFENDING2:
@@ -2245,6 +2245,12 @@ update_status ModuleDhalsim::Update()
 
 		case ST_GETTING_UP2:
 			current_animation = &getup;
+
+			if ((App->frames - getting_up_timer == 1) && (turn == true))
+			{
+				turn = false;
+				flip = !flip;
+			}
 			break;
 
 		case LOOSE2:
@@ -2408,6 +2414,7 @@ update_status ModuleDhalsim::Update()
 
 		case ST_DIZZI2:
 			current_animation = &stun;
+			dizzylvl = 0;
 			break;
 
 		case TURNING2:
@@ -4573,7 +4580,7 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_DIZZI_FINISH2:state = ST_IDLE2; getting_up_timer = App->frames; break;
+			case IN_DIZZI_FINISH2:state = ST_IDLE2; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
