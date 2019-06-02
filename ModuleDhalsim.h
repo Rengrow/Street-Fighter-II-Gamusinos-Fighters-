@@ -45,7 +45,10 @@
 #define D_CROUCHING_TIME 4 //used to be 5
 #define D_STANDING_TIME 4 //used to be 5
 #define D_JUMP_TIME 55 //ok
-#define D_GETTING_UP_TIME 45 //ok
+
+
+
+#define D_GETTING_UP_TIME 30+2 //ok
 #define D_DEFENDING_TIME 20 //ok
 
 #define D_HEAD_REEL_TIME 35 //+3
