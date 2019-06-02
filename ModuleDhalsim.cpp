@@ -57,7 +57,7 @@ bool ModuleDhalsim::Start()
 	life = 100;
 	freeze = true;
 	victoryExecuted = invulnerabilityFrames = puntuation = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = 0;
-	levitationtimer = -1;
+	levitationtimer = -100;
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
@@ -2254,7 +2254,6 @@ update_status ModuleDhalsim::Update()
 				current_animation = &win1;
 				victoryExecuted = 1;
 
-
 			}
 			else {
 
@@ -2262,6 +2261,10 @@ update_status ModuleDhalsim::Update()
 				current_animation = &win2;
 				victoryExecuted = 2;
 
+				if (levitationtimer == -100) {
+					position.y = 160;
+					levitationtimer = 1;
+				}
 				if (levitationtimer > 1) {
 					position.y--;
 					levitationtimer--;
@@ -2271,7 +2274,7 @@ update_status ModuleDhalsim::Update()
 					levitationtimer++;
 				}
 				if ((levitationtimer == 1) || (levitationtimer == -1)) {
-					levitationtimer *= -45;
+					levitationtimer *= -10;
 				}
 			}
 			break;
