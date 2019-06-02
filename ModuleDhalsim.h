@@ -128,8 +128,8 @@ enum ryu_states2
 	L_KIK_CROUCHCLOSE2,
 	M_KIK_CROUCHCLOSE2,
 	//end of test
-	
-	
+
+
 	L_PUNCH_STANDING2,
 	L_PUNCH_NEUTRAL_JUMP2,
 	L_PUNCH_FORWARD_JUMP2,
@@ -196,7 +196,7 @@ enum ryu_inputs2
 {
 	IN_LEFT_DOWN2,
 	IN_LEFT_UP2,
-	
+
 	IN_LEFT_AND_CROUCH2,
 	IN_LEFT_AND_JUMP2,
 
@@ -259,7 +259,7 @@ enum ryu_inputs2
 	IN_YFLAME_FINISH2,
 	IN_YDRILL_FINISH2,
 	IN_YMUMMY_FINISH2,
-	
+
 	IN_GRABBED2,
 	IN_GRABBED_FINISH2,
 
@@ -303,7 +303,7 @@ public:
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
 	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk, close_firstframe_lk_mk;
-	Animation jlp, jlk, jmp,  jmk, jhp,  jhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward. Nonexistent variations: jfmp, jbmp,jfmk, jbmk,jfhp, jbhp, jfhk, jbhk
+	Animation jlp, jlk, jmp, jmk, jhp, jhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward. Nonexistent variations: jfmp, jbmp,jfmk, jbmk,jfhp, jbhp, jfhk, jbhk
 	Animation mp, hp, mk, hk;
 	Animation close_mp, close_hp, close_mk, close_hk;
 	Animation neutralJump, forwardJump, backwardJump;
@@ -357,16 +357,16 @@ public:
 	Uint32 lasttimedamaged;
 	Uint32 timeUpdated;
 	Uint32 timeStoped;
-	
+
 	bool dizzi = false;
-	
+
 	int sprite_change_timer = 0;
 	bool close;
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
-	int puntuation;
-	
+	int puntuation = 0;
+
 	//light
 	Uint32 l_standing_punch_timer = 0;
 	Uint32 l_close_standing_punch_timer = 0;

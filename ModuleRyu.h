@@ -226,7 +226,7 @@ public:
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
-	int puntuation;
+	int puntuation = 0;
 	int mov; //lp, mp, hp, lk, mk, hk
 	int pushbacktimerhit = 0;
 	int pushbacktimerprojectile = 0;
@@ -235,8 +235,8 @@ public:
 	Uint32 invulnerabilityFrames;
 	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
 	int dizzydamage = 0; // 1 =light, 2 = medium, 3 = hard, 4 = special, 5 = throw
-	
-	
+
+
 
 	//light
 	Uint32 l_standing_punch_timer = 0;

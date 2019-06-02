@@ -10,6 +10,7 @@
 
 #include "ModuleRyu.h"
 #include "ModuleDhalsim.h"
+#include "SDL\include\SDL.h"
 
 
 ModuleEndBattle::ModuleEndBattle()
@@ -35,8 +36,8 @@ bool ModuleEndBattle::Start()
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
 	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
-	
-	
+
+
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
 
@@ -44,9 +45,9 @@ bool ModuleEndBattle::Start()
 	App->ryu->position.y = 215;
 	App->dhalsim->position.x = 250;
 	App->dhalsim->position.y = 215;
-	App->render->camera.x = App->render->camera.y = 0;
+	App->render->camera.x = App->render->camera.y = App->ryu->puntuation = App->dhalsim->puntuation = 0;
 
-	quoteOption = App->frames % 2 == 0;
+	quoteOption = SDL_GetTicks() % 2 == 0;
 
 	return ret;
 }
@@ -73,23 +74,20 @@ void ModuleEndBattle::UpdateQuote() {
 	if (quoteOption) {
 		text = quote1.substr(0, quoteLetters);
 		text2 = quote1sub.substr(0, quoteLetters);
-		
-		
+
+
 	}
-	else{
+	else {
 		text = quote2.substr(0, quoteLetters);
 		text2 = quote2sub.substr(0, quoteLetters);
-		
-
-	
 	}
-	
+
 	cstr = new char[text.length() + 1];
 	strcpy_s(cstr, text.length() + 1, text.c_str());
 	cstr2 = new char[text2.length() + 1];
 	strcpy_s(cstr2, text2.length() + 1, text2.c_str());
-	
-	
+
+
 }
 
 // Update: draw background

@@ -56,7 +56,7 @@ bool ModuleDhalsim::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = puntuation = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = 0;
+	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = 0;
 	levitationtimer = -1;
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)

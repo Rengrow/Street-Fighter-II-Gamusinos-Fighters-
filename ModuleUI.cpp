@@ -94,7 +94,9 @@ bool ModuleUI::Start()
 	perfect_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_perfect.wav");
 	scoreUp_snd = App->audio->LoadChunk("assets/sfx/effects/score_up.wav");
 
-	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = false;
+	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = gotBonus = App->fight->stopedFight = false;
+
+	intTimeBonusPuntuation = intVitalBonusPuntuation = intBonusPuntuation = totalBonus = 0;
 
 	return ret;
 }
@@ -144,11 +146,11 @@ update_status ModuleUI::PostUpdate()
 	}
 
 	LifeBarsBlit();
-	BlitPuntuation();
 	TimerBlit(numbers);
 	RoundsWinnedBlit();
 	StartFightBlit();
 	EndFight();
+	BlitPuntuation();
 
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 		debugGamepads = !debugGamepads;
@@ -294,7 +296,7 @@ void ModuleUI::EndFight() {
 	if (App->fight->endFightStarted) {
 		int timeRemaining = (App->fight->endFightTimer - SDL_GetTicks()) / 1000;
 
-		if (timeRemaining == 9 && !youFinalSound) {
+		if (timeRemaining == 12 && !youFinalSound) {
 			App->audio->PlayChunk(you_snd);
 
 			if (winnerPlayer == 1) {
@@ -308,7 +310,7 @@ void ModuleUI::EndFight() {
 
 			youFinalSound = true;
 		}
-		else if (timeRemaining == 8 && !winLoseFinalSound) {
+		else if (timeRemaining == 11 && !winLoseFinalSound) {
 			if (winnerPlayer == 1)
 				App->audio->PlayChunk(win_snd);
 			else if (winnerPlayer == 2)
@@ -316,30 +318,33 @@ void ModuleUI::EndFight() {
 			winLoseFinalSound = true;
 		}
 
-		else if (timeRemaining == 7 && !perfectSound) {
+		else if (timeRemaining == 10 && !perfectSound) {
 			if (App->ryu->life == 100 || App->dhalsim->life == 100)
 				App->audio->PlayChunk(perfect_snd);
 			perfectSound = true;
 		}
 
-		if (timeRemaining > 0 && timeRemaining >= 7 && App->frames % 2 == 0)
+		if (timeRemaining > 0 && timeRemaining >= 11 && App->frames % 4 != 0)
 			if (winnerPlayer == 1)
 				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 1 WIN");
 			else if (winnerPlayer == 2)
 				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 2 WIN");
 
-		if (timeRemaining < 7 && timeRemaining > 0) {
-			if (timeRemaining < 7) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 30, typography1, "TIME");
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 30, typography1, "TIME");
+		if (timeRemaining < 11) {
+			GetBonusPuntuations(timeRemaining < 9);
+			if (timeRemaining < 11) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 70, 55, typography1, "TIME");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(timeBonusPuntuation) * 16, 55, numbers, timeBonusPuntuation);
 			}
 
-			if (timeRemaining < 6) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 60, SCREEN_HEIGHT / 2 - 18, typography1, "VITAL");
+			if (timeRemaining < 10) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 86, 75, typography1, "VITAL");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(vitalBonusPuntuation) * 16, 75, numbers, vitalBonusPuntuation);
 			}
 
-			if (timeRemaining < 5) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 65, SCREEN_HEIGHT / 2 + 10, typography1, "BONUS");
+			if (timeRemaining < 9) {
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 86, 100, typography1, "BONUS");
+				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(bonusPuntuation) * 16, 100, numbers, bonusPuntuation);
 			}
 		}
 	}
@@ -437,4 +442,41 @@ void ModuleUI::BlitPuntuation() {
 	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 120 - strlen(player1Puntuation) * 12, 0, typography1, player1Puntuation);
 	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 260, 0, typography1, "2P");
 	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 380 - strlen(player2Puntuation) * 12, 0, typography1, player2Puntuation);
+}
+
+void ModuleUI::GetBonusPuntuations(bool sum) {
+	if (!gotBonus) {
+		intTimeBonusPuntuation = stopedTimer * 100;
+		intVitalBonusPuntuation = 30000 * ((winnerPlayer == 1 ? App->ryu->life : App->dhalsim->life) / 100);
+		totalBonus = intTimeBonusPuntuation + intVitalBonusPuntuation;
+
+		std::string stTimeBonusPuntuation = std::to_string(intTimeBonusPuntuation);
+		std::string stVitalBonusPuntuation = std::to_string(intVitalBonusPuntuation);
+
+		timeBonusPuntuation = new char[stTimeBonusPuntuation.length() + 1];
+		strcpy_s(timeBonusPuntuation, stTimeBonusPuntuation.length() + 1, stTimeBonusPuntuation.c_str());
+
+		vitalBonusPuntuation = new char[stVitalBonusPuntuation.length() + 1];
+		strcpy_s(vitalBonusPuntuation, stVitalBonusPuntuation.length() + 1, stVitalBonusPuntuation.c_str());
+
+		gotBonus = true;
+	}
+
+	if (sum && totalBonus > 0) {
+		if (App->frames % 8 == 0)
+			App->audio->PlayChunk(scoreUp_snd);
+
+		totalBonus -= 100;
+		intBonusPuntuation += 100;
+
+		if (winnerPlayer == 1)
+			App->ryu->puntuation += 100;
+		else
+			App->dhalsim->puntuation += 100;
+	}
+
+	std::string stBonusPuntuation = std::to_string(intBonusPuntuation);
+
+	bonusPuntuation = new char[stBonusPuntuation.length() + 1];
+	strcpy_s(bonusPuntuation, stBonusPuntuation.length() + 1, stBonusPuntuation.c_str());
 }

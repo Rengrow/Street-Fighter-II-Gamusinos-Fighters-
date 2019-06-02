@@ -89,7 +89,7 @@ int ModuleFight::GetTimer() {
 }
 
 void ModuleFight::StartNewRound() {
-	endFightStarted = stopedFight = roundStarted = false;
+	endFightStarted = roundStarted = false;
 	stage->StopMusic(2000);
 	App->fade->FadeToBlack((Module*)stage, (Module*)stage, 2);
 }
@@ -102,7 +102,6 @@ void ModuleFight::EndFullFight() {
 void ModuleFight::Win(int ryu) {
 	App->ryu->freeze = true;
 	App->dhalsim->freeze = true;
-
 	//App->slowdown->StartSlowdown(1000, 100);
 
 	if (ryu == 1)
@@ -112,7 +111,7 @@ void ModuleFight::Win(int ryu) {
 
 	round++;
 
-	endFightTimer = SDL_GetTicks() + 10000; //10 Seconds
+	endFightTimer = SDL_GetTicks() + 13000; //13 Seconds
 
 	endFightStarted = stopedFight = true;
 

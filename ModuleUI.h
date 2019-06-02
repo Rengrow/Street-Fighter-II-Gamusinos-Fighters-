@@ -32,6 +32,7 @@ private:
 	void BlitGamePadDebug();
 	void GetPuntuations();
 	void BlitPuntuation();
+	void GetBonusPuntuations(bool sum);
 
 public:
 	int numbers;
@@ -66,10 +67,19 @@ public:
 	char* player1Puntuation;
 	char* player2Puntuation;
 
+	char* timeBonusPuntuation;
+	int intTimeBonusPuntuation;
+	char* vitalBonusPuntuation;
+	int intVitalBonusPuntuation;
+	char* bonusPuntuation;
+	int intBonusPuntuation;
+	int totalBonus;
+
 	int timerx = 170;
 	char tiempo[2];
 	bool redKoEnabled;
 	bool debugGamepads = false;
+	bool gotBonus;
 	int winnerPlayer = 0;
 
 private:

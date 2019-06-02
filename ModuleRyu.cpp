@@ -40,7 +40,7 @@ bool ModuleRyu::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = puntuation = 0;
+	victoryExecuted = invulnerabilityFrames = 0;
 	Animation* current_animation;
 
 
