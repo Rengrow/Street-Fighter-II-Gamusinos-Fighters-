@@ -322,6 +322,9 @@ public:
 	Mix_Chunk* high_fist = nullptr;
 	Mix_Chunk* high_kick = nullptr;
 	Mix_Chunk* block = nullptr;
+	Mix_Chunk* yoga_snd = nullptr;
+	Mix_Chunk* fire_snd = nullptr;
+	Mix_Chunk* flame_snd = nullptr;
 
 	iPoint position;
 	p2Qeue<ryu_inputs2> inputs;
@@ -332,6 +335,9 @@ public:
 	bool flip = true;
 	bool altColor = true;
 	bool freeze;
+	bool yoga_check;
+	bool yoga_sound;
+	bool flame_sound;
 	int victoryExecuted;
 	int pushbacktimerhit = 0;
 	int pushbacktimerprojectile = 0;
@@ -344,6 +350,8 @@ public:
 	int levitationtimer = -1;
 	int dizzylvl = 0;
 	Uint32 lasttimedamaged = 0;
+	Uint32 timeUpdated = 0;
+	Uint32 timeStoped = 0;
 	
 	bool dizzi = false;
 	

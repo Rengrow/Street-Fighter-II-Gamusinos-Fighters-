@@ -114,7 +114,9 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 
 			active[i] = p;
 
-			App->audio->PlayChunk(p->sfx);
+			if (p->sfx != 0) {
+				App->audio->PlayChunk(p->sfx);
+			}
 
 			break;
 		}

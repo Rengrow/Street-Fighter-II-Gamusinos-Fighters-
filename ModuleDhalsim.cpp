@@ -47,6 +47,9 @@ bool ModuleDhalsim::Start()
 	high_fist = App->audio->LoadChunk("assets/sfx/effects/high_fist.wav");
 	high_kick = App->audio->LoadChunk("assets/sfx/effects/high_kick.wav");
 	block = App->audio->LoadChunk("assets/sfx/effects/blocked_hadouken.wav");
+	yoga_snd = App->audio->LoadChunk("assets/sfx/voices/dhalsim_yoga.wav");
+	fire_snd = App->audio->LoadChunk("assets/sfx/voices/dhalsim_fire.wav");
+	flame_snd = App->audio->LoadChunk("assets/sfx/voices/dhalsim_flame.wav");
 
 	position.x = 250;
 	position.y = 215;
@@ -1183,6 +1186,12 @@ bool ModuleDhalsim::CleanUp()
 	high_kick = nullptr;
 	App->audio->UnloadChunk(block);
 	block = nullptr;
+	App->audio->UnloadChunk(yoga_snd);
+	yoga_snd = nullptr;
+	App->audio->UnloadChunk(fire_snd);
+	fire_snd = nullptr;
+	App->audio->UnloadChunk(flame_snd);
+	flame_snd = nullptr;
 
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
@@ -1226,6 +1235,14 @@ update_status ModuleDhalsim::Update()
 		hdk_spawn = -45;
 	}
 
+	if (state == L_YFLAME2 || state == M_YFLAME2 || state == F_YFLAME2 || state == L_YFIRE2 || state == M_YFIRE2 || state == F_YFIRE2) {
+		timeUpdated = App->frames;
+	}
+	else {
+		yoga_check = true;
+		yoga_sound = false;
+		flame_sound = false;
+	}
 
 	external_input(inputs);
 	internal_input(inputs);
@@ -2041,9 +2058,21 @@ update_status ModuleDhalsim::Update()
 
 		case L_YFIRE2:
 			current_animation = &yoga_fire_lp;
-			if (App->frames - hadoken_timer == 13)
+			if (yoga_check == true) {
+				timeStoped = App->frames;
+				yoga_check = false;
+			}
+			if (timeUpdated - timeStoped == 5 && !yoga_sound) {
+				App->audio->PlayChunk(yoga_snd);
+				yoga_sound = true;
+			}
+			else if (timeUpdated - timeStoped == 25 && !flame_sound) {
+				App->audio->PlayChunk(fire_snd);
+				flame_sound = true;
+			}
+			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2051,9 +2080,21 @@ update_status ModuleDhalsim::Update()
 
 		case M_YFIRE2:
 			current_animation = &yoga_fire_mp;
-			if (App->frames - hadoken_timer == 13)
+			if (yoga_check == true) {
+				timeStoped = App->frames;
+				yoga_check = false;
+			}
+			if (timeUpdated - timeStoped == 5 && !yoga_sound) {
+				App->audio->PlayChunk(yoga_snd);
+				yoga_sound = true;
+			}
+			else if (timeUpdated - timeStoped == 25 && !flame_sound) {
+				App->audio->PlayChunk(fire_snd);
+				flame_sound = true;
+			}
+			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2061,9 +2102,21 @@ update_status ModuleDhalsim::Update()
 
 		case F_YFIRE2:
 			current_animation = &yoga_fire_mp;
-			if (App->frames - hadoken_timer == 13)
+			if (yoga_check == true) {
+				timeStoped = App->frames;
+				yoga_check = false;
+			}
+			if (timeUpdated - timeStoped == 5 && !yoga_sound) {
+				App->audio->PlayChunk(yoga_snd);
+				yoga_sound = true;
+			}
+			else if (timeUpdated - timeStoped == 25 && !flame_sound) {
+				App->audio->PlayChunk(fire_snd);
+				flame_sound = true;
+			}
+			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, hdk_voice, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2071,18 +2124,54 @@ update_status ModuleDhalsim::Update()
 
 		case L_YFLAME2:
 			current_animation = &yoga_flame_lp;
+			if (yoga_check == true) {
+				timeStoped = App->frames;
+				yoga_check = false;
+			}
+			if (timeUpdated - timeStoped == 5 && !yoga_sound) {
+				App->audio->PlayChunk(yoga_snd);
+				yoga_sound = true;
+			}
+			else if (timeUpdated - timeStoped == 35 && !flame_sound) {
+				App->audio->PlayChunk(flame_snd);
+				flame_sound = true;
+			}
 			typeofattack = 1;
 			dizzydamage = 4;
 			break;
 
 		case M_YFLAME2:
 			current_animation = &yoga_flame_mp;
+			if (yoga_check == true) {
+				timeStoped = App->frames;
+				yoga_check = false;
+			}
+			if (timeUpdated - timeStoped == 5 && !yoga_sound) {
+				App->audio->PlayChunk(yoga_snd);
+				yoga_sound = true;
+			}
+			else if (timeUpdated - timeStoped == 35 && !flame_sound) {
+				App->audio->PlayChunk(flame_snd);
+				flame_sound = true;
+			}
 			typeofattack = 1;
 			dizzydamage = 4;
 			break;
 
 		case F_YFLAME2:
 			current_animation = &yoga_flame_hp;
+			if (yoga_check == true) {
+				timeStoped = App->frames;
+				yoga_check = false;
+			}
+			if (timeUpdated - timeStoped == 5 && !yoga_sound) {
+				App->audio->PlayChunk(yoga_snd);
+				yoga_sound = true;
+			}
+			else if (timeUpdated - timeStoped == 35 && !flame_sound) {
+				App->audio->PlayChunk(flame_snd);
+				flame_sound = true;
+			}
 			dizzydamage = 4;
 			break;
 
