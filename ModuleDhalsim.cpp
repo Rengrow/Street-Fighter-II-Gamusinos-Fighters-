@@ -70,6 +70,15 @@ bool ModuleDhalsim::Start()
 	idle.PushBack({ 694, 448, 76, 89 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 	idle.PushBack({ 772, 444, 74, 93 }, 6, { 33,5 }, idlenColliders, idleHitbox, idleColliderType, idleCallback);
 
+	// Turn (change side animation)
+	const int turn_animnColliders = 3;
+	SDL_Rect turn_animHitbox[turn_animnColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50} };
+	COLLIDER_TYPE turn_animColliderType[turn_animnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* turn_animCallback[turn_animnColliders] = { {this}, {this}, {this} };
+
+	turn_anim.PushBack({ 374, 657, 61, 94 }, 2, { 33,5 }, turn_animnColliders, turn_animHitbox, turn_animColliderType, turn_animCallback);
+	turn_anim.PushBack({ 302, 657, 65, 94 }, 2, { 33,5 }, turn_animnColliders, turn_animHitbox, turn_animColliderType, turn_animCallback);
+	turn_anim.PushBack({ 228, 657, 72, 94 }, 2, { 33,5 }, turn_animnColliders, turn_animHitbox, turn_animColliderType, turn_animCallback);
 
 	// walk forward animation (arcade sprite sheet)
 	const int forwardnColliders = 3;
@@ -871,6 +880,14 @@ bool ModuleDhalsim::Start()
 
 	crouch.PushBack({ 331, 181, 61, 66 }, 1, { 33,5 }, crouchnColliders, crouchHitbox, crouchColliderType, crouchCallback);
 
+	//Crouch turn
+	const int cturn_animnColliders = 3;
+	SDL_Rect cturn_animHitbox[cturn_animnColliders] = { { -32, 47, 26, 22}, { -6, 27, 46, 27}, { -6, 0, 46, 27} };
+	COLLIDER_TYPE cturn_animColliderType[cturn_animnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
+	Module* cturn_animCallback[cturn_animnColliders] = { {this}, {this}, {this} };
+
+	cturn_anim.PushBack({ 393, 175, 57, 70 }, 3, { 33,5 }, cturn_animnColliders, cturn_animHitbox, cturn_animColliderType, cturn_animCallback);
+	cturn_anim.PushBack({ 452, 175, 58, 70 }, 3, { 33,5 }, cturn_animnColliders, cturn_animHitbox, cturn_animColliderType, cturn_animCallback);
 
 	//Crouching l punch
 	const int clpnColliders = 3;
@@ -1203,7 +1220,7 @@ bool ModuleDhalsim::CleanUp()
 	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
 	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp = yoga_flame_hp = yoga_flame_mp = Animation();
-	streel = stgreel = creel = Animation();
+	streel = stgreel = creel = turn_anim = cturn_anim = Animation();
 	airreel = fall = getup = Animation();
 	crouching = standing = crouch = defending = cdefending = grab = grab2 = stun = Animation();
 	win1 = win2 = lose = Animation();

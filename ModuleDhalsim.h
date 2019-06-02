@@ -78,7 +78,8 @@
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 15+2
 
 
-#define D_TURNING_TIME 4
+#define D_TURNING_TIME 6+3
+#define D_CROUCHING_TURNING_TIME 6+2
 
 
 
@@ -314,6 +315,7 @@ public:
 	Animation win1, win2, lose;
 	Animation ground;
 	Animation grabbing;
+	Animation turn_anim, cturn_anim;
 	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
