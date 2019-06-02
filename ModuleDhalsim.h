@@ -45,7 +45,10 @@
 #define D_CROUCHING_TIME 4 //used to be 5
 #define D_STANDING_TIME 4 //used to be 5
 #define D_JUMP_TIME 55 //ok
-#define D_GETTING_UP_TIME 45 //ok
+
+
+
+#define D_GETTING_UP_TIME 30+2 //ok
 #define D_DEFENDING_TIME 20 //ok
 
 #define D_HEAD_REEL_TIME 35 //+3
@@ -78,7 +81,8 @@
 #define D_M_CLOSE_CROUCHING_PUNCH_TIME 15+2
 
 
-#define D_TURNING_TIME 4
+#define D_TURNING_TIME 6+3
+#define D_CROUCHING_TURNING_TIME 6+2
 
 
 
@@ -308,12 +312,13 @@ public:
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
-	Animation airreel, fall;
+	Animation airreel, sweep;
 	Animation getup, cdefending, defending, grab, grab2, stun;
 	Animation crouching, standing, crouch;
 	Animation win1, win2, lose;
 	Animation ground;
 	Animation grabbing;
+	Animation turn_anim, cturn_anim;
 	// Animation sweep;
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
