@@ -64,6 +64,7 @@ public:
 
 	void ResetAnimation()
 	{
+		frames_passed = 0;
 		current_frame = 0;
 	}
 };
