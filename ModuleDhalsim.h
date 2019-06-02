@@ -167,6 +167,7 @@ enum ryu_states2
 	ST_CROUCH_REEL2,
 	ST_FALLING2,
 	ST_DIZZI2,
+	SWEEP2,
 
 	ST_GETTING_UP2,
 
@@ -230,6 +231,7 @@ enum ryu_inputs2
 	IN_GUT_REEL2,
 	IN_CROUCH_REEL2,
 	IN_FALLING2,
+	IN_SWEEP2,
 
 	IN_CROUCHING_FINISH2,
 	IN_STANDING_FINISH2,
@@ -242,6 +244,7 @@ enum ryu_inputs2
 	IN_FALLING_FINISH2,
 	IN_GETTING_UP_FINISH2,
 	IN_DIZZI_FINISH2,
+	IN_SWEEP_FINISH2,
 
 	IN_L_YFIRE2,
 	IN_M_YFIRE2,
@@ -428,6 +431,7 @@ public:
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;
 	Uint32 gut_reel_timer = 0;
+	Uint32 sweep_timer = 0;
 };
 
 #endif
