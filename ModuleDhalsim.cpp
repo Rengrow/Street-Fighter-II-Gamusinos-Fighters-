@@ -2411,13 +2411,19 @@ update_status ModuleDhalsim::Update()
 			break;
 
 		case TURNING2:
-			current_animation = &airreel;
+			texture = graphics3;
+			current_animation = &turn_anim;
 			turn = false;
 			break;
 
 		case CROUCH_TURNING2:
-			current_animation = &airreel;
+			texture = graphics3;
+			current_animation = &cturn_anim;
 			turn = false;
+			break;
+
+		case SWEEP2:
+			current_animation = &sweep;
 			break;
 
 		//end of test
@@ -2577,6 +2583,8 @@ void ModuleDhalsim::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
 			}
+
+			
 
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 			{
@@ -3296,6 +3304,16 @@ void ModuleDhalsim::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			turning_timer = 0;
 
 			flip = !flip;
+		}
+	}
+
+	if (sweep_timer > 0)
+	{
+		if (App->frames - sweep_timer > D_SWEEP_TIME)
+		{
+			inputs.Push(IN_SWEEP_FINISH2);
+			sweep_timer = 0;
+			sweep.ResetAnimation();
 		}
 	}
 }
@@ -4660,6 +4678,15 @@ ryu_states2 ModuleDhalsim::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			}
 		}
 		break;
+
+		case SWEEP2:
+		{
+			switch (last_input)
+			{
+			case IN_SWEEP_FINISH2:state = ST_GETTING_UP2; getting_up_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
 
 		case LOOSE2:
 		{
