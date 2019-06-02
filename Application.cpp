@@ -31,7 +31,7 @@ Application::Application()
 	modules[5] = fight = new ModuleFight();
 	modules[6] = scene_Sagat = new ModuleSceneSagat();
 	modules[7] = scene_ken = new ModuleSceneKen();
-	modules[8] = ryu = new ModuleRyu();	
+	modules[8] = ryu = new ModuleRyu();
 	modules[9] = dhalsim = new ModuleDhalsim();
 	modules[10] = particles = new ModuleParticles();
 	modules[11] = welcomePage = new ModuleWelcomePage();
@@ -41,7 +41,7 @@ Application::Application()
 	modules[15] = vsScreen = new ModuleVsScreen();
 	modules[16] = chSelectionScreen = new ModuleChSelection();
 	modules[17] = fade = new ModuleFadeToBlack();
-	modules[18] = render = new ModuleRender();	
+	modules[18] = render = new ModuleRender();
 	modules[19] = slowdown = new ModuleSlowdown();
 }
 
@@ -66,7 +66,7 @@ bool Application::Init()
 	UI->Disable();
 	vsScreen->Disable();
 	chSelectionScreen->Disable();
-	
+
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 

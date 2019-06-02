@@ -15,130 +15,33 @@ ModuleChSelection::ModuleChSelection()
 {
 #pragma region Read Sprites
 
-	map.x = 0;
-	map.y = 0;
-	map.w = 192;
-	map.h = 112;
+	screen = { 0, 0, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE };
 
-	thailandFlag.x = 204;
-	thailandFlag.y = 225;
-	thailandFlag.w = 22;
-	thailandFlag.h = 27;
-
-	player1Pointer.x = 78;
-	player1Pointer.y = 124;
-	player1Pointer.w = 20;
-	player1Pointer.h = 11;
-
-	player1Cursor.x = 0;
-	player1Cursor.y = 115;
-	player1Cursor.w = 28;
-	player1Cursor.h = 42;
-
-	player1CursorLocked.x = 102;
-	player1CursorLocked.y = 115;
-	player1CursorLocked.w = 28;
-	player1CursorLocked.h = 42;
-
-	player2Pointer.x = 78;
-	player2Pointer.y = 137;
-	player2Pointer.w = 22;
-	player2Pointer.h = 11;
-
-	player2Cursor.x = 31;
-	player2Cursor.y = 115;
-	player2Cursor.w = 28;
-	player2Cursor.h = 42;
-
-	player2CursorLocked.x = 133;
-	player2CursorLocked.y = 115;
-	player2CursorLocked.w = 28;
-	player2CursorLocked.h = 42;
-
-	airplane.x = 60;
-	airplane.y = 129;
-	airplane.w = 15;
-	airplane.h = 15;
-
-	ryuFace.x = 0;
-	ryuFace.y = 253;
-	ryuFace.w = 28;
-	ryuFace.h = 37;
-
-	ryuPortrait.x = 0;
-	ryuPortrait.y = 0;
-	ryuPortrait.w = 105;
-	ryuPortrait.h = 140;
-
-	hondaFace.x = 38;
-	hondaFace.y = 253;
-	hondaFace.w = 28;
-	hondaFace.h = 37;
-
-	hondaPortrait.x = 125;
-	hondaPortrait.y = 0;
-	hondaPortrait.w = 105;
-	hondaPortrait.h = 140;
-
-	blankaFace.x = 78;
-	blankaFace.y = 253;
-	blankaFace.w = 28;
-	blankaFace.h = 37;
-
-	blankaPortrait.x = 247;
-	blankaPortrait.y = 0;
-	blankaPortrait.w = 105;
-	blankaPortrait.h = 140;
-
-	guileFace.x = 116;
-	guileFace.y = 253;
-	guileFace.w = 28;
-	guileFace.h = 37;
-
-	guilePortrait.x = 0;
-	guilePortrait.y = 173;
-	guilePortrait.w = 105;
-	guilePortrait.h = 140;
-
-	kenFace.x = 0;
-	kenFace.y = 300;
-	kenFace.w = 28;
-	kenFace.h = 37;
-
-	kenPortrait.x = 125;
-	kenPortrait.y = 173;
-	kenPortrait.w = 105;
-	kenPortrait.h = 140;
-
-	chunLiFace.x = 38;
-	chunLiFace.y = 300;
-	chunLiFace.w = 28;
-	chunLiFace.h = 37;
-
-	chunLiPortrait.x = 247;
-	chunLiPortrait.y = 173;
-	chunLiPortrait.w = 105;
-	chunLiPortrait.h = 140;
-
-	zangiefFace.x = 78;
-	zangiefFace.y = 300;
-	zangiefFace.w = 28;
-	zangiefFace.h = 37;
-
-	zangiefPortrait.x = 373;
-	zangiefPortrait.y = 0;
-	zangiefPortrait.w = 105;
-	zangiefPortrait.h = 140;
-
-	dhalsimFace.x = 116;
-	dhalsimFace.y = 208;
-	dhalsimFace.w = 28;
-	dhalsimFace.h = 37;
-
-	dhalsimPortrait.x = 497;
-	dhalsimPortrait.y = 0;
-	dhalsimPortrait.w = 105;
-	dhalsimPortrait.h = 140;
+	map = { 0,0,192,112 };
+	thailandFlag = { 204,225,22,27 };
+	player1Pointer = { 78,124,20,11 };
+	player1Cursor = { 0,115,28,42 };
+	player1CursorLocked = { 102,115,28,42 };
+	player2Pointer = { 78,137,22,11 };
+	player2Cursor = { 31,115,28,42 };
+	player2CursorLocked = { 133,115,28,42 };
+	airplane = { 60,129,15,15 };
+	ryuFace = { 0,253,28,37 };
+	ryuPortrait = { 0,0,105,140 };
+	hondaFace = { 38,253,28,37 };
+	hondaPortrait = { 125,0,105,140 };
+	blankaFace = { 78,253,28,37 };
+	blankaPortrait = { 247,0,105,140 };
+	guileFace = { 116,253,28,37 };
+	guilePortrait = { 0,173,105,140 };
+	kenFace = { 0,300,28,37 };
+	kenPortrait = { 125,173,105,140 };
+	chunLiFace = { 38,300,28,37 };
+	chunLiPortrait = { 247,173,105,140 };
+	zangiefFace = { 78,300,28,37 };
+	zangiefPortrait = { 373,0,105,140 };
+	dhalsimFace = { 116,208,28,37 };
+	dhalsimPortrait = { 497,0,105,140 };
 
 #pragma endregion
 }
@@ -180,6 +83,8 @@ bool ModuleChSelection::Start()
 	strcpy_s(player2Name, kenName.length() + 1, kenName.c_str());
 	player2Lock = false;
 
+	canSelectTimer = App->frames + 60;
+
 	return ret;
 }
 
@@ -213,6 +118,7 @@ bool ModuleChSelection::CleanUp()
 update_status ModuleChSelection::Update()
 {
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 121, 255);
+	SDL_RenderFillRect(App->render->renderer, &screen);
 
 	if (timeSelector < App->frames) {
 		lettersOn = !lettersOn;
@@ -376,12 +282,13 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 		}
 
 		if (App->input->keyboard[SDL_SCANCODE_U] == 1) {
-			if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait)) {
-				App->audio->PlayChunk(select);
-				player1Lock = true;
-			}
-			else 
-				App->audio->PlayChunk(invalidSelect);
+			if (canSelectTimer < App->frames)
+				if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait)) {
+					App->audio->PlayChunk(select);
+					player1Lock = true;
+				}
+				else
+					App->audio->PlayChunk(invalidSelect);
 		}
 	}
 }
@@ -522,12 +429,13 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 		}
 
 		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == 1) || App->input->keyboard[SDL_SCANCODE_0] == 1) {
-			if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
-				App->audio->PlayChunk(select);
-				player2Lock = true;
-			}
-			else
-				App->audio->PlayChunk(invalidSelect);
+			if (canSelectTimer < App->frames)
+				if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
+					App->audio->PlayChunk(select);
+					player2Lock = true;
+				}
+				else
+					App->audio->PlayChunk(invalidSelect);
 		}
 
 	}

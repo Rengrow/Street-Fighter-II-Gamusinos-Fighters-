@@ -29,6 +29,7 @@ private:
 	void PrintPlayerCursors();
 
 public:
+	SDL_Rect screen;
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* portraits = nullptr;
 	int typography;
@@ -42,6 +43,7 @@ public:
 	Mix_Chunk* invalidSelect = nullptr;
 	Mix_Chunk* select = nullptr;
 	Uint32 timeSelector;
+	Uint32 canSelectTimer;
 	bool lettersOn;
 	
 	SDL_Rect player1Pointer;
