@@ -2608,7 +2608,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
 		{
-
 			life -= 12;
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
@@ -2856,14 +2855,11 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			jhp.ResetAnimation();
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
-			jhk.ResetAnimation();
-			
+			jhk.ResetAnimation();			
 			
 			airreel.ResetAnimation();
 			sweep.ResetAnimation();
-			
-			
-			
+
 			win1.ResetAnimation();
 			win2.ResetAnimation();
 			lose.ResetAnimation();
