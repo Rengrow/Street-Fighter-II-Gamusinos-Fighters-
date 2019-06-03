@@ -343,17 +343,19 @@ bool ModuleInput::CheckYogaFire(uint frames_past, int player, bool flip) const {
 		if (flip == true)
 		{
 			switch (count) {
-			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
-			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
+			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
 			case 2: { if (pad->down) { return true; } } break;
 			}
 		}
 
 		if (flip == false)
 		{
+			
+
 			switch (count) {
-			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
-			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
+			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
 			case 2: { if (pad->down) { return true; } } break;
 			}
 		}
@@ -378,22 +380,24 @@ bool ModuleInput::CheckYogaFlame(uint frames_past, int player, bool flip) const 
 		if (flip == true)
 		{
 			switch (count) {
-			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
-			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
-			case 2: { if (pad->down) { ++count; frame = i; } } break;
-			case 3: { if (pad->right && pad->down) { return true; } } break;
-			case 4: { if (pad->right && !pad->down) { return true; } } break;
-			}
-		}
-
-		else if (flip == false)
-		{
-			switch (count) {
 			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
 			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
 			case 2: { if (pad->down) { ++count; frame = i; } } break;
 			case 3: { if (pad->left && pad->down) { return true; } } break;
 			case 4: { if (pad->left && !pad->down) { return true; } } break;
+			}
+		}
+
+		else if (flip == false)
+		{
+			
+
+			switch (count) {
+			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
+			case 2: { if (pad->down) { ++count; frame = i; } } break;
+			case 3: { if (pad->right && pad->down) { return true; } } break;
+			case 4: { if (pad->right && !pad->down) { return true; } } break;
 			}
 		}
 	}
