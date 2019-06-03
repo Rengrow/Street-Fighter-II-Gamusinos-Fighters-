@@ -2710,12 +2710,12 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 
 		}
 
-		if (App->input->pads[1].a == true)
+		if (App->input->pads[0].a == true)
 		{
 			inputs.Push(IN_L_KIK);
 		}
 
-		if (App->input->pads[1].y == true)
+		if (App->input->pads[0].y == true)
 		{
 
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
@@ -2732,12 +2732,12 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 				inputs.Push(IN_M_PUNCH);
 		}
 
-		if (App->input->pads[1].b == true)
+		if (App->input->pads[0].b == true)
 		{
 			inputs.Push(IN_M_KIK);
 		}
 
-		if (App->input->pads[1].R1 == true)
+		if (App->input->pads[0].R1 == true)
 		{
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
@@ -2753,17 +2753,17 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 				inputs.Push(IN_F_PUNCH);
 		}
 
-		if (App->input->pads[1].R2 == true)
+		if (App->input->pads[0].R2 == true)
 		{
 			inputs.Push(IN_F_KIK);
 		}
 
-		if (App->input->pads[1].right)
+		if (App->input->pads[0].right)
 		{
-			if (App->input->pads[1].up)
+			if (App->input->pads[0].up)
 				inputs.Push(IN_LEFT_AND_JUMP);
 
-			if (App->input->pads[1].down) {
+			if (App->input->pads[0].down) {
 				inputs.Push(IN_LEFT_AND_CROUCH);
 				crouch = true;
 			}
@@ -2775,12 +2775,12 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_LEFT_UP);
 
 
-		if (App->input->pads[1].left)
+		if (App->input->pads[0].left)
 		{
-			if (App->input->pads[1].up)
+			if (App->input->pads[0].up)
 				inputs.Push(IN_RIGHT_AND_JUMP);
 
-			if (App->input->pads[1].down) {
+			if (App->input->pads[0].down) {
 				inputs.Push(IN_RIGHT_AND_CROUCH);
 				crouch = true;
 			}
@@ -2792,12 +2792,12 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_RIGHT_UP);
 
 
-		if (App->input->pads[1].up && !App->input->pads[1].right && !App->input->pads[1].left)
+		if (App->input->pads[0].up && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
 			inputs.Push(IN_JUMP);
 		}
 
-		if (App->input->pads[1].down && !App->input->pads[1].right && !App->input->pads[1].left)
+		if (App->input->pads[0].down && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
 			inputs.Push(IN_CROUCH_DOWN);
 			crouch = true;
@@ -2808,16 +2808,16 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_CROUCH_UP);
 		}
 
-		if (!App->input->pads[1].down && !App->input->pads[1].up && !App->input->pads[1].right && !App->input->pads[1].left)
+		if (!App->input->pads[0].down && !App->input->pads[0].up && !App->input->pads[0].right && !App->input->pads[0].left)
 		{
 			inputs.Push(IN_IDLE);
 		}
 	}
 	else {
-		App->input->pads[1].left = false;
-		App->input->pads[1].right = false;
-		App->input->pads[1].down = false;
-		App->input->pads[1].up = false;
+		App->input->pads[0].left = false;
+		App->input->pads[0].right = false;
+		App->input->pads[0].down = false;
+		App->input->pads[0].up = false;
 	}
 
 	return true;
