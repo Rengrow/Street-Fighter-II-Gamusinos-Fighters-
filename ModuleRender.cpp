@@ -6,8 +6,8 @@
 #include "ModuleAudio.h"
 #include "ModuleSceneKen.h"
 #include "ModuleCollision.h"
-#include "ModuleRyu.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer1.h"
+#include "ModulePlayer2.h"
 #include "SDL/include/SDL.h"
 #include <cstdlib>
 #include <time.h>
@@ -62,27 +62,27 @@ update_status ModuleRender::Update()
 	
 	// TO DO: this exact coding causes the following problem: camera wont move right if opposite ryu is at left corner (the same way around)
 
-	if (App->ryu->position.x > -camera.x / SCREEN_SIZE && App->ryu->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
+	if (App->player1->position.x > -camera.x / SCREEN_SIZE && App->player1->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
 		camera.x += cameraSpeed * SCREEN_SIZE;
 		limit1Box.x -= cameraSpeed;
 		limit2Box.x -= cameraSpeed;
 	}
 
 
-	if (App->dhalsim->position.x > -camera.x / SCREEN_SIZE && App->dhalsim->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
+	if (App->player2->position.x > -camera.x / SCREEN_SIZE && App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
 		camera.x += cameraSpeed * SCREEN_SIZE;
 		limit1Box.x -= cameraSpeed;
 		limit2Box.x -= cameraSpeed;
 	}
 
 
-	if ((App->ryu->position.x < -camera.x / SCREEN_SIZE + camera.w) && (App->ryu->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4)) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
+	if ((App->player1->position.x < -camera.x / SCREEN_SIZE + camera.w) && (App->player1->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4)) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
 		camera.x -= cameraSpeed * SCREEN_SIZE;
 		limit1Box.x += cameraSpeed;
 		limit2Box.x += cameraSpeed;
 	}
 
-	if (App->dhalsim->position.x < -camera.x / SCREEN_SIZE + camera.w && App->dhalsim->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
+	if (App->player2->position.x < -camera.x / SCREEN_SIZE + camera.w && App->player2->position.x > -camera.x / SCREEN_SIZE + (camera.w * 3 / 4) && (-camera.x / SCREEN_SIZE + camera.w != scenelimit) && (-camera.x / SCREEN_SIZE + camera.w < scenelimit)) {
 		camera.x -= cameraSpeed * SCREEN_SIZE;
 		limit1Box.x += cameraSpeed;
 		limit2Box.x += cameraSpeed;

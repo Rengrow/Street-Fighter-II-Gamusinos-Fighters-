@@ -5,13 +5,13 @@
 #include "ModuleTextures.h"
 #include "ModuleSceneKen.h"
 #include "ModuleSceneSagat.h"
-#include "ModuleRyu.h"
+#include "ModulePlayer1.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleWelcomePage.h"
 #include "ModuleEndBattle.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer2.h"
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
@@ -31,8 +31,8 @@ Application::Application()
 	modules[5] = fight = new ModuleFight();
 	modules[6] = scene_Sagat = new ModuleSceneSagat();
 	modules[7] = scene_ken = new ModuleSceneKen();
-	modules[8] = ryu = new ModuleRyu();
-	modules[9] = dhalsim = new ModuleDhalsim();
+	modules[8] = player1 = new ModulePlayer1();
+	modules[9] = player2 = new ModulePlayer2();
 	modules[10] = particles = new ModuleParticles();
 	modules[11] = welcomePage = new ModuleWelcomePage();
 	modules[12] = endBattle = new ModuleEndBattle();
@@ -55,8 +55,8 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	ryu->Disable();
-	dhalsim->Disable();
+	player1->Disable();
+	player2->Disable();
 	particles->Disable();
 	collisions->Disable();
 	fight->Disable();

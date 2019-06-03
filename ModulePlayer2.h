@@ -1,5 +1,5 @@
-#ifndef __ModuleSecondPlayer_H__
-#define __ModuleSecondPlayer_H__
+#ifndef __ModulePlayer2_H__
+#define __ModulePlayer2_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -276,11 +276,11 @@ enum ryu_inputs2
 
 struct SDL_Texture;
 
-class ModuleDhalsim : public Module
+class ModulePlayer2 : public Module
 {
 public:
-	ModuleDhalsim();
-	~ModuleDhalsim();
+	ModulePlayer2();
+	~ModulePlayer2();
 
 	bool Start();
 	update_status PreUpdate();

@@ -45,9 +45,6 @@
     <ClInclude Include="ModuleCollision.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleDhalsim.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleEndBattle.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -67,9 +64,6 @@
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleRender.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRyu.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneKen.h">
@@ -96,6 +90,12 @@
     <ClInclude Include="ModuleWindow.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModulePlayer2.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer1.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -114,9 +114,6 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCollision.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleDhalsim.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEndBattle.cpp">
@@ -138,9 +135,6 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleRender.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRyu.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneKen.cpp">
@@ -165,6 +159,12 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer2.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer1.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

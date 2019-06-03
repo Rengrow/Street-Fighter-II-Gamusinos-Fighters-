@@ -1,8 +1,8 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleFight.h"
-#include "ModuleRyu.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer1.h"
+#include "ModulePlayer2.h"
 #include "ModuleUI.h"
 #include "ModuleSceneKen.h"
 #include "ModuleSceneSagat.h"
@@ -41,15 +41,15 @@ bool ModuleFight::Start()
 update_status ModuleFight::Update()
 {
 	if (roundStarted)
-		if ((!endFightStarted && (App->dhalsim->life <= 0 || (GetTimer() <= 0 && App->ryu->life > App->dhalsim->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+		if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player1->life > App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			Win(1);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
-		else if ((!endFightStarted && (App->ryu->life <= 0 || (GetTimer() <= 0 && App->dhalsim->life > App->ryu->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+		else if ((!endFightStarted && (App->player1->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player1->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			Win(2);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
-		else if ((!endFightStarted && (App->dhalsim->life <= 0 || (GetTimer() <= 0 && App->ryu->life == App->dhalsim->life)))) {
+		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player1->life == App->player2->life)))) {
 			Win(1);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
@@ -100,8 +100,8 @@ void ModuleFight::EndFullFight() {
 }
 
 void ModuleFight::Win(int ryu) {
-	App->ryu->freeze = true;
-	App->dhalsim->freeze = true;
+	App->player1->freeze = true;
+	App->player2->freeze = true;
 	//App->slowdown->StartSlowdown(1000, 100);
 
 	if (ryu == 1)
@@ -122,23 +122,23 @@ void ModuleFight::CheckFlipPlayers() {
 
 	
 
-	if ( App->ryu->position.x > App->dhalsim->position.x && left == false) {
-		App->ryu->flip = !App->ryu->flip;
-		App->dhalsim->turn = true;
+	if ( App->player1->position.x > App->player2->position.x && left == false) {
+		App->player1->flip = !App->player1->flip;
+		App->player2->turn = true;
 		right = false;
 		left = true;
 	}
 
-	if (App->ryu->position.x < App->dhalsim->position.x && right == false) {
-		App->ryu->flip = !App->ryu->flip;
-		App->dhalsim->turn = true;
+	if (App->player1->position.x < App->player2->position.x && right == false) {
+		App->player1->flip = !App->player1->flip;
+		App->player2->turn = true;
 		right = true;
 		left = false;
 	}
 
-	if (App->dhalsim->turn)
+	if (App->player2->turn)
 	{
-		App->dhalsim->inputs.Push(IN_TURNING2);
+		App->player2->inputs.Push(IN_TURNING2);
 	}
 }
 

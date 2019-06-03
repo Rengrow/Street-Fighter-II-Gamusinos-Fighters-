@@ -1,5 +1,5 @@
-#ifndef __ModulePlayer_H__
-#define __ModulePlayer_H__
+#ifndef __ModulePlayer1_H__
+#define __ModulePlayer1_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -166,11 +166,11 @@ enum ryu_inputs
 struct SDL_Texture;
 
 
-class ModuleRyu : public Module
+class ModulePlayer1 : public Module
 {
 public:
-	ModuleRyu();
-	~ModuleRyu();
+	ModulePlayer1();
+	~ModulePlayer1();
 
 	bool Start();
 	update_status PreUpdate();

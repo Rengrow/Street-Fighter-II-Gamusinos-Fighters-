@@ -3,8 +3,8 @@
 #include "ModuleUI.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleRyu.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer1.h"
+#include "ModulePlayer2.h"
 #include "ModuleFonts.h"
 #include "ModuleInput.h"
 #include "ModuleSceneKen.h"
@@ -141,8 +141,8 @@ bool ModuleUI::CleanUp()
 update_status ModuleUI::PostUpdate()
 {
 	if (App->input->keyboard[SDL_SCANCODE_KP_PLUS] == KEY_STATE::KEY_DOWN) {
-		App->ryu->puntuation += 51;
-		App->dhalsim->puntuation += 51;
+		App->player1->puntuation += 51;
+		App->player2->puntuation += 51;
 	}
 
 	LifeBarsBlit();
@@ -188,10 +188,10 @@ void ModuleUI::TimerBlit(int font_id) {
 
 void ModuleUI::LifeBarsBlit() {
 	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + 37, 17, &lifeBars, false);
-	yelllowBar1.x = yelllowBar1.w - App->ryu->life*1.36;
+	yelllowBar1.x = yelllowBar1.w - App->player1->life*1.36;
 	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 154, 21, &yelllowBar1, true);
 
-	yelllowBar2.w = App->dhalsim->life*1.36;
+	yelllowBar2.w = App->player2->life*1.36;
 	App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 18, 21, &yelllowBar2, false);
 
 	App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 39, 33, typography1, "DHALSIM");
@@ -279,8 +279,8 @@ void ModuleUI::StartFightBlit() {
 		}
 		else {
 			starFight = false;
-			App->ryu->freeze = false;
-			App->dhalsim->freeze = false;
+			App->player1->freeze = false;
+			App->player2->freeze = false;
 			App->fight->roundStarted = true;
 			StartTimer();
 		}
@@ -300,12 +300,12 @@ void ModuleUI::EndFight() {
 			App->audio->PlayChunk(you_snd);
 
 			if (winnerPlayer == 1) {
-				App->ryu->inputs.Push(IN_VICTORY);
-				App->dhalsim->inputs.Push(IN_LOOSE2);
+				App->player1->inputs.Push(IN_VICTORY);
+				App->player2->inputs.Push(IN_LOOSE2);
 			}
 			else if (winnerPlayer == 2) {
-				App->ryu->inputs.Push(IN_LOOSE);
-				App->dhalsim->inputs.Push(IN_VICTORY2);
+				App->player1->inputs.Push(IN_LOOSE);
+				App->player2->inputs.Push(IN_VICTORY2);
 			}
 
 			youFinalSound = true;
@@ -319,7 +319,7 @@ void ModuleUI::EndFight() {
 		}
 
 		else if (timeRemaining == 10 && !perfectSound) {
-			if (App->ryu->life == 100 || App->dhalsim->life == 100)
+			if (App->player1->life == 100 || App->player2->life == 100)
 				App->audio->PlayChunk(perfect_snd);
 			perfectSound = true;
 		}
@@ -426,8 +426,8 @@ void ModuleUI::BlitGamePadDebug() {
 }
 
 void ModuleUI::GetPuntuations() {
-	std::string stPlayer1Puntuation = std::to_string(App->ryu->puntuation);
-	std::string stPlayer2Puntuation = std::to_string(App->dhalsim->puntuation);
+	std::string stPlayer1Puntuation = std::to_string(App->player1->puntuation);
+	std::string stPlayer2Puntuation = std::to_string(App->player2->puntuation);
 
 	player1Puntuation = new char[stPlayer1Puntuation.length() + 1];
 	strcpy_s(player1Puntuation, stPlayer1Puntuation.length() + 1, stPlayer1Puntuation.c_str());
@@ -447,7 +447,7 @@ void ModuleUI::BlitPuntuation() {
 void ModuleUI::GetBonusPuntuations(bool sum) {
 	if (!gotBonus) {
 		intTimeBonusPuntuation = stopedTimer * 100;
-		intVitalBonusPuntuation = 30000 * ((winnerPlayer == 1 ? App->ryu->life : App->dhalsim->life) / 100);
+		intVitalBonusPuntuation = 30000 * ((winnerPlayer == 1 ? App->player1->life : App->player2->life) / 100);
 		totalBonus = intTimeBonusPuntuation + intVitalBonusPuntuation;
 
 		std::string stTimeBonusPuntuation = std::to_string(intTimeBonusPuntuation);
@@ -470,9 +470,9 @@ void ModuleUI::GetBonusPuntuations(bool sum) {
 		intBonusPuntuation += 100;
 
 		if (winnerPlayer == 1)
-			App->ryu->puntuation += 100;
+			App->player1->puntuation += 100;
 		else
-			App->dhalsim->puntuation += 100;
+			App->player2->puntuation += 100;
 	}
 
 	std::string stBonusPuntuation = std::to_string(intBonusPuntuation);

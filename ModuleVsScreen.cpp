@@ -8,8 +8,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 
-#include "ModuleRyu.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer1.h"
+#include "ModulePlayer2.h"
 
 
 ModuleVsScreen::ModuleVsScreen()
@@ -40,10 +40,10 @@ bool ModuleVsScreen::Start()
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
 	typography = App->fonts->Load("assets/images/ui/Font_Big.png", "ABCDEFGHIJKLMNOPQRSTUVW$XYZ0123456789.", 1);
-	App->ryu->position.x = 100;
-	App->ryu->position.y = 215;
-	App->dhalsim->position.x = 250;
-	App->dhalsim->position.y = 215;
+	App->player1->position.x = 100;
+	App->player1->position.y = 215;
+	App->player2->position.x = 250;
+	App->player2->position.y = 215;
 	App->render->camera.x = App->render->camera.y = 0;
 	isFading = false;
 	timeScreen = App->frames + 150;

@@ -8,8 +8,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 
-#include "ModuleRyu.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer1.h"
+#include "ModulePlayer2.h"
 #include "SDL\include\SDL.h"
 
 
@@ -41,11 +41,11 @@ bool ModuleEndBattle::Start()
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
 
-	App->ryu->position.x = 100;
-	App->ryu->position.y = 215;
-	App->dhalsim->position.x = 250;
-	App->dhalsim->position.y = 215;
-	App->render->camera.x = App->render->camera.y = App->ryu->puntuation = App->dhalsim->puntuation = 0;
+	App->player1->position.x = 100;
+	App->player1->position.y = 215;
+	App->player2->position.x = 250;
+	App->player2->position.y = 215;
+	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = 0;
 
 	quoteOption = SDL_GetTicks() % 2 == 0;
 

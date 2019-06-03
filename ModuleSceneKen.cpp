@@ -3,8 +3,8 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleSceneKen.h"
-#include "ModuleRyu.h"
-#include "ModuleDhalsim.h"
+#include "ModulePlayer1.h"
+#include "ModulePlayer2.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
@@ -132,8 +132,8 @@ bool ModuleSceneKen::Start()
 
 	App->render->camera.x = App->render->camera.y = 0;
 
-	App->ryu->Enable();
-	App->dhalsim->Enable();
+	App->player1->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collisions->Enable();
 	App->UI->Enable();
@@ -167,8 +167,8 @@ bool ModuleSceneKen::CleanUp()
 		collider2 = nullptr;
 	}
 
-	App->ryu->Disable();
-	App->dhalsim->Disable();
+	App->player1->Disable();
+	App->player2->Disable();
 	App->particles->Disable();
 	App->collisions->Disable();
 	App->UI->Disable();
