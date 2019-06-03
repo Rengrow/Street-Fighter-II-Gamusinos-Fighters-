@@ -7,43 +7,6 @@
 #include "p2Point.h"
 #include "p2Qeue.h"
 
-#define R_L_STANDING_PUNCH_TIME 28
-#define R_L_CROUCHING_PUNCH_TIME 30
-#define R_L_D_JUMPING_PUNCH_TIME 30
-
-#define R_L_STANDING_KIK_TIME 50
-#define R_L_CROUCHING_KIK_TIME 30
-#define R_L_D_JUMPING_KIK_TIME 20
-
-#define R_M_STANDING_PUNCH_TIME 60
-#define R_M_CROUCHING_PUNCH_TIME 36
-#define R_M_D_JUMPING_PUNCH_TIME 36
-
-#define R_M_STANDING_KIK_TIME 60
-#define R_M_CROUCHING_KIK_TIME 36
-#define R_M_D_JUMPING_KIK_TIME 36
-
-#define R_F_STANDING_PUNCH_TIME 70
-#define R_F_CROUCHING_PUNCH_TIME 40
-#define R_F_D_JUMPING_PUNCH_TIME 40
-
-#define R_F_STANDING_KIK_TIME 70
-#define R_F_CROUCHING_KIK_TIME 40
-#define R_F_D_JUMPING_KIK_TIME 40
-
-#define R_HADOKEN_TIME 66
-#define R_CROUCHING_TIME 10
-#define R_STANDING_TIME 10
-#define R_JUMP_TIME 55
-#define R_GETTING_UP_TIME 48
-#define R_GRABBED_TIME 50
-
-#define R_HEAD_REEL_TIME 43
-#define R_CROUCH_REEL_TIME 20
-#define R_GUT_REEL_TIME 25
-
-
-
 struct Mix_Chunk;
 
 enum ryu_states
@@ -59,7 +22,34 @@ enum ryu_states
 	ST_CROUCHING,
 	ST_CROUCH,
 	ST_STANDING,
+
+	ST_CROUCH_DEFENDING,
+	ST_CROUCH_DEFENDING_READY,
 	ST_DEFENDING,
+
+	M_GRABBING,
+	F_GRABBING,
+
+	M_GRAB,
+	F_GRAB,
+
+	GRABBED,
+
+	//testing adding states in order to debug animations of close attacks -Adrià
+	L_PUNCH_CLOSE,
+	M_PUNCH_CLOSE,
+	F_PUNCH_CLOSE,
+
+	L_KIK_CLOSE,
+	M_KIK_CLOSE,
+	F_KIK_CLOSE,
+
+	L_PUNCH_CROUCHCLOSE,
+	M_PUNCH_CROUCHCLOSE,
+	L_KIK_CROUCHCLOSE,
+	M_KIK_CROUCHCLOSE,
+	//end of test
+
 
 	L_PUNCH_STANDING,
 	L_PUNCH_NEUTRAL_JUMP,
@@ -85,8 +75,6 @@ enum ryu_states
 	M_KIK_BACKWARD_JUMP,
 	M_KIK_CROUCH,
 
-	GRABBED,
-
 	F_PUNCH_STANDING,
 	F_PUNCH_NEUTRAL_JUMP,
 	F_PUNCH_FORWARD_JUMP,
@@ -103,10 +91,24 @@ enum ryu_states
 	ST_GUT_REEL,
 	ST_CROUCH_REEL,
 	ST_FALLING,
+	ST_DIZZI,
+	SWEEP,
 
 	ST_GETTING_UP,
 
-	ST_HADOKEN,
+	L_YFIRE,
+	M_YFIRE,
+	F_YFIRE,
+
+	L_YFLAME,
+	M_YFLAME,
+	F_YFLAME,
+
+	YMUMMY,
+	YDRILL,
+
+	TURNING,
+	CROUCH_TURNING,
 
 	VICTORY,
 	LOOSE
@@ -116,22 +118,27 @@ enum ryu_inputs
 {
 	IN_LEFT_DOWN,
 	IN_LEFT_UP,
+
+	IN_LEFT_AND_CROUCH,
+	IN_LEFT_AND_JUMP,
+
 	IN_RIGHT_DOWN,
 	IN_RIGHT_UP,
-	IN_LEFT_AND_RIGHT,
-	IN_JUMP,
-	IN_CROUCH_UP,
-	IN_CROUCH_DOWN,
-	IN_JUMP_AND_CROUCH,
-	IN_DEFENDING,
-	IN_IDLE,
-	IN_LEFT_AND_JUMP,
-	IN_LEFT_AND_CROUCH,
-	IN_RIGHT_AND_JUMP,
-	IN_RIGHT_AND_CROUCH,
 
-	IN_GRABBED,
-	IN_GRABBED_FINISH,
+	IN_RIGHT_AND_CROUCH,
+	IN_RIGHT_AND_JUMP,
+
+	IN_JUMP,
+
+	IN_CROUCH_DOWN,
+	IN_CROUCH_UP,
+
+	IN_JUMP_AND_CROUCH,
+
+	IN_IDLE,
+
+	IN_DEFENDING,
+	IN_CROUCH_DEFENDING,
 
 	IN_L_PUNCH,
 	IN_L_KIK,
@@ -139,24 +146,49 @@ enum ryu_inputs
 	IN_M_KIK,
 	IN_F_PUNCH,
 	IN_F_KIK,
-	IN_HADOKEN,
+
+	IN_GRAB,
+	IN_GRABBING_FINISH,
+	IN_M_GRAB_FINISH,
+	IN_F_GRAB_FINISH,
 
 	IN_HEAD_REEL,
 	IN_GUT_REEL,
 	IN_CROUCH_REEL,
 	IN_FALLING,
-	IN_GETTING_UP,
+	IN_SWEEP,
 
 	IN_CROUCHING_FINISH,
 	IN_STANDING_FINISH,
 	IN_JUMP_FINISH,
 	IN_PUNCH_FINISH,
 	IN_KIK_FINISH,
-	IN_HADOKEN_FINISH,
+	IN_DEFENDING_FINISH,
 
 	IN_REEL_FINISH,
 	IN_FALLING_FINISH,
 	IN_GETTING_UP_FINISH,
+	IN_DIZZI_FINISH,
+	IN_SWEEP_FINISH,
+
+	IN_L_YFIRE,
+	IN_M_YFIRE,
+	IN_F_YFIRE,
+
+	IN_L_YFLAME,
+	IN_M_YFLAME,
+	IN_F_YFLAME,
+
+	IN_YFIRE_FINISH,
+	IN_YFLAME_FINISH,
+	IN_YDRILL_FINISH,
+	IN_YMUMMY_FINISH,
+
+	IN_GRABBED,
+	IN_GRABBED_FINISH,
+
+	IN_TURNING,
+	IN_TURNING_FINISH,
 
 	IN_VICTORY,
 	IN_LOOSE,
@@ -176,106 +208,160 @@ public:
 	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
+
 	void internal_input(p2Qeue<ryu_inputs>& inputs);
 	bool external_input(p2Qeue<ryu_inputs>& inputs);
 	ryu_states process_fsm(p2Qeue<ryu_inputs>& inputs);
 	void OnCollision(Collider* c1, Collider* c2);
 	void BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture* texture);
+
 	void ClearColliders();
 	bool IsntOnLeftLimit();
 	bool IsntOnRightLimit();
+	void IsClose();
 
 public:
 	Collider* colliders[MAX_COLLIDERS_PER_FRAME];
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
-	Animation idle;
-	Animation forward;
-	Animation backward;
-	Animation lp, lk, clp, clk;
-	Animation jlp, jlk, jflp, jflk, jblp, jblk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward
-	Animation neutralJump;
-	Animation forwardJump;
-	Animation backwardJump;
-	Animation hdk; //hadouken
+	SDL_Texture* graphics3 = nullptr;
+	SDL_Texture* shadow = nullptr;
+	Animation idle, forward, backward;
+	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
+	Animation close_lp, close_lk, close_clp, close_clk, close_cmp, close_cmk, close_chp, close_chk, close_firstframe_lk_mk;
+	Animation jlp, jlk, jmp, jmk, jhp, jhk; // (j)umping, (j)umping(f)orward, (j)umping(b)ackward. Nonexistent variations: jfmp, jbmp,jfmk, jbmk,jfhp, jbhp, jfhk, jbhk
+	Animation mp, hp, mk, hk;
+	Animation close_mp, close_hp, close_mk, close_hk;
+	Animation neutralJump, forwardJump, backwardJump;
+	Animation yoga_fire_lp, yoga_fire_mp, yoga_fire_hp, yoga_drill, yoga_mummy;
+	Animation yoga_flame_lp, yoga_flame_mp, yoga_flame_hp;
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
-	Animation airreel;
-	Animation getup;
+	Animation airreel, sweep;
+	Animation getup, cdefending, defending, grab, grab2, stun;
 	Animation crouching, standing, crouch;
-	Animation win1, win2;
+	Animation win1, win2, lose;
 	Animation ground;
+	Animation grabbing;
+	Animation turn_anim, cturn_anim;
 	// Animation sweep;
-
 	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
 	Mix_Chunk* low_kick = nullptr;
 	Mix_Chunk* low_fist = nullptr;
 	Mix_Chunk* high_fist = nullptr;
 	Mix_Chunk* high_kick = nullptr;
+	Mix_Chunk* block = nullptr;
+	Mix_Chunk* yoga_snd = nullptr;
+	Mix_Chunk* fire_snd = nullptr;
+	Mix_Chunk* flame_snd = nullptr;
+
 	ryu_states state;
 	p2Qeue<ryu_inputs> inputs;
 	iPoint position;
 
-	int victoryExecuted;
+	Uint32 invulnerabilityFrames;
+	bool turn = false;
+	bool flip = false;
+	bool altColor = false;
+	bool colliding = false;
 	bool freeze;
-	bool godmode = false;
-	bool Particle;
+	bool yoga_check;
+	bool yoga_sound;
+	bool flame_sound;
+	int victoryExecuted;
+	int pushbacktimerhit = 0;
+	int pushbacktimerprojectile = 0;
+	int pushbackspeed = 1;
+	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
+	int dizzydamage = 0; // 1 =light, 2 = medium, 3 = hard, 4 = special, 5 = throw
 	int framesAtaque = 0;
 	int framesJump = 0;
+	int mov; //lp, mp, hp, lk, mk, hk
+	int levitationtimer;
+	int dizzylvl;
+	Uint32 lasttimedamaged;
+	Uint32 timeUpdated;
+	Uint32 timeStoped;
+
+	bool dizzi = false;
+	bool godmode = false;
+
+	int sprite_change_timer = 0;
+	bool close;
 	int jumpHeight = 0;
 	int speed = 1;
 	int life;
 	int puntuation = 0;
-	int mov; //lp, mp, hp, lk, mk, hk
-	int pushbacktimerhit = 0;
-	int pushbacktimerprojectile = 0;
-	int pushbackspeed = 1;
-	bool flip = false;
-	Uint32 invulnerabilityFrames;
-	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
-	int dizzydamage = 0; // 1 =light, 2 = medium, 3 = hard, 4 = special, 5 = throw
-
-
 
 	//light
 	Uint32 l_standing_punch_timer = 0;
+	Uint32 l_close_standing_punch_timer = 0;
 	Uint32 l_crouching_punch_timer = 0;
+	Uint32 l_close_crouching_punch_timer = 0;
 	Uint32 l_d_jumping_punch_timer = 0;
 
 	Uint32 l_standing_kik_timer = 0;
+	Uint32 l_close_standing_kik_timer = 0;
 	Uint32 l_crouching_kik_timer = 0;
+	Uint32 l_close_crouching_kik_timer = 0;
 	Uint32 l_d_jumping_kik_timer = 0;
 
 	//medium
 	Uint32 m_standing_punch_timer = 0;
+	Uint32 m_close_standing_punch_timer = 0;
 	Uint32 m_crouching_punch_timer = 0;
+	Uint32 m_close_crouching_punch_timer = 0;
 	Uint32 m_d_jumping_punch_timer = 0;
 
 	Uint32 m_standing_kik_timer = 0;
+	Uint32 m_close_standing_kik_timer = 0;
 	Uint32 m_crouching_kik_timer = 0;
+	Uint32 m_close_crouching_kik_timer = 0;
 	Uint32 m_d_jumping_kik_timer = 0;
+
+	Uint32 m_grab_timer = 0;
 
 	//fierce
 	Uint32 f_standing_punch_timer = 0;
+	Uint32 f_close_standing_punch_timer = 0;
 	Uint32 f_crouching_punch_timer = 0;
+	Uint32 f_close_crouching_punch_timer = 0;
 	Uint32 f_d_jumping_punch_timer = 0;
 
 	Uint32 f_standing_kik_timer = 0;
+	Uint32 f_close_standing_kik_timer = 0;
 	Uint32 f_crouching_kik_timer = 0;
+	Uint32 f_close_crouching_kik_timer = 0;
 	Uint32 f_d_jumping_kik_timer = 0;
 
+	Uint32 f_grab_timer = 0;
+
+	//others
+
+	Uint32 grabbing_timer = 0;
+	Uint32 grabbed_timer = 0;
+
 	Uint32 hadoken_timer = 0;
+	Uint32 l_yflame_timer = 0;
+	Uint32 m_yflame_timer = 0;
+	Uint32 f_yflame_timer = 0;
+
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;
+	Uint32 dizzi_timer = 0;
 	Uint32 jump_timer = 0;
 	Uint32 getting_up_timer = 0;
+	Uint32 defending_timer = 0;
+	Uint32 crouch_defending_timer = 0;
+
+	Uint32 turning_timer = 0;
 
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;
 	Uint32 gut_reel_timer = 0;
-	Uint32 grabbed_timer = 0;
+	Uint32 sweep_timer = 0;
 };
 
 #endif
