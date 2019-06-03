@@ -2574,12 +2574,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player1->state == L_KIK_STANDING2 || App->player1->state == L_KIK_NEUTRAL_JUMP2 || App->player1->state == L_KIK_FORWARD_JUMP2 || App->player1->state == L_KIK_BACKWARD_JUMP2 || App->player1->state == M_KIK_STANDING2 || App->player1->state == M_KIK_NEUTRAL_JUMP2 || App->player1->state == M_KIK_FORWARD_JUMP2 || App->player1->state == M_KIK_BACKWARD_JUMP2
-				|| App->player1->state == F_KIK_STANDING2 || App->player1->state == F_KIK_NEUTRAL_JUMP2 || App->player1->state == F_KIK_FORWARD_JUMP2 || App->player1->state == F_KIK_BACKWARD_JUMP2 || App->player1->state == L_KIK_CLOSE2 || App->player1->state == M_KIK_CLOSE2 || App->player1->state == F_KIK_CLOSE2)
+				|| App->player1->state == F_KIK_STANDING2 || App->player1->state == F_KIK_NEUTRAL_JUMP2 || App->player1->state == F_KIK_FORWARD_JUMP2 || App->player1->state == F_KIK_BACKWARD_JUMP2 || App->player1->state == L_KIK_CLOSE2 || App->player1->state == M_KIK_CLOSE2 || App->player1->state == F_KIK_CLOSE2 || App->player2->state == YMUMMY2)
 				App->audio->PlayChunk(high_kick);
 			else if (App->player1->state == L_KIK_CROUCH2 || App->player1->state == M_KIK_CROUCH2 || App->player1->state == F_KIK_CROUCH2 || App->player1->state == L_KIK_CROUCHCLOSE2 || App->player1->state == M_KIK_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_kick);
 			else if (App->player1->state == L_PUNCH_STANDING2 || App->player1->state == L_PUNCH_NEUTRAL_JUMP2 || App->player1->state == L_PUNCH_FORWARD_JUMP2 || App->player1->state == L_PUNCH_BACKWARD_JUMP2 || App->player1->state == M_PUNCH_STANDING2 || App->player1->state == M_PUNCH_NEUTRAL_JUMP2 || App->player1->state == M_PUNCH_FORWARD_JUMP2 || App->player1->state == M_PUNCH_BACKWARD_JUMP2
-				|| App->player1->state == F_PUNCH_STANDING2 || App->player1->state == F_PUNCH_NEUTRAL_JUMP2 || App->player1->state == F_PUNCH_FORWARD_JUMP2 || App->player1->state == F_PUNCH_BACKWARD_JUMP2 || App->player1->state == L_PUNCH_CLOSE2 || App->player1->state == M_PUNCH_CLOSE2 || App->player1->state == F_PUNCH_CLOSE2)
+				|| App->player1->state == F_PUNCH_STANDING2 || App->player1->state == F_PUNCH_NEUTRAL_JUMP2 || App->player1->state == F_PUNCH_FORWARD_JUMP2 || App->player1->state == F_PUNCH_BACKWARD_JUMP2 || App->player1->state == L_PUNCH_CLOSE2 || App->player1->state == M_PUNCH_CLOSE2 || App->player1->state == F_PUNCH_CLOSE2 || App->player2->state == YDRILL2)
 				App->audio->PlayChunk(high_fist);
 			else if (App->player1->state == L_PUNCH_CROUCH2 || App->player1->state == M_PUNCH_CROUCH2 || App->player1->state == F_PUNCH_CROUCH2 || App->player1->state == L_PUNCH_CROUCHCLOSE2 || App->player1->state == M_PUNCH_CROUCHCLOSE2) {
 				App->audio->PlayChunk(low_fist);
