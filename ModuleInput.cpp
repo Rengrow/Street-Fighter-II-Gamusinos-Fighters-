@@ -126,14 +126,14 @@ update_status ModuleInput::PreUpdate()
 		pads[0].down = false;
 
 
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].left = true;
 	}
 	else
 		pads[0].left = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].right = true;
 	}
@@ -230,14 +230,14 @@ update_status ModuleInput::PreUpdate()
 		pads[1].down = false;
 
 
-	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE )
 	{
 		pads[1].left = true;
 	}
 	else
 		pads[1].left = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].right = true;
 	}
