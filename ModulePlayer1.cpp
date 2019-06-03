@@ -2026,6 +2026,8 @@ update_status ModulePlayer1::Update()
 		case ST_HEAD_REEL:
 			current_animation = &streel;
 
+
+
 			//Pushback start
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
