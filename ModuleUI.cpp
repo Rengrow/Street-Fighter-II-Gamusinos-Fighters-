@@ -449,7 +449,7 @@ void ModuleUI::BlitPuntuation() {
 void ModuleUI::GetBonusPuntuations(bool sum) {
 	if (!gotBonus) {
 		intTimeBonusPuntuation = stopedTimer * 100;
-		intVitalBonusPuntuation = 30000 * ((winnerPlayer == 1 ? App->player1->life : App->player2->life) / 100);
+		intVitalBonusPuntuation = 30000 * ((float)(winnerPlayer == 1 ? App->player1->life : App->player2->life) / 100);
 		totalBonus = intTimeBonusPuntuation + intVitalBonusPuntuation;
 
 		std::string stTimeBonusPuntuation = std::to_string(intTimeBonusPuntuation);

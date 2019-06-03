@@ -119,9 +119,6 @@ void ModuleFight::Win(int ryu) {
 }
 
 void ModuleFight::CheckFlipPlayers() {
-
-	
-
 	if ( App->player1->position.x > App->player2->position.x && left == false) {
 		App->player1->flip = !App->player1->flip;
 		App->player2->turn = true;

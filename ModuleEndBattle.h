@@ -25,6 +25,8 @@ public:
 	Mix_Music *music = nullptr;
 	SDL_Rect portrait1;
 	SDL_Rect portrait2;
+	SDL_Rect portraitP1;
+	SDL_Rect portraitP2;
 	int typography;
 	Uint32 timeLetters;
 	bool quoteOption;
