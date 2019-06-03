@@ -1243,7 +1243,7 @@ update_status ModulePlayer1::Update()
 
 	if (flip == false)
 	{
-		hdk_spawn = 25;
+		hdk_spawn = 15;
 	}
 
 	if (flip == true)
@@ -2091,7 +2091,7 @@ update_status ModulePlayer1::Update()
 			}
 			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2113,7 +2113,7 @@ update_status ModulePlayer1::Update()
 			}
 			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2135,7 +2135,7 @@ update_status ModulePlayer1::Update()
 			}
 			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
