@@ -37,9 +37,9 @@ bool ModuleParticles::Start()
 	ground_dust.anim.PushBack({ 347, 94, 25, 21 }, 2, { 0,0 }, 0, {}, {}, {});
 	ground_dust.anim.PushBack({ 375, 92, 27, 23 }, 2, { 0,0 }, 0, {}, {}, {});
 	ground_dust.anim.PushBack({ 405, 90, 30, 25 }, 2, { 0,0 }, 0, {}, {}, {});
-	ground_dust.anim.loop = false;
+	ground_dust.anim.loop = true;
 
-	ground_dust.life = -1;
+	ground_dust.life = 10;
 
 	return true;
 }
@@ -77,18 +77,21 @@ update_status ModuleParticles::Update()
 		{
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrameBox()), p->flip);
 		}
-		if (active[i] != nullptr && p->anim.loop == false)
+		if (active[i] != nullptr && p->life == 0)
 		{
 			active[i]->collider->to_delete = true;
 
 			delete active[i];
 			active[i] = nullptr;
 		}
+		if(p->life > 0){
+			p->life--;
+		}
 	}
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, int y, int ryu, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, int y, int vx, int vy, int ryu, COLLIDER_TYPE collider_type, Mix_Chunk* sfx, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -101,12 +104,12 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 			p->sfx = sfx;
 
 			if (flip == false) {
-				p->speed = { 3, 0 };
+				p->speed = { vx, vy };
 				p->flip = false;
 			}
 
 			if (flip == true){
-				p->speed = { -3, 0 };
+				p->speed = { -vx, vy };
 				p->flip = true;
 			}
 

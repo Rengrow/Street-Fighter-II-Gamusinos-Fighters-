@@ -1976,6 +1976,9 @@ update_status ModulePlayer2::Update()
 
 		case ST_DEFENDING2:
 			current_animation = &defending;
+			if (App->frames - defending_timer == 1) {
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+			}
 
 			//Pushback start
 			if (pushbacktimerhit != 0) {
@@ -2004,6 +2007,9 @@ update_status ModulePlayer2::Update()
 
 		case ST_CROUCH_DEFENDING2:
 			current_animation = &cdefending;
+			if (App->frames - defending_timer == 1) {
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+			}
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
 				if (IsntOnLeftLimit() && IsntOnRightLimit())
@@ -2026,6 +2032,9 @@ update_status ModulePlayer2::Update()
 
 		case ST_HEAD_REEL2:
 			current_animation = &streel;
+			if (App->frames - defending_timer == 1) {
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+			}
 
 			//Pushback start
 			if (pushbacktimerhit != 0) {
@@ -2052,10 +2061,16 @@ update_status ModulePlayer2::Update()
 		case ST_GUT_REEL2:
 			texture = graphics;
 			current_animation = &stgreel;
+			if (App->frames - defending_timer == 1) {
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+			}
 			break;
 
 		case ST_CROUCH_REEL2:
 			current_animation = &creel;
+			if (App->frames - defending_timer == 1) {
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+			}
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
 				if (IsntOnLeftLimit() && IsntOnRightLimit())
@@ -2092,7 +2107,7 @@ update_status ModulePlayer2::Update()
 			}
 			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 3, 0, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2114,7 +2129,7 @@ update_status ModulePlayer2::Update()
 			}
 			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 3, 0, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
@@ -2136,7 +2151,7 @@ update_status ModulePlayer2::Update()
 			}
 			if (timeUpdated - hadoken_timer == 13)
 			{
-				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
+				App->particles->AddParticle(App->particles->hdk, flip, position.x + hdk_spawn, position.y - 70, 3, 0, 0, COLLIDER_PLAYER2_SHOT, 0, 200);
 			}
 			typeofattack = 1;
 			dizzydamage = 4;
