@@ -46,6 +46,7 @@ public:
 	Uint32 canSelectTimer;
 	bool lettersOn;
 	
+	Uint32 player1MoveTimer;
 	SDL_Rect player1Pointer;
 	SDL_Rect player1Cursor;
 	SDL_Rect player1CursorLocked;
@@ -54,6 +55,7 @@ public:
 	char* player1Name;
 	bool player1Lock;
 
+	Uint32 player2MoveTimer;
 	SDL_Rect player2Pointer;
 	SDL_Rect player2Cursor;
 	SDL_Rect player2CursorLocked;
