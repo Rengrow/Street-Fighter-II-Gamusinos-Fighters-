@@ -2774,7 +2774,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_F_KIK2);
 		}
 
-		if (App->input->pads[0].left)
+		if (App->input->pads[0].right)
 		{
 			if (App->input->pads[0].up)
 				inputs.Push(IN_LEFT_AND_JUMP2);
@@ -2791,7 +2791,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_LEFT_UP2);
 
 
-		if (App->input->pads[0].right)
+		if (App->input->pads[0].left)
 		{
 			if (App->input->pads[0].up)
 				inputs.Push(IN_RIGHT_AND_JUMP2);
