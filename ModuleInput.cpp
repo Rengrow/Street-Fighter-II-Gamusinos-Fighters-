@@ -126,14 +126,14 @@ update_status ModuleInput::PreUpdate()
 		pads[0].down = false;
 
 
-	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].left = true;
 	}
 	else
 		pads[0].left = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].right = true;
 	}
@@ -230,14 +230,14 @@ update_status ModuleInput::PreUpdate()
 		pads[1].down = false;
 
 
-	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE )
 	{
 		pads[1].left = true;
 	}
 	else
 		pads[1].left = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].right = true;
 	}
@@ -343,17 +343,19 @@ bool ModuleInput::CheckYogaFire(uint frames_past, int player, bool flip) const {
 		if (flip == true)
 		{
 			switch (count) {
-			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
-			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
+			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
 			case 2: { if (pad->down) { return true; } } break;
 			}
 		}
 
 		if (flip == false)
 		{
+			
+
 			switch (count) {
-			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
-			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
+			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
 			case 2: { if (pad->down) { return true; } } break;
 			}
 		}
@@ -378,22 +380,24 @@ bool ModuleInput::CheckYogaFlame(uint frames_past, int player, bool flip) const 
 		if (flip == true)
 		{
 			switch (count) {
-			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
-			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
-			case 2: { if (pad->down) { ++count; frame = i; } } break;
-			case 3: { if (pad->right && pad->down) { return true; } } break;
-			case 4: { if (pad->right && !pad->down) { return true; } } break;
-			}
-		}
-
-		else if (flip == false)
-		{
-			switch (count) {
 			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
 			case 1: { if (pad->right && pad->down) { ++count; frame = i; } } break;
 			case 2: { if (pad->down) { ++count; frame = i; } } break;
 			case 3: { if (pad->left && pad->down) { return true; } } break;
 			case 4: { if (pad->left && !pad->down) { return true; } } break;
+			}
+		}
+
+		else if (flip == false)
+		{
+			
+
+			switch (count) {
+			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;
+			case 1: { if (pad->left && pad->down) { ++count; frame = i; } } break;
+			case 2: { if (pad->down) { ++count; frame = i; } } break;
+			case 3: { if (pad->right && pad->down) { return true; } } break;
+			case 4: { if (pad->right && !pad->down) { return true; } } break;
 			}
 		}
 	}

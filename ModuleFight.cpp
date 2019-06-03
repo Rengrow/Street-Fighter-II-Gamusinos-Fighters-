@@ -119,21 +119,23 @@ void ModuleFight::Win(int ryu) {
 }
 
 void ModuleFight::CheckFlipPlayers() {
-
-	
-
 	if ( App->player1->position.x > App->player2->position.x && left == false) {
-		App->player1->flip = !App->player1->flip;
+		App->player1->turn = true;
 		App->player2->turn = true;
 		right = false;
 		left = true;
 	}
 
 	if (App->player1->position.x < App->player2->position.x && right == false) {
-		App->player1->flip = !App->player1->flip;
+		App->player1->turn = true;
 		App->player2->turn = true;
 		right = true;
 		left = false;
+	}
+
+	if (App->player1->turn)
+	{
+		App->player1->inputs.Push(IN_TURNING);
 	}
 
 	if (App->player2->turn)

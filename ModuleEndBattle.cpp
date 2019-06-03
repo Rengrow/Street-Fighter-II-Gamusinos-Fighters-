@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
-
+#include "ModuleFight.h"
 #include "ModulePlayer1.h"
 #include "ModulePlayer2.h"
 #include "SDL\include\SDL.h"
@@ -46,6 +46,15 @@ bool ModuleEndBattle::Start()
 	App->player2->position.x = 250;
 	App->player2->position.y = 215;
 	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = 0;
+
+	if (App->fight->player1RoundWinned > App->fight->player1RoundWinned) {
+		portraitP1 = portrait1;
+		portraitP2 = portrait2;
+	}
+	else {
+		portraitP1 = portrait2;
+		portraitP2 = portrait1;
+	}
 
 	quoteOption = SDL_GetTicks() % 2 == 0;
 
@@ -94,8 +103,8 @@ void ModuleEndBattle::UpdateQuote() {
 update_status ModuleEndBattle::Update()
 {
 	// Draw everything --------------------------------------	
-	App->render->Blit(portraits, 35, 10, &portrait1, false);
-	App->render->Blit(portraits, SCREEN_WIDTH - portrait2.w - 35, 10, &portrait2, true);
+	App->render->Blit(portraits, 35, 10, &portraitP1, false);
+	App->render->Blit(portraits, SCREEN_WIDTH - portraitP2.w - 35, 10, &portraitP2, true);
 
 	if (!quoteOption) {
 		App->fonts->BlitText(10, SCREEN_HEIGHT / 2 + 70, typography, cstr);
