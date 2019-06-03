@@ -286,15 +286,16 @@ public:
 	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
+
 	void internal_input(p2Qeue<ryu_inputs2>& inputs);
 	bool external_input(p2Qeue<ryu_inputs2>& inputs);
 	ryu_states2 process_fsm(p2Qeue<ryu_inputs2>& inputs);
 	void OnCollision(Collider* c1, Collider* c2);
 	void BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture);
+
 	void ClearColliders();
 	bool IsntOnLeftLimit();
 	bool IsntOnRightLimit();
-	bool colliding = false;
 	void IsClose();
 
 public:
@@ -342,6 +343,7 @@ public:
 	bool turn = false;
 	bool flip = true;
 	bool altColor = true;
+	bool colliding = false;
 	bool freeze;
 	bool yoga_check;
 	bool yoga_sound;
