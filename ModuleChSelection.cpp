@@ -148,7 +148,7 @@ update_status ModuleChSelection::Update()
 
 void ModuleChSelection::ReadPlayer1Inputs() {
 	if (!player1Lock) {
-		if (App->input->keyboard[SDL_SCANCODE_A] == 1) {
+		if (App->input->pads[0].left) {
 			App->audio->PlayChunk(move);
 			if (player1Position.x != SCREEN_WIDTH / 2 - 60) {
 				player1Position.x -= 28;
@@ -186,7 +186,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_D] == 1) {
+		if (App->input->pads[0].right) {
 			App->audio->PlayChunk(move);
 			if (player1Position.x != SCREEN_WIDTH / 2 + 24) {
 				player1Position.x += 28;
@@ -224,7 +224,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_W] == 1) {
+		if (App->input->pads[0].up) {
 			App->audio->PlayChunk(move);
 			if (player1Position.y != SCREEN_HEIGHT / 2 + 25) {
 				player1Position.y -= 37;
@@ -252,7 +252,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_S] == 1) {
+		if (App->input->pads[0].down) {
 			App->audio->PlayChunk(move);
 			if (player1Position.y != SCREEN_HEIGHT / 2 + 62) {
 				player1Position.y += 37;
@@ -281,7 +281,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_U] == 1) {
+		if (App->input->pads[0].a) {
 			if (canSelectTimer < App->frames)
 				if (SDL_RectEquals(&player1Portrait, &dhalsimPortrait)) {
 					App->audio->PlayChunk(select);
@@ -295,7 +295,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 
 void ModuleChSelection::ReadPlayer2Inputs() {
 	if (!player2Lock) {
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1) {
+		if (App->input->pads[1].left) {
 			App->audio->PlayChunk(move);
 			if (player2Position.x != SCREEN_WIDTH / 2 - 60) {
 				player2Position.x -= 28;
@@ -333,7 +333,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1) {
+		if (App->input->pads[1].right) {
 			App->audio->PlayChunk(move);
 			if (player2Position.x != SCREEN_WIDTH / 2 + 24) {
 				player2Position.x += 28;
@@ -371,7 +371,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_UP] == 1) {
+		if (App->input->pads[1].up) {
 			App->audio->PlayChunk(move);
 			if (player2Position.y != SCREEN_HEIGHT / 2 + 25) {
 				player2Position.y -= 37;
@@ -399,7 +399,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 			}
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_DOWN] == 1) {
+		if (App->input->pads[1].down) {
 			App->audio->PlayChunk(move);
 			if (player2Position.y != SCREEN_HEIGHT / 2 + 62) {
 				player2Position.y += 37;
@@ -428,7 +428,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 			}
 		}
 
-		if ((App->input->keyboard[SDL_SCANCODE_KP_4] == 1) || App->input->keyboard[SDL_SCANCODE_0] == 1) {
+		if (App->input->pads[1].a) {
 			if (canSelectTimer < App->frames)
 				if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
 					App->audio->PlayChunk(select);

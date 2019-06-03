@@ -33,6 +33,7 @@ struct Gamepad
 	bool y = false;
 	bool R1 = false;
 	bool R2 = false;
+	bool start = false;
 };
 
 struct History

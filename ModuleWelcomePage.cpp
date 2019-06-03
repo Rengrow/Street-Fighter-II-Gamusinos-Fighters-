@@ -101,7 +101,7 @@ update_status ModuleWelcomePage::Update()
 		App->fonts->BlitText(SCREEN_WIDTH/2 - 65, SCREEN_HEIGHT / 2 + 50, typography, "INSERT COIN.");
 
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+	if (App->input->pads[0].start) {
 		App->audio->PlayChunk(start);
 		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->chSelectionScreen, 1);

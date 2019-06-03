@@ -110,7 +110,7 @@ update_status ModuleInput::PreUpdate()
 	}
 
 	//Obtaind the direction of Gamepad 1
-	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].up = true;
 	}
@@ -118,7 +118,7 @@ update_status ModuleInput::PreUpdate()
 		pads[0].up = false;
 
 
-	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].down = true;
 	}
@@ -126,62 +126,69 @@ update_status ModuleInput::PreUpdate()
 		pads[0].down = false;
 
 
-	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].left = true;
 	}
 	else
 		pads[0].left = false;
 
-	if (gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT) || gameController1AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[0].right = true;
 	}
 	else
 		pads[0].right = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
+	if ((App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
 	{
 		pads[0].x = true;
 	}
 	else
 		pads[0].x = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
+	if ((App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
 	{
 		pads[0].a = true;
 	}
 	else
-	pads[0].a = false;
+		pads[0].a = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN))
+	if ((App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN))
 	{
 		pads[0].y = true;
 	}
 	else
 		pads[0].y = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
+	if ((App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
 	{
 		pads[0].b = true;
 	}
 	else
 		pads[0].b = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
+	if ((App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
 	{
 		pads[0].R1 = true;
 	}
 	else
 		pads[0].R1 = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
+	if ((App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN) || (App->input->gameController1AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
 	{
 		pads[0].R2 = true;
 	}
 	else
 		pads[0].R2 = false;
-		
+
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || (App->input->gameController1States[SDL_CONTROLLER_BUTTON_START] == KEY_DOWN))
+	{
+		pads[0].start = true;
+	}
+	else
+		pads[0].start = false;
+
 
 
 	//Obtain the current button values of GamePad 2
@@ -207,7 +214,7 @@ update_status ModuleInput::PreUpdate()
 
 
 	//Obtaind the direction of Gamepad 2
-	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].up = true;
 	}
@@ -215,7 +222,7 @@ update_status ModuleInput::PreUpdate()
 		pads[1].up = false;
 
 
-	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTY] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].down = true;
 	}
@@ -223,19 +230,68 @@ update_status ModuleInput::PreUpdate()
 		pads[1].down = false;
 
 
-	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].left = true;
 	}
 	else
 		pads[1].left = false;
 
-	if (gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] > JOYSTICK_DEAD_ZONE)
+	if ((App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].right = true;
 	}
 	else
 		pads[1].right = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_4] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_X] == KEY_DOWN))
+	{
+		pads[1].x = true;
+	}
+	else
+		pads[1].x = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN))
+	{
+		pads[1].a = true;
+	}
+	else
+		pads[1].a = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_Y] == KEY_DOWN))
+	{
+		pads[1].y = true;
+	}
+	else
+		pads[1].y = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_2] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_B] == KEY_DOWN))
+	{
+		pads[1].b = true;
+	}
+	else
+		pads[1].b = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
+	{
+		pads[1].R1 = true;
+	}
+	else
+		pads[1].R1 = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
+	{
+		pads[1].R2 = true;
+	}
+	else
+		pads[1].R2 = false;
+
+	if ((App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_START] == KEY_DOWN))
+	{
+		pads[1].start = true;
+	}
+	else
+		pads[1].start = false;
 
 #pragma endregion
 
@@ -301,7 +357,7 @@ bool ModuleInput::CheckYogaFire(uint frames_past, int player, bool flip) const {
 			case 2: { if (pad->down) { return true; } } break;
 			}
 		}
-		
+
 	}
 	return false;
 }
