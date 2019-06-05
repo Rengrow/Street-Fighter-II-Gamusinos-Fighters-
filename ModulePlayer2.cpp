@@ -2213,10 +2213,15 @@ update_status ModulePlayer2::Update()
 		case ST_FALLING2:
 			current_animation = &airreel;
 			jumpHeight += speed + 3;
-			if (jumpHeight == 0)
+			if (jumpHeight >= 0)
 			{
 				inputs.Push(IN_FALLING_FINISH2);
 			}
+
+			if ((!flip) && (colliding == false)) position.x -= speed;
+
+			if ((flip) && (colliding == false))  position.x += speed;
+
 			break;
 
 		case YDRILL2:
@@ -2241,13 +2246,13 @@ update_status ModulePlayer2::Update()
 		case YMUMMY2:
 			
 			current_animation = &yoga_mummy;
-			jumpHeight += speed + 2;
+			jumpHeight += speed + 1;
 			typeofattack = 3;
 			dizzydamage = 4;
 
-			if ((!flip) && (colliding == false)) position.x += speed + 3;
+			if (IsntOnRightLimit() && (!flip) && (colliding == false)) position.x += speed + 3;
 
-			if ((flip) && (colliding == false))  position.x -= speed + 3;
+			if (IsntOnLeftLimit() && (flip) && (colliding == false))  position.x -= speed + 3;
 
 			if (jumpHeight >= 0)
 			{
@@ -2448,6 +2453,20 @@ update_status ModulePlayer2::Update()
 			current_animation = &sweep;
 			break;
 
+		/*case BURNING2:
+			current_animation = &airreel;
+
+			if (jumpHeight == 0)
+			{
+				inputs.Push(IN_BURNING_FINISH2);
+			}
+
+			if ((!flip) && (colliding == false)) position.x += speed + 2;
+
+			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			
+			break;*/
+
 		//end of test
 		}
 	}
@@ -2555,30 +2574,22 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			dizzylvl = 0;
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state != ST_JUMP_NEUTRAL2 && state != ST_JUMP_FORWARD2 && state != ST_JUMP_BACKWARD2 && state != L_PUNCH_NEUTRAL_JUMP2 && state != L_PUNCH_FORWARD_JUMP2 && state != L_PUNCH_BACKWARD_JUMP2 && state != L_KIK_NEUTRAL_JUMP2 && state != L_KIK_FORWARD_JUMP2 && state != L_KIK_BACKWARD_JUMP2))
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT)
 		{
-
-
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
 
-			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false))
+			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD2 && flip == false))
 			{
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
 				life -= 5;
 			}
 
-			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
-			{
-				inputs.Push(IN_CROUCH_REEL2);
-				life -= 12;
-			}
-
 			else
 			{
-				inputs.Push(IN_HEAD_REEL2);
-				life -= 12;
+				inputs.Push(IN_BURNING2);
+				life -= 15;
 			}
 		}
 
@@ -3403,6 +3414,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3467,6 +3479,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_DEFENDING2: state = ST_DEFENDING2; defending_timer = App->frames; break;
 
@@ -3531,6 +3544,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_DEFENDING2: state = ST_DEFENDING2; defending_timer = App->frames; break;
 
@@ -3563,6 +3577,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			}break;
 
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3592,6 +3607,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			}break;
 
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3621,6 +3637,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			}break;
 
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3633,6 +3650,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3645,6 +3663,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3657,6 +3676,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3670,6 +3690,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3682,6 +3703,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3694,6 +3716,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3709,6 +3732,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3727,6 +3751,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3745,6 +3770,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3763,6 +3789,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3781,6 +3808,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3799,6 +3827,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 
@@ -3814,6 +3843,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_YDRILL_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3826,6 +3856,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_YMUMMY_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3838,6 +3869,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3850,6 +3882,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3863,6 +3896,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3875,6 +3909,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3887,6 +3922,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3899,6 +3935,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3912,6 +3949,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3924,6 +3962,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3937,6 +3976,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3949,6 +3989,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3961,6 +4002,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3973,6 +4015,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_JUMP_FINISH2: state = ST_IDLE2; break;
 			case IN_FALLING2: state = ST_FALLING2; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -3990,6 +4033,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4007,6 +4051,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4024,6 +4069,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4041,6 +4087,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4058,6 +4105,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4075,6 +4123,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4092,6 +4141,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4109,6 +4159,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4126,6 +4177,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4143,6 +4195,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4160,6 +4213,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4177,6 +4231,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4204,6 +4259,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4230,6 +4286,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4285,6 +4342,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4367,6 +4425,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4383,6 +4442,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4398,6 +4458,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4413,6 +4474,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4428,6 +4490,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4443,6 +4506,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4458,6 +4522,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4473,6 +4538,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4488,6 +4554,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4503,6 +4570,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4522,6 +4590,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4541,6 +4610,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4559,6 +4629,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
@@ -4595,6 +4666,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4608,6 +4680,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRAB2:state = M_GRAB2; m_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
@@ -4621,6 +4694,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			{
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_GRAB2:state = F_GRAB2; f_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
@@ -4675,6 +4749,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4690,6 +4765,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 
 			case IN_GRABBED2: state = GRABBED2; grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
+			case IN_BURNING2: state = BURNING2; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
