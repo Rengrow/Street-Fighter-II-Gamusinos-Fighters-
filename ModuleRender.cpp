@@ -59,7 +59,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	
+
 	// TO DO: this exact coding causes the following problem: camera wont move right if opposite ryu is at left corner (the same way around)
 
 	if (App->player1->position.x > -camera.x / SCREEN_SIZE && App->player1->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
@@ -87,6 +87,10 @@ update_status ModuleRender::Update()
 		limit1Box.x += cameraSpeed;
 		limit2Box.x += cameraSpeed;
 	}
+
+	if (shaking)
+		UpdateCameraShake();
+
 	/*
 	//CAMERA DEBUG
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) {
@@ -104,7 +108,7 @@ update_status ModuleRender::Update()
 			limit2Box.x += cameraSpeed;
 		}
 	}*/
-	
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -203,6 +207,8 @@ void ModuleRender::UpdateCameraShake()
 		camera_offset = { rand() % (int)shake_magnitude, rand() % (int)shake_magnitude };
 		shake_timer++;
 	}
-	else
+	else {
 		shaking = false;
+		camera_offset = { 0,0 };
+	}
 }

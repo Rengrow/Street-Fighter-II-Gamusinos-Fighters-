@@ -102,7 +102,7 @@ void ModuleFight::EndFullFight() {
 void ModuleFight::Win(int ryu) {
 	App->player1->freeze = true;
 	App->player2->freeze = true;
-	//App->slowdown->StartSlowdown(1000, 100);
+	App->slowdown->StartSlowdown(30, 100);
 
 	if (ryu == 1)
 		player1RoundWinned++;

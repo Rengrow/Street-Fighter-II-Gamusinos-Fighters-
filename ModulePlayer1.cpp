@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer2.h"
+#include "ModuleSlowdown.h"
 #include "p2Qeue.h"
 
 #include "SDL\include\SDL.h"
@@ -589,9 +590,9 @@ bool ModulePlayer1::Start()
 	SDL_Rect yoga_flame_lpHitbox10[yoga_flame_lpnColliders4] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	SDL_Rect yoga_flame_lpHitbox11[yoga_flame_lpnColliders5] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
 	COLLIDER_TYPE yoga_flame_lpColliderType[yoga_flame_lpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
-	COLLIDER_TYPE yoga_flame_lpColliderType2[yoga_flame_lpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
-	COLLIDER_TYPE yoga_flame_lpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
-	COLLIDER_TYPE yoga_flame_lpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
+	COLLIDER_TYPE yoga_flame_lpColliderType2[yoga_flame_lpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
+	COLLIDER_TYPE yoga_flame_lpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
+	COLLIDER_TYPE yoga_flame_lpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
 	COLLIDER_TYPE yoga_flame_lpColliderType5[yoga_flame_lpnColliders5] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* yoga_flame_lpCallback[yoga_flame_lpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_lpCallback2[yoga_flame_lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player1} };
@@ -652,9 +653,9 @@ bool ModulePlayer1::Start()
 	SDL_Rect yoga_flame_mpHitbox10[yoga_flame_lpnColliders4] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	SDL_Rect yoga_flame_mpHitbox11[yoga_flame_lpnColliders5] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
 	COLLIDER_TYPE yoga_flame_mpColliderType[yoga_flame_mpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
-	COLLIDER_TYPE yoga_flame_mpColliderType2[yoga_flame_mpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
-	COLLIDER_TYPE yoga_flame_mpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
-	COLLIDER_TYPE yoga_flame_mpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
+	COLLIDER_TYPE yoga_flame_mpColliderType2[yoga_flame_mpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
+	COLLIDER_TYPE yoga_flame_mpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
+	COLLIDER_TYPE yoga_flame_mpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
 	COLLIDER_TYPE yoga_flame_mpColliderType5[yoga_flame_lpnColliders5] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* yoga_flame_mpCallback[yoga_flame_mpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_mpCallback2[yoga_flame_mpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player1} };
@@ -723,9 +724,9 @@ bool ModulePlayer1::Start()
 	SDL_Rect yoga_flame_hpHitbox10[yoga_flame_hpnColliders4] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	SDL_Rect yoga_flame_hpHitbox11[yoga_flame_hpnColliders5] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
 	COLLIDER_TYPE yoga_flame_hpColliderType[yoga_flame_hpnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
-	COLLIDER_TYPE yoga_flame_hpColliderType2[yoga_flame_hpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
-	COLLIDER_TYPE yoga_flame_hpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
-	COLLIDER_TYPE yoga_flame_hpColliderType4[yoga_flame_hpnColliders4] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_HIT} };
+	COLLIDER_TYPE yoga_flame_hpColliderType2[yoga_flame_hpnColliders2] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
+	COLLIDER_TYPE yoga_flame_hpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
+	COLLIDER_TYPE yoga_flame_hpColliderType4[yoga_flame_hpnColliders4] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER_SHOT} };
 	COLLIDER_TYPE yoga_flame_hpColliderType5[yoga_flame_hpnColliders5] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* yoga_flame_hpCallback[yoga_flame_hpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_hpCallback2[yoga_flame_hpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player1} };
@@ -1049,7 +1050,6 @@ bool ModulePlayer1::Start()
 
 
 	// Win1
-
 	const int winnColliders = 3;
 	SDL_Rect winHitbox1[winnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	COLLIDER_TYPE winColliderType[winnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
@@ -1101,7 +1101,6 @@ bool ModulePlayer1::Start()
 
 
 	//Get up
-
 	getup.PushBack({ 197, 989, 131, 31 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	getup.PushBack({ 330, 974, 122, 46 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	getup.PushBack({ 455, 920, 83, 100 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
@@ -2553,6 +2552,9 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 
 			else
 				inputs.Push(IN_BURNING);
+
+			App->slowdown->StartSlowdown(5, 30);
+			App->render->StartCameraShake(5, 2);
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
@@ -2577,6 +2579,8 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 
 			else
 				inputs.Push(IN_HEAD_REEL);
+
+			App->slowdown->StartSlowdown(5, 30);
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
@@ -2585,6 +2589,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 25 + App->frames;
 			inputs.Push(IN_FALLING);
+			App->slowdown->StartSlowdown(5, 30);
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
@@ -2604,12 +2609,11 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(low_fist);
 
 			inputs.Push(IN_FALLING);
+			App->slowdown->StartSlowdown(5, 30);
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2) //Colliding players
 		{
-
-
 			if (state == ST_WALK_FORWARD && App->player2->state == ST_WALK_FORWARD2) {
 				position.x--;
 				App->player2->position.x++;

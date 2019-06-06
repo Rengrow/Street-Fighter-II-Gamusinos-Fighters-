@@ -78,7 +78,6 @@ bool ModuleUI::Start()
 	bool ret = true;
 
 	typography1 = App->fonts->Load("assets/images/ui/Font_name.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~·!@#$%^&*()-+=[]{}|:;ç'<>,./? ", 1);
-	typographyDebug = typography1;//App->fonts->Load("assets/images/ui/font_debug.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 	numbers = App->fonts->Load("assets/images/ui/Font_count.png", "0123456789<> ", 1);
 	graphics = App->textures->Load("assets/images/ui/fight_ui.png");
 
@@ -129,7 +128,6 @@ bool ModuleUI::CleanUp()
 
 	App->textures->Unload(graphics);
 	App->fonts->UnLoad(numbers);
-	App->fonts->UnLoad(typographyDebug);
 	App->fonts->UnLoad(typography1);
 
 	graphics = nullptr;
@@ -356,74 +354,74 @@ void ModuleUI::BlitGamePadDebug() {
 
 #pragma region Player 1
 	if (App->input->pads[0].a)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typographyDebug, "A");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 30, typography1, "A");
 
 	if (App->input->pads[0].x)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 10, typographyDebug, "X");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 - 10, typography1, "X");
 
 	if (App->input->pads[0].y)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 10, typographyDebug, "Y");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 10, typography1, "Y");
 
 	if (App->input->pads[0].b)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 30, typographyDebug, "B");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 30, typography1, "B");
 
 	if (App->input->pads[0].R1)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 50, typographyDebug, "R1");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 10, SCREEN_HEIGHT / 2 + 50, typography1, "R1");
 
 	if (App->input->pads[0].R2)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 + 50, typographyDebug, "R2");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 + 50, typography1, "R2");
 
 
 	if (App->input->pads[0].up)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "UP");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typography1, "UP");
 
 
 	if (App->input->pads[0].down)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "DOWN");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 20, SCREEN_HEIGHT / 2 - 30, typography1, "DOWN");
 
 
 	if (App->input->pads[0].left)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "LEFT");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typography1, "LEFT");
 
 
 	if (App->input->pads[0].right)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "RIGHT");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + 50, SCREEN_HEIGHT / 2 - 30, typography1, "RIGHT");
 #pragma endregion
 
 #pragma region Player 2
 	if (App->input->pads[1].a)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 - 30, typographyDebug, "A");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 - 30, typography1, "A");
 
 	if (App->input->pads[1].x)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 - 10, typographyDebug, "X");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 - 10, typography1, "X");
 
 	if (App->input->pads[1].y)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 10, typographyDebug, "Y");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 10, typography1, "Y");
 
 	if (App->input->pads[1].b)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 30, typographyDebug, "B");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 30, typography1, "B");
 
 	if (App->input->pads[1].R1)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 50, typographyDebug, "R1");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 10, SCREEN_HEIGHT / 2 + 50, typography1, "R1");
 
 	if (App->input->pads[1].R2)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 + 50, typographyDebug, "R2");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 + 50, typography1, "R2");
 
 
 	if (App->input->pads[1].up)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "UP");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 - 30, typography1, "UP");
 
 
 	if (App->input->pads[1].down)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 - 30, typographyDebug, "DOWN");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 20, SCREEN_HEIGHT / 2 - 30, typography1, "DOWN");
 
 
 	if (App->input->pads[1].left)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "LEFT");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typography1, "LEFT");
 
 
 	if (App->input->pads[1].right)
-		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typographyDebug, "RIGHT");
+		App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH - 50, SCREEN_HEIGHT / 2 - 30, typography1, "RIGHT");
 #pragma endregion	
 }
 
