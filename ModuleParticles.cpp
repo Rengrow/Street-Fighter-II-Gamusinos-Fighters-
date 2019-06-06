@@ -41,6 +41,15 @@ bool ModuleParticles::Start()
 
 	ground_dust.life = 10;
 
+	lhead.anim.PushBack({ 242, 67, 8, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 252, 67, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 281, 83, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 323, 67, 19, 15 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 295, 67, 26, 24 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.loop = true;
+
+	lhead.life = 10;
+
 	return true;
 }
 

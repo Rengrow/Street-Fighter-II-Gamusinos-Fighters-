@@ -54,6 +54,7 @@ private:
 public:
 	Particle hdk;
 	Particle ground_dust;
+	Particle lhead;
 };
 
 #endif // __MODULEPARTICLES_H__
