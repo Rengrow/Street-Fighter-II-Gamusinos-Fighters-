@@ -593,9 +593,9 @@ bool ModulePlayer2::Start()
 	SDL_Rect yoga_flame_lpHitbox10[yoga_flame_lpnColliders4] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	SDL_Rect yoga_flame_lpHitbox11[yoga_flame_lpnColliders5] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
 	COLLIDER_TYPE yoga_flame_lpColliderType[yoga_flame_lpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE yoga_flame_lpColliderType2[yoga_flame_lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	COLLIDER_TYPE yoga_flame_lpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	COLLIDER_TYPE yoga_flame_lpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE yoga_flame_lpColliderType2[yoga_flame_lpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
+	COLLIDER_TYPE yoga_flame_lpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
+	COLLIDER_TYPE yoga_flame_lpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
 	COLLIDER_TYPE yoga_flame_lpColliderType5[yoga_flame_lpnColliders5] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_flame_lpCallback[yoga_flame_lpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_lpCallback2[yoga_flame_lpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player1} };
@@ -656,9 +656,9 @@ bool ModulePlayer2::Start()
 	SDL_Rect yoga_flame_mpHitbox10[yoga_flame_lpnColliders4] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	SDL_Rect yoga_flame_mpHitbox11[yoga_flame_lpnColliders5] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
 	COLLIDER_TYPE yoga_flame_mpColliderType[yoga_flame_mpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE yoga_flame_mpColliderType2[yoga_flame_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	COLLIDER_TYPE yoga_flame_mpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	COLLIDER_TYPE yoga_flame_mpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE yoga_flame_mpColliderType2[yoga_flame_mpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
+	COLLIDER_TYPE yoga_flame_mpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
+	COLLIDER_TYPE yoga_flame_mpColliderType4[yoga_flame_lpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
 	COLLIDER_TYPE yoga_flame_mpColliderType5[yoga_flame_lpnColliders5] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_flame_mpCallback[yoga_flame_mpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_mpCallback2[yoga_flame_mpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player1} };
@@ -727,9 +727,9 @@ bool ModulePlayer2::Start()
 	SDL_Rect yoga_flame_hpHitbox10[yoga_flame_hpnColliders4] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38}, { -88, 40, 80, 48} };
 	SDL_Rect yoga_flame_hpHitbox11[yoga_flame_hpnColliders5] = { { -62, 49, 26, 20}, { -15, 41, 50, 44}, { -4, 1, 46, 38} };
 	COLLIDER_TYPE yoga_flame_hpColliderType[yoga_flame_hpnColliders] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
-	COLLIDER_TYPE yoga_flame_hpColliderType2[yoga_flame_hpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	COLLIDER_TYPE yoga_flame_hpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
-	COLLIDER_TYPE yoga_flame_hpColliderType4[yoga_flame_hpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_HIT} };
+	COLLIDER_TYPE yoga_flame_hpColliderType2[yoga_flame_hpnColliders2] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
+	COLLIDER_TYPE yoga_flame_hpColliderType3[yoga_flame_lpnColliders3] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
+	COLLIDER_TYPE yoga_flame_hpColliderType4[yoga_flame_hpnColliders4] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2_SHOT} };
 	COLLIDER_TYPE yoga_flame_hpColliderType5[yoga_flame_hpnColliders5] = { {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2}, {COLLIDER_PLAYER2} };
 	Module* yoga_flame_hpCallback[yoga_flame_hpnColliders] = { {this}, {this}, {this} };
 	Module* yoga_flame_hpCallback2[yoga_flame_hpnColliders2] = { {this}, {this}, {this}, {(Module*)App->player1} };
@@ -2556,6 +2556,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 	{
 		inputs.Push(IN_GRAB2);
 		App->player1->inputs.Push(IN_GRABBED);
+		App->slowdown->StartSlowdown(5, 30); //Slowdown when grabbing?
 	}
 
 	if (invulnerabilityFrames < App->frames) {
@@ -2621,6 +2622,8 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_BURNING2);
 				life -= 15;
 			}
+			App->slowdown->StartSlowdown(5, 30);
+			App->render->StartCameraShake(5, 2);
 		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
@@ -2645,9 +2648,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			{
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
-			}
-
-			
+			}		
 
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 			{
@@ -2660,6 +2661,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_HEAD_REEL2);
 				life -= 7;
 			}
+			App->slowdown->StartSlowdown(5, 30);
 		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
@@ -2668,6 +2670,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
 			inputs.Push(IN_FALLING2);
+			App->slowdown->StartSlowdown(5, 30);
 		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
@@ -2687,6 +2690,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(low_fist);
 
 			inputs.Push(IN_FALLING2);
+			App->slowdown->StartSlowdown(5, 30);
 		}
 	}
 }

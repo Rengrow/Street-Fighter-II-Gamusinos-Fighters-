@@ -37,7 +37,6 @@ private:
 public:
 	int numbers;
 	int typography1;
-	int typographyDebug;
 	int stopedTimer;
 
 	SDL_Texture* graphics = nullptr;
