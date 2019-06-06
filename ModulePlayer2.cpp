@@ -39,6 +39,8 @@ bool ModulePlayer2::Start()
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
 	}
 
+	graphics4 = App->textures->Load("assets/images/sprites/characters/ryu1.png");
+	graphics5 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png");
 	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
@@ -1127,6 +1129,29 @@ bool ModulePlayer2::Start()
 	cdefending.PushBack({ 935, 735, 60, 67 }, 5, { 33,5 }, { cdefendingnColliders }, { cdefendingHitbox1 }, { cdefendingColliderType }, { cdefendingCallback });
 	cdefending.PushBack({ 5, 838, 63, 66 }, 50, { 33,5 }, { cdefendingnColliders }, { cdefendingHitbox1 }, { cdefendingColliderType }, { cdefendingCallback });
 
+	// Burning
+
+	const int burningnColliders = 3;
+	SDL_Rect burningHitbox1[burningnColliders] = { { 0, 0, 0, 0}, { -15, 11, 53, 70}, { -61, 5, 50, 35} };
+	SDL_Rect burningHitbox2[burningnColliders] = { { 0, 0, 0, 0}, { 0, 5, 93, 37}, { 0, 0, 0, 0} };
+	COLLIDER_TYPE burningColliderType[burningnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	COLLIDER_TYPE burningColliderType2[burningnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
+	Module* burningCallback[burningnColliders] = { {this}, {this}, {this} };
+	Module* burningCallback2[burningnColliders] = { {this}, {this}, {this} };
+
+	burning.PushBack({ 87, 0, 90, 108 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox1 }, { burningColliderType }, { airreelCallback });
+	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grab
 	grab.PushBack({ 540, 932, 116, 88 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
@@ -1213,12 +1238,14 @@ bool ModulePlayer2::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
+	App->textures->Unload(graphics4);
+	App->textures->Unload(graphics5);
 	App->textures->Unload(shadow);
 	ClearColliders();
 	idle = forward = backward = Animation();
 	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
 	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
-	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
+	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = burning = Animation();
 	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp = yoga_flame_hp = yoga_flame_mp = Animation();
 	streel = stgreel = creel = turn_anim = cturn_anim = Animation();
 	airreel = sweep = getup = Animation();
@@ -2453,8 +2480,8 @@ update_status ModulePlayer2::Update()
 			current_animation = &sweep;
 			break;
 
-		/*case BURNING2:
-			current_animation = &airreel;
+		case BURNING2:
+			current_animation = &burning;
 
 			if (jumpHeight == 0)
 			{
@@ -2465,7 +2492,7 @@ update_status ModulePlayer2::Update()
 
 			if ((flip) && (colliding == false))  position.x -= speed + 2;
 			
-			break;*/
+			break;
 
 		//end of test
 		}

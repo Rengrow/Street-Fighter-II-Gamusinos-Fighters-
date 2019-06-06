@@ -228,6 +228,8 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
+	SDL_Texture* graphics4 = nullptr;
+	SDL_Texture* graphics5 = nullptr;
 	SDL_Texture* shadow = nullptr;
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
@@ -237,7 +239,7 @@ public:
 	Animation close_mp, close_hp, close_mk, close_hk;
 	Animation neutralJump, forwardJump, backwardJump;
 	Animation yoga_fire_lp, yoga_fire_mp, yoga_fire_hp, yoga_drill, yoga_mummy;
-	Animation yoga_flame_lp, yoga_flame_mp, yoga_flame_hp;
+	Animation yoga_flame_lp, yoga_flame_mp, yoga_flame_hp, burning;
 	Animation streel; //standing reel
 	Animation stgreel; //standing gut reel
 	Animation creel; //crouching reel
