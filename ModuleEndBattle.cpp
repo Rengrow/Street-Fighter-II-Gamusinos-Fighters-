@@ -83,8 +83,6 @@ void ModuleEndBattle::UpdateQuote() {
 	if (quoteOption) {
 		text = quote1.substr(0, quoteLetters);
 		text2 = quote1sub.substr(0, quoteLetters);
-
-
 	}
 	else {
 		text = quote2.substr(0, quoteLetters);

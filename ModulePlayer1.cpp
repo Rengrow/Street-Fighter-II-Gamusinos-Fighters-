@@ -2003,7 +2003,7 @@ update_status ModulePlayer1::Update()
 		case ST_DEFENDING:
 			current_animation = &defending;
 			if (App->frames - defending_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
 			//Pushback start
@@ -2034,7 +2034,7 @@ update_status ModulePlayer1::Update()
 		case ST_CROUCH_DEFENDING:
 			current_animation = &cdefending;
 			if (App->frames - crouch_defending_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
@@ -2059,7 +2059,7 @@ update_status ModulePlayer1::Update()
 		case ST_HEAD_REEL:
 			current_animation = &streel;
 			if (App->frames - head_reel_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
 
@@ -2090,14 +2090,14 @@ update_status ModulePlayer1::Update()
 			texture = graphics;
 			current_animation = &stgreel;
 			if (App->frames - gut_reel_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			break;
 
 		case ST_CROUCH_REEL:
 			current_animation = &creel;
 			if (App->frames - crouch_reel_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
@@ -2487,7 +2487,7 @@ update_status ModulePlayer1::Update()
 			{
 				inputs.Push(IN_BURNING_FINISH);
 			}
-			
+
 			if ((!flip) && (colliding == false)) position.x += speed + 2;
 
 			if ((flip) && (colliding == false))  position.x -= speed + 2;
@@ -2567,7 +2567,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (invulnerabilityFrames < App->frames) {
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT )
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 		{
 			life -= 12;
 			App->audio->PlayChunk(hdk_hit);
@@ -2607,9 +2607,19 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else if (App->player2->state == L_PUNCH_CROUCH2 || App->player2->state == M_PUNCH_CROUCH2 || App->player2->state == F_PUNCH_CROUCH2 || App->player2->state == L_PUNCH_CROUCHCLOSE2 || App->player2->state == M_PUNCH_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_fist);
 
-			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			if (((state == ST_WALK_BACKWARD && flip == true) || (state == ST_WALK_FORWARD && flip == false)) &&
+				(App->player2->state != L_KIK_CROUCH2 && App->player2->state != M_KIK_CROUCH2 && App->player2->state != F_KIK_CROUCH2 && App->player2->state != L_KIK_CROUCHCLOSE2 && App->player2->state != M_KIK_CROUCHCLOSE &&
+					App->player2->state != L_PUNCH_CROUCH2 && App->player2->state != M_PUNCH_CROUCH2 && App->player2->state != F_PUNCH_CROUCH2 && App->player2->state != L_PUNCH_CROUCHCLOSE2 && App->player2->state != M_PUNCH_CROUCHCLOSE)
+				|| (state == ST_CROUCH_DEFENDING_READY))
+			{
+				App->audio->PlayChunk(block);
+				inputs.Push(IN_DEFENDING);
+			}
+			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			{
 				inputs.Push(IN_CROUCH_REEL);
-
+				life -= 7;
+			}
 			else
 				inputs.Push(IN_HEAD_REEL);
 
@@ -2689,7 +2699,8 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 						App->player2->position.x--;
 				}
 			}
-		} else App->player2->colliding = false;
+		}
+		else App->player2->colliding = false;
 	}
 }
 

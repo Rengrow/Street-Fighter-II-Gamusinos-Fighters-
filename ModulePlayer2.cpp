@@ -1267,7 +1267,7 @@ update_status ModulePlayer2::Update()
 	ryu_states2 current_state = ST_UNKNOWN2;
 	Animation* current_animation = &idle;
 	SDL_Texture *texture = graphics;
-	int hdk_spawn; 
+	int hdk_spawn;
 
 	if (flip == false)
 	{
@@ -1389,9 +1389,9 @@ update_status ModulePlayer2::Update()
 				jumpHeight += speed + 3;
 			}
 
-			if (IsntOnRightLimit()){
+			if (IsntOnRightLimit()) {
 				position.x += 2;
-		}
+			}
 			break;
 
 		case ST_CROUCHING2:
@@ -1780,7 +1780,7 @@ update_status ModulePlayer2::Update()
 
 		case M_KIK_NEUTRAL_JUMP2:
 			current_animation = &jmk;
-			
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1807,7 +1807,7 @@ update_status ModulePlayer2::Update()
 		case F_KIK_NEUTRAL_JUMP2:
 			texture = graphics2;
 			current_animation = &jhk;
-			
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1967,10 +1967,10 @@ update_status ModulePlayer2::Update()
 				jumpHeight += speed + 3;
 			}
 
-				if (IsntOnRightLimit())
-					position.x += 2;
-				typeofattack = 2;
-				dizzydamage = 2;
+			if (IsntOnRightLimit())
+				position.x += 2;
+			typeofattack = 2;
+			dizzydamage = 2;
 			break;
 
 		case F_KIK_BACKWARD_JUMP2:
@@ -1991,14 +1991,14 @@ update_status ModulePlayer2::Update()
 				jumpHeight += speed;
 			}
 
-				if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
-				{
-					jumpHeight += speed + 3;
-				}
-				if (IsntOnRightLimit())
-					position.x += 2;
-				typeofattack = 3;
-				dizzydamage = 3;
+			if (App->frames - jump_timer > 31 && (App->frames - jump_timer <= D_JUMP_TIME))
+			{
+				jumpHeight += speed + 3;
+			}
+			if (IsntOnRightLimit())
+				position.x += 2;
+			typeofattack = 3;
+			dizzydamage = 3;
 			break;
 
 		case ST_DEFENDING2:
@@ -2256,9 +2256,9 @@ update_status ModulePlayer2::Update()
 			typeofattack = 3;
 			jumpHeight += speed + 2;
 			dizzydamage = 4;
-			
+
 			if ((!flip) && (colliding == false)) position.x += speed + 2;
-			
+
 			if ((flip) && (colliding == false))  position.x -= speed + 2;
 
 			if (jumpHeight >= 0)
@@ -2271,7 +2271,7 @@ update_status ModulePlayer2::Update()
 			break;
 
 		case YMUMMY2:
-			
+
 			current_animation = &yoga_mummy;
 			jumpHeight += speed + 1;
 			typeofattack = 3;
@@ -2491,10 +2491,10 @@ update_status ModulePlayer2::Update()
 			if ((!flip) && (colliding == false)) position.x += speed + 2;
 
 			if ((flip) && (colliding == false))  position.x -= speed + 2;
-			
+
 			break;
 
-		//end of test
+			//end of test
 		}
 	}
 	current_state = state;
@@ -2556,7 +2556,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 	{
 		inputs.Push(IN_GRAB2);
 		App->player1->inputs.Push(IN_GRABBED);
-		App->slowdown->StartSlowdown(5, 30); //Slowdown when grabbing?
+		App->slowdown->StartSlowdown(5, 30);
 	}
 
 	if (invulnerabilityFrames < App->frames) {
@@ -2644,11 +2644,14 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(low_fist);
 			}
 
-			if ((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false) || (state == ST_CROUCH_DEFENDING_READY2))
+			if (((state == ST_WALK_BACKWARD2 && flip == true) || (state == ST_WALK_FORWARD && flip == false)) &&
+				(App->player1->state != L_KIK_CROUCH && App->player1->state != M_KIK_CROUCH && App->player1->state != F_KIK_CROUCH && App->player1->state != L_KIK_CROUCHCLOSE && App->player1->state != M_KIK_CROUCHCLOSE &&
+					App->player1->state != L_PUNCH_CROUCH && App->player1->state != M_PUNCH_CROUCH && App->player1->state != F_PUNCH_CROUCH && App->player1->state != L_PUNCH_CROUCHCLOSE && App->player1->state != M_PUNCH_CROUCHCLOSE)
+				|| (state == ST_CROUCH_DEFENDING_READY2))
 			{
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING2);
-			}		
+			}
 
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 			{
@@ -2694,8 +2697,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		}
 	}
 }
-
-
 
 void ModulePlayer2::BlitCharacterAndAddColliders(Animation* current_animation, SDL_Texture *texture) {
 	Frame frame = current_animation->GetCurrentFrame();
@@ -2807,7 +2808,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			else
 				inputs.Push(IN_M_PUNCH2);
 		}
-		
+
 		if (App->input->pads[1].b == true)
 		{
 			inputs.Push(IN_M_KIK2);
@@ -2915,8 +2916,8 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			jhp.ResetAnimation();
 			jlk.ResetAnimation();
 			jmk.ResetAnimation();
-			jhk.ResetAnimation();			
-			
+			jhk.ResetAnimation();
+
 			airreel.ResetAnimation();
 			sweep.ResetAnimation();
 
@@ -3049,7 +3050,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			clk.ResetAnimation();
 			l_crouching_kik_timer = 0;
 		}
-		
+
 	}
 
 	if (l_close_crouching_kik_timer > 0)
@@ -3060,7 +3061,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			close_clk.ResetAnimation();
 			l_close_crouching_kik_timer = 0;
 		}
-		
+
 	}
 
 
@@ -3142,7 +3143,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			cmk.ResetAnimation();
 			m_crouching_kik_timer = 0;
 		}
-		
+
 	}
 
 	if (m_close_crouching_kik_timer > 0)
@@ -3153,7 +3154,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			close_cmk.ResetAnimation();
 			m_close_crouching_kik_timer = 0;
 		}
-		
+
 	}
 
 	//fierce
@@ -3224,7 +3225,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 			chk.ResetAnimation();
 			f_crouching_kik_timer = 0;
 		}
-		
+
 	}
 
 	if (hadoken_timer > 0)
