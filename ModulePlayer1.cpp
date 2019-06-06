@@ -2517,6 +2517,11 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 
 	//PUSHBACK CHECK END
 
+	if (App->frames - App->player2->l_close_standing_punch_timer == 2) {
+		if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		else { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+	}
+
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD && state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{

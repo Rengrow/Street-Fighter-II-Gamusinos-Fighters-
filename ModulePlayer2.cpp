@@ -2007,7 +2007,7 @@ update_status ModulePlayer2::Update()
 
 		case ST_CROUCH_DEFENDING2:
 			current_animation = &cdefending;
-			if (App->frames - defending_timer == 1) {
+			if (App->frames - crouch_defending_timer == 1) {
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if (pushbacktimerhit != 0) {
@@ -2032,7 +2032,7 @@ update_status ModulePlayer2::Update()
 
 		case ST_HEAD_REEL2:
 			current_animation = &streel;
-			if (App->frames - defending_timer == 1) {
+			if (App->frames - head_reel_timer == 1) {
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
@@ -2061,14 +2061,14 @@ update_status ModulePlayer2::Update()
 		case ST_GUT_REEL2:
 			texture = graphics;
 			current_animation = &stgreel;
-			if (App->frames - defending_timer == 1) {
+			if (App->frames - gut_reel_timer == 1) {
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			break;
 
 		case ST_CROUCH_REEL2:
 			current_animation = &creel;
-			if (App->frames - defending_timer == 1) {
+			if (App->frames - crouch_reel_timer == 1) {
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if (pushbacktimerhit != 0) {
@@ -2493,7 +2493,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player1->typeofattack == 1) { pushbacktimerhit = 10; pushbackspeed = 2; }
 		if (App->player1->typeofattack == 2) { pushbacktimerhit = 15; pushbackspeed = 2; }
 		if (App->player1->typeofattack == 3) { pushbacktimerhit = 20; pushbackspeed = 2; }
-		//		App->particles->AddParticle(App->particles->ground_dust, flip, position.x, position.y, 0, COLLIDER_WALL, 0, 200);
 	}
 
 	if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
@@ -2502,6 +2501,10 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player1->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
+	if (App->frames - App->player1->l_close_standing_punch_timer == 2) {
+		if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+	}
 
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
 	{
