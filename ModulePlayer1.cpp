@@ -2481,16 +2481,31 @@ update_status ModulePlayer1::Update()
 			break;
 
 		case BURNING:
+			texture = graphics4;
 			current_animation = &burning;
-			jumpHeight += speed + 3;
-			if (jumpHeight == 0)
+
+			if (burning_timer == 0)
 			{
-				inputs.Push(IN_BURNING_FINISH);
+				burning_timer = App->frames;
 			}
 
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 21))
+			{
+				jumpHeight -= speed + 1;
+			}
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (App->frames - burning_timer > 20)
+				jumpHeight += speed + 1;
+
+			if (jumpHeight >= 0 && App->frames - burning_timer > 21)
+			{
+				inputs.Push(IN_BURNING_FINISH);
+				burning_timer = 0;
+			}
+
+			if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
+
+			if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
 
 			break;
 			//end of test
@@ -4817,6 +4832,16 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 
+		case BURNING:
+		{
+			switch (last_input)
+			{
+			case IN_BURNING_FINISH:state = ST_GETTING_UP; getting_up_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
+			}
+		}
+		break;
+
 		case SWEEP:
 		{
 			switch (last_input)
@@ -4825,6 +4850,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
+		break;
 
 		case LOOSE:
 		{

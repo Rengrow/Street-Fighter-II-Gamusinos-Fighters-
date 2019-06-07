@@ -289,6 +289,7 @@ public:
 	Uint32 lasttimedamaged;
 	Uint32 timeUpdated;
 	Uint32 timeStoped;
+	
 
 	bool dizzi = false;
 	bool godmode = false;
@@ -367,6 +368,7 @@ public:
 	Uint32 crouch_reel_timer = 0;
 	Uint32 gut_reel_timer = 0;
 	Uint32 sweep_timer = 0;
+	Uint32 burning_timer = 0;
 };
 
 #endif
