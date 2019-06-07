@@ -55,6 +55,7 @@ bool ModulePlayer1::Start()
 	position.y = 215;
 
 	life = 100;
+	dizzylvl = 0;
 	freeze = true;
 	flip = turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =

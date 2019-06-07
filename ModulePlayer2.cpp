@@ -54,8 +54,8 @@ bool ModulePlayer2::Start()
 
 	position.x = 250;
 	position.y = 215;
-
 	life = 100;
+	dizzylvl = 0;
 	freeze = flip = true;
 	turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
@@ -2593,14 +2593,14 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
 			Uint32 lasttimedamagedaux = App->GetFrame();
-			if (lasttimedamagedaux - lasttimedamaged > 240) {
+			if (lasttimedamagedaux - lasttimedamaged > 200) {
 				dizzylvl = 0;
 			}
-			if (App->player1->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7 - 1); }
-			if (App->player1->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 11 - 5); }
-			if (App->player1->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 17 - 11); }
-			if (App->player1->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 19 - 13); }
-			if (App->player1->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 13 - 7); }
+			if (App->player1->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7); }
+			if (App->player1->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 7); }
+			if (App->player1->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 7); }
+			if (App->player1->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 7); }
+			if (App->player1->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 7); }
 
 			int ponderatedmodifier = (SDL_GetTicks() % 100);
 			if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
@@ -2615,7 +2615,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT) {
 			Uint32 lasttimedamagedaux = App->GetFrame();
-			if (lasttimedamagedaux - lasttimedamaged > 240) {
+			if (lasttimedamagedaux - lasttimedamaged > 200) {
 				dizzylvl = 0;
 			}
 			dizzylvl += 13 + (SDL_GetTicks() % 19);
@@ -2629,8 +2629,15 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl -= +3; }
 			lasttimedamaged = lasttimedamagedaux;
 		}
+		if (dizzylvl < 0) { //should not happen, just to be extra seccure
+			dizzylvl = 0;
+		}
+		
+		if (dizzylvl < 32) {
+			dizzi = false;
+		}
 
-		if (dizzylvl >= 32) {
+		if (dizzylvl >= 32){
 			dizzi = true;
 			dizzylvl = 0;
 		}
