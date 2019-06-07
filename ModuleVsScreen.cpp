@@ -47,7 +47,7 @@ bool ModuleVsScreen::Start()
 	App->player2->position.y = 215;
 	App->render->camera.x = App->render->camera.y = 0;
 	isFading = false;
-	timeScreen = App->frames + 150;
+	timeScreen = App->frames + 160;
 
 	App->audio->PlayChunk(music);
 

@@ -190,6 +190,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 						strcpy_s(player1Name, ryuName.length() + 1, ryuName.c_str());
 					}
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[0].right) {
@@ -228,6 +229,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 						strcpy_s(player1Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[0].up) {
@@ -256,6 +258,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 						strcpy_s(player1Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[0].down) {
@@ -285,9 +288,10 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 					}
 
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
-			player1MoveTimer = App->frames + 10;
+			
 		}
 
 		if (App->input->pads[0].a) {
@@ -341,6 +345,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 						strcpy_s(player2Name, ryuName.length() + 1, ryuName.c_str());
 					}
 				}
+				player2MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[1].right) {
@@ -379,6 +384,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 						strcpy_s(player2Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player2MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[1].up) {
@@ -407,6 +413,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 						strcpy_s(player2Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player2MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[1].down) {
@@ -436,9 +443,8 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 					}
 
 				}
+				player2MoveTimer = App->frames + 10;
 			}
-
-			player2MoveTimer = App->frames + 10;
 		}
 
 		if (App->input->pads[1].a) {
