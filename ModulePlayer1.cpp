@@ -3027,10 +3027,9 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 		}
 	}
 	else {
-		App->input->pads[0].left = false;
-		App->input->pads[0].right = false;
-		App->input->pads[0].down = false;
-		App->input->pads[0].up = false;
+		inputs.Push(IN_CROUCH_UP);
+		inputs.Push(IN_RIGHT_UP);
+		inputs.Push(IN_LEFT_UP);
 	}
 
 	return true;
@@ -3911,7 +3910,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -3930,7 +3928,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -3949,7 +3946,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4210,7 +4206,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4228,7 +4223,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4246,7 +4240,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4264,7 +4257,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4282,7 +4274,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4300,7 +4291,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4318,7 +4308,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4336,7 +4325,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4354,7 +4342,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4372,7 +4359,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4390,7 +4376,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4408,7 +4393,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4436,6 +4420,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
+			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4463,6 +4448,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
+			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4585,7 +4571,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_DEFENDING_FINISH: state = ST_CROUCH; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4602,7 +4587,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4912,6 +4896,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
 			case IN_DEFENDING_FINISH:state = ST_IDLE; break;
 			case IN_GUT_REEL:state = ST_GUT_REEL; break;
+			case IN_SWEEP:state = SWEEP; break;
 			}
 		}
 		break;
