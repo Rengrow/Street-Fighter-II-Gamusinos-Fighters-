@@ -251,7 +251,6 @@ public:
 	Animation grabbing;
 	Animation turn_anim, cturn_anim;
 	// Animation sweep;
-	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
 	Mix_Chunk* low_kick = nullptr;
 	Mix_Chunk* low_fist = nullptr;
@@ -267,38 +266,39 @@ public:
 	iPoint position;
 
 	Uint32 invulnerabilityFrames;
-	bool turn = false;
-	bool flip = false;
+	bool turn;
+	bool flip;
 	bool altColor = false;
-	bool colliding = false;
+	bool colliding;
 	bool freeze;
 	bool yoga_check;
 	bool yoga_sound;
 	bool flame_sound;
 	int victoryExecuted;
-	int pushbacktimerhit = 0;
-	int pushbacktimerprojectile = 0;
-	int pushbackspeed = 1;
-	int typeofattack = 0; // 1 = light, 2 = medium, 3 = hard
-	int dizzydamage = 0; // 1 =light, 2 = medium, 3 = hard, 4 = special, 5 = throw
-	int framesAtaque = 0;
-	int framesJump = 0;
+	int pushbacktimerhit;
+	int pushbacktimerprojectile;
+	int pushbackspeed;
+	int typeofattack; // 1 = light, 2 = medium, 3 = hard
+	int dizzydamage; // 1 =light, 2 = medium, 3 = hard, 4 = special, 5 = throw
+	int framesAtaque;
+	int framesJump;
 	int mov; //lp, mp, hp, lk, mk, hk
 	int levitationtimer;
 	int dizzylvl;
 	Uint32 lasttimedamaged;
 	Uint32 timeUpdated;
 	Uint32 timeStoped;
+	
 
-	bool dizzi = false;
+	bool dizzi;
 	bool godmode = false;
 
-	int sprite_change_timer = 0;
+	int sprite_change_timer;
 	bool close;
-	int jumpHeight = 0;
-	int speed = 1;
+	int jumpHeight;
+	int speed;
 	int life;
-	int puntuation = 0;
+	int puntuation;
 
 	//light
 	Uint32 l_standing_punch_timer = 0;
@@ -367,6 +367,7 @@ public:
 	Uint32 crouch_reel_timer = 0;
 	Uint32 gut_reel_timer = 0;
 	Uint32 sweep_timer = 0;
+	Uint32 burning_timer = 0;
 };
 
 #endif

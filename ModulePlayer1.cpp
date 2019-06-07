@@ -41,7 +41,6 @@ bool ModulePlayer1::Start()
 	graphics4 = App->textures->Load("assets/images/sprites/characters/ryu1.png");
 	graphics5 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png");
 	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
-	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
 	low_fist = App->audio->LoadChunk("assets/sfx/effects/low_fist.wav");
@@ -57,9 +56,13 @@ bool ModulePlayer1::Start()
 
 	life = 100;
 	freeze = true;
-	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = 0;
+	flip = turn = colliding = dizzi = false;
+	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
+		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = 0;
+	pushbackspeed = speed = 1;
 	levitationtimer = -100;
 	Animation* current_animation;
+
 	// idle animation (arcade sprite sheet)
 	const int idlenColliders = 3;
 	SDL_Rect idleHitbox[idlenColliders] = { { -25, 76, 24, 16}, { -16, 50, 50, 27}, { -10, 3, 40, 50} };
@@ -118,7 +121,6 @@ bool ModulePlayer1::Start()
 
 
 	// lp
-
 	const int lpnColliders = 3;
 	const int lpnColliders2 = 4;
 	SDL_Rect lpHitbox[lpnColliders] = { { 0, 0, 0, 0}, { -28, 37, 40, 47}, { -11, 5, 60, 32} };
@@ -1128,7 +1130,6 @@ bool ModulePlayer1::Start()
 
 
 	// Burning
-
 	const int burningnColliders = 3;
 	SDL_Rect burningHitbox1[burningnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	SDL_Rect burningHitbox2[burningnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
@@ -1211,10 +1212,9 @@ bool ModulePlayer1::Start()
 // Unload assets
 bool ModulePlayer1::CleanUp()
 {
-	LOG("Unloading ryu 1");
+	LOG("Unloading Player 1");
 
-	App->audio->UnloadChunk(hdk_voice);
-	hdk_voice = nullptr;
+	//Clear Audio
 	App->audio->UnloadChunk(hdk_hit);
 	hdk_hit = nullptr;
 	App->audio->UnloadChunk(low_kick);
@@ -1234,23 +1234,37 @@ bool ModulePlayer1::CleanUp()
 	App->audio->UnloadChunk(flame_snd);
 	flame_snd = nullptr;
 
+	//Clear Animations
+	idle = forward = backward = lp = lk = clp = clk = cmp = cmk = chp = chk =
+		close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = close_firstframe_lk_mk =
+		jlp = jlk = jmp = jmk = jhp = jhk =
+		mp = hp = mk = hk =
+		close_mp = close_hp = close_mk = close_hk =
+		neutralJump = forwardJump = backwardJump =
+		yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_drill = yoga_mummy =
+		yoga_flame_lp = yoga_flame_mp = yoga_flame_hp = burning =
+		streel =
+		stgreel =
+		creel =
+		airreel = sweep =
+		getup = cdefending = defending = grab = grab2 = stun =
+		crouching = standing = crouch =
+		win1 = win2 = lose =
+		ground =
+		grabbing =
+		turn_anim = cturn_anim = Animation();
+
+	//Clear Textures
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
 	App->textures->Unload(graphics5);
 	App->textures->Unload(shadow);
+
+	//Clear Colliders
 	ClearColliders();
-	idle = forward = backward = Animation();
-	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
-	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
-	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = Animation();
-	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp = yoga_flame_hp = yoga_flame_mp = burning = Animation();
-	streel = stgreel = creel = turn_anim = cturn_anim = Animation();
-	airreel = sweep = getup = Animation();
-	crouching = standing = crouch = defending = cdefending = grab = grab2 = stun = Animation();
-	win1 = win2 = lose = Animation();
-	ground = Animation();
+
 	return true;
 }
 
@@ -2003,11 +2017,11 @@ update_status ModulePlayer1::Update()
 		case ST_DEFENDING:
 			current_animation = &defending;
 			if (App->frames - defending_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
 			//Pushback start
-			if (pushbacktimerhit != 0) {
+	 		if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
 				if (IsntOnLeftLimit() && IsntOnRightLimit())
 				{
@@ -2034,7 +2048,7 @@ update_status ModulePlayer1::Update()
 		case ST_CROUCH_DEFENDING:
 			current_animation = &cdefending;
 			if (App->frames - crouch_defending_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
@@ -2059,7 +2073,7 @@ update_status ModulePlayer1::Update()
 		case ST_HEAD_REEL:
 			current_animation = &streel;
 			if (App->frames - head_reel_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
 
@@ -2090,14 +2104,14 @@ update_status ModulePlayer1::Update()
 			texture = graphics;
 			current_animation = &stgreel;
 			if (App->frames - gut_reel_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			break;
 
 		case ST_CROUCH_REEL:
 			current_animation = &creel;
 			if (App->frames - crouch_reel_timer == 1) {
-				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y-10, 3, 0, 0, COLLIDER_WALL, 0, 0);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
@@ -2480,16 +2494,31 @@ update_status ModulePlayer1::Update()
 			break;
 
 		case BURNING:
+			texture = graphics4;
 			current_animation = &burning;
-			jumpHeight += speed + 3;
-			if (jumpHeight == 0)
+
+			if (burning_timer == 0)
+			{
+				burning_timer = App->frames;
+			}
+
+			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 21))
+			{
+				jumpHeight -= speed + 1;
+			}
+
+			if (App->frames - burning_timer > 20)
+				jumpHeight += speed + 1;
+
+			if (jumpHeight >= 0 && App->frames - burning_timer > 21)
 			{
 				inputs.Push(IN_BURNING_FINISH);
+				burning_timer = 0;
 			}
-			
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
+
+			if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
 
 			break;
 			//end of test
@@ -2531,7 +2560,7 @@ bool ModulePlayer1::IsntOnLeftLimit() {
 }
 
 void ModulePlayer1::IsClose() {
-	if ((App->player2->position.x - this->position.x <= 90 && App->player2->position.x - this->position.x > 0) || (this->position.x - App->player2->position.x <= 90 && this->position.x - App->player2->position.x > 0))
+	if ((App->player2->position.x - this->position.x <= 70 && App->player2->position.x - this->position.x > 0) || (this->position.x - App->player2->position.x <= 70 && this->position.x - App->player2->position.x > 0))
 		close = true;
 
 	else
@@ -2558,6 +2587,12 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player2->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
+	if (c1->type == COLLIDER_PLAYER_GRAB && c2->type == COLLIDER_PLAYER2)
+	{
+		inputs.Push(IN_GRAB);
+		App->player2->inputs.Push(IN_GRABBED2);
+		App->slowdown->StartSlowdown(5, 30);
+	}
 	//PUSHBACK CHECK END
 
 	if (App->frames - App->player2->l_close_standing_punch_timer == 2) {
@@ -2573,9 +2608,9 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 	}*/
 
 	if (invulnerabilityFrames < App->frames) {
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT )
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 		{
-			life -= 12;
+			
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 25 + App->frames;
 
@@ -2588,10 +2623,11 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_DEFENDING);
 				life -= 5;
 			}
-
 			else
+			{
 				inputs.Push(IN_BURNING);
-
+				life -= 15;
+			}
 			App->slowdown->StartSlowdown(5, 30);
 			App->render->StartCameraShake(5, 2);
 		}
@@ -2599,7 +2635,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			life -= 7;
+			
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player2->state == L_KIK_STANDING2 || App->player2->state == L_KIK_NEUTRAL_JUMP2 || App->player2->state == L_KIK_FORWARD_JUMP2 || App->player2->state == L_KIK_BACKWARD_JUMP2 || App->player2->state == M_KIK_STANDING2 || App->player2->state == M_KIK_NEUTRAL_JUMP2 || App->player2->state == M_KIK_FORWARD_JUMP2 || App->player2->state == M_KIK_BACKWARD_JUMP2
@@ -2613,11 +2649,23 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else if (App->player2->state == L_PUNCH_CROUCH2 || App->player2->state == M_PUNCH_CROUCH2 || App->player2->state == F_PUNCH_CROUCH2 || App->player2->state == L_PUNCH_CROUCHCLOSE2 || App->player2->state == M_PUNCH_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_fist);
 
-			if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			if (((state == ST_WALK_BACKWARD && flip == true) || (state == ST_WALK_FORWARD && flip == false)) &&
+				(App->player2->state != L_KIK_CROUCH2 && App->player2->state != M_KIK_CROUCH2 && App->player2->state != F_KIK_CROUCH2 && App->player2->state != L_KIK_CROUCHCLOSE2 && App->player2->state != M_KIK_CROUCHCLOSE &&
+					App->player2->state != L_PUNCH_CROUCH2 && App->player2->state != M_PUNCH_CROUCH2 && App->player2->state != F_PUNCH_CROUCH2 && App->player2->state != L_PUNCH_CROUCHCLOSE2 && App->player2->state != M_PUNCH_CROUCHCLOSE)
+				|| (state == ST_CROUCH_DEFENDING_READY))
+			{
+				App->audio->PlayChunk(block);
+				inputs.Push(IN_DEFENDING);
+			}
+			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			{
 				inputs.Push(IN_CROUCH_REEL);
-
-			else
+				life -= 10;
+			}
+			else {
 				inputs.Push(IN_HEAD_REEL);
+				life -= 10;
+			}
 
 			App->slowdown->StartSlowdown(5, 30);
 		}
@@ -2695,7 +2743,8 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 						App->player2->position.x--;
 				}
 			}
-		} else App->player2->colliding = false;
+		}
+		else App->player2->colliding = false;
 	}
 }
 
@@ -2775,11 +2824,13 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
 				inputs.Push(IN_L_YFLAME);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 0, flip) == true)
 			{
 				inputs.Push(IN_L_YFIRE);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -2798,11 +2849,13 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
 				inputs.Push(IN_M_YFLAME);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 0, flip) == true)
 			{
 				inputs.Push(IN_M_YFIRE);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -2819,11 +2872,13 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
 				inputs.Push(IN_F_YFLAME);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 0, flip) == true)
 			{
 				inputs.Push(IN_F_YFIRE);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -4812,6 +4867,16 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 
+		case BURNING:
+		{
+			switch (last_input)
+			{
+			case IN_BURNING_FINISH:state = ST_GETTING_UP; getting_up_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
+			}
+		}
+		break;
+
 		case SWEEP:
 		{
 			switch (last_input)
@@ -4820,6 +4885,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
+		break;
 
 		case LOOSE:
 		{

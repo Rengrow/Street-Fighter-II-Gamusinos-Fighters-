@@ -151,7 +151,6 @@ bool ModuleSceneKen::CleanUp()
 {
 	LOG("Unloading ken scene");
 
-
 	App->textures->Unload(graphics);
 	graphics = nullptr;
 	App->audio->UnloadSong(music);

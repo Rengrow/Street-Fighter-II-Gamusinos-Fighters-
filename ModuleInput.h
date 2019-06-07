@@ -58,6 +58,7 @@ public:
 
 	bool CheckYogaFire(uint, int, bool) const;
 	bool CheckYogaFlame(uint, int, bool) const;
+	void ClearHistory();
 
 public:
 	History history[MAX_HISTORY];
@@ -72,8 +73,6 @@ public:
 
 	Uint8 gameController2States[SDL_CONTROLLER_BUTTON_MAX];
 	float gameController2AxisValues[SDL_CONTROLLER_AXIS_MAX];
-
-	
 
 	SDL_GameController* gameController1 = NULL;
 	SDL_GameController* gameController2 = NULL;

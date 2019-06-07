@@ -230,7 +230,7 @@ update_status ModuleInput::PreUpdate()
 		pads[1].down = false;
 
 
-	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE )
+	if ((App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN) || (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT) || gameController2AxisValues[SDL_CONTROLLER_AXIS_LEFTX] < -JOYSTICK_DEAD_ZONE)
 	{
 		pads[1].left = true;
 	}
@@ -312,14 +312,20 @@ bool ModuleInput::CleanUp()
 {
 	//Close game controller 2
 	SDL_GameControllerClose(gameController2);
-	gameController2 = NULL;
+	gameController2 = nullptr;
 	//Close game controller 1
 	SDL_GameControllerClose(gameController1);
-	gameController1 = NULL;
+	gameController1 = nullptr;
 
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
+}
+
+void ModuleInput::ClearHistory() {
+	for (int i = 0; i < MAX_HISTORY; i++)	
+		history[i] = History();
+	history_cursor = 0;
 }
 
 const History* ModuleInput::GetPrevious(int pointer) {
@@ -351,7 +357,7 @@ bool ModuleInput::CheckYogaFire(uint frames_past, int player, bool flip) const {
 
 		if (flip == false)
 		{
-			
+
 
 			switch (count) {
 			case 0: { if (pad->right && !pad->down) { ++count; frame = i; } } break;
@@ -390,7 +396,7 @@ bool ModuleInput::CheckYogaFlame(uint frames_past, int player, bool flip) const 
 
 		else if (flip == false)
 		{
-			
+
 
 			switch (count) {
 			case 0: { if (pad->left && !pad->down) { ++count; frame = i; } } break;

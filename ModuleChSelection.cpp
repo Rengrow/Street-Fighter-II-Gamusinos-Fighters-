@@ -63,9 +63,9 @@ bool ModuleChSelection::Start()
 	invalidSelect = App->audio->LoadChunk("assets/sfx/effects/86H.wav");
 	select = App->audio->LoadChunk("assets/sfx/effects/select_menu_option.wav");
 	App->audio->PlaySongDelay(music, -1, 10000);
-	App->render->camera.x = App->render->camera.y = player1MoveTimer = player2MoveTimer = 0;
+	App->render->camera.x = App->render->camera.y = player1MoveTimer = player2MoveTimer = timeSelector = canSelectTimer = 0;
 
-	isFading = false;
+	player1Lock = player2Lock = isFading = lettersOn = false;
 
 	player1Position.x = SCREEN_WIDTH / 2 + 24;
 	player1Position.y = SCREEN_HEIGHT / 2 + 62;
@@ -76,12 +76,10 @@ bool ModuleChSelection::Start()
 	player1Portrait = dhalsimPortrait;
 	player1Name = new char[dhalsimName.length() + 1];
 	strcpy_s(player1Name, dhalsimName.length() + 1, dhalsimName.c_str());
-	player1Lock = false;
 
 	player2Portrait = kenPortrait;
 	player2Name = new char[kenName.length() + 1];
 	strcpy_s(player2Name, kenName.length() + 1, kenName.c_str());
-	player2Lock = false;
 
 	canSelectTimer = App->frames + 60;
 
@@ -92,6 +90,11 @@ bool ModuleChSelection::Start()
 bool ModuleChSelection::CleanUp()
 {
 	LOG("Unloading Vs Screen");
+
+	delete player1Name;
+	player1Name = nullptr;
+	delete player2Name;
+	player2Name = nullptr;
 
 	App->fonts->UnLoad(typography);
 	App->fonts->UnLoad(typographyBig);
@@ -185,6 +188,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 						strcpy_s(player1Name, ryuName.length() + 1, ryuName.c_str());
 					}
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[0].right) {
@@ -223,6 +227,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 						strcpy_s(player1Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[0].up) {
@@ -251,6 +256,7 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 						strcpy_s(player1Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[0].down) {
@@ -280,9 +286,10 @@ void ModuleChSelection::ReadPlayer1Inputs() {
 					}
 
 				}
+				player1MoveTimer = App->frames + 10;
 			}
 
-			player1MoveTimer = App->frames + 10;
+
 		}
 
 		if (App->input->pads[0].a) {
@@ -336,6 +343,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 						strcpy_s(player2Name, ryuName.length() + 1, ryuName.c_str());
 					}
 				}
+				player2MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[1].right) {
@@ -374,6 +382,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 						strcpy_s(player2Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player2MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[1].up) {
@@ -402,6 +411,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 						strcpy_s(player2Name, guileName.length() + 1, guileName.c_str());
 					}
 				}
+				player2MoveTimer = App->frames + 10;
 			}
 
 			if (App->input->pads[1].down) {
@@ -431,9 +441,8 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 					}
 
 				}
+				player2MoveTimer = App->frames + 10;
 			}
-
-			player2MoveTimer = App->frames + 10;
 		}
 
 		if (App->input->pads[1].a) {

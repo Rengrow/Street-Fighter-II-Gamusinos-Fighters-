@@ -23,6 +23,7 @@ public:
 	SDL_Rect portrait1;
 	SDL_Rect portrait2;
 	SDL_Rect vs;
+	Mix_Chunk* music = nullptr;
 	Uint32 timeScreen;
 	bool isFading;
 	int typography;

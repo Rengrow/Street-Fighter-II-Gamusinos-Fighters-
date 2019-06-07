@@ -6,12 +6,10 @@
 class ModuleFight : public Module
 {
 public:
-
 	ModuleFight();
 
 	// Destructor
 	virtual ~ModuleFight();
-
 
 	bool Start();
 	bool CleanUp();

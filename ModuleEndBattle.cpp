@@ -36,8 +36,6 @@ bool ModuleEndBattle::Start()
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
 	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
-
-
 	music = App->audio->LoadSong("assets/music/stage_end.ogg");
 	App->audio->PlaySongDelay(music, 0, 10000);
 
@@ -45,7 +43,7 @@ bool ModuleEndBattle::Start()
 	App->player1->position.y = 215;
 	App->player2->position.x = 250;
 	App->player2->position.y = 215;
-	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = 0;
+	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = quoteLetters = 0;
 
 	if (App->fight->player1RoundWinned > App->fight->player2RoundWinned) {
 		portraitP1 = portrait1;
@@ -66,6 +64,11 @@ bool ModuleEndBattle::CleanUp()
 {
 	LOG("Unloading End battle screen");
 
+	delete cstr2;
+	delete cstr;
+	cstr2 = nullptr;
+	cstr = nullptr;
+
 	App->textures->Unload(portraits);
 	App->fonts->UnLoad(typography);
 	App->audio->UnloadSong(music);
@@ -83,8 +86,6 @@ void ModuleEndBattle::UpdateQuote() {
 	if (quoteOption) {
 		text = quote1.substr(0, quoteLetters);
 		text2 = quote1sub.substr(0, quoteLetters);
-
-
 	}
 	else {
 		text = quote2.substr(0, quoteLetters);

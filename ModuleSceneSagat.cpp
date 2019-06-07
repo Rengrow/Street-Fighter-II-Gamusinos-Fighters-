@@ -31,11 +31,6 @@ ModuleSceneSagat::ModuleSceneSagat()
 	// Background
 	background = { 0, 432, 633, 195 };
 
-	// J: Here rests the module palmera :( 
-	//A:  Gone, but not forgotten
-	palmtree.PushBack({ 699, 212, 325, 317 }, 24, { 0,0 }, 0, {}, {}, {});
-	palmtree.PushBack({ 696, 550, 328, 317 }, 24, { 0,0 }, 0, {}, {}, {});
-
 }
 
 ModuleSceneSagat::~ModuleSceneSagat()
@@ -48,6 +43,12 @@ bool ModuleSceneSagat::Start()
 	bool ret = true;
 	graphics = App->textures->Load("assets/images/sprites/stages/KenSagatStage.png");
 	music = App->audio->LoadSong("assets/music/thailand_s_1.ogg");
+
+	// J: Here rests the module palmera :( 
+	//A:  Gone, but not forgotten
+	//R: Do not let it fool you, once this was a memoryleak
+	palmtree.PushBack({ 699, 212, 325, 317 }, 24, { 0,0 }, 0, {}, {}, {});
+	palmtree.PushBack({ 696, 550, 328, 317 }, 24, { 0,0 }, 0, {}, {}, {});
 
 	App->audio->PlaySongDelay(music, -1, 2000);
 
@@ -104,6 +105,8 @@ bool ModuleSceneSagat::CleanUp()
 	App->particles->Disable();
 	App->collisions->Disable();
 	App->UI->Disable();
+
+	palmtree = Animation();
 
 	return true;
 }
