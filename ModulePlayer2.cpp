@@ -2540,7 +2540,7 @@ bool ModulePlayer2::IsntOnRightLimit() {
 }
 
 void ModulePlayer2::IsClose() {
-	if ((App->player1->position.x - this->position.x <= 90 && App->player1->position.x - this->position.x > 0) || (this->position.x - App->player1->position.x <= 90 && this->position.x - App->player1->position.x > 0))
+	if ((App->player1->position.x - this->position.x <= 70 && App->player1->position.x - this->position.x > 0) || (this->position.x - App->player1->position.x <= 70 && this->position.x - App->player1->position.x > 0))
 		close = true;
 
 	else
@@ -2644,7 +2644,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			life -= 7;
+			
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player1->state == L_KIK_STANDING2 || App->player1->state == L_KIK_NEUTRAL_JUMP2 || App->player1->state == L_KIK_FORWARD_JUMP2 || App->player1->state == L_KIK_BACKWARD_JUMP2 || App->player1->state == M_KIK_STANDING2 || App->player1->state == M_KIK_NEUTRAL_JUMP2 || App->player1->state == M_KIK_FORWARD_JUMP2 || App->player1->state == M_KIK_BACKWARD_JUMP2
@@ -2671,13 +2671,13 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 			{
 				inputs.Push(IN_CROUCH_REEL2);
-				life -= 7;
+				life -= 10;
 			}
 
 			else
 			{
 				inputs.Push(IN_HEAD_REEL2);
-				life -= 7;
+				life -= 10;
 			}
 			App->slowdown->StartSlowdown(5, 30);
 		}
