@@ -54,8 +54,8 @@ private:
 public:
 	Particle hdk;
 	Particle ground_dust;
-	Particle lhead;
-	Particle lhead2;
+	Particle lhead, fhead;
+	Particle lhead2, fhead2;
 	Particle blood, vomit;
 };
 
