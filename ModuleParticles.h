@@ -55,6 +55,8 @@ public:
 	Particle hdk;
 	Particle ground_dust;
 	Particle lhead;
+	Particle lhead2;
+	Particle blood, vomit;
 };
 
 #endif // __MODULEPARTICLES_H__
