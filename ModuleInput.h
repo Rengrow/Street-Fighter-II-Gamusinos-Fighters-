@@ -58,6 +58,7 @@ public:
 
 	bool CheckYogaFire(uint, int, bool) const;
 	bool CheckYogaFlame(uint, int, bool) const;
+	void ClearHistory();
 
 public:
 	History history[MAX_HISTORY];

@@ -96,6 +96,12 @@ Version 0.5.3:
 Version 0.5.4:
 - Fixed infinite loop for changed controls
 
+Version 0.8:
+- Muchas Cosas
+
+Version 0.8.1:
+- Fixed Clear History after a combo hit
+- Added Blood Particles
 
 ## Credits
 

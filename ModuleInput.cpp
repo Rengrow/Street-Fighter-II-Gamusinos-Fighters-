@@ -322,6 +322,12 @@ bool ModuleInput::CleanUp()
 	return true;
 }
 
+void ModuleInput::ClearHistory() {
+	for (int i = 0; i < MAX_HISTORY; i++)	
+		history[i] = History();
+	history_cursor = 0;
+}
+
 const History* ModuleInput::GetPrevious(int pointer) {
 
 	return (&history[pointer]);

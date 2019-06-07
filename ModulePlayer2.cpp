@@ -1134,8 +1134,8 @@ bool ModulePlayer2::Start()
 	// Burning
 
 	const int burningnColliders = 3;
-	SDL_Rect burningHitbox1[burningnColliders] = { { 0, 0, 0, 0}, { -15, 11, 53, 70}, { -61, 5, 50, 35} };
-	SDL_Rect burningHitbox2[burningnColliders] = { { 0, 0, 0, 0}, { 0, 5, 93, 37}, { 0, 0, 0, 0} };
+	SDL_Rect burningHitbox1[burningnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { -0, 0, 0, 0} };
+	SDL_Rect burningHitbox2[burningnColliders] = { { 0, 0, 0, 0}, { 0, 0, 0, 0}, { 0, 0, 0, 0} };
 	COLLIDER_TYPE burningColliderType[burningnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	COLLIDER_TYPE burningColliderType2[burningnColliders] = { {COLLIDER_PLAYER}, {COLLIDER_PLAYER}, {COLLIDER_PLAYER} };
 	Module* burningCallback[burningnColliders] = { {this}, {this}, {this} };
@@ -2577,11 +2577,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player1->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
-	if (App->frames - App->player1->l_close_standing_punch_timer == 2) {
-		if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-		else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-	}
-
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
 	{
 		inputs.Push(IN_GRAB2);
@@ -2590,6 +2585,25 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (invulnerabilityFrames < App->frames) {
+
+		if (App->frames - App->player1->l_close_standing_punch_timer == 2 || App->frames - App->player1->l_close_standing_kik_timer == 4 || App->frames - App->player1->l_standing_kik_timer == 6 || App->frames - App->player1->m_standing_kik_timer == 6 || App->frames - App->player1->m_close_standing_kik_timer == 4) {
+			if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x + 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x - 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		}
+
+
+	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
+	{
+		inputs.Push(IN_GRAB2);
+		App->player1->inputs.Push(IN_GRABBED);
+		App->slowdown->StartSlowdown(5, 30);
+	}
+		if (App->player1->state == YMUMMY || App->player1->state == YDRILL) {
+			if (state != ST_WALK_BACKWARD2 && state != ST_CROUCH_DEFENDING2 && state != ST_DEFENDING2) {
+				if (flip == false) { App->particles->AddParticle(App->particles->blood, !flip, App->player2->position.x + 20, App->player2->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+				else { App->particles->AddParticle(App->particles->blood, !flip, App->player2->position.x - 20, App->player2->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			}
+		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
 			Uint32 lasttimedamagedaux = App->GetFrame();
@@ -2670,12 +2684,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player1->state == L_KIK_STANDING2 || App->player1->state == L_KIK_NEUTRAL_JUMP2 || App->player1->state == L_KIK_FORWARD_JUMP2 || App->player1->state == L_KIK_BACKWARD_JUMP2 || App->player1->state == M_KIK_STANDING2 || App->player1->state == M_KIK_NEUTRAL_JUMP2 || App->player1->state == M_KIK_FORWARD_JUMP2 || App->player1->state == M_KIK_BACKWARD_JUMP2
-				|| App->player1->state == F_KIK_STANDING2 || App->player1->state == F_KIK_NEUTRAL_JUMP2 || App->player1->state == F_KIK_FORWARD_JUMP2 || App->player1->state == F_KIK_BACKWARD_JUMP2 || App->player1->state == L_KIK_CLOSE2 || App->player1->state == M_KIK_CLOSE2 || App->player1->state == F_KIK_CLOSE2 || App->player2->state == YMUMMY2)
+				|| App->player1->state == F_KIK_STANDING2 || App->player1->state == F_KIK_NEUTRAL_JUMP2 || App->player1->state == F_KIK_FORWARD_JUMP2 || App->player1->state == F_KIK_BACKWARD_JUMP2 || App->player1->state == L_KIK_CLOSE2 || App->player1->state == M_KIK_CLOSE2 || App->player1->state == F_KIK_CLOSE2 || App->player1->state == YMUMMY2)
 				App->audio->PlayChunk(high_kick);
 			else if (App->player1->state == L_KIK_CROUCH2 || App->player1->state == M_KIK_CROUCH2 || App->player1->state == F_KIK_CROUCH2 || App->player1->state == L_KIK_CROUCHCLOSE2 || App->player1->state == M_KIK_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_kick);
 			else if (App->player1->state == L_PUNCH_STANDING2 || App->player1->state == L_PUNCH_NEUTRAL_JUMP2 || App->player1->state == L_PUNCH_FORWARD_JUMP2 || App->player1->state == L_PUNCH_BACKWARD_JUMP2 || App->player1->state == M_PUNCH_STANDING2 || App->player1->state == M_PUNCH_NEUTRAL_JUMP2 || App->player1->state == M_PUNCH_FORWARD_JUMP2 || App->player1->state == M_PUNCH_BACKWARD_JUMP2
-				|| App->player1->state == F_PUNCH_STANDING2 || App->player1->state == F_PUNCH_NEUTRAL_JUMP2 || App->player1->state == F_PUNCH_FORWARD_JUMP2 || App->player1->state == F_PUNCH_BACKWARD_JUMP2 || App->player1->state == L_PUNCH_CLOSE2 || App->player1->state == M_PUNCH_CLOSE2 || App->player1->state == F_PUNCH_CLOSE2 || App->player2->state == YDRILL2)
+				|| App->player1->state == F_PUNCH_STANDING2 || App->player1->state == F_PUNCH_NEUTRAL_JUMP2 || App->player1->state == F_PUNCH_FORWARD_JUMP2 || App->player1->state == F_PUNCH_BACKWARD_JUMP2 || App->player1->state == L_PUNCH_CLOSE2 || App->player1->state == M_PUNCH_CLOSE2 || App->player1->state == F_PUNCH_CLOSE2 || App->player1->state == YDRILL2)
 				App->audio->PlayChunk(high_fist);
 			else if (App->player1->state == L_PUNCH_CROUCH2 || App->player1->state == M_PUNCH_CROUCH2 || App->player1->state == F_PUNCH_CROUCH2 || App->player1->state == L_PUNCH_CROUCHCLOSE2 || App->player1->state == M_PUNCH_CROUCHCLOSE2) {
 				App->audio->PlayChunk(low_fist);
@@ -2706,7 +2720,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2))
 		{
-			life -= 12;
+			life -= 15;
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
 			inputs.Push(IN_FALLING2);
@@ -2812,11 +2826,13 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
 				inputs.Push(IN_L_YFLAME2);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 1, flip) == true)
 			{
 				inputs.Push(IN_L_YFIRE2);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -2835,11 +2851,13 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
 				inputs.Push(IN_M_YFLAME2);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 1, flip) == true)
 			{
 				inputs.Push(IN_M_YFIRE2);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -2856,11 +2874,13 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
 				inputs.Push(IN_F_YFLAME2);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 1, flip) == true)
 			{
 				inputs.Push(IN_F_YFIRE2);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -4107,7 +4127,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4125,7 +4144,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4143,7 +4161,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4161,7 +4178,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4179,7 +4195,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4197,7 +4212,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4215,7 +4229,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4233,7 +4246,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4251,7 +4263,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4269,7 +4280,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4287,7 +4297,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4305,7 +4314,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4333,6 +4341,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
+			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4360,6 +4369,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
+			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4499,7 +4509,6 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
 
-			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
@@ -4796,7 +4805,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_GRABBED_FINISH2:state = ST_FALLING2; break;
+			case IN_GRABBED_FINISH2:state = ST_IDLE2; break;
 			}
 		}
 		break;

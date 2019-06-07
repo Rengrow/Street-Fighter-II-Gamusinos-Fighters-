@@ -25,11 +25,11 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 
 	//Hadoken  ATTENTION: THIS FIRES A YOGA FIRE (DHALSIM)
-	hdk.anim.PushBack({ 51, 314, 44, 24 }, 2, { 0,0 }, 0, {}, {}, {});
-	hdk.anim.PushBack({ 107, 315, 40, 23 }, 2, { 0,0 }, 0, {}, {}, {});
-	hdk.anim.PushBack({ 153, 315, 43, 23 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 49, 312, 53, 39 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 108, 304, 56, 37 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 170, 304, 54, 37 }, 2, { 0,0 }, 0, {}, {}, {});
 	hdk.anim.loop = true;
-	
+
 	hdk.life = -1;
 
 	ground_dust.anim.PushBack({ 295, 98, 21, 17 }, 2, { 0,0 }, 0, {}, {}, {});
@@ -41,14 +41,44 @@ bool ModuleParticles::Start()
 
 	ground_dust.life = 10;
 
-	lhead.anim.PushBack({ 242, 67, 8, 10 }, 2, { 0,0 }, 0, {}, {}, {});
-	lhead.anim.PushBack({ 252, 67, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
 	lhead.anim.PushBack({ 281, 83, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
-	lhead.anim.PushBack({ 323, 67, 19, 15 }, 2, { 0,0 }, 0, {}, {}, {});
-	lhead.anim.PushBack({ 295, 67, 26, 24 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 7, 229, 15, 21 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 281, 83, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 25, 227, 28, 24 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead.anim.PushBack({ 57, 220, 33, 31 }, 2, { 0,0 }, 0, {}, {}, {});
 	lhead.anim.loop = true;
 
 	lhead.life = 10;
+
+	lhead2.anim.PushBack({ 242, 67, 8, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead2.anim.PushBack({ 252, 67, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead2.anim.PushBack({ 281, 83, 12, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead2.anim.PushBack({ 323, 67, 19, 15 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead2.anim.PushBack({ 295, 67, 26, 24 }, 2, { 0,0 }, 0, {}, {}, {});
+	lhead2.anim.loop = true;
+
+	lhead2.life = 10;
+
+	blood.anim.PushBack({ 11, 24, 7, 6 }, 2, { 0,0 }, 0, {}, {}, {});
+	blood.anim.PushBack({ 21, 16, 14, 14 }, 2, { 0,0 }, 0, {}, {}, {});
+	blood.anim.PushBack({ 38, 15, 22, 15 }, 2, { 0,0 }, 0, {}, {}, {});
+	blood.anim.PushBack({ 62, 16, 13, 14 }, 2, { 0,0 }, 0, {}, {}, {});
+	blood.anim.PushBack({ 77, 15, 13, 15 }, 2, { 0,0 }, 0, {}, {}, {});
+	blood.anim.loop = true;
+
+	blood.life = 10;
+
+	vomit.anim.PushBack({ 405, 123, 12, 9 }, 1, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 389, 124, 12, 12 }, 2, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 373, 124, 12, 17 }, 1, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 295, 124, 12, 20 }, 2, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 314, 124, 12, 15 }, 1, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 332, 124, 12, 28 }, 2, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 350, 124, 7, 27 }, 1, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.PushBack({ 363, 124, 6, 26 }, 2, { 0,0 }, 0, {}, {}, {});
+	vomit.anim.loop = true;
+
+	vomit.life = 12;
 
 	return true;
 }
@@ -81,7 +111,7 @@ update_status ModuleParticles::Update()
 
 		if (p == nullptr)
 			continue;
-		if (p->Update() == false) {}
+		p->Update();
 		p->collider->SetPos(p->position);
 		if (SDL_GetTicks() >= p->born)
 		{
@@ -94,7 +124,7 @@ update_status ModuleParticles::Update()
 			delete active[i];
 			active[i] = nullptr;
 		}
-		if(p->life > 0){
+		if (p->life > 0) {
 			p->life--;
 		}
 	}
@@ -118,7 +148,7 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 				p->flip = false;
 			}
 
-			if (flip == true){
+			if (flip == true) {
 				p->speed = { -vx, vy };
 				p->flip = true;
 			}
@@ -147,7 +177,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			active[i]->collider->to_delete = true;
 
 			delete active[i];
-			active[i] = nullptr; 
+			active[i] = nullptr;
 			break;
 		}
 	}
@@ -170,7 +200,7 @@ Particle::Particle(const Particle& p) :
 bool Particle::Update()
 {
 	bool ret = true;
-	
+
 	position.x += speed.x;
 	position.y += speed.y;
 
