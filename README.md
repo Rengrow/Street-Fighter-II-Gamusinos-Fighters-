@@ -101,7 +101,7 @@ Version 0.8:
 
 Version 0.8.1:
 - Fixed Clear History after a combo hit
-- 
+- Added Blood Particles
 
 ## Credits
 
