@@ -3286,8 +3286,9 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (App->frames - f_crouching_punch_timer > D_F_CROUCHING_PUNCH_TIME)
 		{
-			inputs.Push(IN_PUNCH_FINISH2);
+ 			inputs.Push(IN_PUNCH_FINISH2);
 			f_crouching_punch_timer = 0;
+			chp.ResetAnimation();
 		}
 	}
 

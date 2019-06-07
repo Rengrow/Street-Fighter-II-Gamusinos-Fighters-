@@ -3323,6 +3323,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		{
 			inputs.Push(IN_PUNCH_FINISH);
 			f_crouching_punch_timer = 0;
+			chp.ResetAnimation();
 		}
 	}
 
