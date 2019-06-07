@@ -430,6 +430,7 @@ public:
 	Uint32 l_yflame_timer = 0;
 	Uint32 m_yflame_timer = 0;
 	Uint32 f_yflame_timer = 0;
+	Uint32 burning_timer = 0;
 
 	Uint32 crouching_timer = 0;
 	Uint32 standing_timer = 0;

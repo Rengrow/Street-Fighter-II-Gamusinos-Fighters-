@@ -2498,16 +2498,31 @@ update_status ModulePlayer1::Update()
 			break;
 
 		case BURNING:
+			texture = graphics4;
 			current_animation = &burning;
-			jumpHeight += speed + 3;
-			if (jumpHeight == 0)
+
+			if (burning_timer == 0)
 			{
-				inputs.Push(IN_BURNING_FINISH);
+				burning_timer = App->frames;
 			}
 
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 21))
+			{
+				jumpHeight -= speed + 1;
+			}
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (App->frames - burning_timer > 20)
+				jumpHeight += speed + 1;
+
+			if (jumpHeight >= 0 && App->frames - burning_timer > 21)
+			{
+				inputs.Push(IN_BURNING_FINISH);
+				burning_timer = 0;
+			}
+
+			if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
+
+			if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
 
 			break;
 			//end of test
@@ -2549,7 +2564,7 @@ bool ModulePlayer1::IsntOnLeftLimit() {
 }
 
 void ModulePlayer1::IsClose() {
-	if ((App->player2->position.x - this->position.x <= 90 && App->player2->position.x - this->position.x > 0) || (this->position.x - App->player2->position.x <= 90 && this->position.x - App->player2->position.x > 0))
+	if ((App->player2->position.x - this->position.x <= 70 && App->player2->position.x - this->position.x > 0) || (this->position.x - App->player2->position.x <= 70 && this->position.x - App->player2->position.x > 0))
 		close = true;
 
 	else
@@ -2586,7 +2601,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 		{
-			life -= 12;
+			
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 25 + App->frames;
 
@@ -2600,8 +2615,10 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				life -= 5;
 			}
 			else
+			{
 				inputs.Push(IN_BURNING);
-
+				life -= 15;
+			}
 			App->slowdown->StartSlowdown(5, 30);
 			App->render->StartCameraShake(5, 2);
 		}
@@ -2609,7 +2626,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			life -= 7;
+			
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player2->state == L_KIK_STANDING2 || App->player2->state == L_KIK_NEUTRAL_JUMP2 || App->player2->state == L_KIK_FORWARD_JUMP2 || App->player2->state == L_KIK_BACKWARD_JUMP2 || App->player2->state == M_KIK_STANDING2 || App->player2->state == M_KIK_NEUTRAL_JUMP2 || App->player2->state == M_KIK_FORWARD_JUMP2 || App->player2->state == M_KIK_BACKWARD_JUMP2
@@ -2634,10 +2651,12 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 			{
 				inputs.Push(IN_CROUCH_REEL);
-				life -= 7;
+				life -= 10;
 			}
-			else
+			else {
 				inputs.Push(IN_HEAD_REEL);
+				life -= 10;
+			}
 
 			App->slowdown->StartSlowdown(5, 30);
 		}
@@ -4833,6 +4852,16 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 
+		case BURNING:
+		{
+			switch (last_input)
+			{
+			case IN_BURNING_FINISH:state = ST_GETTING_UP; getting_up_timer = App->frames; break;
+			case IN_LOOSE: state = LOOSE; break;
+			}
+		}
+		break;
+
 		case SWEEP:
 		{
 			switch (last_input)
@@ -4841,6 +4870,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
+		break;
 
 		case LOOSE:
 		{

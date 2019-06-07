@@ -2263,9 +2263,9 @@ update_status ModulePlayer2::Update()
 				inputs.Push(IN_FALLING_FINISH2);
 			}
 
-			if ((!flip) && (colliding == false)) position.x -= speed;
+			if (IsntOnRightLimit() && (!flip) && (colliding == false)) position.x -= speed;
 
-			if ((flip) && (colliding == false))  position.x += speed;
+			if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed;
 
 			break;
 
@@ -2275,9 +2275,9 @@ update_status ModulePlayer2::Update()
 			jumpHeight += speed + 2;
 			dizzydamage = 4;
 
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			if (IsntOnRightLimit() && (!flip) && (colliding == false)) position.x += speed + 2;
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (IsntOnLeftLimit() && (flip) && (colliding == false))  position.x -= speed + 2;
 
 			if (jumpHeight >= 0)
 			{
@@ -2499,16 +2499,31 @@ update_status ModulePlayer2::Update()
 			break;
 
 		case BURNING2:
+			texture = graphics4;
 			current_animation = &burning;
-
-			if (jumpHeight == 0)
+			
+			if (burning_timer == 0)
 			{
-				inputs.Push(IN_BURNING_FINISH2);
+				burning_timer = App->frames;
 			}
 
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 21))
+			{
+				jumpHeight -= speed + 1;
+			}
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (App->frames - burning_timer > 20)
+				jumpHeight += speed + 1;
+
+			if (jumpHeight >= 0 && App->frames - burning_timer > 21)
+			{
+				inputs.Push(IN_BURNING_FINISH2);
+				burning_timer = 0;
+			}
+
+			if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
+
+			if ( IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
 
 			break;
 
@@ -2543,7 +2558,7 @@ bool ModulePlayer2::IsntOnRightLimit() {
 }
 
 void ModulePlayer2::IsClose() {
-	if ((App->player1->position.x - this->position.x <= 90 && App->player1->position.x - this->position.x > 0) || (this->position.x - App->player1->position.x <= 90 && this->position.x - App->player1->position.x > 0))
+	if ((App->player1->position.x - this->position.x <= 70 && App->player1->position.x - this->position.x > 0) || (this->position.x - App->player1->position.x <= 70 && this->position.x - App->player1->position.x > 0))
 		close = true;
 
 	else
@@ -2647,7 +2662,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			life -= 7;
+			
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player1->state == L_KIK_STANDING2 || App->player1->state == L_KIK_NEUTRAL_JUMP2 || App->player1->state == L_KIK_FORWARD_JUMP2 || App->player1->state == L_KIK_BACKWARD_JUMP2 || App->player1->state == M_KIK_STANDING2 || App->player1->state == M_KIK_NEUTRAL_JUMP2 || App->player1->state == M_KIK_FORWARD_JUMP2 || App->player1->state == M_KIK_BACKWARD_JUMP2
@@ -2674,13 +2689,13 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
 			{
 				inputs.Push(IN_CROUCH_REEL2);
-				life -= 7;
+				life -= 10;
 			}
 
 			else
 			{
 				inputs.Push(IN_HEAD_REEL2);
-				life -= 7;
+				life -= 10;
 			}
 			App->slowdown->StartSlowdown(5, 30);
 		}
@@ -4826,6 +4841,16 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		}
 		break;
 
+		case BURNING2:
+		{
+			switch (last_input)
+			{
+			case IN_BURNING_FINISH2:state = ST_GETTING_UP2; getting_up_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
+			}
+		}
+		break; 
+
 		case SWEEP2:
 		{
 			switch (last_input)
@@ -4834,6 +4859,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
+		break;
 
 		case LOOSE2:
 		{
