@@ -39,7 +39,7 @@ public:
 	std::string quoteTemp;
 	char *cstr;
 	char *cstr2;
-	int quoteLetters = 0;
+	int quoteLetters;
 };
 
 #endif // __MODULEENDBATTLE_H__
