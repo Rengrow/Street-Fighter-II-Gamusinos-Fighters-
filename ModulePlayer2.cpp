@@ -2581,8 +2581,6 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x + 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 		else { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x - 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 	}*/
-
-
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
 	{
 		inputs.Push(IN_GRAB2);
@@ -2591,6 +2589,25 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (invulnerabilityFrames < App->frames) {
+
+		if (App->frames - App->player1->l_close_standing_punch_timer == 2) {
+			if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		}
+
+
+	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
+	{
+		inputs.Push(IN_GRAB2);
+		App->player1->inputs.Push(IN_GRABBED);
+		App->slowdown->StartSlowdown(5, 30);
+	}
+		if (App->player1->state == YMUMMY || App->player1->state == YDRILL) {
+			if (state != ST_WALK_BACKWARD2 && state != ST_CROUCH_DEFENDING2 && state != ST_DEFENDING2) {
+				if (flip == false) { App->particles->AddParticle(App->particles->blood, !flip, App->player2->position.x + 20, App->player2->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+				else { App->particles->AddParticle(App->particles->blood, !flip, App->player2->position.x - 20, App->player2->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			}
+		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
 			Uint32 lasttimedamagedaux = App->GetFrame();
@@ -4785,7 +4802,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_GRABBED_FINISH2:state = ST_FALLING2; break;
+			case IN_GRABBED_FINISH2:state = ST_IDLE2; break;
 			}
 		}
 		break;

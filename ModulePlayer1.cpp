@@ -2021,7 +2021,7 @@ update_status ModulePlayer1::Update()
 			}
 
 			//Pushback start
-	 		if (pushbacktimerhit != 0) {
+			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
 				if (IsntOnLeftLimit() && IsntOnRightLimit())
 				{
@@ -2595,15 +2595,27 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 	}
 	//PUSHBACK CHECK END
 
+	if (invulnerabilityFrames < App->frames) {
+
+		if (App->frames - App->player2->l_close_standing_punch_timer == 2) {
+		if (flip == false) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player2->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player2->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+	}
+
+	if (App->player2->state == YMUMMY2 || App->player2->state == YDRILL2) {
+		if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
+			if (flip == false) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		}
+	}
 /*	if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4) {
 		if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 		else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 	}*/
 
-	if (invulnerabilityFrames < App->frames) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 		{
-			
+
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 25 + App->frames;
 
@@ -2628,7 +2640,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			
+
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player2->state == L_KIK_STANDING2 || App->player2->state == L_KIK_NEUTRAL_JUMP2 || App->player2->state == L_KIK_FORWARD_JUMP2 || App->player2->state == L_KIK_BACKWARD_JUMP2 || App->player2->state == M_KIK_STANDING2 || App->player2->state == M_KIK_NEUTRAL_JUMP2 || App->player2->state == M_KIK_FORWARD_JUMP2 || App->player2->state == M_KIK_BACKWARD_JUMP2
@@ -2637,7 +2649,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else if (App->player2->state == L_KIK_CROUCH2 || App->player2->state == M_KIK_CROUCH2 || App->player2->state == F_KIK_CROUCH2 || App->player2->state == L_KIK_CROUCHCLOSE2 || App->player2->state == M_KIK_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_kick);
 			else if (App->player2->state == L_PUNCH_STANDING2 || App->player2->state == L_PUNCH_NEUTRAL_JUMP2 || App->player2->state == L_PUNCH_FORWARD_JUMP2 || App->player2->state == L_PUNCH_BACKWARD_JUMP2 || App->player2->state == M_PUNCH_STANDING2 || App->player2->state == M_PUNCH_NEUTRAL_JUMP2 || App->player2->state == M_PUNCH_FORWARD_JUMP2 || App->player2->state == M_PUNCH_BACKWARD_JUMP2
-				|| App->player2->state == F_PUNCH_STANDING2 || App->player2->state == F_PUNCH_NEUTRAL_JUMP2 || App->player2->state == F_PUNCH_FORWARD_JUMP2 || App->player2->state == F_PUNCH_BACKWARD_JUMP2 || App->player2->state == L_PUNCH_CLOSE2 || App->player2->state == M_PUNCH_CLOSE2 || App->player2->state == F_PUNCH_CLOSE2 ||App->player2->state == YDRILL2)
+				|| App->player2->state == F_PUNCH_STANDING2 || App->player2->state == F_PUNCH_NEUTRAL_JUMP2 || App->player2->state == F_PUNCH_FORWARD_JUMP2 || App->player2->state == F_PUNCH_BACKWARD_JUMP2 || App->player2->state == L_PUNCH_CLOSE2 || App->player2->state == M_PUNCH_CLOSE2 || App->player2->state == F_PUNCH_CLOSE2 || App->player2->state == YDRILL2)
 				App->audio->PlayChunk(high_fist);
 			else if (App->player2->state == L_PUNCH_CROUCH2 || App->player2->state == M_PUNCH_CROUCH2 || App->player2->state == F_PUNCH_CROUCH2 || App->player2->state == L_PUNCH_CROUCHCLOSE2 || App->player2->state == M_PUNCH_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_fist);
@@ -4811,7 +4823,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_GRABBED_FINISH:state = ST_FALLING; break;
+			case IN_GRABBED_FINISH:state = ST_IDLE; break;
 			}
 		}
 		break;

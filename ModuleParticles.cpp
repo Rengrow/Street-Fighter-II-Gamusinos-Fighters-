@@ -29,7 +29,7 @@ bool ModuleParticles::Start()
 	hdk.anim.PushBack({ 108, 304, 56, 37 }, 2, { 0,0 }, 0, {}, {}, {});
 	hdk.anim.PushBack({ 170, 304, 54, 37 }, 2, { 0,0 }, 0, {}, {}, {});
 	hdk.anim.loop = true;
-	
+
 	hdk.life = -1;
 
 	ground_dust.anim.PushBack({ 295, 98, 21, 17 }, 2, { 0,0 }, 0, {}, {}, {});
@@ -111,7 +111,7 @@ update_status ModuleParticles::Update()
 
 		if (p == nullptr)
 			continue;
-		if (p->Update() == false) {}
+		p->Update();
 		p->collider->SetPos(p->position);
 		if (SDL_GetTicks() >= p->born)
 		{
@@ -124,7 +124,7 @@ update_status ModuleParticles::Update()
 			delete active[i];
 			active[i] = nullptr;
 		}
-		if(p->life > 0){
+		if (p->life > 0) {
 			p->life--;
 		}
 	}
@@ -148,7 +148,7 @@ void ModuleParticles::AddParticle(const Particle& particle, bool flip, int x, in
 				p->flip = false;
 			}
 
-			if (flip == true){
+			if (flip == true) {
 				p->speed = { -vx, vy };
 				p->flip = true;
 			}
@@ -177,7 +177,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			active[i]->collider->to_delete = true;
 
 			delete active[i];
-			active[i] = nullptr; 
+			active[i] = nullptr;
 			break;
 		}
 	}
@@ -200,7 +200,7 @@ Particle::Particle(const Particle& p) :
 bool Particle::Update()
 {
 	bool ret = true;
-	
+
 	position.x += speed.x;
 	position.y += speed.y;
 
