@@ -31,11 +31,13 @@ bool ModulePlayer1::Start()
 		graphics = App->textures->Load("assets/images/sprites/characters/dhalshim1.png"); // arcade version
 		graphics2 = App->textures->Load("assets/images/sprites/characters/dhalshim2.png"); // arcade version
 		graphics3 = App->textures->Load("assets/images/sprites/characters/dictator-dhalshim.png"); // arcade version
+		graphics6 = App->textures->Load("assets/images/sprites/characters/dhalshim4.png"); // arcade version
 	}
 	else {
 		graphics = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim1.png"); // arcade version
 		graphics2 = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim2.png"); // arcade version
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
+		graphics6 = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim4.png"); // arcade version
 	}
 
 	graphics4 = App->textures->Load("assets/images/sprites/characters/ryu1.png");
@@ -1110,6 +1112,30 @@ bool ModulePlayer1::Start()
 	getup.PushBack({ 330, 974, 122, 46 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	getup.PushBack({ 455, 920, 83, 100 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
+	//Grabbed
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
+	//Thrown
+	thrown.PushBack({ 1, 1, 72, 94 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 76, 4, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 144, 49, 125, 52 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 270, 5, 86, 96 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 357, 13, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
 
 	// Defending
 	const int defendingnColliders = 3;
@@ -1252,8 +1278,7 @@ bool ModulePlayer1::CleanUp()
 		crouching = standing = crouch =
 		win1 = win2 = lose =
 		ground =
-		grabbing =
-		turn_anim = cturn_anim = Animation();
+		grabbing = grabbed = thrown = turn_anim = cturn_anim = Animation();
 
 	//Clear Textures
 	App->textures->Unload(graphics);
@@ -1261,6 +1286,7 @@ bool ModulePlayer1::CleanUp()
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
 	App->textures->Unload(graphics5);
+	App->textures->Unload(graphics6);
 	App->textures->Unload(shadow);
 
 	//Clear Colliders

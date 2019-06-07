@@ -230,6 +230,7 @@ public:
 	SDL_Texture* graphics3 = nullptr;
 	SDL_Texture* graphics4 = nullptr;
 	SDL_Texture* graphics5 = nullptr;
+	SDL_Texture* graphics6 = nullptr;
 	SDL_Texture* shadow = nullptr;
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
@@ -248,7 +249,7 @@ public:
 	Animation crouching, standing, crouch;
 	Animation win1, win2, lose;
 	Animation ground;
-	Animation grabbing;
+	Animation grabbing, grabbed, thrown;
 	Animation turn_anim, cturn_anim;
 	// Animation sweep;
 	Mix_Chunk* hdk_hit = nullptr;
