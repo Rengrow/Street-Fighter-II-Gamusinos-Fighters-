@@ -2597,10 +2597,11 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 
 	if (invulnerabilityFrames < App->frames) {
 
-		if (App->frames - App->player2->l_close_standing_punch_timer == 2) {
-		if (flip == false) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player2->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-		else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player2->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-	}
+		if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4) {
+			if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		}
+
 
 	if (App->player2->state == YMUMMY2 || App->player2->state == YDRILL2) {
 		if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
@@ -2608,10 +2609,6 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 		}
 	}
-/*	if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4) {
-		if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-		else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-	}*/
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 		{
