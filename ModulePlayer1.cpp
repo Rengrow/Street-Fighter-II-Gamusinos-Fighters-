@@ -55,6 +55,7 @@ bool ModulePlayer1::Start()
 	position.y = 215;
 
 	life = 100;
+	dizzylvl = 0;
 	freeze = true;
 	flip = turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
@@ -2596,6 +2597,56 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 	//PUSHBACK CHECK END
 
 	if (invulnerabilityFrames < App->frames) {
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
+			Uint32 lasttimedamagedaux = App->GetFrame();
+			if (lasttimedamagedaux - lasttimedamaged > 200) {
+				dizzylvl = 0;
+			}
+			if (App->player2->dizzydamage == 1) { dizzylvl += 1 + (SDL_GetTicks() % 7); }
+			if (App->player2->dizzydamage == 2) { dizzylvl += 5 + (SDL_GetTicks() % 7); }
+			if (App->player2->dizzydamage == 3) { dizzylvl += 11 + (SDL_GetTicks() % 7); }
+			if (App->player2->dizzydamage == 4) { dizzylvl += 13 + (SDL_GetTicks() % 7); }
+			if (App->player2->dizzydamage == 5) { dizzylvl += 7 + (SDL_GetTicks() % 7); }
+
+			int ponderatedmodifier = (SDL_GetTicks() % 100);
+			if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
+			if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
+			if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
+			if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
+			if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl += +1; }
+			if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl += +2; }
+			if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl += +3; }
+			lasttimedamaged = lasttimedamagedaux;
+		}
+
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT) {
+			Uint32 lasttimedamagedaux = App->GetFrame();
+			if (lasttimedamagedaux - lasttimedamaged > 200) {
+				dizzylvl = 0;
+			}
+			dizzylvl += 13 + (SDL_GetTicks() % 19);
+			int ponderatedmodifier = (SDL_GetTicks() % 100);
+			if ((ponderatedmodifier >= 0) && (ponderatedmodifier < 4)) { dizzylvl -= 3; }
+			if ((ponderatedmodifier >= 4) && (ponderatedmodifier < 16)) { dizzylvl -= 2; }
+			if ((ponderatedmodifier >= 16) && (ponderatedmodifier < 31)) { dizzylvl -= 1; }
+			if ((ponderatedmodifier >= 31) && (ponderatedmodifier < 69)) { dizzylvl += 0; }
+			if ((ponderatedmodifier >= 69) && (ponderatedmodifier < 81)) { dizzylvl -= +1; }
+			if ((ponderatedmodifier >= 81) && (ponderatedmodifier < 93)) { dizzylvl -= +2; }
+			if ((ponderatedmodifier >= 83) && (ponderatedmodifier < 101)) { dizzylvl -= +3; }
+			lasttimedamaged = lasttimedamagedaux;
+		}
+		if (dizzylvl < 0) { //should not happen, just to be extra seccure
+			dizzylvl = 0;
+		}
+
+		if (dizzylvl < 32) {
+			dizzi = false;
+		}
+
+		if (dizzylvl >= 32) {
+			dizzi = true;
+			dizzylvl = 0;
+		}
 		if (App->player1->state != ST_CROUCH_DEFENDING) {
 			if (App->player1->state != ST_DEFENDING) {
 				if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4 || App->frames - App->player2->f_standing_kik_timer == 13) {
