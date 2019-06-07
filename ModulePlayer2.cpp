@@ -2596,9 +2596,14 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				}
 			}
 
-			if (App->frames - App->player1->l_close_crouching_kik_timer == 4 || App->frames - App->player1->m_close_crouching_kik_timer == 1) {
+			if (App->frames - App->player1->l_close_crouching_kik_timer == 4 || App->frames - App->player1->m_close_crouching_kik_timer == 1 || App->frames - App->player1->l_close_crouching_punch_timer == 2 || App->frames - App->player1->m_close_crouching_punch_timer == 3 || App->frames - App->player1->m_crouching_punch_timer == 10 || App->frames - App->player1->l_crouching_punch_timer == 10 || App->frames - App->player1->f_crouching_punch_timer == 13) {
 				if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x + 20, App->player1->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 				else { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x - 20, App->player1->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			}
+
+			if (App->frames - App->player1->l_standing_punch_timer == 6 || App->frames - App->player1->m_standing_punch_timer == 8 || App->frames - App->player1->f_standing_punch_timer == 13 || App->frames - App->player1->m_close_standing_punch_timer == 2) {
+				if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x + 20, App->player1->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+				else { App->particles->AddParticle(App->particles->lhead, !flip, App->player2->position.x - 20, App->player1->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 			}
 
 			if (App->player1->state == L_KIK_CROUCH || App->player1->state == M_KIK_CROUCH || App->player1->state == F_KIK_CROUCH) {
