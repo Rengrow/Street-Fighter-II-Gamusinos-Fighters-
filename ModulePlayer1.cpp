@@ -2024,7 +2024,7 @@ update_status ModulePlayer1::Update()
 			}
 
 			//Pushback start
-			if (pushbacktimerhit != 0) {
+	 		if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
 				if (IsntOnLeftLimit() && IsntOnRightLimit())
 				{
@@ -2591,6 +2591,12 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player2->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
+	if (c1->type == COLLIDER_PLAYER_GRAB && c2->type == COLLIDER_PLAYER2)
+	{
+		inputs.Push(IN_GRAB);
+		App->player2->inputs.Push(IN_GRABBED2);
+		App->slowdown->StartSlowdown(5, 30);
+	}
 	//PUSHBACK CHECK END
 
 	if (App->frames - App->player2->l_close_standing_punch_timer == 2) {
