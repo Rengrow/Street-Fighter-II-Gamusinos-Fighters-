@@ -89,6 +89,15 @@ bool ModuleParticles::Start()
 
 	fhead2.life = 12;
 
+	defending.anim.PushBack({ 294, 158, 10, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 308, 158, 14, 20 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 325, 158, 22, 19 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 350, 158, 30, 29 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 383, 158, 31, 31 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.loop = true;
+
+	defending.life = 10;
+
 	return true;
 }
 

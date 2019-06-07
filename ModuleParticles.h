@@ -24,6 +24,7 @@ struct Particle
 	Uint32 born = 0;
 	Uint32 life = 0;
 	bool flip;
+	int number1;
 	Mix_Chunk* sfx = nullptr;
 	
 
@@ -56,7 +57,7 @@ public:
 	Particle ground_dust;
 	Particle lhead, fhead;
 	Particle lhead2, fhead2;
-	Particle blood, vomit;
+	Particle blood, defending;
 };
 
 #endif // __MODULEPARTICLES_H__
