@@ -42,7 +42,6 @@ bool ModulePlayer2::Start()
 	graphics4 = App->textures->Load("assets/images/sprites/characters/ryu1.png");
 	graphics5 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png");
 	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
-	hdk_voice = App->audio->LoadChunk("assets/sfx/voices/ryu_ken_hadouken.wav");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
 	low_fist = App->audio->LoadChunk("assets/sfx/effects/low_fist.wav");
@@ -60,7 +59,7 @@ bool ModulePlayer2::Start()
 	freeze = flip = true;
 	turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
-		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = puntuation = 0;
+		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight =0;
 	pushbackspeed = speed = 1;
 	levitationtimer = -100;
 	Animation* current_animation;
@@ -1218,8 +1217,6 @@ bool ModulePlayer2::CleanUp()
 	LOG("Unloading Player 2");
 
 	//Clear Audio
-	App->audio->UnloadChunk(hdk_voice);
-	hdk_voice = nullptr;
 	App->audio->UnloadChunk(hdk_hit);
 	hdk_hit = nullptr;
 	App->audio->UnloadChunk(low_kick);

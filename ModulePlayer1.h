@@ -251,7 +251,6 @@ public:
 	Animation grabbing;
 	Animation turn_anim, cturn_anim;
 	// Animation sweep;
-	Mix_Chunk* hdk_voice = nullptr;
 	Mix_Chunk* hdk_hit = nullptr;
 	Mix_Chunk* low_kick = nullptr;
 	Mix_Chunk* low_fist = nullptr;

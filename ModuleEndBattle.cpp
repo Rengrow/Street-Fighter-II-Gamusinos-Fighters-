@@ -43,7 +43,7 @@ bool ModuleEndBattle::Start()
 	App->player1->position.y = 215;
 	App->player2->position.x = 250;
 	App->player2->position.y = 215;
-	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = 0;
+	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = quoteLetters = 0;
 
 	if (App->fight->player1RoundWinned > App->fight->player2RoundWinned) {
 		portraitP1 = portrait1;
