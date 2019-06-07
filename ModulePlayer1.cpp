@@ -2485,7 +2485,6 @@ update_status ModulePlayer1::Update()
 			break;
 
 		case CROUCH_TURNING:
-			texture = graphics3;
 			current_animation = &cturn_anim;
 			turn = false;
 			break;
@@ -2647,45 +2646,51 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			dizzi = true;
 			dizzylvl = 0;
 		}
-		if (App->player1->state != ST_CROUCH_DEFENDING) {
-			if (App->player1->state != ST_DEFENDING) {
-				if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4 || App->frames - App->player2->f_standing_kik_timer == 13) {
-					if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-					else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-					if (App->player2->f_standing_kik_timer > 0) {
-						if (flip == true) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-						else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
+			if (App->player1->state != ST_CROUCH_DEFENDING_READY) {
+				if ((flip == false && App->player1->state != ST_WALK_FORWARD) || (flip == true && App->player1->state != ST_WALK_BACKWARD)) {
+					if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4 || App->frames - App->player2->f_standing_kik_timer == 13) {
+						if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						if (App->player2->f_standing_kik_timer > 0) {
+							if (flip == true) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+							else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						}
 					}
-				}
 
-				if (App->frames - App->player2->l_close_crouching_kik_timer == 4 || App->frames - App->player2->m_close_crouching_kik_timer == 1 || App->frames - App->player2->l_close_crouching_punch_timer == 2 || App->frames - App->player2->m_close_crouching_punch_timer == 3 || App->frames - App->player2->m_crouching_punch_timer == 10 || App->frames - App->player2->l_crouching_punch_timer == 10 || App->frames - App->player2->f_crouching_punch_timer == 13) {
-					if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-					else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-				}
-
-				if (App->frames - App->player2->l_standing_punch_timer == 6 || App->frames - App->player2->m_standing_punch_timer == 8 || App->frames - App->player2->f_standing_punch_timer == 13 || App->frames - App->player2->m_close_standing_punch_timer == 0) {
-					if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-					else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-				}
-
-				if (App->player2->state == L_KIK_CROUCH2 || App->player2->state == M_KIK_CROUCH2 || App->player2->state == F_KIK_CROUCH2) {
-					if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
+					if (App->frames - App->player2->l_close_crouching_kik_timer == 4 || App->frames - App->player2->m_close_crouching_kik_timer == 1 || App->frames - App->player2->l_close_crouching_punch_timer == 2 || App->frames - App->player2->m_close_crouching_punch_timer == 3 || App->frames - App->player2->m_crouching_punch_timer == 10 || App->frames - App->player2->l_crouching_punch_timer == 10 || App->frames - App->player2->f_crouching_punch_timer == 13) {
 						if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 						else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 					}
-				}
 
-				if (App->frames - App->player2->f_close_standing_punch_timer == 6) {
-					if (flip == true) { App->particles->AddParticle(App->particles->fhead2, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-					else { App->particles->AddParticle(App->particles->fhead2, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-				}
+					if (App->frames - App->player2->l_standing_punch_timer == 6 || App->frames - App->player2->m_standing_punch_timer == 8 || App->frames - App->player2->f_standing_punch_timer == 13 || App->frames - App->player2->m_close_standing_punch_timer == 2 || App->frames - App->player2->f_close_standing_kik_timer == 10) {
+						if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					}
 
-				if (App->player2->state == YMUMMY2 || App->player2->state == YDRILL2) {
-					if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
-						if (flip == true) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-						else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					if (App->player2->state == L_KIK_CROUCH2 || App->player2->state == M_KIK_CROUCH2 || App->player2->state == F_KIK_CROUCH2) {
+						if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
+							if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+							else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						}
+					}
+
+					if (App->frames - App->player2->f_close_standing_punch_timer == 6) {
+						if (flip == true) { App->particles->AddParticle(App->particles->fhead2, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->fhead2, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					}
+
+					if (App->player2->state == YMUMMY2 || App->player2->state == YDRILL2) {
+						if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
+							if (flip == true) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+							else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						}
 					}
 				}
+			}
+			if ((App->player1->state == ST_CROUCH_DEFENDING_READY) || (flip == false && App->player1->state == ST_WALK_FORWARD) || (flip == true && App->player1->state == ST_WALK_BACKWARD)) {
+				if (flip == true) { App->particles->AddParticle(App->particles->defending, !flip, App->player1->position.x + 20, App->player1->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+				else { App->particles->AddParticle(App->particles->defending, !flip, App->player1->position.x - 20, App->player1->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 			}
 		}
 
