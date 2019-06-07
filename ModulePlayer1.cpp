@@ -2756,7 +2756,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
 		{
 			life -= 12;
 			App->audio->PlayChunk(hdk_hit);
@@ -2765,7 +2765,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
 		{
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
@@ -3328,6 +3328,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		{
 			inputs.Push(IN_PUNCH_FINISH);
 			f_crouching_punch_timer = 0;
+			chp.ResetAnimation();
 		}
 	}
 
@@ -3746,12 +3747,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_KIK: state = M_KIK_NEUTRAL_JUMP; break;
 
 			case IN_F_PUNCH: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
 				else { state = F_PUNCH_NEUTRAL_JUMP; }
 			}break;
 
 			case IN_F_KIK: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YDRILL; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL; }
 				else { state = F_KIK_NEUTRAL_JUMP; }
 			}break;
 
@@ -3776,12 +3777,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_KIK: state = M_KIK_FORWARD_JUMP; m_d_jumping_kik_timer = App->frames; break;
 
 			case IN_F_PUNCH: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
 				else { state = F_PUNCH_FORWARD_JUMP; f_d_jumping_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YDRILL; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL; }
 				else { state = F_KIK_FORWARD_JUMP; f_d_jumping_kik_timer = App->frames; }
 			}break;
 
@@ -3806,12 +3807,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_KIK: state = M_KIK_BACKWARD_JUMP; m_d_jumping_kik_timer = App->frames; break;
 
 			case IN_F_PUNCH: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
 				else { state = F_PUNCH_BACKWARD_JUMP; f_d_jumping_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YDRILL; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL; }
 				else { state = F_KIK_BACKWARD_JUMP; f_d_jumping_kik_timer = App->frames; }
 			}break;
 
