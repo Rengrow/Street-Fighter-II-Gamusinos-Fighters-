@@ -25,14 +25,15 @@ ModuleFight::~ModuleFight()
 
 bool ModuleFight::Start()
 {
-	stage = App->scene_Sagat;
+	if (SDL_GetTicks() % 2 == 0)
+		stage = App->scene_Sagat;
+	else
+		stage = App->scene_ken;
 
 	stage->Enable();
 
 	roundStarted = stopedFight = endFightStarted = false;
-
-	player1RoundWinned = player2RoundWinned = 0;
-	autoWinLoseTimer = 0;
+	player1RoundWinned = player2RoundWinned = autoWinLoseTimer = 0;
 	round = 1;
 
 	return true;
@@ -54,26 +55,26 @@ update_status ModuleFight::Update()
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
 
-		CheckFlipPlayers();
+	CheckFlipPlayers();
 
-		if (endFightStarted) {
-			if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
-				if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 1) {
-					StartNewRound();
-				}
-				else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 1) {
-					StartNewRound();
-				}
-				else if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 2) {
-					EndFullFight();
-				}
-				else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 2) {
-					EndFullFight();
-				}
+	if (endFightStarted) {
+		if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
+			if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 1) {
+				StartNewRound();
+			}
+			else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 1) {
+				StartNewRound();
+			}
+			else if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 2) {
+				EndFullFight();
+			}
+			else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 2) {
+				EndFullFight();
 			}
 		}
+	}
 
-		return UPDATE_CONTINUE;
+	return UPDATE_CONTINUE;
 }
 
 // Called before quitting
@@ -81,6 +82,8 @@ bool ModuleFight::CleanUp()
 {
 	if (stage != nullptr)
 		stage->Disable();
+	stage = nullptr;
+
 	return true;
 }
 
@@ -119,7 +122,7 @@ void ModuleFight::Win(int ryu) {
 }
 
 void ModuleFight::CheckFlipPlayers() {
-	if ( App->player1->position.x > App->player2->position.x && left == false) {
+	if (App->player1->position.x > App->player2->position.x && left == false) {
 		App->player1->turn = true;
 		App->player2->turn = true;
 		right = false;

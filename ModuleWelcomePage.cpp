@@ -26,15 +26,11 @@ bool ModuleWelcomePage::Start()
 	bool ret = true;
 	graphics1 = App->textures->Load("assets/images/ui/logo1.png");
 	graphics2 = App->textures->Load("assets/images/ui/logo2.png");
-	//typography = App->fonts->Load("assets/images/ui/font_middle.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789¬!@ç~$%^&*()-_+=[]{}| :;¨'<>,./?", 1);
 	typography = App->fonts->Load("assets/images/ui/FontMain.png", "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~'!@#$%^&*()-_+=[]{}| :;¨º<>,./?", 1);
 	music = App->audio->LoadSong("assets/music/title.ogg");
 	start = App->audio->LoadChunk("assets/sfx/effects/coin.wav");
 	App->audio->PlaySongDelay(music, -1, 10000);
-	App->render->camera.x = App->render->camera.y = 0;
-
-	fila = 0;
-	columna = 0;
+	App->render->camera.x = App->render->camera.y = fila = columna = timeLetters = 0;
 	segundaSheet = lettersOn = false;
 
 	return ret;
@@ -52,7 +48,6 @@ bool ModuleWelcomePage::CleanUp()
 	start = nullptr;
 
 	App->audio->UnloadSong(music);
-
 	music = nullptr;
 
 	return true;
@@ -97,8 +92,8 @@ update_status ModuleWelcomePage::Update()
 	App->fonts->BlitText(0, 0, typography, "Fanmade copy by: Gamusinos Fighters");
 	App->fonts->BlitText(SCREEN_WIDTH / 2 - 95, SCREEN_HEIGHT / 2 + 90, typography, "@CAPCOM CO.. LTD.");
 
-	if (lettersOn)		
-		App->fonts->BlitText(SCREEN_WIDTH/2 - 65, SCREEN_HEIGHT / 2 + 50, typography, "INSERT COIN.");
+	if (lettersOn)
+		App->fonts->BlitText(SCREEN_WIDTH / 2 - 65, SCREEN_HEIGHT / 2 + 50, typography, "INSERT COIN.");
 
 
 	if (App->input->pads[0].start) {

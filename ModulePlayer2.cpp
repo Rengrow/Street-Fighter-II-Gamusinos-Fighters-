@@ -57,8 +57,11 @@ bool ModulePlayer2::Start()
 	position.y = 215;
 
 	life = 100;
-	freeze = true;
-	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = 0;
+	freeze = flip = true;
+	turn = colliding = dizzi = false;
+	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
+		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = puntuation = 0;
+	pushbackspeed = speed = 1;
 	levitationtimer = -100;
 	Animation* current_animation;
 	// idle animation (arcade sprite sheet)
@@ -1212,8 +1215,9 @@ bool ModulePlayer2::Start()
 
 bool ModulePlayer2::CleanUp()
 {
-	LOG("Unloading ryu 2");
+	LOG("Unloading Player 2");
 
+	//Clear Audio
 	App->audio->UnloadChunk(hdk_voice);
 	hdk_voice = nullptr;
 	App->audio->UnloadChunk(hdk_hit);
@@ -1235,23 +1239,37 @@ bool ModulePlayer2::CleanUp()
 	App->audio->UnloadChunk(flame_snd);
 	flame_snd = nullptr;
 
+	//Clear Animations
+	idle = forward = backward = lp = lk = clp = clk = cmp = cmk = chp = chk =
+		close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = close_firstframe_lk_mk =
+		jlp = jlk = jmp = jmk = jhp = jhk =
+		mp = hp = mk = hk =
+		close_mp = close_hp = close_mk = close_hk =
+		neutralJump = forwardJump = backwardJump =
+		yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_drill = yoga_mummy =
+		yoga_flame_lp = yoga_flame_mp = yoga_flame_hp = burning =
+		streel =
+		stgreel =
+		creel =
+		airreel = sweep =
+		getup = cdefending = defending = grab = grab2 = stun =
+		crouching = standing = crouch =
+		win1 = win2 = lose =
+		ground =
+		grabbing =
+		turn_anim = cturn_anim = Animation();
+
+	//Clear Textures
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
 	App->textures->Unload(graphics4);
 	App->textures->Unload(graphics5);
 	App->textures->Unload(shadow);
+
+	//Clear Colliders
 	ClearColliders();
-	idle = forward = backward = Animation();
-	lp = lk = clp = clk = cmp = cmk = chp = chk = mp = hp = mk = hk = close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = Animation();
-	jlp = jlk = jmp = jmk = jhp = jhk = close_mp = close_hp = close_mk = close_hk = close_firstframe_lk_mk = Animation();
-	neutralJump = forwardJump = backwardJump = yoga_drill = yoga_mummy = burning = Animation();
-	yoga_fire_lp = yoga_fire_mp = yoga_fire_hp = yoga_flame_lp = yoga_flame_hp = yoga_flame_mp = Animation();
-	streel = stgreel = creel = turn_anim = cturn_anim = Animation();
-	airreel = sweep = getup = Animation();
-	crouching = standing = crouch = defending = cdefending = grab = grab2 = stun = Animation();
-	win1 = win2 = lose = Animation();
-	ground = Animation();
+
 	return true;
 }
 

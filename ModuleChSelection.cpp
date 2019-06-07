@@ -93,6 +93,11 @@ bool ModuleChSelection::CleanUp()
 {
 	LOG("Unloading Vs Screen");
 
+	delete player1Name;
+	player1Name = nullptr;
+	delete player2Name;
+	player2Name = nullptr;
+
 	App->fonts->UnLoad(typography);
 	App->fonts->UnLoad(typographyBig);
 

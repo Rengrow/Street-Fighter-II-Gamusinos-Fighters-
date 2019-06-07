@@ -40,6 +40,7 @@ bool ModuleVsScreen::Start()
 	bool ret = true;
 	portraits = App->textures->Load("assets/images/ui/portraits.png");
 	typography = App->fonts->Load("assets/images/ui/Font_Big.png", "ABCDEFGHIJKLMNOPQRSTUVW$XYZ0123456789.", 1);
+	music = App->audio->LoadChunk("assets/sfx/effects/vs_screen.wav");
 	App->player1->position.x = 100;
 	App->player1->position.y = 215;
 	App->player2->position.x = 250;
@@ -48,6 +49,8 @@ bool ModuleVsScreen::Start()
 	isFading = false;
 	timeScreen = App->frames + 150;
 
+	App->audio->PlayChunk(music);
+
 	return ret;
 }
 
@@ -55,6 +58,9 @@ bool ModuleVsScreen::Start()
 bool ModuleVsScreen::CleanUp()
 {
 	LOG("Unloading Vs Screen");
+
+	App->audio->UnloadChunk(music);
+	music = nullptr;
 
 	App->fonts->UnLoad(typography);
 	App->textures->Unload(portraits);

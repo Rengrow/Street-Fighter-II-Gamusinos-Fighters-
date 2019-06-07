@@ -59,9 +59,6 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-
-	// TO DO: this exact coding causes the following problem: camera wont move right if opposite ryu is at left corner (the same way around)
-
 	if (App->player1->position.x > -camera.x / SCREEN_SIZE && App->player1->position.x < -camera.x / SCREEN_SIZE + camera.w / 4 && camera.x != 0) {
 		camera.x += cameraSpeed * SCREEN_SIZE;
 		limit1Box.x -= cameraSpeed;

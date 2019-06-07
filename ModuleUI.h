@@ -79,7 +79,7 @@ public:
 	bool redKoEnabled;
 	bool debugGamepads = false;
 	bool gotBonus;
-	int winnerPlayer = 0;
+	int winnerPlayer;
 
 private:
 	bool timerStarted;

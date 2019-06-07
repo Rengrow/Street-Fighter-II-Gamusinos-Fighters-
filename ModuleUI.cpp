@@ -94,8 +94,7 @@ bool ModuleUI::Start()
 	scoreUp_snd = App->audio->LoadChunk("assets/sfx/effects/score_up.wav");
 
 	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = gotBonus = App->fight->stopedFight = false;
-
-	intTimeBonusPuntuation = intVitalBonusPuntuation = intBonusPuntuation = totalBonus = 0;
+	intTimeBonusPuntuation = intVitalBonusPuntuation = intBonusPuntuation = totalBonus = stopedTimer = winnerPlayer = 0;
 
 	return ret;
 }
@@ -103,10 +102,6 @@ bool ModuleUI::Start()
 // Load assets
 bool ModuleUI::CleanUp()
 {
-	App->audio->UnloadChunk(scoreUp_snd);
-	scoreUp_snd = nullptr;
-	App->audio->UnloadChunk(perfect_snd);
-	perfect_snd = nullptr;
 	App->audio->UnloadChunk(round_snd);
 	round_snd = nullptr;
 	App->audio->UnloadChunk(one_snd);
@@ -125,6 +120,21 @@ bool ModuleUI::CleanUp()
 	win_snd = nullptr;
 	App->audio->UnloadChunk(lose_snd);
 	lose_snd = nullptr;
+	App->audio->UnloadChunk(scoreUp_snd);
+	scoreUp_snd = nullptr;
+	App->audio->UnloadChunk(perfect_snd);
+	perfect_snd = nullptr;
+
+	delete player1Puntuation;
+	player1Puntuation = nullptr;
+	delete player2Puntuation;
+	player2Puntuation = nullptr;
+	delete timeBonusPuntuation;
+	timeBonusPuntuation = nullptr;
+	delete vitalBonusPuntuation;
+	vitalBonusPuntuation = nullptr;
+	delete bonusPuntuation;
+	bonusPuntuation = nullptr;
 
 	App->textures->Unload(graphics);
 	App->fonts->UnLoad(numbers);
