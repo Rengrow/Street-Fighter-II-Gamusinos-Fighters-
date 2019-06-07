@@ -4819,7 +4819,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		{
 			switch (last_input)
 			{
-			case IN_GRABBED_FINISH:state = ST_FALLING; break;
+			case IN_GRABBED_FINISH:state = ST_IDLE; break;
 			}
 		}
 		break;
