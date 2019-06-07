@@ -2805,11 +2805,13 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
 				inputs.Push(IN_L_YFLAME2);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 1, flip) == true)
 			{
 				inputs.Push(IN_L_YFIRE2);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -2828,11 +2830,13 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
 				inputs.Push(IN_M_YFLAME2);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 1, flip) == true)
 			{
 				inputs.Push(IN_M_YFIRE2);
+				App->input->ClearHistory();
 			}
 
 			else
@@ -2849,11 +2853,13 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
 				inputs.Push(IN_F_YFLAME2);
+				App->input->ClearHistory();
 			}
 
 			else if (App->input->CheckYogaFire(200, 1, flip) == true)
 			{
 				inputs.Push(IN_F_YFIRE2);
+				App->input->ClearHistory();
 			}
 
 			else
