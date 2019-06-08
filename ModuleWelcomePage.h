@@ -54,6 +54,7 @@ public:
 	int fila;
 	int columna;
 	bool segundaSheet;
+	bool isFading;
 	int typography;
 	Uint32 timeLetters;
 	Uint32 pageTimer;
