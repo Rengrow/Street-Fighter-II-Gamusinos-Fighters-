@@ -2385,9 +2385,9 @@ update_status ModulePlayer2::Update()
 				current_animation = &ground;
 			}
 
-			if (IsntOnLeftLimit() && (!flip) && (colliding == false) && falling) position.x -= speed + 2;
+			if (IsntOnLeftLimit() && (!flip) && falling) position.x -= speed + 2;
 
-			if (IsntOnRightLimit() && (flip) && (colliding == false) && falling)  position.x += speed + 2;
+			if (IsntOnRightLimit() && (flip) && falling)  position.x += speed + 2;
 			break;
 
 
@@ -2631,9 +2631,9 @@ update_status ModulePlayer2::Update()
 				burning_timer = 0;
 			}
 
-			if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
+			if (IsntOnLeftLimit() && (!flip)) position.x -= speed + 2;
 
-			if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
+			if (IsntOnRightLimit() && (flip))  position.x += speed + 2;
 
 			break;
 
@@ -5092,6 +5092,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_GRABBED_FINISH2:state = ST_IDLE2; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
@@ -5101,6 +5102,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			switch (last_input)
 			{
 			case IN_GRABBED_FINISH2:state = ST_GETTING_UP2; getting_up_timer = App->frames; break;
+			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
 		break;
