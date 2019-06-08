@@ -2967,7 +2967,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_L_PUNCH2);
 		}
 
-		if (App->input->pads[1].x == true)
+		if (App->input->pads[1].x == true && turn == false)
 		{
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
@@ -2986,7 +2986,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		}
 
-		if (App->input->pads[1].a == true)
+		if (App->input->pads[1].a == true && turn == false)
 		{
 			inputs.Push(IN_L_KIK2);
 		}
@@ -3010,7 +3010,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 				inputs.Push(IN_M_PUNCH2);
 		}
 
-		if (App->input->pads[1].b == true)
+		if (App->input->pads[1].b == true && turn == false)
 		{
 			inputs.Push(IN_M_KIK2);
 		}
@@ -3033,7 +3033,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 				inputs.Push(IN_F_PUNCH2);
 		}
 
-		if (App->input->pads[1].R2 == true)
+		if (App->input->pads[1].R2 == true && turn == false)
 		{
 			inputs.Push(IN_F_KIK2);
 		}
