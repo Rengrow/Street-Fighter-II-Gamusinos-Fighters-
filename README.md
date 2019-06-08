@@ -111,6 +111,10 @@ Version 0.9.2:
 - Fixed Win Position
 - Fixed Damages
 
+Version 0.9.3:
+- Fixed Lose animation
+- Fixed Burn animation
+
 ## Credits
 
 Credits go to the team members: <br>
