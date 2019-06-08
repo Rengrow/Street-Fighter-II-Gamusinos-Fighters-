@@ -2882,71 +2882,71 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2 || state ==L_KIK_CROUCHCLOSE2 || state == L_PUNCH_CROUCHCLOSE2 || state == M_KIK_CROUCH2 || state == M_KIK_CROUCHCLOSE2 || state == M_PUNCH_CROUCH2 || state == M_PUNCH_CROUCHCLOSE2 || state == F_PUNCH_CROUCH2 || state == F_KIK_CROUCH2)
 			{
 				inputs.Push(IN_CROUCH_REEL2);
-				if (App->player1->l_standing_punch_timer != 0) { life -= 6; }
-				else if (App->player1->m_standing_punch_timer != 0) { life -= 10; }
-				else if (App->player1->f_standing_punch_timer != 0) { life -= 16; }
-				else if (App->player1->l_standing_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_standing_kik_timer != 0) { life -= 10; }
-				else if (App->player1->f_standing_kik_timer != 0) { life -= 14; }
-				else if (App->player1->l_close_standing_punch_timer != 0) { life -= 6; }
-				else if (App->player1->m_close_standing_punch_timer != 0) { life -= 10; }
-				else if (App->player1->f_close_standing_punch_timer != 0) { life -= 32; }
-				else if (App->player1->l_close_standing_kik_timer != 0) { life -= 6; }
-				else if (App->player1->m_close_standing_kik_timer != 0) { life -= 10; }
-				else if (App->player1->f_close_standing_kik_timer != 0) { life -= 16; }
-				else if (App->player1->l_crouching_punch_timer != 0) { life -= 6; }
-				else if (App->player1->m_crouching_punch_timer != 0) { life -= 10; }
-				else if (App->player1->f_crouching_punch_timer != 0) { life -= 14; }
-				else if (App->player1->l_crouching_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_crouching_kik_timer != 0) { life -= 12; }
-				else if (App->player1->f_crouching_kik_timer != 0) { life -= 16; }
-				else if (App->player1->l_close_crouching_punch_timer != 0) { life -= 8; }
-				else if (App->player1->m_close_crouching_punch_timer != 0) { life -= 12; }
-				else if (App->player1->l_close_crouching_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_close_crouching_kik_timer != 0) { life -= 12; }
-				else if (App->player1->l_d_jumping_punch_timer != 0) { life -= 8; }
-				else if (App->player1->m_d_jumping_punch_timer != 0) { life -= 12; }
-				else if (App->player1->f_d_jumping_punch_timer != 0) { life -= 16; }
-				else if (App->player1->l_d_jumping_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_d_jumping_kik_timer != 0) { life -= 12; }
-				else if (App->player1->f_d_jumping_kik_timer != 0) { life -= 16; }
-				else if (App->player1->state == YDRILL) { life -= 12; }
-				else if (App->player1->state == YMUMMY) { life -= 12; }
+				if (App->player1->l_standing_punch_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_standing_punch_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_standing_punch_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_standing_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_standing_kik_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_standing_kik_timer != 0) { life -= 14; App->player1->puntuation += 300;}
+				else if (App->player1->l_close_standing_punch_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_standing_punch_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_close_standing_punch_timer != 0) { life -= 32; App->player1->puntuation += 300;}
+				else if (App->player1->l_close_standing_kik_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_standing_kik_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_close_standing_kik_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_crouching_punch_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_crouching_punch_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_crouching_punch_timer != 0) { life -= 14; App->player1->puntuation += 300;}
+				else if (App->player1->l_crouching_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_crouching_kik_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->f_crouching_kik_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_close_crouching_punch_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_crouching_punch_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->l_close_crouching_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_crouching_kik_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->l_d_jumping_punch_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_d_jumping_punch_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->f_d_jumping_punch_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_d_jumping_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_d_jumping_kik_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->f_d_jumping_kik_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->state == YDRILL) { life -= 12; App->player1->puntuation += 500;}
+				else if (App->player1->state == YMUMMY) { life -= 12; App->player1->puntuation += 500;}
 			}
 
 			else
 			{
 				inputs.Push(IN_HEAD_REEL2);
-				if (App->player1->l_standing_punch_timer != 0) { life -= 6; }
-				else if (App->player1->m_standing_punch_timer != 0) { life -= 10; }
-				else if (App->player1->f_standing_punch_timer != 0) { life -= 16; }
-				else if (App->player1->l_standing_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_standing_kik_timer != 0) { life -= 10; }
-				else if (App->player1->f_standing_kik_timer != 0) { life -= 14; }
-				else if (App->player1->l_close_standing_punch_timer != 0) { life -= 6; }
-				else if (App->player1->m_close_standing_punch_timer != 0) { life -= 10; }
-				else if (App->player1->f_close_standing_punch_timer != 0) { life -= 32; }
-				else if (App->player1->l_close_standing_kik_timer != 0) { life -= 6; }
-				else if (App->player1->m_close_standing_kik_timer != 0) { life -= 10; }
-				else if (App->player1->f_close_standing_kik_timer != 0) { life -= 16; }
-				else if (App->player1->l_crouching_punch_timer != 0) { life -= 6; }
-				else if (App->player1->m_crouching_punch_timer != 0) { life -= 10; }
-				else if (App->player1->f_crouching_punch_timer != 0) { life -= 14; }
-				else if (App->player1->l_crouching_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_crouching_kik_timer != 0) { life -= 12; }
-				else if (App->player1->f_crouching_kik_timer != 0) { life -= 16; }
-				else if (App->player1->l_close_crouching_punch_timer != 0) { life -= 8; }
-				else if (App->player1->m_close_crouching_punch_timer != 0) { life -= 12; }
-				else if (App->player1->l_close_crouching_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_close_crouching_kik_timer != 0) { life -= 12; }
-				else if (App->player1->l_d_jumping_punch_timer != 0) { life -= 8; }
-				else if (App->player1->m_d_jumping_punch_timer != 0) { life -= 12; }
-				else if (App->player1->f_d_jumping_punch_timer != 0) { life -= 16; }
-				else if (App->player1->l_d_jumping_kik_timer != 0) { life -= 8; }
-				else if (App->player1->m_d_jumping_kik_timer != 0) { life -= 12; }
-				else if (App->player1->f_d_jumping_kik_timer != 0) { life -= 16; }
-				else if (App->player1->state == YDRILL) { life -= 12; }
-				else if (App->player1->state == YMUMMY) { life -= 12; }
+				if (App->player1->l_standing_punch_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_standing_punch_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_standing_punch_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_standing_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_standing_kik_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_standing_kik_timer != 0) { life -= 14; App->player1->puntuation += 300;}
+				else if (App->player1->l_close_standing_punch_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_standing_punch_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_close_standing_punch_timer != 0) { life -= 32; App->player1->puntuation += 300;}
+				else if (App->player1->l_close_standing_kik_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_standing_kik_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_close_standing_kik_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_crouching_punch_timer != 0) { life -= 6; App->player1->puntuation += 100;}
+				else if (App->player1->m_crouching_punch_timer != 0) { life -= 10; App->player1->puntuation += 200;}
+				else if (App->player1->f_crouching_punch_timer != 0) { life -= 14; App->player1->puntuation += 300;}
+				else if (App->player1->l_crouching_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_crouching_kik_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->f_crouching_kik_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_close_crouching_punch_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_crouching_punch_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->l_close_crouching_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_close_crouching_kik_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->l_d_jumping_punch_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_d_jumping_punch_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->f_d_jumping_punch_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->l_d_jumping_kik_timer != 0) { life -= 8; App->player1->puntuation += 100;}
+				else if (App->player1->m_d_jumping_kik_timer != 0) { life -= 12; App->player1->puntuation += 200;}
+				else if (App->player1->f_d_jumping_kik_timer != 0) { life -= 16; App->player1->puntuation += 300;}
+				else if (App->player1->state == YDRILL) { life -= 12; App->player1->puntuation += 500;}
+				else if (App->player1->state == YMUMMY) { life -= 12; App->player1->puntuation += 500;}
 			}
 			if (App->player1->state == F_KIK_CROUCH) {
 				inputs.Push(IN_SWEEP2);
