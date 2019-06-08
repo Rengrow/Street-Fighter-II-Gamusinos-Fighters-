@@ -3853,6 +3853,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else { state = F_KIK_NEUTRAL_JUMP; }
 			}break;
 
+			
 			case IN_FALLING: state = ST_FALLING; break;
 			case IN_BURNING: state = BURNING; break;
 
@@ -4966,6 +4967,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -4980,6 +4982,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_GRAB:state = M_GRAB; m_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH:state = ST_IDLE; break;
@@ -4994,6 +4997,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_GRAB:state = F_GRAB; f_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH:state = ST_IDLE; break;
@@ -5061,6 +5065,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -5078,6 +5083,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
