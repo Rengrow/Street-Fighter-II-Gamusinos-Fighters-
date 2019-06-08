@@ -2473,6 +2473,9 @@ update_status ModulePlayer1::Update()
 		case M_GRABBING:
 			texture = graphics3;
 			current_animation = &grabbing;
+			if (m_grab_timer == 15 || m_grab_timer == 30 || m_grab_timer == 45 || m_grab_timer == 60 || m_grab_timer == 75 || m_grab_timer == 90) {
+				App->audio->PlayChunk(high_fist);
+			}
 			dizzydamage = 5;
 			break;
 
@@ -2689,7 +2692,9 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			if (flip == true) {
 				App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
 			}
-			else{ App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else{
+				App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
+			}
 		}
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
 			if (App->player1->state != ST_CROUCH_DEFENDING_READY) {
