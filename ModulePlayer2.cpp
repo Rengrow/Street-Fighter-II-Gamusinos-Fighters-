@@ -1358,6 +1358,13 @@ update_status ModulePlayer2::Update()
 		case ST_JUMP_NEUTRAL2:
 			texture = graphics;
 			current_animation = &neutralJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1381,6 +1388,12 @@ update_status ModulePlayer2::Update()
 
 		case ST_JUMP_FORWARD2:
 			current_animation = &forwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1407,6 +1420,13 @@ update_status ModulePlayer2::Update()
 
 		case ST_JUMP_BACKWARD2:
 			current_animation = &backwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -2491,6 +2511,7 @@ update_status ModulePlayer2::Update()
 			current_animation = &grab2;
 			if (m_grab_timer == App->frames - 15 || m_grab_timer == App->frames - 30 || m_grab_timer == App->frames - 45 || m_grab_timer == App->frames - 60 || m_grab_timer == App->frames - 75 || m_grab_timer == App->frames - 90 || m_grab_timer == App->frames - 105) {
 				App->audio->PlayChunk(high_fist);
+				App->player1->life -= 4;
 			}
 			dizzydamage = 5;
 			break;
@@ -2498,6 +2519,10 @@ update_status ModulePlayer2::Update()
 		case F_GRAB2:
 			current_animation = &grab;
 			dizzydamage = 5;
+			if (App->frames - f_grab_timer == 1)
+			{
+				App->player2->life -= 20;
+			}
 			break;
 
 		case M_GRABBED2:
@@ -2947,7 +2972,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 			inputs.Push(IN_L_PUNCH2);
 		}
 
-		if (App->input->pads[1].x == true)
+		if (App->input->pads[1].x == true && turn == false)
 		{
 			if (App->input->CheckYogaFlame(250, 1, flip) == true)
 			{
@@ -2966,7 +2991,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		}
 
-		if (App->input->pads[1].a == true)
+		if (App->input->pads[1].a == true && turn == false)
 		{
 			inputs.Push(IN_L_KIK2);
 		}
@@ -2990,7 +3015,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 				inputs.Push(IN_M_PUNCH2);
 		}
 
-		if (App->input->pads[1].b == true)
+		if (App->input->pads[1].b == true && turn == false)
 		{
 			inputs.Push(IN_M_KIK2);
 		}
@@ -3013,7 +3038,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 				inputs.Push(IN_F_PUNCH2);
 		}
 
-		if (App->input->pads[1].R2 == true)
+		if (App->input->pads[1].R2 == true && turn == false)
 		{
 			inputs.Push(IN_F_KIK2);
 		}
@@ -4920,6 +4945,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
+			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -4934,6 +4960,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
+			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 
 			case IN_GRAB2:state = M_GRAB2; m_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
@@ -4948,6 +4975,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
+			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 
 			case IN_GRAB2:state = F_GRAB2; f_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH2:state = ST_IDLE2; break;
@@ -5015,6 +5043,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_HEAD_REEL2: state = ST_HEAD_REEL2; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL2: state = ST_GUT_REEL2; gut_reel_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
+			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
@@ -5032,6 +5061,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_F_GRABBED2: state = F_GRABBED2; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL2: state = ST_CROUCH_REEL2; crouch_reel_timer = App->frames; break;
 			case IN_BURNING2: state = BURNING2; break;
+			case IN_SWEEP2: state = SWEEP2; sweep_timer = App->frames; break;
 
 			case IN_VICTORY2: state = VICTORY2; break;
 			case IN_LOOSE2: state = LOOSE2; break;
