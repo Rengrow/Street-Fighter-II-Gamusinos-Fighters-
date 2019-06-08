@@ -50,6 +50,15 @@ Currently there is no installation required, just open the .exe provided in the 
 	2 / B button: Medium Kick
 	3 / R2 button: Hard Kick
 
+### Combos: <br>
+    Joystick movement:
+	Down, down-front, front: Yoga Fire
+	Back, back-down, down, down-front, front: Yoga Flame
+	Front + Medium punch: Grab
+	Front + Hard punch: Throw
+	Hard punch at top of a jump: Yoga Mummy
+	Hard kick at top of a jump: Yoga Drill
+
 ## History
 
 Up to version 0.5:

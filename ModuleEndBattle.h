@@ -29,6 +29,7 @@ public:
 	SDL_Rect portraitP2;
 	int typography;
 	Uint32 timeLetters;
+	Uint32 timeScreen;
 	bool quoteOption;
 	bool isFading;
 

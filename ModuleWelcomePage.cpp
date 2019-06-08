@@ -66,7 +66,7 @@ bool ModuleWelcomePage::Start()
 	p1Face.loop = false;
 
 	App->audio->PlaySongDelay(music, -1, 10000);
-	App->render->camera.x = App->render->camera.y = fila = columna = timeLetters = pageTimer = p1PostionUp = p2PostionUp = alpha = 0;
+	App->render->camera.x = App->render->camera.y = fila = columna = timeLetters = pageTimer = p1PostionUp = p2PostionUp = alpha = timeScreen = 0;
 	segundaSheet = lettersOn = endedIntro = isFading = false;
 	cameraPosition = p1Position = p2Position = { 0,0 };
 
@@ -228,6 +228,7 @@ update_status ModuleWelcomePage::Update()
 			Mix_FadeOutMusic(2000);
 			App->fade->FadeToBlack(this, (Module*)App->chSelectionScreen, 1);
 			isFading = true;
+			timeScreen = App->frames;
 		}
 		else {
 			endedIntro = true;
@@ -236,6 +237,9 @@ update_status ModuleWelcomePage::Update()
 			cameraPosition = { 0,0 };
 		}
 	}
+
+	if (App->frames - timeScreen > 575)
+		isFading = false;
 
 	return UPDATE_CONTINUE;
 }
