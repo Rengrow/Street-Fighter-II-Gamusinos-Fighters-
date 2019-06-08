@@ -315,9 +315,9 @@ void ModuleUI::EndFight() {
 		int timeRemaining = (App->fight->endFightTimer - SDL_GetTicks()) / 1000;
 
 		if (winnerPlayer != 0) {
-			if (winnerPlayer == 1 && !App->player1->win)
+			if (winnerPlayer == 1 && !App->player1->wining)
 				App->player1->inputs.Push(IN_VICTORY);
-			if (winnerPlayer == 2 && !App->player2->win)
+			if (winnerPlayer == 2 && !App->player2->wining)
 				App->player2->inputs.Push(IN_VICTORY2);
 
 			if (timeRemaining == 12 && !youFinalSound) {
