@@ -43,20 +43,27 @@ update_status ModuleFight::Update()
 {
 	if (roundStarted)
 		if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player1->life > App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+			if (GetTimer() <= 0)
+				App->UI->timeOver = true;
 			Win(1);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
 		else if ((!endFightStarted && (App->player1->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player1->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+			if (GetTimer() <= 0)
+				App->UI->timeOver = true;
 			Win(2);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
-		else if ((!endFightStarted && (App->player2->life <= 0 || (GetTimer() <= 0 && App->player1->life == App->player2->life)))) {
-			Win(1);
+		else if ((!endFightStarted && ((App->player1->life == 0 && App->player2->life == 0) || (GetTimer() <= 0 && App->player1->life == App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F9] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
+			if (GetTimer() > 0 && App->player1->life == 0 && App->player2->life == 0)
+				App->UI->doubleKO = true;
+			else if (GetTimer() <= 0 && App->player1->life == App->player2->life)
+				App->UI->timeOver = true;
+			Win(0);
 			autoWinLoseTimer = SDL_GetTicks() + 7000;
 		}
 
 	CheckFlipPlayers();
-
 	if (endFightStarted) {
 		if (((App->fight->endFightTimer - SDL_GetTicks()) / 1000) == 0) {
 			if (App->UI->winnerPlayer == 1 && App->fight->player1RoundWinned == 1) {
@@ -70,6 +77,12 @@ update_status ModuleFight::Update()
 			}
 			else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 2) {
 				EndFullFight();
+			}
+			else if (App->UI->winnerPlayer == 0 && App->fight->player1RoundWinned == 1 && App->fight->player2RoundWinned == 1) {
+				StartNewRound();
+			}
+			else if (App->UI->winnerPlayer == 0 && App->fight->player1RoundWinned == 2 && App->fight->player2RoundWinned == 2) {
+				StartNewRound();
 			}
 		}
 	}
@@ -102,23 +115,31 @@ void ModuleFight::EndFullFight() {
 	App->fade->FadeToBlack(this, (Module*)App->endBattle, 2);
 }
 
-void ModuleFight::Win(int ryu) {
+void ModuleFight::Win(int player) {
 	App->player1->freeze = true;
 	App->player2->freeze = true;
 	App->slowdown->StartSlowdown(30, 100);
 
-	if (ryu == 1)
+	if (player == 1)
 		player1RoundWinned++;
-	else if (ryu == 2)
+	else if (player == 2)
 		player2RoundWinned++;
-
+	else if (player == 0) {
+		if (player1RoundWinned != 1 && player2RoundWinned != 1) {
+			player1RoundWinned++;
+			player2RoundWinned++;
+		}
+	}
 	round++;
 
-	endFightTimer = SDL_GetTicks() + 13000; //13 Seconds
+	if (player != 0)
+		endFightTimer = SDL_GetTicks() + 13000; //13 Seconds
+	else
+		endFightTimer = SDL_GetTicks() + 5000; //13 Seconds
 
 	endFightStarted = stopedFight = true;
 
-	App->UI->StartEndFight(ryu, GetTimer() <= 0);
+	App->UI->StartEndFight(player, GetTimer() <= 0);
 }
 
 void ModuleFight::CheckFlipPlayers() {

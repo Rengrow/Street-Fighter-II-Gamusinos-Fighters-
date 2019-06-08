@@ -66,6 +66,11 @@ ModuleUI::ModuleUI()
 	fightRect.y = 135;
 	fightRect.w = 89;
 	fightRect.h = 28;
+
+	drawGameRect = { 0,169,83,38 };
+	timeOverRect = { 0,239,91,44 };
+	doubleKORect = { 0,288,91,45 };
+
 }
 
 ModuleUI::~ModuleUI()
@@ -93,7 +98,8 @@ bool ModuleUI::Start()
 	perfect_snd = App->audio->LoadChunk("assets/sfx/voices/announcer_perfect.wav");
 	scoreUp_snd = App->audio->LoadChunk("assets/sfx/effects/score_up.wav");
 
-	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = gotBonus = App->fight->stopedFight = false;
+	timerStarted = redKoEnabled = starFight = roundSoundPlayed = numberRoundSoundPlayed = fightSoundPlayed = youFinalSound = winLoseFinalSound = perfectSound = gotBonus =
+		doubleKO = timeOver = App->fight->stopedFight = false;
 	intTimeBonusPuntuation = intVitalBonusPuntuation = intBonusPuntuation = totalBonus = stopedTimer = winnerPlayer = 0;
 
 	return ret;
@@ -244,7 +250,6 @@ void ModuleUI::StartFightBlit() {
 	int timeRemaining = (App->fight->countdownStartFight - SDL_GetTicks()) / 1000;
 
 	if (starFight) {
-
 		if (timeRemaining == 3 && App->fight->round <= 3 && !roundSoundPlayed) {
 			App->audio->PlayChunk(round_snd);
 			roundSoundPlayed = true;
@@ -277,7 +282,7 @@ void ModuleUI::StartFightBlit() {
 		}
 
 		if (timeRemaining >= 2) {
-			App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - roundRect.h, &roundRect, false);
+			App->render->Blit(graphics, App->fight->round > 3 ? -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 35 : -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - roundRect.h, &roundRect, false);
 			if (App->fight->round == 1)
 				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round1Rect.h, &round1Rect, false);
 			else if (App->fight->round == 2)
@@ -285,7 +290,7 @@ void ModuleUI::StartFightBlit() {
 			else if (App->fight->round == 3)
 				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 35, SCREEN_HEIGHT / 2 - round3Rect.h, &round3Rect, false);
 			else if (App->fight->round > 3)
-				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45 - roundFRect.w, SCREEN_HEIGHT / 2 - roundFRect.h, &roundFRect, false);
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 44 - roundFRect.w, SCREEN_HEIGHT / 2 - roundFRect.h, &roundFRect, false);
 		}
 		else if (timeRemaining >= 1) {
 			App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - fightRect.h, &fightRect, false);
@@ -309,55 +314,65 @@ void ModuleUI::EndFight() {
 	if (App->fight->endFightStarted) {
 		int timeRemaining = (App->fight->endFightTimer - SDL_GetTicks()) / 1000;
 
-		if (winnerPlayer == 1 && !App->player1->win)
-			App->player1->inputs.Push(IN_VICTORY);
-		if (winnerPlayer == 2 && !App->player2->win)
-			App->player2->inputs.Push(IN_VICTORY2);
+		if (winnerPlayer != 0) {
+			if (winnerPlayer == 1 && !App->player1->win)
+				App->player1->inputs.Push(IN_VICTORY);
+			if (winnerPlayer == 2 && !App->player2->win)
+				App->player2->inputs.Push(IN_VICTORY2);
 
-		if (timeRemaining == 12 && !youFinalSound) {
-			App->audio->PlayChunk(you_snd);
-			if (winnerPlayer == 1)
-				App->player2->inputs.Push(IN_LOOSE2);
-			else if (winnerPlayer == 2)
-				App->player1->inputs.Push(IN_LOOSE);
-			youFinalSound = true;
-		}
-		else if (timeRemaining == 11 && !winLoseFinalSound) {
-			if (winnerPlayer == 1)
-				App->audio->PlayChunk(win_snd);
-			else if (winnerPlayer == 2)
-				App->audio->PlayChunk(lose_snd);
-			winLoseFinalSound = true;
-		}
+			if (timeRemaining == 12 && !youFinalSound) {
+				App->audio->PlayChunk(you_snd);
+				if (winnerPlayer == 1)
+					App->player2->inputs.Push(IN_LOOSE2);
+				else if (winnerPlayer == 2)
+					App->player1->inputs.Push(IN_LOOSE);
+				youFinalSound = true;
+			}
+			else if (timeRemaining == 11 && !winLoseFinalSound) {
+				if (winnerPlayer == 1)
+					App->audio->PlayChunk(win_snd);
+				else if (winnerPlayer == 2)
+					App->audio->PlayChunk(lose_snd);
+				winLoseFinalSound = true;
+			}
+			else if (timeRemaining == 10 && !perfectSound) {
+				if (App->player1->life == 100 || App->player2->life == 100)
+					App->audio->PlayChunk(perfect_snd);
+				perfectSound = true;
+			}
 
-		else if (timeRemaining == 10 && !perfectSound) {
-			if (App->player1->life == 100 || App->player2->life == 100)
-				App->audio->PlayChunk(perfect_snd);
-			perfectSound = true;
-		}
+			if (timeRemaining > 0 && timeRemaining >= 11) {
+				if (timeOver)
+					App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - timeOverRect.h - 5, &timeOverRect, false);
+				if (winnerPlayer == 1 && App->frames % 4 != 0)
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, typography1, "PLAYER 1 WIN");
+				else if (winnerPlayer == 2 && App->frames % 4 != 0)
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 70, SCREEN_HEIGHT / 2, typography1, "PLAYER 2 WIN");
+			}
 
-		if (timeRemaining > 0 && timeRemaining >= 11 && App->frames % 4 != 0)
-			if (winnerPlayer == 1)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 1 WIN");
-			else if (winnerPlayer == 2)
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 80, SCREEN_HEIGHT / 2 - 30, typography1, "PLAYER 2 WIN");
-
-		if (timeRemaining < 11) {
-			GetBonusPuntuations(timeRemaining < 9);
 			if (timeRemaining < 11) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 70, 55, typography1, "TIME");
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(timeBonusPuntuation) * 16, 55, numbers, timeBonusPuntuation);
-			}
+				GetBonusPuntuations(timeRemaining < 9);
+				if (timeRemaining < 11) {
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 70, 55, typography1, "TIME");
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(timeBonusPuntuation) * 16, 55, numbers, timeBonusPuntuation);
+				}
 
-			if (timeRemaining < 10) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 82, 75, typography1, "VITAL");
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(vitalBonusPuntuation) * 16, 75, numbers, vitalBonusPuntuation);
-			}
+				if (timeRemaining < 10) {
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 82, 75, typography1, "VITAL");
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(vitalBonusPuntuation) * 16, 75, numbers, vitalBonusPuntuation);
+				}
 
-			if (timeRemaining < 9) {
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 82, 100, typography1, "BONUS");
-				App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(bonusPuntuation) * 16, 100, numbers, bonusPuntuation);
+				if (timeRemaining < 9) {
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 82, 100, typography1, "BONUS");
+					App->fonts->BlitText(-App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 + 66 - strlen(bonusPuntuation) * 16, 100, numbers, bonusPuntuation);
+				}
 			}
+		}
+		else {
+			if (!doubleKO)
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - drawGameRect.h - 5, &drawGameRect, false);
+			else
+				App->render->Blit(graphics, -App->render->camera.x / SCREEN_SIZE + SCREEN_WIDTH / 2 - 45, SCREEN_HEIGHT / 2 - doubleKORect.h - 5, &doubleKORect, false);
 		}
 	}
 }

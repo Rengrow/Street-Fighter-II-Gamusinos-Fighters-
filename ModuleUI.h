@@ -39,6 +39,9 @@ public:
 	int typography1;
 	int stopedTimer;
 
+	bool doubleKO;
+	bool timeOver;
+
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect lifeBars;
 	SDL_Rect yelllowBar1;
@@ -50,6 +53,9 @@ public:
 	SDL_Rect round3Rect;
 	SDL_Rect roundFRect;
 	SDL_Rect fightRect;
+	SDL_Rect timeOverRect;
+	SDL_Rect drawGameRect;
+	SDL_Rect doubleKORect;
 
 	Mix_Chunk* round_snd = nullptr;
 	Mix_Chunk* one_snd = nullptr;
