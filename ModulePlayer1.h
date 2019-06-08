@@ -268,6 +268,7 @@ public:
 
 	Uint32 invulnerabilityFrames;
 	bool turn;
+	bool win;
 	bool flip;
 	bool altColor = false;
 	bool colliding;
