@@ -2498,24 +2498,38 @@ update_status ModulePlayer1::Update()
 
 		case M_GRABBED:
 			current_animation = &grabbed;
+			if (App->frames - m_grabbed_timer >= 105 && App->frames - m_grabbed_timer < 120)
+			{
+				jumpHeight -= speed + 1;
+			}
+			if (App->frames - m_grabbed_timer > 120)
+			{
+				jumpHeight += speed + 1;
+			}
+
+			if (App->frames - m_grabbed_timer >= 105) {
+				if ((!flip) && (colliding == false)) position.x -= speed + 1;
+
+				if ((flip) && (colliding == false))  position.x += speed + 1;
+			}
 			break;
 
 		case F_GRABBED:
 			texture = graphics6;
 			current_animation = &thrown;
-			if (App->frames - f_grabbed_timer>=40 && App->frames - f_grabbed_timer < 60)
+			if (App->frames - f_grabbed_timer >= 40 && App->frames - f_grabbed_timer < 60)
 			{
 				jumpHeight -= speed + 1;
 			}
-			if (App->frames - f_grabbed_timer >= 60)
+			if (App->frames - f_grabbed_timer > 60)
 			{
 				jumpHeight += speed + 1;
 			}
 
 			if (App->frames - f_grabbed_timer >= 40) {
-				if ((!flip) && (colliding == false)) position.x -= speed + 1;
+				if ((!flip) && (colliding == false)) position.x -= speed + 2;
 
-				if ((flip) && (colliding == false))  position.x += speed + 1;
+				if ((flip) && (colliding == false))  position.x += speed + 2;
 			}
 
 			break;
