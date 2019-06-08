@@ -347,7 +347,7 @@ public:
 	ryu_states2 state;
 
 	Uint32 invulnerabilityFrames;
-	bool win;
+	bool wining;
 	bool turn;
 	bool flip;
 	bool altColor = true;
