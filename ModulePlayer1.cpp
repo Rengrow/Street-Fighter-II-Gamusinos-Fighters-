@@ -2778,8 +2778,14 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_HEAD_REEL);
 				life -= 10;
 			}
+			if (App->player2->state == F_KIK_CROUCH) {
+				inputs.Push(IN_SWEEP);
+
+			}
 
 			App->slowdown->StartSlowdown(5, 30);
+
+
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
