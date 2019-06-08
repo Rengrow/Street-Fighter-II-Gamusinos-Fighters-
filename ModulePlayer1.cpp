@@ -57,7 +57,7 @@ bool ModulePlayer1::Start()
 	life = 100;
 	dizzylvl = 0;
 	freeze = true;
-	flip = turn = colliding = dizzi = false;
+	win = flip = turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
 		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = 0;
 	pushbackspeed = speed = 1;
@@ -2629,7 +2629,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		{
 			App->player2->inputs.Push(IN_F_GRABBED2);
 		}
-		
+
 		App->slowdown->StartSlowdown(5, 30);
 	}
 	//PUSHBACK CHECK END
@@ -2689,7 +2689,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			if (flip == true) {
 				App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
 			}
-			else{ App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else { App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 		}
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
 			if (App->player1->state != ST_CROUCH_DEFENDING_READY) {

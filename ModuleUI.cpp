@@ -309,18 +309,17 @@ void ModuleUI::EndFight() {
 	if (App->fight->endFightStarted) {
 		int timeRemaining = (App->fight->endFightTimer - SDL_GetTicks()) / 1000;
 
+		if (winnerPlayer == 1 && !App->player1->win)
+			App->player1->inputs.Push(IN_VICTORY);
+		if (winnerPlayer == 2 && !App->player2->win)
+			App->player2->inputs.Push(IN_VICTORY2);
+
 		if (timeRemaining == 12 && !youFinalSound) {
 			App->audio->PlayChunk(you_snd);
-
-			if (winnerPlayer == 1) {
-				App->player1->inputs.Push(IN_VICTORY);
+			if (winnerPlayer == 1)
 				App->player2->inputs.Push(IN_LOOSE2);
-			}
-			else if (winnerPlayer == 2) {
+			else if (winnerPlayer == 2)
 				App->player1->inputs.Push(IN_LOOSE);
-				App->player2->inputs.Push(IN_VICTORY2);
-			}
-
 			youFinalSound = true;
 		}
 		else if (timeRemaining == 11 && !winLoseFinalSound) {
