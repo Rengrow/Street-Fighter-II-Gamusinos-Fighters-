@@ -317,6 +317,7 @@ bool ModuleInput::CleanUp()
 	SDL_GameControllerClose(gameController1);
 	gameController1 = nullptr;
 
+	ClearHistory();
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;

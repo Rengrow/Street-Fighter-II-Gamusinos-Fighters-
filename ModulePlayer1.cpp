@@ -1134,7 +1134,7 @@ bool ModulePlayer1::Start()
 	thrown.PushBack({ 76, 4, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	thrown.PushBack({ 144, 49, 125, 52 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	thrown.PushBack({ 270, 5, 86, 96 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	thrown.PushBack({ 357, 13, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 357, 13, 67, 91 }, 40, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 
 	// Defending
@@ -2503,6 +2503,21 @@ update_status ModulePlayer1::Update()
 		case F_GRABBED:
 			texture = graphics6;
 			current_animation = &thrown;
+			if (App->frames - f_grabbed_timer>=40 && App->frames - f_grabbed_timer < 60)
+			{
+				jumpHeight -= speed + 1;
+			}
+			if (App->frames - f_grabbed_timer >= 60)
+			{
+				jumpHeight += speed + 1;
+			}
+
+			if (App->frames - f_grabbed_timer >= 40) {
+				if ((!flip) && (colliding == false)) position.x -= speed + 1;
+
+				if ((flip) && (colliding == false))  position.x += speed + 1;
+			}
+
 			break;
 
 		case ST_DIZZI:

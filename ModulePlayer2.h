@@ -40,8 +40,8 @@
 
 #define D_M_GRAB_TIME 135//+15
 #define D_F_GRAB_TIME 40//+3
-#define D_M_GRABBED_TIME 50
-#define D_F_GRABBED_TIME 50
+#define D_M_GRABBED_TIME 135
+#define D_F_GRABBED_TIME 80
 
 #define D_HADOKEN_TIME 32//+6 //not altered, pendent of yoga fire
 #define D_CROUCHING_TIME 4 //used to be 5
