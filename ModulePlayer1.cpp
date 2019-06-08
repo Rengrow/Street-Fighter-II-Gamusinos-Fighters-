@@ -2104,8 +2104,6 @@ update_status ModulePlayer1::Update()
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
-
-
 			//Pushback start
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;

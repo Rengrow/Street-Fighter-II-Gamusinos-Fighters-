@@ -46,7 +46,6 @@ bool ModuleInput::Init()
 // Called every draw update
 update_status ModuleInput::PreUpdate()
 {
-
 #pragma region Keyboard
 	SDL_PumpEvents();
 
