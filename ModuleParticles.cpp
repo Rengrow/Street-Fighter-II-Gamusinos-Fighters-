@@ -148,11 +148,9 @@ bool ModuleParticles::Start()
 	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
 	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
 	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
-	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
-	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
 	pgrab2.anim.loop = true;
 
-	pgrab2.life = 130;
+	pgrab2.life = 120;
 
 	return true;
 }

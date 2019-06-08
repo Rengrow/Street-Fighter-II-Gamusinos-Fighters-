@@ -1127,14 +1127,14 @@ bool ModulePlayer2::Start()
 	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	grabbed.PushBack({ 801, 820, 94, 84 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 801, 820, 94, 84 }, 30, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	//Thrown
 	thrown.PushBack({ 1, 1, 72, 94 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	thrown.PushBack({ 76, 4, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	thrown.PushBack({ 144, 49, 125, 52 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	thrown.PushBack({ 270, 5, 86, 96 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	thrown.PushBack({ 357, 13, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 357, 13, 67, 91 }, 40, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Defending
 	const int defendingnColliders = 3;
@@ -1759,10 +1759,12 @@ update_status ModulePlayer2::Update()
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
 			if ((App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) && (colliding == false)) {
-				if (flip == true) {
+				if (flip == true && IsntOnLeftLimit()) {
 					position.x -= speed * 5;
 				}
-				else position.x += speed * 5;
+				if(flip == false && IsntOnRightLimit()){ 
+					position.x += speed * 5; 
+				}
 			}
 			typeofattack = 3;
 			dizzydamage = 3;
@@ -2484,6 +2486,9 @@ update_status ModulePlayer2::Update()
 		case M_GRAB2:
 			texture = graphics2;
 			current_animation = &grab2;
+			if (m_grab_timer == App->frames - 15 || m_grab_timer == App->frames - 30 || m_grab_timer == App->frames - 45 || m_grab_timer == App->frames - 60 || m_grab_timer == App->frames - 75 || m_grab_timer == App->frames - 90 || m_grab_timer == App->frames - 105) {
+				App->audio->PlayChunk(high_fist);
+			}
 			dizzydamage = 5;
 			break;
 
@@ -2494,11 +2499,40 @@ update_status ModulePlayer2::Update()
 
 		case M_GRABBED2:
 			current_animation = &grabbed;
+
+			if (App->frames - m_grabbed_timer >= 105 && App->frames - m_grabbed_timer < 120)
+			{
+				jumpHeight -= speed + 1;
+			}
+			if (App->frames - m_grabbed_timer > 120)
+			{
+				jumpHeight += speed + 1;
+			}
+
+			if (App->frames - m_grabbed_timer >= 105) {
+				if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 1;
+
+				if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 1;
+			}
 			break;
 
 		case F_GRABBED2:
 			texture = graphics6;
 			current_animation = &thrown;
+			if (App->frames - f_grabbed_timer >= 40 && App->frames - f_grabbed_timer < 60)
+			{
+				jumpHeight -= speed + 1;
+			}
+			if (App->frames - f_grabbed_timer > 60)
+			{
+				jumpHeight += speed + 1;
+			}
+
+			if (App->frames - f_grabbed_timer >= 40) {
+				if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
+
+				if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
+			}
 			break;
 
 		case ST_DIZZI2:
@@ -2530,15 +2564,15 @@ update_status ModulePlayer2::Update()
 				burning_timer = App->frames;
 			}
 
-			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 21))
+			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 26))
 			{
 				jumpHeight -= speed + 1;
 			}
 
-			if (App->frames - burning_timer > 20)
+			if (App->frames - burning_timer > 25)
 				jumpHeight += speed + 1;
 
-			if (jumpHeight >= 0 && App->frames - burning_timer > 21)
+			if (jumpHeight >= 0 && App->frames - burning_timer > 26)
 			{
 				inputs.Push(IN_BURNING_FINISH2);
 				burning_timer = 0;
@@ -3110,6 +3144,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - m_grabbed_timer > D_M_GRABBED_TIME)
 		{
 			inputs.Push(IN_GRABBED_FINISH2);
+			grabbed.ResetAnimation();
 			m_grabbed_timer = 0;
 		}
 	}
@@ -3119,6 +3154,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 		if (App->frames - f_grabbed_timer > D_F_GRABBED_TIME)
 		{
 			inputs.Push(IN_GRABBED_FINISH2);
+			thrown.ResetAnimation();
 			f_grabbed_timer = 0;
 		}
 	}
