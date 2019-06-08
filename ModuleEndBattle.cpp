@@ -131,7 +131,7 @@ update_status ModuleEndBattle::Update()
 		timeScreen = App->frames;
 	}
 
-	if (App->frames - timeScreen > 450)
+	if (App->frames - timeScreen > 575)
 		isFading = false;
 
 		return UPDATE_CONTINUE;
