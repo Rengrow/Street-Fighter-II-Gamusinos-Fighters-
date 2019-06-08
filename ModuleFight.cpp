@@ -33,7 +33,7 @@ bool ModuleFight::Start()
 	stage->Enable();
 
 	roundStarted = stopedFight = endFightStarted = false;
-	App->player1->puntuation = App->player2->puntuation = player1RoundWinned = player2RoundWinned = autoWinLoseTimer = 0;
+	player1RoundWinned = player2RoundWinned = autoWinLoseTimer = 0;
 	round = 1;
 
 	return true;
