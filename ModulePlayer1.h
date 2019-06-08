@@ -228,8 +228,6 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
-	SDL_Texture* graphics4 = nullptr;
-	SDL_Texture* graphics5 = nullptr;
 	SDL_Texture* graphics6 = nullptr;
 	SDL_Texture* shadow = nullptr;
 	Animation idle, forward, backward;
