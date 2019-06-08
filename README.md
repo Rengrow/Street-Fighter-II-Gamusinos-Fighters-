@@ -96,19 +96,20 @@ Version 0.5.3:
 Version 0.5.4:
 - Fixed infinite loop for changed controls
 
-Version 0.8:
+Version 0.9:
 - Muchas Cosas
 
-Version 0.8.1:
+Version 0.9.1:
 - Fixed Clear History combo after a combo hit
 - Added Blood Particles
 
-Version 0.9:
+Version 0.9.2:
 - Added all the Particles
 - Added Intro
 - Added Draw Match
 - Fixed Pushbacks
 - Fixed Win Position
+- Fixed Damages
 
 ## Credits
 
