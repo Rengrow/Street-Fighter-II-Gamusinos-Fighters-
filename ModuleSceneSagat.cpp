@@ -47,6 +47,7 @@ bool ModuleSceneSagat::Start()
 	// J: Here rests the module palmera :( 
 	//A:  Gone, but not forgotten
 	//R: Do not let it fool you, once this was a memoryleak
+
 	palmtree.PushBack({ 699, 212, 325, 317 }, 24, { 0,0 }, 0, {}, {}, {});
 	palmtree.PushBack({ 696, 550, 328, 317 }, 24, { 0,0 }, 0, {}, {}, {});
 
