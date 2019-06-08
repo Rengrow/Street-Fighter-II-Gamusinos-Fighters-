@@ -238,7 +238,7 @@ update_status ModuleWelcomePage::Update()
 		}
 	}
 
-	if (App->frames - timeScreen > 450)
+	if (App->frames - timeScreen > 575)
 		isFading = false;
 
 	return UPDATE_CONTINUE;
