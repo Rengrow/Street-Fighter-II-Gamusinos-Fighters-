@@ -43,8 +43,9 @@ bool ModuleEndBattle::Start()
 	App->player1->position.y = 215;
 	App->player2->position.x = 250;
 	App->player2->position.y = 215;
-	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = quoteLetters = 0;
+	App->render->camera.x = App->render->camera.y = App->player1->puntuation = App->player2->puntuation = quoteLetters = timeScreen = 0;
 	isFading = false;
+
 
 	if (App->fight->player1RoundWinned > App->fight->player2RoundWinned) {
 		portraitP1 = portrait1;
@@ -127,7 +128,11 @@ update_status ModuleEndBattle::Update()
 		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 2);
 		isFading = true;
+		timeScreen = App->frames;
 	}
 
-	return UPDATE_CONTINUE;
+	if (App->frames - timeScreen > 450)
+		isFading = false;
+
+		return UPDATE_CONTINUE;
 }

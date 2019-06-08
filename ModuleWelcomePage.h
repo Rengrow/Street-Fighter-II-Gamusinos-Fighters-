@@ -58,6 +58,7 @@ public:
 	int typography;
 	Uint32 timeLetters;
 	Uint32 pageTimer;
+	Uint32 timeScreen;
 	bool lettersOn;
 };
 
