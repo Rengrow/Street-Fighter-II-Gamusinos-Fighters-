@@ -271,14 +271,14 @@ update_status ModuleInput::PreUpdate()
 	else
 		pads[1].b = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
+	if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController2States[SDL_CONTROLLER_BUTTON_RIGHTSHOULDER] == KEY_DOWN))
 	{
 		pads[1].R1 = true;
 	}
 	else
 		pads[1].R1 = false;
 
-	if ((App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_DOWN) || (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
+	if ((App->input->keyboard[SDL_SCANCODE_KP_3] == KEY_STATE::KEY_DOWN) || (App->input->gameController2AxisValues[SDL_CONTROLLER_AXIS_TRIGGERRIGHT] > JOYSTICK_DEAD_ZONE))
 	{
 		pads[1].R2 = true;
 	}

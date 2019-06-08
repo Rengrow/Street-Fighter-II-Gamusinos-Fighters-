@@ -2511,6 +2511,7 @@ update_status ModulePlayer1::Update()
 			current_animation = &grab2;
 			if (m_grab_timer == App->frames - 15 || m_grab_timer == App->frames - 30 || m_grab_timer == App->frames - 45 || m_grab_timer == App->frames - 60 || m_grab_timer == App->frames - 75 || m_grab_timer == App->frames - 90 || m_grab_timer == App->frames - 105) {
 				App->audio->PlayChunk(high_fist);
+				App->player2->life -= 4;
 			}
 			dizzydamage = 5;
 			break;
@@ -2518,6 +2519,10 @@ update_status ModulePlayer1::Update()
 		case F_GRAB:
 			current_animation = &grab;
 			dizzydamage = 5;
+			if (App->frames - f_grab_timer == 1)
+			{
+				App->player2->life -= 20;
+			}
 			break;
 
 		case M_GRABBED:
