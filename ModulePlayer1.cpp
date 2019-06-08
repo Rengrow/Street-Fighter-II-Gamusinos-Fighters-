@@ -1760,10 +1760,12 @@ update_status ModulePlayer1::Update()
 		case F_KIK_CROUCH:
 			current_animation = &chk;
 			if ((App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) && (colliding == false)) {
-				if (flip == true) {
+				if (flip == true && IsntOnLeftLimit()) {
 					position.x -= speed * 5;
 				}
-				else position.x += speed * 5;
+				if (flip == false && IsntOnRightLimit()) {
+					position.x += speed * 5;
+				}
 			}
 			typeofattack = 3;
 			dizzydamage = 3;
@@ -2508,9 +2510,9 @@ update_status ModulePlayer1::Update()
 			}
 
 			if (App->frames - m_grabbed_timer >= 105) {
-				if ((!flip) && (colliding == false)) position.x -= speed + 1;
+				if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 1;
 
-				if ((flip) && (colliding == false))  position.x += speed + 1;
+				if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 1;
 			}
 			break;
 
@@ -2527,9 +2529,9 @@ update_status ModulePlayer1::Update()
 			}
 
 			if (App->frames - f_grabbed_timer >= 40) {
-				if ((!flip) && (colliding == false)) position.x -= speed + 2;
+				if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
 
-				if ((flip) && (colliding == false))  position.x += speed + 2;
+				if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
 			}
 
 			break;
@@ -2563,15 +2565,15 @@ update_status ModulePlayer1::Update()
 				burning_timer = App->frames;
 			}
 
-			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 21))
+			if ((App->frames - burning_timer > 0) && (App->frames - burning_timer < 26))
 			{
 				jumpHeight -= speed + 1;
 			}
 
-			if (App->frames - burning_timer > 20)
+			if (App->frames - burning_timer > 25)
 				jumpHeight += speed + 1;
 
-			if (jumpHeight >= 0 && App->frames - burning_timer > 21)
+			if (jumpHeight >= 0 && App->frames - burning_timer > 26)
 			{
 				inputs.Push(IN_BURNING_FINISH);
 				burning_timer = 0;
