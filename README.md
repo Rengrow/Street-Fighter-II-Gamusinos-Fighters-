@@ -22,31 +22,33 @@ Currently there is no installation required, just open the .exe provided in the 
 	F11: Instant win for player 2 in the fight screen
 
 ### Player 1 Controls: <br>
-    Movement:
-        W: Jump
-        A: Backwards
-        S: Crouch
-        D: Forwards
+    Movement (keyboard / gamepad):
+        W / joystick up: Jump
+        A / joystick left: Move to the left
+        S / joystick down: Crouch
+        D / joystick right: Move to the right
     Attacks:
-        4: Punch
-        5: Kick
-        6: Hadoken
+        U / X button: Light Punch
+        I / Y button: Medium Punch
+	O / R1 button: Hard Punch
+	J / A button: Light Kick
+	K / B button: Medium Kick
+	L / R2 button: Hard Kick
 
 ### Player 2 Controls:<br> 
     Movement:
-        Y: Jump
-        G: Backwards
-        H: Crouch
-        J: Forwards
+        Up button / joystick up: Jump
+        Left button / joystick left: Move to the left
+        Down button / joystick down: Crouch
+        Right button / joystick right: Move to the right
     Attacks:
 	On the Pad
-        4: Light Punch
-        5: Medium Punch
-        6: Hard Punch
-        1: Light Kick
-        2: Medium Kick
-        3: Hard Kick
-        0: Hadoken
+        4 / X button: Light Punch
+        5 / Y button: Medium Punch
+	6 / R1 button: Hard Punch
+	1 / A button: Light Kick
+	2 / B button: Medium Kick
+	3 / R2 button: Hard Kick
 
 ## History
 
@@ -97,7 +99,19 @@ Version 0.5.4:
 - Fixed infinite loop for changed controls
 
 Version 0.9:
-- Muchas Cosas
+- Dhalsim completed animations added
+- State machine implemented
+- Timers calibrated
+- Color variation added
+- Gamepad inputs implemented
+- Jumps physics upgraded
+- Pushback logic implemented
+- Combos added
+- Slowdown implemented
+- Shadows implemented
+- UI improvement
+- Grabs and throws added
+
 
 Version 0.9.1:
 - Fixed Clear History combo after a combo hit
@@ -110,6 +124,10 @@ Version 0.9.2:
 - Fixed Pushbacks
 - Fixed Win Position
 - Fixed Damages
+
+Version 0.9.3:
+- Fixed Lose animation
+- Fixed Burn animation
 
 ## Credits
 

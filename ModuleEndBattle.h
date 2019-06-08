@@ -30,6 +30,7 @@ public:
 	int typography;
 	Uint32 timeLetters;
 	bool quoteOption;
+	bool isFading;
 
 	std::string quote1 = "I will meditate and then"; //awesome line jump implemented here
 	std::string quote1sub = "destroy you!!";
