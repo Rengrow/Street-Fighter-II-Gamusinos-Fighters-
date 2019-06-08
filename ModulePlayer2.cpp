@@ -56,8 +56,9 @@ bool ModulePlayer2::Start()
 	position.y = 215;
 	life = 100;
 	dizzylvl = 0;
+	lose_timer = 0;
 	freeze = flip = true;
-	wining = turn = colliding = dizzi = false;
+	wining = turn = colliding = dizzi = falling = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
 		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = 0;
 	pushbackspeed = speed = 1;
@@ -2363,6 +2364,30 @@ update_status ModulePlayer2::Update()
 
 		case LOOSE2:
 			current_animation = &lose;
+
+			if (lose_timer == 0)
+			{
+				lose_timer = App->frames;
+				falling = true;
+			}
+
+			if ((App->frames - lose_timer > 0) && (App->frames - lose_timer < 11))
+			{
+				jumpHeight -= speed + 2;
+			}
+
+			if (jumpHeight < 0 && App->frames - lose_timer > 10)
+				jumpHeight += speed + 1;
+
+			if (jumpHeight >= 0 && App->frames - lose_timer > 11)
+			{
+				falling = false;
+				current_animation = &ground;
+			}
+
+			if (IsntOnLeftLimit() && (!flip) && (colliding == false) && falling) position.x -= speed + 2;
+
+			if (IsntOnRightLimit() && (flip) && (colliding == false) && falling)  position.x += speed + 2;
 			break;
 
 

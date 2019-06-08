@@ -348,6 +348,7 @@ public:
 
 	Uint32 invulnerabilityFrames;
 	bool wining;
+	bool falling;
 	bool turn;
 	bool flip;
 	bool altColor = true;
@@ -444,6 +445,7 @@ public:
 	Uint32 crouch_defending_timer = 0;
 
 	Uint32 turning_timer = 0;
+	Uint32 lose_timer = 0;
 
 	Uint32 head_reel_timer = 0;
 	Uint32 crouch_reel_timer = 0;

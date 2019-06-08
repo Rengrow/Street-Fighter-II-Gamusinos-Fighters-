@@ -276,6 +276,7 @@ public:
 	bool yoga_check;
 	bool yoga_sound;
 	bool flame_sound;
+	bool falling;
 	int victoryExecuted;
 	int pushbacktimerhit;
 	int pushbacktimerprojectile;
@@ -371,6 +372,7 @@ public:
 	Uint32 gut_reel_timer = 0;
 	Uint32 sweep_timer = 0;
 	Uint32 burning_timer = 0;
+	Uint32 lose_timer = 0;
 };
 
 #endif
