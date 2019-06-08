@@ -76,14 +76,14 @@ update_status ModuleInput::PreUpdate()
 	//Load GameController
 	if (!SDL_GameControllerGetAttached(gameController1)) {
 		gameController1 = SDL_GameControllerOpen(0);
-		if (gameController1 == NULL)
-			LOG("Warning: Unable to open game controller 1! SDL Error: %s\n", SDL_GetError());
+		/*if (gameController1 == NULL)
+			LOG("Warning: Unable to open game controller 1! SDL Error: %s\n", SDL_GetError());*/
 	}
 
 	if (!SDL_GameControllerGetAttached(gameController2)) {
 		gameController2 = SDL_GameControllerOpen(1);
-		if (gameController2 == NULL)
-			LOG("Warning: Unable to open game controller 2! SDL Error: %s\n", SDL_GetError());
+		//if (gameController2 == NULL)
+		//	LOG("Warning: Unable to open game controller 2! SDL Error: %s\n", SDL_GetError());
 	}
 
 	SDL_GameControllerUpdate();

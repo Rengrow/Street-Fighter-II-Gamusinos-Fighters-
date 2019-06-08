@@ -78,6 +78,9 @@ update_status ModuleFight::Update()
 			else if (App->UI->winnerPlayer == 2 && App->fight->player2RoundWinned == 2) {
 				EndFullFight();
 			}
+			else if (round == 4) {
+				EndFullFight();
+			}
 			else if (App->UI->winnerPlayer == 0 && App->fight->player1RoundWinned == 1 && App->fight->player2RoundWinned == 1) {
 				StartNewRound();
 			}
