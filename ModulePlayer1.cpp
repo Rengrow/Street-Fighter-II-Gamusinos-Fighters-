@@ -2285,6 +2285,7 @@ update_status ModulePlayer1::Update()
 			if (jumpHeight >= 0)
 			{
 				inputs.Push(IN_FALLING_FINISH);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, App->player1->position.x - 20, App->player1->position.y - 10, 0, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if ((!flip) && (colliding == false)) position.x -= speed;
 
@@ -2687,6 +2688,12 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			dizzi = true;
 			dizzylvl = 0;
 		}
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_GRAB) {
+			if (flip == true) {
+				App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
+			}
+			else{ App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		}
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
 			if (App->player1->state != ST_CROUCH_DEFENDING_READY) {
 				if ((flip == false && App->player1->state != ST_WALK_FORWARD) || (flip == true && App->player1->state != ST_WALK_BACKWARD)) {
@@ -2793,8 +2800,14 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_HEAD_REEL);
 				life -= 10;
 			}
+			if (App->player2->state == F_KIK_CROUCH) {
+				inputs.Push(IN_SWEEP);
+
+			}
 
 			App->slowdown->StartSlowdown(5, 30);
+
+
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))

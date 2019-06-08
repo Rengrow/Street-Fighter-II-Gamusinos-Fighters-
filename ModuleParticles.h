@@ -55,8 +55,8 @@ private:
 public:
 	Particle hdk;
 	Particle ground_dust;
-	Particle lhead, fhead;
-	Particle lhead2, fhead2;
+	Particle lhead, fhead, pgrab;
+	Particle lhead2, fhead2, pgrab2;
 	Particle blood, defending;
 };
 
