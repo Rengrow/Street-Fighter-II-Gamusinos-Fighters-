@@ -2608,6 +2608,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (invulnerabilityFrames < App->frames) {
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_GRAB) {
+			if (flip == false) {
+				App->particles->AddParticle(App->particles->pgrab2, !flip, App->player2->position.x + 10, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
+			}
+			else{ App->particles->AddParticle(App->particles->pgrab2, !flip, App->player2->position.x - 20, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		}
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
 			if (App->player2->state != ST_CROUCH_DEFENDING_READY2) {
 				if ((flip == false && App->player2->state != ST_WALK_FORWARD2) || (flip == true && App->player2->state != ST_WALK_BACKWARD2)) {
