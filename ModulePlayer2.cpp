@@ -2472,9 +2472,6 @@ update_status ModulePlayer2::Update()
 		case M_GRABBING2:
 			texture = graphics3;
 			current_animation = &grabbing;
-			if (m_grab_timer == 15 || m_grab_timer == 30 || m_grab_timer == 45 || m_grab_timer == 60 || m_grab_timer == 75 || m_grab_timer == 90) {
-				App->audio->PlayChunk(high_fist);
-			}
 			dizzydamage = 5;
 			break;
 
@@ -2487,6 +2484,9 @@ update_status ModulePlayer2::Update()
 		case M_GRAB2:
 			texture = graphics2;
 			current_animation = &grab2;
+			if (m_grab_timer == App->frames - 15 || m_grab_timer == App->frames - 30 || m_grab_timer == App->frames - 45 || m_grab_timer == App->frames - 60 || m_grab_timer == App->frames - 75 || m_grab_timer == App->frames - 90 || m_grab_timer == App->frames - 105) {
+				App->audio->PlayChunk(high_fist);
+			}
 			dizzydamage = 5;
 			break;
 
