@@ -31,15 +31,15 @@ bool ModulePlayer1::Start()
 		graphics = App->textures->Load("assets/images/sprites/characters/dhalshim1.png"); // arcade version
 		graphics2 = App->textures->Load("assets/images/sprites/characters/dhalshim2.png"); // arcade version
 		graphics3 = App->textures->Load("assets/images/sprites/characters/dictator-dhalshim.png"); // arcade version
+		graphics6 = App->textures->Load("assets/images/sprites/characters/dhalshim4.png"); // arcade version
 	}
 	else {
 		graphics = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim1.png"); // arcade version
 		graphics2 = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim2.png"); // arcade version
 		graphics3 = App->textures->Load("assets/images/sprites/characters/colorvar-dictator-dhalshim.png"); // arcade version
+		graphics6 = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim4.png"); // arcade version
 	}
 
-	graphics4 = App->textures->Load("assets/images/sprites/characters/ryu1.png");
-	graphics5 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png");
 	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -1110,6 +1110,31 @@ bool ModulePlayer1::Start()
 	getup.PushBack({ 330, 974, 122, 46 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	getup.PushBack({ 455, 920, 83, 100 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
+	//Grabbed
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 801, 820, 94, 84 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
+	//Thrown
+	thrown.PushBack({ 1, 1, 72, 94 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 76, 4, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 144, 49, 125, 52 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 270, 5, 86, 96 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	thrown.PushBack({ 357, 13, 67, 91 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+
 
 	// Defending
 	const int defendingnColliders = 3;
@@ -1139,19 +1164,19 @@ bool ModulePlayer1::Start()
 	Module* burningCallback[burningnColliders] = { {this}, {this}, {this} };
 	Module* burningCallback2[burningnColliders] = { {this}, {this}, {this} };
 
-	burning.PushBack({ 87, 0, 90, 108 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox1 }, { burningColliderType }, { airreelCallback });
-	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 249, 105, 90, 108 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox1 }, { burningColliderType }, { airreelCallback });
+	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grab
 	grab.PushBack({ 540, 932, 116, 88 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
@@ -1252,15 +1277,13 @@ bool ModulePlayer1::CleanUp()
 		crouching = standing = crouch =
 		win1 = win2 = lose =
 		ground =
-		grabbing =
-		turn_anim = cturn_anim = Animation();
+		grabbing = grabbed = thrown = turn_anim = cturn_anim = Animation();
 
 	//Clear Textures
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
-	App->textures->Unload(graphics4);
-	App->textures->Unload(graphics5);
+	App->textures->Unload(graphics6);
 	App->textures->Unload(shadow);
 
 	//Clear Colliders
@@ -2035,9 +2058,9 @@ update_status ModulePlayer1::Update()
 				else
 				{
 					if (flip == true) {
-						App->player1->position.x -= pushbackspeed;
+						App->player2->position.x -= pushbackspeed;
 					}
-					else App->player1->position.x += pushbackspeed;
+					else App->player2->position.x += pushbackspeed;
 				}
 			}
 			break;
@@ -2259,6 +2282,7 @@ update_status ModulePlayer1::Update()
 			if (jumpHeight >= 0)
 			{
 				inputs.Push(IN_FALLING_FINISH);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, App->player1->position.x - 20, App->player1->position.y - 10, 0, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 			if ((!flip) && (colliding == false)) position.x -= speed;
 
@@ -2469,8 +2493,13 @@ update_status ModulePlayer1::Update()
 			dizzydamage = 5;
 			break;
 
-		case GRABBED:
-			current_animation = &airreel;
+		case M_GRABBED:
+			current_animation = &grabbed;
+			break;
+
+		case F_GRABBED:
+			texture = graphics6;
+			current_animation = &thrown;
 			break;
 
 		case ST_DIZZI:
@@ -2485,7 +2514,6 @@ update_status ModulePlayer1::Update()
 			break;
 
 		case CROUCH_TURNING:
-			texture = graphics3;
 			current_animation = &cturn_anim;
 			turn = false;
 			break;
@@ -2495,7 +2523,7 @@ update_status ModulePlayer1::Update()
 			break;
 
 		case BURNING:
-			texture = graphics4;
+			texture = graphics6;
 			current_animation = &burning;
 
 			if (burning_timer == 0)
@@ -2591,7 +2619,17 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER_GRAB && c2->type == COLLIDER_PLAYER2)
 	{
 		inputs.Push(IN_GRAB);
-		App->player2->inputs.Push(IN_GRABBED2);
+
+		if (state == M_GRABBING)
+		{
+			App->player2->inputs.Push(IN_M_GRABBED2);
+		}
+
+		if (state == F_GRABBING)
+		{
+			App->player2->inputs.Push(IN_F_GRABBED2);
+		}
+		
 		App->slowdown->StartSlowdown(5, 30);
 	}
 	//PUSHBACK CHECK END
@@ -2647,19 +2685,59 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			dizzi = true;
 			dizzylvl = 0;
 		}
-
-		if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4) {
-			if (flip == false) { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-			else { App->particles->AddParticle(App->particles->lhead, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_GRAB && App->player2->state != F_GRABBING2) {
+			if (flip == true) {
+				App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
+			}
+			else{ App->particles->AddParticle(App->particles->pgrab, !flip, App->player1->position.x, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 		}
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT) {
+			if (App->player1->state != ST_CROUCH_DEFENDING_READY) {
+				if ((flip == false && App->player1->state != ST_WALK_FORWARD) || (flip == true && App->player1->state != ST_WALK_BACKWARD)) {
+					if (App->frames - App->player2->l_close_standing_punch_timer == 2 || App->frames - App->player2->l_close_standing_kik_timer == 4 || App->frames - App->player2->l_standing_kik_timer == 6 || App->frames - App->player2->m_standing_kik_timer == 6 || App->frames - App->player2->m_close_standing_kik_timer == 4 || App->frames - App->player2->f_standing_kik_timer == 13) {
+						if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						if (App->player2->f_standing_kik_timer > 0) {
+							if (flip == true) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+							else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						}
+					}
 
+					if (App->frames - App->player2->l_close_crouching_kik_timer == 4 || App->frames - App->player2->m_close_crouching_kik_timer == 1 || App->frames - App->player2->l_close_crouching_punch_timer == 2 || App->frames - App->player2->m_close_crouching_punch_timer == 3 || App->frames - App->player2->m_crouching_punch_timer == 10 || App->frames - App->player2->l_crouching_punch_timer == 10 || App->frames - App->player2->f_crouching_punch_timer == 13) {
+						if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					}
 
-	if (App->player2->state == YMUMMY2 || App->player2->state == YDRILL2) {
-		if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
-			if (flip == false) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
-			else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					if (App->frames - App->player2->l_standing_punch_timer == 6 || App->frames - App->player2->m_standing_punch_timer == 8 || App->frames - App->player2->f_standing_punch_timer == 13 || App->frames - App->player2->m_close_standing_punch_timer == 2 || App->frames - App->player2->f_close_standing_kik_timer == 10) {
+						if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					}
+
+					if (App->player2->state == L_KIK_CROUCH2 || App->player2->state == M_KIK_CROUCH2 || App->player2->state == F_KIK_CROUCH2) {
+						if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
+							if (flip == true) { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x + 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+							else { App->particles->AddParticle(App->particles->lhead2, !flip, App->player1->position.x - 20, App->player2->position.y - 20, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						}
+					}
+
+					if (App->frames - App->player2->f_close_standing_punch_timer == 6) {
+						if (flip == true) { App->particles->AddParticle(App->particles->fhead2, !flip, App->player1->position.x + 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						else { App->particles->AddParticle(App->particles->fhead2, !flip, App->player1->position.x - 40, App->player2->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+					}
+
+					if (App->player2->state == YMUMMY2 || App->player2->state == YDRILL2) {
+						if (state != ST_WALK_BACKWARD && state != ST_CROUCH_DEFENDING && state != ST_DEFENDING) {
+							if (flip == true) { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x + 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+							else { App->particles->AddParticle(App->particles->blood, !flip, App->player1->position.x - 20, App->player1->position.y - 100, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+						}
+					}
+				}
+			}
+			if ((App->player1->state == ST_CROUCH_DEFENDING_READY) || (flip == false && App->player1->state == ST_WALK_FORWARD) || (flip == true && App->player1->state == ST_WALK_BACKWARD)) {
+				if (flip == true) { App->particles->AddParticle(App->particles->defending, !flip, App->player1->position.x + 20, App->player1->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+				else { App->particles->AddParticle(App->particles->defending, !flip, App->player1->position.x - 20, App->player1->position.y - 50, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			}
 		}
-	}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT)
 		{
@@ -2719,11 +2797,17 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_HEAD_REEL);
 				life -= 10;
 			}
+			if (App->player2->state == F_KIK_CROUCH) {
+				inputs.Push(IN_SWEEP);
+
+			}
 
 			App->slowdown->StartSlowdown(5, 30);
+
+
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
 		{
 			life -= 12;
 			App->audio->PlayChunk(hdk_hit);
@@ -2732,7 +2816,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
 		{
 			life -= 7;
 			invulnerabilityFrames = 25 + App->frames;
@@ -2999,10 +3083,9 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 		}
 	}
 	else {
-		App->input->pads[0].left = false;
-		App->input->pads[0].right = false;
-		App->input->pads[0].down = false;
-		App->input->pads[0].up = false;
+		inputs.Push(IN_CROUCH_UP);
+		inputs.Push(IN_RIGHT_UP);
+		inputs.Push(IN_LEFT_UP);
 	}
 
 	return true;
@@ -3071,12 +3154,21 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		}
 	}
 
-	if (grabbed_timer > 0)
+	if (m_grabbed_timer > 0)
 	{
-		if (App->frames - grabbed_timer > D_GRABBED_TIME)
+		if (App->frames - m_grabbed_timer > D_M_GRABBED_TIME)
 		{
 			inputs.Push(IN_GRABBED_FINISH);
-			grabbed_timer = 0;
+			m_grabbed_timer = 0;
+		}
+	}
+
+	if (f_grabbed_timer > 0)
+	{
+		if (App->frames - f_grabbed_timer > D_F_GRABBED_TIME)
+		{
+			inputs.Push(IN_GRABBED_FINISH);
+			f_grabbed_timer = 0;
 		}
 	}
 
@@ -3295,6 +3387,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		{
 			inputs.Push(IN_PUNCH_FINISH);
 			f_crouching_punch_timer = 0;
+			chp.ResetAnimation();
 		}
 	}
 
@@ -3562,7 +3655,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -3620,7 +3714,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else if (close) { state = F_KIK_CLOSE; f_close_standing_kik_timer = App->frames; }
 			}break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
@@ -3685,7 +3780,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else if (close) { state = F_KIK_CLOSE; f_close_standing_kik_timer = App->frames; }
 			}break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
@@ -3713,12 +3809,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_KIK: state = M_KIK_NEUTRAL_JUMP; break;
 
 			case IN_F_PUNCH: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
 				else { state = F_PUNCH_NEUTRAL_JUMP; }
 			}break;
 
 			case IN_F_KIK: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YDRILL; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL; }
 				else { state = F_KIK_NEUTRAL_JUMP; }
 			}break;
 
@@ -3743,12 +3839,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_KIK: state = M_KIK_FORWARD_JUMP; m_d_jumping_kik_timer = App->frames; break;
 
 			case IN_F_PUNCH: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
 				else { state = F_PUNCH_FORWARD_JUMP; f_d_jumping_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YDRILL; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL; }
 				else { state = F_KIK_FORWARD_JUMP; f_d_jumping_kik_timer = App->frames; }
 			}break;
 
@@ -3773,12 +3869,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_KIK: state = M_KIK_BACKWARD_JUMP; m_d_jumping_kik_timer = App->frames; break;
 
 			case IN_F_PUNCH: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YMUMMY; }
 				else { state = F_PUNCH_BACKWARD_JUMP; f_d_jumping_punch_timer = App->frames; }
 			}break;
 
 			case IN_F_KIK: {
-				if ((App->frames - jump_timer) > 3 && (App->frames - jump_timer) < 37) { state = YDRILL; }
+				if ((App->frames - jump_timer) > 23 && (App->frames - jump_timer) < 37) { state = YDRILL; }
 				else { state = F_KIK_BACKWARD_JUMP; f_d_jumping_kik_timer = App->frames; }
 			}break;
 
@@ -3880,9 +3976,9 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -3899,9 +3995,9 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -3918,9 +4014,9 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -3937,7 +4033,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -3956,7 +4053,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -3975,7 +4073,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -4177,11 +4276,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4195,11 +4294,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4213,11 +4312,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4231,11 +4330,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4249,11 +4348,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4267,11 +4366,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4285,11 +4384,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4303,11 +4402,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4321,11 +4420,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4339,11 +4438,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4357,11 +4456,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4375,11 +4474,11 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4401,12 +4500,14 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_YFLAME: state = M_YFLAME; m_yflame_timer = App->frames; break;
 			case IN_F_YFLAME: state = F_YFLAME; f_yflame_timer = App->frames; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
+			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4428,12 +4529,14 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_M_YFLAME: state = M_YFLAME; m_yflame_timer = App->frames; break;
 			case IN_F_YFLAME: state = F_YFLAME; f_yflame_timer = App->frames; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
+			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4484,7 +4587,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_F_PUNCH: state = F_PUNCH_CROUCH; f_crouching_punch_timer = App->frames; break;
 			case IN_F_KIK: state = F_KIK_CROUCH; f_crouching_kik_timer = App->frames; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
@@ -4541,7 +4645,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_F_PUNCH: state = F_PUNCH_CROUCH; f_crouching_punch_timer = App->frames; break;
 			case IN_F_KIK: state = F_KIK_CROUCH; f_crouching_kik_timer = App->frames; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_DEFENDING: state = ST_CROUCH_DEFENDING; crouch_defending_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
@@ -4556,7 +4661,6 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_DEFENDING_FINISH: state = ST_CROUCH; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4568,12 +4672,12 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_PUNCH_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 
-			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
 			}
 		}
@@ -4585,7 +4689,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_PUNCH_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4601,7 +4706,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_KIK_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4617,7 +4723,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_KIK_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4633,7 +4740,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_PUNCH_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4649,7 +4757,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_PUNCH_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4665,7 +4774,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_KIK_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4681,7 +4791,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_KIK_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4697,7 +4808,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_PUNCH_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4713,7 +4825,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_KIK_FINISH: state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4732,7 +4845,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else state = ST_IDLE;
 			} break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
@@ -4752,7 +4866,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else state = ST_IDLE;
 			} break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
@@ -4772,7 +4887,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else state = ST_IDLE;
 			} break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4810,7 +4926,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			switch (last_input)
 			{
 			case IN_DIZZI_FINISH:state = ST_IDLE; break;
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4867,7 +4984,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 
-		case GRABBED:
+		case M_GRABBED:
 		{
 			switch (last_input)
 			{
@@ -4876,13 +4993,24 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 		}
 		break;
 
+		case F_GRABBED:
+		{
+			switch (last_input)
+			{
+			case IN_GRABBED_FINISH:state = ST_GETTING_UP; getting_up_timer = App->frames; break;
+			}
+		}
+		break;
+
 		case ST_DEFENDING:
 		{
 			switch (last_input)
 			{
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_DEFENDING_FINISH:state = ST_IDLE; break;
 			case IN_GUT_REEL:state = ST_GUT_REEL; break;
+			case IN_SWEEP:state = SWEEP; break;
 			}
 		}
 		break;
@@ -4893,7 +5021,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_TURNING_FINISH:state = ST_IDLE; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
@@ -4910,7 +5039,8 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			{
 			case IN_TURNING_FINISH:state = ST_CROUCH; break;
 
-			case IN_GRABBED: state = GRABBED; grabbed_timer = App->frames; break;
+			case IN_M_GRABBED: state = M_GRABBED; m_grabbed_timer = App->frames; break;
+			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
 

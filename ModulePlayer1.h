@@ -33,7 +33,8 @@ enum ryu_states
 	M_GRAB,
 	F_GRAB,
 
-	GRABBED,
+	M_GRABBED,
+	F_GRABBED,
 
 	//testing adding states in order to debug animations of close attacks -Adrià
 	L_PUNCH_CLOSE,
@@ -187,7 +188,8 @@ enum ryu_inputs
 	IN_YDRILL_FINISH,
 	IN_YMUMMY_FINISH,
 
-	IN_GRABBED,
+	IN_M_GRABBED,
+	IN_F_GRABBED,
 	IN_GRABBED_FINISH,
 
 	IN_TURNING,
@@ -228,8 +230,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
-	SDL_Texture* graphics4 = nullptr;
-	SDL_Texture* graphics5 = nullptr;
+	SDL_Texture* graphics6 = nullptr;
 	SDL_Texture* shadow = nullptr;
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
@@ -248,7 +249,7 @@ public:
 	Animation crouching, standing, crouch;
 	Animation win1, win2, lose;
 	Animation ground;
-	Animation grabbing;
+	Animation grabbing, grabbed, thrown;
 	Animation turn_anim, cturn_anim;
 	// Animation sweep;
 	Mix_Chunk* hdk_hit = nullptr;
@@ -346,7 +347,8 @@ public:
 	//others
 
 	Uint32 grabbing_timer = 0;
-	Uint32 grabbed_timer = 0;
+	Uint32 m_grabbed_timer = 0;
+	Uint32 f_grabbed_timer = 0;
 
 	Uint32 hadoken_timer = 0;
 	Uint32 l_yflame_timer = 0;

@@ -25,9 +25,9 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 
 	//Hadoken  ATTENTION: THIS FIRES A YOGA FIRE (DHALSIM)
-	hdk.anim.PushBack({ 49, 312, 53, 39 }, 2, { 0,0 }, 0, {}, {}, {});
-	hdk.anim.PushBack({ 108, 304, 56, 37 }, 2, { 0,0 }, 0, {}, {}, {});
-	hdk.anim.PushBack({ 170, 304, 54, 37 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 55, 316, 35, 19 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 94, 311, 36, 24 }, 2, { 0,0 }, 0, {}, {}, {});
+	hdk.anim.PushBack({ 135, 311, 35, 24 }, 2, { 0,0 }, 0, {}, {}, {});
 	hdk.anim.loop = true;
 
 	hdk.life = -1;
@@ -68,17 +68,91 @@ bool ModuleParticles::Start()
 
 	blood.life = 10;
 
-	vomit.anim.PushBack({ 405, 123, 12, 9 }, 1, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 389, 124, 12, 12 }, 2, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 373, 124, 12, 17 }, 1, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 295, 124, 12, 20 }, 2, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 314, 124, 12, 15 }, 1, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 332, 124, 12, 28 }, 2, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 350, 124, 7, 27 }, 1, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.PushBack({ 363, 124, 6, 26 }, 2, { 0,0 }, 0, {}, {}, {});
-	vomit.anim.loop = true;
+	fhead.anim.PushBack({ 7, 229, 15, 21 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead.anim.PushBack({ 25, 227, 28, 24 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead.anim.PushBack({ 57, 220, 33, 31 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead.anim.PushBack({ 7, 210, 15, 40 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead.anim.PushBack({ 25, 210, 28, 41 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead.anim.PushBack({ 57, 210, 33, 41 }, 2, { 0,0 }, 0, {}, {}, {});
 
-	vomit.life = 12;
+	fhead.anim.loop = true;
+
+	fhead.life = 12;
+	
+	fhead2.anim.PushBack({ 323, 67, 10, 18 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead2.anim.PushBack({ 345, 67, 26, 22 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead2.anim.PushBack({ 374, 59, 30, 30}, 2, { 0,0 }, 0, {}, {}, {});
+	fhead2.anim.PushBack({ 323, 56, 10, 29 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead2.anim.PushBack({ 345, 56, 26, 33 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead2.anim.PushBack({ 374, 49, 30, 40 }, 2, { 0,0 }, 0, {}, {}, {});
+	fhead2.anim.loop = true;
+
+	fhead2.life = 12;
+
+	defending.anim.PushBack({ 294, 158, 10, 10 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 308, 158, 14, 20 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 325, 158, 22, 19 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 350, 158, 30, 29 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.PushBack({ 383, 158, 31, 31 }, 2, { 0,0 }, 0, {}, {}, {});
+	defending.anim.loop = true;
+
+	defending.life = 10;
+
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 15, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 323, 67, 19, 18 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.PushBack({ 295, 67, 26, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab.anim.loop = true;
+
+	pgrab.life = 130;
+
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 15, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 0, 0, 0, 0 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 25, 227, 28, 24 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.PushBack({ 57, 220, 33, 31 }, 5, { 0,0 }, 0, {}, {}, {});
+	pgrab2.anim.loop = true;
+
+	pgrab2.life = 130;
 
 	return true;
 }

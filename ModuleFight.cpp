@@ -122,14 +122,14 @@ void ModuleFight::Win(int ryu) {
 }
 
 void ModuleFight::CheckFlipPlayers() {
-	if (App->player1->position.x > App->player2->position.x && left == false) {
+	if (App->player1->position.x > App->player2->position.x && left == false && SDL_GetTicks() && !App->player1->freeze && !App->player2->freeze) {
 		App->player1->turn = true;
 		App->player2->turn = true;
 		right = false;
 		left = true;
 	}
 
-	if (App->player1->position.x < App->player2->position.x && right == false) {
+	if (App->player1->position.x < App->player2->position.x && right == false && SDL_GetTicks() && !App->player1->freeze && !App->player2->freeze) {
 		App->player1->turn = true;
 		App->player2->turn = true;
 		right = true;

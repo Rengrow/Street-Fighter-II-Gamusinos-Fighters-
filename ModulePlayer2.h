@@ -26,7 +26,7 @@
 #define D_M_D_JUMPING_KIK_TIME 3003
 
 #define D_F_STANDING_PUNCH_TIME 36//+6
-#define D_F_CROUCHING_PUNCH_TIME 33//+8
+#define D_F_CROUCHING_PUNCH_TIME 36//+8
 #define D_F_D_JUMPING_PUNCH_TIME 3003
 
 #define D_F_STANDING_KIK_TIME 35//+7
@@ -40,14 +40,15 @@
 
 #define D_M_GRAB_TIME 135//+15
 #define D_F_GRAB_TIME 40//+3
-#define D_GRABBED_TIME 50
+#define D_M_GRABBED_TIME 110
+#define D_F_GRABBED_TIME 50
 
 #define D_HADOKEN_TIME 32//+6 //not altered, pendent of yoga fire
 #define D_CROUCHING_TIME 4 //used to be 5
 #define D_STANDING_TIME 4 //used to be 5
 #define D_JUMP_TIME 55 //ok
 
-#define D_SWEEP_TIME 73
+#define D_SWEEP_TIME 72
 
 #define D_GETTING_UP_TIME 30//+2 //ok
 #define D_DEFENDING_TIME 20 //ok
@@ -113,7 +114,8 @@ enum ryu_states2
 	M_GRAB2,
 	F_GRAB2,
 
-	GRABBED2,
+	M_GRABBED2,
+	F_GRABBED2,
 
 	//testing adding states in order to debug animations of close attacks -Adrià
 	L_PUNCH_CLOSE2,
@@ -267,7 +269,8 @@ enum ryu_inputs2
 	IN_YDRILL_FINISH2,
 	IN_YMUMMY_FINISH2,
 
-	IN_GRABBED2,
+	IN_M_GRABBED2,
+	IN_F_GRABBED2,
 	IN_GRABBED_FINISH2,
 
 	IN_TURNING2,
@@ -307,8 +310,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics2 = nullptr;
 	SDL_Texture* graphics3 = nullptr;
-	SDL_Texture* graphics4 = nullptr;
-	SDL_Texture* graphics5 = nullptr;
+	SDL_Texture* graphics6 = nullptr;
 	SDL_Texture* shadow = nullptr;
 	Animation idle, forward, backward;
 	Animation lp, lk, clp, clk, cmp, cmk, chp, chk;
@@ -327,7 +329,7 @@ public:
 	Animation crouching, standing, crouch;
 	Animation win1, win2, lose;
 	Animation ground;
-	Animation grabbing;
+	Animation grabbing, grabbed, thrown;
 	Animation turn_anim, cturn_anim;
 	// Animation sweep;
 	Mix_Chunk* hdk_hit = nullptr;
@@ -423,7 +425,8 @@ public:
 	//others
 
 	Uint32 grabbing_timer = 0;
-	Uint32 grabbed_timer = 0;
+	Uint32 m_grabbed_timer = 0;
+	Uint32 f_grabbed_timer = 0;
 
 	Uint32 hadoken_timer = 0;
 	Uint32 l_yflame_timer = 0;

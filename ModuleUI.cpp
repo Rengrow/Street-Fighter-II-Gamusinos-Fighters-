@@ -229,6 +229,9 @@ void ModuleUI::RoundsWinnedBlit() {
 void ModuleUI::StartTimer() {
 	App->fight->timeOutTimer = SDL_GetTicks() + 99000; //99 Secs
 	timerStarted = true;
+	App->fight->left = false;
+	App->fight->right = true;
+
 }
 
 void ModuleUI::StartFight() {
