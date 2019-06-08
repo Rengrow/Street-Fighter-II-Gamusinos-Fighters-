@@ -25,10 +25,10 @@ ModuleFight::~ModuleFight()
 
 bool ModuleFight::Start()
 {
-	if (SDL_GetTicks() % 2 == 0)
+	//if (SDL_GetTicks() % 2 == 0)
 		stage = App->scene_Sagat;
-	else
-		stage = App->scene_ken;
+	//else
+	//	stage = App->scene_ken;
 
 	stage->Enable();
 
