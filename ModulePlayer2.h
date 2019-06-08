@@ -40,7 +40,8 @@
 
 #define D_M_GRAB_TIME 135//+15
 #define D_F_GRAB_TIME 40//+3
-#define D_GRABBED_TIME 50
+#define D_M_GRABBED_TIME 50
+#define D_F_GRABBED_TIME 50
 
 #define D_HADOKEN_TIME 32//+6 //not altered, pendent of yoga fire
 #define D_CROUCHING_TIME 4 //used to be 5
@@ -113,7 +114,8 @@ enum ryu_states2
 	M_GRAB2,
 	F_GRAB2,
 
-	GRABBED2,
+	M_GRABBED2,
+	F_GRABBED2,
 
 	//testing adding states in order to debug animations of close attacks -Adrià
 	L_PUNCH_CLOSE2,
@@ -267,7 +269,8 @@ enum ryu_inputs2
 	IN_YDRILL_FINISH2,
 	IN_YMUMMY_FINISH2,
 
-	IN_GRABBED2,
+	IN_M_GRABBED2,
+	IN_F_GRABBED2,
 	IN_GRABBED_FINISH2,
 
 	IN_TURNING2,
@@ -422,7 +425,8 @@ public:
 	//others
 
 	Uint32 grabbing_timer = 0;
-	Uint32 grabbed_timer = 0;
+	Uint32 m_grabbed_timer = 0;
+	Uint32 f_grabbed_timer = 0;
 
 	Uint32 hadoken_timer = 0;
 	Uint32 l_yflame_timer = 0;

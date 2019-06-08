@@ -232,7 +232,6 @@ void ModuleUI::StartTimer() {
 	App->fight->left = false;
 	App->fight->right = true;
 
-
 }
 
 void ModuleUI::StartFight() {
