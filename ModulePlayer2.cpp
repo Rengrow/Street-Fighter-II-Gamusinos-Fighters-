@@ -2282,6 +2282,7 @@ update_status ModulePlayer2::Update()
 			if (jumpHeight >= 0)
 			{
 				inputs.Push(IN_FALLING_FINISH2);
+				App->particles->AddParticle(App->particles->ground_dust, !flip, App->player2->position.x - 20, App->player2->position.y - 10, 0, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
 			if (IsntOnRightLimit() && (!flip) && (colliding == false)) position.x -= speed;
