@@ -122,7 +122,7 @@ update_status ModuleEndBattle::Update()
 		UpdateQuote();
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+	if (App->input->pads[0].start) {
 		Mix_FadeOutMusic(2000);
 		App->fade->FadeToBlack(this, (Module*)App->welcomePage, 2);
 	}
