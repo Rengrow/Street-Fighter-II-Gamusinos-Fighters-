@@ -2081,7 +2081,7 @@ update_status ModulePlayer1::Update()
 					else position.x -= pushbackspeed;
 				}
 
-				else
+				else if (App->player2->IsntOnLeftLimit() && App->player2->IsntOnRightLimit())
 				{
 					if (flip == true) {
 						App->player2->position.x -= pushbackspeed;
@@ -2110,7 +2110,7 @@ update_status ModulePlayer1::Update()
 					else position.x -= pushbackspeed;
 				}
 
-				else
+				else if (App->player2->IsntOnLeftLimit() && App->player2->IsntOnRightLimit())
 				{
 					if (flip == true) {
 						App->player2->position.x -= pushbackspeed;
