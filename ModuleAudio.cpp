@@ -57,7 +57,6 @@ bool ModuleAudio::CleanUp()
 			Mix_FreeMusic(songs[i]);
 	}
 
-
 	for (int i = MAX_CHUNKS - 1; i >= 0; i--) {
 		if (chunks[i] != nullptr)
 			Mix_FreeChunk(chunks[i]);

@@ -46,13 +46,13 @@ update_status ModuleFight::Update()
 			if (GetTimer() <= 0)
 				App->UI->timeOver = true;
 			Win(1);
-			autoWinLoseTimer = SDL_GetTicks() + 7000;
+			autoWinLoseTimer = SDL_GetTicks() + 16000;
 		}
 		else if ((!endFightStarted && (App->player1->life <= 0 || (GetTimer() <= 0 && App->player2->life > App->player1->life))) || App->input->keyboard[SDL_SCANCODE_F11] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			if (GetTimer() <= 0)
 				App->UI->timeOver = true;
 			Win(2);
-			autoWinLoseTimer = SDL_GetTicks() + 7000;
+			autoWinLoseTimer = SDL_GetTicks() + 16000;
 		}
 		else if ((!endFightStarted && ((App->player1->life == 0 && App->player2->life == 0) || (GetTimer() <= 0 && App->player1->life == App->player2->life))) || App->input->keyboard[SDL_SCANCODE_F9] == KEY_STATE::KEY_DOWN && autoWinLoseTimer < SDL_GetTicks()) {
 			if (GetTimer() > 0 && App->player1->life == 0 && App->player2->life == 0)

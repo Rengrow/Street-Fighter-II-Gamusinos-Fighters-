@@ -17,7 +17,6 @@
 
 ModuleSceneKen::ModuleSceneKen()
 {
-
 	// ground
 	ground.x = 0;
 	ground.y = 878;
@@ -171,7 +170,6 @@ bool ModuleSceneKen::CleanUp()
 	App->particles->Disable();
 	App->collisions->Disable();
 	App->UI->Disable();
-
 
 	return true;
 }

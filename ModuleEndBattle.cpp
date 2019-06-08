@@ -64,16 +64,16 @@ bool ModuleEndBattle::CleanUp()
 {
 	LOG("Unloading End battle screen");
 
+	App->textures->Unload(portraits);
+	App->fonts->UnLoad(typography);
+
+	App->audio->UnloadSong(music);
+	music = nullptr;
+
 	delete cstr2;
 	delete cstr;
 	cstr2 = nullptr;
 	cstr = nullptr;
-
-	App->textures->Unload(portraits);
-	App->fonts->UnLoad(typography);
-	App->audio->UnloadSong(music);
-
-	music = nullptr;
 
 	return true;
 }

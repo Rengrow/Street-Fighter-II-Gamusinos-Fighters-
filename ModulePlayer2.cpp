@@ -1260,7 +1260,8 @@ bool ModulePlayer2::CleanUp()
 	flame_snd = nullptr;
 
 	//Clear Animations
-	idle = forward = backward = lp = lk = clp = clk = cmp = cmk = chp = chk =
+	idle = forward = backward =
+		lp = lk = clp = clk = cmp = cmk = chp = chk =
 		close_lp = close_lk = close_clp = close_clk = close_cmp = close_cmk = close_chp = close_chk = close_firstframe_lk_mk =
 		jlp = jlk = jmp = jmk = jhp = jhk =
 		mp = hp = mk = hk =
@@ -1276,7 +1277,8 @@ bool ModulePlayer2::CleanUp()
 		crouching = standing = crouch =
 		win1 = win2 = lose =
 		ground =
-		grabbing = grabbed = thrown = turn_anim = cturn_anim = Animation();
+		grabbing = grabbed = thrown =
+		turn_anim = cturn_anim = Animation();
 
 	//Clear Textures
 	App->textures->Unload(graphics);
