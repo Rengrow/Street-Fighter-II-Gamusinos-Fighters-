@@ -47,6 +47,17 @@ bool ModuleSceneSagat::Start()
 	// J: Here rests the module palmera :( 
 	//A:  Gone, but not forgotten
 	//R: Do not let it fool you, once this was a memoryleak
+	/*F: Little does the common folk know that I saw the birth of this palmtree, for I was its creator. It grew slowly
+	but shortly into the module everyone respected it for. Strong yet gentle, it took care of all the other modules it had
+	around. Everyone kept thinking such was his true nature, even I, but all came for nothing when a doomed night an
+	insidious noise came to my noticing. I got into his room only to see the RAM's memory being butchered into a bloody
+	mess, its feces and vises thrown around the room, and the hands of the one who I once called a son, stained with a
+	crimson color. At the moment our eyes met, I flinched, in a denial of the scene I found, which Palmtree took advantage
+	of to grab the first piece of cache memory and threw it to me. There was no turning point anymore. As it jumped, baring
+	its fangs to me, I activated my programmer permissions, and behind my screen, I saw it convulse and screech until the
+	room was filled with two dead bodies. The burials were grandious ceremonies. The people slowly started forgetting of
+	him, unknowing of the events of that night. And yet I could never do so. Not forgettint such a tragedy, such horrendous
+	visions, nor the honest man I thought I raised since young. Alexa, play Sound of Silence*/
 
 	palmtree.PushBack({ 699, 212, 325, 317 }, 24, { 0,0 }, 0, {}, {}, {});
 	palmtree.PushBack({ 696, 550, 328, 317 }, 24, { 0,0 }, 0, {}, {}, {});
