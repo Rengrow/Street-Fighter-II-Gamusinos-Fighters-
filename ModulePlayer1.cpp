@@ -2137,7 +2137,7 @@ update_status ModulePlayer1::Update()
 					else position.x -= pushbackspeed;
 				}
 
-				else
+				else if (App->player2->IsntOnLeftLimit() && App->player2->IsntOnRightLimit())
 				{
 					if (flip == true) {
 						App->player2->position.x -= pushbackspeed;
@@ -2171,7 +2171,7 @@ update_status ModulePlayer1::Update()
 					else position.x -= pushbackspeed;
 				}
 
-				else
+				else if (App->player2->IsntOnLeftLimit() && App->player2->IsntOnRightLimit())
 				{
 					if (flip == true) {
 						App->player2->position.x -= pushbackspeed;
@@ -2877,7 +2877,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(block);
 				inputs.Push(IN_DEFENDING);
 			}
-			else if (state == ST_CROUCHING2 || state == ST_CROUCH2 || state == ST_STANDING2 || state == L_PUNCH_CROUCH2 || state == L_KIK_CROUCH2)
+			else if (state == ST_CROUCHING || state == ST_CROUCH || state == ST_STANDING || state == L_PUNCH_CROUCH || state == L_KIK_CROUCH || state == L_KIK_CROUCHCLOSE || state == L_PUNCH_CROUCHCLOSE || state == M_KIK_CROUCH || state == M_KIK_CROUCHCLOSE || state == M_PUNCH_CROUCH || state == M_PUNCH_CROUCHCLOSE || state == F_PUNCH_CROUCH || state == F_KIK_CROUCH)
 			{
 				inputs.Push(IN_CROUCH_REEL);
 				if (App->player2->l_standing_punch_timer != 0) { life -= 6; }
