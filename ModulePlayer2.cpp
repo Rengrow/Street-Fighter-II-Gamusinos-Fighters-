@@ -1358,6 +1358,13 @@ update_status ModulePlayer2::Update()
 		case ST_JUMP_NEUTRAL2:
 			texture = graphics;
 			current_animation = &neutralJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1381,6 +1388,12 @@ update_status ModulePlayer2::Update()
 
 		case ST_JUMP_FORWARD2:
 			current_animation = &forwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1407,6 +1420,13 @@ update_status ModulePlayer2::Update()
 
 		case ST_JUMP_BACKWARD2:
 			current_animation = &backwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;

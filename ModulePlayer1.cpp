@@ -1359,6 +1359,13 @@ update_status ModulePlayer1::Update()
 		case ST_JUMP_NEUTRAL:
 			texture = graphics;
 			current_animation = &neutralJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1382,6 +1389,13 @@ update_status ModulePlayer1::Update()
 
 		case ST_JUMP_FORWARD:
 			current_animation = &forwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1408,6 +1422,13 @@ update_status ModulePlayer1::Update()
 
 		case ST_JUMP_BACKWARD:
 			current_animation = &backwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -2297,9 +2318,9 @@ update_status ModulePlayer1::Update()
 			jumpHeight += speed + 2;
 			dizzydamage = 4;
 
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			if (IsntOnRightLimit() && (!flip) && (colliding == false)) position.x += speed + 2;
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (IsntOnLeftLimit() && (flip) && (colliding == false))  position.x -= speed + 2;
 
 			if (jumpHeight >= 0)
 			{
