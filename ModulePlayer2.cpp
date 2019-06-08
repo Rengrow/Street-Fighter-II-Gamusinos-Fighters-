@@ -41,8 +41,6 @@ bool ModulePlayer2::Start()
 		graphics6 = App->textures->Load("assets/images/sprites/characters/colorvar-dhalshim4.png"); // arcade version
 	}
 
-	graphics4 = App->textures->Load("assets/images/sprites/characters/ryu1.png");
-	graphics5 = App->textures->Load("assets/images/sprites/characters/ryu2-ken.png");
 	shadow = App->textures->Load("assets/images/sprites/sfx/sfx.png");
 	hdk_hit = App->audio->LoadChunk("assets/sfx/effects/fist_intro.wav");
 	low_kick = App->audio->LoadChunk("assets/sfx/effects/low_kick.wav");
@@ -59,9 +57,9 @@ bool ModulePlayer2::Start()
 	life = 100;
 	dizzylvl = 0;
 	freeze = flip = true;
-	turn = colliding = dizzi = false;
+	win = turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
-		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight =0;
+		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = 0;
 	pushbackspeed = speed = 1;
 	levitationtimer = -100;
 	Animation* current_animation;
@@ -1129,6 +1127,7 @@ bool ModulePlayer2::Start()
 	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grabbed.PushBack({ 144, 811, 69, 93 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	grabbed.PushBack({ 70, 810, 72, 94 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	grabbed.PushBack({ 801, 820, 94, 84 }, 5, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	//Thrown
 	thrown.PushBack({ 1, 1, 72, 94 }, 10, { 33,5 }, { win2nColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
@@ -1165,19 +1164,19 @@ bool ModulePlayer2::Start()
 	Module* burningCallback[burningnColliders] = { {this}, {this}, {this} };
 	Module* burningCallback2[burningnColliders] = { {this}, {this}, {this} };
 
-	burning.PushBack({ 87, 0, 90, 108 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox1 }, { burningColliderType }, { airreelCallback });
-	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 762, 964, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 249, 105, 90, 108 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox1 }, { burningColliderType }, { airreelCallback });
+	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grab
 	grab.PushBack({ 540, 932, 116, 88 }, 10, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
@@ -1283,8 +1282,6 @@ bool ModulePlayer2::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->textures->Unload(graphics3);
-	App->textures->Unload(graphics4);
-	App->textures->Unload(graphics5);
 	App->textures->Unload(graphics6);
 	App->textures->Unload(shadow);
 
@@ -2539,9 +2536,9 @@ update_status ModulePlayer2::Update()
 			break;
 
 		case BURNING2:
-			texture = graphics4;
+			texture = graphics6;
 			current_animation = &burning;
-			
+
 			if (burning_timer == 0)
 			{
 				burning_timer = App->frames;
@@ -2563,7 +2560,7 @@ update_status ModulePlayer2::Update()
 
 			if (IsntOnLeftLimit() && (!flip) && (colliding == false)) position.x -= speed + 2;
 
-			if ( IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
+			if (IsntOnRightLimit() && (flip) && (colliding == false))  position.x += speed + 2;
 
 			break;
 
@@ -2623,7 +2620,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
 	{
 		inputs.Push(IN_GRAB2);
-		
+
 		if (state == M_GRABBING2)
 		{
 			App->player1->inputs.Push(IN_M_GRABBED);
@@ -2640,11 +2637,11 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 
 
 	if (invulnerabilityFrames < App->frames) {
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_GRAB) {
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_GRAB && App->player1->state != F_GRABBING) {
 			if (flip == false) {
 				App->particles->AddParticle(App->particles->pgrab2, !flip, App->player2->position.x + 10, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0);
 			}
-			else{ App->particles->AddParticle(App->particles->pgrab2, !flip, App->player2->position.x - 20, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
+			else { App->particles->AddParticle(App->particles->pgrab2, !flip, App->player2->position.x - 20, App->player1->position.y - 90, 0, 0, 0, COLLIDER_WALL, 0, 0); }
 		}
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
 			if (App->player2->state != ST_CROUCH_DEFENDING_READY2) {
@@ -2690,7 +2687,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			}
 		}
 
-	
+
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT) {
 			Uint32 lasttimedamagedaux = App->GetFrame();
@@ -2780,7 +2777,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state != ST_JUMP_NEUTRAL && state != ST_JUMP_FORWARD && state != ST_JUMP_BACKWARD &&
 			state != L_PUNCH_NEUTRAL_JUMP && state != L_PUNCH_FORWARD_JUMP && state != L_PUNCH_BACKWARD_JUMP && state != L_KIK_NEUTRAL_JUMP && state != L_KIK_FORWARD_JUMP && state != L_KIK_BACKWARD_JUMP))
 		{
-			
+
 			invulnerabilityFrames = 25 + App->frames;
 
 			if (App->player1->state == L_KIK_STANDING2 || App->player1->state == L_KIK_NEUTRAL_JUMP2 || App->player1->state == L_KIK_FORWARD_JUMP2 || App->player1->state == L_KIK_BACKWARD_JUMP2 || App->player1->state == M_KIK_STANDING2 || App->player1->state == M_KIK_NEUTRAL_JUMP2 || App->player1->state == M_KIK_FORWARD_JUMP2 || App->player1->state == M_KIK_BACKWARD_JUMP2
@@ -2819,9 +2816,9 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				inputs.Push(IN_SWEEP2);
 
 			}
-			
+
 			App->slowdown->StartSlowdown(5, 30);
-			
+
 		}
 
 		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2 || state == YDRILL2 || state == YMUMMY2))
@@ -3054,9 +3051,9 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 		}
 	}
 	else {
-	inputs.Push(IN_CROUCH_UP2);
-	inputs.Push(IN_LEFT_UP2);
-	inputs.Push(IN_RIGHT_UP2);
+		inputs.Push(IN_CROUCH_UP2);
+		inputs.Push(IN_LEFT_UP2);
+		inputs.Push(IN_RIGHT_UP2);
 	}
 
 	return true;
@@ -3352,7 +3349,7 @@ void ModulePlayer2::internal_input(p2Qeue<ryu_inputs2>& inputs)
 	{
 		if (App->frames - f_crouching_punch_timer > D_F_CROUCHING_PUNCH_TIME)
 		{
- 			inputs.Push(IN_PUNCH_FINISH2);
+			inputs.Push(IN_PUNCH_FINISH2);
 			f_crouching_punch_timer = 0;
 			chp.ResetAnimation();
 		}
@@ -5025,7 +5022,7 @@ ryu_states2 ModulePlayer2::process_fsm(p2Qeue<ryu_inputs2>& inputs)
 			case IN_LOOSE2: state = LOOSE2; break;
 			}
 		}
-		break; 
+		break;
 
 		case SWEEP2:
 		{
