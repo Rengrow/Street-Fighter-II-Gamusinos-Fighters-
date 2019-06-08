@@ -100,8 +100,15 @@ Version 0.8:
 - Muchas Cosas
 
 Version 0.8.1:
-- Fixed Clear History after a combo hit
+- Fixed Clear History combo after a combo hit
 - Added Blood Particles
+
+Version 0.9:
+- Added all the Particles
+- Added Intro
+- Added Draw Match
+- Fixed Pushbacks
+- Fixed Win Position
 
 ## Credits
 

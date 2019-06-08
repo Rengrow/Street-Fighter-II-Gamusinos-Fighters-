@@ -1359,6 +1359,13 @@ update_status ModulePlayer1::Update()
 		case ST_JUMP_NEUTRAL:
 			texture = graphics;
 			current_animation = &neutralJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1382,6 +1389,13 @@ update_status ModulePlayer1::Update()
 
 		case ST_JUMP_FORWARD:
 			current_animation = &forwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -1408,6 +1422,13 @@ update_status ModulePlayer1::Update()
 
 		case ST_JUMP_BACKWARD:
 			current_animation = &backwardJump;
+
+			if (turn == true && (App->frames - jump_timer) == 1)
+			{
+				flip = !flip;
+				turn = false;
+			}
+
 			if (App->frames - jump_timer < 24 && (App->frames - jump_timer >= 0))
 			{
 				jumpHeight -= speed + 3;
@@ -2104,8 +2125,6 @@ update_status ModulePlayer1::Update()
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
 
-
-
 			//Pushback start
 			if (pushbacktimerhit != 0) {
 				--pushbacktimerhit;
@@ -2299,9 +2318,9 @@ update_status ModulePlayer1::Update()
 			jumpHeight += speed + 2;
 			dizzydamage = 4;
 
-			if ((!flip) && (colliding == false)) position.x += speed + 2;
+			if (IsntOnRightLimit() && (!flip) && (colliding == false)) position.x += speed + 2;
 
-			if ((flip) && (colliding == false))  position.x -= speed + 2;
+			if (IsntOnLeftLimit() && (flip) && (colliding == false))  position.x -= speed + 2;
 
 			if (jumpHeight >= 0)
 			{
@@ -2492,6 +2511,7 @@ update_status ModulePlayer1::Update()
 			current_animation = &grab2;
 			if (m_grab_timer == App->frames - 15 || m_grab_timer == App->frames - 30 || m_grab_timer == App->frames - 45 || m_grab_timer == App->frames - 60 || m_grab_timer == App->frames - 75 || m_grab_timer == App->frames - 90 || m_grab_timer == App->frames - 105) {
 				App->audio->PlayChunk(high_fist);
+				App->player2->life -= 4;
 			}
 			dizzydamage = 5;
 			break;
@@ -2499,6 +2519,10 @@ update_status ModulePlayer1::Update()
 		case F_GRAB:
 			current_animation = &grab;
 			dizzydamage = 5;
+			if (App->frames - f_grab_timer == 1)
+			{
+				App->player2->life -= 20;
+			}
 			break;
 
 		case M_GRABBED:
@@ -3050,7 +3074,7 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 			inputs.Push(IN_L_PUNCH);
 		}
 
-		if (App->input->pads[0].x == true)
+		if (App->input->pads[0].x == true && turn == false)
 		{
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
@@ -3069,7 +3093,7 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 
 		}
 
-		if (App->input->pads[0].a == true)
+		if (App->input->pads[0].a == true && turn == false)
 		{
 			inputs.Push(IN_L_KIK);
 		}
@@ -3093,12 +3117,12 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 				inputs.Push(IN_M_PUNCH);
 		}
 
-		if (App->input->pads[0].b == true)
+		if (App->input->pads[0].b == true && turn == false)
 		{
 			inputs.Push(IN_M_KIK);
 		}
 
-		if (App->input->pads[0].R1 == true)
+		if (App->input->pads[0].R1 == true && turn == false)
 		{
 			if (App->input->CheckYogaFlame(250, 0, flip) == true)
 			{
@@ -3116,7 +3140,7 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 				inputs.Push(IN_F_PUNCH);
 		}
 
-		if (App->input->pads[0].R2 == true)
+		if (App->input->pads[0].R2 == true && turn == false)
 		{
 			inputs.Push(IN_F_KIK);
 		}
@@ -3912,6 +3936,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 				else { state = F_KIK_NEUTRAL_JUMP; }
 			}break;
 
+			
 			case IN_FALLING: state = ST_FALLING; break;
 			case IN_BURNING: state = BURNING; break;
 
@@ -5025,6 +5050,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -5039,6 +5065,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_GRAB:state = M_GRAB; m_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH:state = ST_IDLE; break;
@@ -5053,6 +5080,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_GRAB:state = F_GRAB; f_grab_timer = App->frames; break;
 			case IN_GRABBING_FINISH:state = ST_IDLE; break;
@@ -5120,6 +5148,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_HEAD_REEL: state = ST_HEAD_REEL; head_reel_timer = App->frames; break;
 			case IN_GUT_REEL: state = ST_GUT_REEL; gut_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
@@ -5137,6 +5166,7 @@ ryu_states ModulePlayer1::process_fsm(p2Qeue<ryu_inputs>& inputs)
 			case IN_F_GRABBED: state = F_GRABBED; f_grabbed_timer = App->frames; break;
 			case IN_CROUCH_REEL: state = ST_CROUCH_REEL; crouch_reel_timer = App->frames; break;
 			case IN_BURNING: state = BURNING; break;
+			case IN_SWEEP: state = SWEEP; sweep_timer = App->frames; break;
 
 			case IN_VICTORY: state = VICTORY; break;
 			case IN_LOOSE: state = LOOSE; break;
