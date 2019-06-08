@@ -57,9 +57,9 @@ bool ModulePlayer1::Start()
 	life = 100;
 	dizzylvl = 0;
 	freeze = true;
-	win = flip = turn = colliding = dizzi = false;
+	wining = flip = turn = colliding = dizzi = false;
 	victoryExecuted = invulnerabilityFrames = dizzylvl = lasttimedamaged = timeUpdated = timeStoped = pushbacktimerhit = pushbacktimerprojectile =
-		typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = 0;
+	typeofattack = dizzydamage = framesAtaque = framesJump = sprite_change_timer = jumpHeight = 0;
 	pushbackspeed = speed = 1;
 	levitationtimer = -100;
 	Animation* current_animation;
@@ -2091,9 +2091,9 @@ update_status ModulePlayer1::Update()
 				else
 				{
 					if (flip == true) {
-						App->player1->position.x -= pushbackspeed;
+						App->player2->position.x -= pushbackspeed;
 					}
-					else App->player1->position.x += pushbackspeed;
+					else App->player2->position.x += pushbackspeed;
 				}
 			}
 			break;
@@ -2120,9 +2120,9 @@ update_status ModulePlayer1::Update()
 				else
 				{
 					if (flip == true) {
-						App->player1->position.x -= pushbackspeed;
+						App->player2->position.x -= pushbackspeed;
 					}
-					else App->player1->position.x += pushbackspeed;
+					else App->player2->position.x += pushbackspeed;
 				}
 			}
 			//Pushback end
@@ -2154,9 +2154,9 @@ update_status ModulePlayer1::Update()
 				else
 				{
 					if (flip == true) {
-						App->player1->position.x -= pushbackspeed;
+						App->player2->position.x -= pushbackspeed;
 					}
-					else App->player1->position.x += pushbackspeed;
+					else App->player2->position.x += pushbackspeed;
 				}
 			}
 			break;
@@ -2353,13 +2353,14 @@ update_status ModulePlayer1::Update()
 				texture = graphics2;
 				current_animation = &win1;
 				victoryExecuted = 1;
-
+				wining = true;
 			}
 			else {
 
 				texture = graphics2;
 				current_animation = &win2;
 				victoryExecuted = 2;
+				wining = true;
 
 				if (levitationtimer == -100) {
 					position.y = 160;
