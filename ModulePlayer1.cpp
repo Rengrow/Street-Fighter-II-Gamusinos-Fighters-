@@ -2061,9 +2061,9 @@ update_status ModulePlayer1::Update()
 				else
 				{
 					if (flip == true) {
-						App->player1->position.x -= pushbackspeed;
+						App->player2->position.x -= pushbackspeed;
 					}
-					else App->player1->position.x += pushbackspeed;
+					else App->player2->position.x += pushbackspeed;
 				}
 			}
 			break;
