@@ -1,4 +1,4 @@
-![Street Fighter II: The World Warrior arcade Ryu Gameplay](/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/blob/master/Game/assets/images/wiki/thumbnail_gameplay.jpg)
+![Gamusinos Fighters Logo](/https://raw.githubusercontent.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/master/docs/gamusinos_logo.png)
 
 ## Our project 
 
@@ -9,17 +9,15 @@ We're going to replicate (up to alpha) on of the most iconic games of the arcade
 In Worrld Warrior, a player can choose between 8 playable charcters (Ryu, Ken, Dhalsim, E.Honda, Chun li, Blanka, Guile and Zangief) with distinct moveset, charcteristics and gameplay. In an arcade Run, each player has to face against each of the other 7 characters in succession (controlled by the IA) while getting past a handful of bonus stages. Upon doing that, the player has to face 4 non-playable characters (they would be added as such in later versions): Vega, Balrog, Sagat and M. Bison (originally known as Dictator).
 However, the true Street Fighter experience was not found in a single player run, but facing other players in a first-to-two round combat. The gameplay was so solid and fun that it sparked the first known competitive scene in a fighting game all over the world (mainly in Japan and America, due to game acces restrictions).
 
-## Gameplay (recorded on build 0.9.3.)
+## Gameplay
 
-PONER AQUI EL VIDEO 
+<iframe width="740" height="590" src="https://www.youtube.com/embed/7kgNvi2HT3U" frameborder="0" allowfullscreen></iframe>
 
 ## Installation
 
 Currently there is no installation required, just execute the .exe provided in the download file!
 
 ## History
-
-Up to version 0.5:
 
 Version 0.2:
 - Basic elements such as backgrounds, player textures, audio and sound effects and inputs added!
@@ -55,60 +53,65 @@ Version 0.5.1:
 Version 0.5.2:
 - Fixed different damage for both players
 - Fixed lose pose
-- Added Wall Colliders in stage limits!
+- Added Wall Colliders in stage limits
 - Extended invulnerability frames to 25
 
 Version 0.5.3:
-- Fixed animations when interrumped
+- Fixed animations when interrump
 - Changed Controls
 
 Version 0.5.4:
-- Fixed infinite loop due to changed controls
+- Fixed infinite loop for changed controls
 
 Version 0.9:
-- Dhalsim completed animations added!
-- State machine implemented!
+- Dhalsim completed animations added
+- State machine implemented
 - Timers calibrated
-- Color variation added!
-- Gamepad inputs implemented!
+- Color variation added
+- Gamepad inputs implemented
 - Jumps physics upgraded
-- Pushback logic implemented!
-- Special moves added!
-- Slowdown implemented!
-- Shadows implemented!
+- Pushback logic implemented
+- Combos added
+- Slowdown implemented
+- Shadows implemented
 - UI improvement
-- Grabs and throws added!
+- Grabs and throws added
+- Added All Typographies
+
 
 Version 0.9.1:
-- Fixed Clear History combo after a combo hit!
-- Added Blood Particles!
+- Fixed Clear History combo after a combo hit
+- Added Blood Particles
 
 Version 0.9.2:
-- Added all remanining particles!
-- Added Intro!
-- Added Draw Match!
+- Added all the Particles
+- Added Intro
+- Added Draw Match
 - Fixed Pushbacks
-- Fixed Win Positions
-- Fixed Damage values
+- Fixed Win Position
+- Fixed Damages
 
 Version 0.9.3:
 - Fixed Lose animation
 - Fixed Burn animation
+
+Version 1.0:
+- Added Plus Puntuation on Hit
 
 
 ## Controls
 ~~~~~~~~~~~~~~~
 Note: It is HIGHLY encouraged to play using gamepad
 
-### General Controls:<br>
-	Space: In menus, go to the next screen
-	X: Select character, if aviable
+### General Controls :
+	Start in Gampads or Space in Keyboard: In menus, go to the next screen
 	ESC: Close the game
 	
 ### Debug Controls:<br>
-	F1: Show/Unshow collision boxes
+	F1: Show/Unshow the collision boxes
 	F2: Show debug gamepad
 	F5: Enable God Mode for the player 1
+	F9: Instant Draw Game in the fight screen
 	F10: Instant win for player 1 in the fight screen
 	F11: Instant win for player 2 in the fight screen
 
@@ -126,45 +129,42 @@ Note: It is HIGHLY encouraged to play using gamepad
 	K / B button: Medium Kick
 	L / R2 button: Hard Kick
 
-### Player 2 Controls: <br> 
+### Player 2 Controls:<br> 
     Movement:
         Up button / joystick up: Jump
         Left button / joystick left: Move to the left
         Down button / joystick down: Crouch
         Right button / joystick right: Move to the right
     Attacks:
-        Keypad 4 / X button: Light Punch
-        Keypad 5 / Y button: Medium Punch
-	Keypad 6 / R1 button: Hard Punch
-	Keypad 1 / A button: Light Kick
-	Keypad 2 / B button: Medium Kick
-	Keypad 3 / R2 button: Hard Kick
+	On the NumPad
+        4 / X button: Light Punch
+        5 / Y button: Medium Punch
+	6 / R1 button: Hard Punch
+	1 / A button: Light Kick
+	2 / B button: Medium Kick
+	3 / R2 button: Hard Kick
 
-### Special moves (Dhalsim):<br>
-	(Using FCG notation, therefore opponent is implied to be on the right. If not, just flip directions.)
-	Down, down-right, right, punch: Yoga Fire
-	Left, Left-down, down, down-right, right, punch: Yoga Flame (Duration proportional to type of punch)
-	Right + Medium punch: Grab
-	Right + Hard punch: Throw
+### Combos: <br>
+    Joystick movement:
+	Down, down-front, front: Yoga Fire
+	Back, back-down, down, down-front, front: Yoga Flame
+	Front + Medium punch: Grab
+	Front + Hard punch: Throw
 	Hard punch at top of a jump: Yoga Mummy
 	Hard kick at top of a jump: Yoga Drill
 
 
 ~~~~~~~~~~~~~~~
 
-# Gamusinos Fighters - Our team
-
-![Gamusinos Fighters Logo](/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/blob/master/Game/assets/images/wiki/gamusinos_logo.png)
-![Team photo](/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/blob/master/Game/assets/images/wiki/team_photo.jpg)
-
 
 ## Team members
 
-_José Luís Redondo Tello: <https://github.com/jose-tello>_ 
-_Adriá Serrano López: <https://github.com/adriaserrano97>_ 
-_Rafa López Martínez: <https://github.com/Rengrow>_ 
-_Ferran-Roger Basart i Bosch: <https://github.com/ferba93>_ 
+![Team photo](https://raw.githubusercontent.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/master/docs/team_photo.jpg)
 
+	José Luís Redondo Tello: <https://github.com/jose-tello> <br>
+	Adriá Serrano López: <https://github.com/adriaserrano97> <br>
+	Rafa López Martínez: <https://github.com/Rengrow> <br>
+	Ferran-Roger Basart i Bosch: <https://github.com/ferba93> <br>
 
 
 ### For more information about us, the game or the process we did to replicate it please visit our wiki page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/wiki)
