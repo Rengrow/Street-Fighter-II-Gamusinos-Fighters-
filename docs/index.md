@@ -97,3 +97,61 @@ Version 0.9.3:
 
 Version 1.0:
 - Added Plus Puntuation on Hit
+
+
+## Controls
+~~~~~~~~~~~~~~~
+Note: It is HIGHLY encouraged to play using gamepad
+
+### General Controls :
+	Start in Gampads or Space in Keyboard: In menus, go to the next screen
+	ESC: Close the game
+	
+### Debug Controls:<br>
+	F1: Show/Unshow the collision boxes
+	F2: Show debug gamepad
+	F5: Enable God Mode for the player 1
+	F9: Instant Draw Game in the fight screen
+	F10: Instant win for player 1 in the fight screen
+	F11: Instant win for player 2 in the fight screen
+
+### Player 1 Controls: <br>
+    Movement (keyboard / gamepad):
+        W / joystick up: Jump
+        A / joystick left: Move to the left
+        S / joystick down: Crouch
+        D / joystick right: Move to the right
+    Attacks:
+        U / X button: Light Punch
+        I / Y button: Medium Punch
+	O / R1 button: Hard Punch
+	J / A button: Light Kick
+	K / B button: Medium Kick
+	L / R2 button: Hard Kick
+
+### Player 2 Controls:<br> 
+    Movement:
+        Up button / joystick up: Jump
+        Left button / joystick left: Move to the left
+        Down button / joystick down: Crouch
+        Right button / joystick right: Move to the right
+    Attacks:
+	On the NumPad
+        4 / X button: Light Punch
+        5 / Y button: Medium Punch
+	6 / R1 button: Hard Punch
+	1 / A button: Light Kick
+	2 / B button: Medium Kick
+	3 / R2 button: Hard Kick
+
+### Combos: <br>
+    Joystick movement:
+	Down, down-front, front: Yoga Fire
+	Back, back-down, down, down-front, front: Yoga Flame
+	Front + Medium punch: Grab
+	Front + Hard punch: Throw
+	Hard punch at top of a jump: Yoga Mummy
+	Hard kick at top of a jump: Yoga Drill
+
+
+~~~~~~~~~~~~~~~
