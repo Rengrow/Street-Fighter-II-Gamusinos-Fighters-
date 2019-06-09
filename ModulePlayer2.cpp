@@ -2546,7 +2546,7 @@ update_status ModulePlayer2::Update()
 			dizzydamage = 5;
 			if (App->frames - f_grab_timer == 1)
 			{
-				App->player2->life -= 20;
+				App->player1->life -= 20;
 			}
 			break;
 
