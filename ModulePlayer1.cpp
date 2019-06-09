@@ -2845,8 +2845,8 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else
 			{
 				inputs.Push(IN_BURNING);
-				if (App->player2->l_yflame_timer != 0 || App->player2->m_yflame_timer != 0 || App->player2->f_yflame_timer != 0) { life -= 32; }
-				else { life -= 14; }
+				if (App->player2->l_yflame_timer != 0 || App->player2->m_yflame_timer != 0 || App->player2->f_yflame_timer != 0) { life -= 32; App->player2->puntuation += 500; }
+				else { life -= 14; App->player2->puntuation += 500;}
 			}
 			App->slowdown->StartSlowdown(5, 30);
 			App->render->StartCameraShake(5, 2);
@@ -3282,6 +3282,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		if (App->frames - m_grab_timer > D_M_GRAB_TIME)
 		{
 			inputs.Push(IN_M_GRAB_FINISH);
+			puntuation += 500;
 			grab.ResetAnimation();
 			grab2.ResetAnimation();
 			m_grab_timer = 0;
@@ -3293,6 +3294,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		if (App->frames - f_grab_timer > D_F_GRAB_TIME)
 		{
 			inputs.Push(IN_F_GRAB_FINISH);
+			puntuation += 500;
 			grab.ResetAnimation();
 			grab2.ResetAnimation();
 			f_grab_timer = 0;
@@ -3304,6 +3306,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		if (App->frames - m_grabbed_timer > D_M_GRABBED_TIME)
 		{
 			inputs.Push(IN_GRABBED_FINISH);
+			grabbed.ResetAnimation();
 			m_grabbed_timer = 0;
 		}
 	}
@@ -3313,6 +3316,7 @@ void ModulePlayer1::internal_input(p2Qeue<ryu_inputs>& inputs)
 		if (App->frames - f_grabbed_timer > D_F_GRABBED_TIME)
 		{
 			inputs.Push(IN_GRABBED_FINISH);
+			thrown.ResetAnimation();
 			f_grabbed_timer = 0;
 		}
 	}
