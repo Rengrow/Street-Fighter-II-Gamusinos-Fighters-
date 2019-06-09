@@ -179,7 +179,7 @@ Note: It is HIGHLY encouraged to play using gamepad
 <br/>	
 
 ### For more information about us, the game or the process we did to replicate it please visit our wiki page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/wiki)
-### Download the last version of the game directly from our GitHub page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/blob/master/build/Gamusinos%20Fighters%20-%20Street%20Fighter%201.0.zip)
+### Download the last version of the game directly from our GitHub page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/releases/tag/1.0)
 ### Check our Github repository: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-)
 
 <br/>
