@@ -2944,21 +2944,20 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 				else if (App->player2->state == YDRILL2) { life -= 12; App->player2->puntuation += 500; }
 				else if (App->player2->state == YMUMMY2) { life -= 12; App->player2->puntuation += 500; }
 			}
-			if (App->player2->state == F_KIK_CROUCH) {
+			if (App->player2->state == F_KIK_CROUCH2) {
 				inputs.Push(IN_SWEEP);
-
 			}
 
 			App->slowdown->StartSlowdown(5, 30);
-
-
 		}
 
 		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
 		{
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 25 + App->frames;
-			inputs.Push(IN_FALLING);
+			inputs.Push(IN_BURNING);
+			if (App->player2->l_yflame_timer != 0 || App->player2->m_yflame_timer != 0 || App->player2->f_yflame_timer != 0) { life -= 32; App->player2->puntuation += 500; }
+			else { life -= 14; App->player2->puntuation += 500; }
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
@@ -2977,6 +2976,38 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			else if (App->player2->state == L_PUNCH_CROUCH2 || App->player2->state == M_PUNCH_CROUCH2 || App->player2->state == F_PUNCH_CROUCH2 || App->player2->state == L_PUNCH_CROUCHCLOSE2 || App->player2->state == M_PUNCH_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_fist);
 
+
+
+			if (App->player2->l_standing_punch_timer != 0) { life -= 6; App->player2->puntuation += 100; }
+			else if (App->player2->m_standing_punch_timer != 0) { life -= 10; App->player2->puntuation += 200; }
+			else if (App->player2->f_standing_punch_timer != 0) { life -= 16; App->player2->puntuation += 300; }
+			else if (App->player2->l_standing_kik_timer != 0) { life -= 8; App->player2->puntuation += 100; }
+			else if (App->player2->m_standing_kik_timer != 0) { life -= 10; App->player2->puntuation += 200; }
+			else if (App->player2->f_standing_kik_timer != 0) { life -= 14; App->player2->puntuation += 300; }
+			else if (App->player2->l_close_standing_punch_timer != 0) { life -= 6; App->player2->puntuation += 100; }
+			else if (App->player2->m_close_standing_punch_timer != 0) { life -= 10; App->player2->puntuation += 200; }
+			else if (App->player2->f_close_standing_punch_timer != 0) { life -= 32; App->player2->puntuation += 300; }
+			else if (App->player2->l_close_standing_kik_timer != 0) { life -= 6; App->player2->puntuation += 100; }
+			else if (App->player2->m_close_standing_kik_timer != 0) { life -= 10; App->player2->puntuation += 200; }
+			else if (App->player2->f_close_standing_kik_timer != 0) { life -= 16; App->player2->puntuation += 300; }
+			else if (App->player2->l_crouching_punch_timer != 0) { life -= 6; App->player2->puntuation += 100; }
+			else if (App->player2->m_crouching_punch_timer != 0) { life -= 10; App->player2->puntuation += 200; }
+			else if (App->player2->f_crouching_punch_timer != 0) { life -= 14; App->player2->puntuation += 300; }
+			else if (App->player2->l_crouching_kik_timer != 0) { life -= 8; App->player2->puntuation += 100; }
+			else if (App->player2->m_crouching_kik_timer != 0) { life -= 12; App->player2->puntuation += 200; }
+			else if (App->player2->f_crouching_kik_timer != 0) { life -= 16; App->player2->puntuation += 300; }
+			else if (App->player2->l_close_crouching_punch_timer != 0) { life -= 8; App->player2->puntuation += 100; }
+			else if (App->player2->m_close_crouching_punch_timer != 0) { life -= 12; App->player2->puntuation += 200; }
+			else if (App->player2->l_close_crouching_kik_timer != 0) { life -= 8; App->player2->puntuation += 100; }
+			else if (App->player2->m_close_crouching_kik_timer != 0) { life -= 12; App->player2->puntuation += 200; }
+			else if (App->player2->l_d_jumping_punch_timer != 0) { life -= 8; App->player2->puntuation += 100; }
+			else if (App->player2->m_d_jumping_punch_timer != 0) { life -= 12; App->player2->puntuation += 200; }
+			else if (App->player2->f_d_jumping_punch_timer != 0) { life -= 16; App->player2->puntuation += 300; }
+			else if (App->player2->l_d_jumping_kik_timer != 0) { life -= 8; App->player2->puntuation += 100; }
+			else if (App->player2->m_d_jumping_kik_timer != 0) { life -= 12; App->player2->puntuation += 200; }
+			else if (App->player2->f_d_jumping_kik_timer != 0) { life -= 16; App->player2->puntuation += 300; }
+			else if (App->player2->state == YDRILL2) { life -= 12; App->player2->puntuation += 500; }
+			else if (App->player2->state == YMUMMY2) { life -= 12; App->player2->puntuation += 500; }
 			inputs.Push(IN_FALLING);
 			App->slowdown->StartSlowdown(5, 30);
 		}

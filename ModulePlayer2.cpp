@@ -2961,7 +2961,9 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		{
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
-			inputs.Push(IN_FALLING2);
+			inputs.Push(IN_BURNING2);
+			if (App->player1->l_yflame_timer != 0 || App->player1->m_yflame_timer != 0 || App->player1->f_yflame_timer != 0) { life -= 32; App->player1->puntuation += 500; }
+			else { life -= 14; App->player1->puntuation += 500; }
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
@@ -2979,6 +2981,37 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 				App->audio->PlayChunk(high_fist);
 			else if (App->player1->state == L_PUNCH_CROUCH2 || App->player1->state == M_PUNCH_CROUCH2 || App->player1->state == F_PUNCH_CROUCH2 || App->player1->state == L_PUNCH_CROUCHCLOSE2 || App->player1->state == M_PUNCH_CROUCHCLOSE2)
 				App->audio->PlayChunk(low_fist);
+
+			if (App->player1->l_standing_punch_timer != 0) { life -= 6; App->player1->puntuation += 100; }
+			else if (App->player1->m_standing_punch_timer != 0) { life -= 10; App->player1->puntuation += 200; }
+			else if (App->player1->f_standing_punch_timer != 0) { life -= 16; App->player1->puntuation += 300; }
+			else if (App->player1->l_standing_kik_timer != 0) { life -= 8; App->player1->puntuation += 100; }
+			else if (App->player1->m_standing_kik_timer != 0) { life -= 10; App->player1->puntuation += 200; }
+			else if (App->player1->f_standing_kik_timer != 0) { life -= 14; App->player1->puntuation += 300; }
+			else if (App->player1->l_close_standing_punch_timer != 0) { life -= 6; App->player1->puntuation += 100; }
+			else if (App->player1->m_close_standing_punch_timer != 0) { life -= 10; App->player1->puntuation += 200; }
+			else if (App->player1->f_close_standing_punch_timer != 0) { life -= 32; App->player1->puntuation += 300; }
+			else if (App->player1->l_close_standing_kik_timer != 0) { life -= 6; App->player1->puntuation += 100; }
+			else if (App->player1->m_close_standing_kik_timer != 0) { life -= 10; App->player1->puntuation += 200; }
+			else if (App->player1->f_close_standing_kik_timer != 0) { life -= 16; App->player1->puntuation += 300; }
+			else if (App->player1->l_crouching_punch_timer != 0) { life -= 6; App->player1->puntuation += 100; }
+			else if (App->player1->m_crouching_punch_timer != 0) { life -= 10; App->player1->puntuation += 200; }
+			else if (App->player1->f_crouching_punch_timer != 0) { life -= 14; App->player1->puntuation += 300; }
+			else if (App->player1->l_crouching_kik_timer != 0) { life -= 8; App->player1->puntuation += 100; }
+			else if (App->player1->m_crouching_kik_timer != 0) { life -= 12; App->player1->puntuation += 200; }
+			else if (App->player1->f_crouching_kik_timer != 0) { life -= 16; App->player1->puntuation += 300; }
+			else if (App->player1->l_close_crouching_punch_timer != 0) { life -= 8; App->player1->puntuation += 100; }
+			else if (App->player1->m_close_crouching_punch_timer != 0) { life -= 12; App->player1->puntuation += 200; }
+			else if (App->player1->l_close_crouching_kik_timer != 0) { life -= 8; App->player1->puntuation += 100; }
+			else if (App->player1->m_close_crouching_kik_timer != 0) { life -= 12; App->player1->puntuation += 200; }
+			else if (App->player1->l_d_jumping_punch_timer != 0) { life -= 8; App->player1->puntuation += 100; }
+			else if (App->player1->m_d_jumping_punch_timer != 0) { life -= 12; App->player1->puntuation += 200; }
+			else if (App->player1->f_d_jumping_punch_timer != 0) { life -= 16; App->player1->puntuation += 300; }
+			else if (App->player1->l_d_jumping_kik_timer != 0) { life -= 8; App->player1->puntuation += 100; }
+			else if (App->player1->m_d_jumping_kik_timer != 0) { life -= 12; App->player1->puntuation += 200; }
+			else if (App->player1->f_d_jumping_kik_timer != 0) { life -= 16; App->player1->puntuation += 300; }
+			else if (App->player1->state == YDRILL) { life -= 12; App->player1->puntuation += 500; }
+			else if (App->player1->state == YMUMMY) { life -= 12; App->player1->puntuation += 500; }
 
 			inputs.Push(IN_FALLING2);
 			App->slowdown->StartSlowdown(5, 30);
