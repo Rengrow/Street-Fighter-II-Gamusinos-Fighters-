@@ -42,7 +42,7 @@ Currently there is no installation required, just open the .exe provided in the 
         Down button / joystick down: Crouch
         Right button / joystick right: Move to the right
     Attacks:
-	On the Pad
+	On the NumPad
         4 / X button: Light Punch
         5 / Y button: Medium Punch
 	6 / R1 button: Hard Punch
@@ -120,6 +120,7 @@ Version 0.9:
 - Shadows implemented
 - UI improvement
 - Grabs and throws added
+- Added All Typographies
 
 
 Version 0.9.1:
@@ -137,6 +138,9 @@ Version 0.9.2:
 Version 0.9.3:
 - Fixed Lose animation
 - Fixed Burn animation
+
+Version 1.0:
+- Added Plus Puntuation on Hit
 
 ## Credits
 
