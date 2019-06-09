@@ -1165,18 +1165,18 @@ bool ModulePlayer1::Start()
 	Module* burningCallback[burningnColliders] = { {this}, {this}, {this} };
 	Module* burningCallback2[burningnColliders] = { {this}, {this}, {this} };
 
-	burning.PushBack({ 249, 105, 90, 108 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox1 }, { burningColliderType }, { airreelCallback });
-	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 249, 105, 90, 108 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
-	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
-	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { burningnColliders }, { burningHitbox2 }, { burningColliderType2 }, { burningCallback2 });
+	burning.PushBack({ 126, 143, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
+	burning.PushBack({ 126, 143, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });	burning.PushBack({ 887, 953, 118, 70 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 	burning.PushBack({ 1, 154, 119, 59 }, 5, { 33,5 }, { winnColliders }, { winHitbox1 }, { winColliderType }, { winCallback });
 
 	// Grab
