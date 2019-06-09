@@ -165,7 +165,7 @@ Note: It is HIGHLY encouraged to play using gamepad
 	Jose Luis Redondo Tello: [Github account](https://github.com/jose-tello)
 	Adria Serrano Lopez: [Github account](https://github.com/adriaserrano97)
 	Rafa Lopez Martinez: [Github account](https://github.com/Rengrow)
-	Ferran-Roger Basart i Bosch: [Github account](https://github.com/ferba93)
+	Ferran-Roger Basart i Bosch: [HERE](https://github.com/ferba93)
 	
 
 ### For more information about us, the game or the process we did to replicate it please visit our wiki page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/wiki)
