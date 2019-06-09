@@ -153,12 +153,12 @@ Note: It is HIGHLY encouraged to play using gamepad
 	2 / B button: Medium Kick
 	3 / R2 button: Hard Kick
 
-### Combos:
-    Joystick movement:
-	Down, down-front, front: Yoga Fire
-	Back, back-down, down, down-front, front: Yoga Flame
-	Front + Medium punch: Grab
-	Front + Hard punch: Throw
+### Special moves (Dhalsim):
+	(Using FCG notation, therefore opponent is implied to be on the right. If not, just flip directions.)
+	Down, down-right, right, punch: Yoga Fire
+	Left, Left-down, down, down-right, right, punch: Yoga Flame (Duration proportional to type of punch)
+	Right + Medium punch: Grab
+	Right + Hard punch: Throw
 	Hard punch at top of a jump: Yoga Mummy
 	Hard kick at top of a jump: Yoga Drill
 
