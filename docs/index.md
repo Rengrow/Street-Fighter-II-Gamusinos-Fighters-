@@ -162,10 +162,10 @@ Note: It is HIGHLY encouraged to play using gamepad
 
 ![Team photo](https://raw.githubusercontent.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/master/docs/team_photo.jpg)
 
-	Jose Luis Redondo Tello: <https://github.com/jose-tello>
-	Adria Serrano Lopez: <https://github.com/adriaserrano97>
-	Rafa Lopez Martinez: <https://github.com/Rengrow>
-	Ferran-Roger Basart i Bosch: <https://github.com/ferba93>
+	Jose Luis Redondo Tello: https://github.com/jose-tello
+	Adria Serrano Lopez: https://github.com/adriaserrano97
+	Rafa Lopez Martinez: https://github.com/Rengrow
+	Ferran-Roger Basart i Bosch: https://github.com/ferba93
 	
 
 ### For more information about us, the game or the process we did to replicate it please visit our wiki page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/wiki)
