@@ -13,6 +13,8 @@ However, the true Street Fighter experience was not found in a single player run
 
 <iframe width="740" height="590" src="https://www.youtube.com/embed/7kgNvi2HT3U" frameborder="0" allowfullscreen></iframe>
 
+<br/>
+
 ## Installation
 
 Currently there is no installation required, just execute the .exe provided in the download file!
@@ -107,7 +109,7 @@ Note: It is HIGHLY encouraged to play using gamepad
 	Start in Gampads or Space in Keyboard: In menus, go to the next screen
 	ESC: Close the game
 	
-### Debug Controls:<br>
+### Debug Controls:
 	F1: Show/Unshow the collision boxes
 	F2: Show debug gamepad
 	F5: Enable God Mode for the player 1
@@ -115,7 +117,7 @@ Note: It is HIGHLY encouraged to play using gamepad
 	F10: Instant win for player 1 in the fight screen
 	F11: Instant win for player 2 in the fight screen
 
-### Player 1 Controls: <br>
+### Player 1 Controls:
     Movement (keyboard / gamepad):
         W / joystick up: Jump
         A / joystick left: Move to the left
@@ -129,7 +131,7 @@ Note: It is HIGHLY encouraged to play using gamepad
 	K / B button: Medium Kick
 	L / R2 button: Hard Kick
 
-### Player 2 Controls:<br> 
+### Player 2 Controls:
     Movement:
         Up button / joystick up: Jump
         Left button / joystick left: Move to the left
@@ -144,7 +146,7 @@ Note: It is HIGHLY encouraged to play using gamepad
 	2 / B button: Medium Kick
 	3 / R2 button: Hard Kick
 
-### Combos: <br>
+### Combos:
     Joystick movement:
 	Down, down-front, front: Yoga Fire
 	Back, back-down, down, down-front, front: Yoga Flame
@@ -155,3 +157,19 @@ Note: It is HIGHLY encouraged to play using gamepad
 
 
 ~~~~~~~~~~~~~~~
+
+## Team members
+
+![Team photo](https://raw.githubusercontent.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/master/docs/team_photo.jpg)
+
+	José Luís Redondo Tello: <https://github.com/jose-tello>
+	Adriá Serrano López: <https://github.com/adriaserrano97>
+	Rafa López Martínez: <https://github.com/Rengrow>
+	Ferran-Roger Basart i Bosch: <https://github.com/ferba93>
+
+
+### For more information about us, the game or the process we did to replicate it please visit our wiki page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/wiki)
+### Download the last version of the game directly from our GitHub page: [HERE](https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-/blob/master/build/Gamusinos%20Fighters%20-%20Street%20Fighter%201.0.zip)
+### Check our Github repository: [HERE]https://github.com/Rengrow/Street-Fighter-II-Gamusinos-Fighters-
+
+#### Happy Fighting!
