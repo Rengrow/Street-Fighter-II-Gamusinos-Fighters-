@@ -1781,7 +1781,7 @@ update_status ModulePlayer2::Update()
 
 		case F_KIK_CROUCH2:
 			current_animation = &chk;
-			if ((App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) && (colliding == false)) {
+			if ((App->frames - f_crouching_kik_timer < 18 && App->frames - f_crouching_kik_timer > 7) /*&& (colliding == false)*/) {
 				if (flip == true && IsntOnLeftLimit()) {
 					position.x -= speed * 5;
 				}
@@ -3055,7 +3055,7 @@ bool ModulePlayer2::external_input(p2Qeue<ryu_inputs2>& inputs)
 
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
-			inputs.Push(IN_L_PUNCH2);
+			inputs.Push(IN_F_KIK2);
 		}
 
 		if (App->input->pads[1].x == true && turn == false)

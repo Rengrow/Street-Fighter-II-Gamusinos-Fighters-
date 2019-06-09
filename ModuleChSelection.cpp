@@ -445,7 +445,7 @@ void ModuleChSelection::ReadPlayer2Inputs() {
 			}
 		}
 
-		if (App->input->pads[1].a) {
+		if (App->input->pads[0].a) {
 			if (canSelectTimer < App->frames)
 				if (SDL_RectEquals(&player2Portrait, &dhalsimPortrait)) {
 					App->audio->PlayChunk(select);

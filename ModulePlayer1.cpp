@@ -2154,6 +2154,25 @@ update_status ModulePlayer1::Update()
 			if (App->frames - gut_reel_timer == 1) {
 				App->particles->AddParticle(App->particles->ground_dust, !flip, position.x, position.y - 10, 3, 0, 0, COLLIDER_WALL, 0, 0);
 			}
+			//Pushback start
+			if (pushbacktimerhit != 0) {
+				--pushbacktimerhit;
+				if (IsntOnLeftLimit() && IsntOnRightLimit())
+				{
+					if (flip == true) {
+						position.x += pushbackspeed;
+					}
+					else position.x -= pushbackspeed;
+				}
+
+				else if (App->player2->IsntOnLeftLimit() && App->player2->IsntOnRightLimit())
+				{
+					if (flip == true) {
+						App->player2->position.x -= pushbackspeed;
+					}
+					else App->player2->position.x += pushbackspeed;
+				}
+			}
 			break;
 
 		case ST_CROUCH_REEL:
@@ -2606,6 +2625,25 @@ update_status ModulePlayer1::Update()
 
 		case SWEEP:
 			current_animation = &sweep;
+			//Pushback start
+			if (pushbacktimerhit != 0) {
+				--pushbacktimerhit;
+				if (IsntOnLeftLimit() && IsntOnRightLimit())
+				{
+					if (flip == true) {
+						position.x += pushbackspeed;
+					}
+					else position.x -= pushbackspeed;
+				}
+
+				else if (App->player2->IsntOnLeftLimit() && App->player2->IsntOnRightLimit())
+				{
+					if (flip == true) {
+						App->player2->position.x -= pushbackspeed;
+					}
+					else App->player2->position.x += pushbackspeed;
+				}
+			}
 			break;
 
 		case BURNING:
@@ -3097,10 +3135,10 @@ bool ModulePlayer1::external_input(p2Qeue<ryu_inputs>& inputs)
 
 
 
-		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+		/*if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 		{
 			inputs.Push(IN_L_PUNCH);
-		}
+		}*/
 
 		if (App->input->pads[0].x == true && turn == false)
 		{
