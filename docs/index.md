@@ -8,14 +8,14 @@ We're going to replicate (up to alpha) on of the most iconic games of the arcade
 
 ## About the game
 
-In Worrld Warrior, a player can choose between 8 playable charcters (Ryu, Ken, Dhalsim, E.Honda, Chun li, Blanka, Guile and Zangief) with distinct moveset, charcteristics and gameplay. In an arcade Run, each player has to face against each of the other 7 characters in succession (controlled by the IA) while getting past a handful of bonus stages. Upon doing that, the player has to face 4 non-playable characters (they would be added as such in later versions): Vega, Balrog, Sagat and M. Bison (originally known as Dictator).
+In World Warrior, a player can choose between 8 playable charcters (Ryu, Ken, Dhalsim, E.Honda, Chun li, Blanka, Guile and Zangief) with distinct moveset, charcteristics and gameplay. In an arcade Run, each player has to face against each of the other 7 characters in succession (controlled by the IA) while getting past a handful of bonus stages. Upon doing that, the player has to face 4 non-playable characters (they would be added as such in later versions): Vega, Balrog, Sagat and M. Bison (originally known as Dictator).
 However, the true Street Fighter experience was not found in a single player run, but facing other players in a first-to-two round combat. The gameplay was so solid and fun that it sparked the first known competitive scene in a fighting game all over the world (mainly in Japan and America, due to game acces restrictions).
 
 <br/>
 
 ## Gameplay
 
-<iframe width="740" height="590" src="https://www.youtube.com/embed/7kgNvi2HT3U" frameborder="0" allowfullscreen></iframe>
+<iframe width="740" height="590" src="https://www.youtube.com/embed/H5tVENc1cj8" frameborder="0" allowfullscreen></iframe>
 
 <br/>
 
