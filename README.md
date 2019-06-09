@@ -11,13 +11,14 @@ Currently there is no installation required, just open the .exe provided in the 
 ## Usage
 
 ### General Controls :
-	Space: In menus, go to the next screen
+	Start in Gampads or Space in Keyboard: In menus, go to the next screen
 	ESC: Close the game
 	
 ### Debug Controls:<br>
 	F1: Show/Unshow the collision boxes
 	F2: Show debug gamepad
 	F5: Enable God Mode for the player 1
+	F9: Instant Draw Game in the fight screen
 	F10: Instant win for player 1 in the fight screen
 	F11: Instant win for player 2 in the fight screen
 
