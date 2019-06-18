@@ -2690,7 +2690,12 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player1->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
-	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER)
+	if (c1->type == COLLIDER_PLAYER2_GRAB && c2->type == COLLIDER_PLAYER && (App->player1->state != ST_JUMP_NEUTRAL && App->player1->state != ST_JUMP_FORWARD && 
+		App->player1->state != ST_JUMP_BACKWARD && App->player1->state != L_PUNCH_NEUTRAL_JUMP && App->player1->state != L_PUNCH_FORWARD_JUMP && App->player1->state != L_PUNCH_BACKWARD_JUMP && 
+		App->player1->state != L_KIK_NEUTRAL_JUMP && App->player1->state != L_KIK_FORWARD_JUMP && App->player1->state != L_KIK_BACKWARD_JUMP && App->player1->state != YDRILL && 
+		App->player1->state != YMUMMY && App->player1->state != M_PUNCH_NEUTRAL_JUMP && App->player1->state != M_PUNCH_FORWARD_JUMP && App->player1->state != M_PUNCH_BACKWARD_JUMP && 
+		App->player1->state != M_KIK_NEUTRAL_JUMP && App->player1->state != M_KIK_FORWARD_JUMP && App->player1->state != M_KIK_BACKWARD_JUMP && App->player1->state != F_PUNCH_NEUTRAL_JUMP && 
+		App->player1->state != F_PUNCH_FORWARD_JUMP && App->player1->state != F_PUNCH_BACKWARD_JUMP && App->player1->state != F_KIK_NEUTRAL_JUMP && App->player1->state != F_KIK_FORWARD_JUMP && App->player1->state != F_KIK_BACKWARD_JUMP))
 	{
 		inputs.Push(IN_GRAB2);
 
@@ -2957,7 +2962,7 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2 || state == YDRILL2 || state == YMUMMY2))
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_SHOT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2 || state == YDRILL2 || state == YMUMMY2 || state == M_PUNCH_NEUTRAL_JUMP2 || state == M_PUNCH_FORWARD_JUMP2 || state == M_PUNCH_BACKWARD_JUMP2 || state == M_KIK_NEUTRAL_JUMP2 || state == M_KIK_FORWARD_JUMP2 || state == M_KIK_BACKWARD_JUMP2 || state == F_PUNCH_NEUTRAL_JUMP2 || state == F_PUNCH_FORWARD_JUMP2 || state == F_PUNCH_BACKWARD_JUMP2 || state == F_KIK_NEUTRAL_JUMP2 || state == F_KIK_FORWARD_JUMP2 || state == F_KIK_BACKWARD_JUMP2))
 		{
 			invulnerabilityFrames = 25 + App->frames;
 			App->audio->PlayChunk(hdk_hit);
@@ -2967,9 +2972,9 @@ void ModulePlayer2::OnCollision(Collider* c1, Collider* c2) {
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
-		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2 || state == YDRILL2 || state == YMUMMY2))
+		if (c1->type == COLLIDER_PLAYER2 && c2->type == COLLIDER_PLAYER_HIT && (state == ST_JUMP_NEUTRAL2 || state == ST_JUMP_FORWARD2 || state == ST_JUMP_BACKWARD2 || state == L_PUNCH_NEUTRAL_JUMP2 || state == L_PUNCH_FORWARD_JUMP2 || state == L_PUNCH_BACKWARD_JUMP2 || state == L_KIK_NEUTRAL_JUMP2 || state == L_KIK_FORWARD_JUMP2 || state == L_KIK_BACKWARD_JUMP2 || state == YDRILL2 || state == YMUMMY2 || state == M_PUNCH_NEUTRAL_JUMP2 || state == M_PUNCH_FORWARD_JUMP2 || state == M_PUNCH_BACKWARD_JUMP2 || state == M_KIK_NEUTRAL_JUMP2 || state == M_KIK_FORWARD_JUMP2 || state == M_KIK_BACKWARD_JUMP2 || state == F_PUNCH_NEUTRAL_JUMP2 || state == F_PUNCH_FORWARD_JUMP2 || state == F_PUNCH_BACKWARD_JUMP2 || state == F_KIK_NEUTRAL_JUMP2 || state == F_KIK_FORWARD_JUMP2 || state == F_KIK_BACKWARD_JUMP2))
 		{
-			invulnerabilityFrames = 25 + App->frames;
+			invulnerabilityFrames = 25 + App->frames; 
 
 			if (App->player1->state == L_KIK_STANDING2 || App->player1->state == L_KIK_NEUTRAL_JUMP2 || App->player1->state == L_KIK_FORWARD_JUMP2 || App->player1->state == L_KIK_BACKWARD_JUMP2 || App->player1->state == M_KIK_STANDING2 || App->player1->state == M_KIK_NEUTRAL_JUMP2 || App->player1->state == M_KIK_FORWARD_JUMP2 || App->player1->state == M_KIK_BACKWARD_JUMP2
 				|| App->player1->state == F_KIK_STANDING2 || App->player1->state == F_KIK_NEUTRAL_JUMP2 || App->player1->state == F_KIK_FORWARD_JUMP2 || App->player1->state == F_KIK_BACKWARD_JUMP2 || App->player1->state == L_KIK_CLOSE2 || App->player1->state == M_KIK_CLOSE2 || App->player1->state == F_KIK_CLOSE2)

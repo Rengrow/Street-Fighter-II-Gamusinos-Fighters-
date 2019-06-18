@@ -2740,7 +2740,12 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 		if (App->player2->typeofattack == 3) { pushbacktimerprojectile = 10; pushbackspeed = 2; }
 	}
 
-	if (c1->type == COLLIDER_PLAYER_GRAB && c2->type == COLLIDER_PLAYER2)
+	if (c1->type == COLLIDER_PLAYER_GRAB && c2->type == COLLIDER_PLAYER2 && (App->player2->state != ST_JUMP_NEUTRAL2 && App->player2->state != ST_JUMP_FORWARD2 &&
+		App->player2->state != ST_JUMP_BACKWARD2 && App->player2->state != L_PUNCH_NEUTRAL_JUMP2 && App->player2->state != L_PUNCH_FORWARD_JUMP2 && App->player2->state != L_PUNCH_BACKWARD_JUMP2 &&
+		App->player2->state != L_KIK_NEUTRAL_JUMP2 && App->player2->state != L_KIK_FORWARD_JUMP2 && App->player2->state != L_KIK_BACKWARD_JUMP2 && App->player2->state != YDRILL &&
+		App->player2->state != YMUMMY && App->player2->state != M_PUNCH_NEUTRAL_JUMP2 && App->player2->state != M_PUNCH_FORWARD_JUMP2 && App->player2->state != M_PUNCH_BACKWARD_JUMP2 &&
+		App->player2->state != M_KIK_NEUTRAL_JUMP2 && App->player2->state != M_KIK_FORWARD_JUMP2 && App->player2->state != M_KIK_BACKWARD_JUMP2 && App->player2->state != F_PUNCH_NEUTRAL_JUMP2 &&
+		App->player2->state != F_PUNCH_FORWARD_JUMP2 && App->player2->state != F_PUNCH_BACKWARD_JUMP2 && App->player2->state != F_KIK_NEUTRAL_JUMP2 && App->player2->state != F_KIK_FORWARD_JUMP2 && App->player2->state != F_KIK_BACKWARD_JUMP2))
 	{
 		inputs.Push(IN_GRAB);
 
@@ -2989,7 +2994,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_SHOT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL || state == M_PUNCH_NEUTRAL_JUMP || state == M_PUNCH_FORWARD_JUMP || state == M_PUNCH_BACKWARD_JUMP || state == M_KIK_NEUTRAL_JUMP || state == M_KIK_FORWARD_JUMP || state == M_KIK_BACKWARD_JUMP || state == F_PUNCH_NEUTRAL_JUMP || state == F_PUNCH_FORWARD_JUMP || state == F_PUNCH_BACKWARD_JUMP || state == F_KIK_NEUTRAL_JUMP || state == F_KIK_FORWARD_JUMP || state == F_KIK_BACKWARD_JUMP))
 		{
 			App->audio->PlayChunk(hdk_hit);
 			invulnerabilityFrames = 25 + App->frames;
@@ -2999,7 +3004,7 @@ void ModulePlayer1::OnCollision(Collider* c1, Collider* c2) {
 			App->slowdown->StartSlowdown(5, 30);
 		}
 
-		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL))
+		if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_PLAYER2_HIT && (state == ST_JUMP_NEUTRAL || state == ST_JUMP_FORWARD || state == ST_JUMP_BACKWARD || state == L_PUNCH_NEUTRAL_JUMP || state == L_PUNCH_FORWARD_JUMP || state == L_PUNCH_BACKWARD_JUMP || state == L_KIK_NEUTRAL_JUMP || state == L_KIK_FORWARD_JUMP || state == L_KIK_BACKWARD_JUMP || state == YMUMMY || state == YDRILL || state == M_PUNCH_NEUTRAL_JUMP || state == M_PUNCH_FORWARD_JUMP || state == M_PUNCH_BACKWARD_JUMP || state == M_KIK_NEUTRAL_JUMP || state == M_KIK_FORWARD_JUMP || state == M_KIK_BACKWARD_JUMP || state == F_PUNCH_NEUTRAL_JUMP || state == F_PUNCH_FORWARD_JUMP || state == F_PUNCH_BACKWARD_JUMP || state == F_KIK_NEUTRAL_JUMP || state == F_KIK_FORWARD_JUMP || state == F_KIK_BACKWARD_JUMP))
 		{
 			invulnerabilityFrames = 25 + App->frames;
 
